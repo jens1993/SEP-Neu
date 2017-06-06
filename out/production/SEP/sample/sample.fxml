@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="1050" prefWidth="1650" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<children>
+    <MenuBar>
+        <menus>
+            <Menu mnemonicParsing="false" text="Datei">
+                <items>
+                    <MenuItem fx:id="menu_neuesTurnier" mnemonicParsing="false" onAction="#pressBtn_neuesTurnier" text="neues Turnier" />
+                    <MenuItem fx:id="menu_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="Turnier laden" />
+                    <MenuItem mnemonicParsing="false" text="Turnier speichern" />
+                    <MenuItem mnemonicParsing="false" text="Turnier speichern unter" />
+                    <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem mnemonicParsing="false" text="Programm beenden" />
+                </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Turnier">
+                <items>
+                    <MenuItem mnemonicParsing="false" text="Turnierdaten bearbeiten" />
+                    <MenuItem mnemonicParsing="false" text="Klassendaten bearbeiten" />
+                    <MenuItem mnemonicParsing="false" text="Spielerdaten bearbeiten" />
+                    <MenuItem mnemonicParsing="false" text="Vereine bearbeiten" />
+                    <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem mnemonicParsing="false" text="Statistiken" />
+                </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ansicht">
+                <items>
+                    <MenuItem mnemonicParsing="false" text="Feldübersicht" />
+                    <MenuItem mnemonicParsing="false" text="Klassen" />
+                    <MenuItem mnemonicParsing="false" text="Spielübersicht" />
+                    <MenuItem mnemonicParsing="false" text="Zeitplan" />
+                    <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem mnemonicParsing="false" text="Platzierungen" />
+                    <Menu mnemonicParsing="false" text="neues Fenster">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="Klassen" />
+                            <MenuItem mnemonicParsing="false" text="Spielübersicht" />
+                            <MenuItem mnemonicParsing="false" text="Zeitplan" />
+                        </items>
+                    </Menu>
+                </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Sonstiges">
+                <items>
+                    <MenuItem mnemonicParsing="false" text="Teilnehmerliste drucken" />
+                    <MenuItem mnemonicParsing="false" text="Startgeldliste drucken" />
+                    <MenuItem mnemonicParsing="false" text="Ergebnisformular erstellen" />
+                    <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem mnemonicParsing="false" text="Optionen" />
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+    <Separator prefHeight="19.0" prefWidth="900.0" />
+    <HBox>
+        <children>
+            <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="262.0">
+                <buttons>
+                    <Button fx:id="neuesTurnier" mnemonicParsing="false" onAction="#pressBtn_neuesTurnier" text="neu">
+                        <rotationAxis>
+                            <Point3D />
+                        </rotationAxis>
+                    </Button>
+                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="load" />
+                    <Button mnemonicParsing="false" text="save" />
+                </buttons>
+            </ButtonBar>
+            <ButtonBar>
+                <buttons>
+                    <Button fx:id="btn_klassen" mnemonicParsing="false" onAction="#pressBtn_klassen" text="Klassen" />
+                    <Button fx:id="btn_spieler" mnemonicParsing="false" onAction="#pressBtn_spieler" text="Spieler" />
+                    <Button mnemonicParsing="false" text="Felder" />
+                </buttons>
+            </ButtonBar>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                <buttons>
+                    <Button mnemonicParsing="false" text="Zeitplan" />
+                    <Button mnemonicParsing="false" text="Statistik" />
+                </buttons>
+            </ButtonBar>
+        </children>
+    </HBox>
+    <Separator prefWidth="200.0" />
+    <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+        <items>
+            <TreeView prefHeight="517.0" prefWidth="224.0" />
+            <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
+                <content>
+                    <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
+                        <children>
+                            <TabPane layoutX="-5.0" layoutY="-4.0" prefHeight="519.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                    <Tab text="Turnierbaum">
+                                        <content>
+                                            <AnchorPane />
+                                        </content>
+                                    </Tab>
+                                    <Tab text="Spielübersicht">
+                                        <content>
+                                            <AnchorPane />
+                                        </content>
+                                    </Tab>
+                                </tabs>
+                            </TabPane>
+                        </children>
+                    </AnchorPane>
+                </content>
+            </ScrollPane>
+        </items>
+    </SplitPane>
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+        <children>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Badminton Turnierverwaltung" HBox.hgrow="ALWAYS">
+                <font>
+                    <Font size="11.0" fx:id="x3" />
+                </font>
+                <textFill>
+                    <Color blue="0.625" green="0.625" red="0.625" fx:id="x4" />
+                </textFill>
+            </Label>
+            <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+        </children>
+        <padding>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+        </padding>
+    </HBox>
+</children>
+</VBox>
