@@ -22,17 +22,37 @@ public class Main extends Application {
     public static void main(String[] args) {
     	
     	 //testverbindung.PrintResult(r);
-        launch(args);
+        //launch(args);
         //SQLConnection testverbindung = new SQLConnection();
         //KO testsystem = new KO(65);
         //testsystem.rundenBerechnen();
-    	
-    	/*
-        SQLConnection testverbindung = new SQLConnection();
+        SQLConnection con = new SQLConnection();
+        Connection connection = con.SQLConnection();
+        Statement st = null;
+
+
+        int size = 0;
+        try {
+            st = connection.createStatement();
+            ResultSet count = st.executeQuery("SELECT * from spieler");
+            ResultSetMetaData countMetaData = count.getMetaData();
+            size = countMetaData.getColumnCount();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Zählen Klappt nicht");
+        }
+        for (int i=1; i<=size; i++){
+            SpielerCRUDimpl crud = new SpielerCRUDimpl();
+            crud.read(i);
+        }
+
+
+        /*SQLConnection testverbindung = new SQLConnection();
         
         System.out.println("------------------------------------------");System.out.println("------------------------------------------");
         boolean hallo = testverbindung.insertSpieler("jens", "isttoll");
-        System.out.println("Einf�gen = "+hallo);
+        System.out.println("Einfügen = "+hallo);
         
         
         System.out.println("------------------------------------------");System.out.println("------------------------------------------");
@@ -58,6 +78,6 @@ public class Main extends Application {
         System.out.println("------------------------------------------");System.out.println("------------------------------------------");
         ResultSet r = testverbindung.executeSQL("SELECT * FROM spieler");
         testverbindung.PrintResult(r);
-        */
+*/
     }
 }

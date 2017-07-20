@@ -35,6 +35,26 @@ public class Spieler {
 	public Verein unnamed_Verein_;
 
 
+	public Spieler(String vName, String nName, int spielerID){
+		this.vName = vName;
+		this.nName = nName;
+		this.spielerID = spielerID;
+	}
+
+	public boolean deleteSpieler(Spieler spieler){
+		try {
+			SpielerCRUDimpl dao = new SpielerCRUDimpl();
+			dao.delete(this);
+			return true;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Loeschen klappt nicht");
+			return false;
+		}
+
+	}
+
 	//agDatum muss noch auf Date geÃ¤ndert werden, Jens , int aRanglistenpunkte
 
 
@@ -50,6 +70,11 @@ public class Spieler {
 	}
 	public String getName() {
 		return vName + " " + nName;
+	}
+
+	public String getvName() {return vName;}
+	public String getnName() {
+		return nName;
 	}
 
 	public void spielerLoeschen(int aSpielerID) {
@@ -74,12 +99,16 @@ public class Spieler {
 		boolean hallo = testverbindung.insertSpieler(vname, nname);
 		if(hallo)
         {
-			System.out.println("Einfügen erfolgreich!");
+			System.out.println("Einfï¿½gen erfolgreich!");
         }
 		if(!hallo)
         {
-			System.out.println("Einfügen nicht erfolgreich!");
+			System.out.println("Einfï¿½gen nicht erfolgreich!");
         }
 		//liste_spieler.
+	}
+
+	public int getSpielerID() {
+		return spielerID;
 	}
 }

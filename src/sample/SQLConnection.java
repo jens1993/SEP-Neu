@@ -21,7 +21,7 @@ public class SQLConnection
         private String db_nutzung = "USE turnierverwaltung";
 
 
-        public SQLConnection() //eventuell nich pub
+        public Connection SQLConnection() //eventuell nich pub
         {
             try 
             {
@@ -33,6 +33,7 @@ public class SQLConnection
                 stmt = con.createStatement();
                 //stmt.executeUpdate(db_erstellung);
 
+
             } catch (ClassNotFoundException e) 
             {
                 System.out.println("Treiber nicht gefunden");
@@ -43,6 +44,7 @@ public class SQLConnection
                 System.out.println("SQLState: " + e.getSQLState());
                 System.out.println("VendorError: " + e.getErrorCode());
             }
+            return con;
         }
 
         //Funktioniert. Einfach select abfragen
@@ -66,7 +68,7 @@ public class SQLConnection
         }
 
         //Ergebnis ausgeben (komplette Tabelle z.b.)
-        public void PrintResult(ResultSet r) //als boolean machen, um zu prüfen ob erfolgreich (gilt für alle void sql klassen!) Booleans immer weiterleiten und ganz am ende ausgeben ob erfolgreich 
+        public void PrintResult(ResultSet r) //als boolean machen, um zu prï¿½fen ob erfolgreich (gilt fï¿½r alle void sql klassen!) Booleans immer weiterleiten und ganz am ende ausgeben ob erfolgreich 
         {
         	try {
 				while(r.next())
@@ -93,7 +95,7 @@ public class SQLConnection
         //funktioniert
         public int getSpielerID(String firstname, String lastname)
         {
-        	String sql = "SELECT ID,VNAME, NNAME FROM spieler";
+        	String sql = "SELECT SpielerID,VNAME, NNAME FROM spieler";
         	ResultSet r = executeSQL(sql);
         	try {
         		while(r.next())
@@ -108,11 +110,11 @@ public class SQLConnection
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        	return -1; //Überprüfung in main, ob nicht -1 return
+        	return -1; //ï¿½berprï¿½fung in main, ob nicht -1 return
         }
         public String getSpielerName(int id)
         {
-        	String sql = "SELECT ID,VNAME, NNAME FROM spieler";
+        	String sql = "SELECT SpielerID,VNAME, NNAME FROM spieler";
         	ResultSet r = executeSQL(sql);
         	try {
         		while(r.next())
@@ -127,11 +129,11 @@ public class SQLConnection
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        	return " Nicht gefunden"; //Überprüfung in main, ob nicht -1 return
+        	return " Nicht gefunden"; //ï¿½berprï¿½fung in main, ob nicht -1 return
         }
         public ResultSet getSpielerr(int id)
         {
-        	String sql = "SELECT ID,VNAME, NNAME, GDatum FROM spieler WHERE ID = "+id;
+        	String sql = "SELECT SpielerID,VNAME, NNAME, GDatum FROM spieler WHERE SpielerID = "+id;
         	try
         	{
         		Statement smt = con.createStatement();
