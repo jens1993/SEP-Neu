@@ -13,6 +13,12 @@ public class Spiel {
 	private Feld feld;
 	private Spielstatus status;
 
+	public Spiel(int spielID, Spieler[] heim, Spieler[] auswaerts) {
+		this.spielID = spielID;
+		this.heim = heim;
+		this.auswaerts = auswaerts;
+	}
+
 	public void spielzettelDrucken(int aSpielID) {
 		throw new UnsupportedOperationException();
 	}
@@ -30,6 +36,7 @@ public class Spiel {
 
 	}
 	Spiel(int iD, String heim, String auswaerts){
-		System.out.println(heim+" gegen "+auswaerts);
+		this.spielID = spielID;
+		System.out.println("Spiel erstellt: "+heim+" gegen "+ auswaerts);
 	}
 }

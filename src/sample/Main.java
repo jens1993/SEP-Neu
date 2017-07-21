@@ -18,6 +18,42 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    public static void spielerEinlesen() {
+        SQLConnection con = new SQLConnection();
+        Connection connection = con.SQLConnection();
+        int size = 0;
+        try {
+            Statement st = connection.createStatement();
+            ResultSet count = st.executeQuery("SELECT * from spieler");
+            ResultSetMetaData countMetaData = count.getMetaData();
+            size = countMetaData.getColumnCount();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Spieler Zählen Klappt nicht");
+        }
+        for (int i = 1; i <= size; i++) {
+            SpielerCRUDimpl crud = new SpielerCRUDimpl();
+            crud.read(i);
+        }
+    }
+    public static void vereineEinlesen() {
+        SQLConnection con = new SQLConnection();
+        Connection connection = con.SQLConnection();
+        int size = 0;
+        try {
+            Statement st = connection.createStatement();
+            ResultSet count = st.executeQuery("SELECT * from verein");
+            ResultSetMetaData countMetaData = count.getMetaData();
+            size = countMetaData.getColumnCount();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Vereine Zählen Klappt nicht");
+        }
+        for (int i = 1; i <= size; i++) {
+            VereinCRUDimpl crud = new VereinCRUDimpl();
+            crud.read(i);
+        }
+    }
 
     public static void main(String[] args) {
     	
@@ -26,26 +62,22 @@ public class Main extends Application {
         //SQLConnection testverbindung = new SQLConnection();
         //KO testsystem = new KO(65);
         //testsystem.rundenBerechnen();
-        SQLConnection con = new SQLConnection();
-        Connection connection = con.SQLConnection();
-        Statement st = null;
 
 
-        int size = 0;
-        try {
-            st = connection.createStatement();
-            ResultSet count = st.executeQuery("SELECT * from spieler");
-            ResultSetMetaData countMetaData = count.getMetaData();
-            size = countMetaData.getColumnCount();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Zählen Klappt nicht");
-        }
-        for (int i=1; i<=size; i++){
-            SpielerCRUDimpl crud = new SpielerCRUDimpl();
-            crud.read(i);
-        }
+        //VereinCRUDimpl test = new VereinCRUDimpl();
+        //Verein Osterbrock = new Verein(5, "123456789","Osterbrock",  "BWE");
+        //Verein Testest = new Verein(6, "123456789","Osterbrock",  "BWE");
+        //test.create(Osterbrock);
+        //test.update(Testest);
+        //test.delete(Osterbrock);
+
+
+        KO test = new KO(16);
+
+
+        //Alle Spieler bei Programmstart einlesen: (in einzelnen Thread packen)
+        //vereineEinlesen();
+        //spielerEinlesen();
 
 
         /*SQLConnection testverbindung = new SQLConnection();

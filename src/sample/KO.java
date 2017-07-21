@@ -1,43 +1,43 @@
 package sample;
 
-import java.util.ArrayList;
 
 public class KO extends Spielsystem {
 	private boolean platzDreiAusspielen;
-	ArrayList teilnehmer = new ArrayList();
-	static int ifor;
-	ArrayList ersteRunde = new ArrayList();
-	/*private void stringFuellen(){
-		for (int i=0; i<65;i++){
-			this.teilnehmer[i] = "spieler"+i;
-		}
-	}
-	*/
+	static int teilnehmerzahl;
+	private SpielTree finale = new SpielTree(1, 1, 2);
 
-	public void rundenBerechnen(){
-		for (int i=1; i<= ifor; i++){
-			this.teilnehmer.add(i-1, "spieler" + i);
-		}
-		setAnzahlRunden((int) Math.ceil(Math.log(teilnehmer.size()) / Math.log(2.0)));
-		//System.out.println(getAnzahlRunden());
-
+	public KO(int teilnehmerzahl){
+		this.teilnehmerzahl=teilnehmerzahl;
+		knotenAufbauen(teilnehmerzahl);
 	}
 
-	KO(int ifor){
-		this.ifor=ifor;
-		ersteRundeErstellen();
+	public SpielTree getFinale() {
+		return finale;
 	}
 
-	public void ersteRundeErstellen(){
-		rundenBerechnen();
-		for (int i=teilnehmer.size(); i< Math.pow(2,getAnzahlRunden());i++){
-			teilnehmer.add(i,"Rast");
+	public SpielTree knotenAufbauen (int teilnehmerzahl){
+		int anzahlRunden = rundenBerechnen();
+		int hoechsterSetzplatz;
+		SpielTree aktuellerKnoten = finale;
+
+		for (int i=1; i<anzahlRunden; i++){
+
+			hoechsterSetzplatz = (int) Math.pow(2,i+1);
+			System.out.println("Runde:"+(i+1));
+			for (int j=1; j<=Math.pow(2,i-1); j++)
+			{
+				aktuellerKnoten.addLeft(aktuellerKnoten.getSpielID()*2, aktuellerKnoten.getSetzplatzHeim(), hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1);
+				aktuellerKnoten.addRight(aktuellerKnoten.getSpielID()*2+1, hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1, aktuellerKnoten.getSetzplatzGast());
+				aktuellerKnoten = aktuellerKnoten.getSpielTree(aktuellerKnoten.getSpielID()+1, finale);
+			}
 		}
-		for(int i=0; i<teilnehmer.size()/2;i++){
-			//Spiel spiel = new Spiel(i,(String) teilnehmer.get(i),(String) teilnehmer.get(teilnehmer.size()-i));
-			//ersteRunde.add(i,spiel );
-			System.out.println((String) teilnehmer.get(i)+ " gegen " +(String) teilnehmer.get(teilnehmer.size()-i-1));
-		}
+	return finale;
+	}
+
+	public int rundenBerechnen(){
+		setAnzahlRunden((int) Math.ceil(Math.log(teilnehmerzahl) / Math.log(2.0)));
+		return getAnzahlRunden();
+
 	}
 
 

@@ -21,7 +21,7 @@ public class SpielerCRUDimpl implements SpielerCRUD {
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setString(1, spieler.getvName());
             smt.setString(2, spieler.getnName());
-            smt.setString(3, String.valueOf(spieler.getSpielerID()));
+            smt.setInt(3, spieler.getSpielerID());
             smt.executeUpdate();
             smt.close();
             System.out.println("Einfügen klappt");
@@ -38,22 +38,45 @@ public class SpielerCRUDimpl implements SpielerCRUD {
 
     @Override
     public boolean delete(Spieler spieler) {
-        String sql = "Delete From spieler Where spielerid="+spieler.getSpielerID();
+        String sql = "Delete From spieler Where spielerID= ?";
         try {
             SQLConnection con = new SQLConnection();
-            con.executeSQL(sql);
-            System.out.println("Loeschen klappt");
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setInt(1, spieler.getSpielerID());
+            smt.executeUpdate();
+            smt.close();
+            System.out.println("Verein Loeschen klappt");
             return true;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Loeschen Klappt nicht");
+            System.out.println("Verein Loeschen Klappt nicht");
         }
         return false;
     }
 
     @Override
     public boolean update(Spieler spieler) {
+
+        String sql = "UPDATE spieler SET VName = ?, NName = ? WHERE spielerID = ?";
+                ;
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setString(1, spieler.getvName());
+            smt.setString(2, spieler.getnName());
+            smt.setInt(3, spieler.getSpielerID());
+            smt.executeUpdate();
+            smt.close();
+            System.out.println("Update klappt");
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Update Klappt nicht");
+        }
+
+
         return false;
     }
 
