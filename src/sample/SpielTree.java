@@ -31,11 +31,7 @@ public class SpielTree {
     }
 
     public SpielTree getLeft() {
-        if (left != null){
-            return left;
-        }
-        System.out.println("left ist null");
-        return null;
+        return left;
     }
 
     public SpielTree getRight() {

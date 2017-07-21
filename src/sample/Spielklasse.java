@@ -2,18 +2,26 @@ package sample;
 import java.util.Vector;
 
 public class Spielklasse {
-	private int _iD;
-	private Disziplin _disziplin;
-	private Niveau _niveau;
-	private int _setzliste;
-	private int _anzahlTeilnehmerProTeam;
-	private Spielsystem _spielsystem;
-	private float _meldeKosten;
-	private boolean _aktiv;
-	private Spieler _spieler;
-	public Vector<Spielsystem> _unnamed_Spielsystem_ = new Vector<Spielsystem>();
-	public Vector<Turnier> _unnamed_Turnier_ = new Vector<Turnier>();
-	public Spieler _unnamed_Spieler_;
+	private int spielklasseID;
+	private Disziplin disziplin;
+	private Niveau niveau;
+	private int setzliste;
+	private int anzahlTeilnehmerProTeam;
+	private Spielsystem spielsystem;
+	private float meldeKosten;
+	private boolean aktiv;
+
+	public Spielklasse(int spielklasseID) {
+		this.spielklasseID = spielklasseID;
+	}
+
+	public int getSpielklasseID() {
+		return spielklasseID;
+	}
+
+	public float getMeldeKosten() {
+		return meldeKosten;
+	}
 
 	public void spielerEintragen(Object aSpieler) {
 		throw new UnsupportedOperationException();

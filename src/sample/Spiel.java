@@ -3,20 +3,45 @@ package sample;
 import java.util.Date;
 
 public class Spiel {
-	private int iD;
 	private int spielID;
-	private Spieler[] heim;
-	private Spieler[] auswaerts;
-	private String[] ergebnis;
+	private Spieler heim;
+	private Spieler auswaerts;
+	private int[] ergebnis;
 	private Date aufrufZeit;
 	private Spieler schiedsrichter;
 	private Feld feld;
 	private Spielstatus status;
+	private Spielklasse spielklasse;
 
-	public Spiel(int spielID, Spieler[] heim, Spieler[] auswaerts) {
+	public Spieler getHeim() {
+		return heim;
+	}
+
+	public Spieler getAuswaerts() {
+		return auswaerts;
+	}
+
+	public void setHeim(Spieler heim) {
+		this.heim = heim;
+	}
+
+	public void setAuswaerts(Spieler auswaerts) {
+		this.auswaerts = auswaerts;
+	}
+
+	public Spielklasse getSpielklasse() {
+		return spielklasse;
+	}
+
+	public int getSpielID() {
+		return spielID;
+	}
+
+	public Spiel(int spielID, Spieler heim, Spieler auswaerts, Spielklasse spielklasse) {
 		this.spielID = spielID;
 		this.heim = heim;
 		this.auswaerts = auswaerts;
+		this.spielklasse = spielklasse;
 	}
 
 	public void spielzettelDrucken(int aSpielID) {

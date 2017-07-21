@@ -71,8 +71,13 @@ public class Main extends Application {
         //test.update(Testest);
         //test.delete(Osterbrock);
 
-
-        KO test = new KO(16);
+       /* SpielCRUDimpl test = new SpielCRUDimpl();
+        Spielklasse heA = new Spielklasse(5);
+        Spieler hans = new Spieler("Hans", "Müller", 41);
+        Spieler harald = new Spieler("Harald", "Test", 42);
+        Spiel spiel1 = new Spiel(30, hans, harald, heA);
+        test.delete(spiel1);*/
+        //KO test = new KO(16);
 
 
         //Alle Spieler bei Programmstart einlesen: (in einzelnen Thread packen)

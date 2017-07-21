@@ -9,6 +9,7 @@ public class KO extends Spielsystem {
 	public KO(int teilnehmerzahl){
 		this.teilnehmerzahl=teilnehmerzahl;
 		knotenAufbauen(teilnehmerzahl);
+		ersteRundeFuellen();
 	}
 
 	public SpielTree getFinale() {
@@ -34,11 +35,21 @@ public class KO extends Spielsystem {
 	return finale;
 	}
 
+	public void ersteRundeFuellen(){
+		//Zu erstem Knoten in erster Runde gehen:
+		SpielTree aktuellesSpiel = finale;
+		while (aktuellesSpiel.getLeft() != null){
+			aktuellesSpiel = aktuellesSpiel.getLeft();
+		}
+		for (int i=0; i<Math.pow(2,getAnzahlRunden()-1);i++){
+
+			//Hier die Spiele erstellen!
+			aktuellesSpiel = aktuellesSpiel.getSpielTree(aktuellesSpiel.getSpielID()+1, aktuellesSpiel); //zum Spiel mit nächster ID gehen (im Turnierbaum 1 Spiel nach unten)
+		}
+	}
+
 	public int rundenBerechnen(){
 		setAnzahlRunden((int) Math.ceil(Math.log(teilnehmerzahl) / Math.log(2.0)));
 		return getAnzahlRunden();
-
 	}
-
-
 }
