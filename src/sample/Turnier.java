@@ -3,17 +3,24 @@ import java.util.Date;
 import java.util.Timer;
 
 public class Turnier {
-	private int _groesse;
-	private Timer _matchDauer;
-	private int _gesamtSpiele;
-	private Date _datum;
-	private String _name;
-	private int _anzahlSpieler;
-	private Feld[] _felder;
-	private int _spielerPausenZeit = 10;
-	private int _turnierid;
-	private Spielklasse[] _spielklassen;
-	public Spielklasse _unnamed_Spielklasse_;
+	private int groesse;
+	private Timer matchDauer;
+	private int gesamtSpiele;
+	private Date datum;
+	private String name;
+	private int anzahlSpieler;
+	private Feld[] felder;
+	private int spielerPausenZeit = 10;
+	private int turnierid;
+
+	public Turnier(String name, int turnierid) {
+		this.name = name;
+		this.turnierid = turnierid;
+	}
+
+	public int getTurnierid() {
+		return turnierid;
+	}
 
 	public void turnierplanErstellen() {
 		throw new UnsupportedOperationException();

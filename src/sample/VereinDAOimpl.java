@@ -5,7 +5,7 @@ import java.sql.*;
 /**
  * Created by Florian-PC on 21.07.2017.
  */
-public class VereinCRUDimpl implements VereinCRUD {
+public class VereinDAOimpl implements VereinDAO {
     @Override
     public boolean create(Verein verein) {
         //String sql = "INSERT INTO verein (Name ,Verband, ExtVereinsID, VereinsID) VALUES(?,?,?,?)";

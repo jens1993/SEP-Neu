@@ -5,7 +5,7 @@ import java.sql.*;
 /**
  * Created by Florian-PC on 21.07.2017.
  */
-public class SpielCRUDimpl implements SpielCRUD {
+public class SpielDAOimpl implements SpielDAO {
     @Override
     public boolean create(Spiel spiel) {
         String sql = "INSERT INTO spiel("

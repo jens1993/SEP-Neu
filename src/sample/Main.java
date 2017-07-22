@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends Application {
 
@@ -32,7 +34,7 @@ public class Main extends Application {
             System.out.println("Spieler Zählen Klappt nicht");
         }
         for (int i = 1; i <= size; i++) {
-            SpielerCRUDimpl crud = new SpielerCRUDimpl();
+            SpielerDAOimpl crud = new SpielerDAOimpl();
             crud.read(i);
         }
     }
@@ -50,7 +52,7 @@ public class Main extends Application {
             System.out.println("Vereine Zählen Klappt nicht");
         }
         for (int i = 1; i <= size; i++) {
-            VereinCRUDimpl crud = new VereinCRUDimpl();
+            VereinDAOimpl crud = new VereinDAOimpl();
             crud.read(i);
         }
     }
@@ -64,14 +66,32 @@ public class Main extends Application {
         //testsystem.rundenBerechnen();
 
 
-        //VereinCRUDimpl test = new VereinCRUDimpl();
+        //VereinDAOimpl test = new VereinDAOimpl();
         //Verein Osterbrock = new Verein(5, "123456789","Osterbrock",  "BWE");
         //Verein Testest = new Verein(6, "123456789","Osterbrock",  "BWE");
         //test.create(Osterbrock);
         //test.update(Testest);
         //test.delete(Osterbrock);
 
-       /* SpielCRUDimpl test = new SpielCRUDimpl();
+       /* SpielerDAO test = new SpielerDAOimpl();
+        List<Spieler> alleSpieler;
+        alleSpieler = test.getAllSpieler();
+        for (int i=0; i < alleSpieler.size();i++){
+            System.out.println(alleSpieler.get(i).getName());
+        }*/
+
+        SpielklasseDAO test = new SpielklasseDAOimpl();
+        Spielklasse deb = new Spielklasse(5, "Dameneinzel", "B", 1);
+        test.create(deb);
+        test.update(deb);
+        test.delete(deb);
+        List<Spielklasse> alleKlassen = test.getAllSpielklassen();
+        for (int i=0; i < alleKlassen.size();i++){
+            System.out.println(alleKlassen.get(i).getDisziplin()+alleKlassen.get(i).getNiveau());
+        }
+
+
+       /* SpielDAOimpl test = new SpielDAOimpl();
         Spielklasse heA = new Spielklasse(5);
         Spieler hans = new Spieler("Hans", "Müller", 41);
         Spieler harald = new Spieler("Harald", "Test", 42);

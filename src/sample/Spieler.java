@@ -1,8 +1,5 @@
 package sample;
-import javafx.fxml.FXML;
 
-import javax.swing.text.html.ListView;
-import java.util.Date;
 import java.util.Timer;
 import java.util.Vector;
 
@@ -43,7 +40,7 @@ public class Spieler {
 
 	public boolean deleteSpieler(Spieler spieler){
 		try {
-			SpielerCRUDimpl dao = new SpielerCRUDimpl();
+			SpielerDAOimpl dao = new SpielerDAOimpl();
 			dao.delete(this);
 			return true;
 		}
