@@ -91,7 +91,6 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             spielklasseResult.next();
             temp = new Spielklasse(spielklasseID, spielklasseResult.getString(2), spielklasseResult.getString(3), spielklasseResult.getInt("turnierid"));
             System.out.println(spielklasseResult.getString(2));
-            System.out.println("Lesen klappt");
 
 
         } catch (Exception e) {
@@ -123,7 +122,6 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
                 spielklasseResult.next();
                 alleSpielklassen.add(new Spielklasse(spielklasseResult.getInt(1), spielklasseResult.getString(2),spielklasseResult.getString(3), spielklasseResult.getInt(5)));
                 System.out.println(spielklasseResult.getString(2));
-                System.out.println("Spielklassenliste Lesen klappt");
             }
         } catch (Exception e) {
             e.printStackTrace();

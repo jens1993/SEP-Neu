@@ -1,9 +1,13 @@
 package sample;
-public class KOmitTrostrunde extends KO {
-	private int _tRbisPlatz;
-	private int _ausspielenBisPlatz;
 
-	KOmitTrostrunde(int ifor) {
-		super(ifor);
+import java.util.List;
+
+public class KOmitTrostrunde extends KO {
+	private int tRbisPlatz;
+	private int ausspielenBisPlatz;
+
+	public KOmitTrostrunde(List<Spieler> setzliste, int tRbisPlatz) {
+		super(setzliste);
+		this.tRbisPlatz = tRbisPlatz;
 	}
 }

@@ -80,7 +80,7 @@ public class Main extends Application {
             System.out.println(alleSpieler.get(i).getName());
         }*/
 
-        SpielklasseDAO test = new SpielklasseDAOimpl();
+        /*SpielklasseDAO test = new SpielklasseDAOimpl();
         Spielklasse deb = new Spielklasse(5, "Dameneinzel", "B", 1);
         test.create(deb);
         test.update(deb);
@@ -88,7 +88,14 @@ public class Main extends Application {
         List<Spielklasse> alleKlassen = test.getAllSpielklassen();
         for (int i=0; i < alleKlassen.size();i++){
             System.out.println(alleKlassen.get(i).getDisziplin()+alleKlassen.get(i).getNiveau());
-        }
+        }*/
+
+        SetzlisteDAO test = new SetzlisteDAOimpl();
+        List<Spieler> setzliste = test.read(1);
+        //for (int i=0; i<setzliste.size(); i++){
+          //  System.out.println((i+1)+" "+setzliste.get(i).getName());
+        //}
+        Spielsystem spielsystem = new KO(setzliste);
 
 
        /* SpielDAOimpl test = new SpielDAOimpl();

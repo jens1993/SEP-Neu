@@ -18,7 +18,7 @@ public class SpielDAOimpl implements SpielDAO {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setInt(1, spiel.getHeim().getSpielerID());
-            smt.setInt(2, spiel.getAuswaerts().getSpielerID());
+            smt.setInt(2, spiel.getGast().getSpielerID());
             smt.setInt(3, spiel.getSpielID());
             smt.setInt(4, spiel.getSpielklasse().getSpielklasseID());
             smt.executeUpdate();
@@ -66,7 +66,7 @@ public class SpielDAOimpl implements SpielDAO {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setInt(1, spiel.getHeim().getSpielerID());
-            smt.setInt(2, spiel.getAuswaerts().getSpielerID());
+            smt.setInt(2, spiel.getGast().getSpielerID());
             smt.setInt(3, spiel.getSpielklasse().getSpielklasseID());
             smt.setInt(4, spiel.getSpielID());
             smt.executeUpdate();

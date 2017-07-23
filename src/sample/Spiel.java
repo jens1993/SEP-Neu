@@ -5,28 +5,35 @@ import java.util.Date;
 public class Spiel {
 	private int spielID;
 	private Spieler heim;
-	private Spieler auswaerts;
+	private Spieler gast;
 	private int[] ergebnis;
 	private Date aufrufZeit;
 	private Spieler schiedsrichter;
 	private Feld feld;
 	private Spielstatus status;
 	private Spielklasse spielklasse;
+	private int systemSpielID;
+	private int setzPlatzHeim;
+	private int setzPlatzGast;
 
 	public Spieler getHeim() {
 		return heim;
 	}
 
-	public Spieler getAuswaerts() {
-		return auswaerts;
+	public Spieler getGast() {
+		return gast;
 	}
 
 	public void setHeim(Spieler heim) {
 		this.heim = heim;
 	}
 
-	public void setAuswaerts(Spieler auswaerts) {
-		this.auswaerts = auswaerts;
+	public void setGast(Spieler gast) {
+		this.gast = gast;
+	}
+
+	public void setStatus(Spielstatus status) {
+		this.status = status;
 	}
 
 	public Spielklasse getSpielklasse() {
@@ -40,8 +47,23 @@ public class Spiel {
 	public Spiel(int spielID, Spieler heim, Spieler auswaerts, Spielklasse spielklasse) {
 		this.spielID = spielID;
 		this.heim = heim;
-		this.auswaerts = auswaerts;
+		this.gast = auswaerts;
 		this.spielklasse = spielklasse;
+	}
+
+	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast) {
+		this.systemSpielID = systemSpielID;
+		this.setzPlatzHeim = setzPlatzHeim;
+		this.setzPlatzGast = setzPlatzGast;
+		System.out.println("Spieler "+setzPlatzHeim+" gegen Spieler "+setzPlatzGast);
+	}
+
+	public int getSetzPlatzHeim() {
+		return setzPlatzHeim;
+	}
+
+	public int getSetzPlatzGast() {
+		return setzPlatzGast;
 	}
 
 	public void spielzettelDrucken(int aSpielID) {

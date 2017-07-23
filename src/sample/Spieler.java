@@ -27,15 +27,26 @@ public class Spieler {
 	private int mattenSpiele = 0;
 	private int extSpielerID;
 	private int aktuellesSpiel;
+	private boolean freilos = false;
 	public Vector<Spielklasse> unnamed_Spielklasse_ = new Vector<Spielklasse>();
 	public Vector<Spiel> unnamed_Spiel_ = new Vector<Spiel>();
 	public Verein unnamed_Verein_;
+
 
 
 	public Spieler(String vName, String nName, int spielerID){
 		this.vName = vName;
 		this.nName = nName;
 		this.spielerID = spielerID;
+	}
+
+	public Spieler(String vName) {
+		this.vName = vName;
+		this.freilos = true;
+	}
+
+	public boolean isFreilos() {
+		return freilos;
 	}
 
 	public boolean deleteSpieler(Spieler spieler){
@@ -66,7 +77,13 @@ public class Spieler {
 		return vName + " " + nName + ", " + gDatum;
 	}
 	public String getName() {
-		return vName + " " + nName;
+		if (nName != null) {
+			return vName + " " + nName;
+		}
+		else
+		{
+			return vName;
+		}
 	}
 
 	public String getvName() {return vName;}

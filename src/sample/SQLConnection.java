@@ -29,7 +29,6 @@ public class SQLConnection
 
                 // Verbindung zur JDBC-Datenbank herstellen.
                 con = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?" + "user=" + dbUser + "&" + "password=" + dbPass); //con muss unbedingt irgendwo geschlossen werden
-                System.out.println("Erfolg!");
                 stmt = con.createStatement();
                 //stmt.executeUpdate(db_erstellung);
 
