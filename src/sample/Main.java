@@ -13,54 +13,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/sample.fxml"));
         primaryStage.setTitle("Badminton Turnierverwaltung");
         primaryStage.setScene(new Scene(root));
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
-    public static void spielerEinlesen() {
-        SQLConnection con = new SQLConnection();
-        Connection connection = con.SQLConnection();
-        int size = 0;
-        try {
-            Statement st = connection.createStatement();
-            ResultSet count = st.executeQuery("SELECT * from spieler");
-            ResultSetMetaData countMetaData = count.getMetaData();
-            size = countMetaData.getColumnCount();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Spieler Zählen Klappt nicht");
-        }
-        for (int i = 1; i <= size; i++) {
-            SpielerDAOimpl crud = new SpielerDAOimpl();
-            crud.read(i);
-        }
-    }
-    public static void vereineEinlesen() {
-        SQLConnection con = new SQLConnection();
-        Connection connection = con.SQLConnection();
-        int size = 0;
-        try {
-            Statement st = connection.createStatement();
-            ResultSet count = st.executeQuery("SELECT * from verein");
-            ResultSetMetaData countMetaData = count.getMetaData();
-            size = countMetaData.getColumnCount();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Vereine Zählen Klappt nicht");
-        }
-        for (int i = 1; i <= size; i++) {
-            VereinDAOimpl crud = new VereinDAOimpl();
-            crud.read(i);
-        }
-    }
-
     public static void main(String[] args) {
     	
     	 //testverbindung.PrintResult(r);
-        launch(args);
+        //launch(args);
         //SQLConnection testverbindung = new SQLConnection();
         //KO testsystem = new KO(65);
         //testsystem.rundenBerechnen();
@@ -90,14 +53,14 @@ public class Main extends Application {
             System.out.println(alleKlassen.get(i).getDisziplin()+alleKlassen.get(i).getNiveau());
         }*/
 
-        SetzlisteDAO test = new SetzlisteDAOimpl();
+        sample.SetzlisteDAO test = new sample.SetzlisteDAOimpl();
         List<Spieler> setzliste = test.read(1);
-        //Spielklasse spielklasse = new Spielklasse(1, "Herreneinzel","A",1);
+        Spielklasse spielklasse = new Spielklasse(1, "Herreneinzel","A",1);
         //for (int i=0; i<setzliste.size(); i++){
           //  System.out.println((i+1)+" "+setzliste.get(i).getName());
         //}
         //Spielsystem spielsystem = new KO(setzliste);
-        //Spielsystem schweizer = new SchweizerSystem(5, setzliste,spielklasse);
+        sample.Spielsystem schweizer = new sample.SchweizerSystem(5, setzliste,spielklasse);
 
 
        /* SpielDAOimpl test = new SpielDAOimpl();
