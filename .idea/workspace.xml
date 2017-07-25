@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/FeldDAO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/FeldDAOimpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/TeamDAO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/TeamDAOimpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SEP/sample/Main.class" afterPath="$PROJECT_DIR$/out/production/SEP/sample/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Feld.java" afterPath="$PROJECT_DIR$/src/sample/Feld.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spielsysteme/KO.java" afterPath="$PROJECT_DIR$/src/sample/Spielsysteme/KO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java" afterPath="$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Team.java" afterPath="$PROJECT_DIR$/src/sample/Team.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -254,8 +245,8 @@
       <file leaf-file-name="TeamDAOimpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/DAO/TeamDAOimpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="45" column="55" lean-forward="true" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="55" />
+            <state relative-caret-position="393">
+              <caret line="60" column="41" lean-forward="true" selection-start-line="60" selection-start-column="41" selection-end-line="60" selection-end-column="41" />
               <folding>
                 <element signature="e#3197#3198#0" expanded="true" />
                 <element signature="e#3224#3225#0" expanded="true" />
@@ -1182,7 +1173,7 @@
       <workItem from="1500927264816" duration="331000" />
       <workItem from="1500928984505" duration="830000" />
       <workItem from="1500977223379" duration="5485000" />
-      <workItem from="1500982991796" duration="28602000" />
+      <workItem from="1500982991796" duration="28712000" />
     </task>
     <task id="LOCAL-00001" summary="Comboboxfill mit Button">
       <created>1495537932394</created>
@@ -1296,11 +1287,18 @@
       <option name="project" value="LOCAL" />
       <updated>1501000857932</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Datenbank aktualisiert (DAOs)">
+      <created>1501017663442</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1501017663442</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="157992000" />
+    <option name="totallyTimeSpent" value="158102000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1404,7 +1402,8 @@
     <MESSAGE value="Schweizer System anfang" />
     <MESSAGE value="Schweizer System erste Runde funktioniert&#10;Ordner umstrukturiert" />
     <MESSAGE value="Ergebnisklasse implementiert" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ergebnisklasse implementiert" />
+    <MESSAGE value="Datenbank aktualisiert (DAOs)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Datenbank aktualisiert (DAOs)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1978,8 +1977,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/DAO/TeamDAOimpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="45" column="55" lean-forward="true" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="55" />
+        <state relative-caret-position="393">
+          <caret line="60" column="41" lean-forward="true" selection-start-line="60" selection-start-column="41" selection-end-line="60" selection-end-column="41" />
           <folding>
             <element signature="e#3197#3198#0" expanded="true" />
             <element signature="e#3224#3225#0" expanded="true" />
