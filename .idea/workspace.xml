@@ -2,42 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Team.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/Controller.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/Disziplin.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/Gruppe.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/GruppeMitEndrunde.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/KO.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/KOmitTrostrunde.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/Niveau.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/SQLConnection.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/SchweizerSystem.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/SetzlisteDAO.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/SetzlisteDAOimpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/SpielDAO.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/SpielDAOimpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/SpielTree.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/SpielerDAO.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/SpielerDAOimpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/SpielklasseDAO.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/SpielklasseDAOimpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/Spielstatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/Spielsystem.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/VereinDAO.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/VereinDAOimpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/Zaehlweise.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/klasseHinzuGruppe.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/klasseHinzuGruppeMitKO.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/klasseHinzuKO.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/klasseHinzuKOmitTR.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/klasseHinzuSchweizer.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/neuesTurnier.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/sample.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/spielerHinzu.fxml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SEP/sample/Main.class" afterPath="$PROJECT_DIR$/out/production/SEP/sample/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SEP/sample/SchweizerSystem.class" afterPath="$PROJECT_DIR$/out/production/SEP/sample/SchweizerSystem.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/SQLConnection.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/SetzlisteDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/SetzlisteDAOimpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/SpielDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/SpielDAOimpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/SpielerDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/SpielerDAOimpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/SpielklasseDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/SpielklasseDAOimpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/VereinDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/DAO/VereinDAOimpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Enums/Disziplin.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Enums/Niveau.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Enums/Spielstatus.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Enums/Zaehlweise.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/Controller.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppe.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppeMitKO.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/klasseHinzuKO.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/klasseHinzuKOmitTR.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/klasseHinzuSchweizer.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/neuesTurnier.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/sample.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Spielsystem/Gruppe.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Spielsystem/GruppeMitEndrunde.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Spielsystem/KO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Spielsystem/KOmitTrostrunde.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Spielsystem/SchweizerSystem.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Spielsystem/SpielTree.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/Spielsystem/Spielsystem.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SEP/sample/klasseHinzuGruppe.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SEP/sample/klasseHinzuGruppeMitKO.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SEP/sample/klasseHinzuKO.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SEP/sample/klasseHinzuKOmitTR.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SEP/sample/klasseHinzuSchweizer.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SEP/sample/neuesTurnier.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SEP/sample/sample.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SEP/sample/spielerHinzu.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/testgui.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SEP/sample/Controller.class" afterPath="$PROJECT_DIR$/out/production/SEP/sample/Controller.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -220,8 +226,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+            <state relative-caret-position="456">
+              <caret line="66" column="45" lean-forward="true" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -495,6 +501,72 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="sample" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SEP-Neu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SEP-Neu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sample" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Spielsystem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SEP-Neu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SEP-Neu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sample" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Enums" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SEP-Neu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SEP-Neu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sample" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DAO" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1000,7 +1072,7 @@
       <workItem from="1500927264816" duration="331000" />
       <workItem from="1500928984505" duration="830000" />
       <workItem from="1500977223379" duration="5485000" />
-      <workItem from="1500982991796" duration="6505000" />
+      <workItem from="1500982991796" duration="7263000" />
     </task>
     <task id="LOCAL-00001" summary="Comboboxfill mit Button">
       <created>1495537932394</created>
@@ -1079,15 +1151,21 @@
       <option name="project" value="LOCAL" />
       <updated>1500983049073</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Schweizer System erste Runde funktioniert&#10;Ordner umstrukturiert">
+      <created>1500989670782</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1500989670782</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135895000" />
+    <option name="totallyTimeSpent" value="136653000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1105,7 +1183,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264192" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30595237" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30595237" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297619" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1185,7 +1263,8 @@
     <MESSAGE value="wieder auf SpielerDAO umbenannt, getAllSpieler/Spielklasse implementiert.&#10;Nächster Schritt: Setzliste erstellen um KO-Runde füllen zu können" />
     <MESSAGE value="K.O. Runde erste Runde füllen klappt&#10;SetzlisteDAO hinzugefügt" />
     <MESSAGE value="Schweizer System anfang" />
-    <option name="LAST_COMMIT_MESSAGE" value="Schweizer System anfang" />
+    <MESSAGE value="Schweizer System erste Runde funktioniert&#10;Ordner umstrukturiert" />
+    <option name="LAST_COMMIT_MESSAGE" value="Schweizer System erste Runde funktioniert&#10;Ordner umstrukturiert" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1454,14 +1533,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/testgui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/klasseHinzuGruppeMitKO.fxml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1600,11 +1671,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+        <state relative-caret-position="456">
+          <caret line="66" column="45" lean-forward="true" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/testgui.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
