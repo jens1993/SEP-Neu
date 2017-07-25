@@ -1,4 +1,4 @@
-package sample;
+package sample.GUI;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +21,10 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import sample.Spielsysteme.*;
+import sample.Enums.*;
+import sample.*;
+import sample.DAO.*;
 
 import javax.swing.JList;
 

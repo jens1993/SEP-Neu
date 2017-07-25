@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import sample.Spielsysteme.*;
+import sample.Enums.*;
+import sample.DAO.*;
 
 public class Main extends Application {
 
@@ -53,14 +56,14 @@ public class Main extends Application {
             System.out.println(alleKlassen.get(i).getDisziplin()+alleKlassen.get(i).getNiveau());
         }*/
 
-        sample.SetzlisteDAO test = new sample.SetzlisteDAOimpl();
+        SetzlisteDAO test = new SetzlisteDAOimpl();
         List<Spieler> setzliste = test.read(1);
         Spielklasse spielklasse = new Spielklasse(1, "Herreneinzel","A",1);
         //for (int i=0; i<setzliste.size(); i++){
           //  System.out.println((i+1)+" "+setzliste.get(i).getName());
         //}
         //Spielsystem spielsystem = new KO(setzliste);
-        sample.Spielsystem schweizer = new sample.SchweizerSystem(5, setzliste,spielklasse);
+        new SchweizerSystem(5, setzliste,spielklasse);
 
 
        /* SpielDAOimpl test = new SpielDAOimpl();

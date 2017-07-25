@@ -2,6 +2,9 @@ package sample;
 
 import java.util.Timer;
 import java.util.Vector;
+import sample.DAO.*;
+import sample.Spielsysteme.*;
+import sample.Enums.*;
 
 public class Spieler {
 	private int iD;

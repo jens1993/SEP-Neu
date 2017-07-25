@@ -1,6 +1,9 @@
 package sample;
 
 import java.util.Date;
+import sample.DAO.*;
+import sample.Spielsysteme.*;
+import sample.Enums.*;
 
 public class Spiel {
 	private int spielID;

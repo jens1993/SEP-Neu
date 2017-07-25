@@ -1,4 +1,8 @@
-package sample;
+package sample.DAO;
+
+import sample.*;
+import sample.Spielsysteme.*;
+import sample.Enums.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

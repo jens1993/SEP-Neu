@@ -1,4 +1,6 @@
-package sample;
+package sample.DAO;
+
+import sample.*;
 
 import java.util.List;
 

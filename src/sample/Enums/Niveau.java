@@ -1,4 +1,4 @@
-package sample;
+package sample.Enums;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;

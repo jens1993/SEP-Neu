@@ -1,5 +1,8 @@
-package sample;
+package sample.DAO;
 
+import sample.*;
+import sample.Spielsysteme.*;
+import sample.Enums.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

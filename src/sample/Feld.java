@@ -1,4 +1,9 @@
 package sample;
+
+import sample.DAO.*;
+import sample.Spielsysteme.*;
+import sample.Enums.*;
+
 public class Feld {
 	private boolean _besetzt;
 	private boolean _profiMatte;

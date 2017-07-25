@@ -1,5 +1,8 @@
 package sample;
 
+import sample.DAO.*;
+import sample.Spielsysteme.*;
+import sample.Enums.*;
 import java.util.Vector;
 
 public class Verein {

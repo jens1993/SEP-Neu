@@ -1,6 +1,8 @@
 package sample;
 import java.util.List;
-import java.util.Vector;
+import sample.DAO.*;
+import sample.Spielsysteme.*;
+import sample.Enums.*;
 
 public class Spielklasse {
 	private int spielklasseID;

@@ -1,5 +1,8 @@
 package sample;
 
+import sample.DAO.*;
+import sample.Spielsysteme.*;
+import sample.Enums.*;
 /**
  * Created by Florian-PC on 25.07.2017.
  */
