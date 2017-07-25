@@ -27,20 +27,10 @@ public class Verein {
 		return extVereinsID;
 	}
 
-
 	public Verein(int vereinsID, String extVereinsID, String name, String verband) {
 		this.vereinsID = vereinsID;
 		this.extVereinsID = extVereinsID;
 		this.name = name;
 		this.verband = verband;
-	}
-
-	public void vereinErstellen(int aVereinsnummer, String aName, String aVerband) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void vereinLoeschen(int aVereinsnummer) {
-
-		throw new UnsupportedOperationException();
 	}
 }

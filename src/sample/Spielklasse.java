@@ -1,8 +1,8 @@
 package sample;
 import java.util.List;
 import sample.DAO.*;
-import sample.Spielsysteme.*;
 import sample.Enums.*;
+import sample.Spielsysteme.Spielsystem;
 
 public class Spielklasse {
 	private int spielklasseID;
@@ -48,13 +48,5 @@ public class Spielklasse {
 
 	public float getMeldeKosten() {
 		return meldeKosten;
-	}
-
-	public void spielerEintragen(Object aSpieler) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void spielerEntfernen(Object aSpieler) {
-		throw new UnsupportedOperationException();
 	}
 }

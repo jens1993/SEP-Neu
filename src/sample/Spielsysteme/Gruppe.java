@@ -5,7 +5,7 @@ import sample.DAO.*;
 import sample.Enums.*;
 
 public class Gruppe extends Spielsystem {
-	private int _gruppengroesse;
+	private int gruppengroesse;
 
 	@Override
 	public boolean beendeMatch(Spiel spiel) {

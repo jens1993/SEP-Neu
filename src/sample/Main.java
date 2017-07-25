@@ -65,6 +65,10 @@ public class Main extends Application {
         //Spielsystem spielsystem = new KO(setzliste);
         new SchweizerSystem(5, setzliste,spielklasse);
 
+        Ergebnis ergebnis = new Ergebnis(21,10,21,0,22,19);
+        System.out.println(ergebnis);
+        System.out.println(ergebnis.gueltigesErgebnis());
+
 
        /* SpielDAOimpl test = new SpielDAOimpl();
         Spielklasse heA = new Spielklasse(5);

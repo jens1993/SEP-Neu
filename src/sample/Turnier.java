@@ -13,7 +13,7 @@ public class Turnier {
 	private String name;
 	private int anzahlSpieler;
 	private Feld[] felder;
-	private int spielerPausenZeit = 10;
+	private static int spielerPausenZeit = 10;
 	private int turnierid;
 
 	public Turnier(String name, int turnierid) {

@@ -15,8 +15,6 @@ public class Spieler {
 	private String nName;
 	private String gDatum;
 	private int spielerID;
-	private java.util.Vector<Spielklasse[]> spielklasse;
-	private java.util.Vector<int[]> ranglistenpunkte;
 	private char geschlecht;
 	private Verein verein;
 	private float meldeGebuehren;
@@ -30,12 +28,7 @@ public class Spieler {
 	private int mattenSpiele = 0;
 	private int extSpielerID;
 	private int aktuellesSpiel;
-	private boolean freilos = false;
-	public Vector<Spielklasse> unnamed_Spielklasse_ = new Vector<Spielklasse>();
-	public Vector<Spiel> unnamed_Spiel_ = new Vector<Spiel>();
-	public Verein unnamed_Verein_;
-
-
+	private boolean freilos=false;
 
 	public Spieler(String vName, String nName, int spielerID){
 		this.vName = vName;
@@ -89,24 +82,15 @@ public class Spieler {
 		}
 	}
 
-	public String getvName() {return vName;}
+	public String getvName() {
+		return vName;
+	}
 	public String getnName() {
 		return nName;
 	}
 
-	public void spielerLoeschen(int aSpielerID) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void spielerBearbeiten(Object aSpielerID) {
-		throw new UnsupportedOperationException();
-	}
-
 	public void meldeFormularimportieren() {
 		throw new UnsupportedOperationException();
-	}
-
-	public static void spielerHinzufueger() {
 	}
 
 	public int getSpielerID() {
