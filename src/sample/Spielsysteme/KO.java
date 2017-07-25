@@ -3,6 +3,9 @@ package sample.Spielsysteme;
 import sample.*;
 import sample.DAO.*;
 import sample.Enums.*;
+
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 public class KO extends Spielsystem {

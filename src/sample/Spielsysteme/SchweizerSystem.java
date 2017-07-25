@@ -1,6 +1,8 @@
 package sample.Spielsysteme;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import sample.*;
 import sample.DAO.*;
@@ -10,7 +12,7 @@ public class SchweizerSystem extends Spielsystem {
 	private int anzahlRunden;
 	private List<Spieler> spielerList;
 	private List<Spiel> aktuelleRunde = new ArrayList<Spiel>();
-	private List<Spieler> nextSpielerList = new ArrayList<Spieler>();
+	private List<Team> nextSpielerList = new ArrayList<Team>();
 
 	public SchweizerSystem(int anzahlRunden, List<Spieler> spielerList, Spielklasse spielklasse) {
 		setSpielklasse(spielklasse);
@@ -18,6 +20,15 @@ public class SchweizerSystem extends Spielsystem {
 		this.spielerList = spielerList;
 		freiloseHinzufuegen(spielerList);
 		ersteRundeErstellen();
+	}
+	private void sortList(){
+		Collections.sort(nextSpielerList, new Comparator<Team>() {
+			@Override
+			public int compare(Team team1, Team team2) {
+				return team1.compareTo(team2);
+			}
+		});
+
 	}
 
 	public void ersteRundeErstellen() {
@@ -42,6 +53,7 @@ public class SchweizerSystem extends Spielsystem {
 	public boolean beendeMatch(Spiel spiel) {
 		return false;
 	}
+
 	private void freiloseHinzufuegen(List<Spieler> spielerList){
 		if ((spielerList.size()/2) * 2 != spielerList.size()){ // /2 *2 überprüft, ob Spieleranzahl gerade oder ungerade (int)
 			this.spielerList.add(new Spieler("Freilos"));
