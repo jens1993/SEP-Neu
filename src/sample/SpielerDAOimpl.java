@@ -121,10 +121,10 @@ public class SpielerDAOimpl implements SpielerDAO {
         }
         try {
             Statement st = connection.createStatement();
-            ResultSet spielerResult = st.executeQuery("Select * from spieler");
+            ResultSet spielerResult = st.executeQuery("Select VName, NName, SpielerID from spieler");
             for (int i = 1; i <= size; i++) {
                 spielerResult.next();
-                alleSpieler.add(new Spieler(spielerResult.getString(2), spielerResult.getString(3), spielerResult.getInt(1)));
+                alleSpieler.add(new Spieler(spielerResult.getString(1), spielerResult.getString(2), spielerResult.getInt(3)));
                 System.out.println(spielerResult.getString(2));
                 System.out.println("Spielerliste Lesen klappt");
             }

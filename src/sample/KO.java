@@ -31,12 +31,10 @@ public class KO extends Spielsystem {
 			for (int j=1; j<=Math.pow(2,i-1); j++)
 			{
 				aktuellerKnoten.addLeft(aktuellerKnoten.getSpielID()*2, aktuellerKnoten.getSetzplatzHeim(), hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1);
-				aktuellerKnoten.getLeft().setSpiel(new Spiel(aktuellerKnoten.getSpielID()*2, aktuellerKnoten.getSetzplatzHeim(), hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1));
+				aktuellerKnoten.getLeft().setSpiel(new Spiel(aktuellerKnoten.getSpielID()*2, aktuellerKnoten.getSetzplatzHeim(), hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1,this.getSpielklasse()));
 				aktuellerKnoten.addRight(aktuellerKnoten.getSpielID()*2+1, hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1, aktuellerKnoten.getSetzplatzGast());
-				aktuellerKnoten.getRight().setSpiel(new Spiel(aktuellerKnoten.getSpielID()*2+1, hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1, aktuellerKnoten.getSetzplatzGast()));
+				aktuellerKnoten.getRight().setSpiel(new Spiel(aktuellerKnoten.getSpielID()*2+1, hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1, aktuellerKnoten.getSetzplatzGast(), this.getSpielklasse()));
 				aktuellerKnoten = aktuellerKnoten.getSpielTree(aktuellerKnoten.getSpielID()+1, finale);
-				//System.out.println("Spieler " + aktuellerKnoten.getLeft().getSetzplatzHeim() + " gegen Spieler " + aktuellerKnoten.getLeft().getSetzplatzGast());
-				//System.out.println("Spieler " + aktuellerKnoten.getRight().getSetzplatzHeim() + " gegen Spieler " + aktuellerKnoten.getRight().getSetzplatzGast());
 			}
 		}
 	return finale;
@@ -73,5 +71,10 @@ public class KO extends Spielsystem {
 			setzliste.add(new Spieler("Freilos"));
 			System.out.println("Freilos an Setzplatz "+(i+1) +" hinzugefügt");
 		}
+	}
+
+	@Override
+	public boolean beendeMatch(Spiel spiel) {
+		return false;
 	}
 }

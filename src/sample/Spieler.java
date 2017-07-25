@@ -105,22 +105,6 @@ public class Spieler {
 
 	public static void spielerHinzufueger() {
 	}
-	public static void spielerHinzufueg(String vname, String nname) {
-		// TODO Auto-generated method stub
-		System.out.println("Klappt");
-		System.out.println("Vorname: "+vname+""+" Nachname: "+nname);
-		SQLConnection testverbindung = new SQLConnection();
-		boolean hallo = testverbindung.insertSpieler(vname, nname);
-		if(hallo)
-        {
-			System.out.println("Einf�gen erfolgreich!");
-        }
-		if(!hallo)
-        {
-			System.out.println("Einf�gen nicht erfolgreich!");
-        }
-		//liste_spieler.
-	}
 
 	public int getSpielerID() {
 		return spielerID;

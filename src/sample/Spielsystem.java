@@ -1,19 +1,29 @@
 package sample;
-public class Spielsystem {
+
+import java.util.List;
+
+public abstract class Spielsystem {
 	private String name;
 	private int anzahlTeilnehmer;
 	private int anzahlRunden;
 	private int anzahlSpiele;
 	private int id;
-	private Zaehlweise zaehlweise;
+	private static Zaehlweise zaehlweise;
+	private Spielklasse spielklasse;
+
+	public Spielklasse getSpielklasse() {
+		return spielklasse;
+	}
+
+	public void setSpielklasse(Spielklasse spielklasse) {
+		this.spielklasse = spielklasse;
+	}
+
 	public int getAnzahlRunden() {
 		return anzahlRunden;
 	}
 	public void setAnzahlRunden(int anzahlRunden) {
 		this.anzahlRunden = anzahlRunden;
 	}
-	public boolean beendeMatch(Spiel spiel){
-		System.out.println("beende Match der Oberklasse wurde aufgerufen!");
-		return false;
-	}
+	public abstract boolean beendeMatch(Spiel spiel);
 }

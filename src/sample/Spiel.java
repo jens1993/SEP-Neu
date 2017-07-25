@@ -44,14 +44,14 @@ public class Spiel {
 		return spielID;
 	}
 
-	public Spiel(int spielID, Spieler heim, Spieler auswaerts, Spielklasse spielklasse) {
-		this.spielID = spielID;
+	public Spiel(Spieler heim, Spieler auswaerts, Spielklasse spielklasse) {
 		this.heim = heim;
 		this.gast = auswaerts;
 		this.spielklasse = spielklasse;
+		System.out.println("Spiel erstellt: "+heim.getName()+" gegen "+gast.getName());
 	}
 
-	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast) {
+	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielklasse spielklasse) {
 		this.systemSpielID = systemSpielID;
 		this.setzPlatzHeim = setzPlatzHeim;
 		this.setzPlatzGast = setzPlatzGast;

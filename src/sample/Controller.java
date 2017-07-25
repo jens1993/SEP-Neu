@@ -170,7 +170,7 @@ public class Controller {
 
     }
     @FXML
-    public void PrintTable() //als boolean machen, um zu prüfen ob erfolgreich (gilt für alle void sql klassen!) Booleans immer weiterleiten und ganz am ende ausgeben ob erfolgreich 
+    public void PrintTable() //als boolean machen, um zu prï¿½fen ob erfolgreich (gilt fï¿½r alle void sql klassen!) Booleans immer weiterleiten und ganz am ende ausgeben ob erfolgreich 
     {
     	try {
     		SQLConnection testverbindung = new SQLConnection();
@@ -219,7 +219,7 @@ public class Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	return " Nicht gefunden"; //Überprüfung in main, ob nicht -1 return
+    	return " Nicht gefunden"; //ï¿½berprï¿½fung in main, ob nicht -1 return
     }*/
     
 public void SpeicherSpieler(ActionEvent event)throws Exception
@@ -238,7 +238,7 @@ public void SpeicherSpieler(ActionEvent event)throws Exception
     boolean rw = r_w.isSelected();
     */
 
-    try {
+    /*try {
     
 
     	System.out.println("Speichern");
@@ -247,7 +247,7 @@ public void SpeicherSpieler(ActionEvent event)throws Exception
 		//liste_spieler.getItems().add(vname+" "+nname);
     } catch (Exception e) {
         e.printStackTrace();
-    }
+    }*/
 }
 
     public void pressBtn_spieler(ActionEvent event) throws Exception {

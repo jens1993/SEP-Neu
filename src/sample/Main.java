@@ -60,7 +60,7 @@ public class Main extends Application {
     public static void main(String[] args) {
     	
     	 //testverbindung.PrintResult(r);
-        //launch(args);
+        launch(args);
         //SQLConnection testverbindung = new SQLConnection();
         //KO testsystem = new KO(65);
         //testsystem.rundenBerechnen();
@@ -92,10 +92,12 @@ public class Main extends Application {
 
         SetzlisteDAO test = new SetzlisteDAOimpl();
         List<Spieler> setzliste = test.read(1);
+        //Spielklasse spielklasse = new Spielklasse(1, "Herreneinzel","A",1);
         //for (int i=0; i<setzliste.size(); i++){
           //  System.out.println((i+1)+" "+setzliste.get(i).getName());
         //}
-        Spielsystem spielsystem = new KO(setzliste);
+        //Spielsystem spielsystem = new KO(setzliste);
+        //Spielsystem schweizer = new SchweizerSystem(5, setzliste,spielklasse);
 
 
        /* SpielDAOimpl test = new SpielDAOimpl();
