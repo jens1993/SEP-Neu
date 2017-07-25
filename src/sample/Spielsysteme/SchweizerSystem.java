@@ -12,7 +12,7 @@ public class SchweizerSystem extends Spielsystem {
 	private int anzahlRunden;
 	private List<Spieler> spielerList;
 	private List<Spiel> aktuelleRunde = new ArrayList<Spiel>();
-	private List<Team> nextSpielerList = new ArrayList<Team>();
+	private List<Spieler> nextSpielerList = new ArrayList<Spieler>();
 
 	public SchweizerSystem(int anzahlRunden, List<Spieler> spielerList, Spielklasse spielklasse) {
 		setSpielklasse(spielklasse);
@@ -21,7 +21,7 @@ public class SchweizerSystem extends Spielsystem {
 		freiloseHinzufuegen(spielerList);
 		ersteRundeErstellen();
 	}
-	private void sortList(){
+	/*private void sortList(){
 		Collections.sort(nextSpielerList, new Comparator<Team>() {
 			@Override
 			public int compare(Team team1, Team team2) {
@@ -29,7 +29,7 @@ public class SchweizerSystem extends Spielsystem {
 			}
 		});
 
-	}
+	}*/
 
 	public void ersteRundeErstellen() {
 
