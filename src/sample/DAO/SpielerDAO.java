@@ -13,7 +13,6 @@ public interface SpielerDAO {
     public boolean create(Spieler spieler);
     public boolean delete(Spieler spieler);
     public boolean update(Spieler spieler);
-    public Spieler read (int spielerID);
-    public List<Spieler> getAllSpieler();
-    public List<Spieler> getSetzliste(Spielklasse spielklasse);
+    //public Spieler read (int spielerID);
+    //public List<Spieler> getAllSpieler();
 }

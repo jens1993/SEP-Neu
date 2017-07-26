@@ -17,24 +17,39 @@ public class SpielerDAOimpl implements SpielerDAO {
     public boolean create(Spieler spieler) {
 
         String sql = "INSERT INTO spieler("
+                + "SpielerID,"
                 + "VName,"
-                + "NName, "
-                + "SpielerID) "
-                + "VALUES(?,?,?)";
+                + "NName,"
+                + "GDatum,"
+                + "Geschlecht,"
+                + "Verein,"
+                + "RLP_Einzel, "
+                + "RLP_Doppel, "
+                + "RLP_Mixed, "
+                + "Nationalitaet, "
+                + "ExtSpielerID) "
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setString(1, spieler.getvName());
-            smt.setString(2, spieler.getnName());
-            smt.setInt(3, spieler.getSpielerID());
+            smt.setInt(1, spieler.getSpielerID());
+            smt.setString(2, spieler.getvName());
+            smt.setString(3, spieler.getnName());
+            smt.setDate(4, Date.valueOf(spieler.getgDatum()));
+            smt.setBoolean(5, spieler.getGeschlecht());
+            smt.setInt(6, spieler.getVerein().getVereinsID());
+            smt.setInt(7, spieler.getrPunkte()[0]);
+            smt.setInt(8, spieler.getrPunkte()[1]);
+            smt.setInt(9, spieler.getrPunkte()[2]);
+            smt.setString(10, spieler.getNationalitaet());
+            smt.setString(11, spieler.getExtSpielerID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Einfügen klappt");
             return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Einfügen Klappt nicht");
+            System.out.println("Spieler Einfügen Klappt nicht");
         }
 
 
@@ -50,12 +65,11 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setInt(1, spieler.getSpielerID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Verein Loeschen klappt");
             return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Verein Loeschen Klappt nicht");
+            System.out.println("Spieler Loeschen Klappt nicht");
         }
         return false;
     }
@@ -63,14 +77,40 @@ public class SpielerDAOimpl implements SpielerDAO {
     @Override
     public boolean update(Spieler spieler) {
 
-        String sql = "UPDATE spieler SET VName = ?, NName = ? WHERE spielerID = ?";
-        ;
+        String sql = "UPDATE spieler " +
+                "SET VName = ?, " +
+                "NName = ?, " +
+                "GDatum = ?, " +
+                "Geschlecht = ?, " +
+                "Verein = ?, " +
+                "RLP_Einzel = ?, " +
+                "RLP_Doppel = ?, " +
+                "RLP_Mixed = ?, " +
+                "Meldegebuehren = ?, " +
+                "Nationalitaet = ?, " +
+                "Verfuegbar = ?, " +
+                "MattenSpiele = ?, " +
+                "ExtSpielerID = ?, " +
+                "AktuellesSpiel = ? " +
+                "WHERE spielerID = ?";
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setString(1, spieler.getvName());
             smt.setString(2, spieler.getnName());
-            smt.setInt(3, spieler.getSpielerID());
+            smt.setDate(3, Date.valueOf(spieler.getgDatum()));
+            smt.setInt(4, spieler.getGeschlecht());
+            smt.setInt(5, spieler.getSpielerID());
+            smt.setInt(6, spieler.getSpielerID());
+            smt.setInt(7, spieler.getSpielerID());
+            smt.setInt(8, spieler.getSpielerID());
+            smt.setInt(9, spieler.getSpielerID());
+            smt.setInt(10, spieler.getSpielerID());
+            smt.setInt(11, spieler.getSpielerID());
+            smt.setInt(12, spieler.getSpielerID());
+            smt.setInt(13, spieler.getSpielerID());
+            smt.setInt(14, spieler.getSpielerID());
+            smt.setInt(15, spieler.getSpielerID());
             smt.executeUpdate();
             smt.close();
             System.out.println("Update klappt");
@@ -85,7 +125,7 @@ public class SpielerDAOimpl implements SpielerDAO {
         return false;
     }
 
-    @Override
+    /*@Override
     public Spieler read(int spielerID) {
         String sql = "Select * from spieler Where spielerid=" + spielerID;
         Spieler temp = null;
@@ -106,9 +146,9 @@ public class SpielerDAOimpl implements SpielerDAO {
         }
         return temp;
 
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<Spieler> getAllSpieler() {
         List<Spieler> alleSpieler = new ArrayList<Spieler>();
         SQLConnection con = new SQLConnection();
@@ -161,5 +201,5 @@ public class SpielerDAOimpl implements SpielerDAO {
             return null;
         }
         return setzliste;
-    }
+    }*/
 }

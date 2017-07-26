@@ -17,6 +17,14 @@ public class Feld {
 		this.turnier = turnier;
 	}
 
+	public Feld(boolean profiMatte, int feldID, Spiel inVorbereitung, Spiel aktivesSpiel, Turnier turnier) {
+		this.profiMatte = profiMatte;
+		this.feldID = feldID;
+		this.inVorbereitung = inVorbereitung;
+		this.aktivesSpiel = aktivesSpiel;
+		this.turnier = turnier;
+	}
+
 	public boolean isProfiMatte() {
 		return profiMatte;
 	}
