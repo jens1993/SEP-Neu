@@ -32,7 +32,9 @@ public class Main extends Application {
         //testsystem.rundenBerechnen();
 
 
-
+       /* TurnierDAO test = new TurnierDAOimpl();
+        Turnier turnier = new Turnier("Tolles Turnier",1);
+        test.delete(turnier);*/
 
         //VereinDAOimpl test = new VereinDAOimpl();
         //Verein Osterbrock = new Verein(5, "123456789","Osterbrock",  "BWE");

@@ -1,4 +1,6 @@
 package sample;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -11,7 +13,7 @@ public class Turnier {
 	private int groesse;
 	private int matchDauer;
 	private int gesamtSpiele;
-	private Date datum;
+	private LocalDate datum = LocalDate.now();
 	private String name;
 	private int zaehlweise = 0; // 0=bis21 1=bis 11 mit Verlängerung 2=bis 11 ohne Verlängerung
 	private int anzahlSpieler;
@@ -43,7 +45,7 @@ public class Turnier {
 
 	public int getZaehlweise() { return zaehlweise; }
 
-	public Date getDatum() {
+	public LocalDate getDatum() {
 		return datum;
 	}
 

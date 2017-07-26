@@ -1,5 +1,6 @@
 package sample;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Timer;
 import java.util.Vector;
@@ -10,14 +11,14 @@ import sample.Enums.*;
 public class Spieler {
 	private String vName;
 	private String nName;
-	private Date gDatum;
+	private LocalDate gDatum;
 	private int spielerID;
 	private boolean geschlecht;
 	private int[] rPunkte = new int[3]; //[0]=Einzel-, [1]=Doppel-, [2]=Mixed-Ranglistenpunkte
 	private Verein verein;
 	private float meldeGebuehren;
 	private String Nationalitaet = "Deutschland";
-	private Date verfuegbar;
+	private LocalDate verfuegbar;
 	private int mattenSpiele = 0;
 	private String extSpielerID;
 	private Spiel aktuellesSpiel;
@@ -56,7 +57,7 @@ public class Spieler {
 		return Nationalitaet;
 	}
 
-	public Date getgDatum() {
+	public LocalDate getgDatum() {
 		return gDatum;
 	}
 
@@ -76,7 +77,7 @@ public class Spieler {
 		return meldeGebuehren;
 	}
 
-	public Date getVerfuegbar() {
+	public LocalDate getVerfuegbar() {
 		return verfuegbar;
 	}
 

@@ -12,10 +12,10 @@ public class TurnierDAOimpl implements TurnierDAO {
     @Override
     public boolean create(Turnier turnier) {
 
-        String sql = "INSERT INTO Turnier "
+        String sql = "INSERT INTO Turnier("
                 + "Datum, "
                 + "Name, "
-                + "WHERE Turnierid)"
+                + "Turnierid)"
                 + "VALUES(?,?,?)";
 
         try {
@@ -26,7 +26,6 @@ public class TurnierDAOimpl implements TurnierDAO {
             smt.setInt(3, turnier.getTurnierid());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Turnier Einfügen klappt");
             return true;
 
         } catch (SQLException e) {
@@ -39,6 +38,19 @@ public class TurnierDAOimpl implements TurnierDAO {
 
     @Override
     public boolean delete(Turnier turnier) {
+        String sql = "Delete From turnier Where turnierID= ?";
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setInt(1, turnier.getTurnierid());
+            smt.executeUpdate();
+            smt.close();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Turnier Loeschen Klappt nicht");
+        }
         return false;
     }
 
@@ -50,7 +62,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 "Datum = ?, " +
                 "Name= ?, " +
                 "SpielerPausenZeit = ?, " +
-                "Zaehlweise = ?, " +
+                "Zaehlweise = ? " +
                 "WHERE Turnierid = ?";
         try {
             SQLConnection con = new SQLConnection();
@@ -63,7 +75,6 @@ public class TurnierDAOimpl implements TurnierDAO {
             smt.setInt(6, turnier.getTurnierid());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Turnier Update klappt");
             return true;
 
         } catch (SQLException e) {

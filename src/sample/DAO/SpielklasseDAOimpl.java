@@ -73,10 +73,10 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setString(1, spielklasse.getDisziplin());
             smt.setString(2, spielklasse.getNiveau());
-            smt.setInt(2, spielklasse.getSpielsystem().getSpielsystemCode());
-            smt.setFloat(2, spielklasse.getMeldeKosten());
-            smt.setBoolean(2, spielklasse.isAktiv());
-            smt.setInt(3, spielklasse.getSpielklasseID());
+            smt.setInt(3, spielklasse.getSpielsystem().getSpielsystemCode());
+            smt.setFloat(4, spielklasse.getMeldeKosten());
+            smt.setBoolean(5, spielklasse.isAktiv());
+            smt.setInt(6, spielklasse.getSpielklasseID());
             smt.executeUpdate();
             smt.close();
             System.out.println("Spielklasse Update klappt");
