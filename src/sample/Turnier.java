@@ -13,6 +13,7 @@ public class Turnier {
 	private int gesamtSpiele;
 	private Date datum;
 	private String name;
+	private int zaehlweise = 0; // 0=bis21 1=bis 11 mit Verlängerung 2=bis 11 ohne Verlängerung
 	private int anzahlSpieler;
 	private Feld[] felder;
 	private static int spielerPausenZeit = 10;
@@ -25,6 +26,14 @@ public class Turnier {
 		this.name = name;
 		this.turnierid = turnierid;
 	}
+
+	public Timer getMatchDauer() { return matchDauer; }
+
+	public void setGesamtSpiele(int gesamtSpiele) {
+		this.gesamtSpiele = gesamtSpiele;
+	}
+
+	public int getZaehlweise() { return zaehlweise; }
 
 	public Date getDatum() {
 		return datum;
