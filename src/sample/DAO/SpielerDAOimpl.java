@@ -99,7 +99,7 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setString(1, spieler.getvName());
             smt.setString(2, spieler.getnName());
             smt.setDate(3, Date.valueOf(spieler.getgDatum()));
-            smt.setInt(4, spieler.getGeschlecht());
+            smt.setBoolean(4, spieler.getGeschlecht());
             smt.setInt(5, spieler.getSpielerID());
             smt.setInt(6, spieler.getSpielerID());
             smt.setInt(7, spieler.getSpielerID());

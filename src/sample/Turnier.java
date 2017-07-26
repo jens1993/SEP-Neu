@@ -21,6 +21,14 @@ public class Turnier {
 		this.turnierid = turnierid;
 	}
 
+	public Date getDatum() {
+		return datum;
+	}
+
+	public String getName() {
+		return name;
+	}
+
 	public int getTurnierid() {
 		return turnierid;
 	}
