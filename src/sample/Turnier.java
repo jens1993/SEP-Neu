@@ -9,14 +9,14 @@ import sample.Enums.*;
 
 public class Turnier {
 	private int groesse;
-	private Timer matchDauer;
+	private int matchDauer;
 	private int gesamtSpiele;
 	private Date datum;
 	private String name;
 	private int zaehlweise = 0; // 0=bis21 1=bis 11 mit Verlängerung 2=bis 11 ohne Verlängerung
 	private int anzahlSpieler;
 	private Feld[] felder;
-	private static int spielerPausenZeit = 10;
+	private int spielerPausenZeit = 10;
 	private int turnierid;
 	private Dictionary<Integer,Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
 	private Dictionary<Integer,Spieler> spieler = new Hashtable<Integer,Spieler>();
@@ -27,7 +27,15 @@ public class Turnier {
 		this.turnierid = turnierid;
 	}
 
-	public Timer getMatchDauer() { return matchDauer; }
+	public int getGesamtSpiele() {
+		return gesamtSpiele;
+	}
+
+	public int getSpielerPausenZeit() {
+		return spielerPausenZeit;
+	}
+
+	public int getMatchDauer() { return matchDauer; }
 
 	public void setGesamtSpiele(int gesamtSpiele) {
 		this.gesamtSpiele = gesamtSpiele;
