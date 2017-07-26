@@ -11,5 +11,5 @@ public interface TeamDAO {
     public boolean createTeam(Team team);
     public boolean updateTeam(Team team);
     public boolean deleteTeam(Team team);
-    public List<Team> getAllTeams();
+    //public List<Team> getAllTeams();
 }

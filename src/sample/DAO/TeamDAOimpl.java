@@ -91,12 +91,24 @@ public class TeamDAOimpl implements TeamDAO {
 
     @Override
     public boolean deleteTeam(Team team) {
+        String sql = "Delete From team Where teamid= ?";
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setInt(1, team.getTeamid());
+            smt.executeUpdate();
+            smt.close();
+            return true;
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Team Loeschen Klappt nicht");
+        }
         return false;
     }
 
-    @Override
+   /* @Override
     public List<Team> getAllTeams() {
         return null;
-    }
+    }*/
 }

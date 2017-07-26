@@ -93,4 +93,13 @@ public class Ergebnis {
         }
         else return null;
     }
+
+    public int[] getErgebnisArray(){
+        int[] ergebnis = new int[heim.length*2];
+        for(int i=0; i<heim.length;i++){
+            ergebnis[i*2]=heim[i];
+            ergebnis[i*2+1]=gast[i];
+        }
+        return ergebnis;
+    }
 }

@@ -10,7 +10,7 @@ import sample.Spielsysteme.*;
 import sample.Enums.*;
 
 public class Spiel {
-	private int spielID;
+	private int spielID=1;
 	private Spieler heim;
 	private Spieler gast;
 	private Ergebnis ergebnis;
