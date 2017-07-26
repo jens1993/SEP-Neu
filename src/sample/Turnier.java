@@ -1,5 +1,7 @@
 package sample;
 import java.util.Date;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Timer;
 import sample.DAO.*;
 import sample.Spielsysteme.*;
@@ -15,6 +17,9 @@ public class Turnier {
 	private Feld[] felder;
 	private static int spielerPausenZeit = 10;
 	private int turnierid;
+	private Dictionary<Integer,Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
+	private Dictionary<Integer,Spieler> spieler = new Hashtable<Integer,Spieler>();
+
 
 	public Turnier(String name, int turnierid) {
 		this.name = name;

@@ -9,7 +9,7 @@ public abstract class Spielsystem {
 	private int anzahlTeilnehmer;
 	private int anzahlRunden;
 	private int anzahlSpiele;
-	private int id;
+	private int spielsystemID;
 	private static Zaehlweise zaehlweise;
 	private Spielklasse spielklasse;
 
