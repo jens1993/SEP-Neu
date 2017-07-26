@@ -18,7 +18,7 @@ public class SQLConnection
         private Statement stmt = null;
         private String dbHost = "localhost"; // Hostname
         private String dbPort = "3306";      // Port -- Standard: 3306
-        private String dbName = "turnierverwaltung";   // Datenbankname
+        private String dbName = "turnierverwaltung_neu";   // Datenbankname
         private String dbUser = "root";     // Datenbankuser
         private String dbPass = "";      // Datenbankpasswort
         private String db_erstellung = "create table if not exists turnierverwaltung";

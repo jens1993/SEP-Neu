@@ -4,9 +4,11 @@ import sample.*;
 import sample.Spielsysteme.*;
 import sample.Enums.*;
 
-import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.sql.*;
 
 /**
  * Created by flori on 30.05.2017.
@@ -35,9 +37,14 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setInt(1, spieler.getSpielerID());
             smt.setString(2, spieler.getvName());
             smt.setString(3, spieler.getnName());
-            smt.setDate(4, Date.valueOf(spieler.getgDatum()));
+            smt.setDate(4, (Date) spieler.getgDatum());
             smt.setBoolean(5, spieler.getGeschlecht());
-            smt.setInt(6, spieler.getVerein().getVereinsID());
+            if(spieler.getVerein()!=null){
+                smt.setInt(6, spieler.getVerein().getVereinsID());
+            }
+            else{
+                smt.setNull(6, Types.INTEGER);
+            }
             smt.setInt(7, spieler.getrPunkte()[0]);
             smt.setInt(8, spieler.getrPunkte()[1]);
             smt.setInt(9, spieler.getrPunkte()[2]);
@@ -98,27 +105,36 @@ public class SpielerDAOimpl implements SpielerDAO {
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setString(1, spieler.getvName());
             smt.setString(2, spieler.getnName());
-            smt.setDate(3, Date.valueOf(spieler.getgDatum()));
-            smt.setInt(4, spieler.getGeschlecht());
-            smt.setInt(5, spieler.getSpielerID());
-            smt.setInt(6, spieler.getSpielerID());
-            smt.setInt(7, spieler.getSpielerID());
-            smt.setInt(8, spieler.getSpielerID());
-            smt.setInt(9, spieler.getSpielerID());
-            smt.setInt(10, spieler.getSpielerID());
-            smt.setInt(11, spieler.getSpielerID());
-            smt.setInt(12, spieler.getSpielerID());
-            smt.setInt(13, spieler.getSpielerID());
-            smt.setInt(14, spieler.getSpielerID());
+            smt.setDate(3, (Date) spieler.getgDatum());
+            smt.setBoolean(4, spieler.getGeschlecht());
+            if(spieler.getVerein()!=null){
+                smt.setInt(5, spieler.getVerein().getVereinsID());
+            }
+            else{
+                smt.setNull(5, Types.INTEGER);
+            }
+            smt.setInt(6, spieler.getrPunkte()[0]);
+            smt.setInt(7, spieler.getrPunkte()[1]);
+            smt.setInt(8, spieler.getrPunkte()[2]);
+            smt.setFloat(9, spieler.getMeldeGebuehren());
+            smt.setString(10, spieler.getNationalitaet());
+            smt.setDate(11, (Date) spieler.getVerfuegbar());
+            smt.setInt(12, spieler.getMattenSpiele());
+            smt.setString(13, spieler.getExtSpielerID());
+            if(spieler.getAktuellesSpiel()!=null){
+                smt.setInt(14, spieler.getAktuellesSpiel().getSpielID());
+            }
+            else {
+                smt.setNull(14,Types.INTEGER);
+            }
             smt.setInt(15, spieler.getSpielerID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Update klappt");
             return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Update Klappt nicht");
+            System.out.println("Spieler Update Klappt nicht");
         }
 
 
