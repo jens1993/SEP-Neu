@@ -5,48 +5,46 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import sample.*;
-import sample.DAO.*;
-import sample.Enums.*;
 
 public class SchweizerSystem extends Spielsystem {
 	private int anzahlRunden;
-	private List<Spieler> spielerList;
+	private List<Team> teamList;
 	private List<Spiel> aktuelleRunde = new ArrayList<Spiel>();
-	private List<Spieler> nextSpielerList = new ArrayList<Spieler>();
+	private List<Team> nextTeamList = new ArrayList<Team>();
 
-	public SchweizerSystem(int anzahlRunden, List<Spieler> spielerList, Spielklasse spielklasse) {
+	public SchweizerSystem(int anzahlRunden, List<Team> teamList, Spielklasse spielklasse) {
 		setSpielklasse(spielklasse);
 		this.anzahlRunden = anzahlRunden;
-		this.spielerList = spielerList;
-		freiloseHinzufuegen(spielerList);
+		this.teamList = teamList;
+		freiloseHinzufuegen(teamList);
 		ersteRundeErstellen();
 	}
-	/*private void sortList(){
-		Collections.sort(nextSpielerList, new Comparator<Team>() {
+	private void sortList(){
+		Collections.sort(nextTeamList, new Comparator<Team>() {
 			@Override
 			public int compare(Team team1, Team team2) {
 				return team1.compareTo(team2);
 			}
 		});
 
-	}*/
+	}
 
 	public void ersteRundeErstellen() {
 
-		while (spielerList.size()>1){
-			Spieler spielerEins = getRandomSpieler();
-			this.spielerList.remove(spielerEins);
-			this.nextSpielerList.add(spielerEins);
-			Spieler spielerZwei = getRandomSpieler();
-			this.spielerList.remove(spielerZwei);
-			this.nextSpielerList.add(spielerZwei);
-			aktuelleRunde.add(new Spiel(spielerEins, spielerZwei, this.getSpielklasse()));
+		while (teamList.size()>1){
+			Team teamEins = getRandomTeam();
+			this.teamList.remove(teamEins);
+			this.nextTeamList.add(teamEins);
+			Team teamZwei = getRandomTeam();
+			this.teamList.remove(teamZwei);
+			this.nextTeamList.add(teamZwei);
+			aktuelleRunde.add(new Spiel(teamEins, teamZwei, this.getSpielklasse()));
 		}
 	}
-	public Spieler getRandomSpieler(){
-		int random = (int) Math.round(Math.random()*(spielerList.size()-1));
-		Spieler randomSpieler = this.spielerList.get(random);
-		return randomSpieler;
+	public Team getRandomTeam(){
+		int random = (int) Math.round(Math.random()*(teamList.size()-1));
+		Team randomTeam = this.teamList.get(random);
+		return randomTeam;
 	}
 
 	@Override
@@ -54,9 +52,9 @@ public class SchweizerSystem extends Spielsystem {
 		return false;
 	}
 
-	private void freiloseHinzufuegen(List<Spieler> spielerList){
-		if ((spielerList.size()/2) * 2 != spielerList.size()){ // /2 *2 überprüft, ob Spieleranzahl gerade oder ungerade (int)
-			this.spielerList.add(new Spieler("Freilos"));
+	private void freiloseHinzufuegen(List<Team> teamList){
+		if ((teamList.size()/2) * 2 != teamList.size()){ // /2 *2 überprüft, ob Spieleranzahl gerade oder ungerade (int)
+			this.teamList.add(new Team("Freilos"));
 			System.out.println("Freilos zu schweizer hinzugefügt");
 		}
 	}

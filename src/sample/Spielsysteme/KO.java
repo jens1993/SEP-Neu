@@ -13,7 +13,7 @@ public class KO extends Spielsystem {
 	static int teilnehmerzahl;
 	private SpielTree finale = new SpielTree(1, 1, 2);
 
-	public KO(List<Spieler> setzliste){
+	public KO(List<Team> setzliste){
 		this.teilnehmerzahl=setzliste.size();
 		freiloseHinzufuegen(setzliste);
 		knotenAufbauen(teilnehmerzahl);
@@ -32,7 +32,6 @@ public class KO extends Spielsystem {
 		for (int i=1; i<anzahlRunden; i++){
 
 			hoechsterSetzplatz = (int) Math.pow(2,i+1);
-			//System.out.println("Runde:"+(i+1));
 			for (int j=1; j<=Math.pow(2,i-1); j++)
 			{
 				aktuellerKnoten.addLeft(aktuellerKnoten.getSpielID()*2, aktuellerKnoten.getSetzplatzHeim(), hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1);
@@ -45,7 +44,7 @@ public class KO extends Spielsystem {
 	return finale;
 	}
 
-	public void ersteRundeFuellen(List<Spieler> setzliste){
+	public void ersteRundeFuellen(List<Team> setzliste){
 		//Zu erstem Knoten in erster Runde gehen:
 		SpielTree aktuellesSpiel = finale;
 		while (aktuellesSpiel.getLeft() != null){
@@ -55,11 +54,9 @@ public class KO extends Spielsystem {
 			for (int j=0; j<setzliste.size();j++){
 				if(j+1 == aktuellesSpiel.getSetzplatzHeim()){
 					aktuellesSpiel.getSpiel().setHeim(setzliste.get(j));
-					System.out.println(setzliste.get(j).getName()+" zu Spiel "+aktuellesSpiel.getSpielID()+" hinzugefügt");
 				}
 				if(j+1 == aktuellesSpiel.getSetzplatzGast()){
 					aktuellesSpiel.getSpiel().setGast(setzliste.get(j));
-					System.out.println(setzliste.get(j).getName()+" zu Spiel "+aktuellesSpiel.getSpielID()+" hinzugefügt");
 				}
 			}
 
@@ -71,9 +68,9 @@ public class KO extends Spielsystem {
 		setAnzahlRunden((int) Math.ceil(Math.log(teilnehmerzahl) / Math.log(2.0)));
 		return getAnzahlRunden();
 	}
-	private void freiloseHinzufuegen (List<Spieler> setzliste){
+	private void freiloseHinzufuegen (List<Team> setzliste){
 		for (int i=setzliste.size(); i<Math.pow(2,rundenBerechnen());i++){
-			setzliste.add(new Spieler("Freilos"));
+			setzliste.add(new Team("Freilos"));
 			System.out.println("Freilos an Setzplatz "+(i+1) +" hinzugefügt");
 		}
 	}

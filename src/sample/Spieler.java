@@ -17,32 +17,15 @@ public class Spieler {
 	private Verein verein;
 	private float meldeGebuehren;
 	private String Nationalitaet = "Deutschland";
-	private int anzahlSiege = 0;
-	private int anzahlNiederlagen = 0;
-	private int gewonneneSaetze = 0;
-	private int verloreneSaetze = 0;
-	private int erspieltePunkte = 0;
-	private int zugelassenePunkte = 0;
 	private Date verfuegbar;
-
 	private int mattenSpiele = 0;
 	private String extSpielerID;
 	private Spiel aktuellesSpiel;
-	private boolean freilos=false;
 
 	public Spieler(String vName, String nName, int spielerID){
 		this.vName = vName;
 		this.nName = nName;
 		this.spielerID = spielerID;
-	}
-
-	public Spieler(String vName) {
-		this.vName = vName;
-		this.freilos = true;
-	}
-
-	public boolean isFreilos() {
-		return freilos;
 	}
 
 	public boolean deleteSpieler(Spieler spieler){
@@ -59,20 +42,7 @@ public class Spieler {
 
 	}
 
-	//agDatum muss noch auf Date geändert werden, Jens , int aRanglistenpunkte
-
-
-	public static void spielerHinzufuegen(String aVName, String aNName, String aGDatum, int aSpielerID, int rang_re, int rang_rd,int rang_rm, boolean rm, boolean rw) {
-
-		
-		System.out.println("Klappt");
-		System.out.println("Vorname: "+aVName+""+" Nachname: "+aNName+""+" GD: "+aGDatum+""+" Spielerid: "+aSpielerID+""+" Mann: "+rm+" Frau"+rw+"Punkte"+rang_re+"-"+rang_rd+"-"+rang_rm);
-		//liste_spieler.
-	}
 	public String toString(){
-		return vName + " " + nName + ", " + gDatum;
-	}
-	public String getName() {
 		if (nName != null) {
 			return vName + " " + nName;
 		}
@@ -125,6 +95,11 @@ public class Spieler {
 	public String getvName() {
 		return vName;
 	}
+
+	public void setGeschlecht(boolean geschlecht) {
+		this.geschlecht = geschlecht;
+	}
+
 	public String getnName() {
 		return nName;
 	}

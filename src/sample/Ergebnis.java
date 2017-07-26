@@ -82,7 +82,7 @@ public class Ergebnis {
         }
         return true;
     }
-    public Spieler getSieger(Spiel spiel){
+    public Team getSieger(Spiel spiel){
         if(heim != null){
             if (heim[heim.length-1]>gast[heim.length-1]) {
                 return spiel.getHeim();

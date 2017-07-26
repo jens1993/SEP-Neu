@@ -10,8 +10,8 @@ public abstract class Spielsystem {
 	private int anzahlRunden;
 	private int anzahlSpiele;
 	private int spielsystemID;
-	private static Zaehlweise zaehlweise;
 	private Spielklasse spielklasse;
+	protected int spielsystemCode;
 
 	public Spielklasse getSpielklasse() {
 		return spielklasse;
@@ -26,6 +26,14 @@ public abstract class Spielsystem {
 	}
 	public void setAnzahlRunden(int anzahlRunden) {
 		this.anzahlRunden = anzahlRunden;
+	}
+
+	public int getSpielsystemCode() {
+		return spielsystemCode;
+	}
+
+	public boolean systemWiederherstellen(int spielsystemCode){
+		return false;
 	}
 	public abstract boolean beendeMatch(Spiel spiel);
 }

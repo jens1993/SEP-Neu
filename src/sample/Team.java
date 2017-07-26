@@ -17,6 +17,7 @@ public class Team {
     private int verloreneSaetze;
     private int gewonnnenePunkte;
     private int verlorenePunkte;
+    private boolean freilos = false;
 
     public Team(Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
         this.spielerEins = spielerEins;
@@ -29,6 +30,14 @@ public class Team {
         this.spielerEins = spielerEins;
         this.einzel = true;
         this.spielklasse = spielklasse;
+    }
+
+    public Team(String freilos) {
+        this.freilos = true;
+    }
+
+    public boolean isFreilos() {
+        return freilos;
     }
 
     public boolean isEinzel() {
@@ -89,6 +98,19 @@ public class Team {
 
     public int getVerlorenePunkte() {
         return verlorenePunkte;
+    }
+
+    public String getName(){
+        if(this.einzel=true){
+            return this.spielerEins.toString();
+        }
+        else if(this.einzel = false){
+            return this.spielerEins.toString() + " / " + this.spielerZwei.toString();
+        }
+        else
+        {
+            return "Freilos";
+        }
     }
 
     public int compareTo(Team team){

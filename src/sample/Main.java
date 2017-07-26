@@ -32,6 +32,8 @@ public class Main extends Application {
         //testsystem.rundenBerechnen();
 
 
+
+
         //VereinDAOimpl test = new VereinDAOimpl();
         //Verein Osterbrock = new Verein(5, "123456789","Osterbrock",  "BWE");
         //Verein Testest = new Verein(6, "123456789","Osterbrock",  "BWE");
@@ -55,14 +57,14 @@ public class Main extends Application {
         for (int i=0; i < alleKlassen.size();i++){
             System.out.println(alleKlassen.get(i).getDisziplin()+alleKlassen.get(i).getNiveau());
         }*/
-        Spielklasse spielklasse = new Spielklasse(1,"Herreneinzel","A",1);
+        /*Spielklasse spielklasse = new Spielklasse(1,"Herreneinzel","A",1);
         Spieler spieler = new Spieler("Herbert", "Müller",1);
         Spieler spieler2 = new Spieler("Herbert", "Müller",2);
         Spiel spiel = new Spiel(spieler, spieler2,spielklasse);
         Ergebnis ergebnis = new Ergebnis(21,15,21,19);
         spiel.setErgebnis(ergebnis);
         ErgebnisDAO test = new ErgebnisDAOimpl();
-        test.update(spiel);
+        test.update(spiel);*/
 
         //for (int i=0; i<setzliste.size(); i++){
           //  System.out.println((i+1)+" "+setzliste.get(i).getName());

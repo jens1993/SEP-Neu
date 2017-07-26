@@ -10,33 +10,39 @@ import sample.Spielsysteme.*;
 import sample.Enums.*;
 
 public class Spiel {
-	private int spielID=1;
-	private Spieler heim;
-	private Spieler gast;
+	private int spielID;
+	private Team heim;
+	private Team gast;
 	private Ergebnis ergebnis;
 	private Date aufrufZeit;
 	private Spieler schiedsrichter;
 	private Feld feld;
-	private int status = 0; //0 = ausstehend, 1=aktiv, 2=gespielt
+	private int status = 0; //0= unvollständig 1 = ausstehend, 2=aktiv, 3=gespielt
 	private Spielklasse spielklasse;
 	private int systemSpielID;
 	private int setzPlatzHeim;
 	private int setzPlatzGast;
 
-	public Spieler getHeim() {
+	public Team getHeim() {
 		return heim;
 	}
 
-	public Spieler getGast() {
+	public Team getGast() {
 		return gast;
 	}
 
-	public void setHeim(Spieler heim) {
+	public void setHeim(Team heim) {
 		this.heim = heim;
+		if(this.gast != null){
+			this.status = 1;
+		}
 	}
 
-	public void setGast(Spieler gast) {
+	public void setGast(Team gast) {
 		this.gast = gast;
+		if(this.heim != null){
+			this.status = 1;
+		}
 	}
 
 	public Spielklasse getSpielklasse() {
@@ -67,20 +73,19 @@ public class Spiel {
 		return spielID;
 	}
 
-	public Spiel(Spieler heim, Spieler auswaerts, Spielklasse spielklasse) {
+	public Spiel(Team heim, Team auswaerts, Spielklasse spielklasse) {
 		this.heim = heim;
 		this.gast = auswaerts;
 		this.spielklasse = spielklasse;
-		System.out.println("Spiel erstellt: "+heim.getName()+" gegen "+gast.getName());
+		this.status = 1;
 	}
 
 	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielklasse spielklasse) {
-		this.systemSpielID = systemSpielID;
+		this.systemSpielID = systemSpielID; //Constructor für SpielTree in KO-System
 		this.setzPlatzHeim = setzPlatzHeim;
 		this.setzPlatzGast = setzPlatzGast;
-		System.out.println("Spieler "+setzPlatzHeim+" gegen Spieler "+setzPlatzGast);
 	}
-	public Spieler getSieger(){
+	public Team getSieger(){
 		if(ergebnis!=null){
 			return ergebnis.getSieger(this);
 		}
@@ -109,14 +114,6 @@ public class Spiel {
 		throw new UnsupportedOperationException();
 	}
 
-	public void spielErstellen(String heim, String auswaerts) {
-		/*for (int i=0; i<heim.length && i<auswaerts.length; i++){
-			System.out.println(heim[i].getName());
-		}
-		*/
-		System.out.println(heim+" gegen "+auswaerts);
-
-	}
 	public void ergebnisEintragen(){
 
 	}

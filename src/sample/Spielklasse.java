@@ -12,14 +12,25 @@ public class Spielklasse {
 	private Spielsystem spielsystem;
 	private float meldeKosten = (float) 5;
 	private Turnier turnier;
-	private int turnierid;
 	private boolean aktiv;
 
-	public Spielklasse(int spielklasseID, String disziplin, String niveau, int turnierid) {
+	public Spielklasse(int spielklasseID, String disziplin, String niveau, Turnier turnier) {
 		this.spielklasseID = spielklasseID;
 		this.disziplin = disziplin;
 		this.niveau = niveau;
-		this.turnierid = turnierid;
+		this.turnier = turnier;
+	}
+
+	public Spielsystem getSpielsystem() {
+		return spielsystem;
+	}
+
+	public Turnier getTurnier() {
+		return turnier;
+	}
+
+	public boolean isAktiv() {
+		return aktiv;
 	}
 
 	public int getSpielklasseID() {
@@ -32,10 +43,6 @@ public class Spielklasse {
 
 	public String getNiveau() {
 		return niveau;
-	}
-
-	public int getTurnierid() {
-		return turnierid;
 	}
 
 	public List<Spieler> getSetzliste() {
