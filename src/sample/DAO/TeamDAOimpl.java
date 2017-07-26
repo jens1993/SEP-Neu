@@ -34,15 +34,17 @@ public class TeamDAOimpl implements TeamDAO {
             smt.executeUpdate();
             smt.close();
             PreparedStatement smtSpielerEins = con.SQLConnection().prepareStatement(sqlSpielerEins);
-            smt.setInt(1, team.getTeamid() );
-            smt.setInt(2, team.getSpielerEins().getSpielerID());
-            smt.executeUpdate();
-            smt.close();
-            PreparedStatement smtSpielerZwei = con.SQLConnection().prepareStatement(sqlSpielerZwei);
-            smt.setInt(1, team.getTeamid() );
-            smt.setInt(2, team.getSpielerZwei().getSpielerID());
-            smt.executeUpdate();
-            smt.close();
+            smtSpielerEins.setInt(1, team.getTeamid() );
+            smtSpielerEins.setInt(2, team.getSpielerEins().getSpielerID());
+            smtSpielerEins.executeUpdate();
+            smtSpielerEins.close();
+            if(team.getSpielerZwei()!=null) {
+                PreparedStatement smtSpielerZwei = con.SQLConnection().prepareStatement(sqlSpielerZwei);
+                smtSpielerZwei.setInt(1, team.getTeamid());
+                smtSpielerZwei.setInt(2, team.getSpielerZwei().getSpielerID());
+                smtSpielerZwei.executeUpdate();
+                smtSpielerZwei.close();
+            }
             System.out.println("Team Einfügen klappt");
             return true;
 

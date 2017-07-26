@@ -1,5 +1,6 @@
 package sample;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.Vector;
 import sample.DAO.*;
@@ -7,27 +8,26 @@ import sample.Spielsysteme.*;
 import sample.Enums.*;
 
 public class Spieler {
-	private int iD;
 	private String vName;
-
-
-
 	private String nName;
-	private String gDatum;
+	private Date gDatum;
 	private int spielerID;
-	private char geschlecht;
+	private boolean geschlecht;
+	private int[] rPunkte = new int[3]; //[0]=Einzel-, [1]=Doppel-, [2]=Mixed-Ranglistenpunkte
 	private Verein verein;
 	private float meldeGebuehren;
+	private String Nationalitaet = "Deutschland";
 	private int anzahlSiege = 0;
 	private int anzahlNiederlagen = 0;
 	private int gewonneneSaetze = 0;
 	private int verloreneSaetze = 0;
 	private int erspieltePunkte = 0;
 	private int zugelassenePunkte = 0;
-	private Timer verfuegbar;
+	private Date verfuegbar;
+
 	private int mattenSpiele = 0;
-	private int extSpielerID;
-	private int aktuellesSpiel;
+	private String extSpielerID;
+	private Spiel aktuellesSpiel;
 	private boolean freilos=false;
 
 	public Spieler(String vName, String nName, int spielerID){
@@ -80,6 +80,46 @@ public class Spieler {
 		{
 			return vName;
 		}
+	}
+
+	public String getNationalitaet() {
+		return Nationalitaet;
+	}
+
+	public Date getgDatum() {
+		return gDatum;
+	}
+
+	public int[] getrPunkte() {
+		return rPunkte;
+	}
+
+	public boolean getGeschlecht() {
+		return geschlecht;
+	}
+
+	public Verein getVerein() {
+		return verein;
+	}
+
+	public float getMeldeGebuehren() {
+		return meldeGebuehren;
+	}
+
+	public Date getVerfuegbar() {
+		return verfuegbar;
+	}
+
+	public int getMattenSpiele() {
+		return mattenSpiele;
+	}
+
+	public String getExtSpielerID() {
+		return extSpielerID;
+	}
+
+	public Spiel getAktuellesSpiel() {
+		return aktuellesSpiel;
 	}
 
 	public String getvName() {

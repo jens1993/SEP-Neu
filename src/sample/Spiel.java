@@ -1,6 +1,10 @@
 package sample;
 
 import java.util.Date;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.Hashtable;
+
 import sample.DAO.*;
 import sample.Spielsysteme.*;
 import sample.Enums.*;
@@ -13,7 +17,7 @@ public class Spiel {
 	private Date aufrufZeit;
 	private Spieler schiedsrichter;
 	private Feld feld;
-	private Spielstatus status;
+	private int status = 0; //0 = ausstehend, 1=aktiv, 2=gespielt
 	private Spielklasse spielklasse;
 	private int systemSpielID;
 	private int setzPlatzHeim;
@@ -35,12 +39,28 @@ public class Spiel {
 		this.gast = gast;
 	}
 
-	public void setStatus(Spielstatus status) {
-		this.status = status;
-	}
-
 	public Spielklasse getSpielklasse() {
 		return spielklasse;
+	}
+
+	public Spieler getSchiedsrichter() {
+		return schiedsrichter;
+	}
+
+	public Date getAufrufZeit() {
+		return aufrufZeit;
+	}
+
+	public Feld getFeld() {
+		return feld;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public int getSystemSpielID() {
+		return systemSpielID;
 	}
 
 	public int getSpielID() {

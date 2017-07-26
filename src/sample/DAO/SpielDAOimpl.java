@@ -16,17 +16,33 @@ public class SpielDAOimpl implements SpielDAO {
                 + "Heim,"
                 + "Gast, "
                 + "SpielID, "
+                + "Schiedsrichter, "
                 + "SpielklasseID) "
-                + "VALUES(?,?,?,?)";
+                + "VALUES(?,?,?,?,?)";
+
+        String sqlzwei = "INSERT INTO spielklasse_spielid("
+                + "SpielID,"
+                + "SpielklasseID, "
+                + "SpielklasseSpielID) "
+                + "VALUES(?,?,?)";
+
+
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setInt(1, spiel.getHeim().getSpielerID());
             smt.setInt(2, spiel.getGast().getSpielerID());
             smt.setInt(3, spiel.getSpielID());
-            smt.setInt(4, spiel.getSpielklasse().getSpielklasseID());
+            smt.setInt(4, spiel.getSchiedsrichter().getSpielerID());
+            smt.setInt(5, spiel.getSpielklasse().getSpielklasseID());
             smt.executeUpdate();
             smt.close();
+            PreparedStatement smtzwei = con.SQLConnection().prepareStatement(sqlzwei);
+            smtzwei.setInt(1, spiel.getSpielID());
+            smtzwei.setInt(2, spiel.getSpielklasse().getSpielklasseID());
+            smtzwei.setInt(3, spiel.getSystemSpielID());
+            smtzwei.executeUpdate();
+            smtzwei.close();
             System.out.println("Spiel Einfügen klappt");
             return true;
 
@@ -61,18 +77,28 @@ public class SpielDAOimpl implements SpielDAO {
     @Override
     public boolean update(Spiel spiel) {
         String sql = "UPDATE spiel "
-                + "SET Heim = ?, "
+                + "SET AufrufZeit = ?, "
+                + "Schiedsrichter = ?, "
+                + "Feld = ?, "
+                + "Status = ?, "
+                + "Heim = ?, "
                 + "Gast = ?, "
+                + "SiegerID = ?, "
                 + "SpielklasseID = ? "
                 + "WHERE SpielID = ? "
         ;
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, spiel.getHeim().getSpielerID());
-            smt.setInt(2, spiel.getGast().getSpielerID());
-            smt.setInt(3, spiel.getSpielklasse().getSpielklasseID());
-            smt.setInt(4, spiel.getSpielID());
+            smt.setDate(1, (Date) spiel.getAufrufZeit());
+            smt.setInt(2, spiel.getSchiedsrichter().getSpielerID());
+            smt.setInt(3, spiel.getFeld().getFeldID());
+            smt.setInt(4, spiel.getStatus());
+            smt.setInt(5, spiel.getHeim().getSpielerID());
+            smt.setInt(6, spiel.getGast().getSpielerID());
+            smt.setInt(7, spiel.getSieger().getSpielerID());
+            smt.setInt(8, spiel.getSpielklasse().getSpielklasseID());
+            smt.setInt(9, spiel.getSpielID());
             smt.executeUpdate();
             smt.close();
             System.out.println("Spiel Update klappt");
@@ -87,10 +113,10 @@ public class SpielDAOimpl implements SpielDAO {
         return false;
     }
 
-    @Override
-    public Spiel read(int spielID) {
-        return null;
-    }
+    //@Override
+    //public Spiel read(int spielID) {
+    //    return null;
+    //}
 
     /*@Override
     public Spiel read(int spielID) {

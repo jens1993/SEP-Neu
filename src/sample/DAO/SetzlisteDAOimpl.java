@@ -12,28 +12,25 @@ import java.util.List;
  */
 public class SetzlisteDAOimpl implements SetzlisteDAO {
     @Override
-    public boolean create(List<Spieler> setzliste, Spielklasse spielklasse) {
+    public boolean create(int setzplatz, Team team,  Spielklasse spielklasse) {
         try {
             SQLConnection con = new SQLConnection();
-            for (int i = 0; i < setzliste.size(); i++) {
-
-
-                String sql = "INSERT INTO spielklasse_setzliste("
+            String sql = "INSERT INTO spielklasse_setzliste("
                         + "setzplatz,"
                         + "spielklasseID, "
-                        + "spielerID "
+                        + "teamid "
                         + "VALUES(?,?,?)";
 
                 PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-                smt.setInt(1, i);
+                smt.setInt(1, setzplatz);
                 smt.setInt(2, spielklasse.getSpielklasseID());
-                smt.setInt(3, setzliste.get(i).getSpielerID());
+                smt.setInt(3, team.getTeamid());
                 smt.executeUpdate();
                 smt.close();
                 System.out.println("Setzliste Einfügen klappt");
                 return true;
 
-            }
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Setzliste Einfügen Klappt nicht");
@@ -62,18 +59,32 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
     }
 
     @Override
-    public boolean update(List<Spieler> setzliste, Spielklasse spielklasse) {
-        boolean temp;
-        temp = delete(spielklasse.getSpielklasseID());
-        if (temp) {
-            temp = create(setzliste, spielklasse);
+    public boolean update(int setzplatz, Team team,  Spielklasse spielklasse) {
+        String sql = "UPDATE spielklasse_setzliste "
+                + "SET teamid = ? "
+                + "WHERE spielklasseID = ? "
+                + "AND setzplatz = ?"
+                ;
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setInt(1, team.getTeamid());
+            smt.setInt(2, spielklasse.getSpielklasseID());
+            smt.setInt(3, setzplatz);
+            smt.executeUpdate();
+            smt.close();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Setzliste Update Klappt nicht");
         }
-        return temp;
+        return false;
     }
 
     @Override
-    public List<Spieler> read(int spielklasseID) {
-        List<Spieler> setzliste = new ArrayList<Spieler>();
+    public List<Team> read(int spielklasseID) {
+        /*List<Team> setzliste = new ArrayList<Team>();
         SQLConnection con = new SQLConnection();
         Connection connection = con.SQLConnection();
         int size = 0;
@@ -84,12 +95,12 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
             size = count.getInt(1);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Spielklasse Zählen Klappt nicht");
+            System.out.println("Setzplätze Zählen Klappt nicht");
         }
         try {
             Statement st = connection.createStatement();
-            ResultSet setzlisteResult = st.executeQuery("SELECT setzplatz,VName,NName,spielklasse_setzliste.spielerID FROM spielklasse_setzliste " +
-                    "inner JOIN spieler ON spielklasse_setzliste.spielerID = spieler.SpielerID " +
+            ResultSet setzlisteResult = st.executeQuery("SELECT setzplatz,VName,NName,spielklasse_setzliste.teamID FROM spielklasse_setzliste " +
+                    "inner JOIN spieler ON spielklasse_setzliste.teamID = team.TeamID " +
                     "WHERE spielklasseID = " + spielklasseID +
                     " ORDER BY setzplatz ;");
             for (int i = 1; i <= size; i++) {
@@ -100,12 +111,7 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Setzliste Lesen Klappt nicht");
-        }
-        return setzliste;
-    }
-
-    @Override
-    public List<List<Spieler>> getAllSetzlisten() {
+        }*/
         return null;
     }
 }

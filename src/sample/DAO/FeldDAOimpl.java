@@ -1,9 +1,10 @@
 package sample.DAO;
 
 import sample.Feld;
+import sample.Spieler;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,21 +16,16 @@ public class FeldDAOimpl implements FeldDAO {
         String sql = "INSERT INTO feld("
                 + "FeldID,"
                 + "turnierid, "
-                + "aktivesSpiel, "
-                + "ProfiMatte, "
-                + "InVorbereitung) "
-                + "VALUES(?,?,?,?,?)";
+                + "ProfiMatte) "
+                + "VALUES(?,?,?)";
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setInt(1, feld.getFeldID());
             smt.setInt(2, feld.getTurnier().getTurnierid());
-            smt.setInt(3, feld.getAktivesSpiel().getSpielID());
-            smt.setBoolean(4, feld.isProfiMatte());
-            smt.setInt(5, feld.getInVorbereitung().getSpielID());
+            smt.setBoolean(3, feld.isProfiMatte());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Feld Einfügen klappt");
             return true;
 
         } catch (SQLException e) {
@@ -58,7 +54,6 @@ public class FeldDAOimpl implements FeldDAO {
             smt.setInt(5, feld.getFeldID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Feld Update klappt");
             return true;
 
         } catch (SQLException e) {
@@ -70,11 +65,19 @@ public class FeldDAOimpl implements FeldDAO {
 
     @Override
     public boolean deleteFeld(Feld feld) {
-        return false;
-    }
+        String sql = "Delete From feld Where feldid= ?";
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setInt(1, feld.getFeldID());
+            smt.executeUpdate();
+            smt.close();
+            return true;
 
-    @Override
-    public List<Feld> getAllFelder() {
-        return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Feld Loeschen Klappt nicht");
+        }
+        return false;
     }
 }
