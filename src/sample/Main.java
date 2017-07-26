@@ -26,7 +26,7 @@ public class Main extends Application {
     public static void main(String[] args) {
     	
     	 //testverbindung.PrintResult(r);
-        //launch(args);
+        launch(args);
         //SQLConnection testverbindung = new SQLConnection();
         //KO testsystem = new KO(65);
         //testsystem.rundenBerechnen();
@@ -56,18 +56,17 @@ public class Main extends Application {
             System.out.println(alleKlassen.get(i).getDisziplin()+alleKlassen.get(i).getNiveau());
         }*/
 
-        SetzlisteDAO test = new SetzlisteDAOimpl();
-        List<Spieler> setzliste = test.read(1);
-        Spielklasse spielklasse = new Spielklasse(1, "Herreneinzel","A",1);
+
         //for (int i=0; i<setzliste.size(); i++){
           //  System.out.println((i+1)+" "+setzliste.get(i).getName());
         //}
         //Spielsystem spielsystem = new KO(setzliste);
-        new SchweizerSystem(5, setzliste,spielklasse);
 
-        Ergebnis ergebnis = new Ergebnis(21,10,21,0,22,19);
-        System.out.println(ergebnis);
-        System.out.println(ergebnis.gueltigesErgebnis());
+        //SpielDAO test = new SpielDAOimpl();
+        //Spielklasse spielklasse = new Spielklasse(1, "Herren", "A", 1);
+
+//        Spiel testspiel = new Spiel(1,1,2,spielklasse);
+
 
 
        /* SpielDAOimpl test = new SpielDAOimpl();

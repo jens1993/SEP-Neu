@@ -1,5 +1,6 @@
 package sample;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.Vector;
 import sample.DAO.*;
@@ -9,7 +10,7 @@ import sample.Enums.*;
 public class Spieler {
 	private String vName;
 	private String nName;
-	private String gDatum;
+	private Date gDatum;
 	private int spielerID;
 	private boolean geschlecht;
 	private int[] rPunkte = new int[3]; //[0]=Einzel-, [1]=Doppel-, [2]=Mixed-Ranglistenpunkte
@@ -22,10 +23,11 @@ public class Spieler {
 	private int verloreneSaetze = 0;
 	private int erspieltePunkte = 0;
 	private int zugelassenePunkte = 0;
-	private Timer verfuegbar;
+	private Date verfuegbar;
+
 	private int mattenSpiele = 0;
 	private String extSpielerID;
-	private int aktuellesSpiel;
+	private Spiel aktuellesSpiel;
 	private boolean freilos=false;
 
 	public Spieler(String vName, String nName, int spielerID){
@@ -84,7 +86,7 @@ public class Spieler {
 		return Nationalitaet;
 	}
 
-	public String getgDatum() {
+	public Date getgDatum() {
 		return gDatum;
 	}
 
@@ -104,7 +106,7 @@ public class Spieler {
 		return meldeGebuehren;
 	}
 
-	public Timer getVerfuegbar() {
+	public Date getVerfuegbar() {
 		return verfuegbar;
 	}
 
@@ -116,7 +118,7 @@ public class Spieler {
 		return extSpielerID;
 	}
 
-	public int getAktuellesSpiel() {
+	public Spiel getAktuellesSpiel() {
 		return aktuellesSpiel;
 	}
 
