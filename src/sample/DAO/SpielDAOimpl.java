@@ -33,7 +33,12 @@ public class SpielDAOimpl implements SpielDAO {
             smt.setInt(1, spiel.getHeim().getTeamid());
             smt.setInt(2, spiel.getGast().getTeamid());
             smt.setInt(3, spiel.getSpielID());
-            smt.setInt(4, spiel.getSchiedsrichter().getSpielerID());
+            if (spiel.getSchiedsrichter()!=null){
+                smt.setInt(4, spiel.getSchiedsrichter().getSpielerID());
+            }
+            else{
+                smt.setNull(4,Types.INTEGER);
+            }
             smt.setInt(5, spiel.getSpielklasse().getSpielklasseID());
             smt.executeUpdate();
             smt.close();
@@ -44,6 +49,7 @@ public class SpielDAOimpl implements SpielDAO {
             smtzwei.executeUpdate();
             smtzwei.close();
             System.out.println("Spiel Einfügen klappt");
+
             return true;
 
         } catch (SQLException e) {

@@ -76,6 +76,11 @@ public class KO extends Spielsystem {
 	}
 
 	@Override
+	public List<Team> getPlatzierungsliste() {
+		return null;
+	}
+
+	@Override
 	public boolean beendeMatch(Spiel spiel) {
 		return false;
 	}

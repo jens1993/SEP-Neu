@@ -25,6 +25,7 @@ public class SQLConnection
         private String db_nutzung = "USE turnierverwaltung";
 
 
+
         public Connection SQLConnection() //eventuell nich pub
         {
             try 
@@ -49,6 +50,16 @@ public class SQLConnection
             }
             return con;
         }
+        public boolean closeCon(){
+			try {
+				con.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+			return false;
+		}
 
         //Funktioniert. Einfach select abfragen
         public ResultSet executeSQL(String sql)

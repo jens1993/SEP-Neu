@@ -74,17 +74,36 @@ public class Spiel {
 		return spielID;
 	}
 
+	public Spiel(Team heim, Team gast, Spielklasse spielklasse, int systemSpielID) {
+		this.heim = heim;
+		this.gast = gast;
+		this.spielklasse = spielklasse;
+		this.systemSpielID = systemSpielID;
+		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
+		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
+		SpielDAO spielDAO = new SpielDAOimpl();
+		spielDAO.create(this);
+	}
+
 	public Spiel(Team heim, Team auswaerts, Spielklasse spielklasse) {
 		this.heim = heim;
 		this.gast = auswaerts;
 		this.spielklasse = spielklasse;
 		this.status = 1;
+		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
+		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
+		SpielDAO spielDAO = new SpielDAOimpl();
+		spielDAO.create(this);
 	}
 
 	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielklasse spielklasse) {
 		this.systemSpielID = systemSpielID; //Constructor für SpielTree in KO-System
 		this.setzPlatzHeim = setzPlatzHeim;
 		this.setzPlatzGast = setzPlatzGast;
+		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
+		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
+		SpielDAO spielDAO = new SpielDAOimpl();
+		spielDAO.create(this);
 	}
 	public Team getSieger(){
 		if(ergebnis!=null){
@@ -95,12 +114,51 @@ public class Spiel {
 		}
 	}
 
+	public void setAufrufZeit(LocalDate aufrufZeit) {
+		this.aufrufZeit = aufrufZeit;
+	}
+
+	public void setSchiedsrichter(Spieler schiedsrichter) {
+		this.schiedsrichter = schiedsrichter;
+	}
+
+	public void setFeld(Feld feld) {
+		this.feld = feld;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	public Ergebnis getErgebnis() {
 		return ergebnis;
 	}
 
 	public void setErgebnis(Ergebnis ergebnis) {
 		this.ergebnis = ergebnis;
+		int satzpunkteHeim = 0;
+		int satzpunkteGast = 0;
+		heim.addBisherigenGegner(gast);
+		gast.addBisherigenGegner(heim);
+		getSieger().addGewonnenesSpiel();
+		int i=0;
+		while (i<ergebnis.getErgebnisArray().length/2){
+			satzpunkteHeim = ergebnis.getErgebnisArray()[i*2];
+			satzpunkteGast = ergebnis.getErgebnisArray()[i*2+1];
+			heim.addGespieltePunkte(satzpunkteHeim,satzpunkteGast);
+			gast.addGespieltePunkte(satzpunkteGast,satzpunkteHeim);
+			if (satzpunkteHeim>satzpunkteGast) {
+				heim.addGewonnenenSatz();
+				gast.addVerlorenenSatz();
+			}
+			else{
+				gast.addGewonnenenSatz();
+				heim.addVerlorenenSatz();
+			}
+			i++;
+		}
+		status=3;
+		spielklasse.getSpielsystem().beendeMatch(this);
 	}
 
 	public int getSetzPlatzHeim() {

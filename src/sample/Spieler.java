@@ -2,6 +2,7 @@ package sample;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.Vector;
 import sample.DAO.*;
@@ -18,7 +19,7 @@ public class Spieler {
 	private Verein verein;
 	private float meldeGebuehren;
 	private String Nationalitaet = "Deutschland";
-	private LocalDate verfuegbar;
+	private LocalDate verfuegbar = LocalDate.now();
 	private int mattenSpiele = 0;
 	private String extSpielerID;
 	private Spiel aktuellesSpiel;
@@ -68,6 +69,8 @@ public class Spieler {
 	public void setMeldeGebuehren(float meldeGebuehren) {
 		this.meldeGebuehren = meldeGebuehren;
 	}
+
+
 
 	public void setNationalitaet(String nationalitaet) {
 		Nationalitaet = nationalitaet;

@@ -13,6 +13,7 @@ public abstract class Spielsystem {
 	private Spielklasse spielklasse;
 	protected int spielsystemCode;
 
+
 	public Spielklasse getSpielklasse() {
 		return spielklasse;
 	}
@@ -31,7 +32,7 @@ public abstract class Spielsystem {
 	public int getSpielsystemCode() {
 		return spielsystemCode;
 	}
-
+	public abstract List<Team> getPlatzierungsliste();
 	public boolean systemWiederherstellen(int spielsystemCode){
 		return false;
 	}

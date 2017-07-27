@@ -3,10 +3,15 @@ package sample;
 import sample.DAO.*;
 import sample.Spielsysteme.*;
 import sample.Enums.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Florian-PC on 25.07.2017.
  */
 public class Team {
+    private TeamDAO teamDAO = new TeamDAOimpl();
     private int teamid;
     private Spieler spielerEins;
     private Spieler spielerZwei;
@@ -18,6 +23,7 @@ public class Team {
     private int gewonnnenePunkte;
     private int verlorenePunkte;
     private boolean freilos = false;
+    private List<Team> bisherigeGegner = new ArrayList<Team>();
 
     public Team(int teamid, Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
         this.teamid = teamid;
@@ -35,7 +41,7 @@ public class Team {
     }
 
     public void addSpieler(Spieler spieler){
-        if (spielerEins!=null){
+        if (spielerEins==null){
             this.spielerEins = spieler;
         }
         else{
@@ -74,24 +80,33 @@ public class Team {
         return spielerZwei;
     }
 
+    public void addBisherigenGegner(Team team){
+        bisherigeGegner.add(team);
+    }
+
+    public List<Team> getBisherigeGegner() {
+        return bisherigeGegner;
+    }
+
     public void addGewonnenesSpiel() {
         this.gewonneneSpiele ++;
+        teamDAO.updateTeam(this);
     }
 
-    public void setGewonneneSaetze(int gewonneneSaetze) {
-        this.gewonneneSaetze = this.gewonneneSaetze+ gewonneneSaetze;
+    public void addGewonnenenSatz() {
+        this.gewonneneSaetze ++;
+        teamDAO.updateTeam(this);
     }
 
-    public void addVerloreneSaetze(int verloreneSaetze) {
-        this.verloreneSaetze = this.verloreneSaetze + verloreneSaetze;
+    public void addVerlorenenSatz() {
+        this.verloreneSaetze ++;
+        teamDAO.updateTeam(this);
     }
 
-    public void addGewonnnenePunkt(int gewonnnenePunkt) {
-        this.gewonnnenePunkte = this.gewonnnenePunkte + gewonnnenePunkt;
-    }
-
-    public void addVerlorenePunkte(int verlorenePunkte) {
+    public void addGespieltePunkte(int gewonnnenePunkte, int verlorenePunkte) {
+        this.gewonnnenePunkte = this.gewonnnenePunkte + gewonnnenePunkte;
         this.verlorenePunkte = this.verlorenePunkte + verlorenePunkte;
+        teamDAO.updateTeam(this);
     }
 
     public int getTeamid() {
@@ -118,11 +133,11 @@ public class Team {
         return verlorenePunkte;
     }
 
-    public String getName(){
-        if(this.einzel=true){
+    public String toString(){
+        if(this.einzel==true){
             return this.spielerEins.toString();
         }
-        else if(this.einzel = false){
+        else if(this.einzel == false){
             return this.spielerEins.toString() + " / " + this.spielerZwei.toString();
         }
         else

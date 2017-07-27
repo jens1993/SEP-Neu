@@ -79,6 +79,7 @@ public class TeamDAOimpl implements TeamDAO {
             smt.setInt(7, team.getTeamid());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {

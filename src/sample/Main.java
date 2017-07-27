@@ -6,8 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import sample.Spielsysteme.*;
 import sample.Enums.*;
 import sample.DAO.*;
@@ -24,7 +27,20 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-    	
+    	TurnierDAO test = new TurnierDAOimpl();
+    	Turnier turnier = test.read(1);
+        Spielklasse spielklasse =turnier.getSpielklassen().get(1);
+    	List<Team> setzliste = spielklasse.getSetzliste();
+        spielklasse.setSpielsystem(new SchweizerSystem(2,setzliste,spielklasse));
+        Ergebnis ergebnis = new Ergebnis(21,15,21,15);
+        int ergebnisse = turnier.getSpiele().size();
+        for(int i=1;i<=turnier.getSpiele().size();i++){
+            turnier.getSpiele().get(i).setErgebnis(ergebnis);
+        }
+        int gew = turnier.getTeams().get(1).getGewonnnenePunkte();
+        System.out.println(gew);
+        //Turnier turnier = new Turnier("Kreismeisterschaften", 2, LocalDate.now());
+    	//test.create(turnier);
     	 //testverbindung.PrintResult(r);
         //launch(args);
         //SQLConnection testverbindung = new SQLConnection();
