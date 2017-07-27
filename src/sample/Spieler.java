@@ -53,6 +53,42 @@ public class Spieler {
 		}
 	}
 
+	public void setgDatum(LocalDate gDatum) {
+		this.gDatum = gDatum;
+	}
+
+	public void setrPunkte(int[] rPunkte) {
+		this.rPunkte = rPunkte;
+	}
+
+	public void setVerein(Verein verein) {
+		this.verein = verein;
+	}
+
+	public void setMeldeGebuehren(float meldeGebuehren) {
+		this.meldeGebuehren = meldeGebuehren;
+	}
+
+	public void setNationalitaet(String nationalitaet) {
+		Nationalitaet = nationalitaet;
+	}
+
+	public void setVerfuegbar(LocalDate verfuegbar) {
+		this.verfuegbar = verfuegbar;
+	}
+
+	public void setMattenSpiele(int mattenSpiele) {
+		this.mattenSpiele = mattenSpiele;
+	}
+
+	public void setExtSpielerID(String extSpielerID) {
+		this.extSpielerID = extSpielerID;
+	}
+
+	public void setAktuellesSpiel(Spiel aktuellesSpiel) {
+		this.aktuellesSpiel = aktuellesSpiel;
+	}
+
 	public String getNationalitaet() {
 		return Nationalitaet;
 	}

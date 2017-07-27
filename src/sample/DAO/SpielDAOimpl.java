@@ -90,7 +90,7 @@ public class SpielDAOimpl implements SpielDAO {
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setDate(1, (Date) spiel.getAufrufZeit());
+            smt.setObject(1, spiel.getAufrufZeit());
             smt.setInt(2, spiel.getSchiedsrichter().getSpielerID());
             smt.setInt(3, spiel.getFeld().getFeldID());
             smt.setInt(4, spiel.getStatus());

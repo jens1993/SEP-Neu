@@ -1,5 +1,6 @@
 package sample;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -14,7 +15,7 @@ public class Spiel {
 	private Team heim;
 	private Team gast;
 	private Ergebnis ergebnis;
-	private Date aufrufZeit;
+	private LocalDate aufrufZeit;
 	private Spieler schiedsrichter;
 	private Feld feld;
 	private int status = 0; //0= unvollständig 1 = ausstehend, 2=aktiv, 3=gespielt
@@ -53,7 +54,7 @@ public class Spiel {
 		return schiedsrichter;
 	}
 
-	public Date getAufrufZeit() {
+	public LocalDate getAufrufZeit() {
 		return aufrufZeit;
 	}
 

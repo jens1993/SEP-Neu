@@ -11,7 +11,7 @@ public class Team {
     private Spieler spielerEins;
     private Spieler spielerZwei;
     private Spielklasse spielklasse;
-    private boolean einzel;
+    private boolean einzel = true;
     private int gewonneneSpiele;
     private int gewonneneSaetze;
     private int verloreneSaetze;
@@ -19,16 +19,34 @@ public class Team {
     private int verlorenePunkte;
     private boolean freilos = false;
 
-    public Team(Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
+    public Team(int teamid, Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
+        this.teamid = teamid;
         this.spielerEins = spielerEins;
         this.spielerZwei = spielerZwei;
         this.spielklasse = spielklasse;
         this.einzel = false;
     }
 
-    public Team(Spieler spielerEins, Spielklasse spielklasse) {
+    public Team(int teamid, Spieler spielerEins, Spielklasse spielklasse) {
+        this.teamid = teamid;
         this.spielerEins = spielerEins;
         this.einzel = true;
+        this.spielklasse = spielklasse;
+    }
+
+    public void addSpieler(Spieler spieler){
+        if (spielerEins!=null){
+            this.spielerEins = spieler;
+        }
+        else{
+            this.spielerZwei = spieler;
+            this.einzel=false;
+        }
+
+    }
+
+    public Team(int teamid, Spielklasse spielklasse) { //nur für bestehendes Turnier einlesen
+        this.teamid = teamid;
         this.spielklasse = spielklasse;
     }
 
