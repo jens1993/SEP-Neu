@@ -45,7 +45,7 @@ public class TeamDAOimpl implements TeamDAO {
                 smtSpielerZwei.executeUpdate();
                 smtSpielerZwei.close();
             }
-            System.out.println("Team Einfügen klappt");
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -99,6 +99,7 @@ public class TeamDAOimpl implements TeamDAO {
             smt.setInt(1, team.getTeamid());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {

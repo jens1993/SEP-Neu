@@ -28,6 +28,7 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
                 smt.executeUpdate();
                 smt.close();
                 System.out.println("Setzliste Einfügen klappt");
+            con.closeCon();
                 return true;
 
 
@@ -48,6 +49,7 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
             smt.executeUpdate();
             smt.close();
             System.out.println("Setzliste Loeschen klappt");
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -73,6 +75,7 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
             smt.setInt(3, setzplatz);
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -80,38 +83,5 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
             System.out.println("Setzliste Update Klappt nicht");
         }
         return false;
-    }
-
-    @Override
-    public List<Team> read(int spielklasseID) {
-        /*List<Team> setzliste = new ArrayList<Team>();
-        SQLConnection con = new SQLConnection();
-        Connection connection = con.SQLConnection();
-        int size = 0;
-        try {
-            Statement st = connection.createStatement();
-            ResultSet count = st.executeQuery("SELECT COUNT(setzplatz) from spielklasse_setzliste where spielklasseID = "+spielklasseID);
-            count.next();
-            size = count.getInt(1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Setzplätze Zählen Klappt nicht");
-        }
-        try {
-            Statement st = connection.createStatement();
-            ResultSet setzlisteResult = st.executeQuery("SELECT setzplatz,VName,NName,spielklasse_setzliste.teamID FROM spielklasse_setzliste " +
-                    "inner JOIN spieler ON spielklasse_setzliste.teamID = team.TeamID " +
-                    "WHERE spielklasseID = " + spielklasseID +
-                    " ORDER BY setzplatz ;");
-            for (int i = 1; i <= size; i++) {
-                setzlisteResult.next();
-                setzliste.add(new Spieler(setzlisteResult.getString(2), setzlisteResult.getString(3),setzlisteResult.getInt(4)));
-                System.out.println(setzlisteResult.getString(2));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Setzliste Lesen Klappt nicht");
-        }*/
-        return null;
     }
 }

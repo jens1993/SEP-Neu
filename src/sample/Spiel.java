@@ -11,6 +11,8 @@ import sample.Spielsysteme.*;
 import sample.Enums.*;
 
 public class Spiel {
+	ErgebnisDAO ergebnisDAO = new ErgebnisDAOimpl();
+	SpielDAO spielDAO = new SpielDAOimpl();
 	private int spielID;
 	private Team heim;
 	private Team gast;
@@ -81,7 +83,6 @@ public class Spiel {
 		this.systemSpielID = systemSpielID;
 		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
 		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
-		SpielDAO spielDAO = new SpielDAOimpl();
 		spielDAO.create(this);
 	}
 
@@ -92,7 +93,6 @@ public class Spiel {
 		this.status = 1;
 		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
 		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
-		SpielDAO spielDAO = new SpielDAOimpl();
 		spielDAO.create(this);
 	}
 
@@ -100,9 +100,9 @@ public class Spiel {
 		this.systemSpielID = systemSpielID; //Constructor für SpielTree in KO-System
 		this.setzPlatzHeim = setzPlatzHeim;
 		this.setzPlatzGast = setzPlatzGast;
+		this.spielklasse = spielklasse;
 		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
 		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
-		SpielDAO spielDAO = new SpielDAOimpl();
 		spielDAO.create(this);
 	}
 	public Team getSieger(){
@@ -159,6 +159,8 @@ public class Spiel {
 		}
 		status=3;
 		spielklasse.getSpielsystem().beendeMatch(this);
+		spielDAO.update(this);
+		ergebnisDAO.create(this);
 	}
 
 	public int getSetzPlatzHeim() {

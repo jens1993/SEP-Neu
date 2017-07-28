@@ -33,12 +33,24 @@ public class Main extends Application {
     	List<Team> setzliste = spielklasse.getSetzliste();
         spielklasse.setSpielsystem(new SchweizerSystem(2,setzliste,spielklasse));
         Ergebnis ergebnis = new Ergebnis(21,15,21,15);
-        int ergebnisse = turnier.getSpiele().size();
-        for(int i=1;i<=turnier.getSpiele().size();i++){
-            turnier.getSpiele().get(i).setErgebnis(ergebnis);
-        }
-        int gew = turnier.getTeams().get(1).getGewonnnenePunkte();
-        System.out.println(gew);
+        Ergebnis ergebnis1 = new Ergebnis(15,21,21,19,30,29);
+        Ergebnis ergebnis2 = new Ergebnis(21,12,21,11);
+        Ergebnis ergebnis3 = new Ergebnis(21,18,21,19);
+        Ergebnis ergebnis4 = new Ergebnis(22,20,15,21,23,25);
+        Ergebnis ergebnis5 = new Ergebnis(16,21,21,15,21,14);
+        Ergebnis ergebnis6 = new Ergebnis(26,24,28,30,12,21);
+        Ergebnis ergebnis7 = new Ergebnis(21,14,21,17);
+        turnier.getSpiele().get(1).setErgebnis(ergebnis);
+        turnier.getSpiele().get(2).setErgebnis(ergebnis1);
+        turnier.getSpiele().get(3).setErgebnis(ergebnis2);
+        turnier.getSpiele().get(4).setErgebnis(ergebnis3);
+        turnier.getSpiele().get(5).setErgebnis(ergebnis4);
+        turnier.getSpiele().get(6).setErgebnis(ergebnis5);
+        turnier.getSpiele().get(7).setErgebnis(ergebnis6);
+        turnier.getSpiele().get(8).setErgebnis(ergebnis7);
+
+
+
         //Turnier turnier = new Turnier("Kreismeisterschaften", 2, LocalDate.now());
     	//test.create(turnier);
     	 //testverbindung.PrintResult(r);

@@ -29,7 +29,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             smt.setInt(4, spielklasse.getSpielklasseID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Spielklasse Einfügen klappt");
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -49,7 +49,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             smt.setInt(1, spielklasse.getSpielklasseID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Spielklasse Loeschen klappt");
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -79,7 +79,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             smt.setInt(6, spielklasse.getSpielklasseID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Spielklasse Update klappt");
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {

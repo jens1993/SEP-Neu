@@ -23,7 +23,6 @@ public class ErgebnisDAOimpl implements ErgebnisDAO {
             sql=sql+",?";
         }
         sql=sql+")";
-        System.out.println(sql);
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
@@ -34,8 +33,8 @@ public class ErgebnisDAOimpl implements ErgebnisDAO {
             }
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
-
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Feld Einfügen Klappt nicht");
@@ -52,6 +51,7 @@ public class ErgebnisDAOimpl implements ErgebnisDAO {
             smt.setInt(1, ergebnis.getSpielID());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -82,9 +82,9 @@ public class ErgebnisDAOimpl implements ErgebnisDAO {
                 smt.setInt(k+1,ergebnis.getErgebnis().getErgebnisArray()[k]);
             }
             smt.setInt(ergebnis.getErgebnis().getErgebnisArray().length+1,ergebnis.getSpielID());
-            System.out.println(smt.toString());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {

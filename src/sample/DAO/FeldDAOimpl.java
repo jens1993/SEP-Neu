@@ -26,6 +26,7 @@ public class FeldDAOimpl implements FeldDAO {
             smt.setBoolean(3, feld.isProfiMatte());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -54,6 +55,7 @@ public class FeldDAOimpl implements FeldDAO {
             smt.setInt(5, feld.getFeldID());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -72,6 +74,7 @@ public class FeldDAOimpl implements FeldDAO {
             smt.setInt(1, feld.getFeldID());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {

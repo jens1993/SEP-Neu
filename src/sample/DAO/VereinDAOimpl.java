@@ -29,7 +29,7 @@ public class VereinDAOimpl implements VereinDAO {
             smt.setInt(4, verein.getVereinsID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Verein Einfügen klappt");
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -50,7 +50,7 @@ public class VereinDAOimpl implements VereinDAO {
             smt.setInt(1, verein.getVereinsID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Verein Loeschen klappt");
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -73,37 +73,13 @@ public class VereinDAOimpl implements VereinDAO {
             smt.setInt(4, verein.getVereinsID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Verein Update klappt");
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Verein Update Klappt nicht");
         }
-
-
         return false;
-    }
-
-    @Override
-    public Verein read(int vereinsID) {
-        String sql = "Select * from verein Where vereinsID="+vereinsID;
-        Verein temp = null;
-        try {
-            SQLConnection con = new SQLConnection();
-            Connection connection = con.SQLConnection();
-            Statement st = connection.createStatement();
-            ResultSet vereinResult = st.executeQuery(sql);
-            vereinResult.next();
-            temp = new Verein( vereinsID, vereinResult.getString(2), vereinResult.getString(3), vereinResult.getString(4));
-            System.out.println(vereinResult.getString(2));
-            System.out.println("Verein Lesen klappt");
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Verein Lesen Klappt nicht");
-        }
-        return temp;
     }
 }

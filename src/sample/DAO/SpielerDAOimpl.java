@@ -52,6 +52,7 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setString(11, spieler.getExtSpielerID());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -72,6 +73,7 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setInt(1, spieler.getSpielerID());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -130,6 +132,7 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setInt(15, spieler.getSpielerID());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {

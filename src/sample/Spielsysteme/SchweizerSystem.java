@@ -30,6 +30,13 @@ public class SchweizerSystem extends Spielsystem {
 				return team1.compareTo(team2);
 			}
 		});
+		for (int i=0; i<nextTeamList.size();i++){
+			System.out.println((i+1)+": "+nextTeamList.get(i).getGewonneneSpiele()+", "+
+					nextTeamList.get(i).getGewonneneSaetze()+":"+
+					nextTeamList.get(i).getVerloreneSaetze()+", "+
+					nextTeamList.get(i).getGewonnnenePunkte()+":"+
+					nextTeamList.get(i).getVerlorenePunkte());
+		}
 	}
 
 	public void ersteRundeErstellen() {
@@ -47,9 +54,9 @@ public class SchweizerSystem extends Spielsystem {
 		}
 	}
 
-	public void rundeErstellen() {
+	public boolean rundeErstellen() {
+		sortList();
 		if (aktuelleRunde<=anzahlRunden){
-			sortList();
 			for (int i=0;i<nextTeamList.size();i++)
 			{
 				this.teamList.add(nextTeamList.get(i));
@@ -66,10 +73,13 @@ public class SchweizerSystem extends Spielsystem {
 				Spiel spiel = new Spiel(teamEins,teamZwei,this.getSpielklasse(),spielSystemIDberechnen());
 				spiele.add(spiel);
 				offeneRundenSpiele++;
+
 			}
+			return false;
 		}
 		else{
 			System.out.println("Schweizer System beendet");
+			return true;
 		}
 
 
@@ -110,9 +120,9 @@ public class SchweizerSystem extends Spielsystem {
 		offeneRundenSpiele --;
 		if(offeneRundenSpiele==0){
 			aktuelleRunde++;
-			rundeErstellen();
+			return (rundeErstellen());
 		}
-		return true;
+		return false;
 	}
 
 	private void freiloseHinzufuegen(List<Team> teamList){

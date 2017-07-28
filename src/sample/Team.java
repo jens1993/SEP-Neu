@@ -146,33 +146,66 @@ public class Team {
         }
     }
 
-    public int compareTo(Team team){
+    public int compareToOld(Team team){
+        int satzdifferenzThis = this.gewonneneSaetze-this.verloreneSaetze;
+        int punktdifferenzThis = this.gewonnnenePunkte-this.verlorenePunkte;
+        int satzdifferenzTeam = team.getGewonneneSaetze()-team.getVerloreneSaetze();
+        int punktdifferenzTeam = team.getGewonnnenePunkte()-team.getVerlorenePunkte();
         if (this.gewonneneSpiele>team.getGewonneneSpiele()){
-            return 1;
+            return -1;
         }
         else if (this.gewonneneSpiele==team.getGewonneneSpiele()){
-            if(this.gewonneneSaetze>team.getGewonneneSaetze()){
-                return 1;
+            if(satzdifferenzThis>satzdifferenzTeam){
+                return -1;
             }
-            else if(this.gewonneneSaetze>team.getGewonneneSaetze()){
-                if(this.gewonnnenePunkte > getGewonnnenePunkte()){
+            else if(satzdifferenzThis==satzdifferenzTeam){
+
+                if (punktdifferenzThis > punktdifferenzTeam) {
+                    return -1;
+                } else if (punktdifferenzThis == punktdifferenzTeam) {
+                    return 0;
+                } else {
                     return 1;
                 }
-                else if(this.gewonnnenePunkte==team.getGewonnnenePunkte()){
+
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        else{
+            return 1;
+        }
+
+    }
+
+    public int compareTo(Team team){
+        int satzdifferenzThis = this.gewonneneSaetze-this.verloreneSaetze;
+        int punktdifferenzThis = this.gewonnnenePunkte-this.verlorenePunkte;
+        int satzdifferenzTeam = team.getGewonneneSaetze()-team.getVerloreneSaetze();
+        int punktdifferenzTeam = team.getGewonnnenePunkte()-team.getVerlorenePunkte();
+        if (this.gewonneneSpiele==team.getGewonneneSpiele()){
+
+            if (satzdifferenzTeam==satzdifferenzThis){
+                if(punktdifferenzTeam==punktdifferenzThis){
                     return 0;
                 }
                 else{
-                    return -1;
+                    return punktdifferenzTeam-punktdifferenzThis;
                 }
             }
             else
             {
-                return -1;
+                return satzdifferenzTeam-satzdifferenzThis;
             }
         }
         else{
-            return -1;
+            return team.getGewonneneSpiele()-this.gewonneneSpiele;
         }
 
+
     }
+
+
 }
