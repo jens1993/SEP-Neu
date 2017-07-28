@@ -14,11 +14,12 @@ public class SchweizerSystem extends Spielsystem {
 	private int anzahlRunden;
 	private int offeneRundenSpiele=0;
 	private int aktuelleRunde = 1;
+	private int randomVersuche=0;
 	private boolean beendet;
 	private ArrayList<Team> teamList;
 	private ArrayList<Spiel> spiele = new ArrayList<Spiel>();
 	private ArrayList<Team> nextTeamList = new ArrayList<Team>();
-	private List<ArrayList<Team>> teamListArray =new ArrayList<ArrayList<Team>>();
+	private ArrayList<ArrayList<Team>> teamListArray =new ArrayList<ArrayList<Team>>();
 
 	public SchweizerSystem(int anzahlRunden, ArrayList<Team> teamList, Spielklasse spielklasse) {
 		setSpielklasse(spielklasse);
@@ -59,7 +60,7 @@ public class SchweizerSystem extends Spielsystem {
 			Team teamZwei = getRandomTeam();
 			this.teamList.remove(teamZwei);
 			this.nextTeamList.add(teamZwei);
-			Spiel spiel = new Spiel(teamEins,teamZwei,this.getSpielklasse(),spielSystemIDberechnen());
+			Spiel spiel = new Spiel(teamEins,teamZwei,this.getSpielklasse(),spielSystemIDberechnen()-1000);
 			spiele.add(spiel);
 			offeneRundenSpiele++;
 		}
@@ -75,14 +76,14 @@ public class SchweizerSystem extends Spielsystem {
 
 	public boolean rundenListeErstellen(int versuch, int rundenNummer) {
 
-		if (rundenNummer<anzahlRunden){
+		if (rundenNummer+1<anzahlRunden){
 			teamList.clear();
 			for (int i=0;i<teamListArray.get(rundenNummer).size();i++)
 			{
 				this.teamList.add(teamListArray.get(rundenNummer).get(i));
 			}
 			nextTeamList.clear();
-			System.out.println("Runde: "+aktuelleRunde);
+			System.out.println("Runde: "+(aktuelleRunde+1));
 			while (this.teamList.size()>1){
 				Team teamEins = teamList.get(0);
 				this.teamList.remove(teamEins);
@@ -98,6 +99,15 @@ public class SchweizerSystem extends Spielsystem {
 						if(rundenListeErstellen(versuch + 1, rundenNummer)){
 							return true;
 						}
+
+					}
+					else if(randomVersuche<10){
+						randomVersuche++;
+						listeWuerfeln(rundenNummer);
+						if (rundenListeErstellen(0,rundenNummer)==true){
+							return true;
+						}
+
 					}
 					else {
 						System.out.println("Kein möglicher Gegner gefunden, jeder hat gegen jeden gespielt");
@@ -114,6 +124,28 @@ public class SchweizerSystem extends Spielsystem {
 
 
 	}
+
+	private void listeWenden(int rundenNummer) {
+		Team tempTeam;
+		for(int i=teamListArray.get(rundenNummer).size()-1;i>=0;i--){
+			tempTeam = teamListArray.get(rundenNummer).get(i);
+			teamListArray.get(rundenNummer).remove(i);
+			teamListArray.get(rundenNummer).add(tempTeam);
+		}
+	}
+	private void listeWuerfeln(int rundenNummer){
+		Team tempTeam;
+		//tempTeam = teamListArray.get(rundenNummer).get(verschoben);
+		//teamListArray.get(rundenNummer).remove(tempTeam);
+		//teamListArray.get(rundenNummer).add(teamListArray.get(rundenNummer).size()-1,tempTeam);
+		for(int i=0;i<teamListArray.get(rundenNummer).size()-1;i++){
+			int randomIndex = (int)(Math.random()*(teamListArray.get(rundenNummer).size()-i))+i;
+			tempTeam = teamListArray.get(rundenNummer).get(randomIndex);
+			teamListArray.get(rundenNummer).remove(tempTeam);
+			teamListArray.get(rundenNummer).add(0,tempTeam);
+		}
+	}
+
 	private void rundeFuellen(){
 		teamList.clear();
 		for (int i=0;i<nextTeamList.size();i++)
@@ -195,6 +227,7 @@ public class SchweizerSystem extends Spielsystem {
 			if(beendet==false){
 				rundeErstellen();
 				aktuelleRunde++;
+				randomVersuche=0;
 				return true;
 			}
 
