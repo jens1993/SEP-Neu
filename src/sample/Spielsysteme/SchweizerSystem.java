@@ -95,8 +95,9 @@ public class SchweizerSystem extends Spielsystem {
 				else{
 					if(versuch+1<teamListArray.get(rundenNummer).size()) {
 						//System.out.println("Neuer versuch");
-						rundenListeErstellen(versuch + 1, rundenNummer);
-						return false;
+						if(rundenListeErstellen(versuch + 1, rundenNummer)){
+							return true;
+						}
 					}
 					else {
 						System.out.println("Kein möglicher Gegner gefunden, jeder hat gegen jeden gespielt");
@@ -114,6 +115,7 @@ public class SchweizerSystem extends Spielsystem {
 
 	}
 	private void rundeFuellen(){
+		teamList.clear();
 		for (int i=0;i<nextTeamList.size();i++)
 		{
 			this.teamList.add(nextTeamList.get(i));
