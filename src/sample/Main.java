@@ -30,9 +30,40 @@ public class Main extends Application {
     	TurnierDAO test = new TurnierDAOimpl();
     	Turnier turnier = test.read(1);
         Spielklasse spielklasse =turnier.getSpielklassen().get(1);
-    	List<Team> setzliste = spielklasse.getSetzliste();
-        spielklasse.setSpielsystem(new SchweizerSystem(2,setzliste,spielklasse));
+    	ArrayList<Team> setzliste = spielklasse.getSetzliste();
+        spielklasse.setSpielsystem(new SchweizerSystem(10,setzliste,spielklasse));
+        List<Ergebnis> ergebnisse = new ArrayList<>();
         Ergebnis ergebnis = new Ergebnis(21,15,21,15);
+        Ergebnis ergebnis1 = new Ergebnis(15,21,21,19,30,29);
+        Ergebnis ergebnis2 = new Ergebnis(21,12,21,11);
+        Ergebnis ergebnis3 = new Ergebnis(21,18,21,19);
+        Ergebnis ergebnis4 = new Ergebnis(22,20,15,21,23,25);
+        Ergebnis ergebnis5 = new Ergebnis(16,21,21,15,21,14);
+        Ergebnis ergebnis6 = new Ergebnis(26,24,28,30,12,21);
+        Ergebnis ergebnis7 = new Ergebnis(21,14,21,17);
+        ergebnisse.add(ergebnis);
+        ergebnisse.add(ergebnis1);
+        ergebnisse.add(ergebnis2);
+        ergebnisse.add(ergebnis3);
+        ergebnisse.add(ergebnis4);
+        ergebnisse.add(ergebnis5);
+        ergebnisse.add(ergebnis6);
+        ergebnisse.add(ergebnis7);
+        ergebnisse.add(new Ergebnis(21,6,21,14));
+        ergebnisse.add(new Ergebnis(16,21,14,21));
+        ergebnisse.add(new Ergebnis(26,24,21,14,15,21));
+        ergebnisse.add(new Ergebnis(21,15,21,18));
+        ergebnisse.add(new Ergebnis(12,21,16,21));
+        ergebnisse.add(new Ergebnis(15,21,13,21));
+        ergebnisse.add(new Ergebnis(19,21,21,14,21,18));
+
+
+        for(int i=1; i<=turnier.getSpiele().size();i++){
+            System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
+            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+        }
+        /*Ergebnis ergebnis = new Ergebnis(21,15,21,15);
         Ergebnis ergebnis1 = new Ergebnis(15,21,21,19,30,29);
         Ergebnis ergebnis2 = new Ergebnis(21,12,21,11);
         Ergebnis ergebnis3 = new Ergebnis(21,18,21,19);
@@ -48,7 +79,7 @@ public class Main extends Application {
         turnier.getSpiele().get(6).setErgebnis(ergebnis5);
         turnier.getSpiele().get(7).setErgebnis(ergebnis6);
         turnier.getSpiele().get(8).setErgebnis(ergebnis7);
-
+*/
 
 
         //Turnier turnier = new Turnier("Kreismeisterschaften", 2, LocalDate.now());

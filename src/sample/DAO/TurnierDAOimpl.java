@@ -101,7 +101,6 @@ public class TurnierDAOimpl implements TurnierDAO {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setInt(1, turnierID);
-            System.out.println(smt.toString());
             ResultSet turnierResult = smt.executeQuery();
             turnierResult.next();
             turnier = new Turnier(turnierResult.getString("Name"),turnierID, turnierResult.getDate("Datum").toLocalDate());
@@ -154,8 +153,8 @@ public class TurnierDAOimpl implements TurnierDAO {
         }
         return spielklassen;
     }
-    private List<Team> readSetzliste(Spielklasse spielklasse){
-        List<Team> setzliste = new ArrayList<Team>();
+    private ArrayList<Team> readSetzliste(Spielklasse spielklasse){
+        ArrayList<Team> setzliste = new ArrayList<Team>();
         SQLConnection con = new SQLConnection();
         Connection connection = con.SQLConnection();
         try {

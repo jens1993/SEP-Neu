@@ -70,7 +70,7 @@ public class KO extends Spielsystem {
 	}
 	private void freiloseHinzufuegen (List<Team> setzliste){
 		for (int i=setzliste.size(); i<Math.pow(2,rundenBerechnen());i++){
-			setzliste.add(new Team("Freilos"));
+			setzliste.add(new Team("Freilos",this.getSpielklasse()));
 			System.out.println("Freilos an Setzplatz "+(i+1) +" hinzugefügt");
 		}
 	}

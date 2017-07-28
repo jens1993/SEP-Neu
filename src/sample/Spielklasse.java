@@ -1,14 +1,13 @@
 package sample;
-import java.util.List;
-import sample.DAO.*;
-import sample.Enums.*;
+import java.util.ArrayList;
+
 import sample.Spielsysteme.Spielsystem;
 
 public class Spielklasse {
 	private int spielklasseID;
 	private String disziplin;
 	private String niveau;
-	private List<Team> setzliste;
+	private ArrayList<Team> setzliste;
 	private Spielsystem spielsystem;
 	private float meldeKosten = (float) 5;
 	private Turnier turnier;
@@ -62,11 +61,11 @@ public class Spielklasse {
 		return niveau;
 	}
 
-	public List<Team> getSetzliste() {
+	public ArrayList<Team> getSetzliste() {
 		return setzliste;
 	}
 
-	public void setSetzliste(List<Team> setzliste) {
+	public void setSetzliste(ArrayList<Team> setzliste) {
 		this.setzliste = setzliste;
 	}
 

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class TeamDAOimpl implements TeamDAO {
     @Override
-    public boolean createTeam(Team team) {
+    public boolean create(Team team) {
         String sql = "INSERT INTO team("
                 + "TeamID, "
                 + "SpielklasseID) "
@@ -57,7 +57,28 @@ public class TeamDAOimpl implements TeamDAO {
     }
 
     @Override
-    public boolean updateTeam(Team team) {
+    public boolean createFreilos(Team team) {
+        String sql = "INSERT INTO team("
+                + "TeamID, "
+                + "SpielklasseID) "
+                + "VALUES(?,?)";
+        try{
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setInt(1, team.getTeamid() );
+            smt.setInt(2, team.getSpielklasse().getSpielklasseID());
+            smt.executeUpdate();
+            smt.close();
+        }
+        catch (SQLException e) {
+        e.printStackTrace();
+        System.out.println("Team Einfügen Klappt nicht");
+    }
+        return false;
+    }
+
+    @Override
+    public boolean update(Team team) {
         String sql = "UPDATE team "
                 + "SET SpielklasseID = ?, "
                 + "GewonneneSpiele = ?, "
@@ -91,7 +112,7 @@ public class TeamDAOimpl implements TeamDAO {
     }
 
     @Override
-    public boolean deleteTeam(Team team) {
+    public boolean delete(Team team) {
         String sql = "Delete From team Where teamid= ?";
         try {
             SQLConnection con = new SQLConnection();
