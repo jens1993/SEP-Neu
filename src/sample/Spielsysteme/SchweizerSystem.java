@@ -69,15 +69,14 @@ public class SchweizerSystem extends Spielsystem {
 	}
 	private boolean rundeErstellen(){
 		sortList();
-		//boolean beendet = (rundenListeErstellen(0, aktuelleRunde-1));
-		// if(!beendet)...
-		rundenListeErstellenNeu();
-		if (kombinationGefunden) {
+		boolean beendet = (rundenListeErstellen(0, aktuelleRunde-1));
+		if(!beendet) {
 			rundeFuellen();
 		}
 		return beendet;
 	}
 	private void teamListReset(){
+		teamList.clear();
 		for (int i=0;i<teamListArray.get(aktuelleRunde-1).size();i++)
 		{
 			this.teamList.add(teamListArray.get(aktuelleRunde-1).get(i));
@@ -108,7 +107,7 @@ public class SchweizerSystem extends Spielsystem {
 							return true;
 						}
 					}
-					else if(randomVersuche<10){
+					else if(randomVersuche<20){
 						randomVersuche++;
 						listeWuerfeln(rundenNummer);
 						if (rundenListeErstellen(0,rundenNummer)==true){
@@ -129,44 +128,92 @@ public class SchweizerSystem extends Spielsystem {
 		}
 	}
 	public void rundenListeErstellenNeu(){
-
 		teamListReset();
 		nextTeamList.clear();
 		System.out.println("Runde: "+(aktuelleRunde+1));
-		sucheKombination();
+		sucheKombinationNeu();
+		rundeFuellen();
 
 	}
+
+	private void sucheKombinationNeu(){
+		boolean warNochKeinGegner;
+		teamListReset();
+		ArrayList<Team> tempList = new ArrayList<>();
+		while (teamList.size()>1){
+			if(aktuelleRunde==5){
+				int forbreakpoint=0;
+			}
+			Team teamEins = teamList.get(0);
+			teamList.remove(teamEins);
+			tempList.add(teamEins);
+			for(int i=0; i<teamList.size();i++)
+			{
+				warNochKeinGegner = teamList.get(i).warNochKeinGegner(teamEins);
+				if((isPotentiellerGegner(teamList.get(i))||teamList.size()<2)&&warNochKeinGegner){
+					Team teamZwei = teamList.get(i);
+					teamList.remove(teamZwei);
+					tempList.add(teamZwei);
+					break;
+				}
+			}
+
+		}
+		nextTeamList = tempList;
+
+
+	}
+
 	private void sucheKombination(){
-		if(tempList.size()==teamListArray.get(aktuelleRunde-1).size()){
-			kombinationGefunden = true;
-			nextTeamList = tempList;
-		}
-		if (teamList.size()==teamListArray.get(aktuelleRunde-1).size()&&!kombinationGefunden){
-			tempList.clear();
-		}
-		if (teamList.size()<2 && !kombinationGefunden){
-			teamListReset();
-		}
 		while(this.teamList.size()>1 && !kombinationGefunden){
 			Team erstesTeam = teamList.get(0); //erhalte erstes Team aus der TeamList
 			List <Team> verbleibendeGegner=erstesTeam.getVerbleibendeGegner(teamList); //erhalte verbleibende Gegner für ersten Spieler
-			teamList.remove(erstesTeam);
-			tempList.add(erstesTeam);
-			Team zweitesTeam;
-			if(aktuelleRunde==12){
-				int nurfuerbreakpoint = 0;
-				nurfuerbreakpoint++;
+			if(verbleibendeGegner.size()==0){
+				teamListReset();
+				tempList.clear();
 			}
-			for(int i=0; i<verbleibendeGegner.size();i++){
-				zweitesTeam = verbleibendeGegner.get(i);
-				teamList.remove(zweitesTeam);
-				tempList.add(zweitesTeam);
-				if(zweitesTeam==null){
-					teamListReset();
+			if(!kombinationGefunden) {
+				teamList.remove(erstesTeam);
+				tempList.add(erstesTeam);
+				Team zweitesTeam;
+				if(aktuelleRunde==9){
+					int nurfuerbreakpoint = 0;
 				}
-				sucheKombination();
+
+				for (int i = 0; i < verbleibendeGegner.size(); i++) {
+					if(!kombinationGefunden) {
+						zweitesTeam = verbleibendeGegner.get(i);
+						if(verbleibendeGegner.size()==0){
+							System.out.println("keine verbleibenden Gegner");
+						}
+						teamList.remove(zweitesTeam);
+						tempList.add(zweitesTeam);
+						if (zweitesTeam == null) {
+							teamListReset();
+							tempList.clear();
+						}
+						if(tempList.size()==teamListArray.get(aktuelleRunde-1).size()&&!kombinationGefunden){
+							kombinationGefunden = true;
+							for (int j=0;j<tempList.size();j++) {
+								nextTeamList.add(tempList.get(j));
+							}
+						}
+						sucheKombination();
+
+					}
+				}
 			}
 		}
+	}
+	private boolean isPotentiellerGegner (Team potentiellerGegner){
+		for (int i=0; i<teamList.size();i++){
+			for(int j=0; j<teamList.get(i).getVerbleibendeGegner(teamList).size();j++){
+				if(teamList.get(i).getVerbleibendeGegner(teamList).get(j)==potentiellerGegner){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private void listeWenden(int rundenNummer) {

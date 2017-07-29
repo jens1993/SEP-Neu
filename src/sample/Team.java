@@ -107,6 +107,8 @@ public class Team {
 
     }
 
+
+
     public void addGewonnenesSpiel() {
         this.gewonneneSpiele ++;
         teamDAO.update(this);
@@ -154,6 +156,7 @@ public class Team {
     }
 
     public String toString(){
+
         if(this.freilos==true){
             return "Freilos";
         }
@@ -168,11 +171,15 @@ public class Team {
         return "Fehler";
     }
     public List<Team> getVerbleibendeGegner(ArrayList<Team> teams){
-        for(int i=0; i<bisherigeGegner.size();i++){
-            teams.remove(bisherigeGegner.get(i));
+        List<Team> verbleibendeGegner = new ArrayList<>();
+        for (int j=0;j<teams.size();j++){
+            verbleibendeGegner.add(teams.get(j));
         }
-        teams.remove(this);
-        return teams;
+        for(int i=0; i<bisherigeGegner.size();i++){
+            verbleibendeGegner.remove(bisherigeGegner.get(i));
+        }
+        verbleibendeGegner.remove(this);
+        return verbleibendeGegner;
     }
 
     public int compareTo(Team team){

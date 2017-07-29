@@ -13,7 +13,8 @@ public class KO extends Spielsystem {
 	static int teilnehmerzahl;
 	private SpielTree finale = new SpielTree(1, 1, 2);
 
-	public KO(List<Team> setzliste){
+	public KO(List<Team> setzliste, Spielklasse spielklasse){
+		this.setSpielklasse(spielklasse);
 		this.teilnehmerzahl=setzliste.size();
 		freiloseHinzufuegen(setzliste);
 		knotenAufbauen(teilnehmerzahl);
@@ -28,16 +29,23 @@ public class KO extends Spielsystem {
 		int anzahlRunden = rundenBerechnen();
 		int hoechsterSetzplatz;
 		SpielTree aktuellerKnoten = finale;
+		finale.setSpiel(new Spiel(1,1,2,getSpielklasse()));
 
-		for (int i=1; i<anzahlRunden; i++){
+		for (int i=1; i<anzahlRunden; i++){ //erstelle für jeder Runde Spiele
 
 			hoechsterSetzplatz = (int) Math.pow(2,i+1);
 			for (int j=1; j<=Math.pow(2,i-1); j++)
 			{
-				aktuellerKnoten.addLeft(aktuellerKnoten.getSpielID()*2, aktuellerKnoten.getSetzplatzHeim(), hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1);
-				aktuellerKnoten.getLeft().setSpiel(new Spiel(aktuellerKnoten.getSpielID()*2, aktuellerKnoten.getSetzplatzHeim(), hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1,this.getSpielklasse()));
-				aktuellerKnoten.addRight(aktuellerKnoten.getSpielID()*2+1, hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1, aktuellerKnoten.getSetzplatzGast());
-				aktuellerKnoten.getRight().setSpiel(new Spiel(aktuellerKnoten.getSpielID()*2+1, hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1, aktuellerKnoten.getSetzplatzGast(), this.getSpielklasse()));
+				int leftKnotenSpielID = aktuellerKnoten.getSpielID()*2;
+				int rightKnotenSpielID = aktuellerKnoten.getSpielID()*2+1;
+				int leftKnotenSetzPlatzHeim = aktuellerKnoten.getSetzplatzHeim();
+				int leftKnotenSetzPlatzGast = hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1;
+				int rightKnotenSetzPlatzHeim = hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1;
+				int rightKnotenSetzPlatzGast = aktuellerKnoten.getSetzplatzGast();
+				aktuellerKnoten.addLeft(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast );
+				aktuellerKnoten.getLeft().setSpiel(new Spiel(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast,this.getSpielklasse()));
+				aktuellerKnoten.addRight(rightKnotenSpielID, rightKnotenSetzPlatzHeim ,rightKnotenSetzPlatzGast );
+				aktuellerKnoten.getRight().setSpiel(new Spiel(rightKnotenSpielID, rightKnotenSetzPlatzHeim , rightKnotenSetzPlatzGast, this.getSpielklasse()));
 				aktuellerKnoten = aktuellerKnoten.getSpielTree(aktuellerKnoten.getSpielID()+1, finale);
 			}
 		}
@@ -46,21 +54,21 @@ public class KO extends Spielsystem {
 
 	public void ersteRundeFuellen(List<Team> setzliste){
 		//Zu erstem Knoten in erster Runde gehen:
-		SpielTree aktuellesSpiel = finale;
-		while (aktuellesSpiel.getLeft() != null){
-			aktuellesSpiel = aktuellesSpiel.getLeft();
+		SpielTree aktuellerKnoten = finale;
+		while (aktuellerKnoten.getLeft() != null){
+			aktuellerKnoten = aktuellerKnoten.getLeft();
 		}
 		for (int i=0; i<Math.pow(2,getAnzahlRunden()-1);i++){
 			for (int j=0; j<setzliste.size();j++){
-				if(j+1 == aktuellesSpiel.getSetzplatzHeim()){
-					aktuellesSpiel.getSpiel().setHeim(setzliste.get(j));
+				if(j+1 == aktuellerKnoten.getSetzplatzHeim()){
+					aktuellerKnoten.getSpiel().setHeim(setzliste.get(j));
 				}
-				if(j+1 == aktuellesSpiel.getSetzplatzGast()){
-					aktuellesSpiel.getSpiel().setGast(setzliste.get(j));
+				if(j+1 == aktuellerKnoten.getSetzplatzGast()){
+					aktuellerKnoten.getSpiel().setGast(setzliste.get(j));
 				}
 			}
 
-			aktuellesSpiel = aktuellesSpiel.getSpielTree(aktuellesSpiel.getSpielID()+1, finale); //zum Spiel mit nächster ID gehen (im Turnierbaum 1 Spiel nach unten)
+			aktuellerKnoten = aktuellerKnoten.getSpielTree(aktuellerKnoten.getSpielID()+1, finale); //zum Spiel mit nächster ID gehen (im Turnierbaum 1 Spiel nach unten)
 		}
 	}
 
@@ -82,6 +90,19 @@ public class KO extends Spielsystem {
 
 	@Override
 	public boolean beendeMatch(Spiel spiel) {
-		return false;
+
+		int sysID = spiel.getSystemSpielID();
+		if(sysID>1) {
+			SpielTree parent = finale.getSpielTree(sysID, finale).getParent();
+			if (parent.getLeft().getSpielID() == sysID) {
+				parent.getSpiel().setHeim(spiel.getSieger());
+			} else {
+				parent.getSpiel().setGast(spiel.getSieger());
+			}
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 }

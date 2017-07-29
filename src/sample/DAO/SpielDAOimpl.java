@@ -30,8 +30,14 @@ public class SpielDAOimpl implements SpielDAO {
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, spiel.getHeim().getTeamid());
-            smt.setInt(2, spiel.getGast().getTeamid());
+            if(spiel.getHeim()!=null&&spiel.getGast()!=null) {
+                smt.setInt(1, spiel.getHeim().getTeamid());
+                smt.setInt(2, spiel.getGast().getTeamid());
+            }
+            else{
+                smt.setNull(1, Types.INTEGER);
+                smt.setNull(2, Types.INTEGER);
+            }
             smt.setInt(3, spiel.getSpielID());
             if (spiel.getSchiedsrichter()!=null){
                 smt.setInt(4, spiel.getSchiedsrichter().getSpielerID());

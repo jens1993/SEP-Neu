@@ -31,7 +31,7 @@ public class Main extends Application {
     	Turnier turnier = test.read(1);
         Spielklasse spielklasse =turnier.getSpielklassen().get(1);
     	ArrayList<Team> setzliste = spielklasse.getSetzliste();
-        spielklasse.setSpielsystem(new SchweizerSystem(20,setzliste,spielklasse));
+        spielklasse.setSpielsystem(new KO(setzliste,spielklasse));
         List<Ergebnis> ergebnisse = new ArrayList<>();
         Ergebnis ergebnis = new Ergebnis(21,15,21,15);
         Ergebnis ergebnis1 = new Ergebnis(15,21,21,19,30,29);
@@ -58,10 +58,25 @@ public class Main extends Application {
         ergebnisse.add(new Ergebnis(19,21,21,14,21,18));
 
 
-        for(int i=1; i<=turnier.getSpiele().size();i++){
+        for(int i=8; i<=15;i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
-            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
-            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+        }
+        for(int i=4; i<=7;i++){
+            System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
+            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+        }
+        for(int i=2; i<=3;i++){
+            System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
+            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+        }
+        for(int i=1; i<=1;i++){
+            System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
+            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
         }
         /*Ergebnis ergebnis = new Ergebnis(21,15,21,15);
         Ergebnis ergebnis1 = new Ergebnis(15,21,21,19,30,29);
