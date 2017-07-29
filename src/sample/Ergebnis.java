@@ -7,6 +7,7 @@ import sample.DAO.ErgebnisDAOimpl;
  * Created by Florian-PC on 25.07.2017.
  */
 public class Ergebnis {
+    private int ergebnisID;
     private int[] heim;
     private int[] gast;
     private boolean gueltig=false;
@@ -62,6 +63,15 @@ public class Ergebnis {
         this.gast[4] = satz5gast;
         gueltig = gueltigesErgebnis();
     }
+
+    public int getErgebnisID() {
+        return ergebnisID;
+    }
+
+    public void setErgebnisID(int ergebnisID) {
+        this.ergebnisID = ergebnisID;
+    }
+
     public String toString(){
         String ergebnis = heim[0]+"-"+gast[0];
         for (int i=1; i<heim.length;i++){

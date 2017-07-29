@@ -26,7 +26,7 @@ public class SQLConnection
 
 
 
-        public Connection SQLConnection() //eventuell nich pub
+        public Connection SQLConnection()
         {
             try 
             {
@@ -34,7 +34,7 @@ public class SQLConnection
 
                 // Verbindung zur JDBC-Datenbank herstellen.
                 con = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?" + "user=" + dbUser + "&" + "password=" + dbPass); //con muss unbedingt irgendwo geschlossen werden
-                stmt = con.createStatement();
+                //stmt = con.createStatement();
                 //stmt.executeUpdate(db_erstellung);
 
 

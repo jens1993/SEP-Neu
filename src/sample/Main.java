@@ -26,14 +26,16 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+
+
     public static void main(String[] args) {
     	TurnierDAO test = new TurnierDAOimpl();
     	Turnier turnier = test.read(1);
         Spielklasse spielklasse =turnier.getSpielklassen().get(1);
     	ArrayList<Team> setzliste = spielklasse.getSetzliste();
-        spielklasse.setSpielsystem(new KO(setzliste,spielklasse));
+        spielklasse.setSpielsystem(new Gruppe(setzliste,spielklasse));
         List<Ergebnis> ergebnisse = new ArrayList<>();
-        Ergebnis ergebnis = new Ergebnis(21,15,21,15);
+        Ergebnis ergebnis = new Ergebnis(21,15,21,12);
         Ergebnis ergebnis1 = new Ergebnis(15,21,21,19,30,29);
         Ergebnis ergebnis2 = new Ergebnis(21,12,21,11);
         Ergebnis ergebnis3 = new Ergebnis(21,18,21,19);
@@ -58,26 +60,29 @@ public class Main extends Application {
         ergebnisse.add(new Ergebnis(19,21,21,14,21,18));
 
 
-        for(int i=8; i<=15;i++){
+
+        for(int i=1; i<=turnier.getSpiele().size();i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
-            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
-            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
         }
-        for(int i=4; i<=7;i++){
+        /*for(int i=4; i<=7;i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
-            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
-            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
         }
         for(int i=2; i<=3;i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
-            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
-            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
         }
         for(int i=1; i<=1;i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
-            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
-            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
-        }
+            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+        }*/
+
+
         /*Ergebnis ergebnis = new Ergebnis(21,15,21,15);
         Ergebnis ergebnis1 = new Ergebnis(15,21,21,19,30,29);
         Ergebnis ergebnis2 = new Ergebnis(21,12,21,11);
@@ -95,6 +100,12 @@ public class Main extends Application {
         turnier.getSpiele().get(7).setErgebnis(ergebnis6);
         turnier.getSpiele().get(8).setErgebnis(ergebnis7);
 */
+
+
+
+
+
+
 
 
         //Turnier turnier = new Turnier("Kreismeisterschaften", 2, LocalDate.now());

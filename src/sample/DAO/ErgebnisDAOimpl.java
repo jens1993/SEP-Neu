@@ -12,39 +12,41 @@ import java.sql.SQLException;
 public class ErgebnisDAOimpl implements ErgebnisDAO {
     @Override
     public boolean create(Spiel ergebnis) {
-        String sql = "INSERT INTO spiel_ergebnis("
-                + "SpielID";
-        for(int i=0; i< ergebnis.getErgebnis().getErgebnisArray().length/2;i++){
-            sql = sql+ ",Satz"+(i+1)+"_heim";
-            sql = sql+ ",Satz"+(i+1)+"_gast";
+        String sql = "INSERT INTO Spiel_Satzergebnis( " +
+                "SpielID, " +
+                "HeimPunkte, " +
+                "Gastpunkte) " +
+                "VALUES(?,?,?)";
+        for(int i=1; i< ergebnis.getErgebnis().getErgebnisArray().length/2;i++){
+            sql += ", (?,?,?)";
         }
-        sql = sql + ") VALUES (?";
-        for (int j=0; j<ergebnis.getErgebnis().getErgebnisArray().length;j++){
-            sql=sql+",?";
-        }
-        sql=sql+")";
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setInt(1,ergebnis.getSpielID());
-            for (int k=0;k<ergebnis.getErgebnis().getErgebnisArray().length;k++)
-            {
-                smt.setInt(k+2,ergebnis.getErgebnis().getErgebnisArray()[k]);
+            smt.setInt(2,ergebnis.getErgebnis().getErgebnisArray()[0]);
+            smt.setInt(3,ergebnis.getErgebnis().getErgebnisArray()[1]);
+            for(int j=1; j< ergebnis.getErgebnis().getErgebnisArray().length/2;j++){
+                smt.setInt(j*3+1,ergebnis.getSpielID());
+                smt.setInt(j*3+2,ergebnis.getErgebnis().getErgebnisArray()[j*2]);
+                smt.setInt(j*3+3,ergebnis.getErgebnis().getErgebnisArray()[j*2+1]);
             }
             smt.executeUpdate();
             smt.close();
+
+
             con.closeCon();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Feld Einfügen Klappt nicht");
+            System.out.println("Ergebnis Einfügen Klappt nicht");
         }
         return false;
     }
 
     @Override
     public boolean delete(Spiel ergebnis) {
-        String sql = "Delete from Ergebnis Where spielid = ?";
+        String sql = "Delete from Spiel_Satzergebnis Where spielid = ?";
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
@@ -58,9 +60,6 @@ public class ErgebnisDAOimpl implements ErgebnisDAO {
             e.printStackTrace();
             System.out.println("Ergebnis Loeschen Klappt nicht");
         }
-
-
-
         return false;
     }
 
@@ -89,7 +88,7 @@ public class ErgebnisDAOimpl implements ErgebnisDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Feld Update Klappt nicht");
+            System.out.println("Ergebnis Update Klappt nicht");
         }
         return false;
     }
