@@ -167,39 +167,12 @@ public class Team {
         }
         return "Fehler";
     }
-
-    public int compareToOld(Team team){
-        int satzdifferenzThis = this.gewonneneSaetze-this.verloreneSaetze;
-        int punktdifferenzThis = this.gewonnnenePunkte-this.verlorenePunkte;
-        int satzdifferenzTeam = team.getGewonneneSaetze()-team.getVerloreneSaetze();
-        int punktdifferenzTeam = team.getGewonnnenePunkte()-team.getVerlorenePunkte();
-        if (this.gewonneneSpiele>team.getGewonneneSpiele()){
-            return -1;
+    public List<Team> getVerbleibendeGegner(ArrayList<Team> teams){
+        for(int i=0; i<bisherigeGegner.size();i++){
+            teams.remove(bisherigeGegner.get(i));
         }
-        else if (this.gewonneneSpiele==team.getGewonneneSpiele()){
-            if(satzdifferenzThis>satzdifferenzTeam){
-                return -1;
-            }
-            else if(satzdifferenzThis==satzdifferenzTeam){
-
-                if (punktdifferenzThis > punktdifferenzTeam) {
-                    return -1;
-                } else if (punktdifferenzThis == punktdifferenzTeam) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-
-            }
-            else
-            {
-                return 1;
-            }
-        }
-        else{
-            return 1;
-        }
-
+        teams.remove(this);
+        return teams;
     }
 
     public int compareTo(Team team){
