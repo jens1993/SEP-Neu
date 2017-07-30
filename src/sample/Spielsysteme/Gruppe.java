@@ -9,10 +9,10 @@ import java.util.List;
 
 public class Gruppe extends Spielsystem {
 	private List<Team> teamList;
-	private int aktuelleRunde=0;
+
 	int anzahlTeams;
 	int[][] schablone;
-	private int offeneRundenSpiele;
+
 	List<Spiel> alleSpiele = new ArrayList<>();
 	private static ArrayList<Integer> arrayVerschieben(ArrayList<Integer> arrayList){
 		int temp = arrayList.get(0);
@@ -22,6 +22,7 @@ public class Gruppe extends Spielsystem {
 	}
 
 	public Gruppe(List<Team> setzliste, Spielklasse spielklasse) {
+		this.setSpielSystemArt(1);
 		setSpielklasse(spielklasse);
 		this.teamList = setzliste;
 		freiloseHinzufuegen(teamList);
@@ -47,22 +48,15 @@ public class Gruppe extends Spielsystem {
 			schablone[i][i] = 0;
 			arrayVerschieben(rundenArray);
 		}
-		for(int x=0; x<anzahlTeams; x++){
-			for (int y=0;y<anzahlTeams; y++){
-				System.out.print("["+schablone[x][y]+"]");
-			}
-			System.out.println();
-		}
 	}
 
 	private void rundeErstellen(){
-		if(aktuelleRunde<getAnzahlRunden()){
+		if(getAktuelleRunde()<=getAnzahlRunden()){
 			ArrayList<Team> tempList = new ArrayList<>();
 			for (int i=0; i<teamList.size();i++){
 				tempList.add(teamList.get(i));
 			}
-			aktuelleRunde++;
-			offeneRundenSpiele = 0;
+			erhoeheAktuelleRunde();
 			while (tempList.size()>1){
 				Team teamEins = tempList.get(tempList.size()-1);//nehme letztes Team aus der temporären Liste (höchster verbleibender Setzplatz)
 				int setzplatzTeamEins = teamList.indexOf(teamEins)+1;
@@ -71,13 +65,13 @@ public class Gruppe extends Spielsystem {
 				Team teamZwei = teamList.get(setzplatzTeamZwei-1);  //hole Gegner aus der Setzliste! (nicht TempList, weil diese kleiner wird!
 				tempList.remove(teamZwei);  						//entferne Gegner aus tempList
 				alleSpiele.add(new Spiel(teamZwei,teamEins,getSpielklasse(),spielSystemIDberechnen()));
-				offeneRundenSpiele++;
+				erhoeheOffeneRundenSpiele();
 			}
 		}
 	}
 	private int schabloneDurchsuchen(int setzplatzTeamEins){
 		for(int i=0; i<schablone[setzplatzTeamEins-1].length;i++){
-			if(schablone[setzplatzTeamEins-1][i] == aktuelleRunde){
+			if(schablone[setzplatzTeamEins-1][i] == getAktuelleRunde()){
 				return i+1;
 			}
 		}
@@ -92,12 +86,7 @@ public class Gruppe extends Spielsystem {
 		}
 	}
 
-	public int spielSystemIDberechnen(){
-		int spielSystemID=200000;
-		spielSystemID += aktuelleRunde*1000;
-		spielSystemID += offeneRundenSpiele;
-		return spielSystemID;
-	}
+
 
 	@Override
 	public List<Team> getPlatzierungsliste() {
@@ -106,12 +95,12 @@ public class Gruppe extends Spielsystem {
 
 	@Override
 	public boolean beendeMatch(Spiel spiel) {
-		offeneRundenSpiele --;
-		if(aktuelleRunde==getAnzahlRunden()){
+		senkeOffeneRundenSpiele();
+		if(getAktuelleRunde()==getAnzahlRunden()){
 			return true;
 		}
 		else{
-			if(offeneRundenSpiele==0){
+			if(keineOffenenRundenSpiele()){
 					rundeErstellen();
 
 				}

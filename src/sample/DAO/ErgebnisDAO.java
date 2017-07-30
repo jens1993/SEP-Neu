@@ -9,5 +9,4 @@ import sample.Spiel;
 public interface ErgebnisDAO {
     public boolean create (Spiel ergebnis);
     public boolean delete (Spiel ergebnis);
-    public boolean update (Spiel ergebnis);
 }

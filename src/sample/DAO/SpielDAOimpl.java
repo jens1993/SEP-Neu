@@ -68,13 +68,23 @@ public class SpielDAOimpl implements SpielDAO {
 
     @Override
     public boolean delete(Spiel spiel) {
-        String sql = "Delete From spiel Where SpielID= ?";
+        String sql1 = "DELETE FROM spielklasse_spielid WHERE spielID = ?";
+        String sql2 = "DELETE FROM spiel_satzergebnis WHERE spielID = ?";
+        String sql3 = "DELETE FROM spiel WHERE SpielID= ?";
         try {
             SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, spiel.getSpielID());
-            smt.executeUpdate();
-            smt.close();
+            PreparedStatement smt1 = con.SQLConnection().prepareStatement(sql1);
+            smt1.setInt(1, spiel.getSpielID());
+            PreparedStatement smt2 = con.SQLConnection().prepareStatement(sql2);
+            smt2.setInt(1, spiel.getSpielID());
+            PreparedStatement smt3 = con.SQLConnection().prepareStatement(sql3);
+            smt3.setInt(1, spiel.getSpielID());
+            smt1.executeUpdate();
+            smt1.close();
+            smt2.executeUpdate();
+            smt2.close();
+            smt3.executeUpdate();
+            smt3.close();
             con.closeCon();
             return true;
 

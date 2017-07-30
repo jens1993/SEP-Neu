@@ -1,5 +1,6 @@
 package sample;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import sample.Spielsysteme.Spielsystem;
 
@@ -11,6 +12,7 @@ public class Spielklasse {
 	private Spielsystem spielsystem;
 	private float meldeKosten = (float) 5;
 	private Turnier turnier;
+	private Hashtable<Integer,Spiel> spiele = new Hashtable<>();
 	private boolean aktiv;
 
 	public Spielklasse(int spielklasseID, String disziplin, String niveau, Turnier turnier) {
@@ -18,6 +20,10 @@ public class Spielklasse {
 		this.disziplin = disziplin;
 		this.niveau = niveau;
 		this.turnier = turnier;
+	}
+
+	public Hashtable<Integer, Spiel> getSpiele() {
+		return spiele;
 	}
 
 	public int getSpielklasseID() {

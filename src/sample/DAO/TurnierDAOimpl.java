@@ -45,6 +45,12 @@ public class TurnierDAOimpl implements TurnierDAO {
 
     @Override
     public boolean delete(Turnier turnier) {
+        FeldDAO feldDao = new FeldDAOimpl();
+        SpielklasseDAO spielklasseDAO = new SpielklasseDAOimpl();
+        for (int i=1; i<=turnier.getFelder().size();i++){
+
+        }
+
         String sql = "Delete From turnier Where turnierID= ?";
         try {
             SQLConnection con = new SQLConnection();

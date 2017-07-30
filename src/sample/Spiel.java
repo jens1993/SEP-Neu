@@ -83,10 +83,11 @@ public class Spiel {
 		this.systemSpielID = systemSpielID;
 		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
 		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
+		this.spielklasse.getSpiele().put(systemSpielID,this);
 		spielDAO.create(this);
 	}
 
-	public Spiel(Team heim, Team auswaerts, Spielklasse spielklasse) {
+	/*public Spiel(Team heim, Team auswaerts, Spielklasse spielklasse) {
 		this.heim = heim;
 		this.gast = auswaerts;
 		this.spielklasse = spielklasse;
@@ -95,7 +96,7 @@ public class Spiel {
 		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
 		spielDAO.create(this);
 	}
-
+*/
 	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielklasse spielklasse) {
 		this.systemSpielID = systemSpielID; //Constructor für SpielTree in KO-System
 		this.setzPlatzHeim = setzPlatzHeim;
@@ -103,6 +104,7 @@ public class Spiel {
 		this.spielklasse = spielklasse;
 		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
 		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
+		this.spielklasse.getSpiele().put(systemSpielID,this);
 		spielDAO.create(this);
 	}
 	public Team getSieger(){

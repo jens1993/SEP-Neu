@@ -2,13 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SEP/sample/Main.class" afterPath="$PROJECT_DIR$/out/production/SEP/sample/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SEP/sample/Spiel.class" afterPath="$PROJECT_DIR$/out/production/SEP/sample/Spiel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SEP/sample/Spielklasse.class" afterPath="$PROJECT_DIR$/out/production/SEP/sample/Spielklasse.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/DAO/ErgebnisDAO.java" afterPath="$PROJECT_DIR$/src/sample/DAO/ErgebnisDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/DAO/ErgebnisDAOimpl.java" afterPath="$PROJECT_DIR$/src/sample/DAO/ErgebnisDAOimpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/DAO/SQLConnection.java" afterPath="$PROJECT_DIR$/src/sample/DAO/SQLConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Ergebnis.java" afterPath="$PROJECT_DIR$/src/sample/Ergebnis.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/DAO/SpielDAOimpl.java" afterPath="$PROJECT_DIR$/src/sample/DAO/SpielDAOimpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java" afterPath="$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spiel.java" afterPath="$PROJECT_DIR$/src/sample/Spiel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spielklasse.java" afterPath="$PROJECT_DIR$/src/sample/Spielklasse.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spielsysteme/Gruppe.java" afterPath="$PROJECT_DIR$/src/sample/Spielsysteme/Gruppe.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spielsysteme/GruppeMitEndrunde.java" afterPath="$PROJECT_DIR$/src/sample/Spielsysteme/GruppeMitEndrunde.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spielsysteme/KO.java" afterPath="$PROJECT_DIR$/src/sample/Spielsysteme/KO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java" afterPath="$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spielsysteme/Spielsystem.java" afterPath="$PROJECT_DIR$/src/sample/Spielsysteme/Spielsystem.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,114 +68,6 @@
         <option name="myItemId" value="turnierverwaltung_neu" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="verein" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="@localhost [2]" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="turnierverwaltung_neu" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="turnier" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="@localhost [2]" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="turnierverwaltung_neu" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="team_spieler" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="@localhost [2]" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="turnierverwaltung_neu" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="@localhost [2]" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="turnierverwaltung_neu" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="spielklasse_setzliste" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="@localhost [2]" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="turnierverwaltung_neu" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="spieler" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="@localhost [2]" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="turnierverwaltung_neu" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="spiel_ergebnis" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
     </PATH>
   </component>
   <component name="DebuggerManager">
@@ -211,12 +112,12 @@
     <window id="26">
       <content type="file-editors">
         <state>
-          <leaf>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
             <file leaf-file-name="SpielklasseDAOimpl.java" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/sample/DAO/SpielklasseDAOimpl.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="697">
-                    <caret line="47" column="55" lean-forward="true" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
+                  <state relative-caret-position="650">
+                    <caret line="47" column="55" lean-forward="false" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
                     <folding>
                       <marker date="1501230816083" expanded="true" signature="360:548" ph="INSERT INTO spielklasse... " />
                       <marker date="1501230816083" expanded="true" signature="1315:1361" ph="Delete From " />
@@ -244,8 +145,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="63" column="24" lean-forward="false" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
+            <state relative-caret-position="272">
+              <caret line="35" column="58" lean-forward="false" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -254,12 +155,9 @@
       <file leaf-file-name="GruppeMitEndrunde.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/GruppeMitEndrunde.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding>
-                <element signature="e#332#333#0" expanded="true" />
-                <element signature="e#368#369#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -267,24 +165,23 @@
       <file leaf-file-name="Spielklasse.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Spielklasse.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
-              <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+            <state relative-caret-position="323">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding>
-                <element signature="e#1078#1079#0" expanded="true" />
+                <element signature="e#720#721#0" expanded="true" />
+                <element signature="e#1216#1217#0" expanded="true" />
+                <element signature="e#1237#1238#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gruppe.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/Gruppe.java">
+      <file leaf-file-name="KO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/KO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="73" column="37" lean-forward="false" selection-start-line="73" selection-start-column="37" selection-end-line="73" selection-end-column="37" />
-              <folding>
-                <element signature="e#3251#3252#0" expanded="true" />
-                <element signature="e#3269#3270#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-88">
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -292,23 +189,32 @@
       <file leaf-file-name="Spiel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Spiel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-              <folding>
-                <element signature="e#1055#1056#0" expanded="true" />
-                <element signature="e#1080#1081#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="230">
+              <caret line="97" column="5" lean-forward="true" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Turnier.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/Turnier.java">
+      <file leaf-file-name="Gruppe.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/Gruppe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+            <state relative-caret-position="187">
+              <caret line="56" column="43" lean-forward="false" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SchweizerSystem.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="265" column="70" lean-forward="true" selection-start-line="265" selection-start-column="70" selection-end-line="265" selection-end-column="70" />
               <folding>
-                <element signature="e#2337#2338#0" expanded="true" />
+                <element signature="e#486#493#0" expanded="true" />
+                <element signature="e#550#556#0" expanded="true" />
+                <element signature="e#624#641#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -317,40 +223,37 @@
       <file leaf-file-name="ErgebnisDAOimpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/DAO/ErgebnisDAOimpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="726">
+              <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
               <folding>
-                <marker date="1501346987824" expanded="true" signature="311:473" ph="INSERT INTO Ergebnis_Satz... " />
-                <marker date="1501346987824" expanded="true" signature="1626:1674" ph="Delete from " />
-                <marker date="1501346987824" expanded="true" signature="2238:2334" ph="UPDATE spiel... " />
+                <marker date="1501367470135" expanded="true" signature="311:473" ph="INSERT INTO Ergebnis_Satz... " />
+                <marker date="1501367470135" expanded="true" signature="1626:1674" ph="Delete from " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ergebnis.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/Ergebnis.java">
+      <file leaf-file-name="TurnierDAOimpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="66" column="32" lean-forward="false" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
+            <state relative-caret-position="578">
+              <caret line="48" column="65" lean-forward="false" selection-start-line="48" selection-start-column="65" selection-end-line="48" selection-end-column="65" />
               <folding>
-                <element signature="e#2176#2177#0" expanded="true" />
-                <element signature="e#2225#2226#0" expanded="true" />
-                <element signature="e#2269#2270#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SchweizerSystem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="316" column="34" lean-forward="true" selection-start-line="315" selection-start-column="8" selection-end-line="316" selection-end-column="34" />
-              <folding>
-                <element signature="e#580#587#0" expanded="true" />
-                <element signature="e#644#650#0" expanded="true" />
-                <element signature="e#718#735#0" expanded="true" />
+                <marker date="1501407244921" expanded="true" signature="476:616" ph="INSERT INTO Turnier... " />
+                <marker date="1501407244921" expanded="true" signature="1463:1501" ph="Delete From " />
+                <marker date="1501407244921" expanded="true" signature="2067:2305" ph="UPDATE Turni... " />
+                <marker date="1501407244921" expanded="true" signature="3158:3199" ph="SELECT NAME turnier" />
+                <marker date="1501407244921" expanded="true" signature="4899:4944" ph="SELECT * FRO... spielklasse" />
+                <marker date="1501407244921" expanded="true" signature="6427:6706" ph="SELECT setzp... spielklasse_setzliste" />
+                <marker date="1501407244921" expanded="true" signature="7527:7565" ph="SELECT * FRO... spielklasse" />
+                <marker date="1501407244921" expanded="true" signature="8422:8933" ph="SELECT * FRO... feld" />
+                <marker date="1501407244921" expanded="true" signature="9883:10197" ph="select*from spieler... " />
+                <marker date="1501407244921" expanded="true" signature="9883:10246" ph="SELECT * FRO... spielklasse" />
+                <marker date="1501407244921" expanded="true" signature="12238:12349" ph="select * fro... team" />
+                <marker date="1501407244921" expanded="true" signature="13052:13320" ph="select team.... team_spieler" />
+                <marker date="1501407244921" expanded="true" signature="14367:14368" ph="SELECT * FRO... spiel" />
+                <marker date="1501407244921" expanded="true" signature="14367:14479" ph="Select * fro... spiel" />
+                <marker date="1501407244921" expanded="true" signature="14367:14480" ph="Select * fro... spiel" />
               </folding>
             </state>
           </provider>
@@ -359,10 +262,23 @@
       <file leaf-file-name="Spielsystem.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/Spielsystem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="799">
+              <caret line="52" column="37" lean-forward="false" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
               <folding>
-                <element signature="e#415#416#0" expanded="true" />
+                <element signature="e#512#513#0" expanded="true" />
+                <element signature="e#537#538#0" expanded="true" />
+                <element signature="e#782#783#0" expanded="true" />
+                <element signature="e#825#826#0" expanded="true" />
+                <element signature="e#866#867#0" expanded="true" />
+                <element signature="e#898#899#0" expanded="true" />
+                <element signature="e#940#941#0" expanded="true" />
+                <element signature="e#972#973#0" expanded="true" />
+                <element signature="e#1010#1011#0" expanded="true" />
+                <element signature="e#1037#1038#0" expanded="true" />
+                <element signature="e#1071#1072#0" expanded="true" />
+                <element signature="e#1098#1099#0" expanded="true" />
+                <element signature="e#1142#1143#0" expanded="true" />
+                <element signature="e#1177#1178#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -382,9 +298,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>con</find>
-      <find>resultset</find>
-      <find>stmt</find>
       <find>addNode</find>
       <find>getAnzahlRundewn</find>
       <find>print</find>
@@ -412,6 +325,9 @@
       <find>setSpiel</find>
       <find>SQLConnection</find>
       <find>open</find>
+      <find>erhoehe</find>
+      <find>erhoeheA</find>
+      <find>sortList</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -447,7 +363,6 @@
         <option value="$PROJECT_DIR$/src/sample/Feld.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/FeldDAO.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/SpielerDAO.java" />
-        <option value="$PROJECT_DIR$/src/sample/DAO/ErgebnisDAO.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/SpielklasseDAO.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/TurnierDAO.java" />
         <option value="$PROJECT_DIR$/src/sample/Turnier.java" />
@@ -456,7 +371,6 @@
         <option value="$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/jdbc/ConnectionImpl.class" />
         <option value="$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/jdbc/Field.class" />
         <option value="$PROJECT_DIR$/src/sample/Spieler.java" />
-        <option value="$PROJECT_DIR$/src/sample/Spielsysteme/Spielsystem.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/FeldDAOimpl.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/SetzlisteDAOimpl.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/SetzlisteDAO.java" />
@@ -472,20 +386,22 @@
         <option value="$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/jdbc/StatementImpl.class" />
         <option value="$PROJECT_DIR$/src/sample/DAO/TeamDAO.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/TeamDAOimpl.java" />
-        <option value="$PROJECT_DIR$/src/sample/Spielklasse.java" />
-        <option value="$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java" />
-        <option value="$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java" />
         <option value="$PROJECT_DIR$/src/sample/Spielsysteme/KOmitTrostrunde.java" />
-        <option value="$PROJECT_DIR$/src/sample/Spielsysteme/KO.java" />
         <option value="$PROJECT_DIR$/src/sample/Team.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/SQLConnection.java" />
         <option value="$PROJECT_DIR$/src/sample/Ergebnis.java" />
-        <option value="$PROJECT_DIR$/src/sample/Spiel.java" />
-        <option value="$PROJECT_DIR$/src/sample/DAO/SpielDAOimpl.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/ErgebnisDAOimpl.java" />
+        <option value="$PROJECT_DIR$/src/sample/DAO/ErgebnisDAO.java" />
+        <option value="$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java" />
+        <option value="$PROJECT_DIR$/src/sample/DAO/SpielDAOimpl.java" />
         <option value="$PROJECT_DIR$/src/sample/Spielsysteme/GruppeMitEndrunde.java" />
+        <option value="$PROJECT_DIR$/src/sample/Spielklasse.java" />
+        <option value="$PROJECT_DIR$/src/sample/Spiel.java" />
+        <option value="$PROJECT_DIR$/src/sample/Spielsysteme/KO.java" />
+        <option value="$PROJECT_DIR$/src/sample/Spielsysteme/Spielsystem.java" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
         <option value="$PROJECT_DIR$/src/sample/Spielsysteme/Gruppe.java" />
+        <option value="$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java" />
       </list>
     </option>
   </component>
@@ -607,8 +523,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -686,6 +600,8 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -1193,7 +1109,8 @@
       <workItem from="1501143745077" duration="34134000" />
       <workItem from="1501226321081" duration="28820000" />
       <workItem from="1501272890252" duration="8513000" />
-      <workItem from="1501319877800" duration="32074000" />
+      <workItem from="1501319877800" duration="34424000" />
+      <workItem from="1501406551079" duration="6013000" />
     </task>
     <task id="LOCAL-00001" summary="Comboboxfill mit Button">
       <created>1495537932394</created>
@@ -1433,39 +1350,45 @@
       <option name="project" value="LOCAL" />
       <updated>1501341556204</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Gruppe funktioniert">
+      <created>1501364563340</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1501364563340</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="292203000" />
+    <option name="totallyTimeSpent" value="300566000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13392857" sideWeight="0.4946401" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3973799" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242358" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2871179" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2871179" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13392857" sideWeight="0.5053599" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15416667" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2672619" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13392857" sideWeight="0.4946401" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3973799" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1476,9 +1399,11 @@
       <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13392857" sideWeight="0.5053599" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15829694" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="DBOutput" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1583,33 +1508,35 @@
     <MESSAGE value="Turnier einlesen erstellt" />
     <MESSAGE value="Schweizer System funktioniert (bis auf einlesen)" />
     <MESSAGE value="gefuschte Lösung für Schweizer System =)" />
-    <option name="LAST_COMMIT_MESSAGE" value="gefuschte Lösung für Schweizer System =)" />
+    <MESSAGE value="Gruppe funktioniert" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gruppe funktioniert" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java</url>
-          <line>233</line>
+          <line>229</line>
           <properties />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java</url>
-          <line>144</line>
+          <line>37</line>
           <properties />
-          <option name="timeStamp" value="80" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/Spielsysteme/Gruppe.java</url>
-          <line>65</line>
-          <properties />
-          <option name="timeStamp" value="83" />
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="84" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="86" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="getAktuelleRunde()" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1709,19 +1636,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/DAO/ErgebnisDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="11" column="32" lean-forward="false" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/DAO/SetzlisteDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="12" column="78" lean-forward="false" selection-start-line="12" selection-start-column="78" selection-end-line="12" selection-end-column="78" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1741,7 +1659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1749,11 +1666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="81" column="9" lean-forward="false" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
-          <folding>
-            <marker date="1501230815890" expanded="true" signature="392:570" ph="INSERT INTO verein... " />
-            <marker date="1501230815890" expanded="true" signature="1288:1325" ph="Delete From " />
-            <marker date="1501230815890" expanded="true" signature="1886:1962" ph="UPDATE verei... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1804,7 +1716,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1812,7 +1723,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="13" column="25" lean-forward="false" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1888,43 +1798,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <marker date="1501239604520" expanded="true" signature="476:616" ph="INSERT INTO Turnier... " />
-            <marker date="1501239604520" expanded="true" signature="1282:1320" ph="Delete From " />
-            <marker date="1501239604520" expanded="true" signature="1886:2124" ph="UPDATE Turni... " />
-            <marker date="1501239604520" expanded="true" signature="2977:3018" ph="SELECT NAME turnier" />
-            <marker date="1501239604520" expanded="true" signature="4718:4763" ph="SELECT * FRO... spielklasse" />
-            <marker date="1501239604520" expanded="true" signature="6246:6525" ph="SELECT setzp... spielklasse_setzliste" />
-            <marker date="1501239604520" expanded="true" signature="7346:7384" ph="SELECT * FRO... spielklasse" />
-            <marker date="1501239604520" expanded="true" signature="8241:8752" ph="SELECT * FRO... feld" />
-            <marker date="1501239604520" expanded="true" signature="9702:10016" ph="select*from spieler... " />
-            <marker date="1501239604520" expanded="true" signature="9702:10065" ph="SELECT * FRO... spielklasse" />
-            <marker date="1501239604520" expanded="true" signature="12057:12168" ph="select * fro... team" />
-            <marker date="1501239604520" expanded="true" signature="12871:13139" ph="select team.... team_spieler" />
-            <marker date="1501239604520" expanded="true" signature="14186:14187" ph="SELECT * FRO... spiel" />
-            <marker date="1501239604520" expanded="true" signature="14186:14298" ph="Select * fro... spiel" />
-            <marker date="1501239604520" expanded="true" signature="14186:14299" ph="Select * fro... spiel" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/DAO/TeamDAOimpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="642">
           <caret line="114" column="25" lean-forward="false" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="25" />
-          <folding>
-            <marker date="1501238208577" expanded="true" signature="300:414" ph="INSERT INTO team... " />
-            <marker date="1501238208577" expanded="true" signature="450:568" ph="INSERT INTO Team_Spieler... " />
-            <marker date="1501238208577" expanded="true" signature="621:739" ph="INSERT INTO Team_Spieler... " />
-            <marker date="1501238208577" expanded="true" signature="2091:2205" ph="INSERT INTO team... " />
-            <marker date="1501238208577" expanded="true" signature="2766:3069" ph="UPDATE team " />
-            <marker date="1501238208577" expanded="true" signature="3976:4008" ph="Delete From " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1954,23 +1831,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/KO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/DAO/FeldDAOimpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
           <caret line="72" column="53" lean-forward="false" selection-start-line="72" selection-start-column="40" selection-end-line="72" selection-end-column="53" />
-          <folding>
-            <marker date="1501230441673" expanded="true" signature="309:453" ph="INSERT INTO feld... " />
-            <marker date="1501230441673" expanded="true" signature="1120:1325" ph="UPDATE feld " />
-            <marker date="1501230441673" expanded="true" signature="2138:2170" ph="Delete From " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1978,11 +1842,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="71" column="53" lean-forward="false" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="53" />
-          <folding>
-            <marker date="1501230441561" expanded="true" signature="453:648" ph="INSERT INTO spielklasse_setzliste... " />
-            <marker date="1501230441561" expanded="true" signature="1336:1392" ph="Delete From " />
-            <marker date="1501230441561" expanded="true" signature="2046:2194" ph="UPDATE spiel... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1990,10 +1849,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1309">
           <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <marker date="1501342748425" expanded="true" signature="4587:4656" ph="SELECT Spiel... spieler" />
-            <marker date="1501342748425" expanded="true" signature="5107:5200" ph="INSERT INTO spieler... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2001,27 +1856,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/DAO/SpielDAOimpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="72" column="51" lean-forward="false" selection-start-line="72" selection-start-column="51" selection-end-line="72" selection-end-column="51" />
-          <folding>
-            <marker date="1501335426535" expanded="true" signature="285:497" ph="INSERT INTO spiel... " />
-            <marker date="1501335426535" expanded="true" signature="527:699" ph="INSERT INTO spielklasse_spielid... " />
-            <marker date="1501335426535" expanded="true" signature="2201:2235" ph="Delete From " />
-            <marker date="1501335426535" expanded="true" signature="2790:3123" ph="UPDATE spiel... " />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/DAO/SpielklasseDAOimpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="47" column="55" lean-forward="true" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
+        <state relative-caret-position="650">
+          <caret line="47" column="55" lean-forward="false" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
           <folding>
             <marker date="1501230816083" expanded="true" signature="360:548" ph="INSERT INTO spielklasse... " />
             <marker date="1501230816083" expanded="true" signature="1315:1361" ph="Delete From " />
@@ -2042,109 +1883,216 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/GruppeMitEndrunde.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding>
-            <element signature="e#332#333#0" expanded="true" />
-            <element signature="e#368#369#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="316" column="34" lean-forward="true" selection-start-line="315" selection-start-column="8" selection-end-line="316" selection-end-column="34" />
-          <folding>
-            <element signature="e#580#587#0" expanded="true" />
-            <element signature="e#644#650#0" expanded="true" />
-            <element signature="e#718#735#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Ergebnis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
+        <state relative-caret-position="1105">
           <caret line="66" column="32" lean-forward="false" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
           <folding>
-            <element signature="e#2176#2177#0" expanded="true" />
-            <element signature="e#2225#2226#0" expanded="true" />
-            <element signature="e#2269#2270#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/Spielsystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="e#415#416#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/DAO/ErgebnisDAOimpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding>
-            <marker date="1501346987824" expanded="true" signature="311:473" ph="INSERT INTO Ergebnis_Satz... " />
-            <marker date="1501346987824" expanded="true" signature="1626:1674" ph="Delete from " />
-            <marker date="1501346987824" expanded="true" signature="2238:2334" ph="UPDATE spiel... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Spielklasse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding>
-            <element signature="e#1078#1079#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Turnier.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
+        <state relative-caret-position="986">
           <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding>
-            <element signature="e#2337#2338#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1197#1198#0" expanded="false" />
+            <element signature="e#1223#1224#0" expanded="false" />
+            <element signature="e#1261#1262#0" expanded="false" />
+            <element signature="e#1292#1293#0" expanded="false" />
+            <element signature="e#1394#1395#0" expanded="false" />
+            <element signature="e#1433#1434#0" expanded="false" />
+            <element signature="e#1517#1518#0" expanded="false" />
+            <element signature="e#1536#1537#0" expanded="false" />
+            <element signature="e#1564#1565#0" expanded="false" />
+            <element signature="e#1582#1583#0" expanded="false" />
+            <element signature="e#1612#1613#0" expanded="false" />
+            <element signature="e#1635#1636#0" expanded="false" />
+            <element signature="e#1697#1698#0" expanded="false" />
+            <element signature="e#1723#1724#0" expanded="false" />
+            <element signature="e#1775#1776#0" expanded="false" />
+            <element signature="e#1796#1797#0" expanded="false" />
+            <element signature="e#1860#1861#0" expanded="false" />
+            <element signature="e#1889#1890#0" expanded="false" />
+            <element signature="e#1942#1943#0" expanded="false" />
+            <element signature="e#1963#1964#0" expanded="false" />
+            <element signature="e#2012#2013#0" expanded="false" />
+            <element signature="e#2032#2033#0" expanded="false" />
+            <element signature="e#2092#2093#0" expanded="false" />
+            <element signature="e#2119#2120#0" expanded="false" />
+            <element signature="e#2167#2168#0" expanded="false" />
+            <element signature="e#2186#2187#0" expanded="false" />
+            <element signature="e#2243#2244#0" expanded="false" />
+            <element signature="e#2267#2268#0" expanded="false" />
+            <element signature="e#2398#2399#0" expanded="false" />
+            <element signature="e#2425#2426#0" expanded="false" />
+            <element signature="e#2504#2505#0" expanded="false" />
+            <element signature="e#2543#2544#0" expanded="false" />
+            <element signature="e#2608#2609#0" expanded="false" />
+            <element signature="e#2637#2638#0" expanded="false" />
+            <element signature="e#2683#2684#0" expanded="false" />
+            <element signature="e#2718#2719#0" expanded="false" />
+            <element signature="e#2764#2765#0" expanded="false" />
+            <element signature="e#2799#2800#0" expanded="false" />
+            <element signature="e#2859#2860#0" expanded="false" />
+            <element signature="e#2908#2909#0" expanded="false" />
+            <element signature="e#2947#2948#0" expanded="false" />
+            <element signature="e#2995#2996#0" expanded="false" />
+            <element signature="e#3032#3033#0" expanded="false" />
+            <element signature="e#3080#3081#0" expanded="false" />
+            <element signature="e#3124#3125#0" expanded="false" />
+            <element signature="e#3172#3173#0" expanded="false" />
+            <element signature="e#3212#3213#0" expanded="false" />
+            <element signature="e#3260#3261#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/ErgebnisDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/SpielDAOimpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="776">
+          <caret line="86" column="25" lean-forward="false" selection-start-line="86" selection-start-column="25" selection-end-line="86" selection-end-column="25" />
+          <folding>
+            <marker date="1501409440775" expanded="true" signature="285:497" ph="INSERT INTO spiel... " />
+            <marker date="1501409440775" expanded="true" signature="527:699" ph="INSERT INTO spielklasse_spielid... " />
+            <marker date="1501409440775" expanded="true" signature="2202:2251" ph="DELETE FROM " />
+            <marker date="1501409440775" expanded="true" signature="2277:2325" ph="DELETE FROM " />
+            <marker date="1501409440775" expanded="true" signature="2277:2385" ph="DELETE FROM " />
+            <marker date="1501409440775" expanded="true" signature="2351:2385" ph="Delete From " />
+            <marker date="1501409440775" expanded="true" signature="3323:3656" ph="UPDATE spiel... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/GruppeMitEndrunde.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Spielklasse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#1216#1217#0" expanded="true" />
+            <element signature="e#1237#1238#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Spiel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+        <state relative-caret-position="230">
+          <caret line="97" column="5" lean-forward="true" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/KO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-88">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/ErgebnisDAOimpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
           <folding>
-            <element signature="e#1055#1056#0" expanded="true" />
-            <element signature="e#1080#1081#0" expanded="true" />
+            <marker date="1501367470135" expanded="true" signature="311:473" ph="INSERT INTO Ergebnis_Satz... " />
+            <marker date="1501367470135" expanded="true" signature="1626:1674" ph="Delete from " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="48" column="65" lean-forward="false" selection-start-line="48" selection-start-column="65" selection-end-line="48" selection-end-column="65" />
+          <folding>
+            <marker date="1501407244921" expanded="true" signature="476:616" ph="INSERT INTO Turnier... " />
+            <marker date="1501407244921" expanded="true" signature="1463:1501" ph="Delete From " />
+            <marker date="1501407244921" expanded="true" signature="2067:2305" ph="UPDATE Turni... " />
+            <marker date="1501407244921" expanded="true" signature="3158:3199" ph="SELECT NAME turnier" />
+            <marker date="1501407244921" expanded="true" signature="4899:4944" ph="SELECT * FRO... spielklasse" />
+            <marker date="1501407244921" expanded="true" signature="6427:6706" ph="SELECT setzp... spielklasse_setzliste" />
+            <marker date="1501407244921" expanded="true" signature="7527:7565" ph="SELECT * FRO... spielklasse" />
+            <marker date="1501407244921" expanded="true" signature="8422:8933" ph="SELECT * FRO... feld" />
+            <marker date="1501407244921" expanded="true" signature="9883:10197" ph="select*from spieler... " />
+            <marker date="1501407244921" expanded="true" signature="9883:10246" ph="SELECT * FRO... spielklasse" />
+            <marker date="1501407244921" expanded="true" signature="12238:12349" ph="select * fro... team" />
+            <marker date="1501407244921" expanded="true" signature="13052:13320" ph="select team.... team_spieler" />
+            <marker date="1501407244921" expanded="true" signature="14367:14368" ph="SELECT * FRO... spiel" />
+            <marker date="1501407244921" expanded="true" signature="14367:14479" ph="Select * fro... spiel" />
+            <marker date="1501407244921" expanded="true" signature="14367:14480" ph="Select * fro... spiel" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="63" column="24" lean-forward="false" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
+        <state relative-caret-position="272">
+          <caret line="35" column="58" lean-forward="false" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/Gruppe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="73" column="37" lean-forward="false" selection-start-line="73" selection-start-column="37" selection-end-line="73" selection-end-column="37" />
+        <state relative-caret-position="187">
+          <caret line="56" column="43" lean-forward="false" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/Spielsystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="52" column="37" lean-forward="false" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
           <folding>
-            <element signature="e#3251#3252#0" expanded="true" />
-            <element signature="e#3269#3270#0" expanded="true" />
+            <element signature="e#512#513#0" expanded="true" />
+            <element signature="e#537#538#0" expanded="true" />
+            <element signature="e#782#783#0" expanded="true" />
+            <element signature="e#825#826#0" expanded="true" />
+            <element signature="e#866#867#0" expanded="true" />
+            <element signature="e#898#899#0" expanded="true" />
+            <element signature="e#940#941#0" expanded="true" />
+            <element signature="e#972#973#0" expanded="true" />
+            <element signature="e#1010#1011#0" expanded="true" />
+            <element signature="e#1037#1038#0" expanded="true" />
+            <element signature="e#1071#1072#0" expanded="true" />
+            <element signature="e#1098#1099#0" expanded="true" />
+            <element signature="e#1142#1143#0" expanded="true" />
+            <element signature="e#1177#1178#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="265" column="70" lean-forward="true" selection-start-line="265" selection-start-column="70" selection-end-line="265" selection-end-column="70" />
+          <folding>
+            <element signature="e#486#493#0" expanded="true" />
+            <element signature="e#550#556#0" expanded="true" />
+            <element signature="e#624#641#0" expanded="true" />
           </folding>
         </state>
       </provider>

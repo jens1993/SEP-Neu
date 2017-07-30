@@ -11,9 +11,6 @@ import sample.DAO.SpielDAO;
 import sample.DAO.SpielDAOimpl;
 
 public class SchweizerSystem extends Spielsystem {
-	private int anzahlRunden;
-	private int offeneRundenSpiele=0;
-	private int aktuelleRunde = 1;
 	private int randomVersuche=0;
 	private boolean beendet;
 	boolean kombinationGefunden = false;
@@ -25,7 +22,7 @@ public class SchweizerSystem extends Spielsystem {
 
 	public SchweizerSystem(int anzahlRunden, ArrayList<Team> teamList, Spielklasse spielklasse) {
 		setSpielklasse(spielklasse);
-		this.anzahlRunden = anzahlRunden;
+		setAnzahlRunden(anzahlRunden);
 		this.teamList = teamList;
 		freiloseHinzufuegen(this.teamList);
 		ersteRundeErstellen();
@@ -38,14 +35,14 @@ public class SchweizerSystem extends Spielsystem {
 			}
 		});
 		teamListArray.add(new ArrayList<>());
-		teamListArray.get(aktuelleRunde-1).clear();
+		teamListArray.get(getAktuelleRunde()-1).clear();
 		for (int i=0; i<nextTeamList.size();i++){
 			System.out.println((i+1)+": "+nextTeamList.get(i).getGewonneneSpiele()+", "+
 					nextTeamList.get(i).getGewonneneSaetze()+":"+
 					nextTeamList.get(i).getVerloreneSaetze()+", "+
 					nextTeamList.get(i).getGewonnnenePunkte()+":"+
 					nextTeamList.get(i).getVerlorenePunkte());
-			teamListArray.get(aktuelleRunde-1).add(nextTeamList.get(i));
+			teamListArray.get(getAktuelleRunde()-1).add(nextTeamList.get(i));
 			//System.out.println("Size: "+teamListArray.get(aktuelleRunde-1).size());
 		}
 
@@ -64,12 +61,13 @@ public class SchweizerSystem extends Spielsystem {
 			this.nextTeamList.add(teamZwei);
 			Spiel spiel = new Spiel(teamEins,teamZwei,this.getSpielklasse(),spielSystemIDberechnen()-1000);
 			spiele.add(spiel);
-			offeneRundenSpiele++;
+			erhoeheOffeneRundenSpiele();
 		}
+		erhoeheAktuelleRunde();
 	}
 	private boolean rundeErstellen(){
 		sortList();
-		boolean beendet = (rundenListeErstellen(0, aktuelleRunde-1));
+		boolean beendet = (rundenListeErstellen(0, getAktuelleRunde()-1));
 		if(!beendet) {
 			rundeFuellen();
 		}
@@ -77,21 +75,21 @@ public class SchweizerSystem extends Spielsystem {
 	}
 	private void teamListReset(){
 		teamList.clear();
-		for (int i=0;i<teamListArray.get(aktuelleRunde-1).size();i++)
+		for (int i=0;i<teamListArray.get(getAktuelleRunde()-1).size();i++)
 		{
-			this.teamList.add(teamListArray.get(aktuelleRunde-1).get(i));
+			this.teamList.add(teamListArray.get(getAktuelleRunde()-1).get(i));
 		}
 	}
 	public boolean rundenListeErstellen(int versuch, int rundenNummer) {
 
-		if (rundenNummer+1<anzahlRunden){
+		if (rundenNummer+1<getAnzahlRunden()){
 			teamList.clear();
 			for (int i=0;i<teamListArray.get(rundenNummer).size();i++)
 			{
 				this.teamList.add(teamListArray.get(rundenNummer).get(i));
 			}
 			nextTeamList.clear();
-			System.out.println("Runde: "+(aktuelleRunde+1));
+			System.out.println("Runde: "+(getAktuelleRunde()+1));
 			while (this.teamList.size()>1){
 				Team teamEins = teamList.get(0);
 				this.teamList.remove(teamEins);
@@ -130,7 +128,7 @@ public class SchweizerSystem extends Spielsystem {
 	public void rundenListeErstellenNeu(){
 		teamListReset();
 		nextTeamList.clear();
-		System.out.println("Runde: "+(aktuelleRunde+1));
+		System.out.println("Runde: "+(getAktuelleRunde()+1));
 		sucheKombinationNeu();
 		rundeFuellen();
 
@@ -141,7 +139,7 @@ public class SchweizerSystem extends Spielsystem {
 		teamListReset();
 		ArrayList<Team> tempList = new ArrayList<>();
 		while (teamList.size()>1){
-			if(aktuelleRunde==5){
+			if(getAktuelleRunde()==5){
 				int forbreakpoint=0;
 			}
 			Team teamEins = teamList.get(0);
@@ -176,9 +174,7 @@ public class SchweizerSystem extends Spielsystem {
 				teamList.remove(erstesTeam);
 				tempList.add(erstesTeam);
 				Team zweitesTeam;
-				if(aktuelleRunde==9){
-					int nurfuerbreakpoint = 0;
-				}
+
 
 				for (int i = 0; i < verbleibendeGegner.size(); i++) {
 					if(!kombinationGefunden) {
@@ -192,7 +188,7 @@ public class SchweizerSystem extends Spielsystem {
 							teamListReset();
 							tempList.clear();
 						}
-						if(tempList.size()==teamListArray.get(aktuelleRunde-1).size()&&!kombinationGefunden){
+						if(tempList.size()==teamListArray.get(getAktuelleRunde()-1).size()&&!kombinationGefunden){
 							kombinationGefunden = true;
 							for (int j=0;j<tempList.size();j++) {
 								nextTeamList.add(tempList.get(j));
@@ -253,17 +249,10 @@ public class SchweizerSystem extends Spielsystem {
 			this.nextTeamList.add(teamZwei);
 			Spiel spiel = new Spiel(teamEins, teamZwei, this.getSpielklasse(), spielSystemIDberechnen());
 			spiele.add(spiel);
-			offeneRundenSpiele++;
+			erhoeheOffeneRundenSpiele();
 		}
 
 
-	}
-
-	public int spielSystemIDberechnen(){
-		int spielSystemID=100000;
-		spielSystemID += aktuelleRunde*1000;
-		spielSystemID += offeneRundenSpiele;
-		return spielSystemID;
 	}
 
 	private Team sucheGegner(Team Gegner, int versuch){
@@ -313,11 +302,11 @@ public class SchweizerSystem extends Spielsystem {
 
 	@Override
 	public boolean beendeMatch(Spiel spiel) {
-		offeneRundenSpiele --;
-		if(offeneRundenSpiele==0){
-			if(aktuelleRunde<anzahlRunden){
+		senkeOffeneRundenSpiele();
+		if(keineOffenenRundenSpiele()){
+			if(getAktuelleRunde()<getAnzahlRunden()){
 				rundeErstellen();
-				aktuelleRunde++;
+				erhoeheAktuelleRunde();
 				randomVersuche=0;
 				kombinationGefunden = false;
 				return true;

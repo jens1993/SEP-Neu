@@ -21,6 +21,10 @@ public class KO extends Spielsystem {
 		ersteRundeFuellen(setzliste);
 	}
 
+	public void alleSpieleErstellen(){
+
+	}
+
 	public SpielTree getFinale() {
 		return finale;
 	}
