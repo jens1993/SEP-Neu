@@ -11,11 +11,12 @@ import sample.DAO.SpielDAO;
 import sample.DAO.SpielDAOimpl;
 
 public class SchweizerSystem extends Spielsystem {
+	private int anzahlTeams;
 	private int randomVersuche=0;
 	private boolean beendet;
 	boolean kombinationGefunden = false;
 	private ArrayList<Team> teamList;
-	private ArrayList<Spiel> spiele = new ArrayList<Spiel>();
+	//private ArrayList<Spiel> spiele = new ArrayList<Spiel>();
 	private ArrayList<Team> nextTeamList = new ArrayList<Team>();
 	private ArrayList<ArrayList<Team>> teamListArray =new ArrayList<ArrayList<Team>>();
 	private ArrayList<Team> tempList = new ArrayList<>();
@@ -24,8 +25,11 @@ public class SchweizerSystem extends Spielsystem {
 		setSpielklasse(spielklasse);
 		setAnzahlRunden(anzahlRunden);
 		this.teamList = teamList;
+		setSpielSystemArt(5);
 		freiloseHinzufuegen(this.teamList);
+		this.anzahlTeams = teamList.size();
 		ersteRundeErstellen();
+		alleSpieleErstellen();
 	}
 	private void sortList(){
 		Collections.sort(nextTeamList, new Comparator<Team>() {
@@ -51,6 +55,7 @@ public class SchweizerSystem extends Spielsystem {
 
 	}
 
+
 	public void ersteRundeErstellen() {
 		while (teamList.size()>1){
 			Team teamEins = getRandomTeam();
@@ -59,10 +64,22 @@ public class SchweizerSystem extends Spielsystem {
 			Team teamZwei = getRandomTeam();
 			this.teamList.remove(teamZwei);
 			this.nextTeamList.add(teamZwei);
-			Spiel spiel = new Spiel(teamEins,teamZwei,this.getSpielklasse(),spielSystemIDberechnen()-1000);
-			spiele.add(spiel);
+			Spiel spiel = new Spiel(teamEins,teamZwei,this.getSpielklasse(),spielSystemIDberechnen());
+			//spiele.add(spiel);
 			erhoeheOffeneRundenSpiele();
 		}
+		erhoeheAktuelleRunde();
+	}
+	private void alleSpieleErstellen(){
+		for (int i=2;i<=getAnzahlRunden();i++){
+			resetOffeneRundenSpiele();
+			for (int j=0; j<anzahlTeams/2;j++){
+				new Spiel(this.getSpielklasse(),spielSystemIDberechnen());
+				erhoeheOffeneRundenSpiele();
+			}
+			erhoeheAktuelleRunde();
+		}
+		resetAktuelleRunde();
 		erhoeheAktuelleRunde();
 	}
 	private boolean rundeErstellen(){
@@ -247,8 +264,8 @@ public class SchweizerSystem extends Spielsystem {
 			Team teamZwei = teamList.get(0);
 			this.teamList.remove(teamZwei);
 			this.nextTeamList.add(teamZwei);
-			Spiel spiel = new Spiel(teamEins, teamZwei, this.getSpielklasse(), spielSystemIDberechnen());
-			spiele.add(spiel);
+			getSpielklasse().getSpiele().get(spielSystemIDberechnen()).setHeim(teamEins);
+			getSpielklasse().getSpiele().get(spielSystemIDberechnen()).setGast(teamZwei);
 			erhoeheOffeneRundenSpiele();
 		}
 

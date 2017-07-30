@@ -39,6 +39,7 @@ public class Spiel {
 		if(this.gast != null){
 			this.status = 1;
 		}
+		spielDAO.update(this);
 	}
 
 	public void setGast(Team gast) {
@@ -46,6 +47,7 @@ public class Spiel {
 		if(this.heim != null){
 			this.status = 1;
 		}
+		spielDAO.update(this);
 	}
 
 	public Spielklasse getSpielklasse() {
@@ -97,6 +99,16 @@ public class Spiel {
 		spielDAO.create(this);
 	}
 */
+
+	public Spiel(Spielklasse spielklasse, int systemSpielID) {
+		this.spielklasse = spielklasse;
+		this.systemSpielID = systemSpielID;
+		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
+		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
+		this.spielklasse.getSpiele().put(systemSpielID,this);
+		spielDAO.create(this);
+	}
+
 	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielklasse spielklasse) {
 		this.systemSpielID = systemSpielID; //Constructor für SpielTree in KO-System
 		this.setzPlatzHeim = setzPlatzHeim;

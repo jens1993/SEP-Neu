@@ -28,9 +28,26 @@ public class Gruppe extends Spielsystem {
 		freiloseHinzufuegen(teamList);
 		setAnzahlRunden(teamList.size()-1);
 		anzahlTeams = teamList.size();
+		alleSpieleErstellen();
 		schablone = new int[anzahlTeams][anzahlTeams];
 		schabloneBauen();
-		rundeErstellen();
+		for (int i=0;i<getAnzahlRunden();i++){
+			rundeErstellen();
+			resetOffeneRundenSpiele();
+		}
+	}
+
+	private void alleSpieleErstellen(){
+		for (int i=1;i<=getAnzahlRunden();i++){
+			resetOffeneRundenSpiele();
+			for (int j=0; j<anzahlTeams/2;j++){
+				new Spiel(this.getSpielklasse(),spielSystemIDberechnen());
+				erhoeheOffeneRundenSpiele();
+			}
+			erhoeheAktuelleRunde();
+		}
+		resetOffeneRundenSpiele();
+		resetAktuelleRunde();
 	}
 
 	private void schabloneBauen(){
@@ -64,9 +81,12 @@ public class Gruppe extends Spielsystem {
 				int setzplatzTeamZwei = schabloneDurchsuchen(setzplatzTeamEins); //durchsuche die Schablone nach aktuellem Gegner für TeamEins
 				Team teamZwei = teamList.get(setzplatzTeamZwei-1);  //hole Gegner aus der Setzliste! (nicht TempList, weil diese kleiner wird!
 				tempList.remove(teamZwei);  						//entferne Gegner aus tempList
-				alleSpiele.add(new Spiel(teamZwei,teamEins,getSpielklasse(),spielSystemIDberechnen()));
+				//alleSpiele.add(new Spiel(teamZwei,teamEins,getSpielklasse(),spielSystemIDberechnen()));
+				getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setHeim(teamZwei);
+				getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setGast(teamEins);
 				erhoeheOffeneRundenSpiele();
 			}
+
 		}
 	}
 	private int schabloneDurchsuchen(int setzplatzTeamEins){
@@ -96,16 +116,12 @@ public class Gruppe extends Spielsystem {
 	@Override
 	public boolean beendeMatch(Spiel spiel) {
 		senkeOffeneRundenSpiele();
-		if(getAktuelleRunde()==getAnzahlRunden()){
-			return true;
-		}
-		else{
-			if(keineOffenenRundenSpiele()){
-					rundeErstellen();
-
-				}
-
+		if(keineOffenenRundenSpiele()){
+			erhoeheAktuelleRunde();
+			if(getAktuelleRunde()==getAnzahlRunden()){
+					return true;
 			}
+		}
 		return false;
 	}
 }

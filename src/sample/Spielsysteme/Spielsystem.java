@@ -19,38 +19,44 @@ public abstract class Spielsystem {
 
 	protected int spielsystemCode;
 
-
 	public Spielklasse getSpielklasse() {
 		return spielklasse;
 	}
 
-	public int spielSystemIDberechnen(){
+	protected int spielSystemIDberechnen(){
 		int spielSystemID= spielSystemArt * 1000000;
 		spielSystemID += aktuelleRunde*1000;
 		spielSystemID += offeneRundenSpiele;
 		return spielSystemID;
 	}
 
-	public void setSpielSystemArt(int spielSystemArt) {
+	protected void setSpielSystemArt(int spielSystemArt) {
 		this.spielSystemArt = spielSystemArt;
 	}
 
-	public void senkeOffeneRundenSpiele(){
+	protected void senkeOffeneRundenSpiele(){
 		this.offeneRundenSpiele--;
 	}
-	public void erhoeheOffeneRundenSpiele(){
+	protected void erhoeheOffeneRundenSpiele(){
 		this.offeneRundenSpiele++;
 	}
 
-	public void erhoeheAktuelleRunde(){
+	protected void resetOffeneRundenSpiele(){
+		offeneRundenSpiele=0;
+	}
+
+	protected void erhoeheAktuelleRunde(){
 		this.aktuelleRunde++;
 	}
 
-	public int getAktuelleRunde() {
+	protected int getAktuelleRunde() {
 		return aktuelleRunde;
 	}
-	public boolean keineOffenenRundenSpiele(){
+	protected boolean keineOffenenRundenSpiele(){
 		return offeneRundenSpiele==0;
+	}
+	protected void resetAktuelleRunde(){
+		this.aktuelleRunde=0;
 	}
 
 	public void setSpielklasse(Spielklasse spielklasse) {
