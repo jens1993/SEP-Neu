@@ -32,24 +32,36 @@ public class GruppeMitEndrunde extends Spielsystem{
 			benoetigteFreilose = anzahlGruppen - (templist.size()%anzahlGruppen);
 		}
 		freiloseHinzufuegen();
-		for (int j=0; j<templist.size()/anzahlGruppen;j++){
+		for (int j=0; j<anzahlGruppen;j++){
 			alleSetzListen.add(new ArrayList<>());
 		}
-		boolean hochzaehlen = true;
+		boolean hochzaehlen = false;
+		boolean wurdeschongetauscht=false;
 		int zaehler = 0;
-		while(templist.size()>1)
+		while(templist.size()>0)
 		{
+			if ((zaehler==anzahlGruppen-1||zaehler==0)&&!wurdeschongetauscht){
+				hochzaehlen = !hochzaehlen;
+				wurdeschongetauscht=true;
+			}
+			else if(hochzaehlen){
+				zaehler++;
+				wurdeschongetauscht=false;
+				System.out.println(zaehler);
+			}
+			else{
+				wurdeschongetauscht=false;
+				zaehler--;
+			}
 			Team tempTeam = templist.get(0);
 			templist.remove(tempTeam);
 			alleSetzListen.get(zaehler).add(tempTeam);
-			if (hochzaehlen){
-				zaehler++;
-			}
-			else if(zaehler==anzahlGruppen-1){
-				hochzaehlen = !hochzaehlen;
-			}
-			else{
-				zaehler--;
+
+		}
+		for(int x=0; x<alleSetzListen.size();x++){
+			System.out.println("Gruppe: " + (x+1));
+			for (int y=0; y<alleSetzListen.get(x).size();y++){
+				System.out.println("Team:" +alleSetzListen.get(x).get(y).getTeamid());
 			}
 		}
 	}
