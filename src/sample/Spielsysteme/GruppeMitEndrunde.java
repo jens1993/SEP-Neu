@@ -22,19 +22,17 @@ public class GruppeMitEndrunde extends Spielsystem{
 		this.anzahlWeiterkommender = anzahlWeiterkommender;
 		setSpielklasse(spielklasse);
 		setzListeAufteilen();
+		gruppenErstellen();
 	}
 
 	private void setzListeAufteilen(){
 		for (int k=0; k<setzliste.size();k++){
 			templist.add(setzliste.get(k));
 		}
-		for(int i=0; i<anzahlGruppen; i++){
-			benoetigteFreilose = anzahlGruppen - (templist.size()%anzahlGruppen);
-		}
-		freiloseHinzufuegen();
 		for (int j=0; j<anzahlGruppen;j++){
 			alleSetzListen.add(new ArrayList<>());
 		}
+		freiloseHinzufuegen();
 		boolean hochzaehlen = false;
 		boolean wurdeschongetauscht=false;
 		int zaehler = 0;
@@ -58,17 +56,18 @@ public class GruppeMitEndrunde extends Spielsystem{
 			alleSetzListen.get(zaehler).add(tempTeam);
 
 		}
-		for(int x=0; x<alleSetzListen.size();x++){
-			System.out.println("Gruppe: " + (x+1));
-			for (int y=0; y<alleSetzListen.get(x).size();y++){
-				System.out.println("Team:" +alleSetzListen.get(x).get(y).getTeamid());
-			}
+	}
+
+	private void gruppenErstellen(){
+		for(int i=0; i<alleSetzListen.size();i++){
+			alleGruppen.add(new Gruppe(alleSetzListen.get(i),i+1,this));
 		}
 	}
 
+
 	private void freiloseHinzufuegen (){
-		for (int i=0; i<benoetigteFreilose;i++){
-			templist.add(new Team("Freilos",this.getSpielklasse()));
+		while ((double)templist.size()%(anzahlGruppen*2)>0){
+			templist.add(new Team("Freilos",this));
 		}
 	}
 

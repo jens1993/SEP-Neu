@@ -70,6 +70,15 @@ public class Team {
         this.spielklasse.getTurnier().getTeams().put(teamid,this);
     }
 
+    public Team(String freilos, Spielsystem spielsystem) {
+        this.spielklasse = spielsystem.getSpielklasse();
+        this.freilos = true;
+        teamid = getSpielklasse().getTurnier().getTeams().size()+1;
+        teamDAO.createFreilos(this);
+        this.spielklasse.getTurnier().getTeams().put(teamid,this);
+    }
+
+
     public boolean isFreilos() {
         return freilos;
     }

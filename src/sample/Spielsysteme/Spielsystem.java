@@ -13,9 +13,10 @@ public abstract class Spielsystem {
 	private int anzahlSpiele;
 	private int spielsystemID;
 	private Spielklasse spielklasse;
-	private int offeneRundenSpiele;
+	private int offeneRundenSpiele=0;
 	private int aktuelleRunde=0;
 	private int spielSystemArt;
+	private int extraRunde=0;
 
 	protected int spielsystemCode;
 
@@ -25,9 +26,14 @@ public abstract class Spielsystem {
 
 	protected int spielSystemIDberechnen(){
 		int spielSystemID= spielSystemArt * 1000000;
+		spielSystemID += extraRunde *100000;
 		spielSystemID += aktuelleRunde*1000;
 		spielSystemID += offeneRundenSpiele;
 		return spielSystemID;
+	}
+
+	public void setExtraRunde(int extraRunde) {
+		this.extraRunde = extraRunde;
 	}
 
 	protected void setSpielSystemArt(int spielSystemArt) {

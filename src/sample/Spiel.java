@@ -19,6 +19,7 @@ public class Spiel {
 	private Ergebnis ergebnis;
 	private LocalDate aufrufZeit;
 	private Spieler schiedsrichter;
+	private Spielsystem spielsystem;
 	private Feld feld;
 	private int status = 0; //0= unvollständig 1 = ausstehend, 2=aktiv, 3=gespielt
 	private Spielklasse spielklasse;
@@ -109,6 +110,15 @@ public class Spiel {
 		spielDAO.create(this);
 	}
 
+	public Spiel(int systemSpielID, Spielsystem spielsystem) { //Constructor für Extrarunden (Gruppe mit Endrunde)
+		this.spielsystem = spielsystem;
+		this.systemSpielID = systemSpielID;
+		spielID = spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
+		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
+		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
+		spielDAO.create(this);
+	}
+
 	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielklasse spielklasse) {
 		this.systemSpielID = systemSpielID; //Constructor für SpielTree in KO-System
 		this.setzPlatzHeim = setzPlatzHeim;
@@ -126,6 +136,10 @@ public class Spiel {
 		else{
 			return null;
 		}
+	}
+
+	public Spielsystem getSpielsystem() {
+		return spielsystem;
 	}
 
 	public void setAufrufZeit(LocalDate aufrufZeit) {

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Gruppe extends Spielsystem {
 	private List<Team> teamList;
-
+	private Spielsystem spielsystem;
 	int anzahlTeams;
 	int[][] schablone;
 
@@ -37,11 +37,33 @@ public class Gruppe extends Spielsystem {
 		}
 	}
 
+	public Gruppe(List<Team> setzliste, int vorrundenGruppe, Spielsystem spielsystem) {
+		this.setSpielSystemArt(2);
+		this.setExtraRunde(vorrundenGruppe);
+		this.spielsystem = spielsystem;
+		this.teamList = setzliste;
+		freiloseHinzufuegen(teamList);
+		setAnzahlRunden(teamList.size()-1);
+		anzahlTeams = teamList.size();
+		alleSpieleErstellen();
+		schablone = new int[anzahlTeams][anzahlTeams];
+		schabloneBauen();
+		for (int i=0;i<getAnzahlRunden();i++){
+			rundeErstellen();
+			resetOffeneRundenSpiele();
+		}
+	}
+
 	private void alleSpieleErstellen(){
 		for (int i=1;i<=getAnzahlRunden();i++){
 			resetOffeneRundenSpiele();
 			for (int j=0; j<anzahlTeams/2;j++){
-				new Spiel(this.getSpielklasse(),spielSystemIDberechnen());
+				if(spielsystem==null) {
+					new Spiel(this.getSpielklasse(), spielSystemIDberechnen());
+				}
+				else{
+					new Spiel(spielSystemIDberechnen(),this.spielsystem);
+				}
 				erhoeheOffeneRundenSpiele();
 			}
 			erhoeheAktuelleRunde();
@@ -82,8 +104,14 @@ public class Gruppe extends Spielsystem {
 				Team teamZwei = teamList.get(setzplatzTeamZwei-1);  //hole Gegner aus der Setzliste! (nicht TempList, weil diese kleiner wird!
 				tempList.remove(teamZwei);  						//entferne Gegner aus tempList
 				//alleSpiele.add(new Spiel(teamZwei,teamEins,getSpielklasse(),spielSystemIDberechnen()));
-				getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setHeim(teamZwei);
-				getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setGast(teamEins);
+				if(getSpielklasse()!=null){
+					getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setHeim(teamZwei);
+					getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setGast(teamEins);
+				}
+				else{
+					spielsystem.getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setHeim(teamZwei);
+					spielsystem.getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setGast(teamEins);
+				}
 				erhoeheOffeneRundenSpiele();
 			}
 
@@ -102,7 +130,7 @@ public class Gruppe extends Spielsystem {
 	private void freiloseHinzufuegen(List<Team> teamList){
 		if ((teamList.size()/2) * 2 != teamList.size()){ // /2 *2 überprüft, ob Spieleranzahl gerade oder ungerade (int)
 			this.teamList.add(new Team("Freilos",this.getSpielklasse()));
-			System.out.println("Freilos zu schweizer hinzugefügt");
+			System.out.println("Freilos zu Gruppe hinzugefügt");
 		}
 	}
 

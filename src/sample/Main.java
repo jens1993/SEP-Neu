@@ -33,7 +33,7 @@ public class Main extends Application {
     	Turnier turnier = test.read(1);
         Spielklasse spielklasse =turnier.getSpielklassen().get(1);
     	ArrayList<Team> setzliste = spielklasse.getSetzliste();
-        spielklasse.setSpielsystem(new GruppeMitEndrunde(setzliste,spielklasse,2,8));
+        spielklasse.setSpielsystem(new SchweizerSystem(8,setzliste,spielklasse));
         List<Ergebnis> ergebnisse = new ArrayList<>();
         ergebnisse.add(new Ergebnis(21,15,21,12));
         ergebnisse.add(new Ergebnis(15,21,21,19,30,29));
@@ -53,11 +53,11 @@ public class Main extends Application {
 
 
 
-        /*for(int i=1; i<=turnier.getSpiele().size();i++){
+        for(int i=1; i<=turnier.getSpiele().size();i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
-            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
-            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
-        }*/
+            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+        }
         /*for(int i=4; i<=7;i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
             turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
