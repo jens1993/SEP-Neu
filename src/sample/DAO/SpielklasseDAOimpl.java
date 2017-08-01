@@ -25,11 +25,11 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setString(1, spielklasse.getDisziplin());
             smt.setString(2, spielklasse.getNiveau());
-            smt.setInt(3, spielklasse.getTurnierid());
+            smt.setInt(3, spielklasse.getTurnier().getTurnierid());
             smt.setInt(4, spielklasse.getSpielklasseID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Spielklasse Einfügen klappt");
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -49,7 +49,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             smt.setInt(1, spielklasse.getSpielklasseID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Spielklasse Loeschen klappt");
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -63,17 +63,23 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
     public boolean update(Spielklasse spielklasse) {
         String sql = "UPDATE spielklasse "
                 + "SET Disziplin = ?, "
-                + "Niveau = ? "
+                + "Niveau = ?, "
+                + "SpielsystemCode = ?, "
+                + "Meldekosten = ?, "
+                + "Aktiv = ? "
                 + "WHERE SpielklasseID = ? ";
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setString(1, spielklasse.getDisziplin());
             smt.setString(2, spielklasse.getNiveau());
-            smt.setInt(3, spielklasse.getSpielklasseID());
+            smt.setInt(3, spielklasse.getSpielsystem().getSpielsystemCode());
+            smt.setFloat(4, spielklasse.getMeldeKosten());
+            smt.setBoolean(5, spielklasse.isAktiv());
+            smt.setInt(6, spielklasse.getSpielklasseID());
             smt.executeUpdate();
             smt.close();
-            System.out.println("Spielklasse Update klappt");
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -83,7 +89,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
         return false;
     }
 
-    @Override
+/*    @Override
     public Spielklasse read(int spielklasseID) {
         String sql = "Select * from spielklasse Where spielklasseID=" + spielklasseID;
         Spielklasse temp = null;
@@ -102,9 +108,9 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             System.out.println("Lesen Klappt nicht");
         }
         return temp;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<Spielklasse> getAllSpielklassen() {
         List<Spielklasse> alleSpielklassen = new ArrayList<Spielklasse>();
         SQLConnection con = new SQLConnection();
@@ -132,5 +138,5 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             System.out.println("Spielklassenliste Lesen Klappt nicht");
         }
         return alleSpielklassen;
-    }
+    }*/
 }

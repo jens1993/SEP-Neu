@@ -37,7 +37,7 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setInt(1, spieler.getSpielerID());
             smt.setString(2, spieler.getvName());
             smt.setString(3, spieler.getnName());
-            smt.setDate(4, (Date) spieler.getgDatum());
+            smt.setObject(4, spieler.getgDatum());
             smt.setBoolean(5, spieler.getGeschlecht());
             if(spieler.getVerein()!=null){
                 smt.setInt(6, spieler.getVerein().getVereinsID());
@@ -52,6 +52,7 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setString(11, spieler.getExtSpielerID());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -72,6 +73,7 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setInt(1, spieler.getSpielerID());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {
@@ -105,7 +107,7 @@ public class SpielerDAOimpl implements SpielerDAO {
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setString(1, spieler.getvName());
             smt.setString(2, spieler.getnName());
-            smt.setDate(3, (Date) spieler.getgDatum());
+            smt.setObject(3, spieler.getgDatum());
             smt.setBoolean(4, spieler.getGeschlecht());
             if(spieler.getVerein()!=null){
                 smt.setInt(5, spieler.getVerein().getVereinsID());
@@ -118,7 +120,7 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setInt(8, spieler.getrPunkte()[2]);
             smt.setFloat(9, spieler.getMeldeGebuehren());
             smt.setString(10, spieler.getNationalitaet());
-            smt.setDate(11, (Date) spieler.getVerfuegbar());
+            smt.setObject(11, spieler.getVerfuegbar());
             smt.setInt(12, spieler.getMattenSpiele());
             smt.setString(13, spieler.getExtSpielerID());
             if(spieler.getAktuellesSpiel()!=null){
@@ -130,6 +132,7 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setInt(15, spieler.getSpielerID());
             smt.executeUpdate();
             smt.close();
+            con.closeCon();
             return true;
 
         } catch (SQLException e) {

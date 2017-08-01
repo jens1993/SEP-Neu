@@ -1,30 +1,63 @@
 package sample;
-import java.util.List;
-import sample.DAO.*;
-import sample.Enums.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 import sample.Spielsysteme.Spielsystem;
 
 public class Spielklasse {
 	private int spielklasseID;
 	private String disziplin;
 	private String niveau;
-	private List<Spieler> setzliste;
+	private ArrayList<Team> setzliste;
 	private Spielsystem spielsystem;
 	private float meldeKosten = (float) 5;
 	private Turnier turnier;
-	private int turnierid;
+	private Hashtable<Integer,Spiel> spiele = new Hashtable<>();
 	private boolean aktiv;
 
-	public Spielklasse(int spielklasseID, String disziplin, String niveau, int turnierid) {
-		this.spielklasseID = spielklasseID;
+	public Spielklasse(int spielklasseID, String disziplin, String niveau, Turnier turnier) {
+		this.spielklasseID=spielklasseID;
 		this.disziplin = disziplin;
 		this.niveau = niveau;
-		this.turnierid = turnierid;
+		this.turnier = turnier;
+	}
+
+	public Hashtable<Integer, Spiel> getSpiele() {
+		return spiele;
 	}
 
 	public int getSpielklasseID() {
 		return spielklasseID;
 	}
+
+	public void setSpielklasseID(int spielklasseID) {
+		this.spielklasseID = spielklasseID;
+	}
+
+	public void setSpielsystem(Spielsystem spielsystem) {
+		this.spielsystem = spielsystem;
+	}
+
+	public void setMeldeKosten(float meldeKosten) {
+		this.meldeKosten = meldeKosten;
+	}
+
+	public void setAktiv(boolean aktiv) {
+		this.aktiv = aktiv;
+	}
+
+	public Spielsystem getSpielsystem() {
+		return spielsystem;
+	}
+
+	public Turnier getTurnier() {
+		return turnier;
+	}
+
+	public boolean isAktiv() {
+		return aktiv;
+	}
+
 
 	public String getDisziplin() {
 		return disziplin;
@@ -34,15 +67,11 @@ public class Spielklasse {
 		return niveau;
 	}
 
-	public int getTurnierid() {
-		return turnierid;
-	}
-
-	public List<Spieler> getSetzliste() {
+	public ArrayList<Team> getSetzliste() {
 		return setzliste;
 	}
 
-	public void setSetzliste(List<Spieler> setzliste) {
+	public void setSetzliste(ArrayList<Team> setzliste) {
 		this.setzliste = setzliste;
 	}
 

@@ -13,6 +13,4 @@ public interface SpielklasseDAO {
     public boolean create(Spielklasse spielklasse);
     public boolean delete(Spielklasse spielklasse);
     public boolean update(Spielklasse spielklasse);
-    public Spielklasse read (int spielklasseID);
-    public List<Spielklasse> getAllSpielklassen();
 }

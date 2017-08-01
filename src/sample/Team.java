@@ -3,32 +3,84 @@ package sample;
 import sample.DAO.*;
 import sample.Spielsysteme.*;
 import sample.Enums.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Florian-PC on 25.07.2017.
  */
 public class Team {
+    private TeamDAO teamDAO = new TeamDAOimpl();
     private int teamid;
     private Spieler spielerEins;
     private Spieler spielerZwei;
     private Spielklasse spielklasse;
-    private boolean einzel;
+    private boolean einzel = true;
     private int gewonneneSpiele;
     private int gewonneneSaetze;
     private int verloreneSaetze;
     private int gewonnnenePunkte;
     private int verlorenePunkte;
+    private boolean freilos = false;
+    private List<Team> bisherigeGegner = new ArrayList<Team>();
 
-    public Team(Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
+    public Team(int teamid, Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
+        this.teamid = teamid;
         this.spielerEins = spielerEins;
         this.spielerZwei = spielerZwei;
         this.spielklasse = spielklasse;
         this.einzel = false;
+        teamid = getSpielklasse().getTurnier().getTeams().size()+1;
+        this.spielklasse.getTurnier().getTeams().put(teamid,this);
+        teamDAO.create(this);
     }
 
-    public Team(Spieler spielerEins, Spielklasse spielklasse) {
+    public Team(int teamid, Spieler spielerEins, Spielklasse spielklasse) {
+        this.teamid = teamid;
         this.spielerEins = spielerEins;
         this.einzel = true;
         this.spielklasse = spielklasse;
+        teamid = getSpielklasse().getTurnier().getTeams().size()+1;
+        this.spielklasse.getTurnier().getTeams().put(teamid,this);
+        teamDAO.create(this);
+    }
+
+    public void addSpieler(Spieler spieler){
+        if (spielerEins==null){
+            this.spielerEins = spieler;
+        }
+        else{
+            this.spielerZwei = spieler;
+            this.einzel=false;
+        }
+
+    }
+
+    public Team(int teamid, Spielklasse spielklasse) { //nur für bestehendes Turnier einlesen
+        this.teamid = teamid;
+        this.spielklasse = spielklasse;
+    }
+
+    public Team(String freilos, Spielklasse spielklasse) {
+        this.spielklasse = spielklasse;
+        this.freilos = true;
+        teamid = getSpielklasse().getTurnier().getTeams().size()+1;
+        teamDAO.createFreilos(this);
+        this.spielklasse.getTurnier().getTeams().put(teamid,this);
+    }
+
+    public Team(String freilos, Spielsystem spielsystem) {
+        this.spielklasse = spielsystem.getSpielklasse();
+        this.freilos = true;
+        teamid = getSpielklasse().getTurnier().getTeams().size()+1;
+        teamDAO.createFreilos(this);
+        this.spielklasse.getTurnier().getTeams().put(teamid,this);
+    }
+
+
+    public boolean isFreilos() {
+        return freilos;
     }
 
     public boolean isEinzel() {
@@ -47,24 +99,45 @@ public class Team {
         return spielerZwei;
     }
 
+    public void addBisherigenGegner(Team team){
+        bisherigeGegner.add(team);
+    }
+
+    public List<Team> getBisherigeGegner() {
+        return bisherigeGegner;
+    }
+    public boolean warNochKeinGegner(Team team){
+        for(int i=0; i<bisherigeGegner.size();i++){
+            if (bisherigeGegner.get(i)==team){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+
+
     public void addGewonnenesSpiel() {
         this.gewonneneSpiele ++;
+        teamDAO.update(this);
     }
 
-    public void setGewonneneSaetze(int gewonneneSaetze) {
-        this.gewonneneSaetze = this.gewonneneSaetze+ gewonneneSaetze;
+    public void addGewonnenenSatz() {
+        this.gewonneneSaetze ++;
+        teamDAO.update(this);
     }
 
-    public void addVerloreneSaetze(int verloreneSaetze) {
-        this.verloreneSaetze = this.verloreneSaetze + verloreneSaetze;
+
+    public void addVerlorenenSatz() {
+        this.verloreneSaetze ++;
+        teamDAO.update(this);
     }
 
-    public void addGewonnnenePunkt(int gewonnnenePunkt) {
-        this.gewonnnenePunkte = this.gewonnnenePunkte + gewonnnenePunkt;
-    }
-
-    public void addVerlorenePunkte(int verlorenePunkte) {
+    public void addGespieltePunkte(int gewonnnenePunkte, int verlorenePunkte) {
+        this.gewonnnenePunkte = this.gewonnnenePunkte + gewonnnenePunkte;
         this.verlorenePunkte = this.verlorenePunkte + verlorenePunkte;
+        teamDAO.update(this);
     }
 
     public int getTeamid() {
@@ -91,33 +164,59 @@ public class Team {
         return verlorenePunkte;
     }
 
-    public int compareTo(Team team){
-        if (this.gewonneneSpiele>team.getGewonneneSpiele()){
-            return 1;
+    public String toString(){
+
+        if(this.freilos==true){
+            return "Freilos";
         }
-        else if (this.gewonneneSpiele==team.getGewonneneSpiele()){
-            if(this.gewonneneSaetze>team.getGewonneneSaetze()){
-                return 1;
+        else {
+            if(this.einzel==true){
+                return this.spielerEins.toString();
             }
-            else if(this.gewonneneSaetze>team.getGewonneneSaetze()){
-                if(this.gewonnnenePunkte > getGewonnnenePunkte()){
-                    return 1;
-                }
-                else if(this.gewonnnenePunkte==team.getGewonnnenePunkte()){
+            else if(this.einzel == false){
+                return this.spielerEins.toString() + " / " + this.spielerZwei.toString();
+            }
+        }
+        return "Fehler";
+    }
+    public List<Team> getVerbleibendeGegner(ArrayList<Team> teams){
+        List<Team> verbleibendeGegner = new ArrayList<>();
+        for (int j=0;j<teams.size();j++){
+            verbleibendeGegner.add(teams.get(j));
+        }
+        for(int i=0; i<bisherigeGegner.size();i++){
+            verbleibendeGegner.remove(bisherigeGegner.get(i));
+        }
+        verbleibendeGegner.remove(this);
+        return verbleibendeGegner;
+    }
+
+    public int compareTo(Team team){
+        int satzdifferenzThis = this.gewonneneSaetze-this.verloreneSaetze;
+        int punktdifferenzThis = this.gewonnnenePunkte-this.verlorenePunkte;
+        int satzdifferenzTeam = team.getGewonneneSaetze()-team.getVerloreneSaetze();
+        int punktdifferenzTeam = team.getGewonnnenePunkte()-team.getVerlorenePunkte();
+        if (this.gewonneneSpiele==team.getGewonneneSpiele()){
+
+            if (satzdifferenzTeam==satzdifferenzThis){
+                if(punktdifferenzTeam==punktdifferenzThis){
                     return 0;
                 }
                 else{
-                    return -1;
+                    return punktdifferenzTeam-punktdifferenzThis;
                 }
             }
             else
             {
-                return -1;
+                return satzdifferenzTeam-satzdifferenzThis;
             }
         }
         else{
-            return -1;
+            return team.getGewonneneSpiele()-this.gewonneneSpiele;
         }
 
+
     }
+
+
 }

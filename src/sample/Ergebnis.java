@@ -1,11 +1,16 @@
 package sample;
 
+import sample.DAO.ErgebnisDAO;
+import sample.DAO.ErgebnisDAOimpl;
+
 /**
  * Created by Florian-PC on 25.07.2017.
  */
 public class Ergebnis {
+    private int ergebnisID;
     private int[] heim;
     private int[] gast;
+    private boolean gueltig=false;
 
     public Ergebnis(int satz1heim, int satz1gast, int satz2heim, int satz2gast) {
         heim=new int[2];
@@ -14,6 +19,7 @@ public class Ergebnis {
         this.gast[0] = satz1gast;
         this.heim[1] = satz2heim;
         this.gast[1] = satz2gast;
+        gueltig = gueltigesErgebnis();
     }
 
     public Ergebnis(int satz1heim, int satz1gast, int satz2heim, int satz2gast, int satz3heim, int satz3gast) {
@@ -25,6 +31,7 @@ public class Ergebnis {
         this.gast[1] = satz2gast;
         this.heim[2] = satz3heim;
         this.gast[2] = satz3gast;
+        gueltig = gueltigesErgebnis();
     }
 
     public Ergebnis(int satz1heim, int satz1gast, int satz2heim, int satz2gast, int satz3heim, int satz3gast, int satz4heim, int satz4gast) {
@@ -38,6 +45,7 @@ public class Ergebnis {
         this.gast[2] = satz3gast;
         this.heim[3] = satz4heim;
         this.gast[3] = satz4gast;
+        gueltig = gueltigesErgebnis();
     }
 
     public Ergebnis(int satz1heim, int satz1gast, int satz2heim, int satz2gast, int satz3heim, int satz3gast, int satz4heim, int satz4gast, int satz5heim, int satz5gast) {
@@ -53,7 +61,17 @@ public class Ergebnis {
         this.gast[3] = satz4gast;
         this.heim[4] = satz5heim;
         this.gast[4] = satz5gast;
+        gueltig = gueltigesErgebnis();
     }
+
+    public int getErgebnisID() {
+        return ergebnisID;
+    }
+
+    public void setErgebnisID(int ergebnisID) {
+        this.ergebnisID = ergebnisID;
+    }
+
     public String toString(){
         String ergebnis = heim[0]+"-"+gast[0];
         for (int i=1; i<heim.length;i++){
@@ -82,7 +100,7 @@ public class Ergebnis {
         }
         return true;
     }
-    public Spieler getSieger(Spiel spiel){
+    public Team getSieger(Spiel spiel){
         if(heim != null){
             if (heim[heim.length-1]>gast[heim.length-1]) {
                 return spiel.getHeim();
@@ -92,5 +110,14 @@ public class Ergebnis {
             }
         }
         else return null;
+    }
+
+    public int[] getErgebnisArray(){
+        int[] ergebnis = new int[heim.length*2];
+        for(int i=0; i<heim.length;i++){
+            ergebnis[i*2]=heim[i];
+            ergebnis[i*2+1]=gast[i];
+        }
+        return ergebnis;
     }
 }

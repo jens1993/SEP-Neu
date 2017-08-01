@@ -4,59 +4,359 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import sample.*;
-import sample.DAO.*;
-import sample.Enums.*;
+import sample.DAO.SpielDAO;
+import sample.DAO.SpielDAOimpl;
 
 public class SchweizerSystem extends Spielsystem {
-	private int anzahlRunden;
-	private List<Spieler> spielerList;
-	private List<Spiel> aktuelleRunde = new ArrayList<Spiel>();
-	private List<Spieler> nextSpielerList = new ArrayList<Spieler>();
+	private int anzahlTeams;
+	private int randomVersuche=0;
+	private boolean beendet;
+	private int[][] schema;
+	boolean kombinationGefunden = false;
+	private ArrayList<Team> teamList;
+	//private ArrayList<Spiel> spiele = new ArrayList<Spiel>();
+	private ArrayList<Team> nextTeamList = new ArrayList<Team>();
+	private ArrayList<ArrayList<Team>> teamListArray =new ArrayList<ArrayList<Team>>();
+	private ArrayList<Team> tempList = new ArrayList<>();
 
-	public SchweizerSystem(int anzahlRunden, List<Spieler> spielerList, Spielklasse spielklasse) {
+	public SchweizerSystem(int anzahlRunden, ArrayList<Team> teamList, Spielklasse spielklasse) {
 		setSpielklasse(spielklasse);
-		this.anzahlRunden = anzahlRunden;
-		this.spielerList = spielerList;
-		freiloseHinzufuegen(spielerList);
+		this.anzahlTeams = teamList.size();
+		if(anzahlRunden<anzahlTeams) {
+			setAnzahlRunden(anzahlRunden);
+		}
+		else{
+			setAnzahlRunden(anzahlTeams-1);
+			System.out.println("Es können bei "+anzahlTeams+" Teilnehmern maximal "+(anzahlTeams-1)+" Runden gespielt werden!");
+		}
+		this.teamList = teamList;
+		setSpielSystemArt(5);
+		freiloseHinzufuegen(this.teamList);
 		ersteRundeErstellen();
+		alleSpieleErstellen();
 	}
-	/*private void sortList(){
-		Collections.sort(nextSpielerList, new Comparator<Team>() {
+	private void sortList(){
+		Collections.sort(nextTeamList, new Comparator<Team>() {
 			@Override
 			public int compare(Team team1, Team team2) {
 				return team1.compareTo(team2);
 			}
 		});
+		teamListArray.add(new ArrayList<>());
+		for (int i=0; i<nextTeamList.size();i++){
+			System.out.println((i+1)+": "+nextTeamList.get(i).getGewonneneSpiele()+", "+
+					nextTeamList.get(i).getGewonneneSaetze()+":"+
+					nextTeamList.get(i).getVerloreneSaetze()+", "+
+					nextTeamList.get(i).getGewonnnenePunkte()+":"+
+					nextTeamList.get(i).getVerlorenePunkte());
+			teamListArray.get(teamListArray.size()-1).add(nextTeamList.get(i));
+			//System.out.println("Size: "+teamListArray.get(aktuelleRunde-1).size());
+		}
 
-	}*/
+
+
+
+	}
+
 
 	public void ersteRundeErstellen() {
+		while (teamList.size()>1){
+			Team teamEins = getRandomTeam();
+			this.teamList.remove(teamEins);
+			this.nextTeamList.add(teamEins);
+			Team teamZwei = getRandomTeam();
+			this.teamList.remove(teamZwei);
+			this.nextTeamList.add(teamZwei);
+			Spiel spiel = new Spiel(teamEins,teamZwei,this.getSpielklasse(),spielSystemIDberechnen());
+			//spiele.add(spiel);
+			erhoeheOffeneRundenSpiele();
+		}
+		erhoeheAktuelleRunde();
+	}
+	private void alleSpieleErstellen(){
+		for (int i=2;i<=getAnzahlRunden();i++){
+			resetOffeneRundenSpiele();
+			for (int j=0; j<anzahlTeams/2;j++){
+				new Spiel(this.getSpielklasse(),spielSystemIDberechnen());
+				erhoeheOffeneRundenSpiele();
+			}
+			erhoeheAktuelleRunde();
+		}
+		resetAktuelleRunde();
+		erhoeheAktuelleRunde();
+	}
+	private boolean rundeErstellen(){
+		sortList();
+		//boolean beendet = (rundenListeErstellen(0, getAktuelleRunde()-1));
+		rundenListeErstellenNeu();
+		if(getAktuelleRunde()<getAnzahlRunden()) {
+			rundeFuellen();
+		}
+		return beendet;
+	}
 
-		while (spielerList.size()>1){
-			Spieler spielerEins = getRandomSpieler();
-			this.spielerList.remove(spielerEins);
-			this.nextSpielerList.add(spielerEins);
-			Spieler spielerZwei = getRandomSpieler();
-			this.spielerList.remove(spielerZwei);
-			this.nextSpielerList.add(spielerZwei);
-			aktuelleRunde.add(new Spiel(spielerEins, spielerZwei, this.getSpielklasse()));
+	private void rundenListeErstellenNeu(){
+		teamListReset();
+		nextTeamList.clear();
+		erstelleSchema();
+		for (int i=0; i<anzahlTeams;i++){
+			fuelleZeile(i);
+		}
+		fuelleSummenSpalte();
+		druckeSchema();
+		while(teamList.size()>1) {
+			int indexTeamEins = sucheHoechsteSumme();
+			int indexTeamZwei = sucheGeringstenZeilenWert(indexTeamEins);
+			loescheTeamAusSchema(indexTeamEins);
+			loescheTeamAusSchema(indexTeamZwei);
+			Team teamEins = teamListArray.get(teamListArray.size()-1).get(indexTeamEins); //hole Teams aus der alten Liste, damit Index passt
+			this.teamList.remove(teamEins);
+			this.nextTeamList.add(teamEins);
+			Team teamZwei = teamListArray.get(teamListArray.size()-1).get(indexTeamZwei);
+			this.teamList.remove(teamZwei);
+			this.nextTeamList.add(teamZwei);
 		}
 	}
-	public Spieler getRandomSpieler(){
-		int random = (int) Math.round(Math.random()*(spielerList.size()-1));
-		Spieler randomSpieler = this.spielerList.get(random);
-		return randomSpieler;
+
+	private void erstelleSchema(){
+		schema = new int[anzahlTeams+1][anzahlTeams];
+		for(int i=0; i<anzahlTeams;i++){
+			fuelleZeile(i);
+		}
+	}
+
+	private void fuelleZeile(int zeile){
+		Team teamEins=teamList.get(zeile);
+		for (int i=0;i<anzahlTeams;i++){
+			Team teamZwei=teamList.get(i);
+			if(teamEins==teamZwei){
+				schema[i][zeile] = 0;
+			}
+			else if(!teamEins.warNochKeinGegner(teamZwei)){
+				schema[i][zeile] = 10000;
+			}
+			else{
+				schema[i][zeile] = Math.abs(teamList.indexOf(teamEins)-teamList.indexOf(teamZwei));
+			}
+		}
+	}
+
+	private void fuelleSummenSpalte(){
+		for (int zeile=0;zeile<anzahlTeams;zeile++){
+			int summe=0;
+			for (int spalte=0;spalte<anzahlTeams;spalte++){
+				summe+=schema[spalte][zeile];
+			}
+			schema[anzahlTeams][zeile]=summe;
+		}
+	}
+
+	private int sucheHoechsteSumme(){
+		int hoechsteSummenZeile=0;
+		int hoechsteSumme=0;
+		for (int zeile = 0; zeile<anzahlTeams;zeile++){
+			if (schema[anzahlTeams][zeile]>hoechsteSumme){
+				hoechsteSummenZeile = zeile;
+				hoechsteSumme = schema[anzahlTeams][zeile];
+			}
+		}
+		return hoechsteSummenZeile;
+	}
+
+	private int sucheGeringstenZeilenWert(int zeile){
+		int geringsterZeilenWert=10000;
+		int spalte=0;
+
+		for(int x=0;x<anzahlTeams;x++){
+			if (schema[zeile][x]<geringsterZeilenWert&&schema[zeile][x]!=0){
+				geringsterZeilenWert=schema[zeile][x];
+				spalte=x;
+			}
+			else if (schema[zeile][x]==geringsterZeilenWert){ //wenn Abstand in Tabelle gleich, wähle Team mit höherer Summe
+				if(schema[anzahlTeams][x]>schema[anzahlTeams][spalte]){
+					geringsterZeilenWert=schema[zeile][x];
+					spalte=x;
+				}
+			}
+		}
+
+		return spalte;
+	}
+
+	private void loescheTeamAusSchema(int team){
+		for(int i=0;i<anzahlTeams;i++){
+			schema[team][i]=0; //setze Werte auf 100, damit Team nicht mehr ausgewählt wird
+			schema[i][team]=0;
+		}
+		fuelleSummenSpalte(); //setze Summe auf 0, damit Team nicht mehr ausgewählt wird
+	}
+
+
+
+	private void druckeSchema(){
+		for (int x=0; x< schema.length;x++){
+			for (int y=0;y<schema[0].length;y++){
+				System.out.print("["+schema[x][y]+"]");
+			}
+			System.out.println();
+		}
+	}
+
+	private void teamListReset(){
+		teamList.clear();
+		for (int i=0;i<teamListArray.get(teamListArray.size()-1).size();i++)
+		{
+			this.teamList.add(teamListArray.get(teamListArray.size()-1).get(i));
+		}
+	}
+	public boolean rundenListeErstellen(int versuch, int rundenNummer) {
+
+		if (rundenNummer+1<getAnzahlRunden()){
+			teamList.clear();
+			for (int i=0;i<teamListArray.get(rundenNummer).size();i++)
+			{
+				this.teamList.add(teamListArray.get(rundenNummer).get(i));
+			}
+			nextTeamList.clear();
+			System.out.println("Runde: "+(getAktuelleRunde()+1));
+			while (this.teamList.size()>1){
+				Team teamEins = teamList.get(0);
+				this.teamList.remove(teamEins);
+				this.nextTeamList.add(teamEins);
+				Team teamZwei = sucheGegner(teamEins,versuch);
+				if(teamZwei!=null) {
+					this.teamList.remove(teamZwei);
+					this.nextTeamList.add(teamZwei);
+				}
+				else{
+					if(versuch+1<teamListArray.get(rundenNummer).size()) {
+						if(rundenListeErstellen(versuch + 1, rundenNummer)){
+							return true;
+						}
+					}
+					else if(randomVersuche<20){
+						randomVersuche++;
+						listeWuerfeln(rundenNummer);
+						if (rundenListeErstellen(0,rundenNummer)==true){
+							return true;
+						}
+					}
+					else {
+						System.out.println("Kein möglicher Gegner gefunden, jeder hat gegen jeden gespielt");
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+		else{
+			System.out.println("Schweizer System beendet");
+			return true;
+		}
+	}
+
+	private void listeWuerfeln(int rundenNummer){
+		Team tempTeam;
+		//tempTeam = teamListArray.get(rundenNummer).get(verschoben);
+		//teamListArray.get(rundenNummer).remove(tempTeam);
+		//teamListArray.get(rundenNummer).add(teamListArray.get(rundenNummer).size()-1,tempTeam);
+		for(int i=0;i<teamListArray.get(rundenNummer).size()-1;i++){
+			int randomIndex = (int)(Math.random()*(teamListArray.get(rundenNummer).size()-i))+i;
+			tempTeam = teamListArray.get(rundenNummer).get(randomIndex);
+			teamListArray.get(rundenNummer).remove(tempTeam);
+			teamListArray.get(rundenNummer).add(0,tempTeam);
+		}
+	}
+
+	private void rundeFuellen(){
+		teamList.clear();
+		for (int i=0;i<nextTeamList.size();i++)
+		{
+			this.teamList.add(nextTeamList.get(i));
+		}
+		nextTeamList.clear();
+		while (this.teamList.size()>1){
+			Team teamEins = teamList.get(0);
+			this.teamList.remove(teamEins);
+			this.nextTeamList.add(teamEins);
+			Team teamZwei = teamList.get(0);
+			this.teamList.remove(teamZwei);
+			this.nextTeamList.add(teamZwei);
+			getSpielklasse().getSpiele().get(spielSystemIDberechnen()).setHeim(teamEins);
+			getSpielklasse().getSpiele().get(spielSystemIDberechnen()).setGast(teamZwei);
+			erhoeheOffeneRundenSpiele();
+		}
+
+
+	}
+
+	private Team sucheGegner(Team Gegner, int versuch){
+		//System.out.println("Versuch: "+versuch+" Teamlist: "+teamList.size());
+		Team ergebnisGegner=null;
+		for(int i=0;i<teamList.size();i++){
+			if(teamList.size()-versuch>0) {
+
+				if (i + versuch < teamList.size()) {
+					//System.out.println("i="+i+", Versuch="+versuch+", Teamlistsize="+teamList.size());
+					Team moeglicherGegner = teamList.get(i + versuch);
+					if (moeglicherGegner.warNochKeinGegner(Gegner)) {
+						//System.out.println("returne: " + moeglicherGegner);
+						return moeglicherGegner;
+					}
+				}
+			}
+			else
+			{
+				if(versuch<1){
+					System.out.println("returne Null");
+
+					return null;
+				}
+				else {
+					ergebnisGegner = sucheGegner(Gegner, versuch - 1);
+				}
+
+			}
+		}
+		/*System.out.println("Team 1: "+Gegner);
+		for(int j=0; j<teamList.size();j++){
+			System.out.println("Team "+(j+2)+": "+teamList.get(j));
+		}*/
+		return ergebnisGegner;
+	}
+	public Team getRandomTeam(){
+		int random = (int) Math.round(Math.random()*(teamList.size()-1));
+		Team randomTeam = this.teamList.get(random);
+		return randomTeam;
+	}
+
+	@Override
+	public List<Team> getPlatzierungsliste() {
+		return null;
 	}
 
 	@Override
 	public boolean beendeMatch(Spiel spiel) {
+		senkeOffeneRundenSpiele();
+		if(keineOffenenRundenSpiele()){
+			if(getAktuelleRunde()<getAnzahlRunden()){
+				rundeErstellen();
+				erhoeheAktuelleRunde();
+				randomVersuche=0;
+				kombinationGefunden = false;
+				return true;
+			}
+
+		}
 		return false;
 	}
 
-	private void freiloseHinzufuegen(List<Spieler> spielerList){
-		if ((spielerList.size()/2) * 2 != spielerList.size()){ // /2 *2 überprüft, ob Spieleranzahl gerade oder ungerade (int)
-			this.spielerList.add(new Spieler("Freilos"));
+	private void freiloseHinzufuegen(List<Team> teamList){
+		if ((teamList.size()/2) * 2 != teamList.size()){ // /2 *2 überprüft, ob Spieleranzahl gerade oder ungerade (int)
+			this.teamList.add(new Team("Freilos",this.getSpielklasse()));
 			System.out.println("Freilos zu schweizer hinzugefügt");
 		}
 	}

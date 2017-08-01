@@ -2,6 +2,8 @@ package sample.Spielsysteme;
 import sample.*;
 import sample.DAO.*;
 import sample.Enums.*;
+
+import java.util.Hashtable;
 import java.util.List;
 
 public abstract class Spielsystem {
@@ -9,12 +11,58 @@ public abstract class Spielsystem {
 	private int anzahlTeilnehmer;
 	private int anzahlRunden;
 	private int anzahlSpiele;
-	private int id;
-	private static Zaehlweise zaehlweise;
+	private int spielsystemID;
 	private Spielklasse spielklasse;
+	private int offeneRundenSpiele=0;
+	private int aktuelleRunde=0;
+	private int spielSystemArt;
+	private int extraRunde=0;
+
+	protected int spielsystemCode;
 
 	public Spielklasse getSpielklasse() {
 		return spielklasse;
+	}
+
+	protected int spielSystemIDberechnen(){
+		int spielSystemID= spielSystemArt * 1000000;
+		spielSystemID += extraRunde *100000;
+		spielSystemID += aktuelleRunde*1000;
+		spielSystemID += offeneRundenSpiele;
+		return spielSystemID;
+	}
+
+	public void setExtraRunde(int extraRunde) {
+		this.extraRunde = extraRunde;
+	}
+
+	protected void setSpielSystemArt(int spielSystemArt) {
+		this.spielSystemArt = spielSystemArt;
+	}
+
+	protected void senkeOffeneRundenSpiele(){
+		this.offeneRundenSpiele--;
+	}
+	protected void erhoeheOffeneRundenSpiele(){
+		this.offeneRundenSpiele++;
+	}
+
+	protected void resetOffeneRundenSpiele(){
+		offeneRundenSpiele=0;
+	}
+
+	protected void erhoeheAktuelleRunde(){
+		this.aktuelleRunde++;
+	}
+
+	protected int getAktuelleRunde() {
+		return aktuelleRunde;
+	}
+	protected boolean keineOffenenRundenSpiele(){
+		return offeneRundenSpiele==0;
+	}
+	protected void resetAktuelleRunde(){
+		this.aktuelleRunde=0;
 	}
 
 	public void setSpielklasse(Spielklasse spielklasse) {
@@ -26,6 +74,14 @@ public abstract class Spielsystem {
 	}
 	public void setAnzahlRunden(int anzahlRunden) {
 		this.anzahlRunden = anzahlRunden;
+	}
+
+	public int getSpielsystemCode() {
+		return spielsystemCode;
+	}
+	public abstract List<Team> getPlatzierungsliste();
+	public boolean systemWiederherstellen(int spielsystemCode){
+		return false;
 	}
 	public abstract boolean beendeMatch(Spiel spiel);
 }

@@ -11,5 +11,4 @@ public interface SetzlisteDAO {
     public boolean create(int setzplatz, Team team,  Spielklasse spielklasse);
     public boolean delete(int spielklasseid);
     public boolean update(int setzplatz, Team team,  Spielklasse spielklasse);
-    public List<Team> read (int spielklasseID);
 }

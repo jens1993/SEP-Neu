@@ -9,8 +9,8 @@ public class KOmitTrostrunde extends KO {
 	private int tRbisPlatz;
 	private int ausspielenBisPlatz;
 
-	public KOmitTrostrunde(List<Spieler> setzliste, int tRbisPlatz) {
-		super(setzliste);
+	public KOmitTrostrunde(List<Team> setzliste, Spielklasse spielklasse) {
+		super(setzliste,spielklasse);
 		this.tRbisPlatz = tRbisPlatz;
 	}
 }

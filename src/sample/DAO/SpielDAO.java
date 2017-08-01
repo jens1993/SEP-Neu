@@ -11,5 +11,4 @@ public interface SpielDAO {
     public boolean create(Spiel spiel);
     public boolean delete(Spiel spiel);
     public boolean update(Spiel spiel);
-    //public Spiel read (int spielID);
 }
