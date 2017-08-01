@@ -11,6 +11,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -27,30 +30,6 @@ import javax.swing.JList;
 
 
 public class Controller {
-
-    /*
-    public Controller()
-    {
-        try {
-
-            System.out.println("Start");
-            System.out.println(index_niveau);
-            combo_niveau.getSelectionModel().select(index_niveau);
-            System.out.println("h-"+index_niveau);
-
-        comboBoxFill();
-            //combo_niveau.getSelectionModel().select(index_niveau);
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    */
-
-    //static Niveau niveau_auswahl;
-    //static int a;
-    //static ObservableList<Niveau> test1;
 	
     @FXML
     private TextField t_vn;
@@ -89,10 +68,22 @@ public class Controller {
     private RadioButton radio_schweizer;
 
     @FXML
-    private HBox hbox_test1;
+    private RadioButton radio_trostJa;
+    @FXML
+    private RadioButton radio_trostNein;
 
     @FXML
-    private Label label1;
+    private Pane gruppe;
+    @FXML
+    private AnchorPane gruppeMitEndrunde;
+    @FXML
+    private AnchorPane koSystem;
+    @FXML
+    private AnchorPane koTrostRundeJa;
+    @FXML
+    private AnchorPane koTrostRundeNein;
+    @FXML
+    private AnchorPane schweizerSystem;
 
     private static int index_niveau=100;
     private static int index_diszipin=100;
@@ -116,78 +107,57 @@ public class Controller {
 
     @FXML
     private void klassenSwitch(ActionEvent event) throws IOException, InterruptedException {
-        Stage stage;
-        Parent root;
 
-        Button btn = new Button("Ein Knopf");
-        TextField tf = new TextField();
+        if(radio_gruppe.isSelected()) {
+            gruppe.toFront();
+            gruppe.setVisible(true);
+            gruppeMitEndrunde.setVisible(false);
+            koSystem.setVisible(false);
+            schweizerSystem.setVisible(false);
+                    }
 
-        //System.out.println(combo_niveau.getSelectionModel().getSelectedIndex());
+        else if(radio_gruppeMitE.isSelected()) {
+            gruppeMitEndrunde.toFront();
+            gruppe.setVisible(false);
+            gruppeMitEndrunde.setVisible(true);
+            koSystem.setVisible(false);
+            schweizerSystem.setVisible(false);
+                    }
 
-
-       //niveau_auswahl = combo_niveau.getItems().get();
-        //System.out.println(niveau_auswahl.toString());
-        //System.out.println(combo_niveau.getValue());
-        //combo_niveau.setValue(U9 );
-        //System.out.println(niveau_auswahl.toString());
-        if(radio_gruppeMitE.isSelected()) {
-            label1.setText("Gruppe mit Endrunde");
-            hbox_test1.getChildren().clear();
-            //stage = (Stage) radio_gruppeMitE.getScene().getWindow();
-            //root = FXMLLoader.load(getClass().getResource("klasseHinzuGruppeMitKO.fxml"));
-
-        }
         else if(radio_ko.isSelected()){
-            label1.setText("K.O. System");
-            hbox_test1.getChildren().clear();
-            hbox_test1.getChildren().add(btn);
-            //stage=(Stage) radio_ko.getScene().getWindow();
-            //root = FXMLLoader.load(getClass().getResource("klasseHinzuKO.fxml"));
-        }
+            koSystem.toFront();
+            gruppe.setVisible(false);
+            gruppeMitEndrunde.setVisible(false);
+            koSystem.setVisible(true);
+            schweizerSystem.setVisible(false);
+                    }
+
         else if(radio_schweizer.isSelected()){
-            label1.setText("Schweizer System");
-            hbox_test1.getChildren().clear();
-            hbox_test1.getChildren().add(tf);
-            //stage=(Stage) radio_schweizer.getScene().getWindow();
-            //root = FXMLLoader.load(getClass().getResource("klasseHinzuSchweizer.fxml"));
-        }
+            schweizerSystem.toFront();
+            gruppe.setVisible(false);
+            gruppeMitEndrunde.setVisible(false);
+            koSystem.setVisible(false);
+            schweizerSystem.setVisible(true);
+                    }
         else{
-            label1.setText("Gruppe");
-            hbox_test1.getChildren().clear();
-            //stage=(Stage) radio_gruppe.getScene().getWindow();
-            //root = FXMLLoader.load(getClass().getResource("klasseHinzuGruppe.fxml"));
+            //label1.setText("");
+            //label2.setText("");
+            //label3.setText("");
+            //hbox_1.getChildren().clear();
+            //hbox_2.getChildren().clear();
         }
-        /*Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        wait(500);
-        comboBoxFill();*/
     }
 
     @FXML
-    private RadioButton radio_trostJa;
-    @FXML
-    private RadioButton radio_trostNein;
-    @FXML
     private void trostSwitch(ActionEvent event) throws IOException{
-        Stage stage;
-        Parent root;
-
         if(radio_trostNein.isSelected()){
-            stage=(Stage) radio_trostNein.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("klasseHinzuKO.fxml"));
-        }
+            koTrostRundeNein.setVisible(true);
+            koTrostRundeJa.setVisible(false);
+                   }
         else{
-            stage=(Stage) radio_trostJa.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("klasseHinzuKOmitTR.fxml"));
+            koTrostRundeNein.setVisible(false);
+            koTrostRundeJa.setVisible(true);
         }
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-
-
-
-        stage.show();
-
     }
     @FXML
     public void PrintTable() //als boolean machen, um zu pr�fen ob erfolgreich (gilt f�r alle void sql klassen!) Booleans immer weiterleiten und ganz am ende ausgeben ob erfolgreich 
