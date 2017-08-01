@@ -82,6 +82,11 @@ public abstract class Spielsystem {
 	public int getSpielsystemCode() {
 		return spielsystemCode;
 	}
+
+	public int getExtraRunde() {
+		return extraRunde;
+	}
+
 	public List<Team> getPlatzierungsliste(){
 		return platzierungsListe;
 	}

@@ -10,8 +10,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Gruppe extends Spielsystem {
-	private List<Team> teamList;
-	private Spielsystem spielsystem;
+	private ArrayList<Team> teamList;
+	private GruppeMitEndrunde spielsystem;
 	int anzahlTeams;
 	int[][] schablone;
 
@@ -22,7 +22,7 @@ public class Gruppe extends Spielsystem {
 		return arrayList;
 	}
 
-	public Gruppe(List<Team> setzliste, Spielklasse spielklasse) {
+	public Gruppe(ArrayList<Team> setzliste, Spielklasse spielklasse) {
 		this.setSpielSystemArt(1);
 		setSpielklasse(spielklasse);
 		this.teamList = setzliste;
@@ -38,7 +38,7 @@ public class Gruppe extends Spielsystem {
 		}
 	}
 
-	public Gruppe(List<Team> setzliste, Spielsystem spielsystem, int extraRunde) {
+	public Gruppe(ArrayList<Team> setzliste, GruppeMitEndrunde spielsystem, int extraRunde) {
 		this.setSpielSystemArt(2);
 		this.setExtraRunde(extraRunde);
 		this.spielsystem = spielsystem;
@@ -151,6 +151,9 @@ public class Gruppe extends Spielsystem {
 				sortList(teamList);
 				}
 				setPlatzierungsListe(teamList);
+			if (spielsystem!=null){
+				spielsystem.addPlatzierungsliste(teamList,getExtraRunde());
+			}
 			}
 
 		return false;
