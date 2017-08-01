@@ -35,7 +35,7 @@ public class KO extends Spielsystem {
 		int anzahlRunden = rundenBerechnen();
 		int hoechsterSetzplatz;
 		SpielTree aktuellerKnoten = finale;
-		finale.setSpiel(new Spiel(spielSystemIDberechnen(),1,2,getSpielklasse()));
+		finale.setSpiel(new Spiel(spielSystemIDberechnen(),1,2,this));
 
 		for (int i=0; i<anzahlRunden-1; i++){ //erstelle für jeder Runde Spiele
 			aktuellerKnoten = finale.getSpielTree(spielSystemIDberechnen(),finale);
@@ -49,9 +49,9 @@ public class KO extends Spielsystem {
 				int rightKnotenSetzPlatzHeim = hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1;
 				int rightKnotenSetzPlatzGast = aktuellerKnoten.getSetzplatzGast();
 				aktuellerKnoten.addLeft(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast );
-				aktuellerKnoten.getLeft().setSpiel(new Spiel(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast,this.getSpielklasse()));
+				aktuellerKnoten.getLeft().setSpiel(new Spiel(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast,this));
 				aktuellerKnoten.addRight(rightKnotenSpielID, rightKnotenSetzPlatzHeim ,rightKnotenSetzPlatzGast );
-				aktuellerKnoten.getRight().setSpiel(new Spiel(rightKnotenSpielID, rightKnotenSetzPlatzHeim , rightKnotenSetzPlatzGast, this.getSpielklasse()));
+				aktuellerKnoten.getRight().setSpiel(new Spiel(rightKnotenSpielID, rightKnotenSetzPlatzHeim , rightKnotenSetzPlatzGast, this));
 				aktuellerKnoten = aktuellerKnoten.getSpielTree(aktuellerKnoten.getSpielID()+1, finale);
 			}
 			erhoeheAktuelleRunde();

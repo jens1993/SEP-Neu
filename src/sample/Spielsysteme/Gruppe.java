@@ -5,6 +5,8 @@ import sample.DAO.*;
 import sample.Enums.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Gruppe extends Spielsystem {
@@ -13,7 +15,6 @@ public class Gruppe extends Spielsystem {
 	int anzahlTeams;
 	int[][] schablone;
 
-	List<Spiel> alleSpiele = new ArrayList<>();
 	private static ArrayList<Integer> arrayVerschieben(ArrayList<Integer> arrayList){
 		int temp = arrayList.get(0);
 		arrayList.remove(0);
@@ -37,9 +38,9 @@ public class Gruppe extends Spielsystem {
 		}
 	}
 
-	public Gruppe(List<Team> setzliste, int vorrundenGruppe, Spielsystem spielsystem) {
+	public Gruppe(List<Team> setzliste, Spielsystem spielsystem, int extraRunde) {
 		this.setSpielSystemArt(2);
-		this.setExtraRunde(vorrundenGruppe);
+		this.setExtraRunde(extraRunde);
 		this.spielsystem = spielsystem;
 		this.teamList = setzliste;
 		freiloseHinzufuegen(teamList);
@@ -59,7 +60,7 @@ public class Gruppe extends Spielsystem {
 			resetOffeneRundenSpiele();
 			for (int j=0; j<anzahlTeams/2;j++){
 				if(spielsystem==null) {
-					new Spiel(this.getSpielklasse(), spielSystemIDberechnen());
+					new Spiel(spielSystemIDberechnen(),this);
 				}
 				else{
 					new Spiel(spielSystemIDberechnen(),this.spielsystem);
@@ -147,9 +148,11 @@ public class Gruppe extends Spielsystem {
 		if(keineOffenenRundenSpiele()){
 			erhoeheAktuelleRunde();
 			if(getAktuelleRunde()==getAnzahlRunden()){
-					return true;
+				sortList(teamList);
+				}
+				setPlatzierungsListe(teamList);
 			}
-		}
+
 		return false;
 	}
 }

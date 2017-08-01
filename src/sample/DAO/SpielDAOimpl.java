@@ -45,23 +45,14 @@ public class SpielDAOimpl implements SpielDAO {
             else{
                 smt.setNull(4,Types.INTEGER);
             }
-            if(spiel.getSpielklasse()!=null){
-                smt.setInt(5, spiel.getSpielklasse().getSpielklasseID());
-            }
-            else{
-                smt.setInt(5, spiel.getSpielsystem().getSpielklasse().getSpielklasseID());
-            }
+            smt.setInt(5, spiel.getSpielsystem().getSpielklasse().getSpielklasseID());
+
 
             smt.executeUpdate();
             smt.close();
             PreparedStatement smtzwei = con.SQLConnection().prepareStatement(sqlzwei);
             smtzwei.setInt(1, spiel.getSpielID());
-            if(spiel.getSpielklasse()!=null) {
-                smtzwei.setInt(2, spiel.getSpielklasse().getSpielklasseID());
-            }
-            else{
-                smtzwei.setInt(2, spiel.getSpielsystem().getSpielklasse().getSpielklasseID());
-            }
+            smtzwei.setInt(2, spiel.getSpielsystem().getSpielklasse().getSpielklasseID());
             smtzwei.setInt(3, spiel.getSystemSpielID());
             smtzwei.executeUpdate();
             smtzwei.close();
@@ -154,12 +145,8 @@ public class SpielDAOimpl implements SpielDAO {
             else{
                 smt.setNull(7,Types.INTEGER);
             }
-            if(spiel.getSpielklasse()!=null){
-                smt.setInt(8, spiel.getSpielklasse().getSpielklasseID());
-            }
-            else{
-                smt.setInt(8, spiel.getSpielsystem().getSpielklasse().getSpielklasseID());
-            }
+            smt.setInt(8, spiel.getSpielsystem().getSpielklasse().getSpielklasseID());
+
             smt.setInt(9, spiel.getSpielID());
             smt.executeUpdate();
             smt.close();
