@@ -38,8 +38,8 @@
             </Text>
          </children>
       </HBox>
-      <TextField GridPane.columnIndex="1" />
-      <TextField text=" " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="Turniername" GridPane.columnIndex="1" />
+      <TextField fx:id="AnzahlFelder" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Datum " />
@@ -54,15 +54,13 @@
       <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="311.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
             <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Abbrechen" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Starten">
+            <Button mnemonicParsing="false" onAction="#erstelleTurnier" prefHeight="25.0" prefWidth="75.0" text="Starten">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <DatePicker fx:id="turnierDatum"
-                  GridPane.columnIndex="1"
-                  GridPane.rowIndex="2" />
+      <DatePicker fx:id="turnierDatum" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
 </GridPane>

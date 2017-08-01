@@ -44,7 +44,7 @@ public class Main extends Application {
                     System.err.println( e );
                 }
 
-
+        launch(args);
         /*
     	TurnierDAO test = new TurnierDAOimpl();
     	Turnier turnier = test.read(1);
@@ -120,7 +120,7 @@ public class Main extends Application {
         //Turnier turnier = new Turnier("Kreismeisterschaften", 2, LocalDate.now());
     	//test.create(turnier);
     	 //testverbindung.PrintResult(r);
-        //launch(args);
+        //
         //SQLConnection testverbindung = new SQLConnection();
         //KO testsystem = new KO(65);
         //testsystem.rundenBerechnen();

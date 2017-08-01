@@ -21,6 +21,9 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import sample.Spielsysteme.*;
 import sample.Enums.*;
 import sample.*;
@@ -33,6 +36,12 @@ public class Controller {
 	
     @FXML
     private TextField t_vn;
+    @FXML
+    private TextField Turniername;
+    @FXML
+    private DatePicker turnierDatum;
+    @FXML
+    private TextField AnzahlFelder;
     @FXML
     private TextField t_nn;
     @FXML
@@ -211,13 +220,32 @@ public class Controller {
 		}
     	return " Nicht gefunden"; //�berpr�fung in main, ob nicht -1 return
     }*/
-    
+@FXML
+public void ladeVereine(ActionEvent event) throws Exception
+{
+
+    VereinDAO verein = new VereinDAOimpl();
+
+}
+@FXML
+public void erstelleTurnier(ActionEvent event) throws Exception
+{
+    String date = turnierDatum.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    LocalDate Datum = turnierDatum.getValue();
+    System.out.println("Felder:  "+AnzahlFelder.getText());
+    System.out.println("Name " +Turniername.getText());
+    System.out.println("Datum " + date);
+    TurnierDAO t = new TurnierDAOimpl();
+    Turnier turnier = new Turnier(Turniername.getText(),20, Datum);
+    t.create(turnier);
+    System.out.println("Erfolg");
+}
 public void SpeicherSpieler(ActionEvent event)throws Exception
 {
     String vname = t_vn.getText();
     String nname = t_nn.getText();
    
-	/*
+
     int spid = Integer.parseInt(t_spid.getText());
     int ire=Integer.parseInt(t_re.getText());
     int ird=Integer.parseInt(t_rd.getText());
@@ -226,18 +254,18 @@ public void SpeicherSpieler(ActionEvent event)throws Exception
 
     boolean rm = r_m.isSelected();
     boolean rw = r_w.isSelected();
-    */
 
-    /*try {
+
+    try {
     
 
     	System.out.println("Speichern");
-        Spieler.spielerHinzufueg(vname,nname);
+        //Spieler.spielerHinzufueg(vname,nname);
        // Spieler.spielerHinzufuegen(vname,nname,geb,spid,ire,ird,irm,rm,rw);
 		//liste_spieler.getItems().add(vname+" "+nname);
     } catch (Exception e) {
         e.printStackTrace();
-    }*/
+    }
 }
 
     public void pressBtn_spieler(ActionEvent event) throws Exception {
