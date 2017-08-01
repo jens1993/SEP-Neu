@@ -12,11 +12,9 @@ import sample.DAO.SpielDAOimpl;
 
 public class SchweizerSystem extends Spielsystem {
 	private int anzahlTeams;
-	private int randomVersuche=0;
 	private boolean beendet;
 	private ArrayList<Team> endListe;
 	private int[][] schema;
-	boolean kombinationGefunden = false;
 	private ArrayList<Team> teamList;
 	private ArrayList<Team> nextTeamList = new ArrayList<Team>();
 	private ArrayList<ArrayList<Team>> teamListArray =new ArrayList<ArrayList<Team>>();
@@ -254,8 +252,6 @@ public class SchweizerSystem extends Spielsystem {
 			if(getAktuelleRunde()<getAnzahlRunden()){
 				rundeErstellen();
 				erhoeheAktuelleRunde();
-				randomVersuche=0;
-				kombinationGefunden = false;
 				return true;
 			}
 
