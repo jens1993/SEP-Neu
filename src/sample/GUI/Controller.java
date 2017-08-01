@@ -1,6 +1,7 @@
 package sample.GUI;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
@@ -66,7 +67,6 @@ public class Controller {
     private RadioButton radio_ko;
     @FXML
     private RadioButton radio_schweizer;
-
     @FXML
     private RadioButton radio_trostJa;
     @FXML
@@ -85,8 +85,11 @@ public class Controller {
     @FXML
     private AnchorPane schweizerSystem;
 
+
+
     private static int index_niveau=100;
     private static int index_diszipin=100;
+    private static int index_anzahlRunden=100;
     @FXML
     private void setNiveau_auswahl(ActionEvent event){
         //SingleSelectionModel niveau_auswahl = combo_niveau.getSelectionModel();
@@ -253,10 +256,24 @@ public void SpeicherSpieler(ActionEvent event)throws Exception
         }
     }
 
+    public void pressBtn_neueKlasse(ActionEvent event) throws Exception {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzuGruppe.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage.setTitle("Neue Klasse");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
     
     public void pressBtn_klassen(ActionEvent event) throws Exception {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzuGruppe.fxml"));
+            //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzuGruppe.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseUebersicht.fxml"));
+
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -319,12 +336,16 @@ public void SpielerTabFill()
     @FXML
     public ComboBox<Disziplin> combo_disziplin = new ComboBox<>();
     @FXML
+    public ComboBox<AnzahlRunden> combo_anzahlRunden = new ComboBox<>();
+    @FXML
     public void comboBoxFill() throws IOException{
         try{
             combo_niveau.getItems().setAll(Niveau.values());
             combo_disziplin.getItems().setAll(Disziplin.values());
+            //combo_anzahlRunden.getItems().setAll("1", "2", "3");
             combo_niveau.getSelectionModel().select(index_niveau);
             combo_disziplin.getSelectionModel().select(index_diszipin);
+            //combo_anzahlRunden.getSelectionModel().select(1);
         }
         catch (Exception e){
             e.printStackTrace();

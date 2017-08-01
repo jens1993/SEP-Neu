@@ -140,11 +140,11 @@
                                 </rowConstraints>
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Runden:" GridPane.halignment="RIGHT" />
-                                    <TextField maxWidth="200.0" GridPane.columnIndex="1">
+                                    <ComboBox prefWidth="150.0" GridPane.columnIndex="1">
                                        <GridPane.margin>
                                           <Insets left="5.0" />
                                        </GridPane.margin>
-                                    </TextField>
+                                    </ComboBox>
                                  </children>
                               </GridPane>
                            </children>
