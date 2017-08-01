@@ -108,7 +108,7 @@ public class Spiel {
 		this.setzPlatzHeim = setzPlatzHeim;
 		this.setzPlatzGast = setzPlatzGast;
 		this.spielsystem=spielsystem;
-		spielID = spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
+		spielID = this.spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
 		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		spielDAO.create(this);

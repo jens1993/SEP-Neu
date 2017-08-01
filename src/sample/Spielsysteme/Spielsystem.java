@@ -35,6 +35,10 @@ public abstract class Spielsystem {
 		return spielSystemID;
 	}
 
+	public int getSpielSystemArt() {
+		return spielSystemArt;
+	}
+
 	public void setExtraRunde(int extraRunde) {
 		this.extraRunde = extraRunde;
 	}
@@ -77,6 +81,10 @@ public abstract class Spielsystem {
 	}
 	public void setAnzahlRunden(int anzahlRunden) {
 		this.anzahlRunden = anzahlRunden;
+	}
+
+	public void setOffeneRundenSpiele(int offeneRundenSpiele) {
+		this.offeneRundenSpiele = offeneRundenSpiele;
 	}
 
 	public int getSpielsystemCode() {

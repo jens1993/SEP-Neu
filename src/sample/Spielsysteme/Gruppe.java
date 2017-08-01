@@ -38,10 +38,11 @@ public class Gruppe extends Spielsystem {
 		}
 	}
 
-	public Gruppe(ArrayList<Team> setzliste, GruppeMitEndrunde spielsystem, int extraRunde) {
+	public Gruppe(ArrayList<Team> setzliste, GruppeMitEndrunde spielsystem,Spielklasse spielklasse, int extraRunde) {
 		this.setSpielSystemArt(2);
 		this.setExtraRunde(extraRunde);
 		this.spielsystem = spielsystem;
+		this.setSpielklasse(spielklasse);
 		this.teamList = setzliste;
 		freiloseHinzufuegen(teamList);
 		setAnzahlRunden(teamList.size()-1);
@@ -53,18 +54,20 @@ public class Gruppe extends Spielsystem {
 			rundeErstellen();
 			resetOffeneRundenSpiele();
 		}
+		setOffeneRundenSpiele(anzahlTeams/2);
+		resetAktuelleRunde();
 	}
 
 	private void alleSpieleErstellen(){
 		for (int i=1;i<=getAnzahlRunden();i++){
 			resetOffeneRundenSpiele();
 			for (int j=0; j<anzahlTeams/2;j++){
-				if(spielsystem==null) {
-					new Spiel(spielSystemIDberechnen(),this);
-				}
+				//if(spielsystem==null) {
+				new Spiel(spielSystemIDberechnen(),this);
+				/*}
 				else{
 					new Spiel(spielSystemIDberechnen(),this.spielsystem);
-				}
+				}*/
 				erhoeheOffeneRundenSpiele();
 			}
 			erhoeheAktuelleRunde();
@@ -147,15 +150,16 @@ public class Gruppe extends Spielsystem {
 		senkeOffeneRundenSpiele();
 		if(keineOffenenRundenSpiele()){
 			erhoeheAktuelleRunde();
+			setOffeneRundenSpiele(anzahlTeams/2);
+			System.out.println(getAktuelleRunde());
 			if(getAktuelleRunde()==getAnzahlRunden()){
 				sortList(teamList);
-				}
 				setPlatzierungsListe(teamList);
-			if (spielsystem!=null){
-				spielsystem.addPlatzierungsliste(teamList,getExtraRunde());
+				if (spielsystem!=null){
+					spielsystem.addPlatzierungsliste(teamList,getExtraRunde());
+				}
 			}
-			}
-
+		}
 		return false;
 	}
 }

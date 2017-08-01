@@ -11,7 +11,7 @@ import java.util.List;
 public class GruppeMitEndrunde extends Spielsystem{
 	private int anzahlGruppen;
 	private int anzahlWeiterkommender;
-
+	private List<Team> endrundenSetzliste = new ArrayList<>();
 	private List<Team> setzliste;
 	private ArrayList<Team> templist = new ArrayList<>();
 	private ArrayList<ArrayList<Team>> alleSetzListen = new ArrayList<>();
@@ -63,7 +63,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 
 	private void gruppenErstellen(){
 		for(int i=0; i<alleSetzListen.size();i++){
-			alleGruppen.add(new Gruppe(alleSetzListen.get(i),this,i+1));
+			alleGruppen.add(new Gruppe(alleSetzListen.get(i),this,this.getSpielklasse(),i+1));
 		}
 	}
 
@@ -74,11 +74,38 @@ public class GruppeMitEndrunde extends Spielsystem{
 		}
 	}
 	private void endRundeErstellen(){
-
+		int qualiPlaetzeJeGruppe = anzahlWeiterkommender/anzahlGruppen;
+		int wildCards = anzahlWeiterkommender-qualiPlaetzeJeGruppe*anzahlGruppen;
+		Team tempTeam;
+		for(int i=0; i<qualiPlaetzeJeGruppe;i++){
+			if (i%2==0){
+				for (int j=0;j<allePlatzierungslisten.size();j++){
+					tempTeam=allePlatzierungslisten.get(j).get(i);
+					endrundenSetzliste.add(tempTeam);
+				}
+			}
+			else{
+				for (int k=allePlatzierungslisten.size()-1;k>=0;k--){
+					tempTeam=allePlatzierungslisten.get(k).get(i);
+					endrundenSetzliste.add(tempTeam);
+				}
+				for (int l=i*anzahlGruppen;l<(i+1)*anzahlGruppen;l++){
+					tempTeam=endrundenSetzliste.get(l);
+					endrundenSetzliste.remove(tempTeam);
+					l++;
+					endrundenSetzliste.add(l,tempTeam);
+				}
+			}
+		}
+		endrunde= new KO(endrundenSetzliste,this, this.getSpielklasse());
 	}
 
+
 	public void addPlatzierungsliste(ArrayList<Team> platzierungsliste, int extraRundenID){
-		this.allePlatzierungslisten.put(extraRundenID,platzierungsliste);
+		this.allePlatzierungslisten.put(extraRundenID-1,platzierungsliste);
+		if(allePlatzierungslisten.size()==4) {
+			int justforbreakpoint = 0;
+		}
 		if (allePlatzierungslisten.size()==anzahlGruppen){
 			endRundeErstellen();
 		}
