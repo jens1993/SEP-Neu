@@ -4,6 +4,8 @@ import sample.DAO.*;
 import sample.Enums.*;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 public class GruppeMitEndrunde extends Spielsystem{
@@ -12,8 +14,9 @@ public class GruppeMitEndrunde extends Spielsystem{
 
 	private List<Team> setzliste;
 	private ArrayList<Team> templist = new ArrayList<>();
-	private ArrayList<List<Team>> alleSetzListen = new ArrayList<>();
+	private ArrayList<ArrayList<Team>> alleSetzListen = new ArrayList<>();
 	private ArrayList<Gruppe> alleGruppen = new ArrayList<>();
+	private Dictionary<Integer,ArrayList<Team>> allePlatzierungslisten = new Hashtable();
 	private Spielsystem endrunde;
 
 	public GruppeMitEndrunde(List<Team> setzliste, Spielklasse spielklasse, int anzahlGruppen, int anzahlWeiterkommender) {
@@ -70,6 +73,17 @@ public class GruppeMitEndrunde extends Spielsystem{
 			templist.add(new Team("Freilos",this));
 		}
 	}
+	private void endRundeErstellen(){
+
+	}
+
+	public void addPlatzierungsliste(ArrayList<Team> platzierungsliste, int extraRundenID){
+		this.allePlatzierungslisten.put(extraRundenID,platzierungsliste);
+		if (allePlatzierungslisten.size()==anzahlGruppen){
+			endRundeErstellen();
+		}
+	}
+
 
 	@Override
 	public List<Team> getPlatzierungsliste() {
