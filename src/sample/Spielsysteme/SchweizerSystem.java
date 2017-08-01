@@ -13,7 +13,6 @@ import sample.DAO.SpielDAOimpl;
 public class SchweizerSystem extends Spielsystem {
 	private int anzahlTeams;
 	private boolean beendet;
-	private ArrayList<Team> endListe;
 	private int[][] schema;
 	private ArrayList<Team> teamList;
 	private ArrayList<Team> nextTeamList = new ArrayList<Team>();
@@ -35,6 +34,7 @@ public class SchweizerSystem extends Spielsystem {
 		ersteRundeErstellen();
 		alleSpieleErstellen();
 	}
+
 	private void sortList(){
 		Collections.sort(nextTeamList, new Comparator<Team>() {
 			@Override
@@ -52,12 +52,7 @@ public class SchweizerSystem extends Spielsystem {
 			teamListArray.get(teamListArray.size()-1).add(nextTeamList.get(i));
 			//System.out.println("Size: "+teamListArray.get(aktuelleRunde-1).size());
 		}
-
-
-
-
 	}
-
 
 	public void ersteRundeErstellen() {
 		while (teamList.size()>1){
@@ -67,7 +62,7 @@ public class SchweizerSystem extends Spielsystem {
 			Team teamZwei = getRandomTeam();
 			this.teamList.remove(teamZwei);
 			this.nextTeamList.add(teamZwei);
-			Spiel spiel = new Spiel(teamEins,teamZwei,this.getSpielklasse(),spielSystemIDberechnen());
+			Spiel spiel = new Spiel(teamEins,teamZwei,spielSystemIDberechnen(),this);
 			//spiele.add(spiel);
 			erhoeheOffeneRundenSpiele();
 		}
@@ -77,7 +72,7 @@ public class SchweizerSystem extends Spielsystem {
 		for (int i=2;i<=getAnzahlRunden();i++){
 			resetOffeneRundenSpiele();
 			for (int j=0; j<anzahlTeams/2;j++){
-				new Spiel(this.getSpielklasse(),spielSystemIDberechnen());
+				new Spiel(spielSystemIDberechnen(), this);
 				erhoeheOffeneRundenSpiele();
 			}
 			erhoeheAktuelleRunde();
@@ -94,7 +89,7 @@ public class SchweizerSystem extends Spielsystem {
 		}
 		else{
 			sortList();
-			endListe=nextTeamList;
+			setPlatzierungsListe(nextTeamList);
 		}
 		return beendet;
 	}
@@ -107,7 +102,7 @@ public class SchweizerSystem extends Spielsystem {
 			fuelleZeile(i);
 		}
 		fuelleSummenSpalte();
-		druckeSchema();
+		//druckeSchema();
 		while(teamList.size()>1) {
 			int indexTeamEins = sucheHoechsteSumme();
 			int indexTeamZwei = sucheGeringstenZeilenWert(indexTeamEins);
@@ -238,11 +233,6 @@ public class SchweizerSystem extends Spielsystem {
 		int random = (int) Math.round(Math.random()*(teamList.size()-1));
 		Team randomTeam = this.teamList.get(random);
 		return randomTeam;
-	}
-
-	@Override
-	public List<Team> getPlatzierungsliste() {
-		return endListe;
 	}
 
 	@Override

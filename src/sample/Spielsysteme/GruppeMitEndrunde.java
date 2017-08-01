@@ -9,7 +9,7 @@ import java.util.List;
 public class GruppeMitEndrunde extends Spielsystem{
 	private int anzahlGruppen;
 	private int anzahlWeiterkommender;
-	private int benoetigteFreilose;
+
 	private List<Team> setzliste;
 	private ArrayList<Team> templist = new ArrayList<>();
 	private ArrayList<List<Team>> alleSetzListen = new ArrayList<>();
@@ -60,7 +60,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 
 	private void gruppenErstellen(){
 		for(int i=0; i<alleSetzListen.size();i++){
-			alleGruppen.add(new Gruppe(alleSetzListen.get(i),i+1,this));
+			alleGruppen.add(new Gruppe(alleSetzListen.get(i),this,i+1));
 		}
 	}
 

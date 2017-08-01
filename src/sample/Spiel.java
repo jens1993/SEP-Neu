@@ -22,7 +22,6 @@ public class Spiel {
 	private Spielsystem spielsystem;
 	private Feld feld;
 	private int status = 0; //0= unvollständig 1 = ausstehend, 2=aktiv, 3=gespielt
-	private Spielklasse spielklasse;
 	private int systemSpielID;
 	private int setzPlatzHeim;
 	private int setzPlatzGast;
@@ -51,10 +50,6 @@ public class Spiel {
 		spielDAO.update(this);
 	}
 
-	public Spielklasse getSpielklasse() {
-		return spielklasse;
-	}
-
 	public Spieler getSchiedsrichter() {
 		return schiedsrichter;
 	}
@@ -79,36 +74,25 @@ public class Spiel {
 		return spielID;
 	}
 
-	public Spiel(Team heim, Team gast, Spielklasse spielklasse, int systemSpielID) {
+	public Spiel(Team heim, Team gast, int systemSpielID, Spielsystem spielsystem) {
 		this.heim = heim;
 		this.gast = gast;
+		this.spielsystem=spielsystem;
+		this.systemSpielID = systemSpielID;
+		spielID = spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
+		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
+		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
+		spielDAO.create(this);
+	}
+
+/*	public Spiel(Spielklasse spielklasse, int systemSpielID) {
 		this.spielklasse = spielklasse;
 		this.systemSpielID = systemSpielID;
 		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
 		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
 		this.spielklasse.getSpiele().put(systemSpielID,this);
 		spielDAO.create(this);
-	}
-
-	/*public Spiel(Team heim, Team auswaerts, Spielklasse spielklasse) {
-		this.heim = heim;
-		this.gast = auswaerts;
-		this.spielklasse = spielklasse;
-		this.status = 1;
-		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
-		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
-		spielDAO.create(this);
-	}
-*/
-
-	public Spiel(Spielklasse spielklasse, int systemSpielID) {
-		this.spielklasse = spielklasse;
-		this.systemSpielID = systemSpielID;
-		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
-		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
-		this.spielklasse.getSpiele().put(systemSpielID,this);
-		spielDAO.create(this);
-	}
+	}*/
 
 	public Spiel(int systemSpielID, Spielsystem spielsystem) { //Constructor für Extrarunden (Gruppe mit Endrunde)
 		this.spielsystem = spielsystem;
@@ -119,14 +103,14 @@ public class Spiel {
 		spielDAO.create(this);
 	}
 
-	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielklasse spielklasse) {
+	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielsystem spielsystem) {
 		this.systemSpielID = systemSpielID; //Constructor für SpielTree in KO-System
 		this.setzPlatzHeim = setzPlatzHeim;
 		this.setzPlatzGast = setzPlatzGast;
-		this.spielklasse = spielklasse;
-		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
-		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
-		this.spielklasse.getSpiele().put(systemSpielID,this);
+		this.spielsystem=spielsystem;
+		spielID = spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
+		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
+		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		spielDAO.create(this);
 	}
 	public Team getSieger(){
@@ -186,7 +170,7 @@ public class Spiel {
 			i++;
 		}
 		status=3;
-		spielklasse.getSpielsystem().beendeMatch(this);
+		this.spielsystem.beendeMatch(this);
 		spielDAO.update(this);
 		ergebnisDAO.create(this);
 	}

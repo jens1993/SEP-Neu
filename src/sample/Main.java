@@ -50,7 +50,7 @@ public class Main extends Application {
     	Turnier turnier = test.read(1);
         Spielklasse spielklasse =turnier.getSpielklassen().get(1);
     	ArrayList<Team> setzliste = spielklasse.getSetzliste();
-        spielklasse.setSpielsystem(new SchweizerSystem(16,setzliste,spielklasse));
+        spielklasse.setSpielsystem(new GruppeMitEndrunde(setzliste,spielklasse,3,8));
         List<Ergebnis> ergebnisse = new ArrayList<>();
         ergebnisse.add(new Ergebnis(21,15,21,12));
         ergebnisse.add(new Ergebnis(15,21,21,19,30,29));
