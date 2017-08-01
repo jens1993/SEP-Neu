@@ -7,8 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import sample.Spielsysteme.*;
@@ -29,6 +28,24 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+
+        //$java -Duser.language=en com.tutego.insel.bundle.InternationalHelloWorld
+
+        //Locale.setDefault( new Locale("en", "UK") );
+        Locale.setDefault( new Locale("de", "ch") );
+                String baseName = "resources.HelloWorld";
+
+                try
+                {
+                    ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+                    System.out.println( bundle.getString("Bye") );
+                }
+                catch ( MissingResourceException e ) {
+                    System.err.println( e );
+                }
+
+
+        /*
     	TurnierDAO test = new TurnierDAOimpl();
     	Turnier turnier = test.read(1);
         Spielklasse spielklasse =turnier.getSpielklassen().get(1);
@@ -58,7 +75,7 @@ public class Main extends Application {
             turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
             //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
         }
-        /*for(int i=4; i<=7;i++){
+        *//*for(int i=4; i<=7;i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
             turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
             //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
@@ -72,10 +89,10 @@ public class Main extends Application {
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
             turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
             //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
-        }*/
+        }*//*
 
 
-        /*Ergebnis ergebnis = new Ergebnis(21,15,21,15);
+        *//*Ergebnis ergebnis = new Ergebnis(21,15,21,15);
         Ergebnis ergebnis1 = new Ergebnis(15,21,21,19,30,29);
         Ergebnis ergebnis2 = new Ergebnis(21,12,21,11);
         Ergebnis ergebnis3 = new Ergebnis(21,18,21,19);
@@ -91,7 +108,7 @@ public class Main extends Application {
         turnier.getSpiele().get(6).setErgebnis(ergebnis5);
         turnier.getSpiele().get(7).setErgebnis(ergebnis6);
         turnier.getSpiele().get(8).setErgebnis(ergebnis7);
-*/
+*//*
 
 
 
@@ -109,9 +126,9 @@ public class Main extends Application {
         //testsystem.rundenBerechnen();
 
 
-       /* TurnierDAO test = new TurnierDAOimpl();
+       *//* TurnierDAO test = new TurnierDAOimpl();
         Turnier turnier = new Turnier("Tolles Turnier",1);
-        test.delete(turnier);*/
+        test.delete(turnier);*//*
 
         //VereinDAOimpl test = new VereinDAOimpl();
         //Verein Osterbrock = new Verein(5, "123456789","Osterbrock",  "BWE");
@@ -120,14 +137,14 @@ public class Main extends Application {
         //test.update(Testest);
         //test.delete(Osterbrock);
 
-       /* SpielerDAO test = new SpielerDAOimpl();
+       *//* SpielerDAO test = new SpielerDAOimpl();
         List<Spieler> alleSpieler;
         alleSpieler = test.getAllSpieler();
         for (int i=0; i < alleSpieler.size();i++){
             System.out.println(alleSpieler.get(i).getName());
-        }*/
+        }*//*
 
-        /*SpielklasseDAO test = new SpielklasseDAOimpl();
+        *//*SpielklasseDAO test = new SpielklasseDAOimpl();
         Spielklasse deb = new Spielklasse(5, "Dameneinzel", "B", 1);
         test.create(deb);
         test.update(deb);
@@ -135,15 +152,15 @@ public class Main extends Application {
         List<Spielklasse> alleKlassen = test.getAllSpielklassen();
         for (int i=0; i < alleKlassen.size();i++){
             System.out.println(alleKlassen.get(i).getDisziplin()+alleKlassen.get(i).getNiveau());
-        }*/
-        /*Spielklasse spielklasse = new Spielklasse(1,"Herreneinzel","A",1);
+        }*//*
+        *//*Spielklasse spielklasse = new Spielklasse(1,"Herreneinzel","A",1);
         Spieler spieler = new Spieler("Herbert", "Müller",1);
         Spieler spieler2 = new Spieler("Herbert", "Müller",2);
         Spiel spiel = new Spiel(spieler, spieler2,spielklasse);
         Ergebnis ergebnis = new Ergebnis(21,15,21,19);
         spiel.setErgebnis(ergebnis);
         ErgebnisDAO test = new ErgebnisDAOimpl();
-        test.update(spiel);*/
+        test.update(spiel);*//*
 
         //for (int i=0; i<setzliste.size(); i++){
           //  System.out.println((i+1)+" "+setzliste.get(i).getName());
@@ -157,12 +174,12 @@ public class Main extends Application {
 
 
 
-       /* SpielDAOimpl test = new SpielDAOimpl();
+       *//* SpielDAOimpl test = new SpielDAOimpl();
         Spielklasse heA = new Spielklasse(5);
         Spieler hans = new Spieler("Hans", "Müller", 41);
         Spieler harald = new Spieler("Harald", "Test", 42);
         Spiel spiel1 = new Spiel(30, hans, harald, heA);
-        test.delete(spiel1);*/
+        test.delete(spiel1);*//*
         //KO test = new KO(16);
 
 
@@ -171,7 +188,7 @@ public class Main extends Application {
         //spielerEinlesen();
 
 
-        /*SQLConnection testverbindung = new SQLConnection();
+        *//*SQLConnection testverbindung = new SQLConnection();
         
         System.out.println("------------------------------------------");System.out.println("------------------------------------------");
         boolean hallo = testverbindung.insertSpieler("jens", "isttoll");
@@ -200,7 +217,7 @@ public class Main extends Application {
         testverbindung.PrintResult(j);
         System.out.println("------------------------------------------");System.out.println("------------------------------------------");
         ResultSet r = testverbindung.executeSQL("SELECT * FROM spieler");
-        testverbindung.PrintResult(r);
-*/
+        testverbindung.PrintResult(r);*/
+
     }
 }
