@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.Vector;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import sample.DAO.*;
 import sample.Spielsysteme.*;
 import sample.Enums.*;
@@ -24,6 +27,7 @@ public class Spieler {
 	private int mattenSpiele = 0;
 	private String extSpielerID;
 	private Spiel aktuellesSpiel;
+	private ObservableList<Turnier> turnierData = FXCollections.observableArrayList();
 
 	public Spieler(String vName, String nName, int spielerID){
 		this.vName = vName;
@@ -32,6 +36,21 @@ public class Spieler {
 		spielerDAO.create(this);
 	}
 
+	public Spieler(String vName, String nName, LocalDate gDatum, int spielerID, boolean geschlecht, int[] rPunkte, Verein verein, float meldeGebuehren, String nationalitaet, LocalDate verfuegbar, int mattenSpiele, String extSpielerID) {
+		this.vName = vName;
+		this.nName = nName;
+		this.gDatum = gDatum;
+		this.spielerID = spielerID;
+		this.geschlecht = geschlecht;
+		this.rPunkte = rPunkte;
+		this.verein = verein;
+		this.meldeGebuehren = meldeGebuehren;
+		Nationalitaet = nationalitaet;
+		this.verfuegbar = verfuegbar;
+		this.mattenSpiele = mattenSpiele;
+		this.extSpielerID = extSpielerID;
+		this.aktuellesSpiel = aktuellesSpiel;
+	}
 
 	public boolean deleteSpieler(Spieler spieler){
 		try {

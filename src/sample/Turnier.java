@@ -27,17 +27,14 @@ public class Turnier {
 	private Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
 	private Dictionary<Integer, Spiel> spiele = new Hashtable<Integer,Spiel>();
 	private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
-	private ObservableList<Turnier> turnierData = FXCollections.observableArrayList();
+
 
 	public Turnier(String name, int turnierid, LocalDate datum) {
 		this.datum = datum;
 		this.name = name;
 		this.turnierid = turnierid;
 	}
-	public ObservableList<Turnier> getObservableListTurniere()
-	{
-		return turnierData;
-	}
+
 
 	public int getGesamtSpiele() {
 		return gesamtSpiele;

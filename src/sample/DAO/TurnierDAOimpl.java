@@ -7,6 +7,7 @@ import sample.Spielsysteme.Spielsystem;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -100,16 +101,16 @@ public class TurnierDAOimpl implements TurnierDAO {
     }
 
     @Override
-    public Turnier read(int turnierID) {
+    public Turnier read(Turnier turnierEingabe) {
         Turnier turnier = null;
         String sql = "SELECT * FROM turnier WHERE turnierID = ?";
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, turnierID);
+            smt.setInt(1, turnierEingabe.getTurnierid());
             ResultSet turnierResult = smt.executeQuery();
             turnierResult.next();
-            turnier = new Turnier(turnierResult.getString("Name"),turnierID, turnierResult.getDate("Datum").toLocalDate());
+            turnier = turnierEingabe;
             turnier.setMatchDauer(turnierResult.getInt("MatchDauer"));
             turnier.setSpielerPausenZeit(turnierResult.getInt("SpielerPausenZeit"));
             turnier.setZaehlweise(turnierResult.getInt("Zaehlweise"));
@@ -268,6 +269,7 @@ public class TurnierDAOimpl implements TurnierDAO {
 
         return turnierListe;
     }
+
     private Dictionary<Integer,Spieler> readSpieler(Turnier turnier) {
         Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
         String sql ="SELECT * FROM SPIELER";
@@ -282,22 +284,27 @@ public class TurnierDAOimpl implements TurnierDAO {
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             //smt.setInt(1, turnier.getTurnierid());
             ResultSet spielerResult = smt.executeQuery();
+
             while (spielerResult.next()){
                 int spielerID  = spielerResult.getInt("SpielerID");
-                spieler.put(spielerID,new Spieler(spielerResult.getString("VName"),spielerResult.getString("NName"),spielerID));
-                spieler.get(spielerID).setgDatum(spielerResult.getDate("GDatum").toLocalDate());
-                spieler.get(spielerID).setGeschlecht(spielerResult.getBoolean("Geschlecht"));
-                spieler.get(spielerID).setVerein(turnier.getVereine().get(spielerResult.getInt("VereinsID")));
                 int[] rPunkte = new int[3];
                 rPunkte[0] = spielerResult.getInt("RLP_Einzel");
                 rPunkte[1] = spielerResult.getInt("RLP_Doppel");
                 rPunkte[2] = spielerResult.getInt("RLP_Mixed");
-                spieler.get(spielerID).setrPunkte(rPunkte);
-                spieler.get(spielerID).setMeldeGebuehren(spielerResult.getFloat("Meldegebuehren"));
-                spieler.get(spielerID).setNationalitaet(spielerResult.getString("Nationalitaet"));
-                spieler.get(spielerID).setVerfuegbar(spielerResult.getDate("Verfuegbar").toLocalDate());
-                spieler.get(spielerID).setMattenSpiele(spielerResult.getInt("MattenSpiele"));
-                spieler.get(spielerID).setExtSpielerID(spielerResult.getString("ExtSpielerID"));
+                LocalDate verfuegbar=LocalDate.now();
+                if(spielerResult.getDate("Verfuegbar")!=null) {
+                     verfuegbar = spielerResult.getDate("Verfuegbar").toLocalDate();
+                }
+                spieler.put(spielerID,new Spieler(spielerResult.getString("VName"),
+                        spielerResult.getString("NName"),
+                        spielerResult.getDate("GDatum").toLocalDate(),
+                        spielerID,spielerResult.getBoolean("Geschlecht"),
+                        rPunkte,turnier.getVereine().get(spielerResult.getInt("VereinsID")),
+                        spielerResult.getFloat("Meldegebuehren"),
+                        spielerResult.getString("Nationalitaet"),
+                        verfuegbar,
+                        spielerResult.getInt("MattenSpiele"),
+                        spielerResult.getString("ExtSpielerID")));
             }
             smt.close();
             con.closeCon();

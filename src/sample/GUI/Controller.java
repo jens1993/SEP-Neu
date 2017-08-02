@@ -41,7 +41,9 @@ import javax.swing.JList;
 public class Controller {
     TurnierDAO turnierDao = new TurnierDAOimpl();
     Dictionary<Integer,Turnier>  turnierliste = turnierDao.getAllTurniere();
+
     private ObservableList<Turnier> turnierData = FXCollections.observableArrayList();
+    private static Turnier aktuelleTurnierAuswahl;
     @FXML
     private TextField t_vn;
     @FXML
@@ -66,8 +68,15 @@ public class Controller {
     private RadioButton r_m;
     @FXML
     private RadioButton r_w;
+
     @FXML
-    private TableView tabelle_spielerliste;
+    private TableView tabelle_SpielerZuordnen;
+    @FXML
+    private TableColumn spielerVornameSpalte;
+    @FXML
+    private TableColumn spielerNachnameSpalte;
+    @FXML
+    private TableColumn spielerGeburstdatumSpalte;
     @FXML
     private TableView TurnierlisteTabelle;
     @FXML
@@ -190,11 +199,64 @@ public class Controller {
     public void auswahlSpeichern(ActionEvent event) throws Exception {
         try {
             System.out.println("test");
-            TurnierlisteTabelle.getSelectionModel().
+            if(TurnierlisteTabelle.getSelectionModel().getSelectedItem()!=null && (Turnier) TurnierlisteTabelle.getSelectionModel().getSelectedItem()!= aktuelleTurnierAuswahl)
+            {
+                aktuelleTurnierAuswahl = (Turnier) TurnierlisteTabelle.getSelectionModel().getSelectedItem();
+                turnierDao.read(aktuelleTurnierAuswahl);
+                System.out.println(aktuelleTurnierAuswahl.getName());
+
+            }
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    public void auswahlSpeichernSpieler(ActionEvent event) throws Exception {
+        try {
+            System.out.println("test");
+            if(tabelle_SpielerZuordnen.getSelectionModel().getSelectedItem()!=null)
+            {
+               Spieler spieler = (Spieler) tabelle_SpielerZuordnen.getSelectionModel().getSelectedItem();
+                System.out.println(spieler.getvName());
+
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void printSpielerZuordnenTable(ActionEvent event) throws Exception {
+
+        ObservableList<Spieler> spieler = FXCollections.observableArrayList();
+        for (int i=1;i<=aktuelleTurnierAuswahl.getSpieler().size();i++){
+            spieler.add(aktuelleTurnierAuswahl.getSpieler().get(i));
+            //System.out.println("test");
+            System.out.println(spieler.get(i-1).getvName());
+        }
+
+        tabelle_SpielerZuordnen.setItems(spieler);
+
+        //TableColumn<Spieler,String> spielerVornameSpalte = new TableColumn("Vorname");
+        spielerVornameSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("vName"));
+
+        //TableColumn<Spieler,String> spielerNachnameSpalte = new TableColumn("Nachname");
+        spielerNachnameSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("nName"));
+
+        //TableColumn<Spieler,Date> spielerGeburtsdatumSpalte = new TableColumn("Geburtsdatum");
+        spielerGeburstdatumSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,Date>("gDatum"));
+
+        //TableColumn<Spieler,String> spielerExtSpielerIDSpalte = new TableColumn("ExtSpielerID");
+        //spielerExtSpielerIDSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("extSpielerID"));
+
+        //tabelle_SpielerZuordnen.getColumns().addAll(spielerVornameSpalte,spielerNachnameSpalte,spielerGeburtsdatumSpalte);
+
+
     }
     @FXML
     public void printTable(ActionEvent event) throws Exception {
@@ -202,6 +264,7 @@ public class Controller {
         ObservableList<Turnier> turniere = FXCollections.observableArrayList();
         for (int i=1;i<=turnierliste.size();i++){
             turniere.add(turnierliste.get(i));
+
         }
         TurnierlisteTabelle.setItems(turniere);
         TurnierDatumSpalte.setCellValueFactory(new PropertyValueFactory<Turnier,Date>("datum"));
@@ -209,32 +272,6 @@ public class Controller {
         TurnierIDSpalte.setCellValueFactory(new PropertyValueFactory<Turnier,Integer>("turnierid"));
 
        // TurnierlisteTabelle.getColumns().addAll(TurnierDatumSpalte,TurnierNameSpalte,TurnierIDSpalte);
-       /* try {
-                for(int i =1;i<=turnierliste.size();i++)
-                {
-
-                    System.out.println(turnierliste.get(i).getName());
-                    //TurnierlisteTabelle.getColumns().addAll(TurnierDatumSpalte,TurnierNameSpalte,TurnierIDSpalte);
-                   // TurnierlisteTabelle.getColumns().addAll(turnierliste.get(i).getDatum(),turnierliste.get(i).getName(),turnierliste.get(i).getTurnierid());
-
-                }
-
-
-
-//            System.out.println(turnierliste.get(1).getName());
-//            System.out.println(turnierliste.get(20).getName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-*/
-/*
-        TurnierDAO test = new TurnierDAOimpl();
-        Turnier turnier = test.read(1);
-        turnier.getSpieler().;
-        System.out.println("test");
-*/
-
-       // tabelle_spielerliste.ad
 
     }/*
     public String getSpielerName(int id)
@@ -350,6 +387,7 @@ public void SpeicherSpieler(ActionEvent event)throws Exception
         stage.setScene(new Scene(root1));
         stage.show();
         stage.setTitle("Turnier auswählen");
+
 
     }
     @FXML

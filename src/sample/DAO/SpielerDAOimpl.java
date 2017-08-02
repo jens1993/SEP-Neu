@@ -91,7 +91,7 @@ public class SpielerDAOimpl implements SpielerDAO {
                 "NName = ?, " +
                 "GDatum = ?, " +
                 "Geschlecht = ?, " +
-                "Verein = ?, " +
+                "VereinsID = ?, " +
                 "RLP_Einzel = ?, " +
                 "RLP_Doppel = ?, " +
                 "RLP_Mixed = ?, " +
