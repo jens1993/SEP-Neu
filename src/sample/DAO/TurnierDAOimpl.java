@@ -101,7 +101,7 @@ public class TurnierDAOimpl implements TurnierDAO {
     }
 
     @Override
-    public Turnier read(Turnier turnierEingabe) {
+    public boolean read(Turnier turnierEingabe) {
         Turnier turnier = null;
         String sql = "SELECT * FROM turnier WHERE turnierID = ?";
         try {
@@ -126,6 +126,7 @@ public class TurnierDAOimpl implements TurnierDAO {
             smt.close();
             con.closeCon();
             //turnier.setSpiele(readSpiele(turnier));
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Turnier lesen klappt nicht");
@@ -135,7 +136,7 @@ public class TurnierDAOimpl implements TurnierDAO {
             e.printStackTrace();
             System.out.println("Fehler");
         }
-        return turnier;
+        return false;
     }
 
     private Dictionary<Integer,Spielklasse> readSpielklassen(Turnier turnier) {

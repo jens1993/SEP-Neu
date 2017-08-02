@@ -35,9 +35,9 @@ public class SpielerDAOimpl implements SpielerDAO {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setInt(1, spieler.getSpielerID());
-            smt.setString(2, spieler.getvName());
-            smt.setString(3, spieler.getnName());
-            smt.setObject(4, spieler.getgDatum());
+            smt.setString(2, spieler.getVName());
+            smt.setString(3, spieler.getNName());
+            smt.setObject(4, spieler.getGDatum());
             smt.setBoolean(5, spieler.getGeschlecht());
             if(spieler.getVerein()!=null){
                 smt.setInt(6, spieler.getVerein().getVereinsID());
@@ -105,9 +105,9 @@ public class SpielerDAOimpl implements SpielerDAO {
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setString(1, spieler.getvName());
-            smt.setString(2, spieler.getnName());
-            smt.setObject(3, spieler.getgDatum());
+            smt.setString(1, spieler.getVName());
+            smt.setString(2, spieler.getNName());
+            smt.setObject(3, spieler.getGDatum());
             smt.setBoolean(4, spieler.getGeschlecht());
             if(spieler.getVerein()!=null){
                 smt.setInt(5, spieler.getVerein().getVereinsID());

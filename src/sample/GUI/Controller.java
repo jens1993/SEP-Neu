@@ -41,7 +41,9 @@ import javax.swing.JList;
 
 public class Controller {
     TurnierDAO turnierDao = new TurnierDAOimpl();
+
     Dictionary<Integer,Turnier>  turnierliste = turnierDao.getAllTurniere();
+
 
     private ObservableList<Turnier> turnierData = FXCollections.observableArrayList();
     private static Turnier aktuelleTurnierAuswahl;
@@ -223,10 +225,10 @@ public class Controller {
             if(tabelle_SpielerZuordnen.getSelectionModel().getSelectedItem()!=null)
             {
                Spieler spieler = (Spieler) tabelle_SpielerZuordnen.getSelectionModel().getSelectedItem();
-                System.out.println(spieler.getvName());
-
+                System.out.println(spieler.getVName());
+                tabelle_SpielerZuordnen.getSelectionModel().getSelectedCells();
+                System.out.println(tabelle_SpielerZuordnen.getSelectionModel().toString());
             }
-
 
 
         } catch (Exception e) {
@@ -235,30 +237,36 @@ public class Controller {
     }
     @FXML
     public void printSpielerZuordnenTable(ActionEvent event) throws Exception {
+        if(aktuelleTurnierAuswahl!=null) {
+            ObservableList<Spieler> spieler = FXCollections.observableArrayList();
 
-        ObservableList<Spieler> spieler = FXCollections.observableArrayList();
-        for (int i=1;i<=aktuelleTurnierAuswahl.getSpieler().size();i++){
-            spieler.add(aktuelleTurnierAuswahl.getSpieler().get(i));
-            //System.out.println("test");
-            System.out.println(spieler.get(i-1).getvName());
+            for (int i=1;i<=aktuelleTurnierAuswahl.getSpieler().size();i++){
+                spieler.add(aktuelleTurnierAuswahl.getSpieler().get(i));
+                //System.out.println("test");
+                System.out.println(spieler.get(i-1).getVName());
+            }
+
+
+
+            //TableColumn<Spieler,String> spielerVornameSpalte = new TableColumn("Vorname");
+            spielerVornameSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("vName"));
+
+            //TableColumn<Spieler,String> spielerNachnameSpalte = new TableColumn("Nachname");
+            spielerNachnameSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("nName"));
+
+            //TableColumn<Spieler,Date> spielerGeburtsdatumSpalte = new TableColumn("Geburtsdatum");
+            spielerGeburstdatumSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,Date>("gDatum"));
+            tabelle_SpielerZuordnen.setItems(spieler);
+            //TableColumn<Spieler,String> spielerExtSpielerIDSpalte = new TableColumn("ExtSpielerID");
+            //spielerExtSpielerIDSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("extSpielerID"));
+
+            //tabelle_SpielerZuordnen.getColumns().addAll(spielerVornameSpalte,spielerNachnameSpalte,spielerGeburtsdatumSpalte);
+
+
         }
-
-        tabelle_SpielerZuordnen.setItems(spieler);
-
-        //TableColumn<Spieler,String> spielerVornameSpalte = new TableColumn("Vorname");
-        spielerVornameSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("vName"));
-
-        //TableColumn<Spieler,String> spielerNachnameSpalte = new TableColumn("Nachname");
-        spielerNachnameSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("nName"));
-
-        //TableColumn<Spieler,Date> spielerGeburtsdatumSpalte = new TableColumn("Geburtsdatum");
-        spielerGeburstdatumSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,Date>("gDatum"));
-
-        //TableColumn<Spieler,String> spielerExtSpielerIDSpalte = new TableColumn("ExtSpielerID");
-        //spielerExtSpielerIDSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("extSpielerID"));
-
-        //tabelle_SpielerZuordnen.getColumns().addAll(spielerVornameSpalte,spielerNachnameSpalte,spielerGeburtsdatumSpalte);
-
+        else{
+            System.out.println("kann Turnier nicht laden");
+        }
 
     }
     @FXML

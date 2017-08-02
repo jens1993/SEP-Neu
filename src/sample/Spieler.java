@@ -123,11 +123,12 @@ public class Spieler {
 		spielerDAO.update(this);
 	}
 
+
 	public String getNationalitaet() {
 		return Nationalitaet;
 	}
 
-	public LocalDate getgDatum() {
+	public LocalDate getGDatum() {
 		return gDatum;
 	}
 
@@ -163,7 +164,7 @@ public class Spieler {
 		return aktuellesSpiel;
 	}
 
-	public String getvName() {
+	public String getVName() {
 		return vName;
 	}
 
@@ -172,9 +173,10 @@ public class Spieler {
 		spielerDAO.update(this);
 	}
 
-	public String getnName() {
+	public String getNName() {
 		return nName;
 	}
+
 
 	public void meldeFormularimportieren() {
 		throw new UnsupportedOperationException();
