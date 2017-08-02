@@ -10,6 +10,7 @@ import sample.Spielsysteme.*;
 import sample.Enums.*;
 
 public class Spieler {
+	SpielerDAO spielerDAO = new SpielerDAOimpl();
 	private String vName;
 	private String nName;
 	private LocalDate gDatum;
@@ -28,7 +29,9 @@ public class Spieler {
 		this.vName = vName;
 		this.nName = nName;
 		this.spielerID = spielerID;
+		spielerDAO.create(this);
 	}
+
 
 	public boolean deleteSpieler(Spieler spieler){
 		try {
@@ -56,40 +59,49 @@ public class Spieler {
 
 	public void setgDatum(LocalDate gDatum) {
 		this.gDatum = gDatum;
+		spielerDAO.update(this);
 	}
 
 	public void setrPunkte(int[] rPunkte) {
 		this.rPunkte = rPunkte;
+		spielerDAO.update(this);
 	}
 
 	public void setVerein(Verein verein) {
 		this.verein = verein;
+		spielerDAO.update(this);
 	}
 
 	public void setMeldeGebuehren(float meldeGebuehren) {
 		this.meldeGebuehren = meldeGebuehren;
+		spielerDAO.update(this);
 	}
 
 
 
 	public void setNationalitaet(String nationalitaet) {
 		Nationalitaet = nationalitaet;
+		spielerDAO.update(this);
 	}
 
 	public void setVerfuegbar(LocalDate verfuegbar) {
 		this.verfuegbar = verfuegbar;
+		spielerDAO.update(this);
 	}
 
 	public void setMattenSpiele(int mattenSpiele) {
 		this.mattenSpiele = mattenSpiele;
+		spielerDAO.update(this);
 	}
 
 	public void setExtSpielerID(String extSpielerID) {
 		this.extSpielerID = extSpielerID;
+		spielerDAO.update(this);
 	}
 
 	public void setAktuellesSpiel(Spiel aktuellesSpiel) {
 		this.aktuellesSpiel = aktuellesSpiel;
+		spielerDAO.update(this);
 	}
 
 	public String getNationalitaet() {
@@ -138,6 +150,7 @@ public class Spieler {
 
 	public void setGeschlecht(boolean geschlecht) {
 		this.geschlecht = geschlecht;
+		spielerDAO.update(this);
 	}
 
 	public String getnName() {

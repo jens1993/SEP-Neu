@@ -29,41 +29,64 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
+
+        launch(args);
         //$java -Duser.language=en com.tutego.insel.bundle.InternationalHelloWorld
 
         //Locale.setDefault( new Locale("en", "UK") );
+//        Locale.setDefault( new Locale("de", "ch") );
+//        String baseName = "resources.HelloWorld";
+//
+//        try
+//        {
+//            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+//            System.out.println( bundle.getString("Bye") );
+//        }
+//        catch ( MissingResourceException e ) {
+//            System.err.println( e );
+//        }
 
 
+//        TurnierDAO test = new TurnierDAOimpl();
+//        ArrayList <Turnier> turnierliste = new ArrayList<>();
+//        turnierliste = test.
+//    	TurnierDAO test = new TurnierDAOimpl();
+//    	Dictionary<Integer,Turnier>  turnierliste = test.getAllTurniere();
+//                    System.out.println(turnierliste.get(1).getName());
+//        System.out.println(turnierliste.get(20).getName());
 
-    	TurnierDAO test = new TurnierDAOimpl();
-    	Turnier turnier = test.read(1);
-        Spielklasse spielklasse =turnier.getSpielklassen().get(1);
-    	ArrayList<Team> setzliste = spielklasse.getSetzliste();
-        spielklasse.setSpielsystem(new GruppeMitEndrunde(setzliste,spielklasse,4,8));
-        List<Ergebnis> ergebnisse = new ArrayList<>();
-        ergebnisse.add(new Ergebnis(21,15,21,12));
-        ergebnisse.add(new Ergebnis(15,21,21,19,30,29));
-        ergebnisse.add(new Ergebnis(21,12,21,11));
-        ergebnisse.add(new Ergebnis(21,18,21,19));
-        ergebnisse.add(new Ergebnis(22,20,15,21,23,25));
-        ergebnisse.add(new Ergebnis(16,21,21,15,21,14));
-        ergebnisse.add(new Ergebnis(26,24,28,30,12,21));
-        ergebnisse.add(new Ergebnis(21,14,21,17));
-        ergebnisse.add(new Ergebnis(21,6,21,14));
-        ergebnisse.add(new Ergebnis(16,21,14,21));
-        ergebnisse.add(new Ergebnis(26,24,21,14,15,21));
-        ergebnisse.add(new Ergebnis(21,15,21,18));
-        ergebnisse.add(new Ergebnis(12,21,16,21));
-        ergebnisse.add(new Ergebnis(15,21,13,21));
-        ergebnisse.add(new Ergebnis(19,21,21,14,21,18));
+            //System.out.println((i+1)+" "+setzliste.get(i).getName());
 
 
-
-        for(int i=1; i<=turnier.getSpiele().size();i++){
-            System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
-            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
-            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
-        }
+//    	Turnier turnier = test.read(1);
+//        Spielklasse spielklasse =turnier.getSpielklassen().get(1);
+//   	ArrayList<Team> setzliste = spielklasse.getSetzliste();
+//   	setzliste.
+//        spielklasse.setSpielsystem(new GruppeMitEndrunde(setzliste,spielklasse,4,8));
+//        List<Ergebnis> ergebnisse = new ArrayList<>();
+//        ergebnisse.add(new Ergebnis(21,15,21,12));
+//        ergebnisse.add(new Ergebnis(15,21,21,19,30,29));
+//        ergebnisse.add(new Ergebnis(21,12,21,11));
+//        ergebnisse.add(new Ergebnis(21,18,21,19));
+//        ergebnisse.add(new Ergebnis(22,20,15,21,23,25));
+//        ergebnisse.add(new Ergebnis(16,21,21,15,21,14));
+//        ergebnisse.add(new Ergebnis(26,24,28,30,12,21));
+//        ergebnisse.add(new Ergebnis(21,14,21,17));
+//        ergebnisse.add(new Ergebnis(21,6,21,14));
+//        ergebnisse.add(new Ergebnis(16,21,14,21));
+//        ergebnisse.add(new Ergebnis(26,24,21,14,15,21));
+//        ergebnisse.add(new Ergebnis(21,15,21,18));
+//        ergebnisse.add(new Ergebnis(12,21,16,21));
+//        ergebnisse.add(new Ergebnis(15,21,13,21));
+//        ergebnisse.add(new Ergebnis(19,21,21,14,21,18));
+//
+//
+//
+//        for(int i=1; i<=turnier.getSpiele().size();i++){
+//            System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
+//            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+//            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+//        }
         /*for(int i=4; i<=7;i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
             turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));

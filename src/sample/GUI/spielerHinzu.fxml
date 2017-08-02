@@ -113,7 +113,7 @@
                 </GridPane>
             </content>
         </Tab>
-        <Tab id="tab_spieler_bearbeiten" onSelectionChanged="#PrintTable" text="Spieler bearbeiten">
+        <Tab id="tab_spieler_bearbeiten" onSelectionChanged="#printTable" text="Spieler bearbeiten">
          <content>
             <TableView fx:id="tabelle_spielerliste" prefHeight="200.0" prefWidth="200.0">
               <columns>

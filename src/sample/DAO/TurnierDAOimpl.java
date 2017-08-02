@@ -136,6 +136,7 @@ public class TurnierDAOimpl implements TurnierDAO {
         }
         return turnier;
     }
+
     private Dictionary<Integer,Spielklasse> readSpielklassen(Turnier turnier) {
         Dictionary<Integer,Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
         String sql = "SELECT * FROM spielklasse WHERE turnierID = ?";
@@ -240,19 +241,46 @@ public class TurnierDAOimpl implements TurnierDAO {
 
         return vereine;
     }
+    @Override
+    public Dictionary<Integer,Turnier> getAllTurniere() {
+        Dictionary<Integer, Turnier> turnierListe = new Hashtable<Integer,Turnier>();
+        String sql ="SELECT * FROM Turnier";
+
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            //smt.setInt(1, turnier.getTurnierid());
+            ResultSet TurnierResult = smt.executeQuery();
+            while (TurnierResult.next()){
+                int turnierid  = TurnierResult.getInt("TurnierID");
+                String turnierName = TurnierResult.getString("Name");
+                Date Datum = TurnierResult.getDate("Datum");
+                turnierListe.put(turnierid,new Turnier(turnierName,turnierid, Datum.toLocalDate()));
+            }
+            smt.close();
+            con.closeCon();
+            System.out.println("Turnier lesen klappt");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Turnier lesen klappt nicht");
+        }
+
+
+        return turnierListe;
+    }
     private Dictionary<Integer,Spieler> readSpieler(Turnier turnier) {
         Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
-
-        String sql = "SELECT * FROM spieler " +
+        String sql ="SELECT * FROM SPIELER";
+        /*String sql = "SELECT * FROM spieler " +
                 "INNER JOIN team_spieler ON spieler.SpielerID = team_spieler.SpielerID " +
                 "INNER JOIN team on team_spieler.TeamID = team.TeamID " +
                 "INNER JOIN spielklasse on team.SpielklasseID = spielklasse.SpielklasseID " +
                 "where turnierid = ? " +
-                "GROUP BY spieler.SpielerID;";
+                "GROUP BY spieler.SpielerID;";*/
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, turnier.getTurnierid());
+            //smt.setInt(1, turnier.getTurnierid());
             ResultSet spielerResult = smt.executeQuery();
             while (spielerResult.next()){
                 int spielerID  = spielerResult.getInt("SpielerID");
