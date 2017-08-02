@@ -278,7 +278,7 @@ public void SpeicherSpieler(ActionEvent event)throws Exception
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.show();
-            stage.setTitle("Klassen");
+            stage.setTitle("Klassenübersicht");
         } catch(Exception e) {
             e.printStackTrace();
         }
