@@ -32,25 +32,14 @@ public class Main extends Application {
         //$java -Duser.language=en com.tutego.insel.bundle.InternationalHelloWorld
 
         //Locale.setDefault( new Locale("en", "UK") );
-        Locale.setDefault( new Locale("de", "ch") );
-                String baseName = "resources.HelloWorld";
 
-                try
-                {
-                    ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-                    System.out.println( bundle.getString("Bye") );
-                }
-                catch ( MissingResourceException e ) {
-                    System.err.println( e );
-                }
 
-        launch(args);
-        /*
+
     	TurnierDAO test = new TurnierDAOimpl();
     	Turnier turnier = test.read(1);
         Spielklasse spielklasse =turnier.getSpielklassen().get(1);
     	ArrayList<Team> setzliste = spielklasse.getSetzliste();
-        spielklasse.setSpielsystem(new GruppeMitEndrunde(setzliste,spielklasse,3,8));
+        spielklasse.setSpielsystem(new GruppeMitEndrunde(setzliste,spielklasse,4,8));
         List<Ergebnis> ergebnisse = new ArrayList<>();
         ergebnisse.add(new Ergebnis(21,15,21,12));
         ergebnisse.add(new Ergebnis(15,21,21,19,30,29));
@@ -72,10 +61,10 @@ public class Main extends Application {
 
         for(int i=1; i<=turnier.getSpiele().size();i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
-            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
-            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
+            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
+            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
         }
-        *//*for(int i=4; i<=7;i++){
+        /*for(int i=4; i<=7;i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
             turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
             //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
@@ -120,7 +109,7 @@ public class Main extends Application {
         //Turnier turnier = new Turnier("Kreismeisterschaften", 2, LocalDate.now());
     	//test.create(turnier);
     	 //testverbindung.PrintResult(r);
-        //
+        //launch(args);
         //SQLConnection testverbindung = new SQLConnection();
         //KO testsystem = new KO(65);
         //testsystem.rundenBerechnen();
