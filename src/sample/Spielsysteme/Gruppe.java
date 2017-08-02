@@ -5,15 +5,16 @@ import sample.DAO.*;
 import sample.Enums.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Gruppe extends Spielsystem {
-	private List<Team> teamList;
-	private Spielsystem spielsystem;
+	private ArrayList<Team> teamList;
+	private GruppeMitEndrunde spielsystem;
 	int anzahlTeams;
 	int[][] schablone;
 
-	List<Spiel> alleSpiele = new ArrayList<>();
 	private static ArrayList<Integer> arrayVerschieben(ArrayList<Integer> arrayList){
 		int temp = arrayList.get(0);
 		arrayList.remove(0);
@@ -21,7 +22,7 @@ public class Gruppe extends Spielsystem {
 		return arrayList;
 	}
 
-	public Gruppe(List<Team> setzliste, Spielklasse spielklasse) {
+	public Gruppe(ArrayList<Team> setzliste, Spielklasse spielklasse) {
 		this.setSpielSystemArt(1);
 		setSpielklasse(spielklasse);
 		this.teamList = setzliste;
@@ -37,10 +38,11 @@ public class Gruppe extends Spielsystem {
 		}
 	}
 
-	public Gruppe(List<Team> setzliste, int vorrundenGruppe, Spielsystem spielsystem) {
+	public Gruppe(ArrayList<Team> setzliste, GruppeMitEndrunde spielsystem,Spielklasse spielklasse, int extraRunde) {
 		this.setSpielSystemArt(2);
-		this.setExtraRunde(vorrundenGruppe);
+		this.setExtraRunde(extraRunde);
 		this.spielsystem = spielsystem;
+		this.setSpielklasse(spielklasse);
 		this.teamList = setzliste;
 		freiloseHinzufuegen(teamList);
 		setAnzahlRunden(teamList.size()-1);
@@ -52,18 +54,20 @@ public class Gruppe extends Spielsystem {
 			rundeErstellen();
 			resetOffeneRundenSpiele();
 		}
+		setOffeneRundenSpiele(anzahlTeams/2);
+		resetAktuelleRunde();
 	}
 
 	private void alleSpieleErstellen(){
 		for (int i=1;i<=getAnzahlRunden();i++){
 			resetOffeneRundenSpiele();
 			for (int j=0; j<anzahlTeams/2;j++){
-				if(spielsystem==null) {
-					new Spiel(this.getSpielklasse(), spielSystemIDberechnen());
-				}
+				//if(spielsystem==null) {
+				new Spiel(spielSystemIDberechnen(),this);
+				/*}
 				else{
 					new Spiel(spielSystemIDberechnen(),this.spielsystem);
-				}
+				}*/
 				erhoeheOffeneRundenSpiele();
 			}
 			erhoeheAktuelleRunde();
@@ -146,8 +150,14 @@ public class Gruppe extends Spielsystem {
 		senkeOffeneRundenSpiele();
 		if(keineOffenenRundenSpiele()){
 			erhoeheAktuelleRunde();
+			setOffeneRundenSpiele(anzahlTeams/2);
+			System.out.println(getAktuelleRunde());
 			if(getAktuelleRunde()==getAnzahlRunden()){
-					return true;
+				sortList(teamList);
+				setPlatzierungsListe(teamList);
+				if (spielsystem!=null){
+					spielsystem.addPlatzierungsliste(teamList,getExtraRunde());
+				}
 			}
 		}
 		return false;

@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Timer;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import sample.DAO.*;
 import sample.Spielsysteme.*;
 import sample.Enums.*;
@@ -23,6 +26,7 @@ public class Turnier {
 	private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
 	private Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
 	private Dictionary<Integer, Spiel> spiele = new Hashtable<Integer,Spiel>();
+	private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
 
 
 	public Turnier(String name, int turnierid, LocalDate datum) {
@@ -30,6 +34,7 @@ public class Turnier {
 		this.name = name;
 		this.turnierid = turnierid;
 	}
+
 
 	public int getGesamtSpiele() {
 		return gesamtSpiele;
@@ -67,8 +72,16 @@ public class Turnier {
 		return vereine;
 	}
 
+	public Dictionary<Integer, Turnier> getTurniere() {
+		return turnierliste;
+	}
+
 	public void setVereine(Dictionary<Integer, Verein> vereine) {
 		this.vereine = vereine;
+	}
+
+	public void setTurniere(Dictionary<Integer, Turnier> turnierliste) {
+		this.turnierliste = turnierliste;
 	}
 
 	public Dictionary<Integer, Spieler> getSpieler() {

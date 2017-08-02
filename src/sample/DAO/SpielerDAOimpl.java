@@ -91,7 +91,7 @@ public class SpielerDAOimpl implements SpielerDAO {
                 "NName = ?, " +
                 "GDatum = ?, " +
                 "Geschlecht = ?, " +
-                "Verein = ?, " +
+                "VereinsID = ?, " +
                 "RLP_Einzel = ?, " +
                 "RLP_Doppel = ?, " +
                 "RLP_Mixed = ?, " +
@@ -167,7 +167,7 @@ public class SpielerDAOimpl implements SpielerDAO {
 
     }*/
 
-    /*@Override
+    @Override
     public List<Spieler> getAllSpieler() {
         List<Spieler> alleSpieler = new ArrayList<Spieler>();
         SQLConnection con = new SQLConnection();
@@ -199,26 +199,4 @@ public class SpielerDAOimpl implements SpielerDAO {
         return alleSpieler;
     }
 
-    @Override
-    public List<Spieler> getSetzliste(Spielklasse spielklasse) {
-
-        List<Spieler> setzliste = new ArrayList<Spieler>();
-        SQLConnection con = new SQLConnection();
-        Connection connection = con.SQLConnection();
-        int size = 0;
-        try {
-            Statement st = connection.createStatement();
-            ResultSet count = st.executeQuery("SELECT * from spieler");
-            ResultSetMetaData countMetaData = count.getMetaData();
-            size = countMetaData.getColumnCount();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Spieler Zählen Klappt nicht");
-        }
-        for (int i = 1; i <= size; i++) {
-            setzliste.add(read(i));
-            return null;
-        }
-        return setzliste;
-    }*/
 }

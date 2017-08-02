@@ -3,6 +3,8 @@ import sample.*;
 import sample.DAO.*;
 import sample.Enums.*;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public abstract class Spielsystem {
 	private int aktuelleRunde=0;
 	private int spielSystemArt;
 	private int extraRunde=0;
+	private List<Team> platzierungsListe;
 
 	protected int spielsystemCode;
 
@@ -25,11 +28,15 @@ public abstract class Spielsystem {
 	}
 
 	protected int spielSystemIDberechnen(){
-		int spielSystemID= spielSystemArt * 1000000;
+		int spielSystemID= spielSystemArt * 10000000;
 		spielSystemID += extraRunde *100000;
 		spielSystemID += aktuelleRunde*1000;
 		spielSystemID += offeneRundenSpiele;
 		return spielSystemID;
+	}
+
+	public int getSpielSystemArt() {
+		return spielSystemArt;
 	}
 
 	public void setExtraRunde(int extraRunde) {
@@ -76,10 +83,36 @@ public abstract class Spielsystem {
 		this.anzahlRunden = anzahlRunden;
 	}
 
+	public void setOffeneRundenSpiele(int offeneRundenSpiele) {
+		this.offeneRundenSpiele = offeneRundenSpiele;
+	}
+
 	public int getSpielsystemCode() {
 		return spielsystemCode;
 	}
-	public abstract List<Team> getPlatzierungsliste();
+
+	public int getExtraRunde() {
+		return extraRunde;
+	}
+
+	public List<Team> getPlatzierungsliste(){
+		return platzierungsListe;
+	}
+
+	public void setPlatzierungsListe(List<Team> platzierungsListe) {
+		this.platzierungsListe = platzierungsListe;
+	}
+
+	protected List<Team> sortList(List<Team> teamList) {
+		Collections.sort(teamList, new Comparator<Team>() {
+			@Override
+			public int compare(Team team1, Team team2) {
+				return team1.compareTo(team2);
+			}
+		});
+		return teamList;
+	}
+
 	public boolean systemWiederherstellen(int spielsystemCode){
 		return false;
 	}
