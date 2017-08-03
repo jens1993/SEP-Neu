@@ -210,6 +210,7 @@ public class TurnierladenControllerNeu extends Application implements Initializa
 
         @Override
         public void handle(MouseEvent t) {
+            System.out.println("mausclick");
             TableCell c = (TableCell) t.getSource();
             int index = c.getIndex();
             System.out.println("Name = " + turniere.get(index).getName());

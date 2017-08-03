@@ -1,18 +1,12 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import java.sql.*;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-
-import sample.Spielsysteme.*;
-import sample.Enums.*;
-import sample.DAO.*;
 
 public class Main extends Application {
 
@@ -28,11 +22,19 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         instance = this;
         this.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/Main.fxml"));
         this.primaryStage.setTitle("Badminton Turnierverwaltung - Kein Turnier ausgewählt");
-        this.primaryStage.setScene(new Scene(root, 1280, 720));
+        Scene scene = new Scene(root,500,200);
+        this.primaryStage.setScene(scene);
         this.primaryStage.setMaximized(true);
         this.primaryStage.show();
+        scene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("mouse click detected! " + mouseEvent.getSource());
+            }
+        });
+
 
     }
     public void updateTitle(String title) {
