@@ -113,6 +113,13 @@ public class Spiel {
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		spielDAO.create(this);
 	}
+
+	public Spiel(int systemSpielID, int spielID) { //Constructor für einlesen. Anschließend MUSS Spielsystem gesettet werden!)
+		this.systemSpielID = systemSpielID;
+		this.spielID = spielID;
+
+	}
+
 	public Team getSieger(){
 		if(ergebnis!=null){
 			return ergebnis.getSieger(this);
@@ -120,6 +127,12 @@ public class Spiel {
 		else{
 			return null;
 		}
+	}
+
+	public void setSpielsystem(Spielsystem spielsystem) {
+		this.spielsystem = spielsystem;
+		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
+		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 	}
 
 	public Spielsystem getSpielsystem() {

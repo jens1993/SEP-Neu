@@ -37,6 +37,21 @@ public class Gruppe extends Spielsystem {
 			resetOffeneRundenSpiele();
 		}
 	}
+	public Gruppe(ArrayList<Team> setzliste, Spielklasse spielklasse, List<Spiel> spielListe) {
+		this.setSpielSystemArt(1);
+		setSpielklasse(spielklasse);
+		this.teamList = setzliste;
+		freiloseHinzufuegen(teamList);
+		setAnzahlRunden(teamList.size()-1);
+		anzahlTeams = teamList.size();
+		alleSpieleErstellen();
+		schablone = new int[anzahlTeams][anzahlTeams];
+		schabloneBauen();
+		for (int i=0;i<getAnzahlRunden();i++){
+			rundeErstellen();
+			resetOffeneRundenSpiele();
+		}
+	}
 
 	public Gruppe(ArrayList<Team> setzliste, GruppeMitEndrunde spielsystem,Spielklasse spielklasse, int extraRunde) {
 		this.setSpielSystemArt(2);
@@ -135,6 +150,7 @@ public class Gruppe extends Spielsystem {
 		if ((teamList.size()/2) * 2 != teamList.size()){ // /2 *2 überprüft, ob Spieleranzahl gerade oder ungerade (int)
 			this.teamList.add(new Team("Freilos",this.getSpielklasse()));
 			System.out.println("Freilos zu Gruppe hinzugefügt");
+			super.setzlisteDAO.update(teamList.size(),teamList.get(teamList.size()-1),this.getSpielklasse());
 		}
 	}
 

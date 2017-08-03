@@ -9,6 +9,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 public abstract class Spielsystem {
+	protected SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
 	private String name;
 	private int anzahlTeilnehmer;
 	private int anzahlRunden;

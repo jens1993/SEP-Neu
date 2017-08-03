@@ -253,6 +253,7 @@ public class SchweizerSystem extends Spielsystem {
 		if ((teamList.size()/2) * 2 != teamList.size()){ // /2 *2 überprüft, ob Spieleranzahl gerade oder ungerade (int)
 			this.teamList.add(new Team("Freilos",this.getSpielklasse()));
 			System.out.println("Freilos zu schweizer hinzugefügt");
+			super.setzlisteDAO.update(teamList.size(),teamList.get(teamList.size()-1),this.getSpielklasse());
 		}
 	}
 }

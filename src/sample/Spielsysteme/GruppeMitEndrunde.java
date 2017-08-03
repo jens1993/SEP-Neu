@@ -71,6 +71,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 	private void freiloseHinzufuegen (){
 		while ((double)templist.size()%(anzahlGruppen*2)>0){
 			templist.add(new Team("Freilos",this));
+			super.setzlisteDAO.update(templist.size(),templist.get(templist.size()-1),this.getSpielklasse());
 		}
 	}
 	private void endRundeErstellen(){
