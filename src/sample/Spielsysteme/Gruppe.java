@@ -4,10 +4,7 @@ import sample.*;
 import sample.DAO.*;
 import sample.Enums.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Gruppe extends Spielsystem {
 	private ArrayList<Team> teamList;
@@ -37,8 +34,8 @@ public class Gruppe extends Spielsystem {
 			resetOffeneRundenSpiele();
 		}
 	}
-	public Gruppe(ArrayList<Team> setzliste, Spielklasse spielklasse, List<Spiel> spielListe) {
-		this.setSpielSystemArt(1);
+	public Gruppe(ArrayList<Team> setzliste, Spielklasse spielklasse, List<Spiel> spielListe, Dictionary<Integer,Ergebnis> ergebnisse) {
+		this.setSpielSystemArt(1); //Constructor nur für Einlesen aus der Datenbank
 		setSpielklasse(spielklasse);
 		this.teamList = setzliste;
 		freiloseHinzufuegen(teamList);

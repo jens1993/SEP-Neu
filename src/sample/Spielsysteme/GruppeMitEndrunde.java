@@ -28,6 +28,15 @@ public class GruppeMitEndrunde extends Spielsystem{
 		gruppenErstellen();
 	}
 
+	public GruppeMitEndrunde(List<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
+		this.setzliste = setzliste;		//Constructor nur für Einlesen aus der Datenbank
+		this.anzahlGruppen = anzahlGruppen;
+		this.anzahlWeiterkommender = anzahlWeiterkommender;
+		setSpielklasse(spielklasse);
+		setzListeAufteilen();
+		gruppenErstellen();
+	}
+
 	private void setzListeAufteilen(){
 		for (int k=0; k<setzliste.size();k++){
 			templist.add(setzliste.get(k));

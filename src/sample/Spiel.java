@@ -114,10 +114,15 @@ public class Spiel {
 		spielDAO.create(this);
 	}
 
-	public Spiel(int systemSpielID, int spielID) { //Constructor für einlesen. Anschließend MUSS Spielsystem gesettet werden!)
-		this.systemSpielID = systemSpielID;
-		this.spielID = spielID;
 
+	public Spiel(int spielID, Team heim, Team gast, LocalDate aufrufZeit, Spieler schiedsrichter, int status, int systemSpielID) {
+		this.spielID = spielID;
+		this.heim = heim;						//Constructor für einlesen. Anschließend MUSS Spielsystem gesettet werden!)
+		this.gast = gast;
+		this.aufrufZeit = aufrufZeit;
+		this.schiedsrichter = schiedsrichter;
+		this.status = status;
+		this.systemSpielID = systemSpielID;
 	}
 
 	public Team getSieger(){

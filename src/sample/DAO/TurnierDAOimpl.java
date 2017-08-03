@@ -3,16 +3,14 @@ package sample.DAO;
 import com.sun.org.apache.bcel.internal.generic.Select;
 
 import sample.*;
-import sample.Spielsysteme.Spielsystem;
+import sample.Spielsysteme.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
 public class TurnierDAOimpl implements TurnierDAO {
 
@@ -188,10 +186,115 @@ public class TurnierDAOimpl implements TurnierDAO {
     }
     private Spielsystem readSpielsystem(Spielklasse spielklasse){
         Spielsystem spielsystem = null;
-
+        ArrayList<Spiel> spiele = readSpiele(spielklasse);
+        Dictionary<Integer,Ergebnis> ergebnisse = readErgebnisse(spielklasse);
+        if (spiele.get(0).getSystemSpielID()<20000000){
+            spielsystem= new Gruppe(spielklasse.getSetzliste(),spielklasse,spiele,ergebnisse);
+        }
+        else if(spiele.get(0).getSystemSpielID()<30000000){
+            spielsystem= new GruppeMitEndrunde(spielklasse.getSetzliste(),spielklasse,spiele,ergebnisse);
+        }
+        else if(spiele.get(0).getSystemSpielID()<40000000){
+            spielsystem= new KO(spielklasse.getSetzliste(),spielklasse,spiele,ergebnisse);
+        }
+        else if(spiele.get(0).getSystemSpielID()<50000000){
+            spielsystem= new KOmitTrostrunde(spielklasse.getSetzliste(),spielklasse,spiele,ergebnisse);
+        }
+        else if(spiele.get(0).getSystemSpielID()<60000000){
+            spielsystem= new SchweizerSystem(spielklasse.getSetzliste(),spielklasse,spiele,ergebnisse);
+        }
 
         return spielsystem;
     }
+    private ArrayList<Spiel> readSpiele(Spielklasse spielklasse){
+        ArrayList<Spiel> spiele = new ArrayList<>();
+        String sql = "SELECT * FROM spiel INNER JOIN spielklasse_spielid on spiel.spielid=spielklasse_spielid.spielid WHERE spiel.spielklasseID = ?";
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setInt(1, spielklasse.getSpielklasseID());
+            ResultSet spielResult = smt.executeQuery();
+            while (spielResult.next()){
+                int spielid = spielResult.getInt("SpielID");
+                int heimid=spielResult.getInt("Heim");
+                Team heim = spielklasse.getTurnier().getTeams().get(heimid);
+                int gastid=spielResult.getInt("Gast");
+                Team gast = spielklasse.getTurnier().getTeams().get(gastid);
+                Date date = spielResult.getDate("AufrufZeit");
+                LocalDate aufrufzeit = LocalDate.now();
+                if(date!=null){
+                    aufrufzeit=date.toLocalDate();
+                }
+                int schiedsrichterid = spielResult.getInt("schiedsrichter");
+                Spieler schiedsrichter = null;
+                if(schiedsrichterid!=0) {
+                    schiedsrichter = spielklasse.getTurnier().getSpieler().get(schiedsrichterid);
+                }
+                int status = spielResult.getInt("status");
+                int systemspielid = spielResult.getInt("SpielklasseSpielID");
+                spiele.add(new Spiel(spielid,heim,gast,aufrufzeit,schiedsrichter,status,systemspielid));
+            }
+            smt.close();
+            con.closeCon();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Spiele lesen klappt nicht");
+        }
+        return spiele;
+    }
+    private Dictionary<Integer,Ergebnis> readErgebnisse(Spielklasse spielklasse){
+        Dictionary<Integer, Ergebnis> ergebnisse = new Hashtable<Integer,Ergebnis>();
+        Dictionary<Integer, ArrayList<int[]>> satzListe = new Hashtable<>();
+        String sql = "SELECT spiel_satzergebnis.spielID, Heimpunkte, gastpunkte FROM spiel_satzergebnis Inner join spiel on spiel_satzergebnis.spielID=spiel.spielid where spielklasseid=?";
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setInt(1, spielklasse.getSpielklasseID());
+            ResultSet ergebnisResult = smt.executeQuery();
+            while (ergebnisResult.next()){
+                int spielid = ergebnisResult.getInt("SpielID");
+                int[] satz = new int[2];
+                satz[0] = ergebnisResult.getInt("Heimpunkte");
+                satz[1] = ergebnisResult.getInt("Gastpunkte");
+                if(satzListe.get(spielid)==null){
+                    satzListe.put(spielid,new ArrayList<>());
+
+                }
+                satzListe.get(spielid).add(satz);
+            }
+            smt.close();
+            con.closeCon();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Ergebnisse lesen klappt nicht");
+        }
+        Enumeration keys = satzListe.keys();
+        while(keys.hasMoreElements()){
+            int key=(int)keys.nextElement();
+            ArrayList<int[]> ergebnis = satzListe.get(key);
+            int anzahlSaetze = ergebnis.size();
+            int[] ergebnisarray = new int[anzahlSaetze*2];
+            for (int i=0;i<anzahlSaetze;i++){
+                ergebnisarray[i*2]=ergebnis.get(i)[0];
+                ergebnisarray[i*2+1]=ergebnis.get(i)[1];
+            }
+            if(ergebnisarray.length==4){
+                ergebnisse.put(key,new Ergebnis(ergebnisarray[0],ergebnisarray[1],ergebnisarray[2],ergebnisarray[3]));
+            }
+            else if(ergebnisarray.length==6){
+                ergebnisse.put(key,new Ergebnis(ergebnisarray[0],ergebnisarray[1],ergebnisarray[2],ergebnisarray[3],ergebnisarray[4],ergebnisarray[5]));
+            }
+            else if(ergebnisarray.length==8){
+                ergebnisse.put(key,new Ergebnis(ergebnisarray[0],ergebnisarray[1],ergebnisarray[2],ergebnisarray[3],ergebnisarray[4],ergebnisarray[5],ergebnisarray[6],ergebnisarray[7]));
+            }
+            else if(ergebnisarray.length==10){
+                ergebnisse.put(key,new Ergebnis(ergebnisarray[0],ergebnisarray[1],ergebnisarray[2],ergebnisarray[3],ergebnisarray[4],ergebnisarray[5],ergebnisarray[6],ergebnisarray[7],ergebnisarray[8],ergebnisarray[9]));
+            }
+        }
+        return ergebnisse;
+    }
+
+
     private Dictionary<Integer,Feld> readFelder(Turnier turnier) {
         Dictionary<Integer, Feld> felder = new Hashtable<Integer,Feld>();
 

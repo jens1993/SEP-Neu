@@ -30,7 +30,22 @@ public class Main extends Application {
     public static void main(String[] args) {
 
 
-        launch(args);
+        // create a new hashtable
+        Dictionary<Integer,String> d = new Hashtable();
+
+        // add 2 elements
+        d.put(1, "Cocoa");
+        d.put(4, "Chocolate" + "Bar");
+        System.out.println("\"1\" is " + d.get(1));
+        System.out.println("\"4\" is " + d.get(4));
+
+        // generates a series of elements, one at a time
+        Enumeration e = d.keys();
+        while(e.hasMoreElements()) {
+            int key = (int) e.nextElement();
+            System.out.println(key);
+        }
+        //launch(args);
         //$java -Duser.language=en com.tutego.insel.bundle.InternationalHelloWorld
 
         //Locale.setDefault( new Locale("en", "UK") );
@@ -80,7 +95,7 @@ public class Main extends Application {
 //        ergebnisse.add(new Ergebnis(15,21,13,21));
 //        ergebnisse.add(new Ergebnis(19,21,21,14,21,18));
 //
-//
+
 //
 //        for(int i=1; i<=turnier.getSpiele().size();i++){
 //            System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());

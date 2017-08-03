@@ -1,9 +1,6 @@
 package sample.Spielsysteme;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import sample.*;
@@ -34,6 +31,24 @@ public class SchweizerSystem extends Spielsystem {
 		ersteRundeErstellen();
 		alleSpieleErstellen();
 	}
+
+	public SchweizerSystem(ArrayList<Team> teamList, Spielklasse spielklasse, ArrayList<Spiel> spielListe, Dictionary<Integer,Ergebnis> ergebnisse) {
+		setSpielklasse(spielklasse);				//Constructor nur für Einlesen aus der Datenbank
+		this.anzahlTeams = teamList.size();
+		/*if(anzahlRunden<anzahlTeams) {
+			setAnzahlRunden(anzahlRunden);
+		}
+		else{
+			setAnzahlRunden(anzahlTeams-1);
+			System.out.println("Es können bei "+anzahlTeams+" Teilnehmern maximal "+(anzahlTeams-1)+" Runden gespielt werden!");
+		}*/
+		this.teamList = teamList;
+		setSpielSystemArt(5);
+		freiloseHinzufuegen(this.teamList);
+		ersteRundeErstellen();
+		alleSpieleErstellen();
+	}
+
 
 	private void sortList(){
 		Collections.sort(nextTeamList, new Comparator<Team>() {
