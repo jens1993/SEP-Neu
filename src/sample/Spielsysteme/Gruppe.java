@@ -89,6 +89,7 @@ public class Gruppe extends Spielsystem {
 		for (int i=0;i<spiele.size();i++){
 			spiele.get(i).setSpielsystem(this);
 		}
+		setOffeneRundenSpiele(anzahlTeams/2);
 	}
 	private void alleErgebnisseEinlesen(Dictionary<Integer, Ergebnis> ergebnisse){
 		Enumeration e = ergebnisse.keys();
@@ -187,10 +188,10 @@ public class Gruppe extends Spielsystem {
 		return false;
 	}
 	public boolean beendeMatch(Spiel spiel, String einlesen) {
-		erhoeheOffeneRundenSpiele();
-		if(getOffeneRundenSpiele()==anzahlTeams/2){
+		senkeOffeneRundenSpiele();
+		if(getOffeneRundenSpiele()==0){
 			erhoeheAktuelleRunde();
-			resetOffeneRundenSpiele();
+			setOffeneRundenSpiele(anzahlTeams/2);
 			System.out.println(getAktuelleRunde());
 			if(getAktuelleRunde()==getAnzahlRunden()){
 				sortList(teamList);
