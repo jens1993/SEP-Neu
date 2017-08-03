@@ -131,4 +131,9 @@ public class GruppeMitEndrunde extends Spielsystem{
 	public boolean beendeMatch(Spiel spiel) {
 		return false;
 	}
+
+	@Override
+	public boolean beendeMatch(Spiel spiel, String einlesen) {
+		return false;
+	}
 }

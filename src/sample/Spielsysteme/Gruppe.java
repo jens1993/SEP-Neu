@@ -33,21 +33,18 @@ public class Gruppe extends Spielsystem {
 			rundeErstellen();
 			resetOffeneRundenSpiele();
 		}
+		setOffeneRundenSpiele(anzahlTeams/2);
+		resetAktuelleRunde();
 	}
-	public Gruppe(ArrayList<Team> setzliste, Spielklasse spielklasse, List<Spiel> spielListe, Dictionary<Integer,Ergebnis> ergebnisse) {
-		this.setSpielSystemArt(1); //Constructor nur für Einlesen aus der Datenbank
+	public Gruppe(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spielListe, Dictionary<Integer,Ergebnis> ergebnisse) {
+		this.setSpielSystemArt(1); 							//Constructor nur für Einlesen aus der Datenbank
 		setSpielklasse(spielklasse);
 		this.teamList = setzliste;
-		freiloseHinzufuegen(teamList);
 		setAnzahlRunden(teamList.size()-1);
 		anzahlTeams = teamList.size();
-		alleSpieleErstellen();
-		schablone = new int[anzahlTeams][anzahlTeams];
-		schabloneBauen();
-		for (int i=0;i<getAnzahlRunden();i++){
-			rundeErstellen();
-			resetOffeneRundenSpiele();
-		}
+		alleSpieleEinlesen(spielListe);
+		resetAktuelleRunde();
+		alleErgebnisseEinlesen(ergebnisse);
 	}
 
 	public Gruppe(ArrayList<Team> setzliste, GruppeMitEndrunde spielsystem,Spielklasse spielklasse, int extraRunde) {
@@ -86,6 +83,20 @@ public class Gruppe extends Spielsystem {
 		}
 		resetOffeneRundenSpiele();
 		resetAktuelleRunde();
+	}
+
+	private void alleSpieleEinlesen(ArrayList<Spiel> spiele){
+		for (int i=0;i<spiele.size();i++){
+			spiele.get(i).setSpielsystem(this);
+		}
+	}
+	private void alleErgebnisseEinlesen(Dictionary<Integer, Ergebnis> ergebnisse){
+		Enumeration e = ergebnisse.keys();
+		int key;
+		while(e.hasMoreElements()){
+			key = (int) e.nextElement();
+			getSpielklasse().getSpiele().get(key).setErgebnis(ergebnisse.get(key),"einlesen");
+		}
 	}
 
 	private void schabloneBauen(){
@@ -164,6 +175,22 @@ public class Gruppe extends Spielsystem {
 		if(keineOffenenRundenSpiele()){
 			erhoeheAktuelleRunde();
 			setOffeneRundenSpiele(anzahlTeams/2);
+			System.out.println(getAktuelleRunde());
+			if(getAktuelleRunde()==getAnzahlRunden()){
+				sortList(teamList);
+				setPlatzierungsListe(teamList);
+				if (spielsystem!=null){
+					spielsystem.addPlatzierungsliste(teamList,getExtraRunde());
+				}
+			}
+		}
+		return false;
+	}
+	public boolean beendeMatch(Spiel spiel, String einlesen) {
+		erhoeheOffeneRundenSpiele();
+		if(getOffeneRundenSpiele()==anzahlTeams/2){
+			erhoeheAktuelleRunde();
+			resetOffeneRundenSpiele();
 			System.out.println(getAktuelleRunde());
 			if(getAktuelleRunde()==getAnzahlRunden()){
 				sortList(teamList);

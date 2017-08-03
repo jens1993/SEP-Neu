@@ -193,6 +193,33 @@ public class Spiel {
 		ergebnisDAO.create(this);
 	}
 
+	public void setErgebnis(Ergebnis ergebnis, String einlesen) {
+		this.ergebnis = ergebnis;
+		int satzpunkteHeim = 0;
+		int satzpunkteGast = 0;
+		heim.addBisherigenGegner(gast);
+		gast.addBisherigenGegner(heim);
+		getSieger().addGewonnenesSpiel();
+		int i=0;
+		while (i<ergebnis.getErgebnisArray().length/2){
+			satzpunkteHeim = ergebnis.getErgebnisArray()[i*2];
+			satzpunkteGast = ergebnis.getErgebnisArray()[i*2+1];
+			heim.addGespieltePunkte(satzpunkteHeim,satzpunkteGast);
+			gast.addGespieltePunkte(satzpunkteGast,satzpunkteHeim);
+			if (satzpunkteHeim>satzpunkteGast) {
+				heim.addGewonnenenSatz();
+				gast.addVerlorenenSatz();
+			}
+			else{
+				gast.addGewonnenenSatz();
+				heim.addVerlorenenSatz();
+			}
+			i++;
+		}
+		status=3;
+		this.spielsystem.beendeMatch(this,"einlesen");
+	}
+
 	public int getSetzPlatzHeim() {
 		return setzPlatzHeim;
 	}

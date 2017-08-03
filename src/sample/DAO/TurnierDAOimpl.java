@@ -120,6 +120,10 @@ public class TurnierDAOimpl implements TurnierDAO {
             for(int i=1; i<=turnier.getSpielklassen().size();i++){
                 Spielklasse spielklasse = turnier.getSpielklassen().get(i);
                 readSetzliste(spielklasse);
+                Spielsystem spielsystem = readSpielsystem(spielklasse);
+                if (spielsystem != null){
+                    turnier.getSpielklassen().get(i).setSpielsystem(spielsystem);
+                }
             }
             smt.close();
             con.closeCon();
@@ -150,7 +154,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 spielklassen.put(spielklasseid,new Spielklasse(spielklasseid, spielklassenResult.getString("Disziplin"),spielklassenResult.getString("Niveau"),turnier));
                 spielklassen.get(spielklasseid).setAktiv(spielklassenResult.getBoolean("aktiv"));
                 spielklassen.get(spielklasseid).setMeldeKosten(spielklassenResult.getFloat("MeldeKosten"));
-                spielklassen.get(spielklasseid).setSpielsystem(readSpielsystem(spielklassen.get(spielklasseid)));
+                //spielklassen.get(spielklasseid).setSpielsystem(readSpielsystem(spielklassen.get(spielklasseid)));
             }
             smt.close();
             con.closeCon();
@@ -188,22 +192,19 @@ public class TurnierDAOimpl implements TurnierDAO {
         Spielsystem spielsystem = null;
         ArrayList<Spiel> spiele = readSpiele(spielklasse);
         Dictionary<Integer,Ergebnis> ergebnisse = readErgebnisse(spielklasse);
-        if (spiele.get(0).getSystemSpielID()<20000000){
-            spielsystem= new Gruppe(spielklasse.getSetzliste(),spielklasse,spiele,ergebnisse);
+        if (spiele != null) {
+            if (spiele.get(0).getSystemSpielID() < 20000000) {
+                spielsystem = new Gruppe(spielklasse.getSetzliste(), spielklasse, spiele, ergebnisse);
+            } else if (spiele.get(0).getSystemSpielID() < 30000000) {
+                spielsystem = new GruppeMitEndrunde(spielklasse.getSetzliste(), spielklasse, spiele, ergebnisse);
+            } else if (spiele.get(0).getSystemSpielID() < 40000000) {
+                spielsystem = new KO(spielklasse.getSetzliste(), spielklasse, spiele, ergebnisse);
+            } else if (spiele.get(0).getSystemSpielID() < 50000000) {
+                spielsystem = new KOmitTrostrunde(spielklasse.getSetzliste(), spielklasse, spiele, ergebnisse);
+            } else if (spiele.get(0).getSystemSpielID() < 60000000) {
+                spielsystem = new SchweizerSystem(spielklasse.getSetzliste(), spielklasse, spiele, ergebnisse);
+            }
         }
-        else if(spiele.get(0).getSystemSpielID()<30000000){
-            spielsystem= new GruppeMitEndrunde(spielklasse.getSetzliste(),spielklasse,spiele,ergebnisse);
-        }
-        else if(spiele.get(0).getSystemSpielID()<40000000){
-            spielsystem= new KO(spielklasse.getSetzliste(),spielklasse,spiele,ergebnisse);
-        }
-        else if(spiele.get(0).getSystemSpielID()<50000000){
-            spielsystem= new KOmitTrostrunde(spielklasse.getSetzliste(),spielklasse,spiele,ergebnisse);
-        }
-        else if(spiele.get(0).getSystemSpielID()<60000000){
-            spielsystem= new SchweizerSystem(spielklasse.getSetzliste(),spielklasse,spiele,ergebnisse);
-        }
-
         return spielsystem;
     }
     private ArrayList<Spiel> readSpiele(Spielklasse spielklasse){
@@ -240,19 +241,27 @@ public class TurnierDAOimpl implements TurnierDAO {
             e.printStackTrace();
             System.out.println("Spiele lesen klappt nicht");
         }
-        return spiele;
+        if (spiele.size()>0) {
+            return spiele;
+        }
+        else{
+            return null;
+        }
     }
     private Dictionary<Integer,Ergebnis> readErgebnisse(Spielklasse spielklasse){
         Dictionary<Integer, Ergebnis> ergebnisse = new Hashtable<Integer,Ergebnis>();
         Dictionary<Integer, ArrayList<int[]>> satzListe = new Hashtable<>();
-        String sql = "SELECT spiel_satzergebnis.spielID, Heimpunkte, gastpunkte FROM spiel_satzergebnis Inner join spiel on spiel_satzergebnis.spielID=spiel.spielid where spielklasseid=?";
+        String sql = "SELECT SpielklasseSpielID, Heimpunkte, Gastpunkte FROM spiel_satzergebnis " +
+                "Inner join spiel on spiel_satzergebnis.spielID=spiel.spielid " +
+                "inner join spielklasse_spielid on spiel.spielid=spielklasse_spielid.SpielID " +
+                "where spiel.spielklasseid=?";
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setInt(1, spielklasse.getSpielklasseID());
             ResultSet ergebnisResult = smt.executeQuery();
             while (ergebnisResult.next()){
-                int spielid = ergebnisResult.getInt("SpielID");
+                int spielid = ergebnisResult.getInt("SpielklasseSpielID");
                 int[] satz = new int[2];
                 satz[0] = ergebnisResult.getInt("Heimpunkte");
                 satz[1] = ergebnisResult.getInt("Gastpunkte");

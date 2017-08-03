@@ -136,4 +136,9 @@ public class KO extends Spielsystem {
 			return true;
 		}
 	}
+
+	@Override
+	public boolean beendeMatch(Spiel spiel, String einlesen) {
+		return false;
+	}
 }

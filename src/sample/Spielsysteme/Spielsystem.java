@@ -36,6 +36,10 @@ public abstract class Spielsystem {
 		return spielSystemID;
 	}
 
+	public int getOffeneRundenSpiele() {
+		return offeneRundenSpiele;
+	}
+
 	public int getSpielSystemArt() {
 		return spielSystemArt;
 	}
@@ -118,4 +122,5 @@ public abstract class Spielsystem {
 		return false;
 	}
 	public abstract boolean beendeMatch(Spiel spiel);
+	public abstract boolean beendeMatch(Spiel spiel,String einlesen);
 }

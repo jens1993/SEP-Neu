@@ -264,6 +264,11 @@ public class SchweizerSystem extends Spielsystem {
 		return false;
 	}
 
+	@Override
+	public boolean beendeMatch(Spiel spiel, String einlesen) {
+		return false;
+	}
+
 	private void freiloseHinzufuegen(List<Team> teamList){
 		if ((teamList.size()/2) * 2 != teamList.size()){ // /2 *2 überprüft, ob Spieleranzahl gerade oder ungerade (int)
 			this.teamList.add(new Team("Freilos",this.getSpielklasse()));

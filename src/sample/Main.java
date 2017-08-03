@@ -30,21 +30,8 @@ public class Main extends Application {
     public static void main(String[] args) {
 
 
-        // create a new hashtable
-        Dictionary<Integer,String> d = new Hashtable();
 
-        // add 2 elements
-        d.put(1, "Cocoa");
-        d.put(4, "Chocolate" + "Bar");
-        System.out.println("\"1\" is " + d.get(1));
-        System.out.println("\"4\" is " + d.get(4));
 
-        // generates a series of elements, one at a time
-        Enumeration e = d.keys();
-        while(e.hasMoreElements()) {
-            int key = (int) e.nextElement();
-            System.out.println(key);
-        }
         //launch(args);
         //$java -Duser.language=en com.tutego.insel.bundle.InternationalHelloWorld
 
@@ -62,46 +49,37 @@ public class Main extends Application {
 //        }
 
 
-//        TurnierDAO test = new TurnierDAOimpl();
-//        ArrayList <Turnier> turnierliste = new ArrayList<>();
-//        turnierliste = test.
-//    	TurnierDAO test = new TurnierDAOimpl();
-//    	Dictionary<Integer,Turnier>  turnierliste = test.getAllTurniere();
-//                    System.out.println(turnierliste.get(1).getName());
-//        System.out.println(turnierliste.get(20).getName());
+       ArrayList <Turnier> turnierliste = new ArrayList<>();
+    	TurnierDAO test = new TurnierDAOimpl();
 
-            //System.out.println((i+1)+" "+setzliste.get(i).getName());
+        //System.out.println((i+1)+" "+setzliste.get(i).getName());
+
+        Turnier turnier = new Turnier("testturnier",1,LocalDate.now());
+    	test.read(turnier);
+        Spielklasse spielklasse =turnier.getSpielklassen().get(1);
+   	    ArrayList<Team> setzliste = spielklasse.getSetzliste();
+        //spielklasse.setSpielsystem(new Gruppe(setzliste,spielklasse));
+        List<Ergebnis> ergebnisse = new ArrayList<>();
+        ergebnisse.add(new Ergebnis(21,15,21,12));
+        ergebnisse.add(new Ergebnis(15,21,21,19,30,29));
+        ergebnisse.add(new Ergebnis(21,12,21,11));
+        ergebnisse.add(new Ergebnis(21,18,21,19));
+        ergebnisse.add(new Ergebnis(22,20,15,21,23,25));
+        ergebnisse.add(new Ergebnis(16,21,21,15,21,14));
+        ergebnisse.add(new Ergebnis(26,24,28,30,12,21));
+        ergebnisse.add(new Ergebnis(21,14,21,17));
+        ergebnisse.add(new Ergebnis(21,6,21,14));
+        ergebnisse.add(new Ergebnis(16,21,14,21));
+        ergebnisse.add(new Ergebnis(26,24,21,14,15,21));
+        ergebnisse.add(new Ergebnis(21,15,21,18));
+        ergebnisse.add(new Ergebnis(12,21,16,21));
+        ergebnisse.add(new Ergebnis(15,21,13,21));
+        ergebnisse.add(new Ergebnis(19,21,21,14,21,18));
 
 
-//    	Turnier turnier = test.read(1);
-//        Spielklasse spielklasse =turnier.getSpielklassen().get(1);
-//   	ArrayList<Team> setzliste = spielklasse.getSetzliste();
-//   	setzliste.
-//        spielklasse.setSpielsystem(new GruppeMitEndrunde(setzliste,spielklasse,4,8));
-//        List<Ergebnis> ergebnisse = new ArrayList<>();
-//        ergebnisse.add(new Ergebnis(21,15,21,12));
-//        ergebnisse.add(new Ergebnis(15,21,21,19,30,29));
-//        ergebnisse.add(new Ergebnis(21,12,21,11));
-//        ergebnisse.add(new Ergebnis(21,18,21,19));
-//        ergebnisse.add(new Ergebnis(22,20,15,21,23,25));
-//        ergebnisse.add(new Ergebnis(16,21,21,15,21,14));
-//        ergebnisse.add(new Ergebnis(26,24,28,30,12,21));
-//        ergebnisse.add(new Ergebnis(21,14,21,17));
-//        ergebnisse.add(new Ergebnis(21,6,21,14));
-//        ergebnisse.add(new Ergebnis(16,21,14,21));
-//        ergebnisse.add(new Ergebnis(26,24,21,14,15,21));
-//        ergebnisse.add(new Ergebnis(21,15,21,18));
-//        ergebnisse.add(new Ergebnis(12,21,16,21));
-//        ergebnisse.add(new Ergebnis(15,21,13,21));
-//        ergebnisse.add(new Ergebnis(19,21,21,14,21,18));
-//
 
-//
-//        for(int i=1; i<=turnier.getSpiele().size();i++){
-//            System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
-//            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
-//            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
-//        }
+
+
         /*for(int i=4; i<=7;i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
             turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
