@@ -100,7 +100,7 @@ public class spielerHinzuController implements Initializable
         public void handle(MouseEvent t) {
             TableCell c = (TableCell) t.getSource();
             int index = c.getIndex();
-            System.out.println("Name = " + turniere.get(index).getName());
+            //System.out.println("Name = " + turniere.get(index).getName());
 
         }
     }

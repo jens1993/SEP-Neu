@@ -44,7 +44,7 @@ public class Main extends Application {
 
 
 
-        //launch(args);
+        launch(args);
         //$java -Duser.language=en com.tutego.insel.bundle.InternationalHelloWorld
 
         //Locale.setDefault( new Locale("en", "UK") );
@@ -61,32 +61,32 @@ public class Main extends Application {
 //        }
 
 
-       ArrayList <Turnier> turnierliste = new ArrayList<>();
-    	TurnierDAO test = new TurnierDAOimpl();
-
-        //System.out.println((i+1)+" "+setzliste.get(i).getName());
-
-        Turnier turnier = new Turnier("testturnier",1,LocalDate.now());
-    	test.read(turnier);
-        Spielklasse spielklasse =turnier.getSpielklassen().get(1);
-   	    ArrayList<Team> setzliste = spielklasse.getSetzliste();
-        //spielklasse.setSpielsystem(new Gruppe(setzliste,spielklasse));
-        List<Ergebnis> ergebnisse = new ArrayList<>();
-        ergebnisse.add(new Ergebnis(21,15,21,12));
-        ergebnisse.add(new Ergebnis(15,21,21,19,30,29));
-        ergebnisse.add(new Ergebnis(21,12,21,11));
-        ergebnisse.add(new Ergebnis(21,18,21,19));
-        ergebnisse.add(new Ergebnis(22,20,15,21,23,25));
-        ergebnisse.add(new Ergebnis(16,21,21,15,21,14));
-        ergebnisse.add(new Ergebnis(26,24,28,30,12,21));
-        ergebnisse.add(new Ergebnis(21,14,21,17));
-        ergebnisse.add(new Ergebnis(21,6,21,14));
-        ergebnisse.add(new Ergebnis(16,21,14,21));
-        ergebnisse.add(new Ergebnis(26,24,21,14,15,21));
-        ergebnisse.add(new Ergebnis(21,15,21,18));
-        ergebnisse.add(new Ergebnis(12,21,16,21));
-        ergebnisse.add(new Ergebnis(15,21,13,21));
-        ergebnisse.add(new Ergebnis(19,21,21,14,21,18));
+//       ArrayList <Turnier> turnierliste = new ArrayList<>();
+//    	TurnierDAO test = new TurnierDAOimpl();
+//
+//        //System.out.println((i+1)+" "+setzliste.get(i).getName());
+//
+//        Turnier turnier = new Turnier("testturnier",1,LocalDate.now());
+//    	test.read(turnier);
+//        Spielklasse spielklasse =turnier.getSpielklassen().get(1);
+//   	    ArrayList<Team> setzliste = spielklasse.getSetzliste();
+//        //spielklasse.setSpielsystem(new Gruppe(setzliste,spielklasse));
+//        List<Ergebnis> ergebnisse = new ArrayList<>();
+//        ergebnisse.add(new Ergebnis(21,15,21,12));
+//        ergebnisse.add(new Ergebnis(15,21,21,19,30,29));
+//        ergebnisse.add(new Ergebnis(21,12,21,11));
+//        ergebnisse.add(new Ergebnis(21,18,21,19));
+//        ergebnisse.add(new Ergebnis(22,20,15,21,23,25));
+//        ergebnisse.add(new Ergebnis(16,21,21,15,21,14));
+//        ergebnisse.add(new Ergebnis(26,24,28,30,12,21));
+//        ergebnisse.add(new Ergebnis(21,14,21,17));
+//        ergebnisse.add(new Ergebnis(21,6,21,14));
+//        ergebnisse.add(new Ergebnis(16,21,14,21));
+//        ergebnisse.add(new Ergebnis(26,24,21,14,15,21));
+//        ergebnisse.add(new Ergebnis(21,15,21,18));
+//        ergebnisse.add(new Ergebnis(12,21,16,21));
+//        ergebnisse.add(new Ergebnis(15,21,13,21));
+//        ergebnisse.add(new Ergebnis(19,21,21,14,21,18));
 
 
 
