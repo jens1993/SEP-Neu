@@ -16,16 +16,28 @@ import sample.DAO.*;
 
 public class Main extends Application {
 
+    private static Main instance;
+    public static Main getInstance() {
+        return instance;
+    }
+    private Stage primaryStage;
+
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+        instance = this;
+        this.primaryStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("GUI/sample.fxml"));
-        primaryStage.setTitle("Badminton Turnierverwaltung");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setMaximized(true);
-        primaryStage.show();
+        this.primaryStage.setTitle("Badminton Turnierverwaltung - Kein Turnier ausgewählt");
+        this.primaryStage.setScene(new Scene(root, 1280, 720));
+        this.primaryStage.setMaximized(true);
+        this.primaryStage.show();
+
     }
-
-
+    public void updateTitle(String title) {
+        primaryStage.setTitle(title);
+    }
 
     public static void main(String[] args) {
 

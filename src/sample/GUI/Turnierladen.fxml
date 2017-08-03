@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.TurnierladenControllerNeuer">
    <children>
       <GridPane>
         <columnConstraints>
@@ -31,11 +31,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
                   <Button mnemonicParsing="false" onAction="#auswahlSpeichern" text="Auswahl speichern" />
-                  <Button mnemonicParsing="false" onAction="#printTable" text="ladeTabelle">
-                     <HBox.margin>
-                        <Insets left="100.0" />
-                     </HBox.margin>
-                  </Button>
+                  <Button mnemonicParsing="false" onAction="#zeigeTabelle" text="Button" />
                </children>
                <padding>
                   <Insets right="100.0" />

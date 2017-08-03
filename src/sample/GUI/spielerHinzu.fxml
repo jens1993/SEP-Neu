@@ -16,7 +16,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Text?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="702.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.Controller">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="702.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.spielerHinzuController">
     <tabs>
         <Tab id="tab_spieler_hinzufuegen" text="Spieler hinzufügen">
             <content>
@@ -107,13 +107,13 @@
                                 <TextField fx:id="t_rm" />
                             </children>
                         </HBox>
-                        <Button mnemonicParsing="false" onAction="#SpeicherSpieler" text="Spieler speichern" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <ChoiceBox fx:id="combo_verein" onDragDetected="#SpeicherSpieler" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Button mnemonicParsing="false"  text="Spieler speichern" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <ChoiceBox fx:id="combo_verein"  prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                     </children>
                 </GridPane>
             </content>
         </Tab>
-        <Tab id="tab_spieler_bearbeiten" onSelectionChanged="#printTable" text="Spieler bearbeiten">
+        <Tab id="tab_spieler_bearbeiten"  text="Spieler bearbeiten">
          <content>
             <TableView fx:id="tabelle_spielerliste" prefHeight="200.0" prefWidth="200.0">
               <columns>

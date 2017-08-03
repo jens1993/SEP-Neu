@@ -28,7 +28,6 @@ public class Turnier {
 	private Dictionary<Integer, Spiel> spiele = new Hashtable<Integer,Spiel>();
 	private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
 
-
 	public Turnier(String name, int turnierid, LocalDate datum) {
 		this.datum = datum;
 		this.name = name;
