@@ -167,8 +167,8 @@ public class klasseHinzuGruppeController implements Initializable
             //hbox_2.getChildren().clear();
         }
     }
-
-    private void printSpielerZuordnenTable() throws Exception {
+    @FXML
+    public void printSpielerZuordnenTable() throws Exception {
         if(a.getAktuelleTurnierAuswahl()!=null) {
             ObservableList<Spieler> spieler = FXCollections.observableArrayList();
 
