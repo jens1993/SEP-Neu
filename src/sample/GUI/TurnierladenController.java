@@ -40,8 +40,7 @@ public class TurnierladenController implements Initializable
     @FXML
     public TableView TurnierlisteTabelle;
 
-    @FXML
-    public TableColumn Bearbeitung_TurnierLaden;
+
 
     @FXML
     public TableColumn TurnierDatumSpalte;
@@ -111,14 +110,4 @@ public class TurnierladenController implements Initializable
         }
     }
 
-    class MyEventHandler implements EventHandler<MouseEvent> {
-
-        @Override
-        public void handle(MouseEvent t) {
-            TableCell c = (TableCell) t.getSource();
-            int index = c.getIndex();
-            System.out.println("Name = " + turniere.get(index).getName());
-
-        }
-    }
 }

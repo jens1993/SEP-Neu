@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Infos/Protokoll.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/SpielSystemController.java" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Doppelklick bei Turnierladen zur Auswahl">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/KlasseUebersichtController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/KlasseUebersichtController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/SpielSystem.fxml" afterPath="$PROJECT_DIR$/src/sample/GUI/SpielSystem.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppe.fxml" afterPath="$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppe.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppeController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/klasseUebersicht.fxml" afterPath="$PROJECT_DIR$/src/sample/GUI/klasseUebersicht.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Infos/Protokoll.txt" afterPath="$PROJECT_DIR$/src/Infos/Protokoll.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/DAO/SpielerDAOimpl.java" afterPath="$PROJECT_DIR$/src/sample/DAO/SpielerDAOimpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/DAO/auswahlklasse.java" afterPath="$PROJECT_DIR$/src/sample/DAO/auswahlklasse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spieler.java" afterPath="$PROJECT_DIR$/src/sample/Spieler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Verein.java" afterPath="$PROJECT_DIR$/src/sample/Verein.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -106,51 +107,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TurnierladenController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java">
+      <file leaf-file-name="Spiel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Spiel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="54" column="23" lean-forward="false" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/GUI/MainController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="13" column="26" lean-forward="false" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Protokoll.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="KlasseUebersichtController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/GUI/KlasseUebersichtController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="36" column="9" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpielSystemController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="592">
+              <caret line="220" column="0" lean-forward="false" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -158,65 +119,126 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpielSystem.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/GUI/SpielSystem.fxml">
+      <file leaf-file-name="TurnierDAOimpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="87" lean-forward="true" selection-start-line="20" selection-start-column="87" selection-end-line="20" selection-end-column="87" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="spielerHinzu.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="277" lean-forward="true" selection-start-line="18" selection-start-column="240" selection-end-line="18" selection-end-column="277" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="klasseHinzuGruppeController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppeController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="86" column="9" lean-forward="true" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="222">
+              <caret line="388" column="49" lean-forward="true" selection-start-line="388" selection-start-column="49" selection-end-line="388" selection-end-column="49" />
+              <folding>
+                <marker date="1501777976344" expanded="true" signature="428:568" ph="INSERT INTO Turnier... " />
+                <marker date="1501777976344" expanded="true" signature="1415:1453" ph="Delete From " />
+                <marker date="1501777976344" expanded="true" signature="2019:2257" ph="UPDATE Turni... " />
+                <marker date="1501777976344" expanded="true" signature="3119:3160" ph="SELECT * FRO... turnier" />
+                <marker date="1501777976344" expanded="true" signature="5032:5077" ph="SELECT * FRO... spielklasse" />
+                <marker date="1501777976344" expanded="true" signature="6562:6841" ph="SELECT team.... spielklasse_setzliste" />
+                <marker date="1501777976344" expanded="true" signature="8712:8837" ph="SELECT * FRO... spiel" />
+                <marker date="1501777976344" expanded="true" signature="10806:11107" ph="SELECT Spiel... spiel_satzergebnis" />
+                <marker date="1501777976344" expanded="true" signature="13643:13681" ph="SELECT * FRO... feld" />
+                <marker date="1501777976344" expanded="true" signature="14538:15049" ph="SELECT verei... spieler" />
+                <marker date="1501777976344" expanded="true" signature="15996:16017" ph="SELECT * FRO... Turnier" />
+                <marker date="1501777976344" expanded="true" signature="17094:17115" ph="SELECT * FRO... SPIELER" />
+                <marker date="1501777976344" expanded="true" signature="19421:19532" ph="select * fro... team" />
+                <marker date="1501777976344" expanded="true" signature="20235:20503" ph="select team.... team_spieler" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="klasseHinzuGruppe.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppe.fxml">
+      <file leaf-file-name="TurnierladenController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
-              <caret line="290" column="86" lean-forward="false" selection-start-line="290" selection-start-column="61" selection-end-line="290" selection-end-column="86" />
+            <state relative-caret-position="374">
+              <caret line="102" column="50" lean-forward="true" selection-start-line="102" selection-start-column="50" selection-end-line="102" selection-end-column="50" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="klasseUebersicht.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/GUI/klasseUebersicht.fxml">
+      <file leaf-file-name="Turnier.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Turnier.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="35" column="40" lean-forward="true" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
+            <state relative-caret-position="144">
+              <caret line="37" column="4" lean-forward="true" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
+        </entry>
+      </file>
+      <file leaf-file-name="SpielerDAOimpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/DAO/SpielerDAOimpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="67">
+              <caret line="110" column="49" lean-forward="false" selection-start-line="110" selection-start-column="49" selection-end-line="110" selection-end-column="49" />
+              <folding>
+                <marker date="1501864678418" expanded="true" signature="366:781" ph="INSERT INTO spieler... " />
+                <marker date="1501864678418" expanded="true" signature="2031:2069" ph="Delete From " />
+                <marker date="1501864678418" expanded="true" signature="2635:3210" ph="UPDATE spiel... " />
+                <marker date="1501864678418" expanded="true" signature="5934:5970" ph="SELECT COUNT... spieler" />
+                <marker date="1501864678418" expanded="true" signature="6300:6343" ph="Select VName... spieler" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Object.class" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_77/jre/lib/rt.jar!/java/lang/Object.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spielerHinzuController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="105" column="0" lean-forward="true" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="auswahlklasse.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/DAO/auswahlklasse.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding>
+                <element signature="e#873#874#0" expanded="true" />
+                <element signature="e#906#907#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Protokoll.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="33" column="84" lean-forward="true" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Spieler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Spieler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="170" column="26" lean-forward="true" selection-start-line="170" selection-start-column="26" selection-end-line="170" selection-end-column="26" />
+              <folding>
+                <element signature="e#429#430#0" expanded="true" />
+                <element signature="e#454#455#0" expanded="true" />
+                <element signature="e#493#494#0" expanded="true" />
+                <element signature="e#518#519#0" expanded="true" />
+                <element signature="e#562#563#0" expanded="true" />
+                <element signature="e#595#596#0" expanded="true" />
+                <element signature="e#4009#4010#0" expanded="true" />
+                <element signature="e#4033#4034#0" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
@@ -234,36 +256,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>selectionm</find>
-      <find>turnierlad</find>
-      <find>tabelle_SpielerZuordnen</find>
-      <find>auswah</find>
-      <find>tabelle_S</find>
-      <find>name</find>
-      <find>spielerGe</find>
-      <find>visibl</find>
-      <find>get</find>
-      <find>getgD</find>
-      <find>anzahlRunden</find>
-      <find>Spiel</find>
-      <find>readSpielsystem</find>
-      <find>create</find>
-      <find>new Spiel(</find>
-      <find>TableColumn</find>
-      <find>mouse</find>
-      <find>callba</find>
-      <find>start</find>
-      <find>auswahlsp</find>
       <find>stage</find>
       <find>click</find>
       <find>((Node)(event.getSource())).getScene().getWindow().hide();</find>
       <find>Bearbeitung_TurnierLaden</find>
       <find>TurnierDatumSpalte</find>
       <find>TurnierlisteTabelle</find>
-      <find>add</find>
       <find>test</find>
       <find>press</find>
       <find>printSpielerZuordnenTable</find>
+      <find>pri</find>
+      <find>vereinevereine</find>
+      <find>Bea</find>
+      <find>add</find>
+      <find>vname</find>
+      <find>node</find>
+      <find>select</find>
+      <find>printl</find>
+      <find>item</find>
+      <find>clickedRow</find>
+      <find>spielerau</find>
+      <find>tabelle</find>
+      <find>erf</find>
+      <find>spielerauswahl=</find>
+      <find>clone</find>
+      <find>tos</find>
+      <find>upda</find>
+      <find>spieler</find>
+      <find>observ</find>
+      <find>tableview</find>
+      <find>getGe</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -287,14 +309,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/sample/DAO/SetzlisteDAO.java" />
-        <option value="$PROJECT_DIR$/src/sample/DAO/SpielDAO.java" />
-        <option value="$PROJECT_DIR$/src/sample/DAO/SpielklasseDAOimpl.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/VereinDAO.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/VereinDAOimpl.java" />
-        <option value="$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/fabric/jdbc/FabricMySQLDriver.class" />
-        <option value="$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/jdbc/NonRegisteringDriver.class" />
-        <option value="$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/jdbc/StringUtils.class" />
         <option value="$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/jdbc/PreparedStatement.class" />
         <option value="$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/jdbc/StatementImpl.class" />
         <option value="$PROJECT_DIR$/src/sample/DAO/TeamDAOimpl.java" />
@@ -310,10 +326,8 @@
         <option value="$PROJECT_DIR$/src/sample/Turnier.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/TurnierDAO.java" />
         <option value="$PROJECT_DIR$/src/sample/Enums/AnzahlRunden.java" />
-        <option value="$PROJECT_DIR$/src/sample/DAO/SpielerDAOimpl.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/Controller.java" />
         <option value="$PROJECT_DIR$/src/sample/Team.java" />
-        <option value="$PROJECT_DIR$/src/sample/Spieler.java" />
         <option value="$PROJECT_DIR$/src/resources/HelloWorld_en.properties" />
         <option value="$PROJECT_DIR$/src/resources/HelloWorld_de.properties" />
         <option value="$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java" />
@@ -324,20 +338,28 @@
         <option value="$PROJECT_DIR$/src/sample/Spielsysteme/KOmitTrostrunde.java" />
         <option value="$PROJECT_DIR$/src/sample/Spielsysteme/Gruppe.java" />
         <option value="$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java" />
-        <option value="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/TurnierladenControllerNeu.java" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
         <option value="$PROJECT_DIR$/src/sample/Spielsysteme/TurnierladenControllerNeu.java" />
         <option value="$PROJECT_DIR$/src/sample/Spielsysteme/TurnierladenController.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/CustomImage.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/TurnierladenControllerNeuer.java" />
-        <option value="$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppe.fxml" />
         <option value="$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppeController.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/klasseUebersicht.fxml" />
         <option value="$PROJECT_DIR$/src/sample/GUI/KlasseUebersichtController.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/SpielSystem.fxml" />
         <option value="$PROJECT_DIR$/src/sample/GUI/SpielSystemController.java" />
+        <option value="$PROJECT_DIR$/src/sample/Verein.java" />
+        <option value="$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java" />
+        <option value="$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/fabric/jdbc/FabricMySQLDriver.class" />
+        <option value="$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/jdbc/NonRegisteringDriver.class" />
+        <option value="$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/jdbc/StringUtils.class" />
+        <option value="$PROJECT_DIR$/src/sample/DAO/auswahlklasse.java" />
+        <option value="$PROJECT_DIR$/src/sample/DAO/SpielerDAOimpl.java" />
+        <option value="$PROJECT_DIR$/src/sample/Spieler.java" />
+        <option value="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" />
+        <option value="$PROJECT_DIR$/src/Infos/Protokoll.txt" />
       </list>
     </option>
   </component>
@@ -349,10 +371,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="1358" />
-    <option name="y" value="-320" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -459,6 +481,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -619,9 +644,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -646,13 +668,131 @@
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\jens\Pictures\Programme\SEP-Neu-git_JULI\SEP-Neu\src\sample\GUI" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\SEP-Neu\src\Infos" />
       <recent name="C:\Users\jens\Pictures\Programme\sep_funktioniert\SEP-Neu\src\sample\GUI" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jens\Pictures\Programme\SEP-Neu-git_JULI\SEP-Neu\src\sample\GUI" />
+    </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/sample/GUI/KlasseUebersichtController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppe.fxml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppeController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/sample/GUI/klasseUebersicht.fxml</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Infos/Protokoll.txt</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/sample/GUI/SpielSystem.fxml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/sample/GUI/SpielSystemController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/sample/GUI/spielklasseBearbeiten.fxml</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -948,6 +1088,13 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
       <method />
     </configuration>
     <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
@@ -1488,10 +1635,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="399700000" />
+    <option name="totallyTimeSpent" value="414861000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-320" width="1936" height="1096" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1503,75 +1650,59 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17527862" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19599108" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21770833" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20682302" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13392857" sideWeight="0.49017468" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3964365" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23496659" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DBHelper" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13392857" sideWeight="0.50982535" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15829694" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="DBOutput" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-    </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="DBHelper" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297619" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13392857" sideWeight="0.49017468" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3973799" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32532752" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3964365" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32293987" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2117904" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13392857" sideWeight="0.50982535" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17527862" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264192" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12738095" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15829694" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21770833" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="DBOutput" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="DBOutput" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
@@ -1645,17 +1776,28 @@
           <properties />
           <option name="timeStamp" value="133" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java</url>
+          <line>155</line>
+          <properties />
+          <option name="timeStamp" value="157" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java</url>
+          <line>192</line>
+          <properties />
+          <option name="timeStamp" value="159" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="153" />
+      <option name="time" value="160" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="turnier.getSpiele()" language="JAVA" />
-        <watch expression="test" />
-        <watch expression="spielSystemIDberechnen()" language="JAVA" />
+        <watch expression="a.getSpielerDAO().getAllSpieler()" language="JAVA" />
+        <watch expression="((JDBC42PreparedStatement) smt).getId()" language="JAVA" custom="com.mysql.jdbc.JDBC42PreparedStatement" />
       </configuration>
     </watches-manager>
   </component>
@@ -1664,148 +1806,12 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/sample/DAO/SpielerDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/SpielTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#815#816#0" expanded="false" />
-            <element signature="e#842#843#0" expanded="false" />
-            <element signature="e#877#878#0" expanded="false" />
-            <element signature="e#905#906#0" expanded="false" />
-            <element signature="e#936#937#0" expanded="false" />
-            <element signature="e#964#965#0" expanded="false" />
-            <element signature="e#1000#1001#0" expanded="false" />
-            <element signature="e#1029#1030#0" expanded="false" />
-            <element signature="e#1076#1077#0" expanded="false" />
-            <element signature="e#1112#1113#0" expanded="false" />
-            <element signature="e#1153#1154#0" expanded="false" />
-            <element signature="e#1187#1188#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/neuesTurnier.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="677">
-          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/DAO/VereinDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="41" lean-forward="false" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/DAO/TeamDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="14" column="6" lean-forward="false" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/Main.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="81" column="105" lean-forward="false" selection-start-line="81" selection-start-column="84" selection-end-line="81" selection-end-column="105" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/Turnierladen.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="30" column="77" lean-forward="true" selection-start-line="30" selection-start-column="77" selection-end-line="30" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/beans/property/ObjectPropertyBase.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/control/TableView.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/Node.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/control/Button.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/event/Event.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/scene/Scene.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/javafx-src.zip!/javafx/fxml/FXMLLoader.java" />
     <entry file="file://$PROJECT_DIR$/src/sample/Enums/Disziplin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#627#628#0" expanded="false" />
-            <element signature="e#646#647#0" expanded="false" />
-            <element signature="e#703#704#0" expanded="false" />
-            <element signature="e#722#723#0" expanded="false" />
-            <element signature="e#793#794#0" expanded="false" />
-            <element signature="e#812#813#0" expanded="false" />
-            <element signature="e#872#873#0" expanded="false" />
-            <element signature="e#891#892#0" expanded="false" />
-            <element signature="e#951#952#0" expanded="false" />
-            <element signature="e#970#971#0" expanded="false" />
-            <element signature="e#1059#1060#0" expanded="false" />
-            <element signature="e#1074#1075#0" expanded="false" />
-            <element signature="e#1114#1115#0" expanded="false" />
-            <element signature="e#1133#1134#0" expanded="false" />
-            <element signature="e#1182#1183#0" expanded="false" />
-            <element signature="e#1201#1202#0" expanded="false" />
-            <element signature="e#1251#1252#0" expanded="false" />
-            <element signature="e#1269#1270#0" expanded="false" />
-            <element signature="e#1310#1311#0" expanded="false" />
-            <element signature="e#1337#1338#0" expanded="false" />
-            <element signature="e#1382#1383#0" expanded="false" />
-            <element signature="e#1400#1401#0" expanded="false" />
-            <element signature="e#1449#1450#0" expanded="false" />
-            <element signature="e#1468#1469#0" expanded="false" />
-            <element signature="e#1515#1516#0" expanded="false" />
-            <element signature="e#1534#1535#0" expanded="false" />
-            <element signature="e#1593#1594#0" expanded="false" />
-            <element signature="e#1612#1613#0" expanded="false" />
-            <element signature="e#1681#1682#0" expanded="false" />
-            <element signature="e#1700#1701#0" expanded="false" />
-            <element signature="e#1780#1781#0" expanded="false" />
-            <element signature="e#1799#1800#0" expanded="false" />
-            <element signature="e#1856#1857#0" expanded="false" />
-            <element signature="e#1875#1876#0" expanded="false" />
-            <element signature="e#1932#1933#0" expanded="false" />
-            <element signature="e#1951#1952#0" expanded="false" />
-            <element signature="e#2034#2035#0" expanded="false" />
-            <element signature="e#2052#2053#0" expanded="false" />
-            <element signature="e#2112#2113#0" expanded="false" />
-            <element signature="e#2130#2131#0" expanded="false" />
-            <element signature="e#2239#2240#0" expanded="false" />
-            <element signature="e#2257#2258#0" expanded="false" />
-            <element signature="e#2301#2302#0" expanded="false" />
-            <element signature="e#2316#2317#0" expanded="false" />
-            <element signature="e#2364#2365#0" expanded="false" />
-            <element signature="e#2379#2380#0" expanded="false" />
-            <element signature="e#2437#2438#0" expanded="false" />
-            <element signature="e#2455#2456#0" expanded="false" />
-            <element signature="e#2522#2523#0" expanded="false" />
-            <element signature="e#2540#2541#0" expanded="false" />
-            <element signature="e#2611#2612#0" expanded="false" />
-            <element signature="e#2629#2630#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1813,19 +1819,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="11" column="36" lean-forward="false" selection-start-line="11" selection-start-column="36" selection-end-line="185" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/DAO/SpielerDAOimpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1853">
-          <caret line="117" column="51" lean-forward="false" selection-start-line="117" selection-start-column="51" selection-end-line="117" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1841,44 +1834,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1347">
           <caret line="131" column="0" lean-forward="true" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/DAO/TurnierDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/Controller.java" />
     <entry file="file://$PROJECT_DIR$/src/resources/HelloWorld_de.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="33" lean-forward="true" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/HelloWorld_en.properties">
       <provider editor-type-id="ResourceBundle">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/HelloWorld_en.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="27" />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Turnier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="52" column="18" lean-forward="false" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1886,7 +1862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1946,7 +1921,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/Spielsystem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
+        <state relative-caret-position="1314">
           <caret line="124" column="67" lean-forward="false" selection-start-line="124" selection-start-column="67" selection-end-line="124" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="false" />
@@ -1990,8 +1965,8 @@
             <element signature="e#2326#2327#0" expanded="false" />
             <element signature="e#2393#2394#0" expanded="false" />
             <element signature="e#2442#2443#0" expanded="false" />
-            <element signature="e#2528#2657#0" expanded="false" />
-            <element signature="e#2656#2657#0" expanded="false" />
+            <element signature="e#2612#2613#0" expanded="false" />
+            <element signature="e#2652#2653#0" expanded="false" />
             <element signature="e#2742#2743#0" expanded="false" />
             <element signature="e#2761#2762#0" expanded="false" />
           </folding>
@@ -2000,7 +1975,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/KOmitTrostrunde.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
+        <state relative-caret-position="324">
           <caret line="26" column="8" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="false" />
@@ -2014,21 +1989,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/SchweizerSystem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4403">
+        <state relative-caret-position="4716">
           <caret line="269" column="27" lean-forward="false" selection-start-line="269" selection-start-column="27" selection-end-line="269" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="false" />
-            <element signature="e#383#389#0" expanded="false" />
-            <element signature="e#457#474#0" expanded="false" />
-            <element signature="e#2046#2175#0" expanded="false" />
-            <element signature="e#2174#2175#0" expanded="false" />
+            <element signature="e#2130#2131#0" expanded="false" />
+            <element signature="e#2170#2171#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/Gruppe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3077">
+        <state relative-caret-position="3258">
           <caret line="187" column="21" lean-forward="false" selection-start-line="187" selection-start-column="21" selection-end-line="187" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="false" />
@@ -2046,62 +2019,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Spieler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="51" column="45" lean-forward="false" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Spiel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
-          <caret line="220" column="0" lean-forward="false" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/TurnierladenControllerNeu.java" />
     <entry file="file://$PROJECT_DIR$/src/sample/Spielsysteme/TurnierladenController.java" />
-    <entry file="file://$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4114">
-          <caret line="252" column="76" lean-forward="false" selection-start-line="252" selection-start-column="76" selection-end-line="252" selection-end-column="76" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/CustomImage.java" />
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="54" column="23" lean-forward="false" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/klasseUebersicht.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="35" column="40" lean-forward="true" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppe.fxml">
@@ -2123,58 +2052,271 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml">
+    <entry file="file://$PROJECT_DIR$/src/sample/GUI/SpielSystem.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="277" lean-forward="true" selection-start-line="18" selection-start-column="240" selection-end-line="18" selection-end-column="277" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/SpielSystem.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="87" lean-forward="true" selection-start-line="20" selection-start-column="87" selection-end-line="20" selection-end-column="87" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/GUI/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="51" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1410">
+          <caret line="23" column="21" lean-forward="false" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+          <folding>
+            <marker date="1501858594763" expanded="true" signature="1055:14985" ph="..." />
+            <marker date="1501858594763" expanded="true" signature="1066:14974" ph="..." />
+            <marker date="1501858594763" expanded="true" signature="7987:8728" ph="..." />
+            <marker date="1501858594763" expanded="true" signature="8006:8713" ph="..." />
+            <marker date="1501858594763" expanded="true" signature="8096:8693" ph="..." />
+            <marker date="1501858594763" expanded="true" signature="8120:8668" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Verein.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="39" column="5" lean-forward="true" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+          <folding>
+            <element signature="e#319#320#0" expanded="true" />
+            <element signature="e#337#338#0" expanded="true" />
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#707#708#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_77/javafx-src.zip!/javafx/scene/control/ChoiceBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="195" column="62" lean-forward="false" selection-start-line="195" selection-start-column="62" selection-end-line="195" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/SpielklasseDAOimpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="63" column="26" lean-forward="false" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="26" />
+          <folding>
+            <marker date="1501755563489" expanded="true" signature="360:548" ph="INSERT INTO spielklasse... " />
+            <marker date="1501755563489" expanded="true" signature="1315:1361" ph="Delete From " />
+            <marker date="1501755563489" expanded="true" signature="1946:2193" ph="UPDATE spiel... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/SpielerDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="171" column="49" lean-forward="true" selection-start-line="171" selection-start-column="49" selection-end-line="171" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/fabric/jdbc/FabricMySQLDriver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/jdbc/StringUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="1015" column="0" lean-forward="false" selection-start-line="1015" selection-start-column="0" selection-end-line="1015" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar!/com/mysql/jdbc/NonRegisteringDriver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="489">
+          <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/SQLConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding>
+            <marker date="1501755563482" expanded="true" signature="4587:4656" ph="SELECT Spiel... spieler" />
+            <marker date="1501755563482" expanded="true" signature="5107:5200" ph="INSERT INTO spieler... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_77/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="1657" column="0" lean-forward="false" selection-start-line="1657" selection-start-column="0" selection-end-line="1657" selection-end-column="0" />
+          <folding>
+            <element signature="e#66933#66934#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_77/javafx-src.zip!/javafx/event/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="181" column="31" lean-forward="true" selection-start-line="181" selection-start-column="31" selection-end-line="181" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/TurnierDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_77/jre/lib/rt.jar!/java/lang/Object.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="102" column="50" lean-forward="true" selection-start-line="102" selection-start-column="50" selection-end-line="102" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Turnier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="37" column="4" lean-forward="true" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="388" column="49" lean-forward="true" selection-start-line="388" selection-start-column="49" selection-end-line="388" selection-end-column="49" />
+          <folding>
+            <marker date="1501777976344" expanded="true" signature="428:568" ph="INSERT INTO Turnier... " />
+            <marker date="1501777976344" expanded="true" signature="1415:1453" ph="Delete From " />
+            <marker date="1501777976344" expanded="true" signature="2019:2257" ph="UPDATE Turni... " />
+            <marker date="1501777976344" expanded="true" signature="3119:3160" ph="SELECT * FRO... turnier" />
+            <marker date="1501777976344" expanded="true" signature="5032:5077" ph="SELECT * FRO... spielklasse" />
+            <marker date="1501777976344" expanded="true" signature="6562:6841" ph="SELECT team.... spielklasse_setzliste" />
+            <marker date="1501777976344" expanded="true" signature="8712:8837" ph="SELECT * FRO... spiel" />
+            <marker date="1501777976344" expanded="true" signature="10806:11107" ph="SELECT Spiel... spiel_satzergebnis" />
+            <marker date="1501777976344" expanded="true" signature="13643:13681" ph="SELECT * FRO... feld" />
+            <marker date="1501777976344" expanded="true" signature="14538:15049" ph="SELECT verei... spieler" />
+            <marker date="1501777976344" expanded="true" signature="15996:16017" ph="SELECT * FRO... Turnier" />
+            <marker date="1501777976344" expanded="true" signature="17094:17115" ph="SELECT * FRO... SPIELER" />
+            <marker date="1501777976344" expanded="true" signature="19421:19532" ph="select * fro... team" />
+            <marker date="1501777976344" expanded="true" signature="20235:20503" ph="select team.... team_spieler" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/auswahlklasse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="e#873#874#0" expanded="true" />
+            <element signature="e#906#907#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Spiel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="592">
+          <caret line="220" column="0" lean-forward="false" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/klasseHinzuGruppeController.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/SpielerDAOimpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="86" column="9" lean-forward="true" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
-          <folding />
+        <state relative-caret-position="67">
+          <caret line="110" column="49" lean-forward="false" selection-start-line="110" selection-start-column="49" selection-end-line="110" selection-end-column="49" />
+          <folding>
+            <marker date="1501864678418" expanded="true" signature="366:781" ph="INSERT INTO spieler... " />
+            <marker date="1501864678418" expanded="true" signature="2031:2069" ph="Delete From " />
+            <marker date="1501864678418" expanded="true" signature="2635:3210" ph="UPDATE spiel... " />
+            <marker date="1501864678418" expanded="true" signature="5934:5970" ph="SELECT COUNT... spieler" />
+            <marker date="1501864678418" expanded="true" signature="6300:6343" ph="Select VName... spieler" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/MainController.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/Spieler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="13" column="26" lean-forward="false" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+        <state relative-caret-position="231">
+          <caret line="170" column="26" lean-forward="true" selection-start-line="170" selection-start-column="26" selection-end-line="170" selection-end-column="26" />
+          <folding>
+            <element signature="e#429#430#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#493#494#0" expanded="true" />
+            <element signature="e#518#519#0" expanded="true" />
+            <element signature="e#562#563#0" expanded="true" />
+            <element signature="e#595#596#0" expanded="true" />
+            <element signature="e#4009#4010#0" expanded="true" />
+            <element signature="e#4033#4034#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="105" column="0" lean-forward="true" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="594">
+          <caret line="33" column="84" lean-forward="true" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
           <folding />
         </state>
       </provider>

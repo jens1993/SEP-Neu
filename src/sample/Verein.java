@@ -33,4 +33,9 @@ public class Verein {
 		this.name = name;
 		this.verband = verband;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
 }

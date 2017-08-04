@@ -24,7 +24,7 @@ public class SpielerDAOimpl implements SpielerDAO {
                 + "NName,"
                 + "GDatum,"
                 + "Geschlecht,"
-                + "Verein,"
+                + "Vereinsid,"
                 + "RLP_Einzel, "
                 + "RLP_Doppel, "
                 + "RLP_Mixed, "
@@ -130,9 +130,11 @@ public class SpielerDAOimpl implements SpielerDAO {
                 smt.setNull(14,Types.INTEGER);
             }
             smt.setInt(15, spieler.getSpielerID());
+
             smt.executeUpdate();
             smt.close();
             con.closeCon();
+
             return true;
 
         } catch (SQLException e) {

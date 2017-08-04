@@ -1,5 +1,6 @@
 package sample.DAO;
 
+import sample.Spiel;
 import sample.Spieler;
 import sample.Turnier;
 import sample.Verein;
@@ -15,9 +16,38 @@ public class auswahlklasse
     private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
     private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
     private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
-    TurnierDAO t = new TurnierDAOimpl();
-
+    TurnierDAO turnierDAO = new TurnierDAOimpl();
+    SpielerDAO spielerDAO = new SpielerDAOimpl();
     static Turnier aktuelleTurnierAuswahl = null;
+
+    public void addSpieler(Spieler sp) {
+        spieler.put(sp.getSpielerID(), sp);
+    }
+    public void UpdateSpieler(Spieler sp) {
+        spieler.put(sp.getSpielerID(),sp);
+    }
+
+
+    public SpielerDAO getSpielerDAO() {
+        return spielerDAO;
+    }
+
+    public void setSpielerDAO(SpielerDAO spielerDAO) {
+        this.spielerDAO = spielerDAO;
+    }
+
+
+
+
+    public TurnierDAO getTurnierDAO() {
+        return turnierDAO;
+    }
+
+    public void setTurnierDAO(TurnierDAO turnierDAO) {
+        this.turnierDAO = turnierDAO;
+    }
+
+
 
     public Turnier getAktuelleTurnierAuswahl()
     {
@@ -25,7 +55,7 @@ public class auswahlklasse
     }
 
     public Dictionary<Integer, Turnier> getTurnierliste() {
-        turnierliste=t.getAllTurniere();
+        turnierliste= turnierDAO.getAllTurniere();
         return turnierliste;
     }
     public Dictionary<Integer, Verein> getVereine() {
