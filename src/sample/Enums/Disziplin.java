@@ -9,45 +9,49 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public enum Disziplin implements ObservableList<Niveau> {
+public enum Disziplin implements ObservableList<Disziplin> {
 	Herreneinzel, 
 	Herrendoppel, 
 	Dameneinzel, 
 	Damendoppel, 
 	Mixed;
 
+
+
+
+
 	@Override
-	public void addListener(ListChangeListener<? super Niveau> listener) {
+	public void addListener(ListChangeListener<? super Disziplin> listener) {
 
 	}
 
 	@Override
-	public void removeListener(ListChangeListener<? super Niveau> listener) {
+	public void removeListener(ListChangeListener<? super Disziplin> listener) {
 
 	}
 
 	@Override
-	public boolean addAll(Niveau... elements) {
+	public boolean addAll(Disziplin... elements) {
 		return false;
 	}
 
 	@Override
-	public boolean setAll(Niveau... elements) {
+	public boolean setAll(Disziplin... elements) {
 		return false;
 	}
 
 	@Override
-	public boolean setAll(Collection<? extends Niveau> col) {
+	public boolean setAll(Collection<? extends Disziplin> col) {
 		return false;
 	}
 
 	@Override
-	public boolean removeAll(Niveau... elements) {
+	public boolean removeAll(Disziplin... elements) {
 		return false;
 	}
 
 	@Override
-	public boolean retainAll(Niveau... elements) {
+	public boolean retainAll(Disziplin... elements) {
 		return false;
 	}
 
@@ -72,7 +76,7 @@ public enum Disziplin implements ObservableList<Niveau> {
 	}
 
 	@Override
-	public Iterator<Niveau> iterator() {
+	public Iterator<Disziplin> iterator() {
 		return null;
 	}
 
@@ -87,7 +91,7 @@ public enum Disziplin implements ObservableList<Niveau> {
 	}
 
 	@Override
-	public boolean add(Niveau niveau) {
+	public boolean add(Disziplin Disziplin) {
 		return false;
 	}
 
@@ -102,12 +106,12 @@ public enum Disziplin implements ObservableList<Niveau> {
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends Niveau> c) {
+	public boolean addAll(Collection<? extends Disziplin> c) {
 		return false;
 	}
 
 	@Override
-	public boolean addAll(int index, Collection<? extends Niveau> c) {
+	public boolean addAll(int index, Collection<? extends Disziplin> c) {
 		return false;
 	}
 
@@ -127,22 +131,22 @@ public enum Disziplin implements ObservableList<Niveau> {
 	}
 
 	@Override
-	public Niveau get(int index) {
+	public Disziplin get(int index) {
 		return null;
 	}
 
 	@Override
-	public Niveau set(int index, Niveau element) {
+	public Disziplin set(int index, Disziplin element) {
 		return null;
 	}
 
 	@Override
-	public void add(int index, Niveau element) {
+	public void add(int index, Disziplin element) {
 
 	}
 
 	@Override
-	public Niveau remove(int index) {
+	public Disziplin remove(int index) {
 		return null;
 	}
 
@@ -157,17 +161,17 @@ public enum Disziplin implements ObservableList<Niveau> {
 	}
 
 	@Override
-	public ListIterator<Niveau> listIterator() {
+	public ListIterator<Disziplin> listIterator() {
 		return null;
 	}
 
 	@Override
-	public ListIterator<Niveau> listIterator(int index) {
+	public ListIterator<Disziplin> listIterator(int index) {
 		return null;
 	}
 
 	@Override
-	public List<Niveau> subList(int fromIndex, int toIndex) {
+	public List<Disziplin> subList(int fromIndex, int toIndex) {
 		return null;
 	}
 
@@ -180,4 +184,5 @@ public enum Disziplin implements ObservableList<Niveau> {
 	public void removeListener(InvalidationListener listener) {
 
 	}
+
 }

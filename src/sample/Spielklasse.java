@@ -1,7 +1,12 @@
 package sample;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import sample.DAO.TurnierDAO;
+import sample.DAO.TurnierDAOimpl;
+import sample.Enums.Disziplin;
+import sample.Enums.Niveau;
 import sample.Spielsysteme.Spielsystem;
 
 public class Spielklasse {
@@ -13,6 +18,7 @@ public class Spielklasse {
 	private float meldeKosten = (float) 5;
 	private Turnier turnier;
 	private Hashtable<Integer,Spiel> spiele = new Hashtable<>();
+	TurnierDAO t = new TurnierDAOimpl();
 	private boolean aktiv;
 
 	public Spielklasse(int spielklasseID, String disziplin, String niveau, Turnier turnier) {
@@ -20,6 +26,36 @@ public class Spielklasse {
 		this.disziplin = disziplin;
 		this.niveau = niveau;
 		this.turnier = turnier;
+	}
+	public Spielklasse(int spielklasseID,					   Disziplin disziplin,					   Niveau niveau,					   Turnier turnier)
+	{
+		System.out.println("neue Spielklasse mit Enums1 und gesetzter SpielklasseID");
+		this.spielklasseID=spielklasseID;
+		this.disziplin = disziplin.toString();
+		this.niveau = niveau.toString();
+		this.turnier = turnier;
+	}
+	public Spielklasse(int spielklasseID,					   Disziplin disziplin,					   Niveau niveau,					   int turnierid)
+	{
+		System.out.println("neue Spielklasse mit Enums2 und gesetzter SpielklasseID");
+		this.spielklasseID=spielklasseID;
+		this.disziplin = disziplin.toString();
+		this.niveau = niveau.toString();
+		Turnier turnier = new Turnier("",turnierid, LocalDate.now());
+		this.turnier = t.read(turnier);
+	}
+
+
+	public Spielklasse(int spielklasseID, String disziplin, String niveau, int turnierid)
+	{
+		System.out.println("neue Spielklasse mit gesetzter SpielklasseID ohne Enum");
+		this.spielklasseID=spielklasseID;
+		this.disziplin = disziplin;
+		this.niveau = niveau;
+		Turnier turnier = new Turnier("",turnierid, LocalDate.now());
+		this.turnier = t.read(turnier);
+		System.out.println(this.turnier.getName());
+
 	}
 
 	public Hashtable<Integer, Spiel> getSpiele() {

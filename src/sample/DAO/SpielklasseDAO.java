@@ -1,16 +1,20 @@
 package sample.DAO;
 
-import sample.*;
-import sample.Spielsysteme.*;
-import sample.Enums.*;
+import sample.Spielklasse;
 
+import java.util.Dictionary;
 import java.util.List;
 
 /**
- * Created by Florian-PC on 21.07.2017.
+ * Created by jens on 05.08.2017.
  */
 public interface SpielklasseDAO {
-    public boolean create(Spielklasse spielklasse);
-    public boolean delete(Spielklasse spielklasse);
-    public boolean update(Spielklasse spielklasse);
+    boolean create(Spielklasse spielklasse);
+
+    boolean delete(Spielklasse spielklasse);
+
+    boolean update(Spielklasse spielklasse);
+
+    List<Spielklasse> getAllSpielklassen();
+    public Dictionary<Integer, Spielklasse> getAllSpielklassenDict();
 }

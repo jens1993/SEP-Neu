@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -19,6 +16,7 @@ import sample.Enums.AnzahlRunden;
 import sample.Enums.Disziplin;
 import sample.Enums.Niveau;
 import sample.Spieler;
+import sample.Spielklasse;
 import sample.Turnier;
 
 import java.io.IOException;
@@ -30,9 +28,18 @@ import java.util.ResourceBundle;
 /**
  * Created by jens on 03.08.2017.
  */
-public class klasseHinzuGruppeController implements Initializable
+public class klasseHinzufuegenController implements Initializable
 {
 
+    @FXML
+    private ChoiceBox<Niveau> combo_niveau=new ChoiceBox<>();
+    @FXML
+    private ChoiceBox <Disziplin> combo_disziplin=new ChoiceBox<>();
+//
+//    @FXML
+//    public ComboBox<Disziplin> combo_disziplin = new ComboBox<>();
+//    @FXML
+//    public  ComboBox<Niveau> combo_niveau = new ComboBox<>();
     @FXML
     private RadioButton radio_gruppe;
     @FXML
@@ -67,28 +74,28 @@ public class klasseHinzuGruppeController implements Initializable
     private TableColumn spielerGeburstdatumSpalte;
 
 
-    private static int index_niveau=100;
-    private static int index_diszipin=100;
-    private static int index_anzahlRunden=100;
+    private static int index_niveau=0;
+    private static int index_diszipin=0;
+    private static int index_anzahlRunden=0;
 
     auswahlklasse a = new auswahlklasse();
     TurnierDAO t = new TurnierDAOimpl();
     Dictionary<Integer,Turnier> turnierliste = t.getAllTurniere();
-    @FXML
-    public ComboBox<Disziplin> combo_disziplin = new ComboBox<>();
+
     @FXML
     public ComboBox<AnzahlRunden> combo_anzahlRunden = new ComboBox<>();
     @FXML
     private void setDisziplin_auswahl(ActionEvent event){
         index_diszipin = combo_disziplin.getSelectionModel().getSelectedIndex();
     }
-    @FXML
-    public  ComboBox<Niveau> combo_niveau = new ComboBox<>();
+
     @FXML
     public void comboBoxFill() throws IOException {
         try{
-            combo_niveau.getItems().setAll(Niveau.values());
-            combo_disziplin.getItems().setAll(Disziplin.values());
+            combo_niveau.setItems(FXCollections.observableArrayList(Niveau.values()));
+            combo_disziplin.setItems(FXCollections.observableArrayList(Disziplin.values()));
+
+
             //combo_anzahlRunden.getItems().setAll("1", "2", "3");
             combo_niveau.getSelectionModel().select(index_niveau);
             combo_disziplin.getSelectionModel().select(index_diszipin);
@@ -97,21 +104,10 @@ public class klasseHinzuGruppeController implements Initializable
         catch (Exception e){
             e.printStackTrace();
         }
-        //combo_niveau.getSelectionModel().select(0);
-        //combo_niveau.setItems( FXCollections.observableArrayList((E[]) Niveau.values()));
-        //combo_disziplin.setItems(Disziplin.Herreneinzel);
     }
+
     @FXML
     private void setNiveau_auswahl(ActionEvent event){
-        //SingleSelectionModel niveau_auswahl = combo_niveau.getSelectionModel();
-        //a = combo_niveau.getSelectionModel().getSelectedIndex();
-        //System.out.println("hallo -----"+niveau_auswahl.toString());
-        //combo_niveau.getSelectionModel().select(niveau_auswahl);
-        //test1=combo_niveau.getItems().get(a);
-        // System.out.println(test1.toString());
-        //System.out.println(niveau_auswahl.toString());
-        //System.out.println(a);
-        //combo_niveau.setSelectionModel();
         index_niveau = combo_niveau.getSelectionModel().getSelectedIndex();
     }
     @FXML
@@ -124,6 +120,17 @@ public class klasseHinzuGruppeController implements Initializable
             koTrostRundeNein.setVisible(false);
             koTrostRundeJa.setVisible(true);
         }
+    }
+    @FXML
+    private void pressBtn_KlasseSpeichern(ActionEvent event) throws IOException
+    {
+
+        System.out.println("Größe = "+a.getSpielklasseDict().size());
+
+        Spielklasse spklasse = new Spielklasse(a.getSpielklasseDict().size()+1,combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),a.getAktuelleTurnierAuswahl());
+
+        a.getSpielklasseDAO().create(spklasse);
+
     }
     @FXML
     private void klassenSwitch(ActionEvent event) throws IOException, InterruptedException {
@@ -224,6 +231,9 @@ public class klasseHinzuGruppeController implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
         try {
             printSpielerZuordnenTable();
+            comboBoxFill();
+            combo_niveau.getSelectionModel().select(index_niveau);
+            combo_disziplin.getSelectionModel().select(index_diszipin);
         } catch (Exception e) {
             e.printStackTrace();
         }

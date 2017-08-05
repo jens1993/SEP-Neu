@@ -50,6 +50,7 @@ public class MainController
             e.printStackTrace();
         }
     }
+
     public void pressBtn_turnierLaden (ActionEvent event) throws Exception {
         System.out.println("test");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Turnierladen.fxml"));
@@ -59,7 +60,15 @@ public class MainController
         stage.show();
         stage.setTitle("Turnier auswählen");
         }
-
+    public void pressBtn_teamLaden (ActionEvent event) throws Exception {
+        System.out.println("test");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TeamUebersicht.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.show();
+        stage.setTitle("Turnier auswählen");
+    }
 
 
 }

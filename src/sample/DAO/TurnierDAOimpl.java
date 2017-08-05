@@ -1,15 +1,11 @@
 package sample.DAO;
 
-import com.sun.org.apache.bcel.internal.generic.Select;
-
 import sample.*;
 import sample.Spielsysteme.*;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 public class TurnierDAOimpl implements TurnierDAO {
@@ -99,8 +95,8 @@ public class TurnierDAOimpl implements TurnierDAO {
     }
 
     @Override
-    public boolean read(Turnier turnierEingabe) {
-        Turnier turnier = null;
+    public Turnier read(Turnier turnierEingabe) {
+
         String sql = "SELECT * FROM turnier WHERE turnierID = ?";
         try {
             SQLConnection con = new SQLConnection();
@@ -108,27 +104,27 @@ public class TurnierDAOimpl implements TurnierDAO {
             smt.setInt(1, turnierEingabe.getTurnierid());
             ResultSet turnierResult = smt.executeQuery();
             turnierResult.next();
-            turnier = turnierEingabe;
-            turnier.setMatchDauer(turnierResult.getInt("MatchDauer"));
-            turnier.setSpielerPausenZeit(turnierResult.getInt("SpielerPausenZeit"));
-            turnier.setZaehlweise(turnierResult.getInt("Zaehlweise"));
-            turnier.setFelder(readFelder(turnier));
-            turnier.setSpielklassen(readSpielklassen(turnier));
-            turnier.setVereine(readVereine(turnier));
-            turnier.setSpieler(readSpieler(turnier));
-            turnier.setTeams(readTeams(turnier));
-            for(int i=1; i<=turnier.getSpielklassen().size();i++){
-                Spielklasse spielklasse = turnier.getSpielklassen().get(i);
+            //turnier = turnierEingabe;
+            turnierEingabe.setMatchDauer(turnierResult.getInt("MatchDauer"));
+            turnierEingabe.setSpielerPausenZeit(turnierResult.getInt("SpielerPausenZeit"));
+            turnierEingabe.setZaehlweise(turnierResult.getInt("Zaehlweise"));
+            turnierEingabe.setFelder(readFelder(turnierEingabe));
+            turnierEingabe.setSpielklassen(readSpielklassen(turnierEingabe));
+            turnierEingabe.setVereine(readVereine(turnierEingabe));
+            turnierEingabe.setSpieler(readSpieler(turnierEingabe));
+            turnierEingabe.setTeams(readTeams(turnierEingabe));
+            for(int i=1; i<=turnierEingabe.getSpielklassen().size();i++){
+                Spielklasse spielklasse = turnierEingabe.getSpielklassen().get(i);
                 readSetzliste(spielklasse);
                 Spielsystem spielsystem = readSpielsystem(spielklasse);
                 if (spielsystem != null){
-                    turnier.getSpielklassen().get(i).setSpielsystem(spielsystem);
+                    turnierEingabe.getSpielklassen().get(i).setSpielsystem(spielsystem);
                 }
             }
             smt.close();
             con.closeCon();
             //turnier.setSpiele(readSpiele(turnier));
-            return true;
+            return turnierEingabe;
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Turnier lesen klappt nicht");
@@ -138,7 +134,7 @@ public class TurnierDAOimpl implements TurnierDAO {
             e.printStackTrace();
             System.out.println("Fehler");
         }
-        return false;
+        return turnierEingabe;
     }
 
     private Dictionary<Integer,Spielklasse> readSpielklassen(Turnier turnier) {

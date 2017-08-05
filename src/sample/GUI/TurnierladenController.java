@@ -105,6 +105,7 @@ public class TurnierladenController implements Initializable
             a.turnierAuswahlSpeichern(a.getAktuelleTurnierAuswahl());
             //System.out.println("Das aktuelle Turnier lautet"+a.getAktuelleTurnierAuswahl().toString());
             Main.getInstance().updateTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
+            //a.setAktuelleTurnierAuswahl
             System.out.println("Turnierauswahl durch Doppelklick: = "+item.getName());
             //((Node)(event.getSource())).getScene().getWindow().hide();
         }

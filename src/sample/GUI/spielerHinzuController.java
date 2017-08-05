@@ -289,6 +289,9 @@ public class spielerHinzuController implements Initializable, Cloneable
                 r_w1.setSelected(true);
             }
             System.out.println("geklickt: "+clickedRow.getNName());
+
+            System.out.println("turnier="+a.getAktuelleTurnierAuswahl().getName());
+
             spieler_neu=clickedRow;
                     }
 

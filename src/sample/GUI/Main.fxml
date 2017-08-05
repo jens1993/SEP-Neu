@@ -77,21 +77,21 @@
     <Separator prefHeight="19.0" prefWidth="900.0" />
     <HBox>
         <children>
-            <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="262.0">
+            <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="15.0" prefWidth="196.0">
                 <buttons>
-                    <Button fx:id="neuesTurnier" mnemonicParsing="false" onAction="#pressBtn_neuesTurnier" text="neu">
+                    <Button fx:id="neuesTurnier" mnemonicParsing="false" onAction="#pressBtn_neuesTurnier" text="neues Turnier">
                         <rotationAxis>
                             <Point3D />
                         </rotationAxis>
                     </Button>
-                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="load" />
-                    <Button mnemonicParsing="false" text="save" />
+                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="Turnier laden" />
                 </buttons>
             </ButtonBar>
             <ButtonBar>
                 <buttons>
                     <Button fx:id="btn_klassen" mnemonicParsing="false" onAction="#pressBtn_klassen" text="Klassen" />
                     <Button fx:id="btn_spieler" mnemonicParsing="false" onAction="#pressBtn_spieler" text="Spieler" />
+                  <Button mnemonicParsing="false" onAction="#pressBtn_teamLaden" text="Teams" />
                     <Button mnemonicParsing="false" text="Felder" />
                 </buttons>
             </ButtonBar>
