@@ -17,6 +17,25 @@ public class auswahlklasse
     TurnierDAO turnierDAO = new TurnierDAOimpl();
     SpielerDAO spielerDAO = new SpielerDAOimpl();
     SpielklasseDAO spielklasseDAO=new SpielklasseDAOimpl();
+    static Spielklasse aktuelleSpielklassenAuswahl = null;
+    static Turnier aktuelleTurnierAuswahl = null;
+
+
+
+    public static Spielklasse getAktuelleSpielklassenAuswahl() {
+
+        System.out.println("DAO:" + aktuelleSpielklassenAuswahl.getDisziplin());
+        System.out.println("DAO:" + aktuelleSpielklassenAuswahl.getDisziplin());
+        System.out.println("DAO:" + aktuelleSpielklassenAuswahl.getDisziplin());
+        System.out.println("DAO:" + aktuelleSpielklassenAuswahl.getDisziplin());
+
+        return aktuelleSpielklassenAuswahl;
+    }
+
+    public static void setAktuelleSpielklassenAuswahl(Spielklasse aktuelleSpielklassenAuswahl) {
+        auswahlklasse.aktuelleSpielklassenAuswahl = aktuelleSpielklassenAuswahl;
+    }
+
 
     public SpielklasseDAO getSpielklasseDAO() {
         return spielklasseDAO;
@@ -32,7 +51,6 @@ public class auswahlklasse
         aktuelleTurnierAuswahl = aktuellesTurnier;
     }
 
-    static Turnier aktuelleTurnierAuswahl = null;
 
     public void addSpieler(Spieler sp) {
         spieler.put(sp.getSpielerID(), sp);
@@ -106,6 +124,10 @@ public class auswahlklasse
     public void turnierAuswahlSpeichern (Turnier turnier)
     {
         aktuelleTurnierAuswahl = turnier;
+    }
+    public void spielklassenAuswahlSpeichern (Spielklasse spielklasse)
+    {
+        aktuelleSpielklassenAuswahl = spielklasse;
     }
 
 

@@ -25,6 +25,8 @@ public class Team {
     private boolean freilos = false;
     private List<Team> bisherigeGegner = new ArrayList<Team>();
 
+
+
     public Team(int teamid, Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
         this.teamid = teamid;
         this.spielerEins = spielerEins;

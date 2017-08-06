@@ -2,14 +2,18 @@ package sample.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Created by jens on 03.08.2017.
  */
-public class MainController
+public class MainController implements Initializable
 {
     public void pressBtn_spieler(ActionEvent event) throws Exception {
         try {
@@ -71,4 +75,8 @@ public class MainController
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 }

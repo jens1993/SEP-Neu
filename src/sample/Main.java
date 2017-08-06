@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+
 public class Main extends Application {
 
     private static Main instance;
@@ -49,7 +51,7 @@ public class Main extends Application {
         launch(args);
         //$java -Duser.language=en com.tutego.insel.bundle.InternationalHelloWorld
 
-        //Locale.setDefault( new Locale("en", "UK") );
+      // Locale.setDefault( new Locale("en", "UK") );
 //        Locale.setDefault( new Locale("de", "ch") );
 //        String baseName = "resources.HelloWorld";
 //

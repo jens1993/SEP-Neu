@@ -1,27 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.layout.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sample.GUI.SpielSystemController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="917.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SpielSystemController">
   <tabs>
-    <Tab text="Spieler hinzufügen">
+      <Tab text="Bereits vorhandene Spieler zur Spielklasse hinzufügen">
          <content>
-            <GridPane>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-         </content></Tab>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane layoutY="-2.0" prefHeight="724.0" prefWidth="917.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="676.0" mnemonicParsing="false" text="Spieler entfernen" />
+                     </children>
+                  </AnchorPane>
+                  <TableView fx:id="spielsystem_spielerliste1" layoutY="1.0" prefHeight="663.0" prefWidth="917.0">
+                     <columns>
+                        <TableColumn fx:id="spielsystem_spielerliste_vorname1" prefWidth="164.0" text="Vorname" />
+                        <TableColumn fx:id="spielsystem_spielerliste_nachname1" prefWidth="189.0" text="Nachname" />
+                        <TableColumn fx:id="spielsystem_spielerliste_geschlecht1" minWidth="0.0" prefWidth="138.0" text="Geschlecht" />
+                        <TableColumn fx:id="spielsystem_spielerliste_verein1" prefWidth="242.0" text="Verein" />
+                        <TableColumn fx:id="spielsystem_spielerliste_geburtstag1" prefWidth="184.0" text="Geburtstag" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Spieler zur Spielklasse hinzufügen">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane layoutY="-2.0" prefHeight="724.0" prefWidth="917.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="676.0" mnemonicParsing="false" text="Spieler hinzufügen" />
+                     </children>
+                  </AnchorPane>
+                  <TableView fx:id="spielsystem_spielerliste" layoutY="1.0" prefHeight="663.0" prefWidth="917.0">
+                     <columns>
+                        <TableColumn fx:id="spielsystem_spielerliste_vorname" prefWidth="164.0" text="Vorname" />
+                        <TableColumn fx:id="spielsystem_spielerliste_nachname" prefWidth="189.0" text="Nachname" />
+                        <TableColumn fx:id="spielsystem_spielerliste_geschlecht" minWidth="0.0" prefWidth="138.0" text="Geschlecht" />
+                        <TableColumn fx:id="spielsystem_spielerliste_verein" prefWidth="242.0" text="Verein" />
+                        <TableColumn fx:id="spielsystem_spielerliste_geburtstag" prefWidth="184.0" text="Geburtstag" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
     <Tab text="Spielsystem erstellen">
          <content>
             <GridPane>
