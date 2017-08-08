@@ -28,6 +28,7 @@ public class auswahlklasse
         System.out.println("DAO:" + aktuelleSpielklassenAuswahl.getDisziplin());
         System.out.println("DAO:" + aktuelleSpielklassenAuswahl.getDisziplin());
         System.out.println("DAO:" + aktuelleSpielklassenAuswahl.getDisziplin());
+
         return aktuelleSpielklassenAuswahl;
     }
 

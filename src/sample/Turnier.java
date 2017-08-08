@@ -76,6 +76,11 @@ public class Turnier {
 	public Dictionary<Integer, Spielklasse> getSpielklassen() {
 		return spielklassen;
 	}
+	public Dictionary<Integer, Spielklasse> addSpielklassen(Spielklasse sp) {
+
+		spielklassen.put(sp.getSpielklasseID(),sp);
+		return spielklassen;
+	}
 
 	public Dictionary<Integer, Verein> getVereine() {
 		return vereine;

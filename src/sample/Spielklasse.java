@@ -113,14 +113,16 @@ public class Spielklasse {
 	public ArrayList<Team> getSetzliste() {
 		return setzliste;
 	}
-public void getSetzlisteSpieler()
-	{
-		System.out.println(setzliste.toString());
-	}
+
+
 	public void setSetzliste(ArrayList<Team> setzliste) {
 		this.setzliste = setzliste;
 	}
 
+	public void addSetzliste (Team team )
+	{
+		this.setzliste.add(team);
+	}
 	public float getMeldeKosten() {
 		return meldeKosten;
 	}
