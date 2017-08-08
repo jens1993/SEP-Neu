@@ -39,9 +39,6 @@ public class TurnierladenController implements Initializable
 
     @FXML
     public TableView TurnierlisteTabelle;
-
-
-
     @FXML
     public TableColumn TurnierDatumSpalte;
     @FXML

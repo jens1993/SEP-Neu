@@ -2,18 +2,22 @@ package sample.GUI;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.AnchorPane;
 import sample.DAO.auswahlklasse;
 import sample.Spieler;
 import sample.Spielklasse;
 import sample.Team;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,6 +57,43 @@ public class SpielSystemController implements Initializable
     @FXML
     private TableColumn spielsystem_spielerliste_geburtstag;
 
+    //Tab3
+    @FXML
+    private RadioButton radio_gruppe;
+
+    @FXML
+    private RadioButton radio_gruppeMitE;
+
+    @FXML
+    private RadioButton radio_ko;
+
+    @FXML
+    private RadioButton radio_schweizer;
+
+    @FXML
+    private RadioButton radio_trostJa;
+
+    @FXML
+    private RadioButton radio_trostNein;
+
+    @FXML
+    private AnchorPane gruppe;
+
+    @FXML
+    private AnchorPane gruppeMitEndrunde;
+
+    @FXML
+    private AnchorPane koSystem;
+
+    @FXML
+    private AnchorPane schweizerSystem;
+
+    @FXML
+    private AnchorPane koTrostRundeJa;
+
+    @FXML
+    private AnchorPane koTrostRundeNein;
+
     Dictionary<Integer,Spielklasse> turnierauswahlspielklassen = null;
     auswahlklasse a = new auswahlklasse();
    static Spielklasse ausgewaehlte_spielklasse=  auswahlklasse.getAktuelleSpielklassenAuswahl();
@@ -81,6 +122,59 @@ public class SpielSystemController implements Initializable
             System.out.println("kann Turnier nicht laden");
         }
 
+    }
+    @FXML
+    private void trostSwitch(ActionEvent event) throws IOException {
+        if(radio_trostNein.isSelected()){
+            koTrostRundeNein.setVisible(true);
+            koTrostRundeJa.setVisible(false);
+        }
+        else{
+            koTrostRundeNein.setVisible(false);
+            koTrostRundeJa.setVisible(true);
+        }
+    }
+    @FXML
+    private void klassenSwitch(ActionEvent event) throws IOException, InterruptedException {
+
+        if(radio_gruppe.isSelected()) {
+            gruppe.toFront();
+            gruppe.setVisible(true);
+            gruppeMitEndrunde.setVisible(false);
+            koSystem.setVisible(false);
+            schweizerSystem.setVisible(false);
+        }
+
+        else if(radio_gruppeMitE.isSelected()) {
+            gruppeMitEndrunde.toFront();
+            gruppe.setVisible(false);
+            gruppeMitEndrunde.setVisible(true);
+            koSystem.setVisible(false);
+            schweizerSystem.setVisible(false);
+        }
+
+        else if(radio_ko.isSelected()){
+            koSystem.toFront();
+            gruppe.setVisible(false);
+            gruppeMitEndrunde.setVisible(false);
+            koSystem.setVisible(true);
+            schweizerSystem.setVisible(false);
+        }
+
+        else if(radio_schweizer.isSelected()){
+            schweizerSystem.toFront();
+            gruppe.setVisible(false);
+            gruppeMitEndrunde.setVisible(false);
+            koSystem.setVisible(false);
+            schweizerSystem.setVisible(true);
+        }
+        else{
+            //label1.setText("");
+            //label2.setText("");
+            //label3.setText("");
+            //hbox_1.getChildren().clear();
+            //hbox_2.getChildren().clear();
+        }
     }
 
 
