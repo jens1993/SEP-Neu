@@ -44,7 +44,7 @@
                     <MenuItem mnemonicParsing="false" text="Spielerdaten bearbeiten" />
                     <MenuItem mnemonicParsing="false" text="Vereine bearbeiten" />
                     <SeparatorMenuItem mnemonicParsing="false" />
-                    <MenuItem mnemonicParsing="false" text="Statistiken" fx:id="btn_statistik" onAction="#pressBtn_laden" />
+                    <MenuItem fx:id="btn_statistik" mnemonicParsing="false" onAction="#pressBtn_laden" text="Statistiken" />
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Ansicht">
@@ -110,9 +110,9 @@
             <TreeView prefHeight="517.0" prefWidth="224.0" />
             <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
                 <content>
-                    <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
+                    <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="937.0" prefWidth="1226.0">
                         <children>
-                            <TabPane layoutX="-5.0" layoutY="-4.0" prefHeight="519.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE">
+                            <TabPane layoutX="-5.0" layoutY="-4.0" prefHeight="723.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <tabs>
                                     <Tab text="Turnierbaum">
                                         <content>
@@ -123,7 +123,7 @@
                                         <content>
                                             <AnchorPane>
                                        <children>
-                                          <TableView fx:id="tabelle_spiele" prefHeight="791.0" prefWidth="658.0" />
+                                          <TableView fx:id="tabelle_spiele" prefHeight="964.0" prefWidth="903.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children></AnchorPane>
                                         </content>
                                     </Tab>

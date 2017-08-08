@@ -8,15 +8,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sample.DAO.auswahlklasse;
 import sample.Spiel;
 import sample.Spieler;
 import sample.Team;
 
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.TableView;
 import java.net.URL;
 import java.util.Date;
@@ -120,23 +121,172 @@ public class MainController implements Initializable
 
 
             TableColumn<Spiel,String> spielHeimSpalte = new TableColumn("Heim");
-            spielHeimSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("Heim"));
+            spielHeimSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("HeimString"));
+            spielHeimSpalte.setCellFactory(column -> {
+                return new TableCell<Spiel, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty); //This is mandatory
+
+                        if (item == null || empty) { //If the cell is empty
+                            setText(null);
+                            setStyle("");
+                        } else { //If the cell is not empty
+
+                            setText(item); //Put the String data in the cell
+
+                            //We get here all the info of the Person of this row
+                            Spiel spiel = getTableView().getItems().get(getIndex());
+
+                            // Style all persons wich name is "Edgard"
+                            if (spiel.getStatus()==3) {
+                                setTextFill(Color.RED);
+                            }
+                            else if (spiel.getStatus()==2) {
+                                setTextFill(Color.DARKBLUE);
+                            }
+                            else if (spiel.getStatus()==1) {
+                                setTextFill(Color.DARKGREEN);
+                            }
+                            else {
+                                //Here I see if the row of this cell is selected or not
+                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
+                                    setTextFill(Color.WHITE);
+                                else
+                                    setTextFill(Color.BLACK);
+                            }
+                        }
+                    }
+                };
+            });
 
             TableColumn<Spiel,String> spielGastSpalte = new TableColumn("Gast");
-            spielGastSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("Gast"));
+            spielGastSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("GastString"));
+            spielGastSpalte.setCellFactory(column -> {
+                return new TableCell<Spiel, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty); //This is mandatory
 
+                        if (item == null || empty) { //If the cell is empty
+                            setText(null);
+                            setStyle("");
+                        } else { //If the cell is not empty
+
+                            setText(item); //Put the String data in the cell
+
+                            //We get here all the info of the Person of this row
+                            Spiel spiel = getTableView().getItems().get(getIndex());
+
+                            // Style all persons wich name is "Edgard"
+                            if (spiel.getStatus()==3) {
+                                setTextFill(Color.RED);
+                            }
+                            else if (spiel.getStatus()==2) {
+                                setTextFill(Color.DARKBLUE);
+                            }
+                            else if (spiel.getStatus()==1) {
+                                setTextFill(Color.DARKGREEN);
+                            }
+                            else {
+                                //Here I see if the row of this cell is selected or not
+                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
+                                    setTextFill(Color.WHITE);
+                                else
+                                    setTextFill(Color.BLACK);
+                            }
+                        }
+                    }
+                };
+            });
+            TableColumn<Spiel,String> spielErgebnisSpalte = new TableColumn("Ergebnis");
+            spielErgebnisSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("ErgebnisString"));
+            spielErgebnisSpalte.setCellFactory(column -> {
+                return new TableCell<Spiel, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty); //This is mandatory
+
+                        if (item == null || empty) { //If the cell is empty
+                            setText(null);
+                            setStyle("");
+                        } else { //If the cell is not empty
+
+                            setText(item); //Put the String data in the cell
+
+                            //We get here all the info of the Person of this row
+                            Spiel spiel = getTableView().getItems().get(getIndex());
+
+                            // Style all persons wich name is "Edgard"
+                            if (spiel.getStatus()==3) {
+                                setTextFill(Color.RED);
+                            }
+                            else if (spiel.getStatus()==2) {
+                                setTextFill(Color.DARKBLUE);
+                            }
+                            else if (spiel.getStatus()==1) {
+                                setTextFill(Color.DARKGREEN);
+                            } else {
+                                //Here I see if the row of this cell is selected or not
+                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
+                                    setTextFill(Color.WHITE);
+                                else
+                                    setTextFill(Color.BLACK);
+                            }
+                        }
+                    }
+                };
+            });
             tabelle_spiele.setItems(obs_spiele);
 
+            tabelle_spiele.getColumns().addAll(spielHeimSpalte,spielGastSpalte,spielErgebnisSpalte);
+            /*tabelle_spiele.setRowFactory( tv -> {
+                TableRow<Spiel> row = new TableRow<>();
+                if(row.getItem().getStatus()==3){
+                    row.setStyle("-fx-background-color: deeppink");
+                }
+                return row;
+            });*/
 
-            tabelle_spiele.getColumns().addAll(spielHeimSpalte,spielGastSpalte);
+/*
+            tabelle_spiele.setRowFactory(row -> new TableRow<Spiel>(){
+                @Override
+                public void updateItem(Spiel spiel, boolean empty){
+                    super.updateItem(spiel, empty);
 
-
+                    if (spiel == null || empty) {
+                        setStyle("");
+                    } else {
+                        //Now 'spiel' has all the info of the Person in this row
+                        if (spiel.getStatus()==3) {
+                            //We apply now the changes in all the cells of the row
+                            for(int i=0; i<getChildren().size();i++){
+                                ((Labeled) getChildren().get(i)).setTextFill(Color.AQUAMARINE);
+                                ((Labeled) getChildren().get(i)).setStyle("-fx-background-color: deeppink");
+                            }
+                        } else {
+                            if(getTableView().getSelectionModel().getSelectedItems().contains(spiel)){
+                                for(int i=0; i<getChildren().size();i++){
+                                    ((Labeled) getChildren().get(i)).setTextFill(Color.WHITE);;
+                                }
+                            }
+                            else{
+                                for(int i=0; i<getChildren().size();i++){
+                                    ((Labeled) getChildren().get(i)).setTextFill(Color.BLACK);;
+                                }
+                            }
+                        }
+                    }
+                }
+            });*/
         }
+
         else{
             System.out.println("kann Turnier nicht laden");
         }
-
     }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

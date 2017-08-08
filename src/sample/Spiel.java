@@ -1,14 +1,9 @@
 package sample;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.Hashtable;
 
 import sample.DAO.*;
 import sample.Spielsysteme.*;
-import sample.Enums.*;
 
 public class Spiel {
 	//ErgebnisDAO ergebnisDAO = new ErgebnisDAOimpl();
@@ -28,6 +23,12 @@ public class Spiel {
 
 	public Team getHeim() {
 		return heim;
+	}
+	public String getHeimString() {
+		return heim.toString();
+	}
+	public String getGastString() {
+		return gast.toString();
 	}
 
 	public Team getGast() {
@@ -161,6 +162,16 @@ public class Spiel {
 
 	public Ergebnis getErgebnis() {
 		return ergebnis;
+	}
+
+	public String getErgebnisString() {
+		if (ergebnis!=null){
+			return ergebnis.toString();
+		}
+		else {
+			return "";
+		}
+
 	}
 
 	public void setErgebnis(Ergebnis ergebnis) {
