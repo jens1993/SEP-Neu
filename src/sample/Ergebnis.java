@@ -7,6 +7,7 @@ import sample.DAO.ErgebnisDAOimpl;
  * Created by Florian-PC on 25.07.2017.
  */
 public class Ergebnis {
+    private ErgebnisDAO ergebnisDAO = new ErgebnisDAOimpl();
     private int ergebnisID;
     private int[] heim;
     private int[] gast;
@@ -119,5 +120,9 @@ public class Ergebnis {
             ergebnis[i*2+1]=gast[i];
         }
         return ergebnis;
+    }
+
+    public ErgebnisDAO getErgebnisDAO() {
+        return ergebnisDAO;
     }
 }

@@ -105,6 +105,10 @@ public class Team {
         bisherigeGegner.add(team);
     }
 
+    public TeamDAO getTeamDAO() {
+        return teamDAO;
+    }
+
     public List<Team> getBisherigeGegner() {
         return bisherigeGegner;
     }
@@ -115,31 +119,28 @@ public class Team {
             }
         }
         return true;
-
     }
-
-
 
     public void addGewonnenesSpiel() {
         this.gewonneneSpiele ++;
-        teamDAO.update(this);
+        //teamDAO.update(this);
     }
 
     public void addGewonnenenSatz() {
         this.gewonneneSaetze ++;
-        teamDAO.update(this);
+        //teamDAO.update(this);
     }
 
 
     public void addVerlorenenSatz() {
         this.verloreneSaetze ++;
-        teamDAO.update(this);
+        //teamDAO.update(this);
     }
 
     public void addGespieltePunkte(int gewonnnenePunkte, int verlorenePunkte) {
         this.gewonnnenePunkte = this.gewonnnenePunkte + gewonnnenePunkte;
         this.verlorenePunkte = this.verlorenePunkte + verlorenePunkte;
-        teamDAO.update(this);
+        //teamDAO.update(this);
     }
 
     public int getTeamid() {
