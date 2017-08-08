@@ -157,6 +157,7 @@ public class spielerHinzuController implements Initializable, Cloneable
         Spieler spieler = new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),a.getSpieler().size()+1,geschlecht,rpunkte,verein,t_spid.getText());
         System.out.println(spieler.getNName());
         obs_spieler.add(spieler);
+
         tabelle_spielerliste.refresh();
         //a.addSpieler(spieler);
     }
