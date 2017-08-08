@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -118,7 +119,43 @@ public class MainController implements Initializable
             }
 
 
+            TableColumn<Spiel,String> spielFeldSpalte = new TableColumn("Feld");
+            spielFeldSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("FeldNr"));
+            spielFeldSpalte.setCellFactory(column -> {
+                return new TableCell<Spiel, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty); //This is mandatory
 
+                        if (item == null || empty) { //If the cell is empty
+                            setText(null);
+                            setStyle("");
+                        } else { //If the cell is not empty
+
+                            setText(item); //Put the String data in the cell
+
+                            //We get here all the info of the Person of this row
+                            Spiel spiel = getTableView().getItems().get(getIndex());
+
+                            // Style all persons wich name is "Edgard"
+                            if (spiel.getStatus()==3) {
+                                setTextFill(Color.RED);
+
+                            }
+                            else if (spiel.getStatus()==2) {
+                                setTextFill(Color.DARKBLUE);
+                            }
+                            else {
+                                //Here I see if the row of this cell is selected or not
+                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
+                                    setTextFill(Color.WHITE);
+                                else
+                                    setTextFill(Color.BLACK);
+                            }
+                        }
+                    }
+                };
+            });
 
             TableColumn<Spiel,String> spielHeimSpalte = new TableColumn("Heim");
             spielHeimSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("HeimString"));
@@ -139,8 +176,10 @@ public class MainController implements Initializable
                             Spiel spiel = getTableView().getItems().get(getIndex());
 
                             // Style all persons wich name is "Edgard"
+                            setAlignment(Pos.CENTER_RIGHT);
                             if (spiel.getStatus()==3) {
                                 setTextFill(Color.RED);
+
                             }
                             else if (spiel.getStatus()==2) {
                                 setTextFill(Color.DARKBLUE);
@@ -239,7 +278,7 @@ public class MainController implements Initializable
             });
             tabelle_spiele.setItems(obs_spiele);
 
-            tabelle_spiele.getColumns().addAll(spielHeimSpalte,spielGastSpalte,spielErgebnisSpalte);
+            tabelle_spiele.getColumns().addAll(spielFeldSpalte,spielHeimSpalte,spielGastSpalte,spielErgebnisSpalte);
             /*tabelle_spiele.setRowFactory( tv -> {
                 TableRow<Spiel> row = new TableRow<>();
                 if(row.getItem().getStatus()==3){

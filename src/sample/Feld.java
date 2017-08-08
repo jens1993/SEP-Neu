@@ -25,6 +25,10 @@ public class Feld {
 		this.turnier = turnier;
 	}
 
+	public String toString(){
+		return "Feld "+feldID;
+	}
+
 	public boolean isProfiMatte() {
 		return profiMatte;
 	}

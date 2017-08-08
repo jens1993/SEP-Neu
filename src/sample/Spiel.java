@@ -173,7 +173,14 @@ public class Spiel {
 		}
 
 	}
-
+	public String getFeldNr() {
+		if (feld!=null){
+			return feld.toString();
+		}
+		else{
+			return "";
+		}
+	}
 	public void setErgebnis(Ergebnis ergebnis) {
 		this.ergebnis = ergebnis;
 		statistikAktualisieren();
