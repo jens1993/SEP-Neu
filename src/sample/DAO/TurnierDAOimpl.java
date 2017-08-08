@@ -116,10 +116,10 @@ public class TurnierDAOimpl implements TurnierDAO {
             for(int i=1; i<=turnierEingabe.getSpielklassen().size();i++){
                 Spielklasse spielklasse = turnierEingabe.getSpielklassen().get(i);
                 readSetzliste(spielklasse);
-//                //Spielsystem spielsystem = readSpielsystem(spielklasse);
-//                if (spielsystem != null){
-//                    turnierEingabe.getSpielklassen().get(i).setSpielsystem(spielsystem);
-//                }
+                Spielsystem spielsystem = readSpielsystem(spielklasse);
+                if (spielsystem != null){
+                    turnierEingabe.getSpielklassen().get(i).setSpielsystem(spielsystem);
+                }
             }
             smt.close();
             con.closeCon();

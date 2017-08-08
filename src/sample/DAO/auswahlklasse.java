@@ -15,10 +15,10 @@ public class auswahlklasse
     private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
     private Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
     TurnierDAO turnierDAO = new TurnierDAOimpl();
-    SpielerDAO spielerDAO = new SpielerDAOimpl();
-    SpielklasseDAO spielklasseDAO=new SpielklasseDAOimpl();
-    static Spielklasse aktuelleSpielklassenAuswahl = null;
-    static Turnier aktuelleTurnierAuswahl = null;
+    //SpielerDAO spielerDAO = new SpielerDAOimpl();
+    //private SpielklasseDAO spielklasseDAO=new SpielklasseDAOimpl();
+    private static Spielklasse aktuelleSpielklassenAuswahl = null;
+    private static Turnier aktuelleTurnierAuswahl = null;
 
 
 
@@ -37,13 +37,10 @@ public class auswahlklasse
     }
 
 
-    public SpielklasseDAO getSpielklasseDAO() {
+    /*public SpielklasseDAO getSpielklasseDAO() {
         return spielklasseDAO;
-    }
+    }*/
 
-    public void setSpielklasseDAO(SpielklasseDAO spielklasseDAO) {
-        this.spielklasseDAO = spielklasseDAO;
-    }
 
 
 
@@ -60,13 +57,10 @@ public class auswahlklasse
     }
 
 
-    public SpielerDAO getSpielerDAO() {
+    /*public SpielerDAO getSpielerDAO() {
         return spielerDAO;
     }
-
-    public void setSpielerDAO(SpielerDAO spielerDAO) {
-        this.spielerDAO = spielerDAO;
-    }
+    */
 
 
 
@@ -94,10 +88,10 @@ public class auswahlklasse
         vereine=aktuelleTurnierAuswahl.getVereine();
         return vereine;
     }
-    public Dictionary<Integer, Spielklasse> getSpielklasseDict() {
+    /*public Dictionary<Integer, Spielklasse> getSpielklasseDict() {
         spielklassen=spielklasseDAO.getAllSpielklassenDict();
         return spielklassen;
-    }
+    }*/
     public Dictionary<Integer, Spieler> getSpieler() {
         spieler=aktuelleTurnierAuswahl.getSpieler();
         return spieler;

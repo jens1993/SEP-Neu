@@ -125,11 +125,11 @@ public class klasseHinzufuegenController implements Initializable
     private void pressBtn_KlasseSpeichern(ActionEvent event) throws IOException
     {
 
-        System.out.println("Größe = "+a.getSpielklasseDict().size());
+        System.out.println("Größe = "+a.getAktuelleTurnierAuswahl().getSpielklassen().size());
 
-        Spielklasse spklasse = new Spielklasse(a.getSpielklasseDict().size()+1,combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),a.getAktuelleTurnierAuswahl());
+        Spielklasse spklasse = new Spielklasse(a.getAktuelleTurnierAuswahl().getSpielklassen().size()+1,combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),a.getAktuelleTurnierAuswahl());
 
-        a.getSpielklasseDAO().create(spklasse);
+        spklasse.getSpielklasseDAO().create(spklasse);
 
     }
     @FXML

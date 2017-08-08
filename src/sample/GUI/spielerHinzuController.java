@@ -198,7 +198,7 @@ public class spielerHinzuController implements Initializable, Cloneable
         spieler_neu.setrPunkte(rpunkte);
         spieler_neu.setGeschlecht(geschlecht);
         spieler_neu.setVerein(v);
-        a.getSpielerDAO().update(spieler_neu);
+        spieler_neu.getSpielerDAO().update(spieler_neu);
 
         System.out.println("erf");
 

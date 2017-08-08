@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import sample.DAO.SpielklasseDAO;
+import sample.DAO.SpielklasseDAOimpl;
 import sample.DAO.TurnierDAO;
 import sample.DAO.TurnierDAOimpl;
 import sample.Enums.Disziplin;
@@ -10,6 +12,7 @@ import sample.Enums.Niveau;
 import sample.Spielsysteme.Spielsystem;
 
 public class Spielklasse {
+	private SpielklasseDAO spielklasseDAO = new SpielklasseDAOimpl();
 	private int spielklasseID;
 	private String disziplin;
 	private String niveau;
@@ -56,6 +59,10 @@ public class Spielklasse {
 		this.turnier = t.read(turnier);
 		System.out.println(this.turnier.getName());
 
+	}
+
+	public SpielklasseDAO getSpielklasseDAO() {
+		return spielklasseDAO;
 	}
 
 	public Hashtable<Integer, Spiel> getSpiele() {

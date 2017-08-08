@@ -144,7 +144,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
         }
         return temp;
     }*/
-@Override
+/*@Override
 public Dictionary<Integer, Spielklasse> getSpielklassenDict(Turnier turniereingabe) {
     Dictionary<Integer, Spielklasse> turnierListe = new Hashtable<Integer,Spielklasse>();
     String sql ="SELECT * FROM spielklasse WHERE turnierid = ?";
@@ -171,8 +171,8 @@ public Dictionary<Integer, Spielklasse> getSpielklassenDict(Turnier turniereinga
 
 
     return turnierListe;
-}
-@Override
+}*/
+/*@Override
 public Dictionary<Integer, Spielklasse> getAllSpielklassenDict() {
     Dictionary<Integer, Spielklasse> turnierListe = new Hashtable<Integer,Spielklasse>();
     String sql ="SELECT * FROM spielklasse";
@@ -199,8 +199,8 @@ public Dictionary<Integer, Spielklasse> getAllSpielklassenDict() {
 
 
     return turnierListe;
-}
-    @Override
+}*/
+    /*@Override
     public List<Spielklasse> getAllSpielklassen() {
         List<Spielklasse> alleSpielklassen = new ArrayList<Spielklasse>();
         SQLConnection con = new SQLConnection();
@@ -228,5 +228,5 @@ public Dictionary<Integer, Spielklasse> getAllSpielklassenDict() {
             System.out.println("Spielklassenliste Lesen Klappt nicht");
         }
         return alleSpielklassen;
-    }
+    }*/
 }

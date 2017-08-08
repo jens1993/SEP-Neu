@@ -16,7 +16,7 @@ public interface SpielklasseDAO {
 
     boolean update(Spielklasse spielklasse);
 
-    List<Spielklasse> getAllSpielklassen();
+    //List<Spielklasse> getAllSpielklassen();
 
     /*    @Override
         public Spielklasse read(int spielklasseID) {
@@ -60,7 +60,7 @@ public interface SpielklasseDAO {
             }
             return temp;
         }*/
-    Dictionary<Integer, Spielklasse> getSpielklassenDict(Turnier turniereingabe);
+   // Dictionary<Integer, Spielklasse> getSpielklassenDict(Turnier turniereingabe);
 
-    Dictionary<Integer, Spielklasse> getAllSpielklassenDict();
+    //Dictionary<Integer, Spielklasse> getAllSpielklassenDict();
 }

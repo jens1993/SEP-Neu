@@ -40,7 +40,6 @@ public class Spieler {
 	private int mattenSpiele = 0;
 	private String extSpielerID;
 	private Spiel aktuellesSpiel;
-	private ObservableList<Turnier> turnierData = FXCollections.observableArrayList();
 
 	public Spieler(String vName, String nName, int spielerID){
 		this.vName = vName;
@@ -127,7 +126,9 @@ public class Spieler {
 		//spielerDAO.update(this);
 	}
 
-
+	public SpielerDAO getSpielerDAO() {
+		return spielerDAO;
+	}
 
 	public void setNationalitaet(String nationalitaet) {
 		Nationalitaet = nationalitaet;

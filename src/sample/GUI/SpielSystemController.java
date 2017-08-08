@@ -86,7 +86,7 @@ public class SpielSystemController implements Initializable
 
     private void printSpielerSpielklasseVorhandenTable() throws Exception {
         if(a.getAktuelleTurnierAuswahl()!=null) {
-            turnierauswahlspielklassen= a.getSpielklasseDAO().getSpielklassenDict(a.getAktuelleTurnierAuswahl());
+            turnierauswahlspielklassen= a.getAktuelleTurnierAuswahl().getSpielklassen();
             ArrayList<Team> setzliste = ausgewaehlte_spielklasse.getSetzliste();
             for (int i=0;i<turnierauswahlspielklassen.size();i++){
                 //System.out.println(ausgewaehlte_spielklasse.getSpiele().get(i));

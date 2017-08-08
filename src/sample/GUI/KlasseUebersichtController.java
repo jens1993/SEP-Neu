@@ -63,7 +63,7 @@ public class KlasseUebersichtController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-         turnierauswahlspielklassen= a.getSpielklasseDAO().getSpielklassenDict(a.getAktuelleTurnierAuswahl());
+         turnierauswahlspielklassen= a.getAktuelleTurnierAuswahl().getSpielklassen();
          Spielklasse sp = null;
         Label label[] = new Label[turnierauswahlspielklassen.size()];
         //label[1].setText("jens");
@@ -83,8 +83,10 @@ public class KlasseUebersichtController implements Initializable
             Spielklasse[] finalSp = new Spielklasse[turnierauswahlspielklassen.size()];
             finalSp[i]= sp;
             hp.setOnMouseClicked(event -> {
-                spauswahl[finalI] =a.getSpielklasseDAO().getSpielklassenDict(a.getTurnierDAO().
-                        read(a.getAktuelleTurnierAuswahl())).get(finalI);
+                /*spauswahl[finalI] =a.getSpielklasseDAO().getSpielklassenDict(a.getTurnierDAO().
+                        read(a.getAktuelleTurnierAuswahl())).get(finalI);*/
+
+                spauswahl[finalI] =a.getAktuelleTurnierAuswahl().getSpielklassen().get(finalI);
 
                // System.out.println(spauswahl[finalI].getDisziplin());
                 try {
