@@ -8,7 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import sample.DAO.TurnierDAO;
+import sample.DAO.TurnierDAOimpl;
+import sample.Spielsysteme.Gruppe;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class Main extends Application {
@@ -67,16 +72,16 @@ public class Main extends Application {
 
 
 //       ArrayList <Turnier> turnierliste = new ArrayList<>();
-//    	TurnierDAO test = new TurnierDAOimpl();
+    	//TurnierDAO test = new TurnierDAOimpl();
 //
 //        //System.out.println((i+1)+" "+setzliste.get(i).getName());
 //
-//        Turnier turnier = new Turnier("testturnier",1,LocalDate.now());
-//    	test.read(turnier);
-//        Spielklasse spielklasse =turnier.getSpielklassen().get(1);
-//   	    ArrayList<Team> setzliste = spielklasse.getSetzliste();
-//        //spielklasse.setSpielsystem(new Gruppe(setzliste,spielklasse));
-//        List<Ergebnis> ergebnisse = new ArrayList<>();
+ /*       Turnier turnier = new Turnier("testturnier",1, LocalDate.now());
+    	test.read(turnier);
+        Spielklasse spielklasse =turnier.getSpielklassen().get(1);
+   	    ArrayList<Team> setzliste = spielklasse.getSetzliste();
+   	    spielklasse.setSpielsystem(new Gruppe(setzliste,spielklasse));*/
+    //    List<Ergebnis> ergebnisse = new ArrayList<>();
 //        ergebnisse.add(new Ergebnis(21,15,21,12));
 //        ergebnisse.add(new Ergebnis(15,21,21,19,30,29));
 //        ergebnisse.add(new Ergebnis(21,12,21,11));

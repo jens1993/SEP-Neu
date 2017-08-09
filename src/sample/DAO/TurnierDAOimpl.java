@@ -418,12 +418,17 @@ public class TurnierDAOimpl implements TurnierDAO {
                 rPunkte[1] = spielerResult.getInt("RLP_Doppel");
                 rPunkte[2] = spielerResult.getInt("RLP_Mixed");
                 LocalDate verfuegbar=LocalDate.now();
+                Date geburtstag = spielerResult.getDate("GDatum");
+                LocalDate gdatum = LocalDate.now();
+                if (geburtstag!=null){
+                    gdatum = geburtstag.toLocalDate();
+                }
                 if(spielerResult.getDate("Verfuegbar")!=null) {
                      verfuegbar = spielerResult.getDate("Verfuegbar").toLocalDate();
                 }
                 spieler.put(spielerID,new Spieler(spielerResult.getString("VName"),
                         spielerResult.getString("NName"),
-                        spielerResult.getDate("GDatum").toLocalDate(),
+                        gdatum,
                         spielerID,spielerResult.getBoolean("Geschlecht"),
                         rPunkte,turnier.getVereine().get(spielerResult.getInt("VereinsID")),
                         spielerResult.getFloat("Meldegebuehren"),
