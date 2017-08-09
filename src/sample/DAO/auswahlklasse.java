@@ -1,5 +1,6 @@
 package sample.DAO;
 
+import javafx.stage.Stage;
 import sample.*;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class auswahlklasse
     private static Turnier aktuelleTurnierAuswahl = null;
     private static Spieler SpielerzumHinzufeuegen=null;
     private static ArrayList<Spieler> vorhandeneSpieler;
+    private ArrayList<Stage> stages = new ArrayList<>();
 
 
     public static ArrayList<Spieler> getVorhandeneSpieler() {

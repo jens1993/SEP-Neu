@@ -2,10 +2,16 @@ package sample.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import sample.DAO.TurnierDAO;
 import sample.DAO.TurnierDAOimpl;
+import sample.DAO.auswahlklasse;
 import sample.Turnier;
 
 import java.time.LocalDate;
@@ -27,7 +33,7 @@ public class neuesTurnierController
     private DatePicker turnierDatum;
     @FXML
     private TextField AnzahlFelder;
-
+ auswahlklasse a = new auswahlklasse();
     @FXML
     public void erstelleTurnier(ActionEvent event) throws Exception
     {
@@ -40,6 +46,22 @@ public class neuesTurnierController
         Turnier turnier = new Turnier(Turniername.getText(),turnierliste.size()+1, Datum);
         t.create(turnier);
         System.out.println("Erfolg");
+
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage.setMaximized(true);
+            a.turnierAuswahlSpeichern(turnier);
+            stage.setTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 }
