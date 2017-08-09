@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import sample.*;
 import sample.DAO.*;
@@ -159,6 +160,12 @@ public class spielerHinzuController implements Initializable, Cloneable
         obs_spieler.add(spieler);
         tabelle_spielerliste.refresh();
         //a.addSpieler(spieler);
+
+        Popup popup = new Popup();
+        //CustomController controller = new CustomController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Popup.fxml"));
+        loader.setController(this);
+        popup.getContent().add((Parent)loader.load());
     }
     @FXML
     public void pressBtn_SpielerUpdaten(ActionEvent event) throws Exception

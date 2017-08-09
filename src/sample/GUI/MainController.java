@@ -1,11 +1,14 @@
 package sample.GUI;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -57,13 +60,9 @@ public class MainController implements Initializable
 
     public void pressBtn_turnierLaden (ActionEvent event) throws Exception {
         System.out.println("test");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Turnierladen.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
-        stage.show();
-        stage.setTitle("Turnier auswählen");
-        }
+        turnierLaden();
+    }
+
     public void pressBtn_teamLaden (ActionEvent event) throws Exception {
         System.out.println("test");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TeamUebersicht.fxml"));
@@ -74,9 +73,23 @@ public class MainController implements Initializable
         stage.setTitle("Turnier auswählen");
     }
 
+    private void turnierLaden() throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Turnierladen.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.setAlwaysOnTop(true);
+        stage.show();
+        stage.setTitle("Turnier auswählen");
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        try {
+            turnierLaden();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
