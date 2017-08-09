@@ -27,24 +27,20 @@ public class Team {
 
 
 
-    public Team(int teamid, Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
+    public Team(Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
         this.teamid = teamid;
         this.spielerEins = spielerEins;
         this.spielerZwei = spielerZwei;
         this.spielklasse = spielklasse;
         this.einzel = false;
-        teamid = getSpielklasse().getTurnier().getTeams().size()+1;
-        this.spielklasse.getTurnier().getTeams().put(teamid,this);
         teamDAO.create(this);
     }
 
-    public Team(int teamid, Spieler spielerEins, Spielklasse spielklasse) {
+    public Team(Spieler spielerEins, Spielklasse spielklasse) {
         this.teamid = teamid;
         this.spielerEins = spielerEins;
         this.einzel = true;
         this.spielklasse = spielklasse;
-        teamid = getSpielklasse().getTurnier().getTeams().size()+1;
-        this.spielklasse.getTurnier().getTeams().put(teamid,this);
         teamDAO.create(this);
     }
 
@@ -58,7 +54,10 @@ public class Team {
         }
 
     }
-
+    public void setTeamid(int teamid){
+        this.teamid = teamid;
+        this.spielklasse.getTurnier().getTeams().put(teamid,this);
+    }
     public Team(int teamid, Spielklasse spielklasse) { //nur für bestehendes Turnier einlesen
         this.teamid = teamid;
         this.spielklasse = spielklasse;

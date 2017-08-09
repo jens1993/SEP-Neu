@@ -18,7 +18,7 @@ public class Turnier {
 	private int spielerPausenZeit = 10;
 	private int turnierid;
 	private Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
-	private Dictionary<Integer, Feld> felder = new Hashtable<Integer,Feld>();
+	private ArrayList<Feld> felder = new ArrayList<>();
 	private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
 	private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
 	private Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
@@ -102,11 +102,11 @@ public class Turnier {
 		return spieler;
 	}
 
-	public Dictionary<Integer, Feld> getFelder() {
+	public ArrayList<Feld> getFelder() {
 		return felder;
 	}
 
-	public void setFelder(Dictionary<Integer, Feld> felder) {
+	public void setFelder(ArrayList<Feld> felder) {
 		this.felder = felder;
 	}
 
