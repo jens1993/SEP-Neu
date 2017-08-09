@@ -81,7 +81,7 @@ public class Spieler {
 	}
 
 	public Spieler() {
-		System.out.println("leerer spieler");
+
 	}
 
 	public boolean deleteSpieler(Spieler spieler){

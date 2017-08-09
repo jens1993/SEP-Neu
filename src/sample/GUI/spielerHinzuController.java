@@ -29,6 +29,9 @@ import java.util.*;
  */
 public class spielerHinzuController implements Initializable, Cloneable
 {
+
+    @FXML
+    private Label l_Meldung;
     @FXML
     private Tab tab_sphin;
     @FXML
@@ -58,7 +61,7 @@ public class spielerHinzuController implements Initializable, Cloneable
     @FXML
     private RadioButton r_w;
 
-//Tab2
+    //Tab2
     @FXML
     private TableView tabelle_spielerliste;
     @FXML
@@ -103,7 +106,7 @@ public class spielerHinzuController implements Initializable, Cloneable
         if(a.getAktuelleTurnierAuswahl()!=null) {
 
             obs_spieler.clear();
-            System.out.println("Spielergröße = "+a.getAktuelleTurnierAuswahl().getSpiele().size());
+
             for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
                 obs_spieler.add(a.getAktuelleTurnierAuswahl().getSpieler().get(i));
 
@@ -137,65 +140,94 @@ public class spielerHinzuController implements Initializable, Cloneable
 
     }
 
-private void felderLeeren()
-{
-t_vn.setText("");
-t_nn.setText("");
-    d_geb.setValue(null);
-            t_spid.setText("");
+    private void felderLeeren()
+    {
+        t_vn.setText("");
+        t_nn.setText("");
+        d_geb.setValue(null);
+        t_spid.setText("");
 
-    combo_verein.getSelectionModel().select(0);
-    t_re.setText("0");
-    t_rd.setText("0");
-    t_rm.setText("0");
-    r_m.setSelected(true);
-    r_w.setSelected(false);
+        combo_verein.getSelectionModel().select(0);
+        t_re.setText("0");
+        t_rd.setText("0");
+        t_rm.setText("0");
+        r_m.setSelected(true);
+        r_w.setSelected(false);
 
 
-}
+    }
 
     @FXML
     public void pressBtn_SpielerSpeichern(ActionEvent event) throws Exception
     {
-        boolean geschlecht = false;
-        if (r_m.isSelected())
+
+
+        if(t_vn.getText().equals("")||t_nn.getText().equals("")||t_re.getText().equals("")||t_rd.getText().equals("")||t_rm.getText().equals("")||d_geb.getValue()==null)
         {
-            geschlecht=true;
+            System.out.println("Spielerdaten unvollständig");
+            l_Meldung.setText("Spielerdaten unvollständig!");
         }
         else
         {
-            geschlecht=false;
-        }
-        int []rpunkte = new int[3];
-        rpunkte[0]=Integer.parseInt(t_re.getText());
-        rpunkte[1]=Integer.parseInt(t_rd.getText());
-        rpunkte[2]=Integer.parseInt(t_rm.getText());
+            l_Meldung.setText("");
+            boolean geschlecht = false;
+            if (r_m.isSelected())
+            {
+                geschlecht=true;
+            }
+            else
+            {
+                geschlecht=false;
+            }
+            int []rpunkte = new int[3];
+            rpunkte[0]=Integer.parseInt(t_re.getText());
+            rpunkte[1]=Integer.parseInt(t_rd.getText());
+            rpunkte[2]=Integer.parseInt(t_rm.getText());
 
 
-        Verein verein = combo_verein.getSelectionModel().getSelectedItem();
-        System.out.println(a.getSpieler().size());
+            Verein verein = combo_verein.getSelectionModel().getSelectedItem();
+            System.out.println(a.getSpieler().size());
+
         spieler_neu= new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),a.getSpieler().size()+1,geschlecht,rpunkte,verein,t_spid.getText());
         ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
 
 
- for(Enumeration e = a.getSpieler().elements();e.hasMoreElements();)
- {
-     Spieler sp = (Spieler) e.nextElement();
-     if(sp.getNName().equalsIgnoreCase(spieler_neu.getNName()) && sp.getVName().equalsIgnoreCase(spieler_neu.getVName()))
-     {
+        for(Enumeration e = a.getSpieler().elements();e.hasMoreElements();)
+        {
+            Spieler sp = (Spieler) e.nextElement();
+            if(sp.getNName().equalsIgnoreCase(spieler_neu.getNName()) && sp.getVName().equalsIgnoreCase(spieler_neu.getVName()))
+            {
 
-         System.out.println("Übereinstimmung gefunden:");
-         System.out.println(sp.getVName()+" "+sp.getNName()+" --- "+spieler_neu.getVName()+" "+spieler_neu.getNName());
-         TurnierDAO t;
-         t = new TurnierDAOimpl();
+                System.out.println("Übereinstimmung gefunden:");
+                System.out.println(sp.getVName()+" "+sp.getNName()+" --- "+spieler_neu.getVName()+" "+spieler_neu.getNName());
+                TurnierDAO t;
+                t = new TurnierDAOimpl();
 
-         vorhandeneSpieler.add(sp);
+                vorhandeneSpieler.add(sp);
 
-     }
- }
-        a.setSpielerzumHinzufeuegen(spieler_neu);
-        a.setVorhandeneSpieler(vorhandeneSpieler);
-        pressBtn_Popup(event);
+            }
+        }
+
+
+        if(vorhandeneSpieler.size()>0)
+        {
+            a.setSpielerzumHinzufeuegen(spieler_neu);
+            a.setVorhandeneSpieler(vorhandeneSpieler);
+
+            pressBtn_Popup(event);
+        }
+        else
+        {
+            a.addSpieler(spieler_neu);
+            a.getAktuelleTurnierAuswahl().getSpieler().put(spieler_neu.getSpielerID(),spieler_neu);
+            printSpielerZuordnenTableNeu();
+
+
+        }
+
+
+
+        }
     }
 
 //    @FXML
@@ -210,8 +242,8 @@ t_nn.setText("");
 
     public void  spielerTabelleAktualisieren()
     {
-     tabelle_spielerliste.refresh();
-          }
+        tabelle_spielerliste.refresh();
+    }
     public void pressBtn_Popup (ActionEvent event) throws Exception {
         System.out.println("test");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Popup.fxml"));
@@ -224,7 +256,7 @@ t_nn.setText("");
     }
     private void zeigePopup()
     {
-                   Popup popup = new Popup();
+        Popup popup = new Popup();
         //CustomController controller = new CustomController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Popup.fxml"));
         loader.setController(this);
@@ -240,8 +272,6 @@ t_nn.setText("");
     @FXML
     public void pressBtn_SpielerUpdaten(ActionEvent event) throws Exception
     {
-
-
 
         tab_sphin.setDisable(false);
         tab_spbea.setDisable(false);
@@ -317,6 +347,8 @@ t_nn.setText("");
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        l_Meldung.setText("");
+
         tabelle_spielerliste.setRowFactory(tv -> {
             TableRow row = new TableRow();
             row.setOnMouseClicked(event -> {
@@ -371,7 +403,7 @@ t_nn.setText("");
             System.out.println("turnier="+a.getAktuelleTurnierAuswahl().getName());
 
             spieler_neu=clickedRow;
-                    }
+        }
 
     }
 

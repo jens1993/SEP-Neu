@@ -24,7 +24,6 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Text?>
 
-
 <TabPane fx:id="tabpane_spieler" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="702.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.spielerHinzuController">
     <tabs>
         <Tab id="tab_spieler_hinzufuegen" fx:id="tab_sphin" text="Spieler hinzufügen">
@@ -177,6 +176,11 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </DatePicker>
+                  <Label fx:id="l_Meldung" textFill="#eb0505" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                     </children>
                 </GridPane>
             </content>
