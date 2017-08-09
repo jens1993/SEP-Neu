@@ -38,6 +38,7 @@ public class KlasseUebersichtController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzufuegen.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
+            a.addStage(stage);
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle("Neue Klasse");
@@ -52,6 +53,7 @@ public class KlasseUebersichtController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielSystem.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
+            a.addStage(stage);
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle(spielklasse.getDisziplin()+ " "+ spielklasse.getNiveau());

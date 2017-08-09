@@ -28,7 +28,6 @@ public class Team {
 
 
     public Team(Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
-        this.teamid = teamid;
         this.spielerEins = spielerEins;
         this.spielerZwei = spielerZwei;
         this.spielklasse = spielklasse;
@@ -37,8 +36,7 @@ public class Team {
     }
 
     public Team(Spieler spielerEins, Spielklasse spielklasse) {
-        this.teamid = teamid;
-        this.spielerEins = spielerEins;
+        this.spielerEins = spielerEins;   //teamID
         this.einzel = true;
         this.spielklasse = spielklasse;
         teamDAO.create(this);

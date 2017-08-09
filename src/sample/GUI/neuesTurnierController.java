@@ -51,6 +51,10 @@ public class neuesTurnierController
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
+            for (int i=0; i<a.getStages().size();i++){
+                a.getStages().get(i).close();
+            }
+            a.addStage(stage);
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setMaximized(true);

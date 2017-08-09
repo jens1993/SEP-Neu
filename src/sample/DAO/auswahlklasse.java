@@ -16,14 +16,14 @@ public class auswahlklasse
     private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
     private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
     private Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
-    TurnierDAO turnierDAO = new TurnierDAOimpl();
+    private TurnierDAO turnierDAO = new TurnierDAOimpl();
     //SpielerDAO spielerDAO = new SpielerDAOimpl();
     //private SpielklasseDAO spielklasseDAO=new SpielklasseDAOimpl();
     private static Spielklasse aktuelleSpielklassenAuswahl = null;
     private static Turnier aktuelleTurnierAuswahl = null;
     private static Spieler SpielerzumHinzufeuegen=null;
     private static ArrayList<Spieler> vorhandeneSpieler;
-    private ArrayList<Stage> stages = new ArrayList<>();
+    private static ArrayList<Stage> stages = new ArrayList<>();
 
 
     public static ArrayList<Spieler> getVorhandeneSpieler() {
@@ -34,6 +34,12 @@ public class auswahlklasse
         auswahlklasse.vorhandeneSpieler = vorhandeneSpieler;
     }
 
+    public ArrayList<Stage> getStages() {
+        return stages;
+    }
+    public void addStage(Stage stage){
+        this.stages.add(stage);
+    }
 
     public static Spieler getSpielerzumHinzufeuegen() {
         return SpielerzumHinzufeuegen;

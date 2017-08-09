@@ -51,6 +51,7 @@ public class MainController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
+            a.addStage(stage);
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle("Spieler");
@@ -66,6 +67,7 @@ public class MainController implements Initializable
             System.out.println("test");
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
+            a.addStage(stage);
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle("Klassenübersicht");
@@ -78,6 +80,7 @@ public class MainController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("neuesTurnier.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
+            a.addStage(stage);
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle("Neues Turnier");
@@ -91,6 +94,7 @@ public class MainController implements Initializable
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Turnierladen.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
+        a.addStage(stage);
         stage.setScene(new Scene(root1));
         stage.show();
         stage.setTitle("Turnier auswählen");
@@ -101,6 +105,7 @@ public class MainController implements Initializable
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TeamUebersicht.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
+        a.addStage(stage);
         stage.setScene(new Scene(root1));
         stage.show();
         stage.setTitle("Turnier auswählen");
