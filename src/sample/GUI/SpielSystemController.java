@@ -209,7 +209,7 @@ public class SpielSystemController implements Initializable
             spielerm2=spielerneu;
             befuellem1=true;
             System.out.println(ausgewaehlte_spielklasse.getSetzliste().size()+1+"-------------");
-            Team t = new Team(ausgewaehlte_spielklasse.getSetzliste().size()+1,spielerm1,spielerm2,ausgewaehlte_spielklasse);
+            Team t = new Team(spielerm1,spielerm2,ausgewaehlte_spielklasse);
             ausgewaehlte_spielklasse.addSetzliste(t);
         }
     }

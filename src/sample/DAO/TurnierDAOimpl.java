@@ -247,7 +247,13 @@ public class TurnierDAOimpl implements TurnierDAO {
                 }
                 int status = spielResult.getInt("status");
                 int systemspielid = spielResult.getInt("SpielklasseSpielID");
-                spiele.add(new Spiel(spielid,heim,gast,aufrufzeit,schiedsrichter,status,systemspielid));
+                Feld feld = null;
+                for (int i=0; i<spielklasse.getTurnier().getFelder().size();i++){
+                    if (spielklasse.getTurnier().getFelder().get(i).getFeldID()==spielResult.getInt("Feld")){
+                        feld = spielklasse.getTurnier().getFelder().get(i);
+                    }
+                }
+                spiele.add(new Spiel(spielid,heim,gast,aufrufzeit,schiedsrichter,status,systemspielid,feld));
             }
             smt.close();
             con.closeCon();
@@ -318,8 +324,8 @@ public class TurnierDAOimpl implements TurnierDAO {
     }
 
 
-    private Dictionary<Integer,Feld> readFelder(Turnier turnier) {
-        Dictionary<Integer, Feld> felder = new Hashtable<Integer,Feld>();
+    private ArrayList<Feld> readFelder(Turnier turnier) {
+        ArrayList<Feld> felder = new ArrayList<>();
 
         String sql = "SELECT * FROM feld WHERE turnierID = ?";
         try {
@@ -329,7 +335,11 @@ public class TurnierDAOimpl implements TurnierDAO {
             ResultSet feldResult = smt.executeQuery();
             while (feldResult.next()){
                 int feldid = feldResult.getInt("FeldID");
-                felder.put(feldid,new Feld(feldResult.getBoolean("ProfiMatte"),feldid,turnier));
+                Spiel aktivesSpiel = turnier.getSpiele().get(feldResult.getInt("aktivesSpiel"));
+                Spiel inVorbereitung = turnier.getSpiele().get(feldResult.getInt("inVorbereitung"));
+                Feld feld = new Feld(feldid,aktivesSpiel,inVorbereitung,turnier);
+                felder.add(feld);
+                feld.setFeldnummer(felder.indexOf(feld)+1);
             }
             smt.close();
             con.closeCon();

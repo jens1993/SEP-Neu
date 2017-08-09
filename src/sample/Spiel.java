@@ -117,7 +117,7 @@ public class Spiel {
 	}
 
 
-	public Spiel(int spielID, Team heim, Team gast, LocalDate aufrufZeit, Spieler schiedsrichter, int status, int systemSpielID) {
+	public Spiel(int spielID, Team heim, Team gast, LocalDate aufrufZeit, Spieler schiedsrichter, int status, int systemSpielID, Feld feld) {
 		this.spielID = spielID;
 		this.heim = heim;						//Constructor für einlesen. Anschließend MUSS Spielsystem gesettet werden!)
 		this.gast = gast;
@@ -125,6 +125,7 @@ public class Spiel {
 		this.schiedsrichter = schiedsrichter;
 		this.status = status;
 		this.systemSpielID = systemSpielID;
+		this.feld = feld;
 	}
 
 	public Team getSieger(){

@@ -13,17 +13,24 @@ import java.util.List;
 public class FeldDAOimpl implements FeldDAO {
     @Override
     public boolean createFeld(Feld feld) {
+        String idAbfrage = "Select 'AUTO_INCREMENT' " +
+                "FROM IMFORMATION_SCHEMA.TABLES " +
+                "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
+                "AND TABLE_NAME = 'Feld'";
+
         String sql = "INSERT INTO feld("
-                + "FeldID,"
-                + "turnierid, "
-                + "ProfiMatte) "
+                + "turnierid) "
                 + "VALUES(?,?,?)";
         try {
             SQLConnection con = new SQLConnection();
+            Statement smtID = con.SQLConnection().createStatement();
+            ResultSet count = smtID.executeQuery(idAbfrage);
+            count.next();
+            int feldID = count.getInt(1);
+            feld.setFeldID(feldID);
+            smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, feld.getFeldID());
-            smt.setInt(2, feld.getTurnier().getTurnierid());
-            smt.setBoolean(3, feld.isProfiMatte());
+            smt.setInt(1, feld.getTurnier().getTurnierid());
             smt.executeUpdate();
             smt.close();
             con.closeCon();
@@ -41,8 +48,7 @@ public class FeldDAOimpl implements FeldDAO {
         String sql = "UPDATE feld "
                 + "SET aktivesSpiel = ?, "
                 + "InVorbereitung = ?, "
-                + "turnierid = ?, "
-                + "ProfiMatte = ? "
+                + "turnierid = ? "
                 + "WHERE FeldID = ? "
                 ;
         try {
@@ -51,8 +57,7 @@ public class FeldDAOimpl implements FeldDAO {
             smt.setInt(1, feld.getAktivesSpiel().getSpielID());
             smt.setInt(2, feld.getInVorbereitung().getSpielID());
             smt.setInt(3, feld.getTurnier().getTurnierid());
-            smt.setBoolean(4, feld.isProfiMatte());
-            smt.setInt(5, feld.getFeldID());
+            smt.setInt(4, feld.getFeldID());
             smt.executeUpdate();
             smt.close();
             con.closeCon();
