@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
@@ -69,10 +70,10 @@ public class KlasseUebersichtController implements Initializable
         //label[1].setText("jens");
 
         System.out.println("Anzahl Klassen = "+turnierauswahlspielklassen.size());
-        TextFlow[] flow = new TextFlow[turnierauswahlspielklassen.size()];
+        TextFlow[] flow = new TextFlow[turnierauswahlspielklassen.size()+1];
         final Spielklasse[] spauswahl = {null};
-        for ( int i = 0; i < turnierauswahlspielklassen.size(); i++) {
-            sp= turnierauswahlspielklassen.get(i+1);
+        for ( int i = 1; i <= turnierauswahlspielklassen.size(); i++) {
+            sp= turnierauswahlspielklassen.get(i);
             Hyperlink hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau());
             flow[i] = new TextFlow(new Text("Einzelklasse: "),hp);
             flow[i].setPadding(new Insets(10));
@@ -81,19 +82,25 @@ public class KlasseUebersichtController implements Initializable
             klassseeinzel_vbox.getChildren().addAll(flow[i]);
             int finalI = i;
             Spielklasse[] finalSp = new Spielklasse[turnierauswahlspielklassen.size()];
-            finalSp[i]= sp;
+            finalSp[i-1]= sp;
             hp.setOnMouseClicked(event -> {
                 /*spauswahl[finalI] =a.getSpielklasseDAO().getSpielklassenDict(a.getTurnierDAO().
                         read(a.getAktuelleTurnierAuswahl())).get(finalI);*/
 
-                spauswahl[finalI] =a.getAktuelleTurnierAuswahl().getSpielklassen().get(finalI);
+                if(finalSp[finalI-1]!=null)
+                {
 
-               // System.out.println(spauswahl[finalI].getDisziplin());
-                try {
-                    pressBtn_Spielsystem(finalSp[finalI]);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    finalSp[finalI-1] =a.getAktuelleTurnierAuswahl().getSpielklassen().get(finalI);
+
+                   // System.out.println(spauswahl[finalI].getDisziplin());
+                    try {
+                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                        pressBtn_Spielsystem(finalSp[finalI-1]);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
+
             });
 
             //doing what you want here with labels

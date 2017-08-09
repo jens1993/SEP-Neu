@@ -129,6 +129,8 @@ public class klasseHinzufuegenController implements Initializable
 
         Spielklasse spklasse = new Spielklasse(a.getAktuelleTurnierAuswahl().getSpielklassen().size()+1,combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),a.getAktuelleTurnierAuswahl());
 
+
+        a.getAktuelleTurnierAuswahl().addSpielklassen(spklasse);
         spklasse.getSpielklasseDAO().create(spklasse);
 
     }

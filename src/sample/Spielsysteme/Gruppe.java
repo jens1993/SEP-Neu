@@ -192,7 +192,6 @@ public class Gruppe extends Spielsystem {
 		if(getOffeneRundenSpiele()==0){
 			erhoeheAktuelleRunde();
 			setOffeneRundenSpiele(anzahlTeams/2);
-			System.out.println(getAktuelleRunde());
 			if(getAktuelleRunde()==getAnzahlRunden()){
 				sortList(teamList);
 				setPlatzierungsListe(teamList);

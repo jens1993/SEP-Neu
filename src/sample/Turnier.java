@@ -1,10 +1,7 @@
 package sample;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.Timer;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,13 +24,26 @@ public class Turnier {
 	private Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
 	private Dictionary<Integer, Spiel> spiele = new Hashtable<Integer,Spiel>();
 	private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
-
+	private ArrayList<Spiel> aktiveSpiele = new ArrayList<>();
+	private ArrayList<Spiel> ausstehendeSpiele = new ArrayList<>();
+	private ArrayList<Spiel> gespielteSpiele = new ArrayList<>();
 	public Turnier(String name, int turnierid, LocalDate datum) {
 		this.datum = datum;
 		this.name = name;
 		this.turnierid = turnierid;
 	}
 
+	public ArrayList<Spiel> getAktiveSpiele() {
+		return aktiveSpiele;
+	}
+
+	public ArrayList<Spiel> getAusstehendeSpiele() {
+		return ausstehendeSpiele;
+	}
+
+	public ArrayList<Spiel> getGespielteSpiele() {
+		return gespielteSpiele;
+	}
 
 	public int getGesamtSpiele() {
 		return gesamtSpiele;
@@ -64,6 +74,11 @@ public class Turnier {
 	}
 
 	public Dictionary<Integer, Spielklasse> getSpielklassen() {
+		return spielklassen;
+	}
+	public Dictionary<Integer, Spielklasse> addSpielklassen(Spielklasse sp) {
+
+		spielklassen.put(sp.getSpielklasseID(),sp);
 		return spielklassen;
 	}
 

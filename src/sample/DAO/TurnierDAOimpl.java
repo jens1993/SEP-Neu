@@ -121,6 +121,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                     turnierEingabe.getSpielklassen().get(i).setSpielsystem(spielsystem);
                 }
             }
+            spielListenFuellen(turnierEingabe);
             smt.close();
             con.closeCon();
             //turnier.setSpiele(readSpiele(turnier));
@@ -135,6 +136,24 @@ public class TurnierDAOimpl implements TurnierDAO {
             System.out.println("Fehler");
         }
         return turnierEingabe;
+    }
+
+    private void spielListenFuellen(Turnier turnierEingabe) {
+        Enumeration e = turnierEingabe.getSpiele().keys();
+        while(e.hasMoreElements()){
+            int spielID = (int) e.nextElement();
+            Spiel spiel = turnierEingabe.getSpiele().get(spielID);
+            if(spiel.getStatus() == 3){
+                turnierEingabe.getGespielteSpiele().add(spiel);
+            }
+            else if (spiel.getStatus()==2){
+                turnierEingabe.getAktiveSpiele().add(spiel);
+
+            }
+            else if (spiel.getStatus()==1){
+                turnierEingabe.getAusstehendeSpiele().add(spiel);
+            }
+        }
     }
 
     private Dictionary<Integer,Spielklasse> readSpielklassen(Turnier turnier) {
@@ -161,7 +180,6 @@ public class TurnierDAOimpl implements TurnierDAO {
         return spielklassen;
     }
     private ArrayList<Team> readSetzliste(Spielklasse spielklasse){
-        System.out.println("lese Setzliste");
         ArrayList<Team> setzliste = new ArrayList<Team>();
         SQLConnection con = new SQLConnection();
         Connection connection = con.SQLConnection();
@@ -174,7 +192,6 @@ public class TurnierDAOimpl implements TurnierDAO {
             while (setzlisteResult.next()) {
                 Team team = spielklasse.getTurnier().getTeams().get(setzlisteResult.getInt("TeamID"));
                 setzliste.add(team);
-                System.out.println(team);
             }
             st.close();
             con.closeCon();
@@ -370,7 +387,6 @@ public class TurnierDAOimpl implements TurnierDAO {
             }
             smt.close();
             con.closeCon();
-            System.out.println("Turnier lesen klappt");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Turnier lesen klappt nicht");
