@@ -15,14 +15,13 @@ public class TeamDAOimpl implements TeamDAO {
     @Override
     public boolean create(Team team) {
         String idAbfrage = "Select 'AUTO_INCREMENT' " +
-                "FROM IMFORMATION_SCHEMA.TABLES " +
+                "FROM INFORMATION_SCHEMA.TABLES " +
                 "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
                 "AND TABLE_NAME = 'Team'";
 
         String sql = "INSERT INTO team("
-                + "TeamID, "
                 + "SpielklasseID) "
-                + "VALUES(?,?)";
+                + "VALUES(?)";
         String sqlSpielerEins = "INSERT INTO Team_Spieler("
                 + "TeamID, "
                 + "SpielerID) "
@@ -38,12 +37,14 @@ public class TeamDAOimpl implements TeamDAO {
             Statement smtID = con.SQLConnection().createStatement();
             ResultSet count = smtID.executeQuery(idAbfrage);
             count.next();
-            int teamID = count.getInt(1);
+
+            System.out.println(count.getObject(1));
+            int teamID = count.getInt("AUTO_INCREMENT");
+            System.out.println(teamID);
             team.setTeamid(teamID);
             smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, team.getTeamid() );
-            smt.setInt(2, team.getSpielklasse().getSpielklasseID());
+            smt.setInt(1, team.getSpielklasse().getSpielklasseID());
             smt.executeUpdate();
             smt.close();
             PreparedStatement smtSpielerEins = con.SQLConnection().prepareStatement(sqlSpielerEins);

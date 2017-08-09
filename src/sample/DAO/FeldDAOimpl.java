@@ -20,7 +20,7 @@ public class FeldDAOimpl implements FeldDAO {
 
         String sql = "INSERT INTO feld("
                 + "turnierid) "
-                + "VALUES(?,?,?)";
+                + "VALUES(?)";
         try {
             SQLConnection con = new SQLConnection();
             Statement smtID = con.SQLConnection().createStatement();
