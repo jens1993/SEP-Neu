@@ -58,6 +58,11 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             e.printStackTrace();
             System.out.println("Spielklasse Loeschen Klappt nicht");
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("Allgemeiner Fehler");
+        }
         return false;
     }
 

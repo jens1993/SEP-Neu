@@ -41,6 +41,8 @@ public class Spieler {
 	private String extSpielerID;
 	private Spiel aktuellesSpiel;
 
+
+
 	public Spieler(String vName, String nName, int spielerID){
 		this.vName = vName;
 		this.nName = nName;

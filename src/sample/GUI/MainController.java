@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -93,6 +94,7 @@ public class MainController implements Initializable
         stage.setScene(new Scene(root1));
         stage.show();
         stage.setTitle("Turnier auswählen");
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
     public void pressBtn_teamLaden (ActionEvent event) throws Exception {
         System.out.println("test");
@@ -333,12 +335,13 @@ public class MainController implements Initializable
         stage.setAlwaysOnTop(true);
         stage.show();
         stage.setTitle("Turnier auswählen");
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            turnierLaden();
+            //urnierLaden();
             printSpielTable();
         } catch (Exception e) {
             e.printStackTrace();

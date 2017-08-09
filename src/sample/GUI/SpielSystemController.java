@@ -128,59 +128,8 @@ public class SpielSystemController implements Initializable
         }
 
     }
-    @FXML
-    private void trostSwitch(ActionEvent event) throws IOException {
-        if(radio_trostNein.isSelected()){
-            koTrostRundeNein.setVisible(true);
-            koTrostRundeJa.setVisible(false);
-        }
-        else{
-            koTrostRundeNein.setVisible(false);
-            koTrostRundeJa.setVisible(true);
-        }
-    }
-    @FXML
-    private void klassenSwitch(ActionEvent event) throws IOException, InterruptedException {
 
-        if(radio_gruppe.isSelected()) {
-            gruppe.toFront();
-            gruppe.setVisible(true);
-            gruppeMitEndrunde.setVisible(false);
-            koSystem.setVisible(false);
-            schweizerSystem.setVisible(false);
-        }
 
-        else if(radio_gruppeMitE.isSelected()) {
-            gruppeMitEndrunde.toFront();
-            gruppe.setVisible(false);
-            gruppeMitEndrunde.setVisible(true);
-            koSystem.setVisible(false);
-            schweizerSystem.setVisible(false);
-        }
-
-        else if(radio_ko.isSelected()){
-            koSystem.toFront();
-            gruppe.setVisible(false);
-            gruppeMitEndrunde.setVisible(false);
-            koSystem.setVisible(true);
-            schweizerSystem.setVisible(false);
-        }
-
-        else if(radio_schweizer.isSelected()){
-            schweizerSystem.toFront();
-            gruppe.setVisible(false);
-            gruppeMitEndrunde.setVisible(false);
-            koSystem.setVisible(false);
-            schweizerSystem.setVisible(true);
-        }
-        else{
-            //label1.setText("");
-            //label2.setText("");
-            //label3.setText("");
-            //hbox_1.getChildren().clear();
-            //hbox_2.getChildren().clear();
-        }
-    }
 
 
     private void printSpielerSpielklasseVorhandenTable() throws Exception {

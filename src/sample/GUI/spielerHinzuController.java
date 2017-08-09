@@ -19,9 +19,10 @@ import javafx.stage.Stage;
 import sample.*;
 import sample.DAO.*;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * Created by jens on 03.08.2017.
@@ -95,13 +96,14 @@ public class spielerHinzuController implements Initializable, Cloneable
 
     auswahlklasse a = new auswahlklasse();
 
-    static Spieler spieler_neu=null;
+    private static Spieler spieler_neu=null;
     private static ObservableList<Spieler> obs_spieler = FXCollections.observableArrayList();
 
-    private void printSpielerZuordnenTable() throws Exception {
+    private void printSpielerZuordnenTableNeu() throws Exception {
         if(a.getAktuelleTurnierAuswahl()!=null) {
 
-
+            obs_spieler.clear();
+            System.out.println("Spielergröße = "+a.getAktuelleTurnierAuswahl().getSpiele().size());
             for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
                 obs_spieler.add(a.getAktuelleTurnierAuswahl().getSpieler().get(i));
 
@@ -135,6 +137,22 @@ public class spielerHinzuController implements Initializable, Cloneable
 
     }
 
+private void felderLeeren()
+{
+t_vn.setText("");
+t_nn.setText("");
+    d_geb.setValue(null);
+            t_spid.setText("");
+
+    combo_verein.getSelectionModel().select(0);
+    t_re.setText("0");
+    t_rd.setText("0");
+    t_rm.setText("0");
+    r_m.setSelected(true);
+    r_w.setSelected(false);
+
+
+}
 
     @FXML
     public void pressBtn_SpielerSpeichern(ActionEvent event) throws Exception
@@ -155,18 +173,68 @@ public class spielerHinzuController implements Initializable, Cloneable
 
 
         Verein verein = combo_verein.getSelectionModel().getSelectedItem();
-        Spieler spieler = new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),a.getSpieler().size()+1,geschlecht,rpunkte,verein,t_spid.getText());
-        System.out.println(spieler.getNName());
-        obs_spieler.add(spieler);
+        System.out.println(a.getSpieler().size());
+        spieler_neu= new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),a.getSpieler().size()+1,geschlecht,rpunkte,verein,t_spid.getText());
+        ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
 
-        tabelle_spielerliste.refresh();
-        //a.addSpieler(spieler);
 
-        Popup popup = new Popup();
+ for(Enumeration e = a.getSpieler().elements();e.hasMoreElements();)
+ {
+     Spieler sp = (Spieler) e.nextElement();
+     if(sp.getNName().equalsIgnoreCase(spieler_neu.getNName()) && sp.getVName().equalsIgnoreCase(spieler_neu.getVName()))
+     {
+
+         System.out.println("Übereinstimmung gefunden:");
+         System.out.println(sp.getVName()+" "+sp.getNName()+" --- "+spieler_neu.getVName()+" "+spieler_neu.getNName());
+         TurnierDAO t;
+         t = new TurnierDAOimpl();
+
+         vorhandeneSpieler.add(sp);
+
+     }
+ }
+        a.setSpielerzumHinzufeuegen(spieler_neu);
+        a.setVorhandeneSpieler(vorhandeneSpieler);
+        pressBtn_Popup(event);
+    }
+
+//    @FXML
+//    public void SpielerSpeichern(ActionEvent event)
+//    {
+//        obs_spieler.add(spieler_neu);
+//        a.addSpieler(spieler_neu);
+//        spielerTabelleAktualisieren();
+//        felderLeeren();
+//
+//    }
+
+    public void  spielerTabelleAktualisieren()
+    {
+     tabelle_spielerliste.refresh();
+          }
+    public void pressBtn_Popup (ActionEvent event) throws Exception {
+        System.out.println("test");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Popup.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.show();
+        stage.setTitle("Spieler vorhanden");
+    }
+    private void zeigePopup()
+    {
+                   Popup popup = new Popup();
         //CustomController controller = new CustomController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Popup.fxml"));
         loader.setController(this);
-        popup.getContent().add((Parent)loader.load());
+        try {
+            popup.getContent().add((Parent)loader.load());
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
     @FXML
     public void pressBtn_SpielerUpdaten(ActionEvent event) throws Exception
@@ -221,7 +289,7 @@ public class spielerHinzuController implements Initializable, Cloneable
 
 
 
-        tabelle_spielerliste.refresh();
+        spielerTabelleAktualisieren();
     }
 
 
@@ -265,7 +333,8 @@ public class spielerHinzuController implements Initializable, Cloneable
             ladeVereine();
             combo_verein.getSelectionModel().select(0);
 
-            printSpielerZuordnenTable();
+            printSpielerZuordnenTableNeu();
+            spielerTabelleAktualisieren();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package sample.DAO;
 
 import sample.*;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -19,6 +20,27 @@ public class auswahlklasse
     //private SpielklasseDAO spielklasseDAO=new SpielklasseDAOimpl();
     private static Spielklasse aktuelleSpielklassenAuswahl = null;
     private static Turnier aktuelleTurnierAuswahl = null;
+    private static Spieler SpielerzumHinzufeuegen=null;
+    private static ArrayList<Spieler> vorhandeneSpieler;
+
+
+    public static ArrayList<Spieler> getVorhandeneSpieler() {
+        return vorhandeneSpieler;
+    }
+
+    public static void setVorhandeneSpieler(ArrayList<Spieler> vorhandeneSpieler) {
+        auswahlklasse.vorhandeneSpieler = vorhandeneSpieler;
+    }
+
+
+    public static Spieler getSpielerzumHinzufeuegen() {
+        return SpielerzumHinzufeuegen;
+    }
+
+    public static void setSpielerzumHinzufeuegen(Spieler spielerzumHinzufeuegen) {
+        SpielerzumHinzufeuegen = spielerzumHinzufeuegen;
+    }
+
 
 
 

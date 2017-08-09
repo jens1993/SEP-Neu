@@ -7,8 +7,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -101,11 +104,26 @@ public class TurnierladenController implements Initializable
             //System.out.println(a.getAktuelleTurnierAuswahl().getName());
             a.turnierAuswahlSpeichern(a.getAktuelleTurnierAuswahl());
             //System.out.println("Das aktuelle Turnier lautet"+a.getAktuelleTurnierAuswahl().toString());
-            Main.getInstance().updateTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
+            //Main.getInstance().updateTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
             //a.setAktuelleTurnierAuswahl
             System.out.println("Turnierauswahl durch Doppelklick: = "+item.getName());
             //((Node)(event.getSource())).getScene().getWindow().hide();
+            try {
+                MainLaden();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+    }
+    private void MainLaden() throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+
+        stage.show();
+        stage.setMaximized(true);
+        stage.setTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
     }
 
 }

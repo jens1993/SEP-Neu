@@ -30,18 +30,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         instance = this;
         this.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/Turnierladen.fxml"));
         this.primaryStage.setTitle("Badminton Turnierverwaltung - Kein Turnier ausgewählt");
-        Scene scene = new Scene(root,500,200);
+        Scene scene = new Scene(root);
         this.primaryStage.setScene(scene);
-        this.primaryStage.setMaximized(true);
+
         this.primaryStage.show();
-        scene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("mouse click detected! " + mouseEvent.getSource());
-            }
-        });
+
 
 
     }
