@@ -185,7 +185,7 @@
         </Tab>
         <Tab id="tab_spieler_bearbeiten" fx:id="tab_spbea" text="Spieler bearbeiten">
          <content>
-            <GridPane>
+            <GridPane fx:id="grid">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="337.0" minWidth="100.0" prefWidth="92.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="622.0" minWidth="10.0" prefWidth="610.0" />
@@ -205,7 +205,7 @@
                     </columns>
                   </TableView>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Spielersuche:" GridPane.halignment="CENTER" />
-                  <TextField maxWidth="225.0" promptText="Name ..." GridPane.columnIndex="1">
+                  <TextField fx:id="t_suchleiste" maxWidth="225.0" promptText="Name ..." GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>

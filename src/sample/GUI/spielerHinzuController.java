@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
@@ -20,6 +21,8 @@ import javafx.stage.Stage;
 import sample.*;
 import sample.DAO.*;
 
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -31,6 +34,8 @@ import java.util.*;
 public class spielerHinzuController implements Initializable, Cloneable
 {
 
+@FXML
+private TextField t_suchleiste;
     @FXML
     private Label l_Meldung;
     @FXML
@@ -97,7 +102,7 @@ public class spielerHinzuController implements Initializable, Cloneable
     private RadioButton r_m1;
     @FXML
     private RadioButton r_w1;
-
+    HashMap<Integer, Spieler> loans = new HashMap<Integer, Spieler>();
     auswahlklasse a = new auswahlklasse();
 
     private static Spieler spieler_neu=null;
@@ -110,6 +115,7 @@ public class spielerHinzuController implements Initializable, Cloneable
 
             for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
                 obs_spieler.add(a.getAktuelleTurnierAuswahl().getSpieler().get(i));
+                loans.put(a.getAktuelleTurnierAuswahl().getSpieler().get(i).getSpielerID(),a.getAktuelleTurnierAuswahl().getSpieler().get(i));
 
             }
 
@@ -325,6 +331,7 @@ public class spielerHinzuController implements Initializable, Cloneable
     }
 
 
+
     private void ladeVereine() throws Exception
     {
 
@@ -433,6 +440,32 @@ public class spielerHinzuController implements Initializable, Cloneable
         }
 
 
+        t_suchleiste.textProperty().addListener((observable, oldValue, newValue) -> {
+            // System.out.println("textfield changed from " + oldValue + " to " + newValue);
+            //obs_spieler.clear();
+
+            obs_spieler.clear();
+            for (Integer key : loans.keySet()) {
+
+
+
+                if(loans.get(key).toString().toUpperCase().contains(t_suchleiste.getText().toUpperCase()))
+
+                {
+                    System.out.println("match");
+                    System.out.println("key: " + key + " value: " + loans.get(key));
+                    Spieler sp = loans.get(key);
+
+                    obs_spieler.add(obs_spieler.size(),sp);
+
+                }
+
+            }
+tabelle_spielerliste.refresh();
+
+
+
+        });
 
     }
     private void FuelleFelder(Spieler clickedRow)

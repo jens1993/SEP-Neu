@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
@@ -36,7 +37,7 @@ public class EinstellungenController implements Initializable
     @FXML
     private TextField tuser;
     @FXML
-    private TextField tpw;
+    private PasswordField tpw;
 
     auswahlklasse a = new auswahlklasse();
 
@@ -45,6 +46,7 @@ public class EinstellungenController implements Initializable
  @FXML
  public void btn_einstellungenspeichern(ActionEvent event)
  {
+
      sqlConnection.setDbHost(thost.getText());
      sqlConnection.setDbName(tdb.getText());
      sqlConnection.setDbPass(tpw.getText());

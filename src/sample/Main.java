@@ -44,7 +44,7 @@ public class Main extends Application {
             instance = this;
             this.primaryStage = primaryStage;
             Parent root2 = FXMLLoader.load(getClass().getResource("GUI/Einstellungen.fxml"));
-            this.primaryStage.setTitle("Einstellungen");
+            this.primaryStage.setTitle("Datenbank Fehler");
             Scene scene2 = new Scene(root2);
             this.primaryStage.setScene(scene2);
             this.primaryStage.setAlwaysOnTop(true);
