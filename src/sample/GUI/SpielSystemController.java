@@ -3,15 +3,15 @@ package sample.GUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import sample.DAO.SetzlisteDAO;
 import sample.DAO.SetzlisteDAOimpl;
 import sample.DAO.auswahlklasse;
@@ -34,6 +34,8 @@ import java.util.ResourceBundle;
 public class SpielSystemController implements Initializable
 {
     //Tab1
+    @FXML
+    private Label l_meldungsetzliste;
     @FXML
     private TableView spielsystem_spielerliste_m1;
     @FXML
@@ -109,6 +111,7 @@ public class SpielSystemController implements Initializable
     private static boolean befuellem1=true;
     private static Spieler spielerm1 = null;
     private static Spieler spielerm2 = null;
+
     private void printSpielerSpielklasseHinzuTable() throws Exception {
         if(a.getAktuelleTurnierAuswahl()!=null) {
             obs_spieler.clear();
@@ -268,32 +271,92 @@ public class SpielSystemController implements Initializable
             SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
             ausgewaehlte_spielklasse.addSetzliste(t);
             setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size()+1,t,ausgewaehlte_spielklasse);
+            l_meldungsetzliste.setText(t.getSpielerEins().getVName()+" "+t.getSpielerEins().getNName()+" und "+t.getSpielerZwei().getVName()+" "+t.getSpielerZwei().getNName()+" wurden der Setzliste hinzugefügt!");
 
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ContextMenu contextMenu = new ContextMenu();
+        spielsystem_spielerliste_m2.setRowFactory(tv -> {
+            TableRow row = new TableRow();
+            row.setOnMouseClicked(event -> {
 
+            });
+            return row ;
+        });
         spielsystem_spielerliste_alleSpieler.setRowFactory(tv -> {
             TableRow row = new TableRow();
             row.setOnMouseClicked(event -> {
+                if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY)
+                {
+                    contextMenu.hide();
+                }
                 if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY
                         && event.getClickCount() == 2) {
                     Spieler clickedRow = (Spieler) row.getItem();
                     //(((Node)(event.getSource())).getScene().getWindow().hide();
                     addSpieler(clickedRow);
                 }
-            });
-            return row ;
-        });
-        spielsystem_spielerliste_m1.setRowFactory(tv -> {
-            TableRow row = new TableRow();
-            row.setOnMouseClicked(event -> {
-                if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY
-                        && event.getClickCount() == 2) {
+                if (! row.isEmpty() && event.getButton()== MouseButton.SECONDARY) {
                     Spieler clickedRow = (Spieler) row.getItem();
                     //(((Node)(event.getSource())).getScene().getWindow().hide();
+                    MenuItem item1 = new MenuItem("Spieler hinzufügen");
+                    item1.setOnAction(new EventHandler<ActionEvent>() {
+
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //tabpane_spieler.getSelectionModel().select(tab_sphin);
+                        }
+                    });
+                    MenuItem item2 = new MenuItem("Spieler bearbeiten");
+                    item2.setOnAction(new EventHandler<ActionEvent>() {
+
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //tabpane_spieler.getSelectionModel().select(tab_spupdate);
+                            //FuelleFelder(clickedRow);
+                        }
+                    });
+                    MenuItem item3 = new MenuItem("Spieler löschen");
+                    item3.setOnAction(new EventHandler<ActionEvent>() {
+
+                        @Override
+                        public void handle(ActionEvent event) {
+
+                           boolean loeschespieler = clickedRow.getSpielerDAO().delete(clickedRow);
+                           if(loeschespieler)
+                           {
+                               obs_spieler.remove(clickedRow);
+                               a.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
+                               a.getSpieler().remove(clickedRow);
+                               //tabelle_spielerliste.refresh();
+                               System.out.println("Lösche   "+ clickedRow.getNName());
+                               l_meldungsetzliste.setText(clickedRow.getVName()+" "+clickedRow.getNName()+" wurde erfolgreich gelöscht!");
+                           }
+                           else
+                           {
+                               //l_meldungsetzliste.setTextFill(Color.web("#048d46"));
+                               l_meldungsetzliste.setText(clickedRow.getVName()+" "+clickedRow.getNName()+" kann nicht gelöscht werden!");
+                           }
+
+                        }
+                    });
+
+                    // Add MenuItem to ContextMenu
+                    contextMenu.getItems().clear();
+                    contextMenu.getItems().addAll(item1, item2, item3);
+
+                    // When user right-click on Circle
+                    spielsystem_spielerliste_alleSpieler.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+
+                        @Override
+                        public void handle(ContextMenuEvent event) {
+
+                            contextMenu.show(spielsystem_spielerliste_alleSpieler, event.getScreenX(), event.getScreenY());
+                        }
+                    });
                 }
             });
             return row ;

@@ -90,7 +90,7 @@ public class MainController implements Initializable
     }
 
     public void pressBtn_turnierLaden (ActionEvent event) throws Exception {
-        System.out.println("test");
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Turnierladen.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -99,6 +99,17 @@ public class MainController implements Initializable
         stage.show();
         stage.setTitle("Turnier auswählen");
         ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+    public void pressBtn_Einstellungen (ActionEvent event) throws Exception {
+        System.out.println("test");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Einstellungen.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        a.addStage(stage);
+        stage.setScene(new Scene(root1));
+        stage.show();
+        stage.setTitle("Einstellungen");
+        //((Node)(event.getSource())).getScene().getWindow().hide();
     }
     public void pressBtn_teamLaden (ActionEvent event) throws Exception {
         System.out.println("test");

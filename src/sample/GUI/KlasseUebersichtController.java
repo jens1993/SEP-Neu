@@ -31,6 +31,10 @@ public class KlasseUebersichtController implements Initializable
     Dictionary<Integer,Spielklasse> turnierauswahlspielklassen = null;
     @FXML
     private VBox klassseeinzel_vbox;
+    @FXML
+    private VBox klasssedoppel_vbox;
+    @FXML
+    private VBox klasssemixed_vbox;
     //Label label2 = new Label("Search---------------------");
 
     public void pressBtn_neueKlassehinzufuegen(ActionEvent event) throws Exception{
@@ -76,12 +80,29 @@ public class KlasseUebersichtController implements Initializable
         final Spielklasse[] spauswahl = {null};
         for ( int i = 1; i <= turnierauswahlspielklassen.size(); i++) {
             sp= turnierauswahlspielklassen.get(i);
-            Hyperlink hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau());
-            flow[i] = new TextFlow(new Text("Einzelklasse: "),hp);
-            flow[i].setPadding(new Insets(10));
+            Hyperlink hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spiele:"+sp.getSpiele().size()+" Spieler:"+(sp.getSetzliste().size()*2));
+            if(sp.getDisziplin().contains("doppel"))
+            {
+                flow[i] = new TextFlow(new Text("Doppelklasse: "),hp);
+                flow[i].setPadding(new Insets(10));
+                klasssedoppel_vbox.getChildren().addAll(flow[i]);
+            }
+            if(sp.getDisziplin().contains("einzel"))
+            {
+                flow[i] = new TextFlow(new Text("Einzelklasse: "),hp);
+                flow[i].setPadding(new Insets(10));
+                klassseeinzel_vbox.getChildren().addAll(flow[i]);
+            }
+            if(sp.getDisziplin().contains("Mix"))
+            {
+                flow[i] = new TextFlow(new Text("Mixedklasse: "),hp);
+                flow[i].setPadding(new Insets(10));
+                klasssemixed_vbox.getChildren().addAll(flow[i]);
+            }
+
 
             //lbs[i]=new Label(s);//initializing labels
-            klassseeinzel_vbox.getChildren().addAll(flow[i]);
+
             int finalI = i;
             Spielklasse[] finalSp = new Spielklasse[turnierauswahlspielklassen.size()];
             finalSp[i-1]= sp;

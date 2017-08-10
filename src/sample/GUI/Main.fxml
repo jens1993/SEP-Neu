@@ -70,7 +70,7 @@
                     <MenuItem mnemonicParsing="false" text="Startgeldliste drucken" />
                     <MenuItem mnemonicParsing="false" text="Ergebnisformular erstellen" />
                     <SeparatorMenuItem mnemonicParsing="false" />
-                    <MenuItem mnemonicParsing="false" text="Optionen" />
+                    <MenuItem mnemonicParsing="false" onAction="#pressBtn_Einstellungen" text="Optionen" />
                 </items>
             </Menu>
         </menus>

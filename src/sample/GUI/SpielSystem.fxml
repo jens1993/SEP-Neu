@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -17,6 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="917.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SpielSystemController">
@@ -57,6 +59,11 @@
                               </TableView>
                            </children>
                         </VBox>
+                        <Label fx:id="l_meldungsetzliste" layoutX="182.0" layoutY="674.0" textFill="#048d46">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>

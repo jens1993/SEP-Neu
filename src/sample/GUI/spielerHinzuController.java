@@ -391,10 +391,16 @@ public class spielerHinzuController implements Initializable, Cloneable
                         @Override
                         public void handle(ActionEvent event) {
 
-                            clickedRow.getSpielerDAO().delete(clickedRow);
-                            obs_spieler.remove(clickedRow);
-                            tabelle_spielerliste.refresh();
-                            System.out.println("Lösche   "+ clickedRow.getNName());
+
+                                boolean loeschespieler = clickedRow.getSpielerDAO().delete(clickedRow);
+                            if(loeschespieler) {
+                                obs_spieler.remove(clickedRow);
+                                a.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
+                                a.getSpieler().remove(clickedRow);
+                                tabelle_spielerliste.refresh();
+                                System.out.println("Lösche   " + clickedRow.getNName());
+
+                            }
                         }
                     });
 

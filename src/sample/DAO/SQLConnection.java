@@ -16,17 +16,59 @@ public class SQLConnection
 
         private static Connection con = null;
         private Statement stmt = null;
-        private String dbHost = "localhost"; // Hostname
-        private String dbPort = "3306";      // Port -- Standard: 3306
-        private String dbName = "turnierverwaltung_neu";   // Datenbankname
-        private String dbUser = "root";     // Datenbankuser
-        private String dbPass = "";      // Datenbankpasswort
-        private String db_erstellung = "create table if not exists turnierverwaltung";
-        private String db_nutzung = "USE turnierverwaltung";
+
+	public String getDbHost() {
+		return dbHost;
+	}
+
+	public void setDbHost(String dbHost) {
+		this.dbHost = dbHost;
+	}
+
+	public String getDbPort() {
+		return dbPort;
+	}
+
+	public void setDbPort(String dbPort) {
+		this.dbPort = dbPort;
+	}
+
+	public String getDbName() {
+		return dbName;
+	}
+
+	public void setDbName(String dbName) {
+		this.dbName = dbName;
+	}
+
+	public String getDbUser() {
+		return dbUser;
+	}
+
+	public void setDbUser(String dbUser) {
+		this.dbUser = dbUser;
+	}
+
+	public String getDbPass() {
+		return dbPass;
+	}
+
+	public void setDbPass(String dbPass) {
+		this.dbPass = dbPass;
+	}
+
+	private String dbHost = "localhost"; // Hostname
+        private static String dbPort = "3306";      // Port -- Standard: 3306
+        private static String dbName = "turnierverwaltung_neu";   // Datenbankname
+        private static String dbUser = "root";     // Datenbankuser
+        private static String dbPass = "";      // Datenbankpasswort
+        private static String db_erstellung = "create table if not exists turnierverwaltung";
+        private static String db_nutzung = "USE turnierverwaltung";
 
 
 
-        public Connection SQLConnection()
+
+	public Connection SQLConnection()
         {
             try 
             {
