@@ -13,8 +13,8 @@ import java.util.List;
 public class FeldDAOimpl implements FeldDAO {
     @Override
     public boolean createFeld(Feld feld) {
-        String idAbfrage = "Select 'AUTO_INCREMENT' " +
-                "FROM IMFORMATION_SCHEMA.TABLES " +
+        String idAbfrage = "Select AUTO_INCREMENT " +
+                "FROM INFORMATION_SCHEMA.TABLES " +
                 "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
                 "AND TABLE_NAME = 'Feld'";
 

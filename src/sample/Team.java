@@ -52,6 +52,7 @@ public class Team {
         }
 
     }
+
     public void setTeamid(int teamid){
         this.teamid = teamid;
         this.spielklasse.getTurnier().getTeams().put(teamid,this);
@@ -76,7 +77,15 @@ public class Team {
         teamDAO.createFreilos(this);
         this.spielklasse.getTurnier().getTeams().put(teamid,this);
     }
-
+    public boolean istImTeam(Spieler spieler){
+        if (spielerEins==spieler){
+            return true;
+        }
+        if(spielerZwei==spieler){
+            return true;
+        }
+        return false;
+    }
 
     public boolean isFreilos() {
         return freilos;

@@ -23,12 +23,16 @@ public class Spielklasse {
 	private Hashtable<Integer,Spiel> spiele = new Hashtable<>();
 	TurnierDAO t = new TurnierDAOimpl();
 	private boolean aktiv;
+	private boolean einzel = false;
 
 	public Spielklasse(int spielklasseID, String disziplin, String niveau, Turnier turnier) {
 		this.spielklasseID=spielklasseID;
 		this.disziplin = disziplin;
 		this.niveau = niveau;
 		this.turnier = turnier;
+		if (disziplin=="Herreneinzel"||disziplin=="Dameneinzel"){
+			einzel=true;
+		}
 	}
 	public Spielklasse(int spielklasseID,					   Disziplin disziplin,					   Niveau niveau,					   Turnier turnier)
 	{
@@ -58,7 +62,14 @@ public class Spielklasse {
 		Turnier turnier = new Turnier("",turnierid, LocalDate.now());
 		this.turnier = t.read(turnier);
 		System.out.println(this.turnier.getName());
+		if (disziplin=="Herreneinzel"||disziplin=="Dameneinzel"){
+			einzel=true;
+		}
 
+	}
+
+	public boolean isEinzel() {
+		return einzel;
 	}
 
 	public SpielklasseDAO getSpielklasseDAO() {

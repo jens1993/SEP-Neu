@@ -37,8 +37,6 @@ public class TeamDAOimpl implements TeamDAO {
             Statement smtID = con.SQLConnection().createStatement();
             ResultSet count = smtID.executeQuery(idAbfrage);
             count.next();
-
-            System.out.println(count.getObject(1));
             int teamID = count.getInt("AUTO_INCREMENT");
             System.out.println(teamID);
             team.setTeamid(teamID);
@@ -120,6 +118,46 @@ public class TeamDAOimpl implements TeamDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Team Update Klappt nicht");
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean addSpieler(Team team, boolean ersterSpieler) {
+
+        String sqlSpielerEins = "INSERT INTO Team_Spieler("
+                + "TeamID, "
+                + "SpielerID) "
+                + "VALUES(?,?)"
+                ;
+        String sqlSpielerZwei = "INSERT INTO Team_Spieler("
+                + "TeamID, "
+                + "SpielerID) "
+                + "VALUES(?,?)"
+                ;
+        try {
+            SQLConnection con = new SQLConnection();
+            if(ersterSpieler) {
+                PreparedStatement smtSpielerEins = con.SQLConnection().prepareStatement(sqlSpielerEins);
+                smtSpielerEins.setInt(1, team.getTeamid());
+                smtSpielerEins.setInt(2, team.getSpielerEins().getSpielerID());
+                smtSpielerEins.executeUpdate();
+                smtSpielerEins.close();
+            }
+            else{
+                PreparedStatement smtSpielerZwei = con.SQLConnection().prepareStatement(sqlSpielerZwei);
+                smtSpielerZwei.setInt(1, team.getTeamid());
+                smtSpielerZwei.setInt(2, team.getSpielerZwei().getSpielerID());
+                smtSpielerZwei.executeUpdate();
+                smtSpielerZwei.close();
+            }
+            con.closeCon();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Team Einfügen Klappt nicht");
         }
 
         return false;

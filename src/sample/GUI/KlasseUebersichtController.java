@@ -54,7 +54,7 @@ public class KlasseUebersichtController implements Initializable
     public void pressBtn_Spielsystem(Spielklasse spielklasse) throws Exception {
         try {
             a.spielklassenAuswahlSpeichern(spielklasse);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielSystem.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielSystem_neu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             a.addStage(stage);
