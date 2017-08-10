@@ -15,11 +15,11 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
     public boolean create(int setzplatz, Team team,  Spielklasse spielklasse) {
         try {
             SQLConnection con = new SQLConnection();
-            String sql = "INSERT INTO spielklasse_setzliste("
-                        + "setzplatz,"
+            String sql = "INSERT INTO spielklasse_setzliste ("
+                        + "setzplatz, "
                         + "spielklasseID, "
-                        + "teamid "
-                        + "VALUES(?,?,?)";
+                        + "TeamID) "
+                        + "VALUES (?,?,?)";
 
                 PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
                 smt.setInt(1, setzplatz);

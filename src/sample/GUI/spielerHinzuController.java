@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
@@ -347,6 +348,12 @@ public class spielerHinzuController implements Initializable, Cloneable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
+
+        ContextMenu contextMenu = new ContextMenu();
+
+
+
         l_Meldung.setText("");
 
         tabelle_spielerliste.setRowFactory(tv -> {
@@ -357,6 +364,53 @@ public class spielerHinzuController implements Initializable, Cloneable
                     Spieler clickedRow = (Spieler) row.getItem();
                     UpdateSpieler(clickedRow);
                     //(((Node)(event.getSource())).getScene().getWindow().hide();
+                }
+                if(! row.isEmpty() && event.getButton()== MouseButton.SECONDARY)
+                {
+                    Spieler clickedRow = (Spieler) row.getItem();
+                    MenuItem item1 = new MenuItem("Spieler hinzufügen");
+                    item1.setOnAction(new EventHandler<ActionEvent>() {
+
+                        @Override
+                        public void handle(ActionEvent event) {
+                            tabpane_spieler.getSelectionModel().select(tab_sphin);
+                        }
+                    });
+                    MenuItem item2 = new MenuItem("Spieler bearbeiten");
+                    item2.setOnAction(new EventHandler<ActionEvent>() {
+
+                        @Override
+                        public void handle(ActionEvent event) {
+                            tabpane_spieler.getSelectionModel().select(tab_spupdate);
+                            FuelleFelder(clickedRow);
+                        }
+                    });
+                    MenuItem item3 = new MenuItem("Spieler löschen");
+                    item3.setOnAction(new EventHandler<ActionEvent>() {
+
+                        @Override
+                        public void handle(ActionEvent event) {
+
+                            clickedRow.getSpielerDAO().delete(clickedRow);
+                            obs_spieler.remove(clickedRow);
+                            tabelle_spielerliste.refresh();
+                            System.out.println("Lösche   "+ clickedRow.getNName());
+                        }
+                    });
+
+                    // Add MenuItem to ContextMenu
+                    contextMenu.getItems().clear();
+                    contextMenu.getItems().addAll(item1, item2, item3);
+
+                    // When user right-click on Circle
+                    tabelle_spielerliste.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+
+                        @Override
+                        public void handle(ContextMenuEvent event) {
+
+                            contextMenu.show(tabelle_spielerliste, event.getScreenX(), event.getScreenY());
+                        }
+                    });
                 }
             });
             return row ;
@@ -373,31 +427,36 @@ public class spielerHinzuController implements Initializable, Cloneable
         }
 
 
+
+    }
+    private void FuelleFelder(Spieler clickedRow)
+    {
+        tab_spupdate.setDisable(false);
+        tab_spbea.setDisable(true);
+        tab_sphin.setDisable(true);
+        tabpane_spieler.getSelectionModel().select(tab_spupdate);
+        t_vn1.setText(clickedRow.getVName());
+        t_nn1.setText(clickedRow.getNName());
+        d_geb1.setValue(clickedRow.getGDatum());
+        t_spid1.setText(clickedRow.getExtSpielerID());
+        t_re1.setText(String.valueOf(clickedRow.getrPunkte()[0]));
+        t_rd1.setText(String.valueOf(clickedRow.getrPunkte()[1]));
+        t_rm1.setText(String.valueOf(clickedRow.getrPunkte()[2]));
+        combo_verein1.getSelectionModel().select(clickedRow.getVerein());
+        if(clickedRow.getGeschlecht())
+        {
+            r_m1.setSelected(true);
+        }
+        else
+        {
+            r_w1.setSelected(true);
+        }
     }
     private void UpdateSpieler(Spieler clickedRow) {
 
         if(tabelle_spielerliste.getSelectionModel().getSelectedItem()!=null )
         {
-            tab_spupdate.setDisable(false);
-            tab_spbea.setDisable(true);
-            tab_sphin.setDisable(true);
-            tabpane_spieler.getSelectionModel().select(tab_spupdate);
-            t_vn1.setText(clickedRow.getVName());
-            t_nn1.setText(clickedRow.getNName());
-            d_geb1.setValue(clickedRow.getGDatum());
-            t_spid1.setText(clickedRow.getExtSpielerID());
-            t_re1.setText(String.valueOf(clickedRow.getrPunkte()[0]));
-            t_rd1.setText(String.valueOf(clickedRow.getrPunkte()[1]));
-            t_rm1.setText(String.valueOf(clickedRow.getrPunkte()[2]));
-            combo_verein1.getSelectionModel().select(clickedRow.getVerein());
-            if(clickedRow.getGeschlecht())
-            {
-                r_m1.setSelected(true);
-            }
-            else
-            {
-                r_w1.setSelected(true);
-            }
+            FuelleFelder(clickedRow);
             System.out.println("geklickt: "+clickedRow.getNName());
 
             System.out.println("turnier="+a.getAktuelleTurnierAuswahl().getName());
@@ -405,6 +464,22 @@ public class spielerHinzuController implements Initializable, Cloneable
             spieler_neu=clickedRow;
         }
 
+    }
+    @FXML
+    public void pressBtn_neuerVerein(ActionEvent event) throws Exception {
+        try {
+            ((Node)(event.getSource())).getScene().getWindow().hide();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("neuerVerein.fxml"));
+
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            a.addStage(stage);
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage.setTitle("Neuer Verein");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

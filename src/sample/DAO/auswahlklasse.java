@@ -118,6 +118,9 @@ public class auswahlklasse
         vereine=aktuelleTurnierAuswahl.getVereine();
         return vereine;
     }
+    public void addVerein(Verein verein) {
+        vereine.put(verein.getVereinsID(),verein);
+    }
     /*public Dictionary<Integer, Spielklasse> getSpielklasseDict() {
         spielklassen=spielklasseDAO.getAllSpielklassenDict();
         return spielklassen;

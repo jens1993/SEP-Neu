@@ -14,7 +14,7 @@ import java.util.List;
 public class TeamDAOimpl implements TeamDAO {
     @Override
     public boolean create(Team team) {
-        String idAbfrage = "Select 'AUTO_INCREMENT' " +
+        String idAbfrage = "Select AUTO_INCREMENT " +
                 "FROM INFORMATION_SCHEMA.TABLES " +
                 "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
                 "AND TABLE_NAME = 'Team'";

@@ -12,6 +12,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import sample.DAO.SetzlisteDAO;
+import sample.DAO.SetzlisteDAOimpl;
 import sample.DAO.auswahlklasse;
 import sample.Spiel;
 import sample.Spieler;
@@ -263,7 +265,10 @@ public class SpielSystemController implements Initializable
             befuellem1=true;
             System.out.println(ausgewaehlte_spielklasse.getSetzliste().size()+1+"-------------");
             Team t = new Team(spielerm1,spielerm2,ausgewaehlte_spielklasse);
+            SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
             ausgewaehlte_spielklasse.addSetzliste(t);
+            setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size()+1,t,ausgewaehlte_spielklasse);
+
         }
     }
 
