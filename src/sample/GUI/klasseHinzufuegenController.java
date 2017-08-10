@@ -4,11 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import sample.DAO.TurnierDAO;
 import sample.DAO.TurnierDAOimpl;
 import sample.DAO.auswahlklasse;
@@ -132,6 +136,19 @@ public class klasseHinzufuegenController implements Initializable
 
         a.getAktuelleTurnierAuswahl().addSpielklassen(spklasse);
         spklasse.getSpielklasseDAO().create(spklasse);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseUebersicht.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        for (int i=0; i<a.getStages().size()-1;i++){
+            a.getStages().get(i).close();
+        }
+        a.addStage(stage);
+        stage.setScene(new Scene(root1));
+
+        stage.show();
+
+        stage.setTitle("Klassenuebersicht: "+a.getAktuelleTurnierAuswahl().getName());
 
     }
     @FXML

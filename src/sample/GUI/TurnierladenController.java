@@ -40,6 +40,7 @@ import java.util.ResourceBundle;
 public class TurnierladenController implements Initializable
 {
 
+
     @FXML
     public TableView TurnierlisteTabelle;
     @FXML
@@ -52,6 +53,17 @@ public class TurnierladenController implements Initializable
     auswahlklasse a = new auswahlklasse();
     TurnierDAO t = new TurnierDAOimpl();
     Dictionary<Integer,Turnier> turnierliste = t.getAllTurniere();
+    private static Stage primaryStage;
+    public TurnierladenController()
+    {
+        System.out.println();
+    }
+
+    public TurnierladenController(String refresh)
+    {
+
+        primaryStage.setTitle(refresh);
+    }
 
     @FXML
     private void zeigeTabelle() {
@@ -118,16 +130,16 @@ public class TurnierladenController implements Initializable
     private void MainLaden() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
+        primaryStage = new Stage();
         for (int i=0; i<a.getStages().size();i++){
             a.getStages().get(i).close();
         }
-        a.addStage(stage);
-        stage.setScene(new Scene(root1));
+        a.addStage(primaryStage);
+        primaryStage.setScene(new Scene(root1));
 
-        stage.show();
-        stage.setMaximized(true);
-        stage.setTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
+        primaryStage.show();
+        primaryStage.setMaximized(true);
+        primaryStage.setTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
     }
 
     public void pressBtn_neuesTurnier(ActionEvent event) throws Exception {

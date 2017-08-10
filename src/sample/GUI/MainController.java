@@ -1,6 +1,9 @@
 package sample.GUI;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,18 +25,21 @@ import sample.Team;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.TableView;
 import java.net.URL;
-import java.util.Date;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by jens on 03.08.2017.
  */
-public class MainController implements Initializable
+public class MainController implements Initializable, Observable
 {
+
+
     @FXML
     private javafx.scene.control.TableView tabelle_spiele;
 
     auswahlklasse a = new auswahlklasse();
+
+
 
     public void spieleRefresh(){
         //tabelle_spiele.refresh();
@@ -52,13 +58,16 @@ public class MainController implements Initializable
 
     public void pressBtn_spieler(ActionEvent event) throws Exception {
         try {
+
+
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             a.addStage(stage);
             stage.setScene(new Scene(root1));
             stage.show();
-            stage.setTitle("Spieler");
+            stage.setTitle("Spieler hinzufügen");
         } catch(Exception e) {
             e.printStackTrace();
             System.out.println("Fehler beim laden");
@@ -127,7 +136,24 @@ public class MainController implements Initializable
         stage.show();
         stage.setTitle("Turnier auswählen");
     }
+    private final List<InvalidationListener> listeners = new LinkedList<>();
+    @Override
+    public void addListener(InvalidationListener listener) {
+        listeners.add(listener);
+    }
 
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        listeners.remove(listener);
+    }
+    public void invalidate() {
+        for (InvalidationListener listener : listeners) {
+            try {
+                listener.invalidated(this);
+            } catch (RuntimeException ex) {
+            }
+        }
+    }
     private void printSpielTable() throws Exception {
         if(a.getAktuelleTurnierAuswahl()!=null) {
             ObservableList<Spiel> obs_spiele = FXCollections.observableArrayList();
@@ -142,8 +168,18 @@ public class MainController implements Initializable
                 obs_spiele.add(a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i));
             }
 
+            ObservableList<Spiel> ob = obs_spiele;
+            ob.addListener(new ListChangeListener<Spiel>() {
+                               @Override
+                               public void onChanged(Change<? extends Spiel> c) {
+                                   System.out.println("Changed on " + c.toString());
+                                   if(c.next()){
+                                       System.out.println(c.getFrom());
+                                   }
+                               }
+                           });
 
-            TableColumn<Spiel,String> spielFeldSpalte = new TableColumn("Feld");
+                    TableColumn < Spiel, String > spielFeldSpalte = new TableColumn("Feld");
             spielFeldSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("FeldNr"));
             spielFeldSpalte.setCellFactory(column -> {
                 return new TableCell<Spiel, String>() {

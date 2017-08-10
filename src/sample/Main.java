@@ -40,7 +40,7 @@ public class Main extends Application {
             this.primaryStage.show();
         } catch (IOException e) {
 
-
+            e.printStackTrace();
             instance = this;
             this.primaryStage = primaryStage;
             Parent root2 = FXMLLoader.load(getClass().getResource("GUI/Einstellungen.fxml"));
@@ -66,6 +66,7 @@ public class Main extends Application {
     }
     public void updateTitle(String title) {
         primaryStage.setTitle(title);
+
     }
 
     public static void main(String[] args) {
@@ -76,7 +77,7 @@ public class Main extends Application {
         launch(args);
         //$java -Duser.language=en com.tutego.insel.bundle.InternationalHelloWorld
 
-      // Locale.setDefault( new Locale("en", "UK") );
+      Locale.setDefault( new Locale("en", "UK") );
 //        Locale.setDefault( new Locale("de", "ch") );
 //        String baseName = "resources.HelloWorld";
 //

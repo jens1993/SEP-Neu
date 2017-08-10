@@ -76,7 +76,7 @@ public class TeamDAOimpl implements TeamDAO {
                 "AND TABLE_NAME = 'Team'";
 
         String sql = "INSERT INTO team("
-                + "SpielklasseID) "
+                + "SpielklasseID, TeamID) "
                 + "VALUES(?,?)";
         try{
             SQLConnection con = new SQLConnection();
@@ -89,6 +89,7 @@ public class TeamDAOimpl implements TeamDAO {
             smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setInt(1, team.getSpielklasse().getSpielklasseID());
+            smt.setInt(2, team.getTeamid());
             smt.executeUpdate();
             smt.close();
         }

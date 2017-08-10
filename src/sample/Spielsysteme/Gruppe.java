@@ -20,21 +20,25 @@ public class Gruppe extends Spielsystem {
 	}
 
 	public Gruppe(ArrayList<Team> setzliste, Spielklasse spielklasse) {
-		this.setSpielSystemArt(1);
-		setSpielklasse(spielklasse);
-		this.teamList = setzliste;
-		freiloseHinzufuegen(teamList);
-		setAnzahlRunden(teamList.size()-1);
-		anzahlTeams = teamList.size();
-		alleSpieleErstellen();
-		schablone = new int[anzahlTeams][anzahlTeams];
-		schabloneBauen();
-		for (int i=0;i<getAnzahlRunden();i++){
-			rundeErstellen();
-			resetOffeneRundenSpiele();
+		try {
+			this.setSpielSystemArt(1);
+			setSpielklasse(spielklasse);
+			this.teamList = setzliste;
+			freiloseHinzufuegen(teamList);
+			setAnzahlRunden(teamList.size()-1);
+			anzahlTeams = teamList.size();
+			alleSpieleErstellen();
+			schablone = new int[anzahlTeams][anzahlTeams];
+			schabloneBauen();
+			for (int i=0;i<getAnzahlRunden();i++){
+                rundeErstellen();
+                resetOffeneRundenSpiele();
+            }
+			setOffeneRundenSpiele(anzahlTeams/2);
+			resetAktuelleRunde();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		setOffeneRundenSpiele(anzahlTeams/2);
-		resetAktuelleRunde();
 	}
 	public Gruppe(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spielListe, Dictionary<Integer,Ergebnis> ergebnisse) {
 		this.setSpielSystemArt(1); 							//Constructor nur für Einlesen aus der Datenbank

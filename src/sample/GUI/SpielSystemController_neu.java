@@ -131,10 +131,25 @@ public class SpielSystemController_neu implements Initializable
         }
         return false;
     }
+
     @FXML
     private void pressbtn_spielklasseStarten(ActionEvent event){
         if(radio_gruppe.isSelected()){
-            ausgewaehlte_spielklasse.setSpielsystem(new Gruppe(ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse));
+            Gruppe gruppe = new Gruppe (ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse);
+            try {
+                ausgewaehlte_spielklasse.setSpielsystem( gruppe);
+                l_meldungsetzliste1.setText("ERFOLG");
+                TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+a.getAktuelleTurnierAuswahl().getName());
+
+
+                a.getStages().get(0).close();
+
+                //a.getStages().get(2).close();
+
+            } catch (Exception e) {
+                l_meldungsetzliste1.setText("Fehlschlag");
+                e.printStackTrace();
+            }
         }
     }
 
