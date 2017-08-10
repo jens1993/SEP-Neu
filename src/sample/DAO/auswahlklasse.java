@@ -26,6 +26,15 @@ public class auswahlklasse
     private static ArrayList<Spieler> vorhandeneSpieler;
     private static ArrayList<Stage> stages = new ArrayList<>();
 
+    public static int getSprachid() {
+        return sprachid;
+    }
+
+    public static void setSprachid(int sprachid) {
+        auswahlklasse.sprachid = sprachid;
+    }
+
+    private static int sprachid;
     public static void setUpdateSpieler(Spieler updateSpieler) {
         auswahlklasse.updateSpieler = updateSpieler;
     }

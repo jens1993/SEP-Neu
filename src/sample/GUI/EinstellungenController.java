@@ -10,10 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -38,11 +35,26 @@ public class EinstellungenController implements Initializable
     private TextField tuser;
     @FXML
     private PasswordField tpw;
-
+    @FXML
+    private RadioButton rd;
+    @FXML
+    private RadioButton re;
     auswahlklasse a = new auswahlklasse();
 
  SQLConnection sqlConnection = new SQLConnection();
 
+ public void radioswitch (ActionEvent event)
+ {
+     if(rd.isSelected())
+     {
+         a.setSprachid(1);
+     }
+     if(re.isSelected())
+     {
+         a.setSprachid(2);
+     }
+     System.out.println(a.getSprachid());
+ }
  @FXML
  public void btn_einstellungenspeichern(ActionEvent event)
  {
@@ -62,6 +74,15 @@ public class EinstellungenController implements Initializable
             tpw.setText(sqlConnection.getDbPass());
             tuser.setText(sqlConnection.getDbUser());
 
+            if(a.getSprachid()==1)
+            {
+                rd.setSelected(true);
+            }
+
+            if(a.getSprachid()==2)
+            {
+                re.setSelected(true);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
