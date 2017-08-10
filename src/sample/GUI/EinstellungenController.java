@@ -42,6 +42,15 @@ public class EinstellungenController implements Initializable
 
  SQLConnection sqlConnection = new SQLConnection();
 
+ @FXML
+ public void btn_einstellungenspeichern(ActionEvent event)
+ {
+     sqlConnection.setDbHost(thost.getText());
+     sqlConnection.setDbName(tdb.getText());
+     sqlConnection.setDbPass(tpw.getText());
+     sqlConnection.setDbUser(tuser.getText());
+ }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {

@@ -12,6 +12,7 @@ import sample.DAO.TurnierDAO;
 import sample.DAO.TurnierDAOimpl;
 import sample.Spielsysteme.Gruppe;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -28,15 +29,38 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        instance = this;
-        this.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/Turnierladen.fxml"));
-        this.primaryStage.setTitle("Badminton Turnierverwaltung - Kein Turnier ausgewählt");
-        Scene scene = new Scene(root);
-        this.primaryStage.setScene(scene);
+        try {
+            instance = this;
+            this.primaryStage = primaryStage;
+            Parent root = FXMLLoader.load(getClass().getResource("GUI/Turnierladen.fxml"));
+            this.primaryStage.setTitle("Badminton Turnierverwaltung - Kein Turnier ausgewählt");
+            Scene scene = new Scene(root);
+            this.primaryStage.setScene(scene);
 
-        this.primaryStage.show();
+            this.primaryStage.show();
+        } catch (IOException e) {
 
+
+            instance = this;
+            this.primaryStage = primaryStage;
+            Parent root2 = FXMLLoader.load(getClass().getResource("GUI/Einstellungen.fxml"));
+            this.primaryStage.setTitle("Einstellungen");
+            Scene scene2 = new Scene(root2);
+            this.primaryStage.setScene(scene2);
+            this.primaryStage.setAlwaysOnTop(true);
+            this.primaryStage.show();
+
+
+
+            FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("GUI/Main.fxml"));
+            Parent root1 = (Parent) fxmlLoader2.load();
+            Stage stage = new Stage();
+            //a.addStage(stage);
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage.setMaximized(true);
+            stage.setTitle("Badminton Turnierverwaltung - Keine Datenbankverbindung!");
+        }
 
 
     }

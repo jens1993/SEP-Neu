@@ -1,5 +1,10 @@
 package sample.DAO;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import sample.*;
 import sample.Spielsysteme.*;
 import sample.Enums.*;
@@ -13,7 +18,7 @@ import java.sql.Statement;
 
 public class SQLConnection 
 {
-
+		auswahlklasse a = new auswahlklasse();
         private static Connection con = null;
         private Statement stmt = null;
 
@@ -85,13 +90,30 @@ public class SQLConnection
                 System.out.println("Treiber nicht gefunden");
             } catch (SQLException e) 
             {
-                System.out.println("Verbindung nicht moglich");
+
+				try {
+					pressBtn_Einstellungenneu();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				System.out.println("Verbindung nicht moglich");
                 System.out.println("SQLException: " + e.getMessage());
                 System.out.println("SQLState: " + e.getSQLState());
                 System.out.println("VendorError: " + e.getErrorCode());
             }
             return con;
         }
+	public void pressBtn_Einstellungenneu () throws Exception {
+		System.out.println("test");
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Einstellungen.fxml"));
+		Parent root1 = (Parent) fxmlLoader.load();
+		Stage stage = new Stage();
+		//a.addStage(stage);
+		stage.setScene(new Scene(root1));
+		stage.show();
+		stage.setTitle("Einstellungen");
+		//((Node)(event.getSource())).getScene().getWindow().hide();
+	}
         public boolean closeCon(){
 			try {
 				con.close();
