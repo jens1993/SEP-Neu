@@ -33,7 +33,6 @@ import java.util.*;
 
 public class SpielSystemController_neu implements Initializable
 {
-    private MainController mainController = new MainController();
     //Tab1
     @FXML
     private TextField t_suchleistespieler;
@@ -136,7 +135,6 @@ public class SpielSystemController_neu implements Initializable
     private void pressbtn_spielklasseStarten(ActionEvent event){
         if(radio_gruppe.isSelected()){
             ausgewaehlte_spielklasse.setSpielsystem(new Gruppe(ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse));
-            mainController.spieleRefresh();
         }
     }
 

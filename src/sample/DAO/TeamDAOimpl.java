@@ -70,21 +70,31 @@ public class TeamDAOimpl implements TeamDAO {
 
     @Override
     public boolean createFreilos(Team team) {
+        String idAbfrage = "Select AUTO_INCREMENT " +
+                "FROM INFORMATION_SCHEMA.TABLES " +
+                "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
+                "AND TABLE_NAME = 'Team'";
+
         String sql = "INSERT INTO team("
-                + "TeamID, "
                 + "SpielklasseID) "
                 + "VALUES(?,?)";
         try{
             SQLConnection con = new SQLConnection();
+            Statement smtID = con.SQLConnection().createStatement();
+            ResultSet count = smtID.executeQuery(idAbfrage);
+            count.next();
+            int teamID = count.getInt("AUTO_INCREMENT");
+            System.out.println(teamID);
+            team.setTeamid(teamID);
+            smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, team.getTeamid() );
-            smt.setInt(2, team.getSpielklasse().getSpielklasseID());
+            smt.setInt(1, team.getSpielklasse().getSpielklasseID());
             smt.executeUpdate();
             smt.close();
         }
         catch (SQLException e) {
         e.printStackTrace();
-        System.out.println("Team Einfügen Klappt nicht");
+        System.out.println("Freilos Einfügen Klappt nicht");
     }
         return false;
     }
