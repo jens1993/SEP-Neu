@@ -86,7 +86,7 @@ public class SpielSystemController_neu implements Initializable
     @FXML
     private AnchorPane koTrostRundeNein;
 
-    Dictionary<Integer,Spielklasse> turnierauswahlspielklassen = null;
+    Dictionary<Integer,Spielklasse> turnierauswahlspielklassendict = null;
     auswahlklasse a = new auswahlklasse();
     Spielklasse ausgewaehlte_spielklasse=  auswahlklasse.getAktuelleSpielklassenAuswahl();
     static Spieler spieler_neu=null;
@@ -97,8 +97,10 @@ public class SpielSystemController_neu implements Initializable
     private SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
 
     private void printSpielerSpielklasseHinzuTable() throws Exception {
+        System.out.println(a.getAktuelleTurnierAuswahl());
         if(a.getAktuelleTurnierAuswahl()!=null) {
             obs_spieler.clear();
+            System.out.println("Anzahl spielklassen = "+a.getAktuelleTurnierAuswahl().getSpielklassen().size());
             for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
                 Spieler spieler = a.getAktuelleTurnierAuswahl().getSpieler().get(i);
                 if (!istInSetzListe(spieler)){
@@ -197,11 +199,11 @@ public class SpielSystemController_neu implements Initializable
     private void printSpielerSpielklasseVorhandenTable() throws Exception {
 
         if(a.getAktuelleTurnierAuswahl()!=null) {
-            turnierauswahlspielklassen= a.getAktuelleTurnierAuswahl().getSpielklassen();
+            turnierauswahlspielklassendict = a.getAktuelleTurnierAuswahl().getSpielklassen();
             ArrayList<Team> setzliste = ausgewaehlte_spielklasse.getSetzliste();
 
             obs_setzliste.clear();
-            //for (int i=0;i<turnierauswahlspielklassen.size();i++){ //Warum?
+            //for (int i=0;i<turnierauswahlspielklassendict.size();i++){ //Warum?
             //System.out.println(ausgewaehlte_spielklasse.getSpiele().get(i));
             //obsvorhanden_spieler.add(ausgewaehlte_spielklasse.getSetzliste().get(i-1));
 
@@ -231,6 +233,7 @@ public class SpielSystemController_neu implements Initializable
         }
         else{
             System.out.println("kann Setzliste nicht laden");
+            l_meldungsetzliste1.setText("kann Setzliste nicht laden");
         }
 
     }
@@ -255,14 +258,17 @@ public class SpielSystemController_neu implements Initializable
         {
             team.addSpieler(spielerneu);
             befuellem1=true;
-            System.out.println(ausgewaehlte_spielklasse.getSetzliste().size()+1+"-------------");
-            spielsystem_setzliste.refresh();
+            //System.out.println(ausgewaehlte_spielklasse.getSetzliste().size()+1+"-------------");
+
             ausgewaehlte_spielklasse.addSetzliste(team);
-            setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size()+1,team,ausgewaehlte_spielklasse);
             team.getTeamDAO().addSpieler(team, false);
+            setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size()+1,team,ausgewaehlte_spielklasse);
+
+
             l_meldungsetzliste1.setText(team.getSpielerEins().getVName()+" "+team.getSpielerEins().getNName()+" und "+team.getSpielerZwei().getVName()+" "+team.getSpielerZwei().getNName()+" wurden der Setzliste hinzugefügt!");
 
         }
+        spielsystem_setzliste.refresh();
     }
 
     @Override

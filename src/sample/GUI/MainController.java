@@ -36,7 +36,7 @@ public class MainController implements Initializable
     auswahlklasse a = new auswahlklasse();
 
     public void spieleRefresh(){
-        tabelle_spiele.refresh();
+        //tabelle_spiele.refresh();
 
     }
 
