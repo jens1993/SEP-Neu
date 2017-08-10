@@ -24,26 +24,30 @@ public class Turnier {
 	private Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
 	private Dictionary<Integer, Spiel> spiele = new Hashtable<Integer,Spiel>();
 	private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
-	private ArrayList<Spiel> aktiveSpiele = new ArrayList<>();
-	private ArrayList<Spiel> ausstehendeSpiele = new ArrayList<>();
-	private ArrayList<Spiel> gespielteSpiele = new ArrayList<>();
+
+
+	private ObservableList<Spiel> gespielteSpiele = FXCollections.observableArrayList();
+	private ObservableList<Spiel> aktiveSpiele = FXCollections.observableArrayList();
+	private ObservableList<Spiel> ausstehendeSpiele = FXCollections.observableArrayList();
+
+	public ObservableList<Spiel> getGespielteSpiele() {
+		return gespielteSpiele;
+	}
+
+	public ObservableList<Spiel> getAktiveSpiele() {
+		return aktiveSpiele;
+	}
+
+	public ObservableList<Spiel> getAusstehendeSpiele() {
+		return ausstehendeSpiele;
+	}
+
 	public Turnier(String name, int turnierid, LocalDate datum) {
 		this.datum = datum;
 		this.name = name;
 		this.turnierid = turnierid;
 	}
 
-	public ArrayList<Spiel> getAktiveSpiele() {
-		return aktiveSpiele;
-	}
-
-	public ArrayList<Spiel> getAusstehendeSpiele() {
-		return ausstehendeSpiele;
-	}
-
-	public ArrayList<Spiel> getGespielteSpiele() {
-		return gespielteSpiele;
-	}
 
 	public int getGesamtSpiele() {
 		return gesamtSpiele;

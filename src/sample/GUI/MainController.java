@@ -1,6 +1,7 @@
 package sample.GUI;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +23,9 @@ import sample.Team;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.TableView;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -35,10 +38,7 @@ public class MainController implements Initializable
 
     auswahlklasse a = new auswahlklasse();
 
-    public void spieleRefresh(){
-        tabelle_spiele.refresh();
 
-    }
 
     public void pressBtn_laden(ActionEvent event) throws Exception{
         try{
@@ -132,15 +132,6 @@ public class MainController implements Initializable
         if(a.getAktuelleTurnierAuswahl()!=null) {
             ObservableList<Spiel> obs_spiele = FXCollections.observableArrayList();
 
-            for (int i=0;i<a.getAktuelleTurnierAuswahl().getGespielteSpiele().size();i++){
-                obs_spiele.add(a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i));
-            }
-            for (int i=0;i<a.getAktuelleTurnierAuswahl().getAktiveSpiele().size();i++){
-                obs_spiele.add(a.getAktuelleTurnierAuswahl().getAktiveSpiele().get(i));
-            }
-            for (int i=0;i<a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().size();i++){
-                obs_spiele.add(a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i));
-            }
 
 
             TableColumn<Spiel,String> spielFeldSpalte = new TableColumn("Feld");
@@ -300,7 +291,40 @@ public class MainController implements Initializable
                     }
                 };
             });
+            /*obs_spiele.clear();
+            for(int i=0;i<a.getAktuelleTurnierAuswahl().getGespielteSpiele().size();i++)
+            {
+                obs_spiele.add(a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i));
+            }
+            for(int i=0;i<a.getAktuelleTurnierAuswahl().getAktiveSpiele().size();i++)
+            {
+                obs_spiele.add(a.getAktuelleTurnierAuswahl().getAktiveSpiele().get(i));
+            }
+            for(int i=0;i<a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().size();i++)
+            {
+                obs_spiele.add(a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i));
+            }
+*/
+            /*Aggregate<ObservableList<Integer>> aggregate = new Aggregate(a.getAktuelleTurnierAuswahl().getAktiveSpiele(), a.getAktuelleTurnierAuswahl().getAusstehendeSpiele(),a.getAktuelleTurnierAuswahl().getGespielteSpiele());
+            aggregate.addListener(new ListChangeListener<ObservableList<Integer>>() {
+                @Override
+                public void onChanged(ListChangeListener.Change<? extends ObservableList<Integer>> c) {
+                    System.out.println("changed " + c);
+                }
+            });
+            */
+            obs_spiele = FXCollections.concat(a.getAktuelleTurnierAuswahl().getGespielteSpiele(),a.getAktuelleTurnierAuswahl().getAktiveSpiele(),a.getAktuelleTurnierAuswahl().getAusstehendeSpiele());
+
+            obs_spiele.addListener(new ListChangeListener<Spiel>() {
+                @Override
+                public void onChanged(Change<? extends Spiel> c) {
+                    System.out.println("concat changed " + c);
+                }
+            });
+
             tabelle_spiele.setItems(obs_spiele);
+
+
 
             tabelle_spiele.getColumns().addAll(spielFeldSpalte,spielHeimSpalte,spielGastSpalte,spielErgebnisSpalte);
             /*tabelle_spiele.setRowFactory( tv -> {
@@ -367,6 +391,29 @@ public class MainController implements Initializable
             printSpielTable();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    private static class Aggregate<T> {
+
+        List<ObservableList<T>> lists = new ArrayList<>();
+auswahlklasse a = new auswahlklasse();
+
+        public Aggregate(ObservableList<T>... lists) {
+            for (ObservableList<T> list : lists) {
+                this.lists.add(list);
+            }
+        }
+
+        public final void addListener(ListChangeListener<? super T> listener) {
+            for (ObservableList<T> list : lists) {
+                list.addListener(listener);
+            }
+        }
+
+        public final void removeListener(ListChangeListener<? super T> listener) {
+            for (ObservableList<T> list : lists) {
+                list.removeListener(listener);
+            }
         }
     }
 }
