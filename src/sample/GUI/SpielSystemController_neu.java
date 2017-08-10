@@ -246,8 +246,14 @@ public class SpielSystemController_neu implements Initializable
             obs_setzliste.add(team);
             if(ausgewaehlte_spielklasse.isEinzel()){
                 ausgewaehlte_spielklasse.addSetzliste(team);
-                setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
-                l_meldungsetzliste1.setText(team.getSpielerEins().getVName()+" "+team.getSpielerEins().getNName()+" wurde der Setzliste hinzugefügt!");
+                boolean erfolg = setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
+                if(erfolg) {
+                    l_meldungsetzliste1.setText(team.getSpielerEins().getVName() + " " + team.getSpielerEins().getNName() + " wurde der Setzliste hinzugefügt!");
+                }
+                else
+                {
+                    l_meldungsetzliste1.setText("fehler");
+                }
             }
             else{
                 befuellem1=false;

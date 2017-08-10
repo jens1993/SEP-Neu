@@ -16,7 +16,7 @@ public class Spielklasse {
 	private int spielklasseID;
 	private String disziplin;
 	private String niveau;
-	private ArrayList<Team> setzliste;
+	private ArrayList<Team> setzliste=new ArrayList<>();
 	private Spielsystem spielsystem;
 	private float meldeKosten = (float) 5;
 	private Turnier turnier;

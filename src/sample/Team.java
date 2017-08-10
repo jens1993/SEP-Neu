@@ -180,7 +180,14 @@ public class Team {
         }
         else {
             if(this.einzel==true){
-                return this.spielerEins.toString();
+                if(this.spielerEins!=null)
+                {
+                    return this.spielerEins.toString();
+                }
+                else
+                {
+                    return null;
+                }
             }
             else if(this.einzel == false){
                 return this.spielerEins.toString() + " / " + this.spielerZwei.toString();
