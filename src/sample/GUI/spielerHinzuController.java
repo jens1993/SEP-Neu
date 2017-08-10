@@ -13,19 +13,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import sample.*;
 import sample.DAO.*;
 
-import javax.swing.*;
-import java.awt.event.KeyAdapter;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -102,7 +97,7 @@ private TextField t_suchleiste;
     private RadioButton r_m1;
     @FXML
     private RadioButton r_w1;
-    HashMap<Integer, Spieler> loans = new HashMap<Integer, Spieler>();
+    HashMap<Integer, Spieler> spielerhash = new HashMap<Integer, Spieler>();
     auswahlklasse a = new auswahlklasse();
 
     private static Spieler spieler_neu=null;
@@ -115,7 +110,7 @@ private TextField t_suchleiste;
 
             for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
                 obs_spieler.add(a.getAktuelleTurnierAuswahl().getSpieler().get(i));
-                loans.put(a.getAktuelleTurnierAuswahl().getSpieler().get(i).getSpielerID(),a.getAktuelleTurnierAuswahl().getSpieler().get(i));
+                spielerhash.put(a.getAktuelleTurnierAuswahl().getSpieler().get(i).getSpielerID(),a.getAktuelleTurnierAuswahl().getSpieler().get(i));
 
             }
 
@@ -449,16 +444,16 @@ private TextField t_suchleiste;
             //obs_spieler.clear();
 
             obs_spieler.clear();
-            for (Integer key : loans.keySet()) {
+            for (Integer key : spielerhash.keySet()) {
 
 
 
-                if(loans.get(key).toString().toUpperCase().contains(t_suchleiste.getText().toUpperCase()))
+                if(spielerhash.get(key).toString().toUpperCase().contains(t_suchleiste.getText().toUpperCase()))
 
                 {
                     System.out.println("match");
-                    System.out.println("key: " + key + " value: " + loans.get(key));
-                    Spieler sp = loans.get(key);
+                    System.out.println("key: " + key + " value: " + spielerhash.get(key));
+                    Spieler sp = spielerhash.get(key);
 
                     obs_spieler.add(obs_spieler.size(),sp);
 

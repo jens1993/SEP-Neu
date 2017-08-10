@@ -24,10 +24,7 @@ import sample.Team;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by Manuel Hüttermann on 04.08.2017.
@@ -36,6 +33,8 @@ import java.util.ResourceBundle;
 public class SpielSystemController_neu implements Initializable
 {
     //Tab1
+    @FXML
+    private TextField t_suchleistespieler;
     @FXML
     private Label l_meldungsetzliste1;
 
@@ -99,6 +98,7 @@ public class SpielSystemController_neu implements Initializable
                 Spieler spieler = a.getAktuelleTurnierAuswahl().getSpieler().get(i);
                 if (!istInSetzListe(spieler)){
                     obs_spieler.add(spieler);
+
                 }
             }
             TableColumn<Spieler,String> spielerVornameSpalte = new TableColumn("Vorname");
@@ -206,7 +206,10 @@ public class SpielSystemController_neu implements Initializable
             spielerZweiSpalte.setCellValueFactory(new PropertyValueFactory<Team,String>("SpielerZwei"));
 
             spielsystem_setzliste.setItems(obs_setzliste);
+            System.out.println("einzel = "+ausgewaehlte_spielklasse.isEinzel());
+            System.out.println("Spielklasse = "+ausgewaehlte_spielklasse.getDisziplin());
             if (ausgewaehlte_spielklasse.isEinzel()){
+                System.out.println("erfolgreich");
                 spielsystem_setzliste.getColumns().addAll(spielerEinsSpalte);
             }
             else{
@@ -383,5 +386,24 @@ public class SpielSystemController_neu implements Initializable
         } catch (Exception e) {
             e.printStackTrace();
         }
+        t_suchleistespieler.textProperty().addListener((observable, oldValue, newValue) -> {
+            // System.out.println("textfield changed from " + oldValue + " to " + newValue);
+            //obs_spieler.clear();
+
+            obs_spieler.clear();
+
+            spielsystem_spielerliste_alleSpieler.refresh();
+            Enumeration e = a.getSpieler().keys();
+            while (e.hasMoreElements()){
+                int key = (int) e.nextElement();
+                if(a.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespieler.getText().toUpperCase()))
+                {
+                    obs_spieler.add(a.getSpieler().get(key));
+                }
+                              ;
+            }
+
+
+        });
     }
 }

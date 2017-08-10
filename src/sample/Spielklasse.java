@@ -30,7 +30,7 @@ public class Spielklasse {
 		this.disziplin = disziplin;
 		this.niveau = niveau;
 		this.turnier = turnier;
-		if (disziplin=="Herreneinzel"||disziplin=="Dameneinzel"){
+		if (disziplin.toUpperCase().contains("EINZEL")){
 			einzel=true;
 		}
 	}
@@ -41,16 +41,14 @@ public class Spielklasse {
 		this.disziplin = disziplin.toString();
 		this.niveau = niveau.toString();
 		this.turnier = turnier;
+		System.out.println("Disziplin = "+disziplin.toString());
+		if(disziplin.toString().toUpperCase().contains("EINZEL"))
+		{
+			System.out.println("Erfolg");
+			einzel=true;
+		}
 	}
-	public Spielklasse(int spielklasseID,					   Disziplin disziplin,					   Niveau niveau,					   int turnierid)
-	{
-		System.out.println("neue Spielklasse mit Enums2 und gesetzter SpielklasseID");
-		this.spielklasseID=spielklasseID;
-		this.disziplin = disziplin.toString();
-		this.niveau = niveau.toString();
-		Turnier turnier = new Turnier("",turnierid, LocalDate.now());
-		this.turnier = t.read(turnier);
-	}
+
 
 
 	public Spielklasse(int spielklasseID, String disziplin, String niveau, int turnierid)
@@ -62,7 +60,7 @@ public class Spielklasse {
 		Turnier turnier = new Turnier("",turnierid, LocalDate.now());
 		this.turnier = t.read(turnier);
 		System.out.println(this.turnier.getName());
-		if (disziplin=="Herreneinzel"||disziplin=="Dameneinzel"){
+		if (disziplin.toUpperCase().contains("EINZEL")){
 			einzel=true;
 		}
 

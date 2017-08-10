@@ -78,9 +78,16 @@ public class KlasseUebersichtController implements Initializable
         System.out.println("Anzahl Klassen = "+turnierauswahlspielklassen.size());
         TextFlow[] flow = new TextFlow[turnierauswahlspielklassen.size()+1];
         final Spielklasse[] spauswahl = {null};
+        Hyperlink hp;
         for ( int i = 1; i <= turnierauswahlspielklassen.size(); i++) {
             sp= turnierauswahlspielklassen.get(i);
-            Hyperlink hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spiele:"+sp.getSpiele().size()+" Spieler:"+(sp.getSetzliste().size()*2));
+            if(sp.getSpiele()!=null&&sp.getSetzliste()!=null&&sp.getSpiele().size()>0)
+            {
+                hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spiele:"+sp.getSpiele().size()+" Spieler:"+(sp.getSetzliste().size()*2));
+            }
+            else {
+                 hp = new Hyperlink(sp.getDisziplin() + "-" + sp.getNiveau());
+            }
             if(sp.getDisziplin().contains("doppel"))
             {
                 flow[i] = new TextFlow(new Text("Doppelklasse: "),hp);
