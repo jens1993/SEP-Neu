@@ -366,6 +366,10 @@ private TextField t_suchleiste;
         tabelle_spielerliste.setRowFactory(tv -> {
             TableRow row = new TableRow();
             row.setOnMouseClicked(event -> {
+                if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY)
+                {
+                    contextMenu.hide();
+                }
                 if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY
                         && event.getClickCount() == 2) {
                     Spieler clickedRow = (Spieler) row.getItem();
@@ -467,6 +471,15 @@ tabelle_spielerliste.refresh();
 
         });
 
+        if(a.getTab()==3)
+        {
+
+            tab_sphin.setDisable(true);
+            tab_spbea.setDisable(true);
+            tab_spupdate.setDisable(false);
+            tabpane_spieler.getSelectionModel().select(tab_spupdate);
+            FuelleFelder(a.getUpdateSpieler());
+        }
     }
     private void FuelleFelder(Spieler clickedRow)
     {

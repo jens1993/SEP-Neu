@@ -1,5 +1,6 @@
 package sample.DAO;
 
+import javafx.scene.control.Tab;
 import javafx.stage.Stage;
 import sample.*;
 
@@ -24,6 +25,32 @@ public class auswahlklasse
     private static Spieler SpielerzumHinzufeuegen=null;
     private static ArrayList<Spieler> vorhandeneSpieler;
     private static ArrayList<Stage> stages = new ArrayList<>();
+
+    public static void setUpdateSpieler(Spieler updateSpieler) {
+        auswahlklasse.updateSpieler = updateSpieler;
+    }
+
+    public static Spieler getUpdateSpieler() {
+        return updateSpieler;
+    }
+
+    public static int getTab() {
+        return tab;
+    }
+
+    public static void setTab(int tab) {
+        auswahlklasse.tab = tab;
+    }
+
+    private static Spieler updateSpieler;
+    private static int tab;
+
+    public static void setTabAuswahl(Spieler spieler, int tabspeichern)
+    {
+        updateSpieler=spieler;
+        tab=tabspeichern;
+
+    }
 
 
     public static ArrayList<Spieler> getVorhandeneSpieler() {

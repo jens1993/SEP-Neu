@@ -5,13 +5,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import sample.DAO.SetzlisteDAO;
 import sample.DAO.SetzlisteDAOimpl;
 import sample.DAO.auswahlklasse;
@@ -307,6 +311,18 @@ public class SpielSystemController implements Initializable
 
                         @Override
                         public void handle(ActionEvent event) {
+                            try {
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
+                                Parent root1 = (Parent) fxmlLoader.load();
+                                Stage stage = new Stage();
+                                a.addStage(stage);
+                                stage.setScene(new Scene(root1));
+                                stage.show();
+                                stage.setTitle("Spieler");
+                            } catch(Exception e) {
+                                e.printStackTrace();
+                                System.out.println("Fehler beim laden");
+                            }
                             //tabpane_spieler.getSelectionModel().select(tab_sphin);
                         }
                     });
@@ -317,6 +333,23 @@ public class SpielSystemController implements Initializable
                         public void handle(ActionEvent event) {
                             //tabpane_spieler.getSelectionModel().select(tab_spupdate);
                             //FuelleFelder(clickedRow);
+
+                            try {
+                                a.setUpdateSpieler(clickedRow);
+                                a.setTab(3);
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
+                                Parent root1 = (Parent) fxmlLoader.load();
+                                Stage stage = new Stage();
+                                a.addStage(stage);
+                                stage.setScene(new Scene(root1));
+                                stage.show();
+                                stage.setTitle("Spieler");
+                            } catch(Exception e) {
+                                e.printStackTrace();
+                                System.out.println("Fehler beim laden");
+                            }
+
+
                         }
                     });
                     MenuItem item3 = new MenuItem("Spieler löschen");
@@ -337,6 +370,7 @@ public class SpielSystemController implements Initializable
                            }
                            else
                            {
+
                                //l_meldungsetzliste.setTextFill(Color.web("#048d46"));
                                l_meldungsetzliste.setText(clickedRow.getVName()+" "+clickedRow.getNName()+" kann nicht gelöscht werden!");
                            }

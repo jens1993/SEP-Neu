@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
@@ -78,14 +77,9 @@
     <Separator prefHeight="19.0" prefWidth="900.0" />
     <HBox>
         <children>
-            <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="15.0" prefWidth="196.0">
+            <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="114.0">
                 <buttons>
-                    <Button fx:id="neuesTurnier" mnemonicParsing="false" onAction="#pressBtn_neuesTurnier" text="neues Turnier">
-                        <rotationAxis>
-                            <Point3D />
-                        </rotationAxis>
-                    </Button>
-                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="Turnier laden" />
+                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="Turnierübersicht" />
                 </buttons>
             </ButtonBar>
             <ButtonBar>
