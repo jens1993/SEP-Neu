@@ -83,6 +83,8 @@ public class Spiel {
 		spielID = spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
 		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
+		this.spielsystem.getSpielklasse().getTurnier().getAusstehendeSpiele().add(this);
+
 		spielDAO.create(this);
 		this.status = 1;
 	}

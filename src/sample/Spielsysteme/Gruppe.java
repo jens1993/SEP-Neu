@@ -73,6 +73,7 @@ public class Gruppe extends Spielsystem {
 			for (int j=0; j<anzahlTeams/2;j++){
 				//if(spielsystem==null) {
 				new Spiel(spielSystemIDberechnen(),this);
+				//this.spielsystem.getSpielklasse().getTurnier().getSpiele()
 				/*}
 				else{
 					new Spiel(spielSystemIDberechnen(),this.spielsystem);

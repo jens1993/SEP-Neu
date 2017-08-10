@@ -33,8 +33,12 @@ public class MainController implements Initializable
     @FXML
     private javafx.scene.control.TableView tabelle_spiele;
 
-
     auswahlklasse a = new auswahlklasse();
+
+    public void spieleRefresh(){
+        tabelle_spiele.refresh();
+
+    }
 
     public void pressBtn_laden(ActionEvent event) throws Exception{
         try{
@@ -98,7 +102,9 @@ public class MainController implements Initializable
         stage.setScene(new Scene(root1));
         stage.show();
         stage.setTitle("Turnier auswählen");
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        for(int i=1;i<a.getStages().size();i++){
+            a.getStages().get(i).close();
+        }
     }
     public void pressBtn_Einstellungen (ActionEvent event) throws Exception {
         System.out.println("test");

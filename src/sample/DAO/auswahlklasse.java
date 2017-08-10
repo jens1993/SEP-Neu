@@ -58,6 +58,7 @@ public class auswahlklasse
     {
         updateSpieler=spieler;
         tab=tabspeichern;
+        stages.get(0).close();
 
     }
 
@@ -74,7 +75,7 @@ public class auswahlklasse
         return stages;
     }
     public void addStage(Stage stage){
-        this.stages.add(stage);
+        this.stages.add(0,stage);
     }
 
     public static Spieler getSpielerzumHinzufeuegen() {

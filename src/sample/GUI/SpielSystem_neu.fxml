@@ -58,7 +58,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab text="Spielsystem erstellen">
+      <Tab text="Spielsystem starten">
          <content>
             <GridPane>
                <children>
@@ -157,7 +157,7 @@
                               </GridPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="koSystem" prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane fx:id="koSystem" prefHeight="200.0" prefWidth="200.0" visible="false">
                            <children>
                               <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
@@ -289,6 +289,7 @@
                         </AnchorPane>
                      </children>
                   </StackPane>
+                  <Button mnemonicParsing="false" onAction="#pressbtn_spielklasseStarten" text="Spielsystem starten" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="200.0" />

@@ -20,6 +20,7 @@ import sample.DAO.SetzlisteDAOimpl;
 import sample.DAO.auswahlklasse;
 import sample.Spieler;
 import sample.Spielklasse;
+import sample.Spielsysteme.Gruppe;
 import sample.Team;
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ import java.util.*;
 
 public class SpielSystemController_neu implements Initializable
 {
+    private MainController mainController = new MainController();
     //Tab1
     @FXML
     private TextField t_suchleistespieler;
@@ -44,7 +46,10 @@ public class SpielSystemController_neu implements Initializable
     private TableView spielsystem_setzliste;
 
 
+
     //Tab2
+    @FXML
+    private Button btn_spielklasseStarten;
     @FXML
     private RadioButton radio_gruppe;
 
@@ -125,6 +130,13 @@ public class SpielSystemController_neu implements Initializable
         }
         return false;
     }
+    @FXML
+    private void pressbtn_spielklasseStarten(ActionEvent event){
+        if(radio_gruppe.isSelected()){
+            ausgewaehlte_spielklasse.setSpielsystem(new Gruppe(ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse));
+            mainController.spieleRefresh();
+        }
+    }
 
     @FXML
     private void trostSwitch(ActionEvent event) throws IOException {
@@ -190,15 +202,15 @@ public class SpielSystemController_neu implements Initializable
 
             obs_setzliste.clear();
             //for (int i=0;i<turnierauswahlspielklassen.size();i++){ //Warum?
-                //System.out.println(ausgewaehlte_spielklasse.getSpiele().get(i));
-                //obsvorhanden_spieler.add(ausgewaehlte_spielklasse.getSetzliste().get(i-1));
+            //System.out.println(ausgewaehlte_spielklasse.getSpiele().get(i));
+            //obsvorhanden_spieler.add(ausgewaehlte_spielklasse.getSetzliste().get(i-1));
 
-                System.out.println("ausgewählte Spielklasse = "+ausgewaehlte_spielklasse.getSpielklasseID()+" "+ausgewaehlte_spielklasse.getDisziplin());
-
-                for(int j = 0;j<setzliste.size();j++)
-                {
+            System.out.println("ausgewählte Spielklasse = "+ausgewaehlte_spielklasse.getSpielklasseID()+" "+ausgewaehlte_spielklasse.getDisziplin());
+            if (setzliste!=null) {
+                for (int j = 0; j < setzliste.size(); j++) {
                     obs_setzliste.add(setzliste.get(j));
                 }
+            }
             //}
             TableColumn<Team,String> spielerEinsSpalte = new TableColumn("Spieler");
             spielerEinsSpalte.setCellValueFactory(new PropertyValueFactory<Team,String>("SpielerEins"));
@@ -331,26 +343,26 @@ public class SpielSystemController_neu implements Initializable
                         @Override
                         public void handle(ActionEvent event) {
 
-                           boolean loeschespieler = clickedRow.getSpielerDAO().delete(clickedRow);
-                           if(loeschespieler)
-                           {
-                               obs_spieler.remove(clickedRow);
-                               a.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
-                               a.getSpieler().remove(clickedRow);
-                               //tabelle_spielerliste.refresh();
-                               System.out.println("Lösche   "+ clickedRow.getNName());
-                               l_meldungsetzliste1.setText(clickedRow.getVName()+" "+clickedRow.getNName()+" wurde erfolgreich gelöscht!");
-                           }
-                           else
-                           {
+                            boolean loeschespieler = clickedRow.getSpielerDAO().delete(clickedRow);
+                            if(loeschespieler)
+                            {
+                                obs_spieler.remove(clickedRow);
+                                a.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
+                                a.getSpieler().remove(clickedRow);
+                                //tabelle_spielerliste.refresh();
+                                System.out.println("Lösche   "+ clickedRow.getNName());
+                                l_meldungsetzliste1.setText(clickedRow.getVName()+" "+clickedRow.getNName()+" wurde erfolgreich gelöscht!");
+                            }
+                            else
+                            {
 
-                               //l_meldungsetzliste.setTextFill(Color.web("#048d46"));
-                               l_meldungsetzliste1.setText(clickedRow.getVName()+" "+clickedRow.getNName()+" kann nicht gelöscht werden!");
-                           }
+                                //l_meldungsetzliste.setTextFill(Color.web("#048d46"));
+                                l_meldungsetzliste1.setText(clickedRow.getVName()+" "+clickedRow.getNName()+" kann nicht gelöscht werden!");
+                            }
 
                         }
                     });
-
+                    a.getStages().get(0).getTitle();
                     // Add MenuItem to ContextMenu
                     contextMenu.getItems().clear();
                     contextMenu.getItems().addAll(item1, item2, item3);
@@ -400,7 +412,7 @@ public class SpielSystemController_neu implements Initializable
                 {
                     obs_spieler.add(a.getSpieler().get(key));
                 }
-                              ;
+                ;
             }
 
 
