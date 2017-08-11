@@ -87,19 +87,28 @@ public class KlasseUebersichtController implements Initializable
         System.out.println("Anzahl Klassen = "+turnierauswahlspielklassen.size());
         TextFlow[] flow = new TextFlow[turnierauswahlspielklassen.size()+1];
         final Spielklasse[] spauswahl = {null};
-        Hyperlink hp;
+         Hyperlink hp=null;
         for ( int i = 1; i <= turnierauswahlspielklassen.size(); i++) {
             sp= turnierauswahlspielklassen.get(i);
+            if(sp.getSetzliste()!=null&&sp.getSetzliste().size()>0)
+            {
+                hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2));
+                System.out.println(hp+"----------1");
+            }
             if(sp.getSpiele()!=null&&sp.getSetzliste()!=null&&sp.getSpiele().size()>0)
             {
                 sp.setSetzliste_gesperrt(true);
                 //System.out.println(sp.isSetzliste_gesperrt());
-                hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spiele:"+sp.getSpiele().size()+" Spieler:"+(sp.getSetzliste().size()*2));
+                hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2)+" Spiele:"+sp.getSpiele().size());
+                System.out.println(hp+"----------2");
             }
-            else {
+            if(sp.getSetzliste().size()==0||sp.getSetzliste()==null)
+            {
                 sp.setSetzliste_gesperrt(false);
                  hp = new Hyperlink(sp.getDisziplin() + "-" + sp.getNiveau());
+                System.out.println(hp+"----------3");
             }
+
             if(sp.getDisziplin().contains("doppel"))
             {
                 flow[i] = new TextFlow(new Text("Doppelklasse: "),hp);

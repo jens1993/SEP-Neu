@@ -377,7 +377,7 @@ private TextField t_suchleistespielerhinzu;
                 }
                 if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY
                         && event.getClickCount() == 2) {
-                    Spieler clickedRow = (Spieler) row.getItem();
+                    Spieler clickedRow = (sample.Spieler) row.getItem();
                     UpdateSpieler(clickedRow);
                     //(((Node)(event.getSource())).getScene().getWindow().hide();
                 }
