@@ -36,6 +36,21 @@ public class Spielklasse {
 
 	private boolean setzliste_gesperrt= false;
 
+	@Override
+	public String toString() {
+		if(this.getSetzliste()!=null&&this.getSetzliste().size()>0)
+		{
+			return	 disziplin +
+					" - " + niveau + " - Spieler:"+this.getSetzliste().size() ;
+		}
+		else
+		{
+			return	 disziplin +
+					" - " + niveau ;
+		}
+
+	}
+
 	public Spielklasse(int spielklasseID, String disziplin, String niveau, Turnier turnier) {
 		this.spielklasseID=spielklasseID;
 		this.disziplin = disziplin;

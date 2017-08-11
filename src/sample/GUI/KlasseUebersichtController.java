@@ -79,15 +79,15 @@ public class KlasseUebersichtController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-         turnierauswahlspielklassen= a.getAktuelleTurnierAuswahl().getSpielklassen();
-         Spielklasse sp = null;
+        turnierauswahlspielklassen= a.getAktuelleTurnierAuswahl().getSpielklassen();
+        Spielklasse sp = null;
         Label label[] = new Label[turnierauswahlspielklassen.size()];
         //label[1].setText("jens");
 
         System.out.println("Anzahl Klassen = "+turnierauswahlspielklassen.size());
         TextFlow[] flow = new TextFlow[turnierauswahlspielklassen.size()+1];
         final Spielklasse[] spauswahl = {null};
-         Hyperlink hp=null;
+        Hyperlink hp=null;
         for ( int i = 1; i <= turnierauswahlspielklassen.size(); i++) {
             sp= turnierauswahlspielklassen.get(i);
             if(sp.getSetzliste()!=null&&sp.getSetzliste().size()>0)
@@ -105,7 +105,7 @@ public class KlasseUebersichtController implements Initializable
             if(sp.getSetzliste().size()==0||sp.getSetzliste()==null)
             {
                 sp.setSetzliste_gesperrt(false);
-                 hp = new Hyperlink(sp.getDisziplin() + "-" + sp.getNiveau());
+                hp = new Hyperlink(sp.getDisziplin() + "-" + sp.getNiveau());
                 System.out.println(hp+"----------3");
             }
 
@@ -143,7 +143,7 @@ public class KlasseUebersichtController implements Initializable
 
                     finalSp[finalI-1] =a.getAktuelleTurnierAuswahl().getSpielklassen().get(finalI);
 
-                   // System.out.println(spauswahl[finalI].getDisziplin());
+                    // System.out.println(spauswahl[finalI].getDisziplin());
                     try {
                         ((Node)(event.getSource())).getScene().getWindow().hide();
                         pressBtn_Spielsystem(finalSp[finalI-1]);

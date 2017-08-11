@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 /**
  * Created by jens on 03.08.2017.
  */
-public class PopupController implements Initializable
+public class spielerVorhandenController implements Initializable
 {
 
    @FXML TableView popup_tabelle;

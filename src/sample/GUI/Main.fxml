@@ -93,7 +93,7 @@
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
                 <buttons>
                     <Button mnemonicParsing="false" text="Zeitplan" />
-                    <Button mnemonicParsing="false" text="Statistik" />
+                    <Button mnemonicParsing="false" onAction="#pressBtn_Statistik" text="Statistik" />
                 </buttons>
             </ButtonBar>
         </children>
@@ -114,12 +114,14 @@
                                         </content>
                                     </Tab>
                                     <Tab fx:id="tab_spieluebersicht" text="Spielübersicht">
-                                        <content>
-                                            <AnchorPane>
+                                 <content>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <TableView fx:id="tabelle_spiele" prefHeight="964.0" prefWidth="903.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                       </children></AnchorPane>
-                                        </content>
+                                          <HBox fx:id="hbox_main" prefHeight="100.0" prefWidth="200.0" />
+                                          <TableView fx:id="tabelle_spiele" prefHeight="964.0" prefWidth="903.0" />
+                                       </children>
+                                    </VBox>
+                                 </content>
                                     </Tab>
                                 </tabs>
                             </TabPane>

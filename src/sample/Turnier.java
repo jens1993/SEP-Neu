@@ -30,6 +30,7 @@ public class Turnier {
 	private ObservableList<Spiel> aktiveSpiele = FXCollections.observableArrayList();
 	private ObservableList<Spiel> ausstehendeSpiele = FXCollections.observableArrayList();
 
+
 	public ObservableList<Spiel> getGespielteSpiele() {
 		return gespielteSpiele;
 	}

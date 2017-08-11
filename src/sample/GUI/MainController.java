@@ -18,11 +18,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.controlsfx.control.CheckComboBox;
 import sample.DAO.auswahlklasse;
 import sample.Spiel;
 import sample.Spieler;
+import sample.Spielklasse;
 import sample.Team;
 
 import javax.swing.table.DefaultTableCellRenderer;
@@ -36,12 +39,41 @@ import java.util.*;
 public class MainController implements Initializable, Observable
 {
 
+    private Label lspielklassen;
 
+    @FXML
+    private HBox hbox_main;
+    @FXML
+    private CheckBox check_gespielteSpiele= new CheckBox();
+    @FXML
+    private CheckBox check_aktiveSpiele= new CheckBox();
+    @FXML
+    private CheckBox check_ausstehendeSpiele= new CheckBox();
+    @FXML
+    private ChoiceBox choice_spielklassen= new ChoiceBox();
     @FXML
     private javafx.scene.control.TableView tabelle_spiele;
 
     auswahlklasse a = new auswahlklasse();
+    ObservableList obs_spielklassen = FXCollections.observableArrayList();
+    private void ladeSpielklassen() throws Exception
+    {
 
+        System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
+
+        for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpielklassen().size();i++){
+            obs_spielklassen.add(a.getVereine().get(i));
+
+        }
+        try {
+            System.out.println(obs_spielklassen.size());
+
+            choice_spielklassen.setItems(obs_spielklassen);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public void spieleRefresh(){
@@ -415,6 +447,7 @@ public class MainController implements Initializable, Observable
     public void initialize(URL location, ResourceBundle resources) {
         ContextMenu contextMenu = new ContextMenu();
 
+
         tabelle_spiele.setRowFactory(tv -> {
             TableRow row = new TableRow();
             row.setOnMouseClicked(event -> {
@@ -468,10 +501,50 @@ public class MainController implements Initializable, Observable
             return row ;
         });
 
+        // create the data to show in the CheckComboBox
+        final ObservableList<Spielklasse> strings = FXCollections.observableArrayList();
+        for (int i = 1; i <= a.getAktuelleTurnierAuswahl().getSpielklassen().size(); i++) {
+            strings.add(a.getAktuelleTurnierAuswahl().getSpielklassen().get(i));
+        }
+
+        // Create the CheckComboBox with the data
+        final CheckComboBox<Spielklasse> checkComboBox = new CheckComboBox<Spielklasse>(strings);
+
+        // and listen to the relevant events (e.g. when the selected indices or
+        // selected items change).
+        checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<Spielklasse>() {
+            public void onChanged(ListChangeListener.Change<? extends Spielklasse> c) {
+                System.out.println(checkComboBox.getCheckModel().getCheckedIndices());
+            }
+        });
+
+        lspielklassen = new Label("Spielklassen");
+
+        hbox_main.getChildren().add(lspielklassen);
+        hbox_main.getChildren().add(checkComboBox);
+        hbox_main.getChildren().add(check_aktiveSpiele);
+        hbox_main.getChildren().add(check_ausstehendeSpiele);
+        hbox_main.getChildren().add(check_gespielteSpiele);
+        check_aktiveSpiele.setText("Aktive Spiele");
+        check_aktiveSpiele.setSelected(true);
+        check_ausstehendeSpiele.setText("Ausstehende Spiele");
+        check_ausstehendeSpiele.setSelected(true);
+        check_gespielteSpiele.setText("Gespielte Spiele");
+        check_gespielteSpiele.setSelected(true);
+        checkComboBox.setMaxWidth(250);
+
+      
+        for(int i=0;i<strings.size();i++)
+        {
+            checkComboBox.getCheckModel().check(i);
+        }
 
         try {
             //urnierLaden();
             printSpielTable();
+            ladeSpielklassen();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

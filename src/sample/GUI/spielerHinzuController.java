@@ -7,22 +7,22 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import org.controlsfx.control.action.Action;
 import sample.*;
 import sample.DAO.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import org.controlsfx.*;
 
 /**
  * Created by jens on 03.08.2017.
@@ -210,6 +210,7 @@ private TextField t_suchleistespielerhinzu;
                 vorhandeneSpieler.add(sp);
 
             }
+
         }
 
 
@@ -225,6 +226,7 @@ private TextField t_suchleistespielerhinzu;
             a.addSpieler(spieler_neu);
             a.getAktuelleTurnierAuswahl().getSpieler().put(spieler_neu.getSpielerID(),spieler_neu);
             printSpielerZuordnenTableNeu();
+
 
 
         }
@@ -250,7 +252,7 @@ private TextField t_suchleistespielerhinzu;
     }
     public void pressBtn_Popup (ActionEvent event) throws Exception {
         System.out.println("test");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Popup.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerVorhanden.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         a.addStage(stage);
@@ -262,7 +264,7 @@ private TextField t_suchleistespielerhinzu;
     {
         Popup popup = new Popup();
         //CustomController controller = new CustomController();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Popup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("spielerVorhanden.fxml"));
         loader.setController(this);
         try {
             popup.getContent().add((Parent)loader.load());
