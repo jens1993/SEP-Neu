@@ -26,6 +26,9 @@ public class Team {
     private List<Team> bisherigeGegner = new ArrayList<Team>();
 
 
+    public Team(Spielklasse spielklasse) {
+        this.spielklasse = spielklasse;
+    }
 
     public Team(Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
         this.spielerEins = spielerEins;
@@ -55,6 +58,11 @@ public class Team {
 
     public void setTeamid(int teamid){
         this.teamid = teamid;
+        this.spielklasse.getTurnier().getTeams().put(teamid,this);
+    }
+    public void setTeamid(int teamid, Spielklasse sp){
+        this.teamid = teamid;
+        this.spielklasse=sp;
         this.spielklasse.getTurnier().getTeams().put(teamid,this);
     }
     public Team(int teamid, Spielklasse spielklasse) { //nur für bestehendes Turnier einlesen
@@ -127,6 +135,10 @@ public class Team {
         return true;
     }
 
+    public Team()
+    {
+
+    }
     public void addGewonnenesSpiel() {
         this.gewonneneSpiele ++;
         //teamDAO.update(this);

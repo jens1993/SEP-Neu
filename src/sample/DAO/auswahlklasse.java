@@ -13,6 +13,7 @@ import java.util.Hashtable;
  */
 public class auswahlklasse
 {
+
     private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
     private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
     private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();

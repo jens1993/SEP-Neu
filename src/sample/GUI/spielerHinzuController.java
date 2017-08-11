@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import sample.*;
@@ -30,7 +31,7 @@ public class spielerHinzuController implements Initializable, Cloneable
 {
 
 @FXML
-private TextField t_suchleiste;
+private TextField t_suchleistespielerhinzu;
     @FXML
     private Label l_Meldung;
     @FXML
@@ -171,6 +172,7 @@ private TextField t_suchleiste;
         }
         else
         {
+
             l_Meldung.setText("");
             boolean geschlecht = false;
             if (r_m.isSelected())
@@ -193,7 +195,7 @@ private TextField t_suchleiste;
         spieler_neu= new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),a.getSpieler().size()+1,geschlecht,rpunkte,verein,t_spid.getText());
         ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
 
-
+            felderLeeren();
         for(Enumeration e = a.getSpieler().elements();e.hasMoreElements();)
         {
             Spieler sp = (Spieler) e.nextElement();
@@ -326,7 +328,15 @@ private TextField t_suchleiste;
     }
 
 
-
+    @FXML
+    private void choiceclick(ActionEvent event)
+    {
+        try {
+            ladeVereine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private void ladeVereine() throws Exception
     {
 
@@ -439,32 +449,7 @@ private TextField t_suchleiste;
         }
 
 
-        t_suchleiste.textProperty().addListener((observable, oldValue, newValue) -> {
-            // System.out.println("textfield changed from " + oldValue + " to " + newValue);
-            //obs_spieler.clear();
 
-            obs_spieler.clear();
-            for (Integer key : spielerhash.keySet()) {
-
-
-
-                if(spielerhash.get(key).toString().toUpperCase().contains(t_suchleiste.getText().toUpperCase()))
-
-                {
-                    System.out.println("match");
-                    System.out.println("key: " + key + " value: " + spielerhash.get(key));
-                    Spieler sp = spielerhash.get(key);
-
-                    obs_spieler.add(obs_spieler.size(),sp);
-
-                }
-
-            }
-tabelle_spielerliste.refresh();
-
-
-
-        });
 
         if(a.getTab()==3)
         {
@@ -475,6 +460,27 @@ tabelle_spielerliste.refresh();
             tabpane_spieler.getSelectionModel().select(tab_spupdate);
             FuelleFelder(a.getUpdateSpieler());
         }
+
+        t_suchleistespielerhinzu.textProperty().addListener((observable, oldValue, newValue) -> {
+            // System.out.println("textfield changed from " + oldValue + " to " + newValue);
+            //obs_spieler.clear();
+
+            obs_spieler.clear();
+
+            tabelle_spielerliste.refresh();
+            Enumeration e = a.getSpieler().keys();
+            while (e.hasMoreElements()){
+                int key = (int) e.nextElement();
+                if(a.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespielerhinzu.getText().toUpperCase()))
+                {
+                    obs_spieler.add(a.getSpieler().get(key));
+                }
+                ;
+            }
+
+
+        });
+
     }
     private void FuelleFelder(Spieler clickedRow)
     {
@@ -515,7 +521,7 @@ tabelle_spielerliste.refresh();
     @FXML
     public void pressBtn_neuerVerein(ActionEvent event) throws Exception {
         try {
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("neuerVerein.fxml"));
 
             Parent root1 = (Parent) fxmlLoader.load();
@@ -528,6 +534,7 @@ tabelle_spielerliste.refresh();
             e.printStackTrace();
         }
     }
+
 
 
 }

@@ -25,6 +25,17 @@ public class Spielklasse {
 	private boolean aktiv;
 	private boolean einzel = false;
 
+
+	public boolean isSetzliste_gesperrt() {
+		return setzliste_gesperrt;
+	}
+
+	public void setSetzliste_gesperrt(boolean setzliste_gesperrt) {
+		this.setzliste_gesperrt = setzliste_gesperrt;
+	}
+
+	private boolean setzliste_gesperrt= false;
+
 	public Spielklasse(int spielklasseID, String disziplin, String niveau, Turnier turnier) {
 		this.spielklasseID=spielklasseID;
 		this.disziplin = disziplin;

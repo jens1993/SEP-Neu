@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +16,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sample.DAO.auswahlklasse;
@@ -124,6 +127,18 @@ public class MainController implements Initializable, Observable
         stage.setScene(new Scene(root1));
         stage.show();
         stage.setTitle("Einstellungen");
+        //((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+    @FXML
+    public void pressBtn_Statistik (ActionEvent event) throws Exception {
+        System.out.println("test");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Statistik.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        a.addStage(stage);
+        stage.setScene(new Scene(root1));
+        stage.show();
+        stage.setTitle("Statistiken: "+a.getAktuelleTurnierAuswahl().getName());
         //((Node)(event.getSource())).getScene().getWindow().hide();
     }
     public void pressBtn_teamLaden (ActionEvent event) throws Exception {
@@ -398,6 +413,62 @@ public class MainController implements Initializable, Observable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ContextMenu contextMenu = new ContextMenu();
+
+        tabelle_spiele.setRowFactory(tv -> {
+            TableRow row = new TableRow();
+            row.setOnMouseClicked(event -> {
+                if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY)
+                {
+                    contextMenu.hide();
+                }
+                if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY
+                        && event.getClickCount() == 2) {
+                    Spiel clickedRow = (Spiel) row.getItem();
+                    //UpdateSpieler(clickedRow);
+                    //(((Node)(event.getSource())).getScene().getWindow().hide();
+                }
+                if(! row.isEmpty() && event.getButton()== MouseButton.SECONDARY)
+                {
+                    Spiel clickedRow = (Spiel) row.getItem();
+                    MenuItem item1 = new MenuItem("Spieldetails anzeigen");
+                    item1.setOnAction(new EventHandler<ActionEvent>() {
+
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //tabpane_spieler.getSelectionModel().select(tab_sphin);
+                        }
+                    });
+                    MenuItem item2 = new MenuItem("Ergebnisse eintragen");
+                    item2.setOnAction(new EventHandler<ActionEvent>() {
+
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //tabpane_spieler.getSelectionModel().select(tab_spupdate);
+                            //FuelleFelder(clickedRow);
+                        }
+                    });
+
+
+                    // Add MenuItem to ContextMenu
+                    contextMenu.getItems().clear();
+                    contextMenu.getItems().addAll(item1, item2);
+
+                    // When user right-click on Circle
+                    tabelle_spiele.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+
+                        @Override
+                        public void handle(ContextMenuEvent event) {
+
+                            contextMenu.show(tabelle_spiele, event.getScreenX(), event.getScreenY());
+                        }
+                    });
+                }
+            });
+            return row ;
+        });
+
+
         try {
             //urnierLaden();
             printSpielTable();

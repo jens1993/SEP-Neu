@@ -92,9 +92,12 @@ public class KlasseUebersichtController implements Initializable
             sp= turnierauswahlspielklassen.get(i);
             if(sp.getSpiele()!=null&&sp.getSetzliste()!=null&&sp.getSpiele().size()>0)
             {
+                sp.setSetzliste_gesperrt(true);
+                //System.out.println(sp.isSetzliste_gesperrt());
                 hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spiele:"+sp.getSpiele().size()+" Spieler:"+(sp.getSetzliste().size()*2));
             }
             else {
+                sp.setSetzliste_gesperrt(false);
                  hp = new Hyperlink(sp.getDisziplin() + "-" + sp.getNiveau());
             }
             if(sp.getDisziplin().contains("doppel"))

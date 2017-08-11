@@ -12,6 +12,7 @@ import java.util.List;
  * Created by Florian-PC on 25.07.2017.
  */
 public class TeamDAOimpl implements TeamDAO {
+    auswahlklasse a = new auswahlklasse();
     @Override
     public boolean create(Team team) {
         String idAbfrage = "Select AUTO_INCREMENT " +
@@ -39,7 +40,7 @@ public class TeamDAOimpl implements TeamDAO {
             count.next();
             int teamID = count.getInt("AUTO_INCREMENT");
             System.out.println(teamID);
-            team.setTeamid(teamID);
+            team.setTeamid(count.getInt("AUTO_INCREMENT"),a.getAktuelleSpielklassenAuswahl());
             smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setInt(1, team.getSpielklasse().getSpielklasseID());
