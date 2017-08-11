@@ -27,14 +27,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="692.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.klasseHinzufuegenController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="692.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="326.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.klasseHinzufuegenController">
     <tabs>
         <Tab text="Klassendaten">
             <content>
                 <GridPane prefHeight="373.0" prefWidth="600.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="190.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.0" minWidth="10.0" prefWidth="502.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="113.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="10.0" prefWidth="579.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -47,224 +47,59 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Niveau:" />
-                     </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <children>
-                        <ChoiceBox fx:id="combo_niveau" prefWidth="150.0" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zählweise:" />
-                     </children>
-                        </HBox>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.rowSpan="3">
-                     <children>
-                        <AnchorPane fx:id="gruppeMitEndrunde" visible="false">
-                           <children>
-                              <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="341.0" minWidth="10.0" prefWidth="191.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="504.0" minWidth="10.0" prefWidth="501.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gruppengröße:" GridPane.halignment="RIGHT" />
-                                    <TextField maxWidth="200.0" GridPane.columnIndex="1">
-                                       <GridPane.margin>
-                                          <Insets left="5.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Weiterkommender:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                                    <TextField maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <GridPane.margin>
-                                          <Insets left="5.0" />
-                                       </GridPane.margin>
-                                    </TextField>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Endrunde:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <children>
-                                          <RadioButton mnemonicParsing="false" text="Gruppe" />
-                                          <RadioButton mnemonicParsing="false" text="K.O." />
-                                       </children>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </HBox>
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="schweizerSystem" visible="false">
-                           <children>
-                              <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="191.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="502.0" minWidth="10.0" prefWidth="501.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Runden:" GridPane.halignment="RIGHT" />
-                                    <ComboBox prefWidth="150.0" GridPane.columnIndex="1">
-                                       <GridPane.margin>
-                                          <Insets left="5.0" />
-                                       </GridPane.margin>
-                                    </ComboBox>
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="koSystem" prefHeight="200.0" prefWidth="200.0" visible="false">
-                           <children>
-                              <GridPane layoutX="-14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="341.0" minWidth="10.0" prefWidth="191.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="506.0" minWidth="10.0" prefWidth="501.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Trostrunde:" GridPane.halignment="RIGHT" />
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1">
-                                       <children>
-                                          <RadioButton fx:id="radio_trostJa" mnemonicParsing="false" onAction="#trostSwitch" text="Ja">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="groupTrostRunde" />
-                                             </toggleGroup>
-                                          </RadioButton>
-                                          <RadioButton fx:id="radio_trostNein" mnemonicParsing="false" onAction="#trostSwitch" selected="true" text="Nein" toggleGroup="$groupTrostRunde" />
-                                       </children>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </HBox>
-                                    <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
-                                       <children>
-                                          <AnchorPane fx:id="koTrostRundeJa" prefHeight="200.0" prefWidth="200.0" visible="false">
-                                             <children>
-                                                <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                  <columnConstraints>
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="341.0" minWidth="10.0" prefWidth="189.0" />
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="505.0" minWidth="10.0" prefWidth="503.0" />
-                                                  </columnConstraints>
-                                                  <rowConstraints>
-                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                  </rowConstraints>
-                                                   <children>
-                                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Art der Trostrunde:" GridPane.halignment="RIGHT" />
-                                                       <ComboBox fx:id="combo_anzahlRunden" prefWidth="150.0" GridPane.columnIndex="1">
-                                                           <GridPane.margin>
-                                                               <Insets left="5.0" />
-                                                           </GridPane.margin>
-                                                       </ComboBox>
-                                                   </children>
-                                                </GridPane>
-                                             </children>
-                                          </AnchorPane>
-                                          <AnchorPane fx:id="koTrostRundeNein" prefHeight="200.0" prefWidth="200.0">
-                                             <children>
-                                                <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                  <columnConstraints>
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="190.0" />
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="502.0" minWidth="10.0" prefWidth="502.0" />
-                                                  </columnConstraints>
-                                                  <rowConstraints>
-                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                  </rowConstraints>
-                                                   <children>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Platz 3 ausspielen:" GridPane.halignment="RIGHT" />
-                                                      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1">
-                                                         <children>
-                                                            <RadioButton mnemonicParsing="false" text="Ja">
-                                                               <HBox.margin>
-                                                                  <Insets />
-                                                               </HBox.margin>
-                                                               <toggleGroup>
-                                                                  <ToggleGroup fx:id="groupPlatz3" />
-                                                               </toggleGroup>
-                                                            </RadioButton>
-                                                            <RadioButton mnemonicParsing="false" selected="true" text="Nein" toggleGroup="$groupPlatz3" />
-                                                         </children>
-                                                         <padding>
-                                                            <Insets left="5.0" />
-                                                         </padding>
-                                                      </HBox>
-                                                   </children>
-                                                </GridPane>
-                                             </children>
-                                          </AnchorPane>
-                                       </children>
-                                    </StackPane>
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </StackPane>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                            <children>
-                                <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#pressBtn_KlasseSpeichern" text="Klasse speichern">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Disziplin:" GridPane.halignment="RIGHT" />
+                  <ChoiceBox fx:id="combo_disziplin" minWidth="200.0" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin></ChoiceBox>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Niveau:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zählweise:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="combo_niveau" minWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </ChoiceBox>
+                          <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#pressBtn_KlasseSpeichern" text="Klasse speichern" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                          <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="203.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <children>
+                                  <RadioButton minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" selected="true" text="21 ">
+                                      <toggleGroup>
+                                          <ToggleGroup fx:id="zaehlweise" />
+                                      </toggleGroup>
                            <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin></Button>
-                            </children>
-                        </HBox>
-                        <Group id="zaehlweise" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                            <children>
-                                <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="203.0">
-                                    <children>
-                                        <RadioButton minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" selected="true" text="21 ">
-                                            <toggleGroup>
-                                                <ToggleGroup fx:id="zaehlweise" />
-                                            </toggleGroup>
-                                            <padding>
-                                                <Insets left="5.0" right="5.0" />
-                                            </padding>
-                                        </RadioButton>
-                                        <RadioButton minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="11 mit Verlängerung " toggleGroup="$zaehlweise">
-                                            <padding>
-                                                <Insets right="5.0" />
-                                            </padding>
-                                        </RadioButton>
-                                        <RadioButton minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="11 ohne Verlängerung" toggleGroup="$zaehlweise">
-                                            <padding>
-                                                <Insets right="5.0" />
-                                            </padding>
-                                        </RadioButton>
-                                    </children>
-                                </HBox>
-                            </children>
-                        </Group>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Disziplin:" />
-                  <ChoiceBox fx:id="combo_disziplin" prefWidth="150.0" GridPane.columnIndex="1" />
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                                  </RadioButton>
+                                  <RadioButton minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="11 mit Verlängerung " toggleGroup="$zaehlweise">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                                  </RadioButton>
+                                  <RadioButton minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="11 ohne Verlängerung" toggleGroup="$zaehlweise">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                                  </RadioButton>
+                              </children>
+                          </HBox>
                     </children>
                 </GridPane>
             </content>
         </Tab>
         <Tab text="Spieler zuordnen">
          <content>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
                   <TableView fx:id="tabelle_SpielerZuordnen" prefHeight="376.0" prefWidth="692.0">
                      <columns>
@@ -273,10 +108,22 @@
                         <TableColumn fx:id="spielerGeburstdatumSpalte" prefWidth="75.0" text="Geburtsdatum" />
                      </columns>
                   </TableView>
-                  <Button mnemonicParsing="false" onAction="#printSpielerZuordnenTable" text="LadeTabelle" />
-                  <Button mnemonicParsing="false" onAction="#auswahlSpeichernSpieler" text="Gebe Spielername aus" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#printSpielerZuordnenTable" text="LadeTabelle">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#auswahlSpeichernSpieler" text="Gebe Spielername aus">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
-            </VBox>
+            </GridPane>
          </content></Tab>
     </tabs>
 </TabPane>

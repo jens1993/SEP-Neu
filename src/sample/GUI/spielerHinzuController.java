@@ -534,6 +534,26 @@ private TextField t_suchleistespielerhinzu;
             e.printStackTrace();
         }
     }
+    @FXML
+    public void pressBtn_Abbrechen(ActionEvent event) throws Exception {
+        try {
+            a.getStages().get(0).close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void pressBtn_AbbrechenBearbeiten (ActionEvent event) throws Exception {
+        try {
+            tab_sphin.setDisable(false);
+            tab_spbea.setDisable(false);
+            tab_spupdate.setDisable(true);
+            tabpane_spieler.getSelectionModel().select(tab_spbea);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

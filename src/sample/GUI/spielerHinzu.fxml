@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -21,7 +27,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TabPane fx:id="tabpane_spieler" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="702.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.spielerHinzuController">
+<TabPane fx:id="tabpane_spieler" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="702.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.spielerHinzuController">
     <tabs>
         <Tab id="tab_spieler_hinzufuegen" fx:id="tab_sphin" text="Spieler hinzufügen">
             <content>
@@ -42,20 +48,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                            <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname:">
-                                    <stroke>
-                                        <LinearGradient endX="1.0" endY="1.0">
-                                            <stops>
-                                                <Stop color="BLACK" />
-                                                <Stop color="WHITE" offset="1.0" />
-                                            </stops>
-                                        </LinearGradient>
-                                    </stroke>
-                                </Text>
-                            </children>
-                        </HBox>
                         <TextField fx:id="t_vn" maxWidth="200.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
@@ -83,86 +75,11 @@
                         </RadioButton>
                                 <RadioButton fx:id="r_w" mnemonicParsing="false" text="weiblich" toggleGroup="$geschlecht">
                            <HBox.margin>
-                              <Insets left="5.0" />
+                              <Insets left="10.0" />
                            </HBox.margin>
                         </RadioButton>
                             </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-                            <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Geburtsdatum:" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                            <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname:" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
-                            <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SpielerID:" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
-                            <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Verein:" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
-                            <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ranglistenpunkte:" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
-                            <children>
-                                <Button mnemonicParsing="false" text="Abbrechen" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8" />
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
-                            <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Geschlecht:" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                            <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Einzel:">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Text>
-                                <TextField fx:id="t_re" maxWidth="100.0" text="0">
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </TextField>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Doppel:">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Text>
-                                <TextField fx:id="t_rd" maxWidth="100.0" text="0">
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </TextField>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mixed:">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Text>
-                                <TextField fx:id="t_rm" maxWidth="100.0" text="0">
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </TextField>
-                            </children>
-                        </HBox>
-                        <Button mnemonicParsing="false" onAction="#pressBtn_SpielerSpeichern" text="Spieler speichern" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                     <GridPane.margin>
-                        <Insets left="10.0" />
-                     </GridPane.margin>
-                  </Button>
                   <DatePicker fx:id="d_geb" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
@@ -173,10 +90,92 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <HBox prefHeight="0.0" prefWidth="586.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="586.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
-                        <ChoiceBox fx:id="combo_verein" maxWidth="200.0"  prefWidth="150.0" />
-                        <Button mnemonicParsing="false" onAction="#pressBtn_neuerVerein" text="Neuer Verein" />
+                        <ChoiceBox fx:id="combo_verein" maxWidth="200.0" minWidth="200.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></ChoiceBox>
+                        <Button minWidth="95.0" mnemonicParsing="false" onAction="#pressBtn_neuerVerein" text="Neuer Verein">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Button>
+                     </children>
+                  </HBox>
+                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Geburtsdatum:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname:" GridPane.halignment="RIGHT">
+                              <stroke>
+                                  <LinearGradient endX="1.0" endY="1.0">
+                                      <stops>
+                                          <Stop color="BLACK" />
+                                          <Stop color="WHITE" offset="1.0" />
+                                      </stops>
+                                  </LinearGradient>
+                              </stroke>
+                          </Text>
+                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SpielerID:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Verein:" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ranglistenpunkte:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Geschlecht:" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="200.0">
+                           <children>
+                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Einzel">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                                      <TextField fx:id="t_re" maxWidth="95.0" text="0">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="200.0">
+                           <children>
+                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Doppel">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                                      <TextField fx:id="t_rd" maxWidth="95.0" text="0">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="200.0">
+                           <children>
+                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mixed">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                                      <TextField fx:id="t_rm" maxWidth="95.0" text="0">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <children>
+                                <Button minWidth="80.0" mnemonicParsing="false" onAction="#pressBtn_Abbrechen" text="Abbrechen">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                              <Button minWidth="110.0" mnemonicParsing="false" onAction="#pressBtn_SpielerSpeichern" text="Spieler speichern">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                   </HBox>
                     </children>
@@ -218,8 +217,8 @@
          <content>
             <GridPane prefHeight="435.0" prefWidth="718.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="500.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="116.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="595.0" minWidth="10.0" prefWidth="586.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -233,82 +232,118 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname ">
-                           <stroke>
-                              <LinearGradient endX="1.0" endY="1.0">
-                                 <stops>
-                                    <Stop color="BLACK" />
-                                    <Stop color="WHITE" offset="1.0" />
-                                 </stops>
-                              </LinearGradient>
-                           </stroke>
-                        </Text>
-                     </children>
-                  </HBox>
-                  <TextField fx:id="t_vn1" GridPane.columnIndex="1" />
-                  <TextField fx:id="t_nn1" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="t_spid1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="t_vn1" maxWidth="200.0" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin></TextField>
+                  <TextField fx:id="t_nn1" maxWidth="200.0" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin></TextField>
+                  <TextField fx:id="t_spid1" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin></TextField>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
                         <RadioButton fx:id="r_m1" mnemonicParsing="false" selected="true" text="männlich">
                            <toggleGroup>
                               <ToggleGroup fx:id="geschlecht1" />
                            </toggleGroup>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
                         </RadioButton>
-                        <RadioButton fx:id="r_w1" mnemonicParsing="false" text="weiblich" toggleGroup="$geschlecht1" />
+                        <RadioButton fx:id="r_w1" mnemonicParsing="false" text="weiblich" toggleGroup="$geschlecht1">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></RadioButton>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                  <ChoiceBox fx:id="combo_verein1" maxWidth="200.0" minWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin></ChoiceBox>
+                  <DatePicker fx:id="d_geb1" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin></DatePicker>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname:" GridPane.halignment="RIGHT">
+                     <stroke>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="BLACK" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </stroke>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Geburtsdatum:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SpielerID:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Verein:" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ranglistenpunkte:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Geschlecht:" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Geburtsdatum " />
+                        <Button minWidth="80.0" mnemonicParsing="false" onAction="#pressBtn_AbbrechenBearbeiten" text="Abbrechen">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button minWidth="110.0" mnemonicParsing="false" onAction="#pressBtn_SpielerUpdaten" text="Spieler updaten">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname " />
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="200.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Einzel ">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="t_re1" maxWidth="95.0" text="0">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="200.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Doppel ">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="t_rd1" maxWidth="95.0" text="0">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="200.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mixed ">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="t_rm1" maxWidth="95.0" text="0">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SpielerID " />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Verein " />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ranglistenpunkte " />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
-                     <children>
-                        <Button mnemonicParsing="false" text="Abbrechen" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8" />
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Geschlecht " />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Einzel " />
-                        <TextField fx:id="t_re1" text="0" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Doppel " />
-                        <TextField fx:id="t_rd1" text="0" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mixed " />
-                        <TextField fx:id="t_rm1" text="0" />
-                     </children>
-                  </HBox>
-                  <Button mnemonicParsing="false" onAction="#pressBtn_SpielerUpdaten" text="Spieler updaten" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <ChoiceBox fx:id="combo_verein1" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <DatePicker fx:id="d_geb1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </content>
