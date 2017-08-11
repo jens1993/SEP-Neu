@@ -423,24 +423,6 @@ public class SpielSystemController_neu implements Initializable
         } catch (Exception e) {
             e.printStackTrace();
         }
-        t_suchleistespieler.textProperty().addListener((observable, oldValue, newValue) -> {
-            // System.out.println("textfield changed from " + oldValue + " to " + newValue);
-            //obs_spieler.clear();
 
-            obs_spieler.clear();
-
-            spielsystem_spielerliste_alleSpieler.refresh();
-            Enumeration e = a.getSpieler().keys();
-            while (e.hasMoreElements()){
-                int key = (int) e.nextElement();
-                if(a.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespieler.getText().toUpperCase()))
-                {
-                    obs_spieler.add(a.getSpieler().get(key));
-                }
-                ;
-            }
-
-
-        });
     }
 }

@@ -25,11 +25,13 @@ import sample.DAO.TurnierDAO;
 import sample.DAO.TurnierDAOimpl;
 import sample.DAO.auswahlklasse;
 import sample.Main;
+import sample.Spieler;
 import sample.Turnier;
 
 import java.net.URL;
 import java.util.Date;
 import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 
@@ -40,6 +42,8 @@ import java.util.ResourceBundle;
 public class TurnierladenController implements Initializable
 {
 
+    @FXML
+    private TextField t_turniersuche;
 
     @FXML
     public TableView TurnierlisteTabelle;
@@ -105,6 +109,25 @@ public class TurnierladenController implements Initializable
                 }
             });
             return row ;
+        });
+        t_turniersuche.textProperty().addListener((observable, oldValue, newValue) -> {
+            // System.out.println("textfield changed from " + oldValue + " to " + newValue);
+            //obs_spieler.clear();
+
+            turniere.clear();
+
+            TurnierlisteTabelle.refresh();
+            Enumeration e = a.getTurnierliste().keys();
+            while (e.hasMoreElements()){
+                int key = (int) e.nextElement();
+                if(a.getTurnierliste().get(key).getName().toUpperCase().contains(t_turniersuche.getText().toUpperCase()))
+                {
+                    turniere.add(a.getTurnierliste().get(key));
+                }
+                ;
+            }
+
+
         });
     }
     private void printRow(Turnier item) {
