@@ -21,6 +21,7 @@ public class Spiel {
 	private int setzPlatzHeim;
 	private int setzPlatzGast;
 	private int zeitplanNummer;
+	private int rundenZeitplanNummer;
 
 	public Team getHeim() {
 		return heim;
@@ -152,6 +153,14 @@ public class Spiel {
 
 	public void setZeitplanNummer(int zeitplanNummer) {
 		this.zeitplanNummer = zeitplanNummer;
+	}
+
+	public int getRundenZeitplanNummer() {
+		return rundenZeitplanNummer;
+	}
+
+	public void setRundenZeitplanNummer(int rundenZeitplanNummer) {
+		this.rundenZeitplanNummer = rundenZeitplanNummer;
 	}
 
 	public Spielsystem getSpielsystem() {

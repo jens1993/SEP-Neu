@@ -75,6 +75,7 @@ public class Zeitplan {
                 Spiel spiel = alleRundenSortiert.get(i).get(j);
                 zeitplan.add(spiel);
                 spiel.setZeitplanNummer(spielnummer);
+                spiel.setRundenZeitplanNummer(i+1);
                 spielnummer++;
             }
         }
