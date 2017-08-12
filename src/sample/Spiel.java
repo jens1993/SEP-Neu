@@ -20,6 +20,7 @@ public class Spiel {
 	private int systemSpielID;
 	private int setzPlatzHeim;
 	private int setzPlatzGast;
+	private int zeitplanNummer;
 
 	public Team getHeim() {
 		return heim;
@@ -143,6 +144,14 @@ public class Spiel {
 		this.spielsystem = spielsystem;
 		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
+	}
+
+	public int getZeitplanNummer() {
+		return zeitplanNummer;
+	}
+
+	public void setZeitplanNummer(int zeitplanNummer) {
+		this.zeitplanNummer = zeitplanNummer;
 	}
 
 	public Spielsystem getSpielsystem() {

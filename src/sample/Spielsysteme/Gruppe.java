@@ -76,7 +76,12 @@ public class Gruppe extends Spielsystem {
 			resetOffeneRundenSpiele();
 			for (int j=0; j<anzahlTeams/2;j++){
 				//if(spielsystem==null) {
-				new Spiel(spielSystemIDberechnen(),this);
+				Spiel spiel = new Spiel(spielSystemIDberechnen(),this);
+				if(this.getRundenArray().get(getAktuelleRunde())==null){
+					this.getRundenArray().add(new ArrayList<>());
+				}
+				this.getRundenArray().get(getAktuelleRunde()).add(spiel);
+
 				//this.spielsystem.getSpielklasse().getTurnier().getSpiele()
 				/*}
 				else{
