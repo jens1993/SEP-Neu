@@ -44,7 +44,12 @@ public class Team {
         this.spielklasse = spielklasse;
         teamDAO.create(this);
     }
+    public Team(Spieler spielerEins, Spielklasse spielklasse, Boolean b) {
+        this.spielerEins = spielerEins;   //teamID
+        this.einzel = true;
+        this.spielklasse = spielklasse;
 
+    }
     public void addSpieler(Spieler spieler){
         if (spielerEins==null){
             this.spielerEins = spieler;

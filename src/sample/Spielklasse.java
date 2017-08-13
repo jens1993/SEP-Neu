@@ -38,10 +38,10 @@ public class Spielklasse {
 
 	@Override
 	public String toString() {
-		if(this.getSetzliste()!=null&&this.getSetzliste().size()>0)
+		if(this.getSpiele()!=null&&this.getSpiele().size()>0)
 		{
 			return	 disziplin +
-					" - " + niveau + " - Spieler:"+this.getSetzliste().size() ;
+					" - " + niveau + " - Spiele:"+this.getSpiele().size() ;
 		}
 		else
 		{

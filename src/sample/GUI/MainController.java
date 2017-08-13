@@ -1,7 +1,10 @@
 package sample.GUI;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -30,6 +33,7 @@ import sample.Team;
 
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.TableView;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -38,7 +42,8 @@ import java.util.*;
  */
 public class MainController implements Initializable, Observable
 {
-
+    final ObservableList<Spielklasse> strings = FXCollections.observableArrayList();
+    final CheckComboBox<Spielklasse> checkComboBox = new CheckComboBox<Spielklasse>(strings);
     private Label lspielklassen;
 
     @FXML
@@ -56,17 +61,19 @@ public class MainController implements Initializable, Observable
 
     auswahlklasse a = new auswahlklasse();
     ObservableList obs_spielklassen = FXCollections.observableArrayList();
+    ObservableList<Spiel> obs_spiele = FXCollections.observableArrayList();
+    ObservableList<Integer> obs_spielklassen_auswahl = FXCollections.observableArrayList();
     private void ladeSpielklassen() throws Exception
     {
 
-        System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
+        //System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
 
         for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpielklassen().size();i++){
             obs_spielklassen.add(a.getVereine().get(i));
 
         }
         try {
-            System.out.println(obs_spielklassen.size());
+            //System.out.println(obs_spielklassen.size());
 
             choice_spielklassen.setItems(obs_spielklassen);
 
@@ -112,7 +119,7 @@ public class MainController implements Initializable, Observable
         try {
             //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzuGruppe.fxml"));
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseUebersicht.fxml"));
-            System.out.println("test");
+            //System.out.println("test");
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             a.addStage(stage);
@@ -151,7 +158,7 @@ public class MainController implements Initializable, Observable
         }
     }
     public void pressBtn_Einstellungen (ActionEvent event) throws Exception {
-        System.out.println("test");
+        //System.out.println("test");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Einstellungen.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -163,7 +170,7 @@ public class MainController implements Initializable, Observable
     }
     @FXML
     public void pressBtn_Statistik (ActionEvent event) throws Exception {
-        System.out.println("test");
+        //System.out.println("test");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Statistik.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -174,7 +181,7 @@ public class MainController implements Initializable, Observable
         //((Node)(event.getSource())).getScene().getWindow().hide();
     }
     public void pressBtn_teamLaden (ActionEvent event) throws Exception {
-        System.out.println("test");
+        //System.out.println("test");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TeamUebersicht.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -201,30 +208,98 @@ public class MainController implements Initializable, Observable
             }
         }
     }
+    @FXML
+    private void fuelleSpielElemente() throws Exception{
+
+
+
+
+
+    obs_spiele.clear();
+    obs_spiele.removeAll();
+
+
+    int id=0;
+    if (check_gespielteSpiele.isSelected()) {
+        for (int j = 0; j <= obs_spielklassen_auswahl.size(); j++) {
+
+            id = obs_spielklassen_auswahl.get(j)+1;
+            //System.out.println("id= " + id);
+            for (int i = 0; i < a.getAktuelleTurnierAuswahl().getGespielteSpiele().size(); i++) {
+
+
+                if (a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                    //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
+                }
+                if (id != 0 && id == a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                    obs_spiele.add(a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i));
+                   // System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
+                }
+
+
+            }
+        }
+    }
+
+    if (check_aktiveSpiele.isSelected()) {
+        for (int j = 0; j <= obs_spielklassen_auswahl.size(); j++) {
+            id = obs_spielklassen_auswahl.get(j)+1;
+            //System.out.println("id= " + id);
+            for (int i = 0; i < a.getAktuelleTurnierAuswahl().getAktiveSpiele().size(); i++) {
+
+
+                if (a.getAktuelleTurnierAuswahl().getAktiveSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                    //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
+                }
+                if (id != 0 && id == a.getAktuelleTurnierAuswahl().getAktiveSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                    obs_spiele.add(a.getAktuelleTurnierAuswahl().getAktiveSpiele().get(i));
+                    //System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
+                }
+
+
+            }
+        }
+    }
+    if (check_ausstehendeSpiele.isSelected()) {
+        for (int j = 0; j <= obs_spielklassen_auswahl.size(); j++) {
+            id = obs_spielklassen_auswahl.get(j)+1;
+            //System.out.println("id= " + id);
+            for (int i = 0; i < a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().size(); i++) {
+
+
+                if (a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                    //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
+                }
+                if (id != 0 && id == a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                    obs_spiele.add(a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i));
+                    //System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
+                }
+
+
+            }
+        }
+    }
+
+
+
+    obs_spiele.addListener(new ListChangeListener<Spiel>() {
+        @Override
+        public void onChanged(Change<? extends Spiel> c) {
+           // System.out.println("Changed on " + c.toString());
+            tabelle_spiele.refresh();
+
+            if (c.next()) {
+                //System.out.println(c.getFrom());
+            }
+        }
+    });
+}
+
     private void printSpielTable() throws Exception {
+        tabelle_spiele.getColumns().removeAll();
         if(a.getAktuelleTurnierAuswahl()!=null) {
-            ObservableList<Spiel> obs_spiele = FXCollections.observableArrayList();
 
-            for (int i=0;i<a.getAktuelleTurnierAuswahl().getGespielteSpiele().size();i++){
-                obs_spiele.add(a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i));
-            }
-            for (int i=0;i<a.getAktuelleTurnierAuswahl().getAktiveSpiele().size();i++){
-                obs_spiele.add(a.getAktuelleTurnierAuswahl().getAktiveSpiele().get(i));
-            }
-            for (int i=0;i<a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().size();i++){
-                obs_spiele.add(a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i));
-            }
 
-            ObservableList<Spiel> ob = obs_spiele;
-            ob.addListener(new ListChangeListener<Spiel>() {
-                               @Override
-                               public void onChanged(Change<? extends Spiel> c) {
-                                   System.out.println("Changed on " + c.toString());
-                                   if(c.next()){
-                                       System.out.println(c.getFrom());
-                                   }
-                               }
-                           });
 
                     TableColumn < Spiel, String > spielFeldSpalte = new TableColumn("Feld");
             spielFeldSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("FeldNr"));
@@ -479,6 +554,18 @@ public class MainController implements Initializable, Observable
                         public void handle(ActionEvent event) {
                             //tabpane_spieler.getSelectionModel().select(tab_spupdate);
                             //FuelleFelder(clickedRow);
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielergebnisEingeben.fxml"));
+                            Parent root1 = null;
+                            try {
+                                root1 = (Parent) fxmlLoader.load();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Stage stage = new Stage();
+                            stage.setScene(new Scene(root1));
+                            stage.setAlwaysOnTop(true);
+                            stage.show();
+                            stage.setTitle("Ergebnisse eintragen");
                         }
                     });
 
@@ -502,19 +589,27 @@ public class MainController implements Initializable, Observable
         });
 
         // create the data to show in the CheckComboBox
-        final ObservableList<Spielklasse> strings = FXCollections.observableArrayList();
+
         for (int i = 1; i <= a.getAktuelleTurnierAuswahl().getSpielklassen().size(); i++) {
             strings.add(a.getAktuelleTurnierAuswahl().getSpielklassen().get(i));
         }
 
         // Create the CheckComboBox with the data
-        final CheckComboBox<Spielklasse> checkComboBox = new CheckComboBox<Spielklasse>(strings);
+
 
         // and listen to the relevant events (e.g. when the selected indices or
         // selected items change).
         checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<Spielklasse>() {
             public void onChanged(ListChangeListener.Change<? extends Spielklasse> c) {
-                System.out.println(checkComboBox.getCheckModel().getCheckedIndices());
+                //System.out.println(checkComboBox.getCheckModel().getCheckedIndices());
+                obs_spielklassen_auswahl=checkComboBox.getCheckModel().getCheckedIndices();
+                //System.out.println(obs_spielklassen_auswahl);
+                try {
+                    fuelleSpielElemente();
+                    tabelle_spiele.refresh();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -533,17 +628,52 @@ public class MainController implements Initializable, Observable
         check_gespielteSpiele.setSelected(true);
         checkComboBox.setMaxWidth(250);
 
-      
-        for(int i=0;i<strings.size();i++)
-        {
-            checkComboBox.getCheckModel().check(i);
-        }
+        check_aktiveSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                try {
+                    fuelleSpielElemente();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        check_ausstehendeSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                try {
+                    fuelleSpielElemente();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        check_gespielteSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                try {
+                    fuelleSpielElemente();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
         try {
             //urnierLaden();
+            for(int i=0;i<strings.size();i++)
+            {
+                checkComboBox.getCheckModel().check(i);
+            }
             printSpielTable();
             ladeSpielklassen();
+            fuelleSpielElemente();
 
+            obs_spielklassen_auswahl=checkComboBox.getCheckModel().getCheckedIndices();
 
         } catch (Exception e) {
             e.printStackTrace();

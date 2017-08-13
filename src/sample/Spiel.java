@@ -23,6 +23,10 @@ public class Spiel {
 	private int zeitplanNummer;
 	private int rundenZeitplanNummer;
 
+
+
+
+
 	public Team getHeim() {
 		return heim;
 	}
@@ -111,6 +115,7 @@ public class Spiel {
 
 	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielsystem spielsystem) {
 		this.systemSpielID = systemSpielID; //Constructor für SpielTree in KO-System
+		this.setzPlatzHeim = setzPlatzHeim;
 		this.setzPlatzHeim = setzPlatzHeim;
 		this.setzPlatzGast = setzPlatzGast;
 		this.spielsystem=spielsystem;
