@@ -58,7 +58,7 @@ public class Turnier  implements Initializable {
 				MainController m = new MainController();
 				try {
 					System.out.println("Änderung der obsListe ausstehende Spiele");
-					m.fuelleSpielElemente();
+					//m.fuelleSpielElemente();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

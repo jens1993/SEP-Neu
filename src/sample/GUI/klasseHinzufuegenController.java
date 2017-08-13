@@ -140,7 +140,7 @@ public class klasseHinzufuegenController implements Initializable
 
         MainController m = new MainController();
         try {
-            m.fuelleCheckCombo();
+            //m.fuelleCheckCombo();
         } catch (Exception e) {
             e.printStackTrace();
         }

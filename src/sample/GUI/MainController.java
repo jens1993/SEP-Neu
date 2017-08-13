@@ -225,14 +225,14 @@ public class MainController implements Initializable, Observable
 
             id = obs_spielklassen_auswahl.get(j)+1;
             //System.out.println("id= " + id);
-            for (int i = 0; i < a.getAktuelleTurnierAuswahl().getGespielteSpiele().size(); i++) {
+            for (int i = 0; i < a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().size(); i++) {
 
 
-                if (a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                if (a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
                     //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                 }
-                if (id != 0 && id == a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-                    obs_spiele.add(a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i));
+                if (id != 0 && id == a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                    obs_spiele.add(a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i));
                    // System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                 }
 
@@ -245,14 +245,14 @@ public class MainController implements Initializable, Observable
         for (int j = 0; j <= obs_spielklassen_auswahl.size(); j++) {
             id = obs_spielklassen_auswahl.get(j)+1;
             //System.out.println("id= " + id);
-            for (int i = 0; i < a.getAktuelleTurnierAuswahl().getAktiveSpiele().size(); i++) {
+            for (int i = 0; i < a.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().size(); i++) {
 
 
-                if (a.getAktuelleTurnierAuswahl().getAktiveSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                if (a.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
                     //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                 }
-                if (id != 0 && id == a.getAktuelleTurnierAuswahl().getAktiveSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-                    obs_spiele.add(a.getAktuelleTurnierAuswahl().getAktiveSpiele().get(i));
+                if (id != 0 && id == a.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                    obs_spiele.add(a.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().get(i));
                     //System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                 }
 
@@ -264,14 +264,14 @@ public class MainController implements Initializable, Observable
         for (int j = 0; j <= obs_spielklassen_auswahl.size(); j++) {
             id = obs_spielklassen_auswahl.get(j)+1;
             //System.out.println("id= " + id);
-            for (int i = 0; i < a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().size(); i++) {
+            for (int i = 0; i < a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().size(); i++) {
 
 
-                if (a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                if (a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
                     //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                 }
-                if (id != 0 && id == a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-                    obs_spiele.add(a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i));
+                if (id != 0 && id == a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                    obs_spiele.add(a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i));
                     //System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                 }
 
