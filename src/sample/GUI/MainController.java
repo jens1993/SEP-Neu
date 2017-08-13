@@ -231,7 +231,7 @@ public class MainController implements Initializable, Observable
                 if (a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
                     //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                 }
-                if (id != 0 && id == a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                if (id != 0 && id == a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
                     obs_spiele.add(a.getAktuelleTurnierAuswahl().getGespielteSpiele().get(i));
                    // System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                 }
