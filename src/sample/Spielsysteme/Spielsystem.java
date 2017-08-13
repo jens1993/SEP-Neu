@@ -18,7 +18,7 @@ public abstract class Spielsystem {
 	private int spielSystemArt;
 	private int extraRunde=0;
 	private List<Team> platzierungsListe;
-	private ArrayList<ArrayList<Spiel>> runden;
+	private ArrayList<ArrayList<Spiel>> runden =new ArrayList<>();
 
 	protected int spielsystemCode;
 

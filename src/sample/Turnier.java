@@ -1,15 +1,15 @@
 package sample;
+import java.net.URL;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import sample.DAO.*;
-import sample.Spielsysteme.*;
-import sample.Enums.*;
+import javafx.fxml.Initializable;
+import sample.GUI.MainController;
 
-public class Turnier {
+public class Turnier  implements Initializable {
 	private int matchDauer;
 	private int gesamtSpiele;
 	private LocalDate datum = LocalDate.now();
@@ -17,6 +17,7 @@ public class Turnier {
 	private int zaehlweise = 0; // 0=bis21 1=bis 11 mit Verlängerung 2=bis 11 ohne Verlängerung
 	private int spielerPausenZeit = 10;
 	private int turnierid;
+
 	private Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
 	private ArrayList<Feld> felder = new ArrayList<>();
 	private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
@@ -26,21 +27,96 @@ public class Turnier {
 	private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
 
 
-	private ObservableList<Spiel> gespielteSpiele = FXCollections.observableArrayList();
-	private ObservableList<Spiel> aktiveSpiele = FXCollections.observableArrayList();
-	private ObservableList<Spiel> ausstehendeSpiele = FXCollections.observableArrayList();
+	private ObservableList<Spiel> obs_gespielteSpiele = FXCollections.observableArrayList();
+	private ObservableList<Spiel> obs_aktiveSpiele = FXCollections.observableArrayList();
+	private ObservableList<Spiel> obs_ausstehendeSpiele = FXCollections.observableArrayList();
+	private ObservableList<Spielklasse> obs_spielklassen = FXCollections.observableArrayList();
 
 
-	public ObservableList<Spiel> getGespielteSpiele() {
-		return gespielteSpiele;
+
+	public ObservableList<Spielklasse> getObs_spielklassen() {
+		return obs_spielklassen;
 	}
 
-	public ObservableList<Spiel> getAktiveSpiele() {
-		return aktiveSpiele;
+	public void setObs_spielklassen(ObservableList<Spielklasse> obs_spielklassen) {
+		this.obs_spielklassen = obs_spielklassen;
+	}
+	public void addtObs_spielklassen(Spielklasse spielklasse) {
+		this.obs_spielklassen.add(spielklasse);
+	}
+	public void removeobs_spielklassen(Spielklasse spielklasse) {
+		this.obs_spielklassen.remove(spielklasse);
 	}
 
-	public ObservableList<Spiel> getAusstehendeSpiele() {
-		return ausstehendeSpiele;
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		obs_ausstehendeSpiele.addListener(new ListChangeListener<Spiel>() {
+			@Override
+			public void onChanged(Change<? extends Spiel> c) {
+				// System.out.println("Changed on " + c.toString());
+
+				MainController m = new MainController();
+				try {
+					System.out.println("Änderung der obsListe ausstehende Spiele");
+					m.fuelleSpielElemente();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (c.next()) {
+					System.out.println(c.getFrom());
+				}
+
+			}
+		});
+	}
+
+
+
+	public ObservableList<Spiel> getObs_gespielteSpiele() {
+		return obs_gespielteSpiele;
+	}
+
+	public void removeobsGespielteSpiele(Spiel spiel) {
+		this.obs_gespielteSpiele.remove(spiel);
+
+	}
+	public void removeobsAktiveSpiele(Spiel spiel) {
+		this.obs_aktiveSpiele.remove(spiel);
+	}
+	public void removeobsAusstehendeSpiele(Spiel spiel) {
+		this.obs_ausstehendeSpiele.remove(spiel);
+	}
+	public void addobsGespielteSpiele(Spiel spiel) {
+		this.obs_gespielteSpiele.add(spiel);
+	}
+	public void addobsAktiveSpiele(Spiel spiel) {
+		this.obs_aktiveSpiele.add(spiel);
+	}
+	public void addobsAusstehendeSpiele(Spiel spiel) {
+		this.obs_ausstehendeSpiele.add(spiel);
+	}
+	public void setObs_gespielteSpiele(ObservableList<Spiel> obs_gespielteSpiele) {
+
+		this.obs_gespielteSpiele = obs_gespielteSpiele;
+	}
+
+	public void setObs_aktiveSpiele(ObservableList<Spiel> obs_aktiveSpiele) {
+
+		this.obs_aktiveSpiele = obs_aktiveSpiele;
+	}
+
+	public void setObs_ausstehendeSpiele(ObservableList<Spiel> obs_ausstehendeSpiele) {
+
+
+		this.obs_ausstehendeSpiele = obs_ausstehendeSpiele;
+	}
+
+	public ObservableList<Spiel> getObs_aktiveSpiele() {
+		return obs_aktiveSpiele;
+	}
+
+	public ObservableList<Spiel> getObs_ausstehendeSpiele() {
+		return obs_ausstehendeSpiele;
 	}
 
 	public Turnier(String name, int turnierid, LocalDate datum) {
@@ -166,4 +242,6 @@ public class Turnier {
 	public void startgeldlisteDrucken() {
 		throw new UnsupportedOperationException();
 	}
+
+
 }

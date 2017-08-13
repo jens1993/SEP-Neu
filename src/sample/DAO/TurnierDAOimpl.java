@@ -6,6 +6,7 @@ import sample.Spielsysteme.*;
 import java.sql.*;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 public class TurnierDAOimpl implements TurnierDAO {
@@ -144,14 +145,14 @@ public class TurnierDAOimpl implements TurnierDAO {
             int spielID = (int) e.nextElement();
             Spiel spiel = turnierEingabe.getSpiele().get(spielID);
             if(spiel.getStatus() == 3){
-                turnierEingabe.getGespielteSpiele().add(spiel);
+                turnierEingabe.getObs_gespielteSpiele().add(spiel);
             }
             else if (spiel.getStatus()==2){
-                turnierEingabe.getAktiveSpiele().add(spiel);
+                turnierEingabe.getObs_aktiveSpiele().add(spiel);
 
             }
             else if (spiel.getStatus()==1){
-                turnierEingabe.getAusstehendeSpiele().add(spiel);
+                turnierEingabe.getObs_ausstehendeSpiele().add(spiel);
             }
         }
     }
@@ -235,10 +236,10 @@ public class TurnierDAOimpl implements TurnierDAO {
                 Team heim = spielklasse.getTurnier().getTeams().get(heimid);
                 int gastid=spielResult.getInt("Gast");
                 Team gast = spielklasse.getTurnier().getTeams().get(gastid);
-                Date date = spielResult.getDate("AufrufZeit");
-                LocalDate aufrufzeit = LocalDate.now();
+                Time date = spielResult.getTime("AufrufZeit");
+                LocalTime aufrufzeit = LocalTime.now();
                 if(date!=null){
-                    aufrufzeit=date.toLocalDate();
+                    aufrufzeit=date.toLocalTime();
                 }
                 int schiedsrichterid = spielResult.getInt("schiedsrichter");
                 Spieler schiedsrichter = null;
@@ -254,6 +255,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                     }
                 }
                 spiele.add(new Spiel(spielid,heim,gast,aufrufzeit,schiedsrichter,status,systemspielid,feld));
+
             }
             smt.close();
             con.closeCon();

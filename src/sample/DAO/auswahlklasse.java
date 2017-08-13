@@ -26,6 +26,15 @@ public class auswahlklasse
     private static Spieler SpielerzumHinzufeuegen=null;
     private static ArrayList<Spieler> vorhandeneSpieler;
     private static ArrayList<Stage> stages = new ArrayList<>();
+    private static Spiel SpielAuswahlErgebniseintragen;
+    public static Spiel getSpielAuswahlErgebniseintragen() {
+        return SpielAuswahlErgebniseintragen;
+    }
+
+    public static void setSpielAuswahlErgebniseintragen(Spiel spielAuswahlErgebniseintragen) {
+        SpielAuswahlErgebniseintragen = spielAuswahlErgebniseintragen;
+    }
+
 
     public static int getSprachid() {
         return sprachid;

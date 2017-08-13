@@ -32,6 +32,8 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             smt.executeUpdate();
             smt.close();
             con.closeCon();
+            auswahlklasse a = new auswahlklasse();
+            //a.getAktuelleTurnierAuswahl().
             return true;
 
         } catch (SQLException e) {

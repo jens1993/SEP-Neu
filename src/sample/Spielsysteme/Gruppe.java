@@ -77,7 +77,7 @@ public class Gruppe extends Spielsystem {
 			for (int j=0; j<anzahlTeams/2;j++){
 				//if(spielsystem==null) {
 				Spiel spiel = new Spiel(spielSystemIDberechnen(),this);
-				if(this.getRundenArray().get(getAktuelleRunde())==null){
+				if(this.getRundenArray().size()<=getAktuelleRunde()){
 					this.getRundenArray().add(new ArrayList<>());
 				}
 				this.getRundenArray().get(getAktuelleRunde()).add(spiel);

@@ -136,7 +136,14 @@ public class klasseHinzufuegenController implements Initializable
 
         a.getAktuelleTurnierAuswahl().addSpielklassen(spklasse);
         spklasse.getSpielklasseDAO().create(spklasse);
+        a.getAktuelleTurnierAuswahl().addtObs_spielklassen(spklasse);
 
+        MainController m = new MainController();
+        try {
+            m.fuelleCheckCombo();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseUebersicht.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
