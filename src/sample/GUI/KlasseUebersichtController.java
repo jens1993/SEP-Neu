@@ -84,7 +84,7 @@ public class KlasseUebersichtController implements Initializable
         Label label[] = new Label[turnierauswahlspielklassen.size()];
         //label[1].setText("jens");
 
-        System.out.println("Anzahl Klassen = "+turnierauswahlspielklassen.size());
+        
         TextFlow[] flow = new TextFlow[turnierauswahlspielklassen.size()+1];
         final Spielklasse[] spauswahl = {null};
         Hyperlink hp=null;
@@ -93,20 +93,20 @@ public class KlasseUebersichtController implements Initializable
             if(sp.getSetzliste()!=null&&sp.getSetzliste().size()>0)
             {
                 hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2));
-                System.out.println(hp+"----------1");
+                //System.out.println(hp+"----------1");
             }
             if(sp.getSpiele()!=null&&sp.getSetzliste()!=null&&sp.getSpiele().size()>0)
             {
                 sp.setSetzliste_gesperrt(true);
                 //System.out.println(sp.isSetzliste_gesperrt());
                 hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2)+" Spiele:"+sp.getSpiele().size());
-                System.out.println(hp+"----------2");
+                //System.out.println(hp+"----------2");
             }
             if(sp.getSetzliste().size()==0||sp.getSetzliste()==null)
             {
                 sp.setSetzliste_gesperrt(false);
                 hp = new Hyperlink(sp.getDisziplin() + "-" + sp.getNiveau());
-                System.out.println(hp+"----------3");
+                //System.out.println(hp+"----------3");
             }
 
             if(sp.getDisziplin().contains("doppel"))
@@ -160,15 +160,7 @@ public class KlasseUebersichtController implements Initializable
         }
 
 
-        for (int i=1;i<=turnierauswahlspielklassen.size();i++)
-        {
-            //label[1].setText("Jens ist toll");
-            System.out.println("jens");
-            //GridPane_NeueKlasse.add(label[i],2,1);
 
-//
-//            System.out.println(sp.getDisziplin());
-        }
 
 
 

@@ -290,9 +290,9 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
             }
 
             else{
+                team = new Team(spielerneu,ausgewaehlte_spielklasse,false);
                 System.out.println("doppelklasse");
                 befuellem1=false;
-                team.addSpieler(spielerneu);
                 obs_setzliste.add(team);
 
 
@@ -301,8 +301,10 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
         }
         else
         {
+
            // team.setTeamid(ausgewaehlte_spielklasse.getSetzliste());
             team.addSpieler(spielerneu);
+
             team.getTeamDAO().create(team);
 
 
@@ -311,12 +313,12 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
 
             ausgewaehlte_spielklasse.addSetzliste(team);
 
-            team.getTeamDAO().addSpieler(team, false);
-            setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size()+1,team,ausgewaehlte_spielklasse);
+            //team.getTeamDAO().addSpieler(team, false);
+            //setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size()+1,team,ausgewaehlte_spielklasse);
 
 
             l_meldungsetzliste1.setText(team.getSpielerEins().getVName()+" "+team.getSpielerEins().getNName()+" und "+team.getSpielerZwei().getVName()+" "+team.getSpielerZwei().getNName()+" wurden der Setzliste hinzugefügt!");
-            team = new Team(ausgewaehlte_spielklasse);
+
         }
         spielsystem_setzliste.refresh();
     }
