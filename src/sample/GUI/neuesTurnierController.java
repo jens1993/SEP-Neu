@@ -3,6 +3,7 @@ package sample.GUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,14 +15,18 @@ import sample.DAO.TurnierDAOimpl;
 import sample.DAO.auswahlklasse;
 import sample.Turnier;
 
+import java.math.BigDecimal;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Dictionary;
+import java.util.ResourceBundle;
+
 import jfxtras.labs.scene.control.BigDecimalField;
 /**
  * Created by jens on 03.08.2017.
  */
-public class neuesTurnierController
+public class neuesTurnierController implements Initializable
 {
     TurnierDAO turnierDao = new TurnierDAOimpl();
 
@@ -69,4 +74,11 @@ public class neuesTurnierController
         }
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        BigDecimal v = new BigDecimal(0);
+        AnzahlFelder.setMinValue(v);
+        v=new BigDecimal(30);
+        AnzahlFelder.setMaxValue(v);
+    }
 }
