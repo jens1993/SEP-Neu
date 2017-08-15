@@ -51,6 +51,11 @@ public class Feld {
 		return aktivesSpiel;
 	}
 
+	public void spielBeenden(){
+		this.aktivesSpiel = this.inVorbereitung;
+		this.inVorbereitung = null;
+	}
+
 	public Turnier getTurnier() {
 		return turnier;
 	}

@@ -29,6 +29,7 @@ public class Spiel {
 
 	public void setFeld(Feld feld) {
 		this.feld = feld;
+		feld.setAktivesSpiel(this);
 		spielDAO.update(this);
 	}
 
@@ -242,6 +243,7 @@ public class Spiel {
 		ergebnis.getErgebnisDAO().create(this);
 		this.getSpielsystem().getSpielklasse().getTurnier().getObs_aktiveSpiele().remove(this);
 		this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);
+		this.feld.spielBeenden();
 	}
 
 	public void setErgebnis(Ergebnis ergebnis, String einlesen) {

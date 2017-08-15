@@ -77,7 +77,6 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             String sqlSpiel = "DELETE FROM spiel WHERE SpielID= 'start'";
             for (int i=0;i<spielklasse.getSpielsystem().getRunden().size();i++){
                 for (int j=0;j<spielklasse.getSpielsystem().getRunden().get(i).size();j++){
-                    Spiel spiel = spielklasse.getSpielsystem().getRunden().get(i).get(j);
                     sqlErgebnis += " OR SpielID= ?";
                     sqlSpielklasseSpielID += " OR SpielID= ?";
                     sqlSpiel += " OR SpielID= ?";

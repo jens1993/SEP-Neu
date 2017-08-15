@@ -750,24 +750,28 @@ public class MainController implements Initializable, Observable
                         }
                         MenuItem[] childMenu1 = new MenuItem[feld.length];
                         MenuItem[] childMenu2 = new MenuItem[feld2.length];
-                        for(int i =0;i<feld.length;i++)
+                        if(feld.length>0)
                         {
-                            final int ii= i;
-                            childMenu1[i]=new MenuItem(feld[i].toString());
+                        for(int i =0;i<feld.length;i++) {
+                            final int ii = i;
+
+                            childMenu1[i] = new MenuItem(feld[i].toString());
 
                             childMenu1[i].setOnAction(new EventHandler<ActionEvent>() {
 
                                 @Override
                                 public void handle(ActionEvent event) {
-                                    System.out.println("Feld = "+feld[ii]);
+                                    System.out.println("Feld = " + feld[ii]);
                                     clickedRow.setFeld(feld[ii]);
                                     clickedRow.setStatus(2);
-
+                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().remove(clickedRow);
+                                    a.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().add(clickedRow);
                                 }
                             });
 
 
                             item3.getItems().add(childMenu1[i]);
+                        }
                         }
                         if(feld2.length>0)
                         {

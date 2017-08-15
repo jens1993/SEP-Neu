@@ -21,20 +21,10 @@ public class Spielklasse {
 	private float meldeKosten = (float) 5;
 	private Turnier turnier;
 	private Hashtable<Integer,Spiel> spiele = new Hashtable<>();
-	//private TurnierDAO t = new TurnierDAOimpl();
 	private boolean aktiv;
 	private boolean einzel = false;
-
-
-	public boolean isSetzliste_gesperrt() {
-		return setzliste_gesperrt;
-	}
-
-	public void setSetzliste_gesperrt(boolean setzliste_gesperrt) {
-		this.setzliste_gesperrt = setzliste_gesperrt;
-	}
-
 	private boolean setzliste_gesperrt= false;
+
 
 	@Override
 	public String toString() {
@@ -126,6 +116,14 @@ public class Spielklasse {
 
 	public Spielsystem getSpielsystem() {
 		return spielsystem;
+	}
+
+	public boolean isSetzliste_gesperrt() {
+		return setzliste_gesperrt;
+	}
+
+	public void setSetzliste_gesperrt(boolean setzliste_gesperrt) {
+		this.setzliste_gesperrt = setzliste_gesperrt;
 	}
 
 	public Turnier getTurnier() {

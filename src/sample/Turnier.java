@@ -84,6 +84,7 @@ public class Turnier  implements Initializable {
 		this.obs_aktiveSpiele.remove(spiel);
 		this.obs_ausstehendeSpiele.remove(spiel);
 		this.obs_gespielteSpiele.remove(spiel);
+		this.spiele.remove(spiel.getSpielID());
 	}
 
 	public ObservableList<Spiel> getObs_gespielteSpiele() {
