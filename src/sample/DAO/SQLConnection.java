@@ -18,7 +18,7 @@ import java.sql.Statement;
 
 public class SQLConnection 
 {
-		auswahlklasse a = new auswahlklasse();
+		//auswahlklasse a = new auswahlklasse();
         private static Connection con = null;
         private Statement stmt = null;
 

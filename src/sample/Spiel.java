@@ -213,6 +213,14 @@ public class Spiel {
 		else {
 			return "";
 		}
+	}
+	public String getSpielklasseString() {
+		if (spielsystem.getSpielklasse()!=null){
+			return spielsystem.getSpielklasse().getDisziplin()+"-"+spielsystem.getSpielklasse().getNiveau();
+		}
+		else {
+			return "";
+		}
 
 	}
 	public String getFeldNr() {

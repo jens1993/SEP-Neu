@@ -3,6 +3,7 @@ package sample.DAO;
 import sample.*;
 import sample.Enums.Disziplin;
 import sample.Enums.Niveau;
+import sun.security.provider.ConfigFile;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -65,6 +66,55 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             e.printStackTrace();
             System.out.println("Allgemeiner Fehler");
         }
+        return false;
+    }
+
+    @Override
+    public boolean deleteSpielsystem(Spielklasse spielklasse) {
+        if(spielklasse.getSpielsystem()!=null) {
+            String sqlErgebnis = "DELETE FROM spiel_satzergebnis WHERE SpielID= 'start'";
+            String sqlSpielklasseSpielID = "DELETE FROM spielklasse_spielid WHERE SpielID= 'start'";
+            String sqlSpiel = "DELETE FROM spiel WHERE SpielID= 'start'";
+            for (int i=0;i<spielklasse.getSpielsystem().getRunden().size();i++){
+                for (int j=0;j<spielklasse.getSpielsystem().getRunden().get(i).size();j++){
+                    Spiel spiel = spielklasse.getSpielsystem().getRunden().get(i).get(j);
+                    sqlErgebnis += " OR SpielID= ?";
+                    sqlSpielklasseSpielID += " OR SpielID= ?";
+                    sqlSpiel += " OR SpielID= ?";
+                }
+            }
+            try {
+                int zaehler = 1;
+                SQLConnection con = new SQLConnection();
+                PreparedStatement smtErgebnis = con.SQLConnection().prepareStatement(sqlErgebnis);
+                PreparedStatement smtSpielklasseSpielId = con.SQLConnection().prepareStatement(sqlSpielklasseSpielID);
+                PreparedStatement smtSpiel = con.SQLConnection().prepareStatement(sqlSpiel);
+                for (int i=0;i<spielklasse.getSpielsystem().getRunden().size();i++){
+                    for (int j=0;j<spielklasse.getSpielsystem().getRunden().get(i).size();j++){
+                        Spiel spiel = spielklasse.getSpielsystem().getRunden().get(i).get(j);
+                        smtErgebnis.setInt(zaehler,spiel.getSpielID());
+                        smtSpielklasseSpielId.setInt(zaehler,spiel.getSpielID());
+                        smtSpiel.setInt(zaehler,spiel.getSpielID());
+                        zaehler++;
+                    }
+                }
+                smtErgebnis.executeUpdate();
+                smtErgebnis.close();
+                smtSpielklasseSpielId.executeUpdate();
+                smtSpielklasseSpielId.close();
+                smtSpiel.executeUpdate();
+                smtSpiel.close();
+                con.closeCon();
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Spielklasse Loeschen Klappt nicht");
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Allgemeiner Fehler");
+            }
+        }
+        System.out.println("kein Spielsystem vorhanden");
         return false;
     }
 
