@@ -14,6 +14,8 @@ public interface SpielklasseDAO {
 
     boolean delete(Spielklasse spielklasse);
 
+    boolean deleteSpielsystem (Spielklasse spielklasse);
+
     boolean update(Spielklasse spielklasse);
 
     //List<Spielklasse> getAllSpielklassen();

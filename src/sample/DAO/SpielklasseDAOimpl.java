@@ -69,6 +69,31 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
     }
 
     @Override
+    public boolean deleteSpielsystem(Spielklasse spielklasse) {
+
+        String sql = "Delete From spielklasse Where SpielklasseID= ?";
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setInt(1, spielklasse.getSpielklasseID());
+            smt.executeUpdate();
+            smt.close();
+            con.closeCon();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Spielklasse Loeschen Klappt nicht");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("Allgemeiner Fehler");
+        }
+        return false;
+    }
+
+    @Override
     public boolean update(Spielklasse spielklasse) {
         String sql = "UPDATE spielklasse "
                 + "SET Disziplin = ?, "
