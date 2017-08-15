@@ -1,5 +1,7 @@
 package sample.DAO;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
 import javafx.stage.Stage;
 import sample.*;
@@ -13,20 +15,23 @@ import java.util.Hashtable;
  */
 public class auswahlklasse
 {
-
+    private TurnierDAO turnierDAO = new TurnierDAOimpl();
     private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
     private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
     private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
-    private Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
-    private TurnierDAO turnierDAO = new TurnierDAOimpl();
-    //SpielerDAO spielerDAO = new SpielerDAOimpl();
-    //private SpielklasseDAO spielklasseDAO=new SpielklasseDAOimpl();
     private static Spielklasse aktuelleSpielklassenAuswahl = null;
     private static Turnier aktuelleTurnierAuswahl = null;
     private static Spieler SpielerzumHinzufeuegen=null;
     private static ArrayList<Spieler> vorhandeneSpieler;
     private static ArrayList<Stage> stages = new ArrayList<>();
     private static Spiel SpielAuswahlErgebniseintragen;
+    private static ObservableList<Spieler> obs_spieler = FXCollections.observableArrayList();
+
+
+    public auswahlklasse() {
+        turnierliste= turnierDAO.getAllTurniere();
+    }
+
     public static Spiel getSpielAuswahlErgebniseintragen() {
         return SpielAuswahlErgebniseintragen;
     }
@@ -35,6 +40,9 @@ public class auswahlklasse
         SpielAuswahlErgebniseintragen = spielAuswahlErgebniseintragen;
     }
 
+    public static ObservableList<Spieler> getObs_spieler() {
+        return obs_spieler;
+    }
 
     public static int getSprachid() {
         return sprachid;
@@ -84,6 +92,7 @@ public class auswahlklasse
     public ArrayList<Stage> getStages() {
         return stages;
     }
+
     public void addStage(Stage stage){
         this.stages.add(0,stage);
     }
@@ -96,12 +105,7 @@ public class auswahlklasse
         SpielerzumHinzufeuegen = spielerzumHinzufeuegen;
     }
 
-
-
-
     public static Spielklasse getAktuelleSpielklassenAuswahl() {
-
-
         return aktuelleSpielklassenAuswahl;
     }
 
@@ -109,18 +113,9 @@ public class auswahlklasse
         auswahlklasse.aktuelleSpielklassenAuswahl = aktuelleSpielklassenAuswahl;
     }
 
-
-    /*public SpielklasseDAO getSpielklasseDAO() {
-        return spielklasseDAO;
-    }*/
-
-
-
-
     public static void setAktuelleTurnierAuswahl(Turnier aktuellesTurnier) {
         aktuelleTurnierAuswahl = aktuellesTurnier;
     }
-
 
     public void addSpieler(Spieler sp) {
         spieler.put(sp.getSpielerID(), sp);
@@ -129,32 +124,12 @@ public class auswahlklasse
         spieler.put(sp.getSpielerID(),sp);
     }
 
-
-    /*public SpielerDAO getSpielerDAO() {
-        return spielerDAO;
-    }
-    */
-
-
-
-
-    public TurnierDAO getTurnierDAO() {
-        return turnierDAO;
-    }
-
-    public void setTurnierDAO(TurnierDAO turnierDAO) {
-        this.turnierDAO = turnierDAO;
-    }
-
-
-
     public Turnier getAktuelleTurnierAuswahl()
     {
         return aktuelleTurnierAuswahl;
     }
 
     public Dictionary<Integer, Turnier> getTurnierliste() {
-        turnierliste= turnierDAO.getAllTurniere();
         return turnierliste;
     }
     public Dictionary<Integer, Verein> getVereine() {
@@ -173,19 +148,13 @@ public class auswahlklasse
         return spieler;
     }
 
-
-
     public void setTurnierliste(Dictionary<Integer, Turnier> turnierliste) {
         this.turnierliste = turnierliste;
     }
 
-
-
     public void setVereine(Dictionary<Integer, Verein> vereine) {
         this.vereine = vereine;
     }
-
-
 
     public void setSpieler(Dictionary<Integer, Spieler> spieler) {
         this.spieler = spieler;
@@ -195,6 +164,7 @@ public class auswahlklasse
     {
         aktuelleTurnierAuswahl = turnier;
     }
+
     public void spielklassenAuswahlSpeichern (Spielklasse spielklasse)
     {
         aktuelleSpielklassenAuswahl = spielklasse;

@@ -102,7 +102,7 @@ private TextField t_suchleistespielerhinzu;
     auswahlklasse a = new auswahlklasse();
 
     private static Spieler spieler_neu=null;
-    private static ObservableList<Spieler> obs_spieler = FXCollections.observableArrayList();
+    private ObservableList<Spieler> obs_spieler = a.getObs_spieler();
 
     private void printSpielerZuordnenTableNeu() throws Exception {
         if(a.getAktuelleTurnierAuswahl()!=null) {

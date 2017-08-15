@@ -59,9 +59,9 @@ public class MainController implements Initializable, Observable
     private javafx.scene.control.TableView tabelle_spiele;
 
     auswahlklasse a = new auswahlklasse();
-    ObservableList <Spielklasse> obs_spielklassen = FXCollections.observableArrayList();
-    ObservableList<Spiel> obs_spiele = FXCollections.observableArrayList();
-    ObservableList<Integer> obs_spielklassen_auswahl = FXCollections.observableArrayList();
+    ObservableList <Spielklasse> obs_spielklassen = a.getAktuelleTurnierAuswahl().getObs_spielklassen();
+    ObservableList<Spiel> obs_spiele = a.getAktuelleTurnierAuswahl().getObs_spiele();
+    ObservableList<Integer> obs_spielklassen_auswahl = a.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl();
 
 
 
@@ -509,9 +509,48 @@ public class MainController implements Initializable, Observable
                     }
                 };
             });
+            TableColumn<Spiel,String> spielSpielklasseSpalte = new TableColumn("Spielklasse");
+            spielSpielklasseSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("SpielklasseString"));
+            spielSpielklasseSpalte.setCellFactory(column -> {
+                return new TableCell<Spiel, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty); //This is mandatory
+
+                        if (item == null || empty) { //If the cell is empty
+                            setText(null);
+                            setStyle("");
+                        } else { //If the cell is not empty
+
+                            setText(item); //Put the String data in the cell
+
+                            //We get here all the info of the Person of this row
+                            Spiel spiel = getTableView().getItems().get(getIndex());
+
+                            // Style all persons wich name is "Edgard"
+                            if (spiel.getStatus()==3) {
+                                setTextFill(Color.RED);
+                            }
+                            else if (spiel.getStatus()==2) {
+                                setTextFill(Color.DARKBLUE);
+                            }
+                            else if (spiel.getStatus()==1) {
+                                setTextFill(Color.DARKGREEN);
+                            } else {
+                                //Here I see if the row of this cell is selected or not
+                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
+                                    setTextFill(Color.WHITE);
+                                else
+                                    setTextFill(Color.BLACK);
+                            }
+                        }
+                    }
+                };
+            });
+
             tabelle_spiele.setItems(obs_spiele);
 
-            tabelle_spiele.getColumns().addAll(spielFeldSpalte,spielHeimSpalte,spielGastSpalte,spielErgebnisSpalte);
+            tabelle_spiele.getColumns().addAll(spielFeldSpalte,spielHeimSpalte,spielGastSpalte,spielErgebnisSpalte,spielSpielklasseSpalte);
             /*tabelle_spiele.setRowFactory( tv -> {
                 TableRow<Spiel> row = new TableRow<>();
                 if(row.getItem().getStatus()==3){

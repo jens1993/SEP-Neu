@@ -21,7 +21,7 @@ public class Spielklasse {
 	private float meldeKosten = (float) 5;
 	private Turnier turnier;
 	private Hashtable<Integer,Spiel> spiele = new Hashtable<>();
-	TurnierDAO t = new TurnierDAOimpl();
+	//private TurnierDAO t = new TurnierDAOimpl();
 	private boolean aktiv;
 	private boolean einzel = false;
 
@@ -77,7 +77,7 @@ public class Spielklasse {
 
 
 
-	public Spielklasse(int spielklasseID, String disziplin, String niveau, int turnierid)
+	/*public Spielklasse(int spielklasseID, String disziplin, String niveau, int turnierid)
 	{
 		System.out.println("neue Spielklasse mit gesetzter SpielklasseID ohne Enum");
 		this.spielklasseID=spielklasseID;
@@ -90,7 +90,7 @@ public class Spielklasse {
 			einzel=true;
 		}
 
-	}
+	}*/
 
 	public boolean isEinzel() {
 		return einzel;

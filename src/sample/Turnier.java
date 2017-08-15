@@ -25,8 +25,8 @@ public class Turnier  implements Initializable {
 	private Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
 	private Dictionary<Integer, Spiel> spiele = new Hashtable<Integer,Spiel>();
 	private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
-
-
+	private ObservableList<Spiel> obs_spiele = FXCollections.observableArrayList();
+	private ObservableList<Integer> obs_spielklassen_auswahl = FXCollections.observableArrayList();
 	private ObservableList<Spiel> obs_gespielteSpiele = FXCollections.observableArrayList();
 	private ObservableList<Spiel> obs_aktiveSpiele = FXCollections.observableArrayList();
 	private ObservableList<Spiel> obs_ausstehendeSpiele = FXCollections.observableArrayList();
@@ -36,6 +36,14 @@ public class Turnier  implements Initializable {
 
 	public ObservableList<Spielklasse> getObs_spielklassen() {
 		return obs_spielklassen;
+	}
+
+	public ObservableList<Spiel> getObs_spiele() {
+		return obs_spiele;
+	}
+
+	public ObservableList<Integer> getObs_spielklassen_auswahl() {
+		return obs_spielklassen_auswahl;
 	}
 
 	public void setObs_spielklassen(ObservableList<Spielklasse> obs_spielklassen) {
@@ -71,6 +79,12 @@ public class Turnier  implements Initializable {
 	}
 
 
+	public void deleteSpiel(Spiel spiel){
+		this.obs_spiele.remove(spiel);
+		this.obs_aktiveSpiele.remove(spiel);
+		this.obs_ausstehendeSpiele.remove(spiel);
+		this.obs_gespielteSpiele.remove(spiel);
+	}
 
 	public ObservableList<Spiel> getObs_gespielteSpiele() {
 		return obs_gespielteSpiele;
