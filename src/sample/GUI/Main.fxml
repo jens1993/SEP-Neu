@@ -22,7 +22,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="1050" prefWidth="1650" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController" stylesheets="@/CSS/Badminton.css">
+<VBox prefHeight="1050" prefWidth="1650" stylesheets="@/CSS/Badminton.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
 <children>
     <MenuBar>
         <menus>
@@ -79,12 +79,12 @@
         <children>
             <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="114.0">
                 <buttons>
-                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="Turnierübersicht" styleClass="buttonstyle" />
+                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" styleClass="mainButton" text="Turnierübersicht" />
                 </buttons>
             </ButtonBar>
             <ButtonBar>
                 <buttons>
-                    <Button fx:id="btn_klassen" mnemonicParsing="false" onAction="#pressBtn_klassen" text="Klassen" />
+                    <Button fx:id="btn_klassen" mnemonicParsing="false" onAction="#pressBtn_klassen" styleClass="mainButton" text="Klassen" />
                     <Button fx:id="btn_spieler" mnemonicParsing="false" onAction="#pressBtn_spieler" text="Spieler" />
                   <Button mnemonicParsing="false" onAction="#pressBtn_teamLaden" text="Teams" />
                     <Button mnemonicParsing="false" text="Felder" />
