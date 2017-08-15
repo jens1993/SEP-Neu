@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <?import javafx.scene.control.TextField?>
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.TurnierladenController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" stylesheets="@/CSS/Badminton.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.TurnierladenController">
    <children>
       <GridPane prefHeight="323.0" prefWidth="476.0">
          <columnConstraints>

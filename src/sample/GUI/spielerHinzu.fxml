@@ -27,7 +27,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TabPane fx:id="tabpane_spieler" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="702.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.spielerHinzuController">
+<TabPane fx:id="tabpane_spieler" maxHeight="-Infinity" stylesheets="@/CSS/Badminton.css" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="702.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.spielerHinzuController">
     <tabs>
         <Tab id="tab_spieler_hinzufuegen" fx:id="tab_sphin" text="Spieler hinzufügen">
             <content>

@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import jfxtras.labs.scene.control.BigDecimalField?>
 
-<GridPane prefHeight="126.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.neuesTurnierController">
+<GridPane prefHeight="126.0" prefWidth="418.0" stylesheets="@/CSS/Badminton.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.neuesTurnierController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="124.0" />
