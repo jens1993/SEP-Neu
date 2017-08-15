@@ -62,6 +62,7 @@ public class SpielErgebnisEingebenController implements Initializable{
 
     auswahlklasse a = new auswahlklasse();
     Dictionary<Integer, Spiel> dictspiele = a.getAktuelleTurnierAuswahl().getSpiele();
+
     Spiel sp = dictspiele.get(a.getSpielAuswahlErgebniseintragen().getSpielID());
 
 
@@ -81,27 +82,28 @@ public class SpielErgebnisEingebenController implements Initializable{
 
         if(s11<0||s12<0)
         {
+            l_meldungergebnis.setText("Negative Ergebnisse sind ungültig");
             return false;
         }
         if (Math.abs(s11-s12)<2)
         {
             if (!((s11==29 && s12==30)||s11==30 && s12==29)){
-                System.out.println("Ein Satz muss mit 2 Punkten Differenz gewonnen werden");
+                l_meldungergebnis.setText("Ein Satz muss mit 2 Punkten Differenz gewonnen werden");
                 System.out.println("Fehler in Satz ");
                 return false;
             }
         }
         if(s11<21&&s12<21)
         {
-            System.out.println("Ein Satz muss mindestens 21 Punkte haben");
+            l_meldungergebnis.setText("Ein Satz muss mindestens 21 Punkte haben");
             return false;
         }
         if (s11>30 || s12>30){
-            System.out.println("Ein Satz kann maximal bis 30 Punkte gehen");
+            l_meldungergebnis.setText("Ein Satz kann maximal bis 30 Punkte gehen");
             return false;
         }
         if((s11>18 && s12>18) && Math.abs(s11-s12)>2 ){
-            System.out.println("Ungültiges Satzergebnis ");
+            l_meldungergebnis.setText("Ungültiges Satzergebnis ");
             return false;
         }
 
@@ -117,18 +119,20 @@ public class SpielErgebnisEingebenController implements Initializable{
             System.out.println("unvollständiges Spiel");
         }
 
-        if(sp!=null && sp.getStatus()==1)
+        if(sp!=null && sp.getStatus()==2)
         {
 
 
-            System.out.println("ausstehendes Spiel");
+            System.out.println("aktives Spiel");
             if(erg!=null) {
                 try {
 
                     a.getSpielAuswahlErgebniseintragen().setErgebnis(erg);
                     a.getSpielAuswahlErgebniseintragen().setStatus(3);
-                    a.getAktuelleTurnierAuswahl().addobsGespielteSpiele(a.getSpielAuswahlErgebniseintragen());
-                    l_meldungergebnis.setText("Ergebnis eingetragen");
+                   // a.getAktuelleTurnierAuswahl().addobsGespielteSpiele(a.getSpielAuswahlErgebniseintragen());
+                    a.getAktuelleTurnierAuswahl().removeobsAusstehendeSpiele(a.getSpielAuswahlErgebniseintragen());
+                    l_meldungergebnis.setText("Ergebnis erfolgreich eingetragen");
+
 
                 } catch (Exception e) {
                     l_meldungergebnis.setText("Satz nicht ausgefüllt");
@@ -137,9 +141,9 @@ public class SpielErgebnisEingebenController implements Initializable{
             }
 
         }
-        if(sp!=null && sp.getStatus()==2)
+        if(sp!=null && sp.getStatus()==1)
         {
-            System.out.println("aktives Spiel");
+            System.out.println("ausstehendes Spiel");
         }
         if(sp!=null && sp.getStatus()==3)
         {

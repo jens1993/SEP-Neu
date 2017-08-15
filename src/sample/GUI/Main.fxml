@@ -117,7 +117,10 @@
                                  <content>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <HBox fx:id="hbox_main" prefHeight="100.0" prefWidth="200.0" />
+                                          <HBox fx:id="hbox_main" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#reloadcheckbox" text="Lade Spielklassen neu" />
+                                             </children></HBox>
                                           <TableView fx:id="tabelle_spiele" prefHeight="964.0" prefWidth="903.0" />
                                        </children>
                                     </VBox>

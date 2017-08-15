@@ -129,7 +129,7 @@ public class klasseHinzufuegenController implements Initializable
     private void pressBtn_KlasseSpeichern(ActionEvent event) throws IOException
     {
 
-        System.out.println("Größe = "+a.getAktuelleTurnierAuswahl().getSpielklassen().size());
+
 
         Spielklasse spklasse = new Spielklasse(a.getAktuelleTurnierAuswahl().getSpielklassen().size()+1,combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),a.getAktuelleTurnierAuswahl());
 
@@ -137,10 +137,11 @@ public class klasseHinzufuegenController implements Initializable
         a.getAktuelleTurnierAuswahl().addSpielklassen(spklasse);
         spklasse.getSpielklasseDAO().create(spklasse);
         a.getAktuelleTurnierAuswahl().addtObs_spielklassen(spklasse);
-
+        System.out.println("------------------Größe = "+a.getAktuelleTurnierAuswahl().getSpielklassen().size());
         MainController m = new MainController();
         try {
             //m.fuelleCheckCombo();
+            m.reloadcheckbox();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -152,8 +153,10 @@ public class klasseHinzufuegenController implements Initializable
         }
         a.addStage(stage);
         stage.setScene(new Scene(root1));
+        Scene s = new Scene(root1);
 
         stage.show();
+
 
         stage.setTitle("Klassenuebersicht: "+a.getAktuelleTurnierAuswahl().getName());
 

@@ -15,6 +15,9 @@ public class Spiel {
 	private LocalTime aufrufZeit;
 	private Spieler schiedsrichter;
 	private Spielsystem spielsystem;
+
+
+
 	private Feld feld;
 	private int status = 0; //0= unvollständig 1 = ausstehend, 2=aktiv, 3=gespielt
 	private int systemSpielID;
@@ -24,7 +27,10 @@ public class Spiel {
 	private int rundenZeitplanNummer;
 
 
-
+	public void setFeld(Feld feld) {
+		this.feld = feld;
+		spielDAO.update(this);
+	}
 
 
 	public Team getHeim() {
@@ -48,6 +54,11 @@ public class Spiel {
 		return gast;
 	}
 
+	public boolean isGast() {
+
+
+		return false;
+	}
 	public void setHeim(Team heim) {
 		this.heim = heim;
 		if(this.gast != null){
@@ -188,6 +199,7 @@ public class Spiel {
 
 	public void setStatus(int status) {
 		this.status = status;
+		spielDAO.update(this);
 	}
 
 	public Ergebnis getErgebnis() {
