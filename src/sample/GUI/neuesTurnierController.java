@@ -17,7 +17,7 @@ import sample.Turnier;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Dictionary;
-
+import jfxtras.labs.scene.control.BigDecimalField;
 /**
  * Created by jens on 03.08.2017.
  */
@@ -31,8 +31,9 @@ public class neuesTurnierController
     private TextField Turniername;
     @FXML
     private DatePicker turnierDatum;
+
     @FXML
-    private TextField AnzahlFelder;
+    private BigDecimalField AnzahlFelder;
  auswahlklasse a = new auswahlklasse();
     @FXML
     public void erstelleTurnier(ActionEvent event) throws Exception

@@ -11,6 +11,7 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Text?>
+<?import jfxtras.labs.scene.control.BigDecimalField?>
 
 <GridPane prefHeight="126.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.neuesTurnierController">
    <columnConstraints>
@@ -39,7 +40,6 @@
          </children>
       </HBox>
       <TextField fx:id="Turniername" GridPane.columnIndex="1" />
-      <TextField fx:id="AnzahlFelder" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Datum " />
@@ -61,6 +61,7 @@
             </Button>
          </children>
       </HBox>
-      <DatePicker fx:id="turnierDatum" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <DatePicker fx:id="turnierDatum" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <BigDecimalField fx:id="AnzahlFelder" prefHeight="32.0" prefWidth="159.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>

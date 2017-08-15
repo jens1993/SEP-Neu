@@ -51,6 +51,7 @@ public class Team {
 
     }
     public void addSpieler(Spieler spieler){
+        this.freilos=false;
         if (spielerEins==null){
             this.spielerEins = spieler;
         }
@@ -73,6 +74,7 @@ public class Team {
     public Team(int teamid, Spielklasse spielklasse) { //nur für bestehendes Turnier einlesen
         this.teamid = teamid;
         this.spielklasse = spielklasse;
+        this.freilos=true;
     }
 
     public Team(String freilos, Spielklasse spielklasse) {
