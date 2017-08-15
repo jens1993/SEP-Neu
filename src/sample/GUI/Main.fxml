@@ -22,7 +22,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="1050" prefWidth="1650" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
+<VBox prefHeight="1050" prefWidth="1650" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController" stylesheets="@/CSS/Badminton.css">
 <children>
     <MenuBar>
         <menus>
@@ -79,7 +79,7 @@
         <children>
             <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="114.0">
                 <buttons>
-                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="Turnierübersicht" />
+                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="Turnierübersicht" styleClass="buttonstyle" />
                 </buttons>
             </ButtonBar>
             <ButtonBar>
