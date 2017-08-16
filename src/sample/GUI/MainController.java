@@ -847,6 +847,7 @@ public class MainController implements Initializable, Observable
         check_gespielteSpiele.setSelected(true);
         checkComboBox.setMaxWidth(250);
         checkComboBox.getItems().setAll(obs_spielklassen);
+
         check_aktiveSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
