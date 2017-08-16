@@ -1,9 +1,6 @@
 package sample.Spielsysteme;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import sample.*;
@@ -33,6 +30,34 @@ public class SchweizerSystem extends Spielsystem {
 		freiloseHinzufuegen(this.teamList);
 		ersteRundeErstellen();
 		alleSpieleErstellen();
+	}
+
+	public SchweizerSystem(ArrayList<Team> teamList, Spielklasse spielklasse, ArrayList<Spiel> spielListe, Dictionary<Integer,Ergebnis> ergebnisse) {
+		setSpielklasse(spielklasse);				//Constructor nur für Einlesen aus der Datenbank
+		this.anzahlTeams = teamList.size();
+		setAnzahlRunden(spielListe.size()/(teamList.size()/2));
+		this.teamList = teamList;
+		setSpielSystemArt(5);
+		alleSpieleEinlesen(spielListe);
+		setOffeneRundenSpiele(anzahlTeams/2);
+		alleErgebnisseEinlesen(ergebnisse);
+
+	}
+
+	private void alleSpieleEinlesen(ArrayList<Spiel> spiele){
+		for (int i=0;i<spiele.size();i++){
+			spiele.get(i).setSpielsystem(this);
+		}
+		setOffeneRundenSpiele(anzahlTeams/2);
+	}
+
+	private void alleErgebnisseEinlesen(Dictionary<Integer, Ergebnis> ergebnisse){
+		Enumeration e = ergebnisse.keys();
+		int key;
+		while(e.hasMoreElements()){
+			key = (int) e.nextElement();
+			getSpielklasse().getSpiele().get(key).setErgebnis(ergebnisse.get(key),"einlesen");
+		}
 	}
 
 	private void sortList(){
@@ -248,7 +273,18 @@ public class SchweizerSystem extends Spielsystem {
 		}
 		return false;
 	}
-
+	@Override
+	public boolean beendeMatch(Spiel spiel, String einlesen) {
+		senkeOffeneRundenSpiele();
+		if(keineOffenenRundenSpiele()){
+			erhoeheAktuelleRunde();
+			setOffeneRundenSpiele(anzahlTeams/2);
+			if(getAktuelleRunde()==getAnzahlRunden()){
+				return true;
+			}
+		}
+		return false;
+	}
 	private void freiloseHinzufuegen(List<Team> teamList){
 		if ((teamList.size()/2) * 2 != teamList.size()){ // /2 *2 überprüft, ob Spieleranzahl gerade oder ungerade (int)
 			this.teamList.add(new Team("Freilos",this.getSpielklasse()));

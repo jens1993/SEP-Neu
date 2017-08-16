@@ -3,19 +3,26 @@ package sample.DAO;
 import sample.Team;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 /**
  * Created by Florian-PC on 25.07.2017.
  */
 public class TeamDAOimpl implements TeamDAO {
+    auswahlklasse a = new auswahlklasse();
     @Override
     public boolean create(Team team) {
+        String idAbfrage = "Select AUTO_INCREMENT " +
+                "FROM INFORMATION_SCHEMA.TABLES " +
+                "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
+                "AND TABLE_NAME = 'Team'";
+
         String sql = "INSERT INTO team("
-                + "TeamID, "
                 + "SpielklasseID) "
-                + "VALUES(?,?)";
+                + "VALUES(?)";
         String sqlSpielerEins = "INSERT INTO Team_Spieler("
                 + "TeamID, "
                 + "SpielerID) "
@@ -28,9 +35,15 @@ public class TeamDAOimpl implements TeamDAO {
                 ;
         try {
             SQLConnection con = new SQLConnection();
+            Statement smtID = con.SQLConnection().createStatement();
+            ResultSet count = smtID.executeQuery(idAbfrage);
+            count.next();
+            int teamID = count.getInt("AUTO_INCREMENT");
+            System.out.println(teamID);
+            team.setTeamid(count.getInt("AUTO_INCREMENT"),a.getAktuelleSpielklassenAuswahl());
+            smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, team.getTeamid() );
-            smt.setInt(2, team.getSpielklasse().getSpielklasseID());
+            smt.setInt(1, team.getSpielklasse().getSpielklasseID());
             smt.executeUpdate();
             smt.close();
             PreparedStatement smtSpielerEins = con.SQLConnection().prepareStatement(sqlSpielerEins);
@@ -58,21 +71,32 @@ public class TeamDAOimpl implements TeamDAO {
 
     @Override
     public boolean createFreilos(Team team) {
+        String idAbfrage = "Select AUTO_INCREMENT " +
+                "FROM INFORMATION_SCHEMA.TABLES " +
+                "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
+                "AND TABLE_NAME = 'Team'";
+
         String sql = "INSERT INTO team("
-                + "TeamID, "
-                + "SpielklasseID) "
+                + "SpielklasseID, TeamID) "
                 + "VALUES(?,?)";
         try{
             SQLConnection con = new SQLConnection();
+            Statement smtID = con.SQLConnection().createStatement();
+            ResultSet count = smtID.executeQuery(idAbfrage);
+            count.next();
+            int teamID = count.getInt("AUTO_INCREMENT");
+            System.out.println(teamID);
+            team.setTeamid(teamID);
+            smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, team.getTeamid() );
-            smt.setInt(2, team.getSpielklasse().getSpielklasseID());
+            smt.setInt(1, team.getSpielklasse().getSpielklasseID());
+            smt.setInt(2, team.getTeamid());
             smt.executeUpdate();
             smt.close();
         }
         catch (SQLException e) {
         e.printStackTrace();
-        System.out.println("Team Einfügen Klappt nicht");
+        System.out.println("Freilos Einfügen Klappt nicht");
     }
         return false;
     }
@@ -106,6 +130,46 @@ public class TeamDAOimpl implements TeamDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Team Update Klappt nicht");
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean addSpieler(Team team, boolean ersterSpieler) {
+
+        String sqlSpielerEins = "INSERT INTO Team_Spieler("
+                + "TeamID, "
+                + "SpielerID) "
+                + "VALUES(?,?)"
+                ;
+        String sqlSpielerZwei = "INSERT INTO Team_Spieler("
+                + "TeamID, "
+                + "SpielerID) "
+                + "VALUES(?,?)"
+                ;
+        try {
+            SQLConnection con = new SQLConnection();
+            if(ersterSpieler) {
+                PreparedStatement smtSpielerEins = con.SQLConnection().prepareStatement(sqlSpielerEins);
+                smtSpielerEins.setInt(1, team.getTeamid());
+                smtSpielerEins.setInt(2, team.getSpielerEins().getSpielerID());
+                smtSpielerEins.executeUpdate();
+                smtSpielerEins.close();
+            }
+            else{
+                PreparedStatement smtSpielerZwei = con.SQLConnection().prepareStatement(sqlSpielerZwei);
+                smtSpielerZwei.setInt(1, team.getTeamid());
+                smtSpielerZwei.setInt(2, team.getSpielerZwei().getSpielerID());
+                smtSpielerZwei.executeUpdate();
+                smtSpielerZwei.close();
+            }
+            con.closeCon();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Team Einfügen Klappt nicht");
         }
 
         return false;

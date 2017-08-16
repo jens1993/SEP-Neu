@@ -1,39 +1,65 @@
 package sample;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.time.LocalTime;
 
 import sample.DAO.*;
 import sample.Spielsysteme.*;
-import sample.Enums.*;
 
 public class Spiel {
-	ErgebnisDAO ergebnisDAO = new ErgebnisDAOimpl();
+	//ErgebnisDAO ergebnisDAO = new ErgebnisDAOimpl();
 	SpielDAO spielDAO = new SpielDAOimpl();
 	private int spielID;
 	private Team heim;
 	private Team gast;
 	private Ergebnis ergebnis;
-	private LocalDate aufrufZeit;
+	private LocalTime aufrufZeit;
 	private Spieler schiedsrichter;
 	private Spielsystem spielsystem;
+
+
+
 	private Feld feld;
 	private int status = 0; //0= unvollständig 1 = ausstehend, 2=aktiv, 3=gespielt
 	private int systemSpielID;
 	private int setzPlatzHeim;
 	private int setzPlatzGast;
+	private int zeitplanNummer;
+	private int rundenZeitplanNummer;
+
+
+	public void setFeld(Feld feld) {
+		this.feld = feld;
+		feld.setAktivesSpiel(this);
+		spielDAO.update(this);
+	}
+
 
 	public Team getHeim() {
 		return heim;
+	}
+
+	@Override
+	public String toString() {
+
+		return (heim.toString()  +" --- "+ gast.toString()) ;
+	}
+
+	public String getHeimString() {
+		return heim.toString();
+	}
+	public String getGastString() {
+		return gast.toString();
 	}
 
 	public Team getGast() {
 		return gast;
 	}
 
+	public boolean isGast() {
+
+
+		return false;
+	}
 	public void setHeim(Team heim) {
 		this.heim = heim;
 		if(this.gast != null){
@@ -54,7 +80,7 @@ public class Spiel {
 		return schiedsrichter;
 	}
 
-	public LocalDate getAufrufZeit() {
+	public LocalTime getAufrufZeit() {
 		return aufrufZeit;
 	}
 
@@ -82,17 +108,15 @@ public class Spiel {
 		spielID = spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
 		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
+		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
+
 		spielDAO.create(this);
+		this.status = 1;
+		if(heim.isFreilos()){
+			setErgebnis(new Ergebnis(21,0,21,0));
+		}
 	}
 
-/*	public Spiel(Spielklasse spielklasse, int systemSpielID) {
-		this.spielklasse = spielklasse;
-		this.systemSpielID = systemSpielID;
-		spielID = getSpielklasse().getTurnier().getSpiele().size()+1;
-		this.spielklasse.getTurnier().getSpiele().put(spielID,this);
-		this.spielklasse.getSpiele().put(systemSpielID,this);
-		spielDAO.create(this);
-	}*/
 
 	public Spiel(int systemSpielID, Spielsystem spielsystem) { //Constructor für Extrarunden (Gruppe mit Endrunde)
 		this.spielsystem = spielsystem;
@@ -100,24 +124,33 @@ public class Spiel {
 		spielID = spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
 		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
+		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
 		spielDAO.create(this);
 	}
 
 	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielsystem spielsystem) {
 		this.systemSpielID = systemSpielID; //Constructor für SpielTree in KO-System
 		this.setzPlatzHeim = setzPlatzHeim;
+		this.setzPlatzHeim = setzPlatzHeim;
 		this.setzPlatzGast = setzPlatzGast;
 		this.spielsystem=spielsystem;
 		spielID = this.spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
 		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
+		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
 		spielDAO.create(this);
 	}
 
-	public Spiel(int systemSpielID, int spielID) { //Constructor für einlesen. Anschließend MUSS Spielsystem gesettet werden!)
-		this.systemSpielID = systemSpielID;
-		this.spielID = spielID;
 
+	public Spiel(int spielID, Team heim, Team gast, LocalTime aufrufZeit, Spieler schiedsrichter, int status, int systemSpielID, Feld feld) {
+		this.spielID = spielID;
+		this.heim = heim;						//Constructor für einlesen. Anschließend MUSS Spielsystem gesettet werden!)
+		this.gast = gast;
+		this.aufrufZeit = aufrufZeit;
+		this.schiedsrichter = schiedsrichter;
+		this.status = status;
+		this.systemSpielID = systemSpielID;
+		this.feld = feld;
 	}
 
 	public Team getSieger(){
@@ -135,32 +168,92 @@ public class Spiel {
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 	}
 
-	public Spielsystem getSpielsystem() {
-		return spielsystem;
+	public int getZeitplanNummer() {
+		return zeitplanNummer;
 	}
 
-	public void setAufrufZeit(LocalDate aufrufZeit) {
-		this.aufrufZeit = aufrufZeit;
+	public void setZeitplanNummer(int zeitplanNummer) {
+		this.zeitplanNummer = zeitplanNummer;
+	}
+
+	public int getRundenZeitplanNummer() {
+		return rundenZeitplanNummer;
+	}
+
+	public void setRundenZeitplanNummer(int rundenZeitplanNummer) {
+		this.rundenZeitplanNummer = rundenZeitplanNummer;
+	}
+
+	public Spielsystem getSpielsystem() {
+		return spielsystem;
 	}
 
 	public void setSchiedsrichter(Spieler schiedsrichter) {
 		this.schiedsrichter = schiedsrichter;
 	}
 
-	public void setFeld(Feld feld) {
+	public void spielAufrufen(Feld feld) {
 		this.feld = feld;
+		this.aufrufZeit = LocalTime.now();
+		this.status = 2;
 	}
 
 	public void setStatus(int status) {
 		this.status = status;
+		spielDAO.update(this);
 	}
 
 	public Ergebnis getErgebnis() {
 		return ergebnis;
 	}
 
+	public String getErgebnisString() {
+		if (ergebnis!=null){
+			return ergebnis.toString();
+		}
+		else {
+			return "";
+		}
+	}
+	public String getSpielklasseString() {
+		if (spielsystem.getSpielklasse()!=null){
+			return spielsystem.getSpielklasse().getDisziplin()+"-"+spielsystem.getSpielklasse().getNiveau();
+		}
+		else {
+			return "";
+		}
+
+	}
+	public String getFeldNr() {
+		if (feld!=null){
+			return feld.toString();
+		}
+		else{
+			return "";
+		}
+	}
 	public void setErgebnis(Ergebnis ergebnis) {
 		this.ergebnis = ergebnis;
+		statistikAktualisieren();
+		status=3;
+		this.spielsystem.beendeMatch(this);
+		spielDAO.update(this);
+		heim.getTeamDAO().update(heim);
+		gast.getTeamDAO().update(gast);
+		ergebnis.getErgebnisDAO().create(this);
+		this.getSpielsystem().getSpielklasse().getTurnier().getObs_aktiveSpiele().remove(this);
+		this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);
+		this.feld.spielBeenden();
+	}
+
+	public void setErgebnis(Ergebnis ergebnis, String einlesen) {
+		this.ergebnis = ergebnis;
+		statistikAktualisieren();
+		status=3;
+		this.spielsystem.beendeMatch(this,einlesen);
+	}
+
+	private void statistikAktualisieren() {
 		int satzpunkteHeim = 0;
 		int satzpunkteGast = 0;
 		heim.addBisherigenGegner(gast);
@@ -182,10 +275,10 @@ public class Spiel {
 			}
 			i++;
 		}
-		status=3;
-		this.spielsystem.beendeMatch(this);
-		spielDAO.update(this);
-		ergebnisDAO.create(this);
+	}
+
+	private void punkteHinzufuegen(){
+
 	}
 
 	public int getSetzPlatzHeim() {
@@ -197,11 +290,8 @@ public class Spiel {
 	}
 
 	public void spielzettelDrucken() {
-		heim.getSpielerEins().getVName();
-	}
-
-	public void ergebnisEintragen(){
-
+		String aufrufzeit = this.aufrufZeit.toString();
+		this.heim.toString();
 	}
 
 }

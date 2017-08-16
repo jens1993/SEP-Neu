@@ -15,6 +15,19 @@ import sample.Enums.*;
 public class Spieler {
 	SpielerDAO spielerDAO = new SpielerDAOimpl();
 	private String vName;
+
+	public void setvName(String vName) {
+		this.vName = vName;
+	}
+
+	public void setnName(String nName) {
+		this.nName = nName;
+	}
+
+	public void setSpielerID(int spielerID) {
+		this.spielerID = spielerID;
+	}
+
 	private String nName;
 	private LocalDate gDatum;
 	private int spielerID;
@@ -27,7 +40,8 @@ public class Spieler {
 	private int mattenSpiele = 0;
 	private String extSpielerID;
 	private Spiel aktuellesSpiel;
-	private ObservableList<Turnier> turnierData = FXCollections.observableArrayList();
+
+
 
 	public Spieler(String vName, String nName, int spielerID){
 		this.vName = vName;
@@ -36,6 +50,20 @@ public class Spieler {
 		spielerDAO.create(this);
 	}
 
+	public Spieler(String vName, String nName, LocalDate gDatum, int spielerID, boolean geschlecht, int[] rPunkte, Verein verein,String extSpielerID)
+	{
+		this.vName = vName;
+		this.nName = nName;
+		this.gDatum = gDatum;
+		this.spielerID = spielerID;
+		this.geschlecht = geschlecht;
+		this.rPunkte = rPunkte;
+		this.verein = verein;
+		this.extSpielerID = extSpielerID;
+		spielerDAO.create(this);
+
+	}
+	//EINLESEN
 	public Spieler(String vName, String nName, LocalDate gDatum, int spielerID, boolean geschlecht, int[] rPunkte, Verein verein, float meldeGebuehren, String nationalitaet, LocalDate verfuegbar, int mattenSpiele, String extSpielerID) {
 		this.vName = vName;
 		this.nName = nName;
@@ -50,6 +78,10 @@ public class Spieler {
 		this.mattenSpiele = mattenSpiele;
 		this.extSpielerID = extSpielerID;
 		this.aktuellesSpiel = aktuellesSpiel;
+	}
+
+	public Spieler() {
+
 	}
 
 	public boolean deleteSpieler(Spieler spieler){
@@ -78,49 +110,51 @@ public class Spieler {
 
 	public void setgDatum(LocalDate gDatum) {
 		this.gDatum = gDatum;
-		spielerDAO.update(this);
+		//spielerDAO.update(this);
 	}
 
 	public void setrPunkte(int[] rPunkte) {
 		this.rPunkte = rPunkte;
-		spielerDAO.update(this);
+		//spielerDAO.update(this);
 	}
 
 	public void setVerein(Verein verein) {
 		this.verein = verein;
-		spielerDAO.update(this);
+		//spielerDAO.update(this);
 	}
 
 	public void setMeldeGebuehren(float meldeGebuehren) {
 		this.meldeGebuehren = meldeGebuehren;
-		spielerDAO.update(this);
+		//spielerDAO.update(this);
 	}
 
-
+	public SpielerDAO getSpielerDAO() {
+		return spielerDAO;
+	}
 
 	public void setNationalitaet(String nationalitaet) {
 		Nationalitaet = nationalitaet;
-		spielerDAO.update(this);
+		//spielerDAO.update(this);
 	}
 
 	public void setVerfuegbar(LocalDate verfuegbar) {
 		this.verfuegbar = verfuegbar;
-		spielerDAO.update(this);
+		//spielerDAO.update(this);
 	}
 
 	public void setMattenSpiele(int mattenSpiele) {
 		this.mattenSpiele = mattenSpiele;
-		spielerDAO.update(this);
+		//spielerDAO.update(this);
 	}
 
 	public void setExtSpielerID(String extSpielerID) {
 		this.extSpielerID = extSpielerID;
-		spielerDAO.update(this);
+		//spielerDAO.update(this);
 	}
 
 	public void setAktuellesSpiel(Spiel aktuellesSpiel) {
 		this.aktuellesSpiel = aktuellesSpiel;
-		spielerDAO.update(this);
+		//spielerDAO.update(this);
 	}
 
 
@@ -139,7 +173,14 @@ public class Spieler {
 	public boolean getGeschlecht() {
 		return geschlecht;
 	}
-
+	public String getSGeschlecht() {
+		if(geschlecht){
+			return "m";
+		}
+		else {
+			return "w";
+		}
+	}
 	public Verein getVerein() {
 		return verein;
 	}
@@ -170,7 +211,7 @@ public class Spieler {
 
 	public void setGeschlecht(boolean geschlecht) {
 		this.geschlecht = geschlecht;
-		spielerDAO.update(this);
+		//spielerDAO.update(this);
 	}
 
 	public String getNName() {

@@ -25,28 +25,33 @@ public class Team {
     private boolean freilos = false;
     private List<Team> bisherigeGegner = new ArrayList<Team>();
 
-    public Team(int teamid, Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
-        this.teamid = teamid;
+
+    public Team(Spielklasse spielklasse) {
+        this.spielklasse = spielklasse;
+    }
+
+    public Team(Spieler spielerEins, Spieler spielerZwei, Spielklasse spielklasse) {
         this.spielerEins = spielerEins;
         this.spielerZwei = spielerZwei;
         this.spielklasse = spielklasse;
         this.einzel = false;
-        teamid = getSpielklasse().getTurnier().getTeams().size()+1;
-        this.spielklasse.getTurnier().getTeams().put(teamid,this);
         teamDAO.create(this);
     }
 
-    public Team(int teamid, Spieler spielerEins, Spielklasse spielklasse) {
-        this.teamid = teamid;
-        this.spielerEins = spielerEins;
+    public Team(Spieler spielerEins, Spielklasse spielklasse) {
+        this.spielerEins = spielerEins;   //teamID
         this.einzel = true;
         this.spielklasse = spielklasse;
-        teamid = getSpielklasse().getTurnier().getTeams().size()+1;
-        this.spielklasse.getTurnier().getTeams().put(teamid,this);
         teamDAO.create(this);
     }
+    public Team(Spieler spielerEins, Spielklasse spielklasse, Boolean b) {
+        this.spielerEins = spielerEins;   //teamID
+        this.einzel = true;
+        this.spielklasse = spielklasse;
 
+    }
     public void addSpieler(Spieler spieler){
+        this.freilos=false;
         if (spielerEins==null){
             this.spielerEins = spieler;
         }
@@ -57,9 +62,19 @@ public class Team {
 
     }
 
+    public void setTeamid(int teamid){
+        this.teamid = teamid;
+        this.spielklasse.getTurnier().getTeams().put(teamid,this);
+    }
+    public void setTeamid(int teamid, Spielklasse sp){
+        this.teamid = teamid;
+        this.spielklasse=sp;
+        this.spielklasse.getTurnier().getTeams().put(teamid,this);
+    }
     public Team(int teamid, Spielklasse spielklasse) { //nur für bestehendes Turnier einlesen
         this.teamid = teamid;
         this.spielklasse = spielklasse;
+        this.freilos=true;
     }
 
     public Team(String freilos, Spielklasse spielklasse) {
@@ -77,7 +92,15 @@ public class Team {
         teamDAO.createFreilos(this);
         this.spielklasse.getTurnier().getTeams().put(teamid,this);
     }
-
+    public boolean istImTeam(Spieler spieler){
+        if (spielerEins==spieler){
+            return true;
+        }
+        if(spielerZwei==spieler){
+            return true;
+        }
+        return false;
+    }
 
     public boolean isFreilos() {
         return freilos;
@@ -103,6 +126,10 @@ public class Team {
         bisherigeGegner.add(team);
     }
 
+    public TeamDAO getTeamDAO() {
+        return teamDAO;
+    }
+
     public List<Team> getBisherigeGegner() {
         return bisherigeGegner;
     }
@@ -113,31 +140,32 @@ public class Team {
             }
         }
         return true;
-
     }
 
+    public Team()
+    {
 
-
+    }
     public void addGewonnenesSpiel() {
         this.gewonneneSpiele ++;
-        teamDAO.update(this);
+        //teamDAO.update(this);
     }
 
     public void addGewonnenenSatz() {
         this.gewonneneSaetze ++;
-        teamDAO.update(this);
+        //teamDAO.update(this);
     }
 
 
     public void addVerlorenenSatz() {
         this.verloreneSaetze ++;
-        teamDAO.update(this);
+        //teamDAO.update(this);
     }
 
     public void addGespieltePunkte(int gewonnnenePunkte, int verlorenePunkte) {
         this.gewonnnenePunkte = this.gewonnnenePunkte + gewonnnenePunkte;
         this.verlorenePunkte = this.verlorenePunkte + verlorenePunkte;
-        teamDAO.update(this);
+        //teamDAO.update(this);
     }
 
     public int getTeamid() {
@@ -171,7 +199,14 @@ public class Team {
         }
         else {
             if(this.einzel==true){
-                return this.spielerEins.toString();
+                if(this.spielerEins!=null)
+                {
+                    return this.spielerEins.toString();
+                }
+                else
+                {
+                    return null;
+                }
             }
             else if(this.einzel == false){
                 return this.spielerEins.toString() + " / " + this.spielerZwei.toString();

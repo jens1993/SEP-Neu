@@ -3,10 +3,7 @@ import sample.*;
 import sample.DAO.*;
 import sample.Enums.*;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
 public abstract class Spielsystem {
 	protected SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
@@ -21,6 +18,7 @@ public abstract class Spielsystem {
 	private int spielSystemArt;
 	private int extraRunde=0;
 	private List<Team> platzierungsListe;
+	private ArrayList<ArrayList<Spiel>> runden =new ArrayList<>();
 
 	protected int spielsystemCode;
 
@@ -34,6 +32,13 @@ public abstract class Spielsystem {
 		spielSystemID += aktuelleRunde*1000;
 		spielSystemID += offeneRundenSpiele;
 		return spielSystemID;
+	}
+	protected ArrayList<ArrayList<Spiel>> getRundenArray(){
+		return runden;
+	}
+
+	public int getOffeneRundenSpiele() {
+		return offeneRundenSpiele;
 	}
 
 	public int getSpielSystemArt() {
@@ -113,9 +118,13 @@ public abstract class Spielsystem {
 		});
 		return teamList;
 	}
+	public ArrayList<ArrayList<Spiel>> getRunden(){
+		return null;
+	}
 
 	public boolean systemWiederherstellen(int spielsystemCode){
 		return false;
 	}
 	public abstract boolean beendeMatch(Spiel spiel);
+	public abstract boolean beendeMatch(Spiel spiel,String einlesen);
 }

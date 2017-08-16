@@ -1,5 +1,10 @@
 package sample.DAO;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import sample.*;
 import sample.Spielsysteme.*;
 import sample.Enums.*;
@@ -13,20 +18,62 @@ import java.sql.Statement;
 
 public class SQLConnection 
 {
-
+		//auswahlklasse a = new auswahlklasse();
         private static Connection con = null;
         private Statement stmt = null;
-        private String dbHost = "localhost"; // Hostname
-        private String dbPort = "3306";      // Port -- Standard: 3306
-        private String dbName = "turnierverwaltung_neu";   // Datenbankname
-        private String dbUser = "root";     // Datenbankuser
-        private String dbPass = "";      // Datenbankpasswort
-        private String db_erstellung = "create table if not exists turnierverwaltung";
-        private String db_nutzung = "USE turnierverwaltung";
+
+	public String getDbHost() {
+		return dbHost;
+	}
+
+	public void setDbHost(String dbHost) {
+		this.dbHost = dbHost;
+	}
+
+	public String getDbPort() {
+		return dbPort;
+	}
+
+	public void setDbPort(String dbPort) {
+		this.dbPort = dbPort;
+	}
+
+	public String getDbName() {
+		return dbName;
+	}
+
+	public void setDbName(String dbName) {
+		this.dbName = dbName;
+	}
+
+	public String getDbUser() {
+		return dbUser;
+	}
+
+	public void setDbUser(String dbUser) {
+		this.dbUser = dbUser;
+	}
+
+	public String getDbPass() {
+		return dbPass;
+	}
+
+	public void setDbPass(String dbPass) {
+		this.dbPass = dbPass;
+	}
+
+	private String dbHost = "localhost"; // Hostname
+        private static String dbPort = "3306";      // Port -- Standard: 3306
+        private static String dbName = "turnierverwaltung_neu";   // Datenbankname
+        private static String dbUser = "root";     // Datenbankuser
+        private static String dbPass = "";      // Datenbankpasswort
+        private static String db_erstellung = "create table if not exists turnierverwaltung";
+        private static String db_nutzung = "USE turnierverwaltung";
 
 
 
-        public Connection SQLConnection()
+
+	public Connection SQLConnection()
         {
             try 
             {
@@ -43,13 +90,30 @@ public class SQLConnection
                 System.out.println("Treiber nicht gefunden");
             } catch (SQLException e) 
             {
-                System.out.println("Verbindung nicht moglich");
+
+				try {
+					pressBtn_Einstellungenneu();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				System.out.println("Verbindung nicht moglich");
                 System.out.println("SQLException: " + e.getMessage());
                 System.out.println("SQLState: " + e.getSQLState());
                 System.out.println("VendorError: " + e.getErrorCode());
             }
             return con;
         }
+	public void pressBtn_Einstellungenneu () throws Exception {
+		System.out.println("test");
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Einstellungen.fxml"));
+		Parent root1 = (Parent) fxmlLoader.load();
+		Stage stage = new Stage();
+		//a.addStage(stage);
+		stage.setScene(new Scene(root1));
+		stage.show();
+		stage.setTitle("Einstellungen");
+		//((Node)(event.getSource())).getScene().getWindow().hide();
+	}
         public boolean closeCon(){
 			try {
 				con.close();

@@ -11,6 +11,7 @@ public interface TeamDAO {
     public boolean create(Team team);
     public boolean createFreilos(Team team);
     public boolean update(Team team);
+    public boolean addSpieler(Team team, boolean ersterSpieler);
     public boolean delete(Team team);
     //public List<Team> getAllTeams();
 }

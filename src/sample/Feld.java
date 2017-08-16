@@ -5,28 +5,38 @@ import sample.Spielsysteme.*;
 import sample.Enums.*;
 
 public class Feld {
-	private boolean profiMatte;
+	private FeldDAO feldDAO = new FeldDAOimpl();
 	private int feldID;
 	private Spiel inVorbereitung;
 	private Spiel aktivesSpiel;
 	private Turnier turnier;
+	private int feldnummer;
 
-	public Feld(boolean profiMatte, int feldID, Turnier turnier) {
-		this.profiMatte = profiMatte;
-		this.feldID = feldID;
+	public Feld(Turnier turnier) {
 		this.turnier = turnier;
+		feldDAO.createFeld(this); //feldDAO ruft setFeldID() auf!!
 	}
 
-	public Feld(boolean profiMatte, int feldID, Spiel inVorbereitung, Spiel aktivesSpiel, Turnier turnier) {
-		this.profiMatte = profiMatte;
+	public void setFeldID(int feldID) {
+		this.feldID = feldID;
+		this.turnier.getFelder().add(this);
+		this.feldnummer = this.turnier.getFelder().indexOf(this)+1;
+	}
+
+	public Feld(int feldID, Spiel inVorbereitung, Spiel aktivesSpiel, Turnier turnier) {		//Constructor zum einlesen
 		this.feldID = feldID;
 		this.inVorbereitung = inVorbereitung;
 		this.aktivesSpiel = aktivesSpiel;
 		this.turnier = turnier;
 	}
 
-	public boolean isProfiMatte() {
-		return profiMatte;
+	public String toString(){
+		return "Feld "+feldnummer;
+	}
+
+
+	public void setFeldnummer(int feldnummer) {
+		this.feldnummer = feldnummer;
 	}
 
 	public int getFeldID() {
@@ -39,6 +49,11 @@ public class Feld {
 
 	public Spiel getAktivesSpiel() {
 		return aktivesSpiel;
+	}
+
+	public void spielBeenden(){
+		this.aktivesSpiel = this.inVorbereitung;
+		this.inVorbereitung = null;
 	}
 
 	public Turnier getTurnier() {

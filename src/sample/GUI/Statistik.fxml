@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@/CSS/Badminton.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.StatistikController">
+   <children>
+      <Label layoutX="27.0" layoutY="85.0" text="Spielklassen: ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="142.0" text="Spieler: ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+
+      <Label layoutX="27.0" layoutY="205.0" text="Spiele: ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lturnier" layoutX="27.0" layoutY="29.0" text="Turnierinformationen: ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="anzahlSpielklassen" layoutX="148.0" layoutY="85.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="anzahlSpielerimTurnier" layoutX="148.0" layoutY="142.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="anzahlSpiele" layoutX="148.0" layoutY="205.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="175.0" text="obs_spiele">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="anzahlobsspiele" layoutX="148.0" layoutY="175.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

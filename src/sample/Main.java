@@ -1,39 +1,83 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import java.sql.*;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import javafx.stage.WindowEvent;
+import sample.DAO.TurnierDAO;
+import sample.DAO.TurnierDAOimpl;
+import sample.Spielsysteme.Gruppe;
 
-import sample.Spielsysteme.*;
-import sample.Enums.*;
-import sample.DAO.*;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class Main extends Application {
 
+    private static Main instance;
+    public static Main getInstance() {
+        return instance;
+    }
+    private Stage primaryStage;
+
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/sample.fxml"));
-        primaryStage.setTitle("Badminton Turnierverwaltung");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setMaximized(true);
-        primaryStage.show();
+        try {
+            instance = this;
+            this.primaryStage = primaryStage;
+            Parent root = FXMLLoader.load(getClass().getResource("GUI/Turnierladen.fxml"));
+            this.primaryStage.setTitle("Badminton Turnierverwaltung - Kein Turnier ausgewählt");
+            Scene scene = new Scene(root);
+            this.primaryStage.setScene(scene);
+
+            this.primaryStage.show();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            instance = this;
+            this.primaryStage = primaryStage;
+            Parent root2 = FXMLLoader.load(getClass().getResource("GUI/Einstellungen.fxml"));
+            this.primaryStage.setTitle("Datenbank Fehler");
+            Scene scene2 = new Scene(root2);
+            this.primaryStage.setScene(scene2);
+            this.primaryStage.setAlwaysOnTop(true);
+            this.primaryStage.show();
+
+
+
+            FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("GUI/Main.fxml"));
+            Parent root1 = (Parent) fxmlLoader2.load();
+            Stage stage = new Stage();
+            //a.addStage(stage);
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage.setMaximized(true);
+            stage.setTitle("Badminton Turnierverwaltung - Keine Datenbankverbindung!");
+        }
+
+
+    }
+    public void updateTitle(String title) {
+        primaryStage.setTitle(title);
+
     }
 
-
-
     public static void main(String[] args) {
+
+
 
 
         launch(args);
         //$java -Duser.language=en com.tutego.insel.bundle.InternationalHelloWorld
 
-        //Locale.setDefault( new Locale("en", "UK") );
+      Locale.setDefault( new Locale("en", "UK") );
 //        Locale.setDefault( new Locale("de", "ch") );
 //        String baseName = "resources.HelloWorld";
 //
@@ -47,23 +91,17 @@ public class Main extends Application {
 //        }
 
 
-//        TurnierDAO test = new TurnierDAOimpl();
-//        ArrayList <Turnier> turnierliste = new ArrayList<>();
-//        turnierliste = test.
-//    	TurnierDAO test = new TurnierDAOimpl();
-//    	Dictionary<Integer,Turnier>  turnierliste = test.getAllTurniere();
-//                    System.out.println(turnierliste.get(1).getName());
-//        System.out.println(turnierliste.get(20).getName());
-
-            //System.out.println((i+1)+" "+setzliste.get(i).getName());
-
-
-//    	Turnier turnier = test.read(1);
-//        Spielklasse spielklasse =turnier.getSpielklassen().get(1);
-//   	ArrayList<Team> setzliste = spielklasse.getSetzliste();
-//   	setzliste.
-//        spielklasse.setSpielsystem(new GruppeMitEndrunde(setzliste,spielklasse,4,8));
-//        List<Ergebnis> ergebnisse = new ArrayList<>();
+//       ArrayList <Turnier> turnierliste = new ArrayList<>();
+    	//TurnierDAO test = new TurnierDAOimpl();
+//
+//        //System.out.println((i+1)+" "+setzliste.get(i).getName());
+//
+ /*       Turnier turnier = new Turnier("testturnier",1, LocalDate.now());
+    	test.read(turnier);
+        Spielklasse spielklasse =turnier.getSpielklassen().get(1);
+   	    ArrayList<Team> setzliste = spielklasse.getSetzliste();
+   	    spielklasse.setSpielsystem(new Gruppe(setzliste,spielklasse));*/
+    //    List<Ergebnis> ergebnisse = new ArrayList<>();
 //        ergebnisse.add(new Ergebnis(21,15,21,12));
 //        ergebnisse.add(new Ergebnis(15,21,21,19,30,29));
 //        ergebnisse.add(new Ergebnis(21,12,21,11));
@@ -79,14 +117,11 @@ public class Main extends Application {
 //        ergebnisse.add(new Ergebnis(12,21,16,21));
 //        ergebnisse.add(new Ergebnis(15,21,13,21));
 //        ergebnisse.add(new Ergebnis(19,21,21,14,21,18));
-//
-//
-//
-//        for(int i=1; i<=turnier.getSpiele().size();i++){
-//            System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
-//            //turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));
-//            turnier.getSpiele().get(i).setErgebnis(ergebnisse.get(0));
-//        }
+
+
+
+
+
         /*for(int i=4; i<=7;i++){
             System.out.println(turnier.getSpiele().get(i).getHeim()+" gegen "+turnier.getSpiele().get(i).getGast());
             turnier.getSpiele().get(i).setErgebnis(ergebnisse.get((int)(Math.random()*ergebnisse.size())));

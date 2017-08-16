@@ -95,7 +95,7 @@ public class ServerController {
     }
 
     /**
-     * Creates a server controller for the MySQL server with the given basedir
+     * Creates a server sample.controller for the MySQL server with the given basedir
      * and datadir.
      * 
      * @param basedir

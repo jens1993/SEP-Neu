@@ -4,6 +4,7 @@ import sample.*;
 import sample.DAO.*;
 import sample.Enums.*;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
@@ -35,8 +36,18 @@ public class KO extends Spielsystem {
 		ersteRundeFuellen(setzliste);
 	}
 
+    public KO(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
+		this.setSpielklasse(spielklasse);		//Constructor nur für Einlesen aus der Datenbank
+		this.teilnehmerzahl=setzliste.size();
+		setSpielSystemArt(3);
+		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
+		freiloseHinzufuegen(setzliste);
+		knotenAufbauen(teilnehmerzahl);
+		ersteRundeFuellen(setzliste);
+    }
 
-	public void alleSpieleErstellen(){
+
+    public void alleSpieleErstellen(){
 
 	}
 
@@ -124,5 +135,10 @@ public class KO extends Spielsystem {
 		else{
 			return true;
 		}
+	}
+
+	@Override
+	public boolean beendeMatch(Spiel spiel, String einlesen) {
+		return false;
 	}
 }

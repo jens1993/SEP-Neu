@@ -1,18 +1,13 @@
 package sample.DAO;
 
-import com.sun.org.apache.bcel.internal.generic.Select;
-
 import sample.*;
-import sample.Spielsysteme.Spielsystem;
+import sample.Spielsysteme.*;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.List;
+import java.time.LocalTime;
+import java.util.*;
 
 public class TurnierDAOimpl implements TurnierDAO {
 
@@ -101,8 +96,8 @@ public class TurnierDAOimpl implements TurnierDAO {
     }
 
     @Override
-    public boolean read(Turnier turnierEingabe) {
-        Turnier turnier = null;
+    public Turnier read(Turnier turnierEingabe) {
+
         String sql = "SELECT * FROM turnier WHERE turnierID = ?";
         try {
             SQLConnection con = new SQLConnection();
@@ -110,23 +105,28 @@ public class TurnierDAOimpl implements TurnierDAO {
             smt.setInt(1, turnierEingabe.getTurnierid());
             ResultSet turnierResult = smt.executeQuery();
             turnierResult.next();
-            turnier = turnierEingabe;
-            turnier.setMatchDauer(turnierResult.getInt("MatchDauer"));
-            turnier.setSpielerPausenZeit(turnierResult.getInt("SpielerPausenZeit"));
-            turnier.setZaehlweise(turnierResult.getInt("Zaehlweise"));
-            turnier.setFelder(readFelder(turnier));
-            turnier.setSpielklassen(readSpielklassen(turnier));
-            turnier.setVereine(readVereine(turnier));
-            turnier.setSpieler(readSpieler(turnier));
-            turnier.setTeams(readTeams(turnier));
-            for(int i=1; i<=turnier.getSpielklassen().size();i++){
-                Spielklasse spielklasse = turnier.getSpielklassen().get(i);
+            //turnier = turnierEingabe;
+            turnierEingabe.setMatchDauer(turnierResult.getInt("MatchDauer"));
+            turnierEingabe.setSpielerPausenZeit(turnierResult.getInt("SpielerPausenZeit"));
+            turnierEingabe.setZaehlweise(turnierResult.getInt("Zaehlweise"));
+            turnierEingabe.setFelder(readFelder(turnierEingabe));
+            turnierEingabe.setSpielklassen(readSpielklassen(turnierEingabe));
+            turnierEingabe.setVereine(readVereine(turnierEingabe));
+            turnierEingabe.setSpieler(readSpieler(turnierEingabe));
+            turnierEingabe.setTeams(readTeams(turnierEingabe));
+            for(int i=1; i<=turnierEingabe.getSpielklassen().size();i++){
+                Spielklasse spielklasse = turnierEingabe.getSpielklassen().get(i);
                 readSetzliste(spielklasse);
+                Spielsystem spielsystem = readSpielsystem(spielklasse);
+                if (spielsystem != null){
+                    turnierEingabe.getSpielklassen().get(i).setSpielsystem(spielsystem);
+                }
             }
+            spielListenFuellen(turnierEingabe);
             smt.close();
             con.closeCon();
             //turnier.setSpiele(readSpiele(turnier));
-            return true;
+            return turnierEingabe;
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Turnier lesen klappt nicht");
@@ -136,7 +136,25 @@ public class TurnierDAOimpl implements TurnierDAO {
             e.printStackTrace();
             System.out.println("Fehler");
         }
-        return false;
+        return turnierEingabe;
+    }
+
+    private void spielListenFuellen(Turnier turnierEingabe) {
+        Enumeration e = turnierEingabe.getSpiele().keys();
+        while(e.hasMoreElements()){
+            int spielID = (int) e.nextElement();
+            Spiel spiel = turnierEingabe.getSpiele().get(spielID);
+            if(spiel.getStatus() == 3){
+                turnierEingabe.getObs_gespielteSpiele().add(spiel);
+            }
+            else if (spiel.getStatus()==2){
+                turnierEingabe.getObs_aktiveSpiele().add(spiel);
+
+            }
+            else if (spiel.getStatus()==1){
+                turnierEingabe.getObs_ausstehendeSpiele().add(spiel);
+            }
+        }
     }
 
     private Dictionary<Integer,Spielklasse> readSpielklassen(Turnier turnier) {
@@ -152,7 +170,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 spielklassen.put(spielklasseid,new Spielklasse(spielklasseid, spielklassenResult.getString("Disziplin"),spielklassenResult.getString("Niveau"),turnier));
                 spielklassen.get(spielklasseid).setAktiv(spielklassenResult.getBoolean("aktiv"));
                 spielklassen.get(spielklasseid).setMeldeKosten(spielklassenResult.getFloat("MeldeKosten"));
-                spielklassen.get(spielklasseid).setSpielsystem(readSpielsystem(spielklassen.get(spielklasseid)));
+                //spielklassen.get(spielklasseid).setSpielsystem(readSpielsystem(spielklassen.get(spielklasseid)));
             }
             smt.close();
             con.closeCon();
@@ -175,7 +193,6 @@ public class TurnierDAOimpl implements TurnierDAO {
             while (setzlisteResult.next()) {
                 Team team = spielklasse.getTurnier().getTeams().get(setzlisteResult.getInt("TeamID"));
                 setzliste.add(team);
-                System.out.println(team);
             }
             st.close();
             con.closeCon();
@@ -188,12 +205,129 @@ public class TurnierDAOimpl implements TurnierDAO {
     }
     private Spielsystem readSpielsystem(Spielklasse spielklasse){
         Spielsystem spielsystem = null;
-
-
+        ArrayList<Spiel> spiele = readSpiele(spielklasse);
+        Dictionary<Integer,Ergebnis> ergebnisse = readErgebnisse(spielklasse);
+        if (spiele != null) {
+            if (spiele.get(0).getSystemSpielID() < 20000000) {
+                spielsystem = new Gruppe(spielklasse.getSetzliste(), spielklasse, spiele, ergebnisse);
+            } else if (spiele.get(0).getSystemSpielID() < 30000000) {
+                spielsystem = new GruppeMitEndrunde(spielklasse.getSetzliste(), spielklasse, spiele, ergebnisse);
+            } else if (spiele.get(0).getSystemSpielID() < 40000000) {
+                spielsystem = new KO(spielklasse.getSetzliste(), spielklasse, spiele, ergebnisse);
+            } else if (spiele.get(0).getSystemSpielID() < 50000000) {
+                spielsystem = new KOmitTrostrunde(spielklasse.getSetzliste(), spielklasse, spiele, ergebnisse);
+            } else if (spiele.get(0).getSystemSpielID() < 60000000) {
+                spielsystem = new SchweizerSystem(spielklasse.getSetzliste(), spielklasse, spiele, ergebnisse);
+            }
+        }
         return spielsystem;
     }
-    private Dictionary<Integer,Feld> readFelder(Turnier turnier) {
-        Dictionary<Integer, Feld> felder = new Hashtable<Integer,Feld>();
+    private ArrayList<Spiel> readSpiele(Spielklasse spielklasse){
+        ArrayList<Spiel> spiele = new ArrayList<>();
+        String sql = "SELECT * FROM spiel INNER JOIN spielklasse_spielid on spiel.spielid=spielklasse_spielid.spielid WHERE spiel.spielklasseID = ?";
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setInt(1, spielklasse.getSpielklasseID());
+            ResultSet spielResult = smt.executeQuery();
+            while (spielResult.next()){
+                int spielid = spielResult.getInt("SpielID");
+                int heimid=spielResult.getInt("Heim");
+                Team heim = spielklasse.getTurnier().getTeams().get(heimid);
+                int gastid=spielResult.getInt("Gast");
+                Team gast = spielklasse.getTurnier().getTeams().get(gastid);
+                Time date = spielResult.getTime("AufrufZeit");
+                LocalTime aufrufzeit = LocalTime.now();
+                if(date!=null){
+                    aufrufzeit=date.toLocalTime();
+                }
+                int schiedsrichterid = spielResult.getInt("schiedsrichter");
+                Spieler schiedsrichter = null;
+                if(schiedsrichterid!=0) {
+                    schiedsrichter = spielklasse.getTurnier().getSpieler().get(schiedsrichterid);
+                }
+                int status = spielResult.getInt("status");
+                int systemspielid = spielResult.getInt("SpielklasseSpielID");
+                Feld feld = null;
+                for (int i=0; i<spielklasse.getTurnier().getFelder().size();i++){
+                    if (spielklasse.getTurnier().getFelder().get(i).getFeldID()==spielResult.getInt("Feld")){
+                        feld = spielklasse.getTurnier().getFelder().get(i);
+                    }
+                }
+                spiele.add(new Spiel(spielid,heim,gast,aufrufzeit,schiedsrichter,status,systemspielid,feld));
+
+            }
+            smt.close();
+            con.closeCon();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Spiele lesen klappt nicht");
+        }
+        if (spiele.size()>0) {
+            return spiele;
+        }
+        else{
+            return null;
+        }
+    }
+    private Dictionary<Integer,Ergebnis> readErgebnisse(Spielklasse spielklasse){
+        Dictionary<Integer, Ergebnis> ergebnisse = new Hashtable<Integer,Ergebnis>();
+        Dictionary<Integer, ArrayList<int[]>> satzListe = new Hashtable<>();
+        String sql = "SELECT SpielklasseSpielID, Heimpunkte, Gastpunkte FROM spiel_satzergebnis " +
+                "Inner join spiel on spiel_satzergebnis.spielID=spiel.spielid " +
+                "inner join spielklasse_spielid on spiel.spielid=spielklasse_spielid.SpielID " +
+                "where spiel.spielklasseid=?";
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            smt.setInt(1, spielklasse.getSpielklasseID());
+            ResultSet ergebnisResult = smt.executeQuery();
+            while (ergebnisResult.next()){
+                int spielid = ergebnisResult.getInt("SpielklasseSpielID");
+                int[] satz = new int[2];
+                satz[0] = ergebnisResult.getInt("Heimpunkte");
+                satz[1] = ergebnisResult.getInt("Gastpunkte");
+                if(satzListe.get(spielid)==null){
+                    satzListe.put(spielid,new ArrayList<>());
+
+                }
+                satzListe.get(spielid).add(satz);
+            }
+            smt.close();
+            con.closeCon();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Ergebnisse lesen klappt nicht");
+        }
+        Enumeration keys = satzListe.keys();
+        while(keys.hasMoreElements()){
+            int key=(int)keys.nextElement();
+            ArrayList<int[]> ergebnis = satzListe.get(key);
+            int anzahlSaetze = ergebnis.size();
+            int[] ergebnisarray = new int[anzahlSaetze*2];
+            for (int i=0;i<anzahlSaetze;i++){
+                ergebnisarray[i*2]=ergebnis.get(i)[0];
+                ergebnisarray[i*2+1]=ergebnis.get(i)[1];
+            }
+            if(ergebnisarray.length==4){
+                ergebnisse.put(key,new Ergebnis(ergebnisarray[0],ergebnisarray[1],ergebnisarray[2],ergebnisarray[3]));
+            }
+            else if(ergebnisarray.length==6){
+                ergebnisse.put(key,new Ergebnis(ergebnisarray[0],ergebnisarray[1],ergebnisarray[2],ergebnisarray[3],ergebnisarray[4],ergebnisarray[5]));
+            }
+            else if(ergebnisarray.length==8){
+                ergebnisse.put(key,new Ergebnis(ergebnisarray[0],ergebnisarray[1],ergebnisarray[2],ergebnisarray[3],ergebnisarray[4],ergebnisarray[5],ergebnisarray[6],ergebnisarray[7]));
+            }
+            else if(ergebnisarray.length==10){
+                ergebnisse.put(key,new Ergebnis(ergebnisarray[0],ergebnisarray[1],ergebnisarray[2],ergebnisarray[3],ergebnisarray[4],ergebnisarray[5],ergebnisarray[6],ergebnisarray[7],ergebnisarray[8],ergebnisarray[9]));
+            }
+        }
+        return ergebnisse;
+    }
+
+
+    private ArrayList<Feld> readFelder(Turnier turnier) {
+        ArrayList<Feld> felder = new ArrayList<>();
 
         String sql = "SELECT * FROM feld WHERE turnierID = ?";
         try {
@@ -203,7 +337,11 @@ public class TurnierDAOimpl implements TurnierDAO {
             ResultSet feldResult = smt.executeQuery();
             while (feldResult.next()){
                 int feldid = feldResult.getInt("FeldID");
-                felder.put(feldid,new Feld(feldResult.getBoolean("ProfiMatte"),feldid,turnier));
+                Spiel aktivesSpiel = turnier.getSpiele().get(feldResult.getInt("aktivesSpiel"));
+                Spiel inVorbereitung = turnier.getSpiele().get(feldResult.getInt("inVorbereitung"));
+                Feld feld = new Feld(feldid,aktivesSpiel,inVorbereitung,turnier);
+                felder.add(feld);
+                feld.setFeldnummer(felder.indexOf(feld)+1);
             }
             smt.close();
             con.closeCon();
@@ -261,7 +399,6 @@ public class TurnierDAOimpl implements TurnierDAO {
             }
             smt.close();
             con.closeCon();
-            System.out.println("Turnier lesen klappt");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Turnier lesen klappt nicht");
@@ -293,12 +430,17 @@ public class TurnierDAOimpl implements TurnierDAO {
                 rPunkte[1] = spielerResult.getInt("RLP_Doppel");
                 rPunkte[2] = spielerResult.getInt("RLP_Mixed");
                 LocalDate verfuegbar=LocalDate.now();
+                Date geburtstag = spielerResult.getDate("GDatum");
+                LocalDate gdatum = LocalDate.now();
+                if (geburtstag!=null){
+                    gdatum = geburtstag.toLocalDate();
+                }
                 if(spielerResult.getDate("Verfuegbar")!=null) {
                      verfuegbar = spielerResult.getDate("Verfuegbar").toLocalDate();
                 }
                 spieler.put(spielerID,new Spieler(spielerResult.getString("VName"),
                         spielerResult.getString("NName"),
-                        spielerResult.getDate("GDatum").toLocalDate(),
+                        gdatum,
                         spielerID,spielerResult.getBoolean("Geschlecht"),
                         rPunkte,turnier.getVereine().get(spielerResult.getInt("VereinsID")),
                         spielerResult.getFloat("Meldegebuehren"),
