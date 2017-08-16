@@ -79,7 +79,9 @@ public class Spieler {
 		this.extSpielerID = extSpielerID;
 		this.aktuellesSpiel = aktuellesSpiel;
 	}
+	public Spieler(){
 
+	}
 	public void einzelPunkteUpdate(int einzelPunkte){
 		rPunkte[0] = einzelPunkte;
 	}
