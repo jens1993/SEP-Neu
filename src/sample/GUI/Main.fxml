@@ -85,15 +85,15 @@
             <ButtonBar>
                 <buttons>
                     <Button fx:id="btn_klassen" mnemonicParsing="false" onAction="#pressBtn_klassen" styleClass="mainButton" text="Klassen" />
-                    <Button fx:id="btn_spieler" mnemonicParsing="false" onAction="#pressBtn_spieler" text="Spieler" />
-                  <Button mnemonicParsing="false" onAction="#pressBtn_teamLaden" text="Teams" />
-                    <Button mnemonicParsing="false" text="Felder" />
+                    <Button fx:id="btn_spieler" mnemonicParsing="false" onAction="#pressBtn_spieler" styleClass="mainButton" text="Spieler" />
+                  <Button mnemonicParsing="false" onAction="#pressBtn_teamLaden" styleClass="mainButton" text="Teams" />
+                    <Button mnemonicParsing="false" styleClass="mainButton" text="Felder" />
                 </buttons>
             </ButtonBar>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
                 <buttons>
-                    <Button mnemonicParsing="false" text="Zeitplan" />
-                    <Button mnemonicParsing="false" onAction="#pressBtn_Statistik" text="Statistik" />
+                    <Button mnemonicParsing="false" styleClass="mainButton" text="Zeitplan" />
+                    <Button mnemonicParsing="false" onAction="#pressBtn_Statistik" styleClass="mainButton" text="Statistik" />
                 </buttons>
             </ButtonBar>
         </children>
@@ -108,18 +108,18 @@
                         <children>
                             <TabPane layoutX="-5.0" layoutY="-4.0" prefHeight="723.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <tabs>
-                                    <Tab text="Turnierbaum">
+                                    <Tab styleClass="mainTab" text="Turnierbaum">
                                         <content>
                                             <AnchorPane />
                                         </content>
                                     </Tab>
-                                    <Tab fx:id="tab_spieluebersicht" onSelectionChanged="#fuelleSpielElemente" text="Spielübersicht">
+                                    <Tab fx:id="tab_spieluebersicht" onSelectionChanged="#fuelleSpielElemente" styleClass="mainTab" text="Spielübersicht">
                                  <content>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
                                           <HBox fx:id="hbox_main" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button mnemonicParsing="false" onAction="#reloadcheckbox" text="Lade Spielklassen neu" />
+                                                <Button mnemonicParsing="false" onAction="#reloadcheckbox" styleClass="mainTab" text="Lade Spielklassen neu" />
                                              </children></HBox>
                                           <TableView fx:id="tabelle_spiele" prefHeight="964.0" prefWidth="903.0" />
                                        </children>
