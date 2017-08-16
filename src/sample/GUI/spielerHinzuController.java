@@ -557,6 +557,12 @@ private TextField t_suchleistespielerhinzu;
         }
     }
 
-
-
+    @FXML
+    public void pressBtn_ExcelImport (ActionEvent event) throws Exception {
+        try {
+            ExcelImport.importExcelData("C:\\Meldeformular\\meldeformular.xls");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
