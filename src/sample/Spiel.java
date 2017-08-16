@@ -196,8 +196,8 @@ public class Spiel {
 		return setzPlatzGast;
 	}
 
-	public void spielzettelDrucken(int aSpielID) {
-		throw new UnsupportedOperationException();
+	public void spielzettelDrucken() {
+		heim.getSpielerEins().getVName();
 	}
 
 	public void ergebnisEintragen(){
