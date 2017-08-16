@@ -98,7 +98,6 @@ public class Gruppe extends Spielsystem {
 		for (int i=0;i<spiele.size();i++){
 			int spielklasseSpielID=spiele.get(i).getSystemSpielID();
 			int rundenNummer = (spielklasseSpielID-getSpielSystemArt()*10000000)/1000;
-			System.out.println("Rundennummer des Spiels ist: "+rundenNummer);
 			Spiel spiel =spiele.get(i);
 			while(getRundenArray().size()-1<rundenNummer){
 				getRundenArray().add(new ArrayList<>());
