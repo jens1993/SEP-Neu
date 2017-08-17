@@ -16,9 +16,9 @@ import java.util.Hashtable;
 public class auswahlklasse
 {
     private TurnierDAO turnierDAO = new TurnierDAOimpl();
-    private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
-    private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
-    private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
+    private static Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
+    private static Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
+    private static Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
     private static Spielklasse aktuelleSpielklassenAuswahl = null;
     private static Turnier aktuelleTurnierAuswahl = null;
     private static Spieler SpielerzumHinzufeuegen=null;
@@ -89,12 +89,12 @@ public class auswahlklasse
         auswahlklasse.vorhandeneSpieler = vorhandeneSpieler;
     }
 
-    public ArrayList<Stage> getStages() {
+    public static ArrayList<Stage> getStages() {
         return stages;
     }
 
-    public void addStage(Stage stage){
-        this.stages.add(0,stage);
+    public static void addStage(Stage stage){
+        auswahlklasse.stages.add(0,stage);
     }
 
     public static Spieler getSpielerzumHinzufeuegen() {
@@ -117,55 +117,46 @@ public class auswahlklasse
         aktuelleTurnierAuswahl = aktuellesTurnier;
     }
 
-    public void addSpieler(Spieler sp) {
+    public static void addSpieler(Spieler sp) {
         spieler.put(sp.getSpielerID(), sp);
     }
-    public void UpdateSpieler(Spieler sp) {
-        spieler.put(sp.getSpielerID(),sp);
-    }
 
-    public Turnier getAktuelleTurnierAuswahl()
+    public static Turnier getAktuelleTurnierAuswahl()
     {
         return aktuelleTurnierAuswahl;
     }
 
-    public Dictionary<Integer, Turnier> getTurnierliste() {
+    public static Dictionary<Integer, Turnier> getTurnierliste() {
         return turnierliste;
     }
-    public Dictionary<Integer, Verein> getVereine() {
+    public static Dictionary<Integer, Verein> getVereine() {
         vereine=aktuelleTurnierAuswahl.getVereine();
         return vereine;
     }
-    public void addVerein(Verein verein) {
+    public static void addVerein(Verein verein) {
         vereine.put(verein.getVereinsID(),verein);
     }
     /*public Dictionary<Integer, Spielklasse> getSpielklasseDict() {
         spielklassen=spielklasseDAO.getAllSpielklassenDict();
         return spielklassen;
     }*/
-    public Dictionary<Integer, Spieler> getSpieler() {
+    public static Dictionary<Integer, Spieler> getSpieler() {
         spieler=aktuelleTurnierAuswahl.getSpieler();
         return spieler;
     }
 
-    public void setTurnierliste(Dictionary<Integer, Turnier> turnierliste) {
-        this.turnierliste = turnierliste;
+
+
+    public static void setSpieler(Dictionary<Integer, Spieler> spieler) {
+        auswahlklasse.spieler = spieler;
     }
 
-    public void setVereine(Dictionary<Integer, Verein> vereine) {
-        this.vereine = vereine;
-    }
-
-    public void setSpieler(Dictionary<Integer, Spieler> spieler) {
-        this.spieler = spieler;
-    }
-
-    public void turnierAuswahlSpeichern (Turnier turnier)
+    public static void turnierAuswahlSpeichern (Turnier turnier)
     {
         aktuelleTurnierAuswahl = turnier;
     }
 
-    public void spielklassenAuswahlSpeichern (Spielklasse spielklasse)
+    public static void spielklassenAuswahlSpeichern (Spielklasse spielklasse)
     {
         aktuelleSpielklassenAuswahl = spielklasse;
     }
