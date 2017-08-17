@@ -34,9 +34,8 @@ public class Verein {
 		this.name = name;
 		this.verband = verband;
 		vereinDAO.create(this);
-
 	}
-	public Verein(int vereinsID, String extVereinsID, String name, String verband, String einlesen) {
+	public Verein(String einlesen, int vereinsID, String extVereinsID, String name, String verband) {
 		this.vereinsID = vereinsID;
 		this.extVereinsID = extVereinsID;
 		this.name = name;
