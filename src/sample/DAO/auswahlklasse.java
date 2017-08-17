@@ -130,7 +130,6 @@ public class auswahlklasse
         return turnierliste;
     }
     public static Dictionary<Integer, Verein> getVereine() {
-        vereine=aktuelleTurnierAuswahl.getVereine();
         return vereine;
     }
     public static void addVerein(Verein verein) {
@@ -141,7 +140,6 @@ public class auswahlklasse
         return spielklassen;
     }*/
     public static Dictionary<Integer, Spieler> getSpieler() {
-        spieler=aktuelleTurnierAuswahl.getSpieler();
         return spieler;
     }
 

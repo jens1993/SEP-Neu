@@ -111,8 +111,7 @@ public class TurnierDAOimpl implements TurnierDAO {
             turnierEingabe.setZaehlweise(turnierResult.getInt("Zaehlweise"));
             turnierEingabe.setFelder(readFelder(turnierEingabe));
             turnierEingabe.setSpielklassen(readSpielklassen(turnierEingabe));
-            turnierEingabe.setVereine(readVereine(turnierEingabe));
-            turnierEingabe.setSpieler(readSpieler(turnierEingabe));
+
             turnierEingabe.setTeams(readTeams(turnierEingabe));
             for(int i=1; i<=turnierEingabe.getSpielklassen().size();i++){
                 Spielklasse spielklasse = turnierEingabe.getSpielklassen().get(i);
@@ -137,6 +136,33 @@ public class TurnierDAOimpl implements TurnierDAO {
             System.out.println("Fehler");
         }
         return turnierEingabe;
+    }
+    @Override
+    public Dictionary<Integer,Turnier> getAllTurniere() {
+        Dictionary<Integer, Turnier> turnierListe = new Hashtable<Integer,Turnier>();
+        String sql ="SELECT * FROM Turnier";
+
+        try {
+            SQLConnection con = new SQLConnection();
+            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            //smt.setInt(1, turnier.getTurnierid());
+            ResultSet TurnierResult = smt.executeQuery();
+            while (TurnierResult.next()){
+                int turnierid  = TurnierResult.getInt("TurnierID");
+                String turnierName = TurnierResult.getString("Name");
+                Date Datum = TurnierResult.getDate("Datum");
+                turnierListe.put(turnierid,new Turnier(turnierName,turnierid, Datum.toLocalDate()));
+            }
+            smt.close();
+            con.closeCon();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Turnier lesen klappt nicht");
+        }
+
+        readVereine();
+        readSpieler();
+        return turnierListe;
     }
 
     private void spielListenFuellen(Turnier turnierEingabe) {
@@ -244,7 +270,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 int schiedsrichterid = spielResult.getInt("schiedsrichter");
                 Spieler schiedsrichter = null;
                 if(schiedsrichterid!=0) {
-                    schiedsrichter = spielklasse.getTurnier().getSpieler().get(schiedsrichterid);
+                    schiedsrichter = auswahlklasse.getSpieler().get(schiedsrichterid);
                 }
                 int status = spielResult.getInt("status");
                 int systemspielid = spielResult.getInt("SpielklasseSpielID");
@@ -353,23 +379,15 @@ public class TurnierDAOimpl implements TurnierDAO {
         return felder;
     }
 
-    private Dictionary<Integer,Verein> readVereine(Turnier turnier) {
-        Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
-        String sql = "SELECT verein.VereinsID, verein.ExtVereinsID, verein.Name,verein.Verband FROM spieler " +
-                "inner join team_spieler on spieler.SpielerID = team_spieler.SpielerID " +
-                "inner join team on team_spieler.TeamID = team.TeamID " +
-                "inner join verein on spieler.Vereinsid = verein.VereinsID " +
-                "inner join spielklasse on team.SpielklasseID = spielklasse.SpielklasseID " +
-                "where turnierid = ? " +
-                "Group by verein.VereinsID";
+    private void readVereine() {
+        String sql = "SELECT verein.VereinsID, verein.ExtVereinsID, verein.Name,verein.Verband FROM Verein";
         try {
             SQLConnection con = new SQLConnection();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, turnier.getTurnierid());
             ResultSet vereinResult = smt.executeQuery();
             while (vereinResult.next()){
                 int vereinsid = vereinResult.getInt("VereinsID");
-                vereine.put(vereinsid,new Verein(vereinsid,vereinResult.getString("ExtVereinsID"),vereinResult.getString("Name"),vereinResult.getString("Verband")));
+                auswahlklasse.getVereine().put(vereinsid,new Verein(vereinsid,vereinResult.getString("ExtVereinsID"),vereinResult.getString("Name"),vereinResult.getString("Verband")));
             }
             smt.close();
             con.closeCon();
@@ -377,39 +395,10 @@ public class TurnierDAOimpl implements TurnierDAO {
             e.printStackTrace();
             System.out.println("Verein lesen klappt nicht");
         }
-
-
-        return vereine;
-    }
-    @Override
-    public Dictionary<Integer,Turnier> getAllTurniere() {
-        Dictionary<Integer, Turnier> turnierListe = new Hashtable<Integer,Turnier>();
-        String sql ="SELECT * FROM Turnier";
-
-        try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            //smt.setInt(1, turnier.getTurnierid());
-            ResultSet TurnierResult = smt.executeQuery();
-            while (TurnierResult.next()){
-                int turnierid  = TurnierResult.getInt("TurnierID");
-                String turnierName = TurnierResult.getString("Name");
-                Date Datum = TurnierResult.getDate("Datum");
-                turnierListe.put(turnierid,new Turnier(turnierName,turnierid, Datum.toLocalDate()));
-            }
-            smt.close();
-            con.closeCon();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Turnier lesen klappt nicht");
-        }
-
-
-        return turnierListe;
     }
 
-    private Dictionary<Integer,Spieler> readSpieler(Turnier turnier) {
-        Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
+
+    private void readSpieler() {
         String sql ="SELECT * FROM SPIELER";
         /*String sql = "SELECT * FROM spieler " +
                 "INNER JOIN team_spieler ON spieler.SpielerID = team_spieler.SpielerID " +
@@ -438,11 +427,11 @@ public class TurnierDAOimpl implements TurnierDAO {
                 if(spielerResult.getDate("Verfuegbar")!=null) {
                      verfuegbar = spielerResult.getDate("Verfuegbar").toLocalDate();
                 }
-                spieler.put(spielerID,new Spieler(spielerResult.getString("VName"),
+                auswahlklasse.getSpieler().put(spielerID,new Spieler(spielerResult.getString("VName"),
                         spielerResult.getString("NName"),
                         gdatum,
                         spielerID,spielerResult.getBoolean("Geschlecht"),
-                        rPunkte,turnier.getVereine().get(spielerResult.getInt("VereinsID")),
+                        rPunkte,auswahlklasse.getVereine().get(spielerResult.getInt("VereinsID")),
                         spielerResult.getFloat("Meldegebuehren"),
                         spielerResult.getString("Nationalitaet"),
                         verfuegbar,
@@ -455,8 +444,6 @@ public class TurnierDAOimpl implements TurnierDAO {
             e.printStackTrace();
             System.out.println("Spieler lesen klappt nicht");
         }
-
-        return spieler;
     }
     private Dictionary<Integer,Team> readTeams(Turnier turnier) {
         Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
@@ -490,7 +477,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 int spielerid = teamSpielerResult.getInt("SpielerID");
                 int teamid = teamSpielerResult.getInt("TeamID");
                 Team team = teams.get(teamid);
-                Spieler spieler = turnier.getSpieler().get(spielerid);
+                Spieler spieler = auswahlklasse.getSpieler().get(spielerid);
                 team.addSpieler(spieler);
             }
             smtzwei.close();

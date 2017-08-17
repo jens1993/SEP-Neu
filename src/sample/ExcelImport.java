@@ -80,7 +80,6 @@ public class ExcelImport {
         HSSFCell cell = row.getCell(cellNumber);
 
 
-        int spielerid = auswahlklasse.getSpieler().size()+1;
         String vName = "";
         String nName;
         LocalDate gDatum = LocalDate.now();
@@ -158,9 +157,9 @@ public class ExcelImport {
                     int key = (int) e.nextElement();
                     if(verein == null) {
                         Verein tempVerein = auswahlklasse.getVereine().get(key);
-                        if (tempVerein.getName() == vereinsname) {
+                        if (tempVerein.getName().contentEquals(vereinsname)) {
                             verein = tempVerein;
-                        } else if (tempVerein.getExtVereinsID() == extVereinsID) {
+                        } else if (tempVerein.getExtVereinsID().contentEquals(extVereinsID)) {
                             verein = tempVerein;
                         }
                     }
@@ -171,7 +170,7 @@ public class ExcelImport {
                         auswahlklasse.addVerein(verein);
                     }
                 }
-                Spieler neuerSpieler = new Spieler(vName,nName,gDatum,spielerid,geschlecht,rPunkte,verein,extSpielerID);
+                Spieler neuerSpieler = new Spieler(vName,nName,gDatum,geschlecht,rPunkte,verein,extSpielerID);
                 return neuerSpieler;
 
 

@@ -206,8 +206,8 @@ public class klasseHinzufuegenController implements Initializable
         if(a.getAktuelleTurnierAuswahl()!=null) {
             ObservableList<Spieler> spieler = FXCollections.observableArrayList();
 
-            for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
-                spieler.add(a.getAktuelleTurnierAuswahl().getSpieler().get(i));
+            for (int i=1;i<=auswahlklasse.getSpieler().size();i++){
+                spieler.add(auswahlklasse.getSpieler().get(i));
                 //System.out.println("test");
                 System.out.println(spieler.get(i-1).getVName());
             }

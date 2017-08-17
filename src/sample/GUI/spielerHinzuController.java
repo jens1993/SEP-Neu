@@ -111,9 +111,9 @@ private TextField t_suchleistespielerhinzu;
 
             obs_spieler.clear();
 
-            for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
-                obs_spieler.add(a.getAktuelleTurnierAuswahl().getSpieler().get(i));
-                spielerhash.put(a.getAktuelleTurnierAuswahl().getSpieler().get(i).getSpielerID(),a.getAktuelleTurnierAuswahl().getSpieler().get(i));
+            for (int i=1;i<=auswahlklasse.getSpieler().size();i++){
+                obs_spieler.add(auswahlklasse.getSpieler().get(i));
+                spielerhash.put(auswahlklasse.getSpieler().get(i).getSpielerID(),auswahlklasse.getSpieler().get(i));
 
             }
 
@@ -194,7 +194,7 @@ private TextField t_suchleistespielerhinzu;
             Verein verein = combo_verein.getSelectionModel().getSelectedItem();
             System.out.println(a.getSpieler().size());
 
-        spieler_neu= new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),a.getSpieler().size()+1,geschlecht,rpunkte,verein,t_spid.getText());
+        spieler_neu= new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),geschlecht,rpunkte,verein,t_spid.getText());
         ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
 
             felderLeeren();
@@ -226,7 +226,7 @@ private TextField t_suchleistespielerhinzu;
         else
         {
             a.addSpieler(spieler_neu);
-            a.getAktuelleTurnierAuswahl().getSpieler().put(spieler_neu.getSpielerID(),spieler_neu);
+            auswahlklasse.getSpieler().put(spieler_neu.getSpielerID(),spieler_neu);
             printSpielerZuordnenTableNeu();
 
 
@@ -344,7 +344,7 @@ private TextField t_suchleistespielerhinzu;
     private void ladeVereine() throws Exception
     {
 
-        System.out.println(a.getAktuelleTurnierAuswahl().getVereine().size());
+        System.out.println(auswahlklasse.getVereine().size());
         ObservableList vereine = FXCollections.observableArrayList();
         for (int i=1;i<=a.getVereine().size();i++){
             vereine.add(a.getVereine().get(i));

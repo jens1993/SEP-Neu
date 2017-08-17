@@ -65,8 +65,8 @@ public class TeamUebersichtController implements Initializable, Cloneable
         if(a.getAktuelleTurnierAuswahl()!=null) {
 
 
-            for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
-                obs_spieler.add(a.getAktuelleTurnierAuswahl().getSpieler().get(i));
+            for (int i=1;i<=auswahlklasse.getSpieler().size();i++){
+                obs_spieler.add(auswahlklasse.getSpieler().get(i));
 
             }
 
