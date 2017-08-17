@@ -119,8 +119,8 @@ public class SpielSystemController implements Initializable
     private void printSpielerSpielklasseHinzuTable() throws Exception {
         if(a.getAktuelleTurnierAuswahl()!=null) {
             obs_spieler.clear();
-            for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
-                obs_spieler.add(a.getAktuelleTurnierAuswahl().getSpieler().get(i));
+            for (int i=1;i<=auswahlklasse.getSpieler().size();i++){
+                obs_spieler.add(auswahlklasse.getSpieler().get(i));
             }
                         //TableColumn<Spieler,String> spielerVornameSpalte = new TableColumn("Vorname");
             spielsystem_spielerliste_nachname.setCellValueFactory(new PropertyValueFactory<Spieler,String>("nName"));
