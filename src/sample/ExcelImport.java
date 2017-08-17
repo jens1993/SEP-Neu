@@ -146,7 +146,7 @@ public class ExcelImport {
                 HSSFCell extVereinsidZelle = row.getCell(13);
                 if (extVereinsidZelle != null) {
                     if (extVereinsidZelle.getCellTypeEnum() == CellType.NUMERIC) {
-                        Double extID = extVereinsidZelle.getNumericCellValue();
+                        Integer extID = (int)extVereinsidZelle.getNumericCellValue();
                         extVereinsID = extID.toString();
                     } else if (extVereinsidZelle.getCellTypeEnum() == CellType.STRING){
                         extVereinsID = extVereinsidZelle.getStringCellValue();
@@ -155,8 +155,8 @@ public class ExcelImport {
                 }
                 Enumeration e = auswahlklasse.getVereine().keys();
                 while (e.hasMoreElements()){
+                    int key = (int) e.nextElement();
                     if(verein == null) {
-                        int key = (int) e.nextElement();
                         Verein tempVerein = auswahlklasse.getVereine().get(key);
                         if (tempVerein.getName() == vereinsname) {
                             verein = tempVerein;
@@ -167,7 +167,7 @@ public class ExcelImport {
                 }
                 if(verein ==null){
                     {
-                        verein = new Verein(auswahlklasse.getVereine().size()+1,extVereinsID,vereinsname,verband);
+                        verein = new Verein(extVereinsID,vereinsname,verband);
                         auswahlklasse.addVerein(verein);
                     }
                 }
