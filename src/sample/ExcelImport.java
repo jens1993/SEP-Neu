@@ -75,7 +75,7 @@ public class ExcelImport {
             cell = row.getCell(cellNumber);
         }*/
 
-        HSSFCell cellB1 = row.getCell(1);
+       HSSFCell cellB1 = row.getCell(1);
         if (cellB1 != null ) {
             if(cellB1.getStringCellValue() != "") {
                 System.out.println("B1 " + cellB1.getStringCellValue());

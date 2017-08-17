@@ -1,26 +1,64 @@
+/**
+ * Created by Tobias Sandfort on 15.08.2017.
+ */
+
+/*EINSTELLUNGEN*/
+
 .einstellungenButton
 {
-
+    -fx-background-color: aqua;
 }
+
 .einstellungenRadioButton
 {
-
+    -fx-background-color: aqua;
 }
+
+.einstellungenLabel
+{
+    -fx-background-color: aqua;
+}
+
+.einstellungenField
+{
+    -fx-background-color: aqua;
+}
+
+.einstellungenText
+{
+    -fx-background-color: aqua;
+}
+
+.einstellungenTab
+{
+    -fx-background-color: aqua;
+}
+
 /*EINSTELLUNGENCONTROLLER*/
 
-.mainButton
-{
-    
-}
+/*KLASSEHINZUFUEGEN*/
 
-.mainTab
+.klassehinzuTab
 {
     -fx-background-color: crimson;
 }
 
-/*KLASSEHINZUFUEGENCONTROLLER*/
+.klassehinzuBox
+{
+    -fx-background-color: crimson;
+}
 
-.klassehinzuTab
+.klassehinzuTableview
+{
+    -fx-background-color: crimson;
+}
+
+.klassehinzuWindow
+{
+    -fx-background-color: crimson;
+}
+
+.klassehinzuTablecolumn
 {
     -fx-background-color: crimson;
 }
@@ -30,7 +68,12 @@
     -fx-background-color: crimson;
 }
 
-.klassehinzuRadio
+.klassehinzuText
+{
+    -fx-background-color: crimson;
+}
+
+.klassehinzuRadioButton
 {
     -fx-background-color: crimson;
 }
@@ -40,14 +83,14 @@
     -fx-background-color: crimson;
 }
 
-.klassehinzuLabel
+.klassehinzuButton:focused
 {
-
+    -fx-background-color: yellow;
 }
 
-.klassehinzuFrame
+.klassehinzuLabel
 {
-    -fx-border-radius: 30%;
+    -fx-background-color: yellow;
 }
 
 .klassehinzuTable
@@ -56,55 +99,82 @@
 
 }
 
+/*KLASSEHINZUFUEGENCONTROLLER*/
+
+/*KLASSEUEBERSICHT*/
+
+.klasseuebersichtButton
+{
+   -fx-background-color: crimson;
+}
+
+.klasseuebersichtTab
+{
+    -fx-background-color: crimson;
+}
+
+.klasseuebersichtVBox
+{
+    -fx-background-color: crimson;
+}
+
 /*KLASSEUEBERSICHTCONTROLLER*/
 
+/*MAIN*/
+
+.mainButton
+{
+    -fx-background-color: crimson;
+}
+
+.mainTab
+{
+    -fx-background-color: crimson;
+}
+
+.mainBox
+{
+    -fx-background-color: crimson;
+}
+
 /*MAINCONTROLLER*/
-.hbox_main
-{
 
-}
-
-.check_gespielteSpiele
-{
-
-}
-
-.check_aktiveSpiele
-{
-
-}
-
-.check_ausstehendeSpiele
-{
-
-}
-
-.choice_spielklassen
-{
-
-}
-
-.tabelle_spiele
-{
-
-}
+/*NEUERVEREIN*/
 
 /*NEUERVEREINCONTROLLER*/
 
+/*NEUESTURNIER*/
+
 /*NEUESTURNIERCONTROLLER*/
+
+/*SPIELERGEBNISEINGEBEN*/
 
 /*SPIELERGEBNISEINGEBENCONTROLLER*/
 
+/*SPIELERHINZU*/
+
 /*SPIELERHINZUCONTROLLER*/
+
+/*SPIELERVORHANDEN*/
 
 /*SPIELERVORHANDENCONTROLLER*/
 
+/*SPIELSYSTEM*/
+
 /*SPIELSYSTEMCONTROLLER*/
+
+/*SPIELSYSTEM_NEU*/
 
 /*SPIELSYSTEMCONTROLLER_NEU*/
 
+/*STATISTIK*/
+
 /*STATISTIKCONTROLLER*/
 
+/*TEAMUEBERSICHT*/
+
 /*TEAMUEBERSICHTCONTROLLER*/
+
+/*TURNIERLADEN*/
 
 /*TURNIERLADENCONTROLLER*/

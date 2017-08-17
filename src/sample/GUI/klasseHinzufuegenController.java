@@ -153,8 +153,6 @@ public class klasseHinzufuegenController implements Initializable
         }
         a.addStage(stage);
         stage.setScene(new Scene(root1));
-        Scene s = new Scene(root1);
-
         stage.show();
 
 
