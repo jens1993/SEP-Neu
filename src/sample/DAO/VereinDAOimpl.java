@@ -13,20 +13,27 @@ public class VereinDAOimpl implements VereinDAO {
     @Override
     public boolean create(Verein verein) {
         //String sql = "INSERT INTO verein (Name ,Verband, ExtVereinsID, VereinsID) VALUES(?,?,?,?)";
+        String idAbfrage = "Select AUTO_INCREMENT " +
+                "FROM INFORMATION_SCHEMA.TABLES " +
+                "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
+                "AND TABLE_NAME = 'Verein'";
 
         String sql = "INSERT INTO verein("
                 + "name,"
                 + "Verband, "
-                + "ExtVereinsID, "
-                + "VereinsID) "
-                + "VALUES(?,?,?,?)";
+                + "ExtVereinsID) "
+                + "VALUES(?,?,?)";
         try {
             SQLConnection con = new SQLConnection();
+            Statement smtID = con.SQLConnection().createStatement();
+            ResultSet count = smtID.executeQuery(idAbfrage);
+            count.next();
+            int vereinsid = count.getInt(1);
+            verein.setVereinsID(vereinsid);
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setString(1, verein.getName());
             smt.setString(2, verein.getVerband());
             smt.setString(3, verein.getExtVereinsID());
-            smt.setInt(4, verein.getVereinsID());
             smt.executeUpdate();
             smt.close();
             con.closeCon();
