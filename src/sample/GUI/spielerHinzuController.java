@@ -13,12 +13,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
+import javafx.stage.FileChooser;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import org.controlsfx.control.action.Action;
 import sample.*;
 import sample.DAO.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -557,6 +559,22 @@ private TextField t_suchleistespielerhinzu;
         }
     }
 
+    @FXML
+    public void pressBtn_ExcelImport (ActionEvent event) throws Exception {
+        try {
+
+            FileChooser fileChooser = new FileChooser();
+
+            Stage stage = new Stage();
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null) {
+                ExcelImport.importExcelData(file.getAbsolutePath());
+            }
 
 
+            //ExcelImport.importExcelData("C:\\Meldeformular\\meldeformular.xls");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

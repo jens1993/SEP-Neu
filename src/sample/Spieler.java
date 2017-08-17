@@ -79,9 +79,17 @@ public class Spieler {
 		this.extSpielerID = extSpielerID;
 		this.aktuellesSpiel = aktuellesSpiel;
 	}
+	public Spieler(){
 
-	public Spieler() {
-
+	}
+	public void einzelPunkteUpdate(int einzelPunkte){
+		rPunkte[0] = einzelPunkte;
+	}
+	public void doppelPunkteUpdate(int doppelPunkte){
+		rPunkte[1] = doppelPunkte;
+	}
+	public void mixedPunkteUpdate(int mixedPunkte){
+		rPunkte[2] = mixedPunkte;
 	}
 
 	public boolean deleteSpieler(Spieler spieler){

@@ -94,11 +94,22 @@ public class Gruppe extends Spielsystem {
 		resetOffeneRundenSpiele();
 		resetAktuelleRunde();
 	}
-
+	private void rundenListeEinlesen(ArrayList<Spiel> spiele){
+		for (int i=0;i<spiele.size();i++){
+			int spielklasseSpielID=spiele.get(i).getSystemSpielID();
+			int rundenNummer = (spielklasseSpielID-getSpielSystemArt()*10000000)/1000;
+			Spiel spiel =spiele.get(i);
+			while(getRundenArray().size()-1<rundenNummer){
+				getRundenArray().add(new ArrayList<>());
+			}
+			getRundenArray().get(rundenNummer).add(spiel);
+		}
+	}
 	private void alleSpieleEinlesen(ArrayList<Spiel> spiele){
 		for (int i=0;i<spiele.size();i++){
 			spiele.get(i).setSpielsystem(this);
 		}
+		rundenListeEinlesen(spiele);
 		setOffeneRundenSpiele(anzahlTeams/2);
 	}
 	private void alleErgebnisseEinlesen(Dictionary<Integer, Ergebnis> ergebnisse){
@@ -169,7 +180,7 @@ public class Gruppe extends Spielsystem {
 		if ((teamList.size()/2) * 2 != teamList.size()){ // /2 *2 überprüft, ob Spieleranzahl gerade oder ungerade (int)
 			this.teamList.add(new Team("Freilos",this.getSpielklasse()));
 			System.out.println("Freilos zu Gruppe hinzugefügt");
-			super.setzlisteDAO.update(teamList.size(),teamList.get(teamList.size()-1),this.getSpielklasse());
+			super.setzlisteDAO.create(teamList.size(),teamList.get(teamList.size()-1),this.getSpielklasse());
 		}
 	}
 
