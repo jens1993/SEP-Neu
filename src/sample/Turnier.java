@@ -258,5 +258,9 @@ public class Turnier  implements Initializable {
 		throw new UnsupportedOperationException();
 	}
 
+	public void sechSpielzettelDrucken(ArrayList<Spiel> spiele){
+
+	}
+
 
 }

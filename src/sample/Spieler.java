@@ -73,7 +73,7 @@ public class Spieler {
 		this.rPunkte = rPunkte;
 		this.verein = verein;
 		this.meldeGebuehren = meldeGebuehren;
-		Nationalitaet = nationalitaet;
+		this.Nationalitaet = nationalitaet;
 		this.verfuegbar = verfuegbar;
 		this.mattenSpiele = mattenSpiele;
 		this.extSpielerID = extSpielerID;

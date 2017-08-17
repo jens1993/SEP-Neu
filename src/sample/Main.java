@@ -12,6 +12,10 @@ import sample.DAO.TurnierDAO;
 import sample.DAO.TurnierDAOimpl;
 import sample.Spielsysteme.Gruppe;
 
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -76,8 +80,49 @@ public class Main extends Application {
 
         launch(args);
         //$java -Duser.language=en com.tutego.insel.bundle.InternationalHelloWorld
+     /*          Turnier turnier = new Turnier("Tolles Turnier",1,LocalDate.now());
+        TurnierDAO turnierDAO = new TurnierDAOimpl();
+        turnierDAO.read(turnier);
+        ArrayList<Spiel> spiele = new ArrayList<>();
+        spiele.add(turnier.getSpiele().get(1));
+        spiele.add(turnier.getSpiele().get(2));
+        spiele.add(turnier.getSpiele().get(3));
+        spiele.add(turnier.getSpiele().get(4));
+        spiele.add(turnier.getSpiele().get(5));
+        spiele.add(turnier.getSpiele().get(6));
 
-      Locale.setDefault( new Locale("en", "UK") );
+
+
+        Spielzettel test = new Spielzettel(spiele);
+        *//*JFrame window = new JFrame();
+        window.setSize(800,600);
+        window.setTitle("Spielzettel");
+        window.setVisible(true);
+        DrawingComponent drawingComponent = new DrawingComponent();
+        window.add(test);*//*
+
+        PrinterJob job = PrinterJob.getPrinterJob();
+        //Book book = new Book();
+        PageFormat querFormat = new PageFormat();
+        Paper paper = querFormat.getPaper();
+        //Remove borders from the paper
+        paper.setImageableArea(45, 45, querFormat.getPaper().getWidth()-90, querFormat.getPaper().getHeight()-90);
+        querFormat.setPaper(paper);
+        querFormat.setOrientation(PageFormat.PORTRAIT);
+        //book.append(test,querFormat);
+        job.setPrintable(test,querFormat);
+        try {
+            job.print();
+        }
+        catch (PrinterException e)
+        {
+            System.out.println("Drucken fehlgeschlagen");
+        }
+        System.exit(0);*/
+
+
+
+      //Locale.setDefault( new Locale("en", "UK") );
 //        Locale.setDefault( new Locale("de", "ch") );
 //        String baseName = "resources.HelloWorld";
 //

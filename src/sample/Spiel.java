@@ -290,8 +290,7 @@ public class Spiel {
 	}
 
 	public void spielzettelDrucken() {
-		String aufrufzeit = this.aufrufZeit.toString();
-		this.heim.toString();
+
 	}
 
 }
