@@ -139,6 +139,14 @@ public class Turnier  implements Initializable {
 		this.turnierid = turnierid;
 	}
 
+	public Turnier(String name, LocalDate datum) {
+		this.datum = datum;
+		this.name = name;
+	}
+
+	public void setTurnierid(int turnierid) {
+		this.turnierid = turnierid;
+	}
 
 	public int getGesamtSpiele() {
 		return gesamtSpiele;

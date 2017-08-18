@@ -17,19 +17,28 @@ import java.util.List;
 public class SpielklasseDAOimpl implements SpielklasseDAO {
     @Override
     public boolean create(Spielklasse spielklasse) {
+        String idAbfrage = "Select AUTO_INCREMENT " +
+                "FROM INFORMATION_SCHEMA.TABLES " +
+                "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
+                "AND TABLE_NAME = 'Spielklasse'";
+
         String sql = "INSERT INTO spielklasse("
                 + "Disziplin,"
                 + "Niveau, "
-                + "turnierid, "
-                + "SpielklasseID) "
-                + "VALUES(?,?,?,?)";
+                + "turnierid) "
+                + "VALUES(?,?,?)";
         try {
             SQLConnection con = new SQLConnection();
+            Statement smtID = con.SQLConnection().createStatement();
+            ResultSet count = smtID.executeQuery(idAbfrage);
+            count.next();
+            int spielklasseID = count.getInt(1);
+            spielklasse.setSpielklasseID(spielklasseID);
+            smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setString(1, spielklasse.getDisziplin());
             smt.setString(2, spielklasse.getNiveau());
             smt.setInt(3, spielklasse.getTurnier().getTurnierid());
-            smt.setInt(4, spielklasse.getSpielklasseID());
             smt.executeUpdate();
             smt.close();
             con.closeCon();

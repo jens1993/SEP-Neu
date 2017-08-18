@@ -50,7 +50,7 @@ public class Spielklasse {
 			einzel=true;
 		}
 	}
-	public Spielklasse(int spielklasseID,					   Disziplin disziplin,					   Niveau niveau,					   Turnier turnier)
+	public Spielklasse(Disziplin disziplin, Niveau niveau, Turnier turnier)
 	{
 		System.out.println("neue Spielklasse mit Enums1 und gesetzter SpielklasseID");
 		this.spielklasseID=spielklasseID;

@@ -12,13 +12,17 @@ import java.sql.*;
 public class SpielDAOimpl implements SpielDAO {
     @Override
     public boolean create(Spiel spiel) {
+        String idAbfrage = "Select AUTO_INCREMENT " +
+                "FROM INFORMATION_SCHEMA.TABLES " +
+                "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
+                "AND TABLE_NAME = 'Spiel'";
+
         String sql = "INSERT INTO spiel("
                 + "Heim,"
                 + "Gast, "
-                + "SpielID, "
                 + "Schiedsrichter, "
                 + "SpielklasseID) "
-                + "VALUES(?,?,?,?,?)";
+                + "VALUES(?,?,?,?)";
 
         String sqlzwei = "INSERT INTO spielklasse_spielid("
                 + "SpielID,"
@@ -29,6 +33,12 @@ public class SpielDAOimpl implements SpielDAO {
 
         try {
             SQLConnection con = new SQLConnection();
+            Statement smtID = con.SQLConnection().createStatement();
+            ResultSet count = smtID.executeQuery(idAbfrage);
+            count.next();
+            int spielID = count.getInt(1);
+            spiel.setSpielID(spielID);
+            smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             if(spiel.getHeim()!=null&&spiel.getGast()!=null) {
                 smt.setInt(1, spiel.getHeim().getTeamid());
@@ -38,14 +48,13 @@ public class SpielDAOimpl implements SpielDAO {
                 smt.setNull(1, Types.INTEGER);
                 smt.setNull(2, Types.INTEGER);
             }
-            smt.setInt(3, spiel.getSpielID());
             if (spiel.getSchiedsrichter()!=null){
-                smt.setInt(4, spiel.getSchiedsrichter().getSpielerID());
+                smt.setInt(3, spiel.getSchiedsrichter().getSpielerID());
             }
             else{
-                smt.setNull(4,Types.INTEGER);
+                smt.setNull(3,Types.INTEGER);
             }
-            smt.setInt(5, spiel.getSpielsystem().getSpielklasse().getSpielklasseID());
+            smt.setInt(4, spiel.getSpielsystem().getSpielklasse().getSpielklasseID());
 
 
             smt.executeUpdate();
