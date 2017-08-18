@@ -110,11 +110,11 @@ private TextField t_suchleistespielerhinzu;
         if(a.getAktuelleTurnierAuswahl()!=null) {
 
             obs_spieler.clear();
-
-            for (int i=1;i<=auswahlklasse.getSpieler().size();i++){
-                obs_spieler.add(auswahlklasse.getSpieler().get(i));
-                spielerhash.put(auswahlklasse.getSpieler().get(i).getSpielerID(),auswahlklasse.getSpieler().get(i));
-
+            Enumeration enumSpielerIDs = auswahlklasse.getSpieler().keys();
+            while (enumSpielerIDs.hasMoreElements()){
+                int key = (int)enumSpielerIDs.nextElement();
+                obs_spieler.add(auswahlklasse.getSpieler().get(key));
+                spielerhash.put(auswahlklasse.getSpieler().get(key).getSpielerID(),auswahlklasse.getSpieler().get(key));
             }
 
 
@@ -346,13 +346,13 @@ private TextField t_suchleistespielerhinzu;
 
         System.out.println(auswahlklasse.getVereine().size());
         ObservableList vereine = FXCollections.observableArrayList();
-        for (int i=1;i<=a.getVereine().size();i++){
-            vereine.add(a.getVereine().get(i));
+        Enumeration enumKeys = a.getVereine().keys();
+        while (enumKeys.hasMoreElements()){
+            int key = (int) enumKeys.nextElement();
+            vereine.add(a.getVereine().get(key));
 
         }
         try {
-            System.out.println(vereine.size());
-
             combo_verein.setItems(vereine);
             combo_verein1.setItems(vereine);
 

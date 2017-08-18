@@ -62,7 +62,8 @@ public class MainController implements Initializable, Observable
     ObservableList <Spielklasse> obs_spielklassen = a.getAktuelleTurnierAuswahl().getObs_spielklassen();
     ObservableList<Spiel> obs_spiele = a.getAktuelleTurnierAuswahl().getObs_spiele();
     ObservableList<Integer> obs_spielklassen_auswahl = a.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl();
-
+//wieso integer?
+    //wenn integer dann die ids abgehen
 
 
     public void spieleRefresh(){
@@ -248,9 +249,8 @@ public class MainController implements Initializable, Observable
         int id=0;
         if(obs_spielklassen_auswahl!=null&&obs_spielklassen_auswahl.size()>0) {
             if (check_gespielteSpiele.isSelected()) {
-                for (int j = 0; j <= obs_spielklassen_auswahl.size(); j++) {
-
-                    id = obs_spielklassen_auswahl.get(j) + 1;
+                for (int j = 0; j < obs_spielklassen_auswahl.size(); j++) { //<=?
+                    id = obs_spielklassen_auswahl.get(j); //+1?
                     //System.out.println("id= " + id);
                     for (int i = 0; i < a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().size(); i++) {
 
@@ -269,8 +269,8 @@ public class MainController implements Initializable, Observable
             }
 
             if (check_aktiveSpiele.isSelected()) {
-                for (int j = 0; j <= obs_spielklassen_auswahl.size(); j++) {
-                    id = obs_spielklassen_auswahl.get(j) + 1;
+                for (int j = 0; j < obs_spielklassen_auswahl.size(); j++) { //<=?
+                    id = obs_spielklassen_auswahl.get(j);//+1
                     //System.out.println("id= " + id);
                     for (int i = 0; i < a.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().size(); i++) {
 
@@ -288,8 +288,8 @@ public class MainController implements Initializable, Observable
                 }
             }
             if (check_ausstehendeSpiele.isSelected()) {
-                for (int j = 0; j <= obs_spielklassen_auswahl.size(); j++) {
-                    id = obs_spielklassen_auswahl.get(j) + 1;
+                for (int j = 0; j < obs_spielklassen_auswahl.size(); j++) { //<=?
+                    id = obs_spielklassen_auswahl.get(j); //+1
                     //System.out.println("id= " + id);
                     for (int i = 0; i < a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().size(); i++) {
 
@@ -821,7 +821,11 @@ public class MainController implements Initializable, Observable
         checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<Spielklasse>() {
             public void onChanged(ListChangeListener.Change<? extends Spielklasse> c) {
                 //System.out.println(checkComboBox.getCheckModel().getCheckedIndices());
-                obs_spielklassen_auswahl=checkComboBox.getCheckModel().getCheckedIndices();
+                //obs_spielklassen_auswahl=checkComboBox.getCheckModel().getCheckedIndices();
+                for(int i=0;i<checkComboBox.getCheckModel().getCheckedItems().size();i++)
+                {
+                    obs_spielklassen_auswahl.add(checkComboBox.getCheckModel().getCheckedItems().get(i).getSpielklasseID());
+                }
                 //System.out.println(obs_spielklassen_auswahl);
                 try {
                     fuelleSpielElemente();
@@ -893,7 +897,11 @@ public class MainController implements Initializable, Observable
             {
                 checkComboBox.getCheckModel().check(i);
             }
-            obs_spielklassen_auswahl=checkComboBox.getCheckModel().getCheckedIndices();
+            //obs_spielklassen_auswahl=checkComboBox.getCheckModel().getCheckedItems();
+            for(int i=0;i<checkComboBox.getCheckModel().getCheckedItems().size();i++)
+            {
+                obs_spielklassen_auswahl.add(checkComboBox.getCheckModel().getCheckedItems().get(i).getSpielklasseID());
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -106,8 +106,10 @@ public class SpielSystemController_neu implements Initializable
         if(a.getAktuelleTurnierAuswahl()!=null) {
             obs_spieler.clear();
             System.out.println("Anzahl spielklassen = "+a.getAktuelleTurnierAuswahl().getSpielklassen().size());
-            for (int i=1;i<=auswahlklasse.getSpieler().size();i++){
-                Spieler spieler = auswahlklasse.getSpieler().get(i);
+            Enumeration enumSpielerIDs = auswahlklasse.getSpieler().keys();
+            while (enumSpielerIDs.hasMoreElements()){
+                int key = (int)enumSpielerIDs.nextElement();
+                Spieler spieler = auswahlklasse.getSpieler().get(key);
                 if (!istInSetzListe(spieler)){
                     obs_spieler.add(spieler);
 

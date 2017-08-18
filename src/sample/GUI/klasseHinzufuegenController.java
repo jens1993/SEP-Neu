@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 /**
@@ -203,11 +204,10 @@ public class klasseHinzufuegenController implements Initializable
     public void printSpielerZuordnenTable() throws Exception {
         if(a.getAktuelleTurnierAuswahl()!=null) {
             ObservableList<Spieler> spieler = FXCollections.observableArrayList();
-
-            for (int i=1;i<=auswahlklasse.getSpieler().size();i++){
-                spieler.add(auswahlklasse.getSpieler().get(i));
-                //System.out.println("test");
-                System.out.println(spieler.get(i-1).getVName());
+            Enumeration enumKeys = auswahlklasse.getSpieler().keys();
+            while (enumKeys.hasMoreElements()){
+                int key = (int) enumKeys.nextElement();
+                spieler.add(auswahlklasse.getSpieler().get(key));
             }
 
 
