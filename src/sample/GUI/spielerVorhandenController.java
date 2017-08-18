@@ -84,7 +84,7 @@ public class spielerVorhandenController implements Initializable
         Spieler spielerzumHinzufuegen = a.getSpielerzumHinzufeuegen();
         System.out.println(spielerzumHinzufuegen.getNName());
         a.addSpieler(spielerzumHinzufuegen);
-        a.getAktuelleTurnierAuswahl().getSpieler().put(spielerzumHinzufuegen.getSpielerID(),spielerzumHinzufuegen);
+        auswahlklasse.getSpieler().put(spielerzumHinzufuegen.getSpielerID(),spielerzumHinzufuegen);
         try {
             ((Node)(event.getSource())).getScene().getWindow().hide();
             pressBtn_LadeSpielerHinzu(event);

@@ -10,6 +10,7 @@ public class Verein {
 	private String extVereinsID;
 	private String name;
 	private String verband;
+	VereinDAO vereinDAO = new VereinDAOimpl();
 
 	public int getVereinsID() {
 		return vereinsID;
@@ -27,11 +28,22 @@ public class Verein {
 		return extVereinsID;
 	}
 
+	public Verein(String extVereinsID, String name, String verband) {
+		this.vereinsID = vereinsID;
+		this.extVereinsID = extVereinsID;
+		this.name = name;
+		this.verband = verband;
+		vereinDAO.create(this);
+	}
 	public Verein(int vereinsID, String extVereinsID, String name, String verband) {
 		this.vereinsID = vereinsID;
 		this.extVereinsID = extVereinsID;
 		this.name = name;
 		this.verband = verband;
+	}
+
+	public void setVereinsID(int vereinsID) {
+		this.vereinsID = vereinsID;
 	}
 
 	@Override

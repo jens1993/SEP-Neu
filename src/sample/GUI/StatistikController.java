@@ -33,7 +33,7 @@ public class StatistikController implements Initializable
     lturnier.setText("Turnierinformationen: "+ a.getAktuelleTurnierAuswahl().getName());
     anzahlSpielklassen.setText(String.valueOf(a.getAktuelleTurnierAuswahl().getSpielklassen().size()));
     anzahlSpiele.setText(String.valueOf(a.getAktuelleTurnierAuswahl().getSpiele().size()));
-    anzahlSpielerimTurnier.setText(String.valueOf(a.getAktuelleTurnierAuswahl().getSpieler().size()));
+    anzahlSpielerimTurnier.setText(String.valueOf(auswahlklasse.getSpieler().size()));
     anzahlobsspiele.setText(
             String.valueOf("Aktive "+
             a.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().size()+"Gespielte "+

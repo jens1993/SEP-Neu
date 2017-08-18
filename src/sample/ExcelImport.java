@@ -3,13 +3,20 @@ package sample;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Enumeration;
+
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import sample.DAO.auswahlklasse;
 
 /**
  * Created by Manuel Hüttermann on 15.08.2017.
  */
 public class ExcelImport {
-
     public static void importExcelData(String excelDatei) {
         try {
             FileInputStream iStream = new FileInputStream(excelDatei);
@@ -19,10 +26,10 @@ public class ExcelImport {
             readWorkSheetSingle(worksheet);
 
             worksheet = workbook.getSheet("Doppel");
-            readWorkSheetDouble(worksheet);
+            readWorkSheetDoubleMixed(worksheet);
 
             worksheet = workbook.getSheet("Mixed");
-            readWorkSheetMixed(worksheet);
+            readWorkSheetDoubleMixed(worksheet);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -43,7 +50,7 @@ public class ExcelImport {
         }
     }
 
-    private static void readWorkSheetDouble(HSSFSheet worksheet) {
+    private static void readWorkSheetDoubleMixed(HSSFSheet worksheet) {
         int actualRow = 1;
 
         while ((worksheet.getRow(actualRow) != null)) {
@@ -55,48 +62,120 @@ public class ExcelImport {
             //get second row
             row = worksheet.getRow(actualRow);
             if (row != null) {
-                readRow(row);
+                Spieler tempSpieler = readRow(row);
+                if (tempSpieler !=null && !gibtEsSchon(tempSpieler)){
+                    auswahlklasse.getObs_spieler().add(tempSpieler);
+                    auswahlklasse.addSpieler(tempSpieler);
+                    System.out.println(tempSpieler.getVName()+" "+tempSpieler.getNName()+" gespeichert"+ " geschlecht:"+tempSpieler.getGeschlecht()+" extID:"+tempSpieler.getExtSpielerID()+"verein: "+tempSpieler.getVerein()+" gdatum:"+tempSpieler.getGDatum());
+                }
             }
             actualRow++;
         }
     }
-
-    private static void readWorkSheetMixed(HSSFSheet worksheet) {
-
+    private static boolean gibtEsSchon(Spieler spieler){
+        return true; //wenn es den schon gibt;
     }
-
-    private static void readRow(HSSFRow row) {
+    private static Spieler readRow(HSSFRow row) {
         int cellNumber = 0;
         HSSFCell cell = row.getCell(cellNumber);
 
-        /*while (cell != null) {
-            System.out.println(cell.toString());
-            cellNumber++;
-            cell = row.getCell(cellNumber);
-        }*/
 
-       HSSFCell cellB1 = row.getCell(1);
-        if (cellB1 != null ) {
-            if(cellB1.getStringCellValue() != "") {
-                System.out.println("B1 " + cellB1.getStringCellValue());
+        String vName = "";
+        String nName;
+        LocalDate gDatum = LocalDate.now();
+        boolean geschlecht = false;
+        String extSpielerID = "";
+        int rPunkte[] = new int[3];
+        Verein verein = null;
 
-                HSSFCell cellA1 = row.getCell(0);
-                if (cellA1 != null) {
-                    System.out.println("A1 " + cellA1.getStringCellValue());
+
+
+        HSSFCell nachnameZelle = row.getCell(1);
+        if (nachnameZelle != null ) {
+            if(nachnameZelle.getStringCellValue() != "") {
+                nName = nachnameZelle.getStringCellValue();
+
+                HSSFCell vornameZelle = row.getCell(0);
+                if (vornameZelle != null) {
+                    vName = vornameZelle.getStringCellValue();
                 }
-                HSSFCell cellC1 = row.getCell(2);
-                if (cellC1 != null) {
-                    System.out.println("C1 " + cellC1.getStringCellValue());
+                HSSFCell geschlechtZelle = row.getCell(2);
+                if (geschlechtZelle != null) {
+                    geschlecht = (geschlechtZelle.getStringCellValue().toUpperCase().contains("M"));
+                    System.out.println("C1 " + geschlecht);
                 }
-                HSSFCell cellD1 = row.getCell(3);
-                if (cellD1 != null) {
-                    System.out.println("D1 " + cellD1.getStringCellValue());
+                HSSFCell gdatumZelle = row.getCell(12);
+                if (gdatumZelle != null) {
+                    gDatum = gdatumZelle.getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    System.out.println("M1 " + gdatumZelle.getNumericCellValue());
                 }
-                HSSFCell cellE1 = row.getCell(4);
-                if (cellE1 != null) {
-                    System.out.println("E1 " + cellE1.getStringCellValue());
+                HSSFCell extSpieleridZelle = row.getCell(11);
+                if (extSpieleridZelle != null) {
+                    extSpielerID = extSpieleridZelle.getStringCellValue();
                 }
-                HSSFCell cellF1 = row.getCell(5);
+
+                //RanglistenpunkteZellen
+                HSSFCell einzelRPunkteZelle = row.getCell(8);
+                if (einzelRPunkteZelle != null) {
+                    rPunkte[0] = (int) einzelRPunkteZelle.getNumericCellValue();
+                }
+                HSSFCell doppelRPunkteZelle = row.getCell(9);
+                if (doppelRPunkteZelle != null) {
+                    rPunkte[1] = (int) doppelRPunkteZelle.getNumericCellValue();
+                }
+                HSSFCell mixedRPunkteZelle = row.getCell(10);
+                if (mixedRPunkteZelle != null) {
+                    rPunkte[2] = (int) mixedRPunkteZelle.getNumericCellValue();
+                }
+
+
+                String vereinsname ="";
+                String verband="";
+                String extVereinsID="";
+                //Vereinszellen
+                HSSFCell vereinsnameZelle = row.getCell(3);
+                if (vereinsnameZelle != null) {
+                    vereinsname = vereinsnameZelle.getStringCellValue();
+                }
+                HSSFCell vereinverbandZelle = row.getCell(4);
+                if (vereinverbandZelle != null) {
+                    verband = vereinverbandZelle.getStringCellValue();
+                    System.out.println("E1 " + vereinverbandZelle.getStringCellValue());
+                }
+                HSSFCell extVereinsidZelle = row.getCell(13);
+                if (extVereinsidZelle != null) {
+                    if (extVereinsidZelle.getCellTypeEnum() == CellType.NUMERIC) {
+                        Integer extID = (int)extVereinsidZelle.getNumericCellValue();
+                        extVereinsID = extID.toString();
+                    } else if (extVereinsidZelle.getCellTypeEnum() == CellType.STRING){
+                        extVereinsID = extVereinsidZelle.getStringCellValue();
+                    }
+                    System.out.println("N1 " + extVereinsidZelle.getNumericCellValue());
+                }
+                Enumeration e = auswahlklasse.getVereine().keys();
+                while (e.hasMoreElements()){
+                    int key = (int) e.nextElement();
+                    if(verein == null) {
+                        Verein tempVerein = auswahlklasse.getVereine().get(key);
+                        if (tempVerein.getName().contentEquals(vereinsname)) {
+                            verein = tempVerein;
+                        } else if (tempVerein.getExtVereinsID().contentEquals(extVereinsID)) {
+                            verein = tempVerein;
+                        }
+                    }
+                }
+                if(verein ==null){
+                    {
+                        verein = new Verein(extVereinsID,vereinsname,verband);
+                        auswahlklasse.addVerein(verein);
+                    }
+                }
+                Spieler neuerSpieler = new Spieler(vName,nName,gDatum,geschlecht,rPunkte,verein,extSpielerID);
+                return neuerSpieler;
+
+
+                //für Klassenzuweisung (Einzel/Doppel/Mixed-Spalte)
+                /*HSSFCell cellF1 = row.getCell(5);
                 if (cellF1 != null) {
                     System.out.println("F1 " + cellF1.getStringCellValue());
                 }
@@ -107,45 +186,16 @@ public class ExcelImport {
                 HSSFCell cellH1 = row.getCell(7);
                 if (cellH1 != null) {
                     System.out.println("H1 " + cellH1.getStringCellValue());
-                }
-                HSSFCell cellI1 = row.getCell(8);
-                if (cellI1 != null) {
-                    System.out.println("I1 " + cellI1.getStringCellValue());
-                }
-                HSSFCell cellJ1 = row.getCell(9);
-                if (cellJ1 != null) {
-                    System.out.println("J1 " + cellJ1.getStringCellValue());
-                }
-                HSSFCell cellK1 = row.getCell(10);
-                if (cellK1 != null) {
-                    System.out.println("K1 " + cellK1.getStringCellValue());
-                }
-                HSSFCell cellL1 = row.getCell(11);
-                if (cellL1 != null) {
-                    System.out.println("L1 " + cellL1.getStringCellValue());
-                }
-                HSSFCell cellM1 = row.getCell(12);
-                if (cellM1 != null) {
-                    System.out.println("M1 " + cellM1.getNumericCellValue());
-                }
-                HSSFCell cellN1 = row.getCell(13);
-                if (cellN1 != null) {
-                    System.out.println("N1 " + cellN1.getNumericCellValue());
-                }
-                HSSFCell cellO1 = row.getCell(14);
-                if (cellO1 != null) {
-                    System.out.println("O1 " + cellO1.getNumericCellValue());
-                }
-                HSSFCell cellP1 = row.getCell(15);
-                if (cellP1 != null) {
-                    System.out.println("P1 " + cellP1.getStringCellValue());
-                }
-                HSSFCell cellQ1 = row.getCell(16);
+                }*/
+                //gemeldet von
+                /*HSSFCell cellQ1 = row.getCell(16);
                 if (cellQ1 != null) {
                     System.out.println("Q1 " + cellQ1.getStringCellValue());
-                }
+                }*/
+
             }
         }
+        return null;
     }
 
 }

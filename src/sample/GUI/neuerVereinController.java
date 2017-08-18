@@ -52,9 +52,8 @@ public class neuerVereinController
 
         try {
 
-            verein = new Verein(a.getVereine().size()+1,t_vname.getText(),t_vverband.getText(),t_vextvereinsid.getText());
+            verein = new Verein(t_vname.getText(),t_vverband.getText(),t_vextvereinsid.getText());
             a.addVerein(verein);
-            v.create(verein);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();

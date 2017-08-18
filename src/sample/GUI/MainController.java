@@ -147,9 +147,10 @@ public class MainController implements Initializable, Observable
         checkComboBox.getItems().clear();
 
         //System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
-
-        for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpielklassen().size();i++){
-            obs_spielklassen.add(a.getAktuelleTurnierAuswahl().getSpielklassen().get(i));
+        Enumeration enumKeys = auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().keys();
+        while(enumKeys.hasMoreElements()){
+            int key = (int) enumKeys.nextElement();
+            obs_spielklassen.add(a.getAktuelleTurnierAuswahl().getSpielklassen().get(key));
             System.out.println("größe = "+obs_spielklassen.size());
             //checkComboBox.getItems().add(obs_spielklassen.get(i-1));
 
@@ -168,8 +169,10 @@ public class MainController implements Initializable, Observable
 
         //System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
 
-        for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpielklassen().size();i++){
-            obs_spielklassen.add(a.getAktuelleTurnierAuswahl().getSpielklassen().get(i));
+        Enumeration enumKeys = auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().keys();
+        while(enumKeys.hasMoreElements()){
+            int key = (int) enumKeys.nextElement();
+            obs_spielklassen.add(a.getAktuelleTurnierAuswahl().getSpielklassen().get(key));
             System.out.println("größe = "+obs_spielklassen.size());
 //            checkComboBox.getItems().add(obs_spielklassen.get(i-1));
 
