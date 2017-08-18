@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane fx:id="tabpane_spieler" maxHeight="-Infinity" stylesheets="@/CSS/Badminton.css" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="702.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.TeamUebersichtController">
+<TabPane fx:id="tabpane_spieler" maxHeight="-Infinity" stylesheets="@/CSS/TeamUebersicht.css" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="702.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.TeamUebersichtController">
     <tabs>
       <Tab fx:id="tab_teamueber" text="Teamübersicht">
          <content>

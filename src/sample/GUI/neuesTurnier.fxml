@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import jfxtras.labs.scene.control.BigDecimalField?>
 
-<GridPane prefHeight="126.0" prefWidth="418.0" stylesheets="@/CSS/Badminton.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.neuesTurnierController">
+<GridPane styleClass="neuesTurnierPane" prefHeight="126.0" prefWidth="418.0" stylesheets="@/CSS/neuesTurnier.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.neuesTurnierController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="124.0" />
@@ -28,9 +28,9 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <HBox styleClass="neuesTurnierBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Turniername ">
+            <Text styleClass="neuesTurnierLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Turniername ">
                <stroke>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -42,30 +42,30 @@
             </Text>
          </children>
       </HBox>
-      <TextField fx:id="Turniername" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField styleClass="neuesTurnierTextField" fx:id="Turniername" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <HBox styleClass="neuesTurnierBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Datum " />
+            <Text styleClass="neuesTurnierLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Datum " />
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <HBox styleClass="neuesTurnierBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Felder " />
+            <Text styleClass="neuesTurnierLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Felder " />
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="311.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+      <HBox styleClass="neuesTurnierBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <HBox styleClass="neuesTurnierBox" alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="311.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
          <children>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Abbrechen" />
-            <Button mnemonicParsing="false" onAction="#erstelleTurnier" prefHeight="25.0" prefWidth="75.0" text="Starten">
+            <Button styleClass="neuesTurnierButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Abbrechen" />
+            <Button styleClass="neuesTurnierButton" mnemonicParsing="false" onAction="#erstelleTurnier" prefHeight="25.0" prefWidth="75.0" text="Starten">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <DatePicker fx:id="turnierDatum" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <BigDecimalField fx:id="AnzahlFelder" prefHeight="13.0" prefWidth="332.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <DatePicker styleClass="neuesTurnierTextField" fx:id="turnierDatum" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <BigDecimalField styleClass="neuesTurnierTextField" fx:id="AnzahlFelder" prefHeight="13.0" prefWidth="332.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Cylinder radius="0.77" />
    </children>
 </GridPane>
