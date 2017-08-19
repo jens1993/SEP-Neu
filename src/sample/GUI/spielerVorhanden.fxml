@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" stylesheets="@/CSS/spielerVorhanden.css" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.spielerVorhandenController">
+<GridPane styleClass="spielerVorhandenPane" maxHeight="-Infinity" maxWidth="-Infinity" stylesheets="@/CSS/spielerVorhanden.css" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.spielerVorhandenController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -14,36 +14,36 @@
       <RowConstraints maxHeight="90.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <HBox prefHeight="0.0" prefWidth="724.0" GridPane.rowIndex="1">
+      <HBox styleClass="spielerVorhandenBox" prefHeight="0.0" prefWidth="724.0" GridPane.rowIndex="1">
          <children>
-            <Button mnemonicParsing="false" text="Zurück" />
-            <Button mnemonicParsing="false" onAction="#btn_SpeicherSpielerPopup" text="Spieler speichern" />
-            <Button mnemonicParsing="false" onAction="#btn_UpdateSpielerPopup" text="Spieler updaten" />
+            <Button styleClass="spielerVorhandenButton" mnemonicParsing="false" text="Zurück" />
+            <Button styleClass="spielerVorhandenButton" mnemonicParsing="false" onAction="#btn_SpeicherSpielerPopup" text="Spieler speichern" />
+            <Button styleClass="spielerVorhandenButton" mnemonicParsing="false" onAction="#btn_UpdateSpielerPopup" text="Spieler updaten" />
          </children>
       </HBox>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox styleClass="spielerVorhandenBox" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Label text="Neuer Spieler" />
-            <TableView fx:id="popup_tabelle" prefHeight="85.0" prefWidth="724.0">
+            <Label styleClass="spielerVorhandenLabel" text="Neuer Spieler" />
+            <TableView styleClass="spielerVorhandenTableView" fx:id="popup_tabelle" prefHeight="85.0" prefWidth="724.0">
               <columns>
-                <TableColumn fx:id="popup_vorname" prefWidth="75.0" text="Vorname" />
-                <TableColumn fx:id="popup_nachname" prefWidth="75.0" text="Nachname" />
-                  <TableColumn fx:id="popup_geschlecht" prefWidth="75.0" text="Geschlecht" />
-                  <TableColumn fx:id="popup_gdatum" prefWidth="92.0" text="Geburtsdatum" />
-                  <TableColumn fx:id="popup_verein" prefWidth="75.0" text="Verein" />
-                  <TableColumn fx:id="popup_nationalitaet" prefWidth="129.0" text="Nationalität" />
+                <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_vorname" prefWidth="75.0" text="Vorname" />
+                <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_nachname" prefWidth="75.0" text="Nachname" />
+                  <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_geschlecht" prefWidth="75.0" text="Geschlecht" />
+                  <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_gdatum" prefWidth="92.0" text="Geburtsdatum" />
+                  <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_verein" prefWidth="75.0" text="Verein" />
+                  <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_nationalitaet" prefWidth="129.0" text="Nationalität" />
               </columns>
             </TableView>
-            <Label text="Vorhandene Spieler" />
-            <TableView fx:id="popup_tabelle2" prefHeight="200.0" prefWidth="200.0">
+            <Label styleClass="spielerVorhandenLabel" text="Vorhandene Spieler" />
+            <TableView styleClass="spielerVorhandenTableView" fx:id="popup_tabelle2" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn fx:id="popup_vorname2" prefWidth="75.0" text="Vorname" />
-                <TableColumn fx:id="popup_nachname2" prefWidth="75.0" text="Nachname" />
-                  <TableColumn fx:id="popup_geschlecht2" prefWidth="75.0" text="Geschlecht" />
-                  <TableColumn fx:id="popup_gdatum2" prefWidth="91.0" text="Geburtsdatum" />
-                  <TableColumn fx:id="popup_verein2" prefWidth="75.0" text="Verein" />
-                  <TableColumn fx:id="popup_nationalitaet2" prefWidth="134.0" text="Nationalität" />
-                  <TableColumn fx:id="popup_spielerid2" prefWidth="75.0" text="Spielerid" />
+                <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_vorname2" prefWidth="75.0" text="Vorname" />
+                <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_nachname2" prefWidth="75.0" text="Nachname" />
+                  <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_geschlecht2" prefWidth="75.0" text="Geschlecht" />
+                  <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_gdatum2" prefWidth="91.0" text="Geburtsdatum" />
+                  <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_verein2" prefWidth="75.0" text="Verein" />
+                  <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_nationalitaet2" prefWidth="134.0" text="Nationalität" />
+                  <TableColumn styleClass="spielerVorhandenTableColumn" fx:id="popup_spielerid2" prefWidth="75.0" text="Spielerid" />
               </columns>
             </TableView>
          </children>

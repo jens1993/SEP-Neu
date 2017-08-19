@@ -601,7 +601,8 @@ public class MainController implements Initializable, Observable
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Turnierladen.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
+        Scene scene = new Scene(root1);
+        stage.setScene(scene);
         stage.setAlwaysOnTop(true);
         stage.show();
         stage.setTitle("Turnier auswählen");
