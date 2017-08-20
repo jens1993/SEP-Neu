@@ -28,16 +28,17 @@ public class Spielklasse {
 
 	@Override
 	public String toString() {
-		if(this.getSpiele()!=null&&this.getSpiele().size()>0)
-		{
+		//funktioniert nicht, weil freilose auch als Spiele zählen..
+//		if(this.getSpiele()!=null&&this.getSpiele().size()>0)
+//		{
+//			return	 disziplin +
+//					" - " + niveau + " - Spiele:"+this.getSpiele().size() ;
+//		}
+//		else
+//		{
 			return	 disziplin +
-					" - " + niveau + " - Spiele:"+this.getSpiele().size() ;
-		}
-		else
-		{
-			return	 disziplin +
-					" - " + niveau ;
-		}
+					" - " + niveau  ;
+
 
 	}
 

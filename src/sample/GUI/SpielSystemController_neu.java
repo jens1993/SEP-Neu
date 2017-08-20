@@ -110,8 +110,33 @@ public class SpielSystemController_neu implements Initializable
             while (enumSpielerIDs.hasMoreElements()){
                 int key = (int)enumSpielerIDs.nextElement();
                 Spieler spieler = auswahlklasse.getSpieler().get(key);
+
                 if (!istInSetzListe(spieler)){
+                if(a.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("DAMEN"))
+                {
+                    System.out.println("DAMEN!!!");
+                    if(!spieler.getGeschlecht())
+                    {
+                        obs_spieler.add(spieler);
+                    }
+                }
+                if(a.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("HERREN"))
+                {
+                    System.out.println("Herren!!!");
+                    if(spieler.getGeschlecht())
+                    {
+                        obs_spieler.add(spieler);
+                    }
+
+                }
+                if(a.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("MIXED"))
+                {
+                    System.out.println("Beide!!!");
                     obs_spieler.add(spieler);
+
+                }
+                //sp.getDisziplin().contains("einzel")
+
 
                 }
             }
@@ -155,15 +180,17 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
             try {
                 ausgewaehlte_spielklasse.setSpielsystem( gruppe);
                 l_meldungsetzliste1.setText("ERFOLG");
+                a.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
                 TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+a.getAktuelleTurnierAuswahl().getName());
 
 
-                a.getStages().get(0).close();
+                //a.getStages().get(0).close();
 
                 //a.getStages().get(2).close();
 
             } catch (Exception e) {
                 l_meldungsetzliste1.setText("Fehlschlag");
+                a.InfoBenachrichtigung("Fehler","Das Spielsystem konnte nicht erfolgreich gestartet werden");
                 e.printStackTrace();
             }
         }
@@ -471,8 +498,7 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
                 Enumeration e = a.getSpieler().keys();
                 while (e.hasMoreElements()) {
                     int key = (int) e.nextElement();
-
-                    if (a.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespieler.getText().toUpperCase())) {
+                                        if (a.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespieler.getText().toUpperCase())) {
                         if (!istInSetzListe(a.getSpieler().get(key))) {
                             obs_spieler.add(a.getSpieler().get(key));
                         }

@@ -19,6 +19,7 @@ import sample.DAO.auswahlklasse;
 import sample.Spiel;
 
 import java.net.URL;
+import java.util.Dictionary;
 import java.util.ResourceBundle;
 
 /**
@@ -68,6 +69,9 @@ public class EinstellungenController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            //a.getStagesdict().get("Main").close();
+            Dictionary<String,Stage> stages =a.getStagesdict();
+
             //urnierLaden();
             thost.setText(sqlConnection.getDbHost());
             tdb.setText(sqlConnection.getDbName());

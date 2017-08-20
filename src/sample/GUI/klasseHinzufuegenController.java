@@ -157,6 +157,7 @@ public class klasseHinzufuegenController implements Initializable
 
         stage.setTitle("Klassenuebersicht: "+a.getAktuelleTurnierAuswahl().getName());
 
+        a.InfoBenachrichtigung("erf","klasse erstellt");
     }
     @FXML
     private void klassenSwitch(ActionEvent event) throws IOException, InterruptedException {

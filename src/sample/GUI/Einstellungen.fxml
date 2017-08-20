@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -13,63 +11,29 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<AnchorPane prefHeight="301.0" prefWidth="341.0" xmlns="http://javafx.com/javafx/8.0.111" stylesheets="@/CSS/Einstellungen.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.EinstellungenController">
+<AnchorPane prefHeight="301.0" prefWidth="341.0" stylesheets="@/CSS/Einstellungen.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.EinstellungenController">
    <children>
       <TabPane layoutY="-1.0" prefHeight="319.0" prefWidth="366.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab styleClass="einstellungenTab" text="Datenbank">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="316.0" prefWidth="532.0">
-                     <children>
-                        <Label styleClass="einstellungenLabel" layoutX="24.0" layoutY="37.0" text="Host">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label styleClass="einstellungenLabel" layoutX="24.0" layoutY="80.0" text="DB-Name">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label styleClass="einstellungenLabel" layoutX="24.0" layoutY="117.0" text="Benutzer">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label styleClass="einstellungenLabel" layoutX="24.0" layoutY="153.0" text="Passwort">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <TextField styleClass="einstellungenText" fx:id="thost" layoutX="138.0" layoutY="38.0" />
-                        <TextField styleClass="einstellungenText" fx:id="tdb" layoutX="138.0" layoutY="81.0" />
-                        <TextField styleClass="einstellungenText" fx:id="tuser" layoutX="138.0" layoutY="118.0" />
-                        <ButtonBar layoutX="24.0" layoutY="263.0" prefHeight="40.0" prefWidth="200.0" />
-                      <Button styleClass="einstellungenButton" layoutX="25.0" layoutY="228.0" mnemonicParsing="false" onAction="#btn_einstellungenspeichern" text="Einstellungen speichern" />
-                        <PasswordField styleClass="einstellungenField" fx:id="tpw" layoutX="138.0" layoutY="154.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
           <Tab styleClass="einstellungenTab" text="Spieleinstellung">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label styleClass="einstellungenLabel" layoutX="137.0" layoutY="14.0" text="Sprache">
+                        <Label layoutX="137.0" layoutY="14.0" styleClass="einstellungenLabel" text="Sprache">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <RadioButton styleClass="einstellungenRadioButton" fx:id="rd" layoutX="28.0" layoutY="48.0" mnemonicParsing="false" onAction="#radioswitch" text="Deutsch">
+                        <RadioButton fx:id="rd" layoutX="28.0" layoutY="48.0" mnemonicParsing="false" onAction="#radioswitch" styleClass="einstellungenRadioButton" text="Deutsch">
                            <toggleGroup>
                               <ToggleGroup fx:id="sprache" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton styleClass="einstellungenRadioButton" fx:id="re" layoutX="137.0" layoutY="48.0" mnemonicParsing="false" onAction="#radioswitch" text="Englisch" toggleGroup="$sprache" />
-                        <RadioButton styleClass="einstellungenRadioButton" layoutX="24.0" layoutY="151.0" mnemonicParsing="false" text="Verlierer" />
-                        <RadioButton styleClass="einstellungenRadioButton" layoutX="131.0" layoutY="151.0" mnemonicParsing="false" text="Gewinner" />
-                        <RadioButton styleClass="einstellungenRadioButton" layoutX="273.0" layoutY="151.0" mnemonicParsing="false" text=" aus" />
-                        <Label styleClass="einstellungenLabel" layoutX="104.0" layoutY="122.0" text="Vormerkung als Schiedsrichter" />
+                        <RadioButton fx:id="re" layoutX="137.0" layoutY="48.0" mnemonicParsing="false" onAction="#radioswitch" styleClass="einstellungenRadioButton" text="Englisch" toggleGroup="$sprache" />
+                        <RadioButton layoutX="24.0" layoutY="151.0" mnemonicParsing="false" styleClass="einstellungenRadioButton" text="Verlierer" />
+                        <RadioButton layoutX="131.0" layoutY="151.0" mnemonicParsing="false" styleClass="einstellungenRadioButton" text="Gewinner" />
+                        <RadioButton layoutX="273.0" layoutY="151.0" mnemonicParsing="false" styleClass="einstellungenRadioButton" text=" aus" />
+                        <Label layoutX="104.0" layoutY="122.0" styleClass="einstellungenLabel" text="Vormerkung als Schiedsrichter" />
                         <ToggleSwitch layoutX="29.0" layoutY="84.0" text="Schiedsrichter stanndardmäßig verwenden" />
                      </children>
                   </AnchorPane>
@@ -79,10 +43,10 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label styleClass="einstellungenLabel" layoutX="14.0" layoutY="49.0" text="aktueller Drucker" />
-                        <TextField styleClass="einstellungenTextfield" layoutX="146.0" layoutY="45.0" />
-                        <Button styleClass="einstellungenButton" layoutX="14.0" layoutY="198.0" mnemonicParsing="false" text="Testseite drucken" />
-                        <Button styleClass="einstellungenButton" layoutX="14.0" layoutY="145.0" mnemonicParsing="false" text="Drucker ändern" />
+                        <Label layoutX="14.0" layoutY="49.0" styleClass="einstellungenLabel" text="aktueller Drucker" />
+                        <TextField layoutX="146.0" layoutY="45.0" styleClass="einstellungenTextfield" />
+                        <Button layoutX="14.0" layoutY="198.0" mnemonicParsing="false" styleClass="einstellungenButton" text="Testseite drucken" />
+                        <Button layoutX="14.0" layoutY="145.0" mnemonicParsing="false" styleClass="einstellungenButton" text="Drucker ändern" />
                      </children>
                   </AnchorPane>
               </content>
