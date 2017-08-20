@@ -9,10 +9,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
@@ -23,6 +20,7 @@ import javafx.stage.Stage;
 import sample.DAO.auswahlklasse;
 import sample.Spielklasse;
 
+import javax.xml.ws.RequestWrapper;
 import java.net.URL;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -41,6 +39,8 @@ public class KlasseUebersichtController implements Initializable
     private VBox klasssedoppel_vbox;
     @FXML
     private VBox klasssemixed_vbox;
+    @FXML
+    private TabPane tabpane_uebersicht;
     //Label label2 = new Label("Search---------------------");
 
     public void pressBtn_neueKlassehinzufuegen(ActionEvent event) throws Exception{
@@ -145,6 +145,33 @@ public class KlasseUebersichtController implements Initializable
             Spielklasse[] finalSp = new Spielklasse[turnierauswahlspielklassen.size()];
             finalSp[i-1]= sp;
             Hyperlink finalHp = hp;
+            tabpane_uebersicht.setOnMouseClicked(event ->{
+                        if(MouseButton.SECONDARY==event.getButton()) {
+                            ContextMenu contextMenu = new ContextMenu();
+                            MenuItem item1 = new MenuItem("Neue Spielklasse");
+                            item1.setOnAction(new EventHandler<ActionEvent>() {
+
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    try {
+                                        pressBtn_neueKlassehinzufuegen(event);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                            });
+                            contextMenu.getItems().add(item1);
+                            tabpane_uebersicht.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+
+                                @Override
+                                public void handle(ContextMenuEvent event) {
+
+                                    contextMenu.show(tabpane_uebersicht, event.getScreenX(), event.getScreenY());
+                                }
+                            });
+                        }
+            } );
             hp.setOnMouseClicked(event -> {
                 /*spauswahl[finalI] =a.getSpielklasseDAO().getSpielklassenDict(a.getTurnierDAO().
                         read(a.getAktuelleTurnierAuswahl())).get(finalI);*/
