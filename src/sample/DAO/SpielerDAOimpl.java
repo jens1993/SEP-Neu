@@ -18,8 +18,13 @@ public class SpielerDAOimpl implements SpielerDAO {
     @Override
     public boolean create(Spieler spieler) {
 
+        String idAbfrage = "Select AUTO_INCREMENT " +
+                "FROM INFORMATION_SCHEMA.TABLES " +
+                "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
+                "AND TABLE_NAME = 'Spieler'";
+
+
         String sql = "INSERT INTO spieler("
-                + "SpielerID,"
                 + "VName,"
                 + "NName,"
                 + "GDatum,"
@@ -30,26 +35,31 @@ public class SpielerDAOimpl implements SpielerDAO {
                 + "RLP_Mixed, "
                 + "Nationalitaet, "
                 + "ExtSpielerID) "
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                + "VALUES(?,?,?,?,?,?,?,?,?,?)";
         try {
             SQLConnection con = new SQLConnection();
+            Statement smtID = con.SQLConnection().createStatement();
+            ResultSet count = smtID.executeQuery(idAbfrage);
+            count.next();
+            int spielerID = count.getInt(1);
+            spieler.setSpielerID(spielerID);
+            smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-            smt.setInt(1, spieler.getSpielerID());
-            smt.setString(2, spieler.getVName());
-            smt.setString(3, spieler.getNName());
-            smt.setObject(4, spieler.getGDatum());
-            smt.setBoolean(5, spieler.getGeschlecht());
+            smt.setString(1, spieler.getVName());
+            smt.setString(2, spieler.getNName());
+            smt.setObject(3, spieler.getGDatum());
+            smt.setBoolean(4, spieler.getGeschlecht());
             if(spieler.getVerein()!=null){
-                smt.setInt(6, spieler.getVerein().getVereinsID());
+                smt.setInt(5, spieler.getVerein().getVereinsID());
             }
             else{
-                smt.setNull(6, Types.INTEGER);
+                smt.setNull(5, Types.INTEGER);
             }
-            smt.setInt(7, spieler.getrPunkte()[0]);
-            smt.setInt(8, spieler.getrPunkte()[1]);
-            smt.setInt(9, spieler.getrPunkte()[2]);
-            smt.setString(10, spieler.getNationalitaet());
-            smt.setString(11, spieler.getExtSpielerID());
+            smt.setInt(6, spieler.getrPunkte()[0]);
+            smt.setInt(7, spieler.getrPunkte()[1]);
+            smt.setInt(8, spieler.getrPunkte()[2]);
+            smt.setString(9, spieler.getNationalitaet());
+            smt.setString(10, spieler.getExtSpielerID());
             smt.executeUpdate();
             smt.close();
             con.closeCon();
@@ -169,7 +179,7 @@ public class SpielerDAOimpl implements SpielerDAO {
 
     }*/
 
-    @Override
+    /*@Override
     public List<Spieler> getAllSpieler() {
         List<Spieler> alleSpieler = new ArrayList<Spieler>();
         SQLConnection con = new SQLConnection();
@@ -199,6 +209,6 @@ public class SpielerDAOimpl implements SpielerDAO {
         }
 
         return alleSpieler;
-    }
+    }*/
 
 }

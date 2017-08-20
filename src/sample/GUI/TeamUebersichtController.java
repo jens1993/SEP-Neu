@@ -19,6 +19,7 @@ import sample.Verein;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 /**
@@ -64,9 +65,10 @@ public class TeamUebersichtController implements Initializable, Cloneable
     private void printSpielerZuordnenTable() throws Exception {
         if(a.getAktuelleTurnierAuswahl()!=null) {
 
-
-            for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
-                obs_spieler.add(a.getAktuelleTurnierAuswahl().getSpieler().get(i));
+            Enumeration enumSpielerIDs = auswahlklasse.getSpieler().keys();
+            while (enumSpielerIDs.hasMoreElements()){
+                int key = (int)enumSpielerIDs.nextElement();
+                obs_spieler.add(auswahlklasse.getSpieler().get(key));
 
             }
 

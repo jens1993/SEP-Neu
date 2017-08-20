@@ -49,7 +49,7 @@ public class neuesTurnierController implements Initializable
         System.out.println("Name " +Turniername.getText());
         System.out.println("Datum " + date);
         TurnierDAO t = new TurnierDAOimpl();
-        Turnier turnier = new Turnier(Turniername.getText(),turnierliste.size()+1, Datum);
+        Turnier turnier = new Turnier(Turniername.getText(),Datum);
         t.create(turnier);
         System.out.println("Erfolg");
 

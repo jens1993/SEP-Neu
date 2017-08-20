@@ -26,10 +26,7 @@ import sample.Team;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by Manuel Hüttermann on 04.08.2017.
@@ -119,8 +116,10 @@ public class SpielSystemController implements Initializable
     private void printSpielerSpielklasseHinzuTable() throws Exception {
         if(a.getAktuelleTurnierAuswahl()!=null) {
             obs_spieler.clear();
-            for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
-                obs_spieler.add(a.getAktuelleTurnierAuswahl().getSpieler().get(i));
+            Enumeration enumSpielerIDs = auswahlklasse.getSpieler().keys();
+            while (enumSpielerIDs.hasMoreElements()){
+                int key = (int)enumSpielerIDs.nextElement();
+                obs_spieler.add(auswahlklasse.getSpieler().get(key));
             }
                         //TableColumn<Spieler,String> spielerVornameSpalte = new TableColumn("Vorname");
             spielsystem_spielerliste_nachname.setCellValueFactory(new PropertyValueFactory<Spieler,String>("nName"));
@@ -202,7 +201,9 @@ public class SpielSystemController implements Initializable
 
             setzliste_spielerm1.clear();
             setzliste_spielerm2.clear();
-            for (int i=0;i<turnierauswahlspielklassen.size();i++){
+            Enumeration enumSpielklasseIDs = auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().keys();
+            while (enumSpielklasseIDs.hasMoreElements()){
+                int key = (int)enumSpielklasseIDs.nextElement();
                 //System.out.println(ausgewaehlte_spielklasse.getSpiele().get(i));
                 //obsvorhanden_spieler.add(ausgewaehlte_spielklasse.getSetzliste().get(i-1));
 

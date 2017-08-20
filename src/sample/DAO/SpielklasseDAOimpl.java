@@ -17,19 +17,28 @@ import java.util.List;
 public class SpielklasseDAOimpl implements SpielklasseDAO {
     @Override
     public boolean create(Spielklasse spielklasse) {
+        String idAbfrage = "Select AUTO_INCREMENT " +
+                "FROM INFORMATION_SCHEMA.TABLES " +
+                "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
+                "AND TABLE_NAME = 'Spielklasse'";
+
         String sql = "INSERT INTO spielklasse("
                 + "Disziplin,"
                 + "Niveau, "
-                + "turnierid, "
-                + "SpielklasseID) "
-                + "VALUES(?,?,?,?)";
+                + "turnierid) "
+                + "VALUES(?,?,?)";
         try {
             SQLConnection con = new SQLConnection();
+            Statement smtID = con.SQLConnection().createStatement();
+            ResultSet count = smtID.executeQuery(idAbfrage);
+            count.next();
+            int spielklasseID = count.getInt(1);
+            spielklasse.setSpielklasseID(spielklasseID);
+            smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setString(1, spielklasse.getDisziplin());
             smt.setString(2, spielklasse.getNiveau());
             smt.setInt(3, spielklasse.getTurnier().getTurnierid());
-            smt.setInt(4, spielklasse.getSpielklasseID());
             smt.executeUpdate();
             smt.close();
             con.closeCon();
@@ -70,25 +79,34 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
     }
 
     @Override
-    public boolean deleteSpielsystem(Spielklasse spielklasse) {
+    public boolean stoppeSpielsystem(Spielklasse spielklasse) {
         if(spielklasse.getSpielsystem()!=null) {
             String sqlErgebnis = "DELETE FROM spiel_satzergebnis WHERE SpielID= 'start'";
             String sqlSpielklasseSpielID = "DELETE FROM spielklasse_spielid WHERE SpielID= 'start'";
             String sqlSpiel = "DELETE FROM spiel WHERE SpielID= 'start'";
+            String sqlFreilose = "DELETE FROM TEAM WHERE TeamID = 'start'";
             for (int i=0;i<spielklasse.getSpielsystem().getRunden().size();i++){
                 for (int j=0;j<spielklasse.getSpielsystem().getRunden().get(i).size();j++){
-                    Spiel spiel = spielklasse.getSpielsystem().getRunden().get(i).get(j);
                     sqlErgebnis += " OR SpielID= ?";
                     sqlSpielklasseSpielID += " OR SpielID= ?";
                     sqlSpiel += " OR SpielID= ?";
                 }
             }
+            int freilosZaehler =0;
+            for (int k=0;k<spielklasse.getSetzliste().size();k++){
+                if(spielklasse.getSetzliste().get(k).isFreilos()){
+                    sqlFreilose += " OR TeamID= ?";
+                    freilosZaehler++;
+                }
+            }
+
             try {
                 int zaehler = 1;
                 SQLConnection con = new SQLConnection();
                 PreparedStatement smtErgebnis = con.SQLConnection().prepareStatement(sqlErgebnis);
                 PreparedStatement smtSpielklasseSpielId = con.SQLConnection().prepareStatement(sqlSpielklasseSpielID);
                 PreparedStatement smtSpiel = con.SQLConnection().prepareStatement(sqlSpiel);
+                PreparedStatement smtFreilose = con.SQLConnection().prepareStatement(sqlFreilose);
                 for (int i=0;i<spielklasse.getSpielsystem().getRunden().size();i++){
                     for (int j=0;j<spielklasse.getSpielsystem().getRunden().get(i).size();j++){
                         Spiel spiel = spielklasse.getSpielsystem().getRunden().get(i).get(j);
@@ -96,6 +114,11 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
                         smtSpielklasseSpielId.setInt(zaehler,spiel.getSpielID());
                         smtSpiel.setInt(zaehler,spiel.getSpielID());
                         zaehler++;
+                    }
+                }
+                for (int k=0;k<spielklasse.getSetzliste().size();k++){
+                    if(spielklasse.getSetzliste().get(k).isFreilos()){
+                        smtFreilose.setInt(freilosZaehler,spielklasse.getSetzliste().get(k).getTeamid());
                     }
                 }
                 smtErgebnis.executeUpdate();

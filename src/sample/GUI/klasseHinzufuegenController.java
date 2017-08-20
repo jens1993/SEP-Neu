@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 /**
@@ -131,11 +132,9 @@ public class klasseHinzufuegenController implements Initializable
 
 
 
-        Spielklasse spklasse = new Spielklasse(a.getAktuelleTurnierAuswahl().getSpielklassen().size()+1,combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),a.getAktuelleTurnierAuswahl());
-
-
-        a.getAktuelleTurnierAuswahl().addSpielklassen(spklasse);
+        Spielklasse spklasse = new Spielklasse(combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),a.getAktuelleTurnierAuswahl());
         spklasse.getSpielklasseDAO().create(spklasse);
+        a.getAktuelleTurnierAuswahl().addSpielklassen(spklasse);
         a.getAktuelleTurnierAuswahl().addtObs_spielklassen(spklasse);
         System.out.println("------------------Größe = "+a.getAktuelleTurnierAuswahl().getSpielklassen().size());
         MainController m = new MainController();
@@ -153,8 +152,6 @@ public class klasseHinzufuegenController implements Initializable
         }
         a.addStage(stage);
         stage.setScene(new Scene(root1));
-        Scene s = new Scene(root1);
-
         stage.show();
 
 
@@ -207,11 +204,10 @@ public class klasseHinzufuegenController implements Initializable
     public void printSpielerZuordnenTable() throws Exception {
         if(a.getAktuelleTurnierAuswahl()!=null) {
             ObservableList<Spieler> spieler = FXCollections.observableArrayList();
-
-            for (int i=1;i<=a.getAktuelleTurnierAuswahl().getSpieler().size();i++){
-                spieler.add(a.getAktuelleTurnierAuswahl().getSpieler().get(i));
-                //System.out.println("test");
-                System.out.println(spieler.get(i-1).getVName());
+            Enumeration enumKeys = auswahlklasse.getSpieler().keys();
+            while (enumKeys.hasMoreElements()){
+                int key = (int) enumKeys.nextElement();
+                spieler.add(auswahlklasse.getSpieler().get(key));
             }
 
 

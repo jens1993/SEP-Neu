@@ -22,78 +22,77 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="1050" prefWidth="1650" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
+<VBox prefHeight="1050" prefWidth="1650" styleClass="mainFrame" stylesheets="@/CSS/Main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
 <children>
-    <MenuBar>
+    <MenuBar styleClass="mainMenuBar">
         <menus>
-            <Menu mnemonicParsing="false" text="Datei">
+            <Menu mnemonicParsing="false" styleClass="mainItem" text="Datei">
                 <items>
-                    <MenuItem fx:id="menu_neuesTurnier" mnemonicParsing="false" onAction="#pressBtn_neuesTurnier" text="neues Turnier" />
-                    <MenuItem fx:id="menu_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="Turnier laden" />
-                    <MenuItem mnemonicParsing="false" text="Turnier speichern" />
-                    <MenuItem mnemonicParsing="false" text="Turnier speichern unter" />
-                    <SeparatorMenuItem mnemonicParsing="false" />
-                    <MenuItem mnemonicParsing="false" text="Programm beenden" />
+                    <MenuItem fx:id="menu_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" styleClass="mainItem" text="Turnier laden" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Turnier speichern" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Turnier speichern unter" />
+                    <SeparatorMenuItem mnemonicParsing="false" styleClass="mainItem" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Programm beenden" />
                 </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Turnier">
+            <Menu mnemonicParsing="false" styleClass="mainItem" text="Turnier">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="Turnierdaten bearbeiten" />
-                    <MenuItem mnemonicParsing="false" text="Klassendaten bearbeiten" />
-                    <MenuItem mnemonicParsing="false" text="Spielerdaten bearbeiten" />
-                    <MenuItem mnemonicParsing="false" text="Vereine bearbeiten" />
-                    <SeparatorMenuItem mnemonicParsing="false" />
-                    <MenuItem fx:id="btn_statistik" mnemonicParsing="false" onAction="#pressBtn_laden" text="Statistiken" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Turnierdaten bearbeiten" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Klassendaten bearbeiten" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Spielerdaten bearbeiten" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Vereine bearbeiten" />
+                    <SeparatorMenuItem mnemonicParsing="false" styleClass="mainItem" />
+                    <MenuItem fx:id="btn_statistik" mnemonicParsing="false" onAction="#pressBtn_laden" styleClass="mainItem" text="Statistiken" />
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Ansicht">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="Feldübersicht" />
-                    <MenuItem mnemonicParsing="false" text="Klassen" />
-                    <MenuItem mnemonicParsing="false" text="Spielübersicht" />
-                    <MenuItem mnemonicParsing="false" text="Zeitplan" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Feldübersicht" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Klassen" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Spielübersicht" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Zeitplan" />
                     <SeparatorMenuItem mnemonicParsing="false" />
-                    <MenuItem mnemonicParsing="false" text="Platzierungen" />
-                    <Menu mnemonicParsing="false" text="neues Fenster">
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Platzierungen" />
+                    <Menu mnemonicParsing="false" styleClass="mainItem" text="neues Fenster">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="Klassen" />
-                            <MenuItem mnemonicParsing="false" text="Spielübersicht" />
-                            <MenuItem mnemonicParsing="false" text="Zeitplan" />
+                            <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Klassen" />
+                            <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Spielübersicht" />
+                            <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Zeitplan" />
                         </items>
                     </Menu>
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Sonstiges">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="Teilnehmerliste drucken" />
-                    <MenuItem mnemonicParsing="false" text="Startgeldliste drucken" />
-                    <MenuItem mnemonicParsing="false" text="Ergebnisformular erstellen" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Teilnehmerliste drucken" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Startgeldliste drucken" />
+                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Ergebnisformular erstellen" />
                     <SeparatorMenuItem mnemonicParsing="false" />
-                    <MenuItem mnemonicParsing="false" onAction="#pressBtn_Einstellungen" text="Optionen" />
+                    <MenuItem mnemonicParsing="false" onAction="#pressBtn_Einstellungen" styleClass="mainItem" text="Optionen" />
                 </items>
             </Menu>
         </menus>
     </MenuBar>
     <Separator prefHeight="19.0" prefWidth="900.0" />
-    <HBox>
+    <HBox styleClass="mainMenuBar">
         <children>
-            <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="114.0">
+            <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="114.0" styleClass="mainButtonBar">
                 <buttons>
-                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="Turnierübersicht" />
+                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" styleClass="mainButton" text="Turnierübersicht" />
                 </buttons>
             </ButtonBar>
-            <ButtonBar>
+            <ButtonBar styleClass="mainButtonBar">
                 <buttons>
-                    <Button fx:id="btn_klassen" mnemonicParsing="false" onAction="#pressBtn_klassen" text="Klassen" />
-                    <Button fx:id="btn_spieler" mnemonicParsing="false" onAction="#pressBtn_spieler" text="Spieler" />
-                  <Button mnemonicParsing="false" onAction="#pressBtn_teamLaden" text="Teams" />
-                    <Button mnemonicParsing="false" text="Felder" />
+                    <Button fx:id="btn_klassen" mnemonicParsing="false" onAction="#pressBtn_klassen" styleClass="mainButton" text="Klassen" />
+                    <Button fx:id="btn_spieler" mnemonicParsing="false" onAction="#pressBtn_spieler" styleClass="mainButton" text="Spieler" />
+                    <Button mnemonicParsing="false" onAction="#pressBtn_teamLaden" styleClass="mainButton" text="Teams" />
+                    <Button mnemonicParsing="false" styleClass="mainButton" text="Felder" />
                 </buttons>
             </ButtonBar>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" styleClass="mainButtonBar">
                 <buttons>
-                    <Button mnemonicParsing="false" text="Zeitplan" />
-                    <Button mnemonicParsing="false" onAction="#pressBtn_Statistik" text="Statistik" />
+                    <Button mnemonicParsing="false" styleClass="mainButton" text="Zeitplan" />
+                    <Button mnemonicParsing="false" onAction="#pressBtn_Statistik" styleClass="mainButton" text="Statistik" />
                 </buttons>
             </ButtonBar>
         </children>
@@ -108,18 +107,18 @@
                         <children>
                             <TabPane layoutX="-5.0" layoutY="-4.0" prefHeight="723.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <tabs>
-                                    <Tab text="Turnierbaum">
+                                    <Tab styleClass="mainTab" text="Turnierbaum">
                                         <content>
                                             <AnchorPane />
                                         </content>
                                     </Tab>
-                                    <Tab fx:id="tab_spieluebersicht" onSelectionChanged="#fuelleSpielElemente" text="Spielübersicht">
+                                    <Tab fx:id="tab_spieluebersicht" onSelectionChanged="#fuelleSpielElemente" styleClass="mainTab" text="Spielübersicht">
                                  <content>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
                                           <HBox fx:id="hbox_main" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button mnemonicParsing="false" onAction="#reloadcheckbox" text="Lade Spielklassen neu" />
+                                                <Button styleClass="mainButton" mnemonicParsing="false" onAction="#reloadcheckbox" text="Lade Spielklassen neu" />
                                              </children></HBox>
                                           <TableView fx:id="tabelle_spiele" prefHeight="964.0" prefWidth="903.0" />
                                        </children>
@@ -136,7 +135,7 @@
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
         <children>
-            <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Badminton Turnierverwaltung" HBox.hgrow="ALWAYS">
+            <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" styleClass="mainLabel" text="Badminton Turnierverwaltung" HBox.hgrow="ALWAYS">
                 <font>
                     <Font size="11.0" fx:id="x3" />
                 </font>

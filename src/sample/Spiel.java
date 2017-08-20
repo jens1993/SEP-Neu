@@ -15,6 +15,7 @@ public class Spiel {
 	private LocalTime aufrufZeit;
 	private Spieler schiedsrichter;
 	private Spielsystem spielsystem;
+	private Turnier turnier;
 
 
 
@@ -29,6 +30,7 @@ public class Spiel {
 
 	public void setFeld(Feld feld) {
 		this.feld = feld;
+		feld.setAktivesSpiel(this);
 		spielDAO.update(this);
 	}
 
@@ -104,11 +106,9 @@ public class Spiel {
 		this.gast = gast;
 		this.spielsystem=spielsystem;
 		this.systemSpielID = systemSpielID;
-		spielID = spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
-		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
+		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
-		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
-
+		turnier.getObs_ausstehendeSpiele().add(this);
 		spielDAO.create(this);
 		this.status = 1;
 		if(heim.isFreilos()){
@@ -120,8 +120,7 @@ public class Spiel {
 	public Spiel(int systemSpielID, Spielsystem spielsystem) { //Constructor für Extrarunden (Gruppe mit Endrunde)
 		this.spielsystem = spielsystem;
 		this.systemSpielID = systemSpielID;
-		spielID = spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
-		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
+		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
 		spielDAO.create(this);
@@ -133,8 +132,7 @@ public class Spiel {
 		this.setzPlatzHeim = setzPlatzHeim;
 		this.setzPlatzGast = setzPlatzGast;
 		this.spielsystem=spielsystem;
-		spielID = this.spielsystem.getSpielklasse().getTurnier().getSpiele().size()+1;
-		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
+		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
 		spielDAO.create(this);
@@ -242,6 +240,7 @@ public class Spiel {
 		ergebnis.getErgebnisDAO().create(this);
 		this.getSpielsystem().getSpielklasse().getTurnier().getObs_aktiveSpiele().remove(this);
 		this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);
+		this.feld.spielBeenden();
 	}
 
 	public void setErgebnis(Ergebnis ergebnis, String einlesen) {
@@ -277,6 +276,11 @@ public class Spiel {
 
 	private void punkteHinzufuegen(){
 
+	}
+
+	public void setSpielID(int spielID) {
+		this.spielID = spielID;
+		this.turnier.getSpiele().put(spielID,this);
 	}
 
 	public int getSetzPlatzHeim() {

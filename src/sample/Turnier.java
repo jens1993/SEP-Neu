@@ -20,11 +20,10 @@ public class Turnier  implements Initializable {
 
 	private Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
 	private ArrayList<Feld> felder = new ArrayList<>();
-	private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
-	private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
+	//private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
+	//private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
 	private Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
 	private Dictionary<Integer, Spiel> spiele = new Hashtable<Integer,Spiel>();
-	private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
 	private ObservableList<Spiel> obs_spiele = FXCollections.observableArrayList();
 	private ObservableList<Integer> obs_spielklassen_auswahl = FXCollections.observableArrayList();
 	private ObservableList<Spiel> obs_gespielteSpiele = FXCollections.observableArrayList();
@@ -84,6 +83,7 @@ public class Turnier  implements Initializable {
 		this.obs_aktiveSpiele.remove(spiel);
 		this.obs_ausstehendeSpiele.remove(spiel);
 		this.obs_gespielteSpiele.remove(spiel);
+		this.spiele.remove(spiel.getSpielID());
 	}
 
 	public ObservableList<Spiel> getObs_gespielteSpiele() {
@@ -139,6 +139,14 @@ public class Turnier  implements Initializable {
 		this.turnierid = turnierid;
 	}
 
+	public Turnier(String name, LocalDate datum) {
+		this.datum = datum;
+		this.name = name;
+	}
+
+	public void setTurnierid(int turnierid) {
+		this.turnierid = turnierid;
+	}
 
 	public int getGesamtSpiele() {
 		return gesamtSpiele;
@@ -177,25 +185,7 @@ public class Turnier  implements Initializable {
 		return spielklassen;
 	}
 
-	public Dictionary<Integer, Verein> getVereine() {
-		return vereine;
-	}
 
-	public Dictionary<Integer, Turnier> getTurniere() {
-		return turnierliste;
-	}
-
-	public void setVereine(Dictionary<Integer, Verein> vereine) {
-		this.vereine = vereine;
-	}
-
-	public void setTurniere(Dictionary<Integer, Turnier> turnierliste) {
-		this.turnierliste = turnierliste;
-	}
-
-	public Dictionary<Integer, Spieler> getSpieler() {
-		return spieler;
-	}
 
 	public ArrayList<Feld> getFelder() {
 		return felder;
@@ -223,10 +213,6 @@ public class Turnier  implements Initializable {
 
 	public void setSpielklassen(Dictionary<Integer, Spielklasse> spielklassen) {
 		this.spielklassen = spielklassen;
-	}
-
-	public void setSpieler(Dictionary<Integer, Spieler> spieler) {
-		this.spieler = spieler;
 	}
 
 	public void setMatchDauer(int matchDauer) {

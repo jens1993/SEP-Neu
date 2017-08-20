@@ -43,19 +43,17 @@ public class Spieler {
 
 
 
-	public Spieler(String vName, String nName, int spielerID){
+	public Spieler(String vName, String nName){
 		this.vName = vName;
 		this.nName = nName;
-		this.spielerID = spielerID;
 		spielerDAO.create(this);
 	}
 
-	public Spieler(String vName, String nName, LocalDate gDatum, int spielerID, boolean geschlecht, int[] rPunkte, Verein verein,String extSpielerID)
+	public Spieler(String vName, String nName, LocalDate gDatum, boolean geschlecht, int[] rPunkte, Verein verein,String extSpielerID)
 	{
 		this.vName = vName;
 		this.nName = nName;
 		this.gDatum = gDatum;
-		this.spielerID = spielerID;
 		this.geschlecht = geschlecht;
 		this.rPunkte = rPunkte;
 		this.verein = verein;
@@ -79,9 +77,17 @@ public class Spieler {
 		this.extSpielerID = extSpielerID;
 		this.aktuellesSpiel = aktuellesSpiel;
 	}
+	public Spieler(){
 
-	public Spieler() {
-
+	}
+	public void einzelPunkteUpdate(int einzelPunkte){
+		rPunkte[0] = einzelPunkte;
+	}
+	public void doppelPunkteUpdate(int doppelPunkte){
+		rPunkte[1] = doppelPunkte;
+	}
+	public void mixedPunkteUpdate(int mixedPunkte){
+		rPunkte[2] = mixedPunkte;
 	}
 
 	public boolean deleteSpieler(Spieler spieler){

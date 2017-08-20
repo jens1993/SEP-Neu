@@ -6,41 +6,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="321.0" prefWidth="514.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.neuerVereinController">
+<AnchorPane styleClass="neuerVereinPane" prefHeight="321.0" prefWidth="514.0" stylesheets="@/CSS/neuerVerein.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.neuerVereinController">
    <children>
 
-      <Label layoutX="32.0" layoutY="40.0" text="Name">
+      <Label styleClass="neuerVereinLabel" layoutX="32.0" layoutY="40.0" text="Name">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="t_vname" layoutX="161.0" layoutY="38.0">
+      <TextField styleClass="neuerVereinTextField" fx:id="t_vname" layoutX="161.0" layoutY="38.0">
          <font>
             <Font size="13.0" />
          </font>
       </TextField>
-      <Label layoutX="32.0" layoutY="107.0" text="Verband">
+      <Label styleClass="neuerVereinLabel" layoutX="32.0" layoutY="107.0" text="Verband">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="32.0" layoutY="178.0" text="Ext. VereinsID">
+      <Label styleClass="neuerVereinLabel" layoutX="32.0" layoutY="178.0" text="Ext. VereinsID">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="t_vverband" layoutX="161.0" layoutY="102.0">
+      <TextField styleClass="neuerVereinTextField" fx:id="t_vverband" layoutX="161.0" layoutY="102.0">
          <font>
             <Font size="13.0" />
          </font>
       </TextField>
-      <TextField fx:id="t_vextvereinsid" layoutX="161.0" layoutY="169.0">
+      <TextField styleClass="neuerVereinTextField" fx:id="t_vextvereinsid" layoutX="161.0" layoutY="169.0">
          <font>
             <Font size="13.0" />
          </font>
       </TextField>
 
-      <Button layoutX="161.0" layoutY="230.0" mnemonicParsing="false" onAction="#pressBtn_VereinSpeichern" text="Speichern">
+      <Button styleClass="neuerVereinButton" layoutX="161.0" layoutY="230.0" mnemonicParsing="false" onAction="#pressBtn_VereinSpeichern" text="Speichern">
          <font>
             <Font size="20.0" />
          </font>

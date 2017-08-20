@@ -20,6 +20,7 @@ import sample.Spielklasse;
 
 import java.net.URL;
 import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 /**
@@ -88,8 +89,12 @@ public class KlasseUebersichtController implements Initializable
         TextFlow[] flow = new TextFlow[turnierauswahlspielklassen.size()+1];
         final Spielklasse[] spauswahl = {null};
         Hyperlink hp=null;
-        for ( int i = 1; i <= turnierauswahlspielklassen.size(); i++) {
-            sp= turnierauswahlspielklassen.get(i);
+        Enumeration enumkeys = turnierauswahlspielklassen.keys();
+        int i=1;
+        while(enumkeys.hasMoreElements()){
+
+            int key = (int)enumkeys.nextElement();
+            sp= turnierauswahlspielklassen.get(key);
             if(sp.getSetzliste()!=null&&sp.getSetzliste().size()>0)
             {
                 hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2));
@@ -141,7 +146,7 @@ public class KlasseUebersichtController implements Initializable
                 if(finalSp[finalI-1]!=null)
                 {
 
-                    finalSp[finalI-1] =a.getAktuelleTurnierAuswahl().getSpielklassen().get(finalI);
+                    finalSp[finalI-1] =a.getAktuelleTurnierAuswahl().getSpielklassen().get(key);
 
                     // System.out.println(spauswahl[finalI].getDisziplin());
                     try {
@@ -156,7 +161,7 @@ public class KlasseUebersichtController implements Initializable
 
             //doing what you want here with labels
             //...
-
+            i++;
         }
 
 
