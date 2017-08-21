@@ -28,16 +28,17 @@ public class Spielklasse {
 
 	@Override
 	public String toString() {
-		if(this.getSpiele()!=null&&this.getSpiele().size()>0)
-		{
+		//funktioniert nicht, weil freilose auch als Spiele zählen..
+//		if(this.getSpiele()!=null&&this.getSpiele().size()>0)
+//		{
+//			return	 disziplin +
+//					" - " + niveau + " - Spiele:"+this.getSpiele().size() ;
+//		}
+//		else
+//		{
 			return	 disziplin +
-					" - " + niveau + " - Spiele:"+this.getSpiele().size() ;
-		}
-		else
-		{
-			return	 disziplin +
-					" - " + niveau ;
-		}
+					" - " + niveau  ;
+
 
 	}
 
@@ -50,7 +51,7 @@ public class Spielklasse {
 			einzel=true;
 		}
 	}
-	public Spielklasse(int spielklasseID,					   Disziplin disziplin,					   Niveau niveau,					   Turnier turnier)
+	public Spielklasse(Disziplin disziplin, Niveau niveau, Turnier turnier)
 	{
 		System.out.println("neue Spielklasse mit Enums1 und gesetzter SpielklasseID");
 		this.spielklasseID=spielklasseID;

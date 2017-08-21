@@ -29,6 +29,7 @@ public class VereinDAOimpl implements VereinDAO {
             ResultSet count = smtID.executeQuery(idAbfrage);
             count.next();
             int vereinsid = count.getInt(1);
+            smtID.close();
             verein.setVereinsID(vereinsid);
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setString(1, verein.getName());

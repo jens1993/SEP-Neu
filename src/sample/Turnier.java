@@ -18,19 +18,18 @@ public class Turnier  implements Initializable {
 	private int spielerPausenZeit = 10;
 	private int turnierid;
 
-	private Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
-	private ArrayList<Feld> felder = new ArrayList<>();
-	private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
-	private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
-	private Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
-	private Dictionary<Integer, Spiel> spiele = new Hashtable<Integer,Spiel>();
-	private Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
-	private ObservableList<Spiel> obs_spiele = FXCollections.observableArrayList();
-	private ObservableList<Integer> obs_spielklassen_auswahl = FXCollections.observableArrayList();
-	private ObservableList<Spiel> obs_gespielteSpiele = FXCollections.observableArrayList();
-	private ObservableList<Spiel> obs_aktiveSpiele = FXCollections.observableArrayList();
-	private ObservableList<Spiel> obs_ausstehendeSpiele = FXCollections.observableArrayList();
-	private ObservableList<Spielklasse> obs_spielklassen = FXCollections.observableArrayList();
+	private static Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
+	private static ArrayList<Feld> felder = new ArrayList<>();
+	//private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
+	//private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
+	private static Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
+	private static Dictionary<Integer, Spiel> spiele = new Hashtable<Integer,Spiel>();
+	private static ObservableList<Spiel> obs_spiele = FXCollections.observableArrayList();
+	private static ObservableList<Integer> obs_spielklassen_auswahl = FXCollections.observableArrayList();
+	private static ObservableList<Spiel> obs_gespielteSpiele = FXCollections.observableArrayList();
+	private static ObservableList<Spiel> obs_aktiveSpiele = FXCollections.observableArrayList();
+	private static ObservableList<Spiel> obs_ausstehendeSpiele = FXCollections.observableArrayList();
+	private static ObservableList<Spielklasse> obs_spielklassen = FXCollections.observableArrayList();
 
 
 
@@ -140,6 +139,14 @@ public class Turnier  implements Initializable {
 		this.turnierid = turnierid;
 	}
 
+	public Turnier(String name, LocalDate datum) {
+		this.datum = datum;
+		this.name = name;
+	}
+
+	public void setTurnierid(int turnierid) {
+		this.turnierid = turnierid;
+	}
 
 	public int getGesamtSpiele() {
 		return gesamtSpiele;
@@ -177,26 +184,13 @@ public class Turnier  implements Initializable {
 		spielklassen.put(sp.getSpielklasseID(),sp);
 		return spielklassen;
 	}
+	public Dictionary<Integer, Spielklasse> removeSpielklassen(Spielklasse sp) {
 
-	public Dictionary<Integer, Verein> getVereine() {
-		return vereine;
+		spielklassen.remove(sp);
+		return spielklassen;
 	}
 
-	public Dictionary<Integer, Turnier> getTurniere() {
-		return turnierliste;
-	}
 
-	public void setVereine(Dictionary<Integer, Verein> vereine) {
-		this.vereine = vereine;
-	}
-
-	public void setTurniere(Dictionary<Integer, Turnier> turnierliste) {
-		this.turnierliste = turnierliste;
-	}
-
-	public Dictionary<Integer, Spieler> getSpieler() {
-		return spieler;
-	}
 
 	public ArrayList<Feld> getFelder() {
 		return felder;
@@ -224,10 +218,6 @@ public class Turnier  implements Initializable {
 
 	public void setSpielklassen(Dictionary<Integer, Spielklasse> spielklassen) {
 		this.spielklassen = spielklassen;
-	}
-
-	public void setSpieler(Dictionary<Integer, Spieler> spieler) {
-		this.spieler = spieler;
 	}
 
 	public void setMatchDauer(int matchDauer) {

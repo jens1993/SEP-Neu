@@ -37,33 +37,27 @@ public class Main extends Application {
             instance = this;
             this.primaryStage = primaryStage;
             Parent root = FXMLLoader.load(getClass().getResource("GUI/Turnierladen.fxml"));
-            this.primaryStage.setTitle("Badminton Turnierverwaltung - Kein Turnier ausgewählt");
+            this.primaryStage.setTitle("Badminton Turnierverwaltung -- Kein Turnier ausgewählt");
             Scene scene = new Scene(root);
             this.primaryStage.setScene(scene);
 
             this.primaryStage.show();
         } catch (IOException e) {
 
-            e.printStackTrace();
-            instance = this;
-            this.primaryStage = primaryStage;
-            Parent root2 = FXMLLoader.load(getClass().getResource("GUI/Einstellungen.fxml"));
-            this.primaryStage.setTitle("Datenbank Fehler");
-            Scene scene2 = new Scene(root2);
-            this.primaryStage.setScene(scene2);
-            this.primaryStage.setAlwaysOnTop(true);
-            this.primaryStage.show();
+            try {
+                e.printStackTrace();
+                instance = this;
+                this.primaryStage = primaryStage;
+                Parent root2 = FXMLLoader.load(getClass().getResource("GUI/DBEinstellungen.fxml"));
+                this.primaryStage.setTitle("Datenbank Fehler");
+                Scene scene2 = new Scene(root2);
+                this.primaryStage.setScene(scene2);
+                this.primaryStage.setAlwaysOnTop(true);
+                this.primaryStage.show();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
 
-
-
-            FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("GUI/Main.fxml"));
-            Parent root1 = (Parent) fxmlLoader2.load();
-            Stage stage = new Stage();
-            //a.addStage(stage);
-            stage.setScene(new Scene(root1));
-            stage.show();
-            stage.setMaximized(true);
-            stage.setTitle("Badminton Turnierverwaltung - Keine Datenbankverbindung!");
         }
 
 
@@ -74,9 +68,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-
-
-
 
         launch(args);
         //$java -Duser.language=en com.tutego.insel.bundle.InternationalHelloWorld

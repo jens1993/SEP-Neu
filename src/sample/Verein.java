@@ -29,7 +29,6 @@ public class Verein {
 	}
 
 	public Verein(String extVereinsID, String name, String verband) {
-		this.vereinsID = vereinsID;
 		this.extVereinsID = extVereinsID;
 		this.name = name;
 		this.verband = verband;

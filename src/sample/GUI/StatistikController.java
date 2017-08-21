@@ -31,9 +31,9 @@ public class StatistikController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     lturnier.setText("Turnierinformationen: "+ a.getAktuelleTurnierAuswahl().getName());
-    anzahlSpielklassen.setText(String.valueOf(a.getAktuelleTurnierAuswahl().getSpielklassen().size()));
-    anzahlSpiele.setText(String.valueOf(a.getAktuelleTurnierAuswahl().getSpiele().size()));
-    anzahlSpielerimTurnier.setText(String.valueOf(a.getAktuelleTurnierAuswahl().getSpieler().size()));
+    anzahlSpielklassen.setText(String.valueOf(a.getAktuelleTurnierAuswahl().getObs_spielklassen().size()));
+    anzahlSpiele.setText(String.valueOf(a.getAktuelleTurnierAuswahl().getObs_spiele().size()));
+    anzahlSpielerimTurnier.setText(String.valueOf(auswahlklasse.getObs_spieler().size()));
     anzahlobsspiele.setText(
             String.valueOf("Aktive "+
             a.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().size()+"Gespielte "+

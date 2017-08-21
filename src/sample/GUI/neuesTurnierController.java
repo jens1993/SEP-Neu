@@ -3,6 +3,7 @@ package sample.GUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,14 +15,18 @@ import sample.DAO.TurnierDAOimpl;
 import sample.DAO.auswahlklasse;
 import sample.Turnier;
 
+import java.math.BigDecimal;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Dictionary;
+import java.util.ResourceBundle;
+
 import jfxtras.labs.scene.control.BigDecimalField;
 /**
  * Created by jens on 03.08.2017.
  */
-public class neuesTurnierController
+public class neuesTurnierController implements Initializable
 {
     TurnierDAO turnierDao = new TurnierDAOimpl();
 
@@ -44,23 +49,25 @@ public class neuesTurnierController
         System.out.println("Name " +Turniername.getText());
         System.out.println("Datum " + date);
         TurnierDAO t = new TurnierDAOimpl();
-        Turnier turnier = new Turnier(Turniername.getText(),turnierliste.size()+1, Datum);
+        Turnier turnier = new Turnier(Turniername.getText(),Datum);
         t.create(turnier);
+        a.InfoBenachrichtigung("Turnier erstellt",turnier.getName()+" wurde erstellt.");
         System.out.println("Erfolg");
 
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Turnierladen.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             for (int i=0; i<a.getStages().size();i++){
                 a.getStages().get(i).close();
             }
             a.addStage(stage);
+            a.addStagesdict(stage,"TurnierLaden");
             stage.setScene(new Scene(root1));
             stage.show();
-            stage.setMaximized(true);
+
             a.turnierAuswahlSpeichern(turnier);
-            stage.setTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
+            stage.setTitle("Badminton Turnierverwaltung - Kein Turnier ausgewählt");
 
         }
         catch (Exception e)
@@ -69,4 +76,11 @@ public class neuesTurnierController
         }
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        BigDecimal v = new BigDecimal(0);
+        AnzahlFelder.setMinValue(v);
+        v=new BigDecimal(30);
+        AnzahlFelder.setMaxValue(v);
+    }
 }

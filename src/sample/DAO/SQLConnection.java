@@ -105,7 +105,7 @@ public class SQLConnection
         }
 	public void pressBtn_Einstellungenneu () throws Exception {
 		System.out.println("test");
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Einstellungen.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GUI/DBEinstellungen.fxml"));
 		Parent root1 = (Parent) fxmlLoader.load();
 		Stage stage = new Stage();
 		//a.addStage(stage);
