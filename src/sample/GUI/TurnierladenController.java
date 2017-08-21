@@ -73,7 +73,7 @@ public class TurnierladenController implements Initializable
     private void zeigeTabelle() {
         System.out.println("Print table");
 
-        for (int i = 1; i <= a.getTurnierliste().size(); i++) {
+        for (int i = 1; i <= a.getTurnierliste().size()+1; i++) {
             turniere.add(a.getTurnierliste().get(i));
 
         }
@@ -100,6 +100,7 @@ public class TurnierladenController implements Initializable
                     Turnier clickedRow = (Turnier) row.getItem();
                     printRow(clickedRow);
                     ((Node)(event.getSource())).getScene().getWindow().hide();
+                 //   a.getStagesdict().get("")
                 }
                 else if(! row.isEmpty() && event.getButton()== MouseButton.PRIMARY)
                 {
@@ -158,6 +159,7 @@ public class TurnierladenController implements Initializable
             a.getStages().get(i).close();
         }
         a.addStage(primaryStage);
+        a.addStagesdict(primaryStage,"Main");
         primaryStage.setScene(new Scene(root1));
 
         primaryStage.show();
@@ -172,6 +174,7 @@ public class TurnierladenController implements Initializable
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             a.addStage(stage);
+            a.addStagesdict(stage,"NeuesTurnier");
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle("Neues Turnier");

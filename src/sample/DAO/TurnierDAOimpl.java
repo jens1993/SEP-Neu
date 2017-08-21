@@ -13,19 +13,28 @@ public class TurnierDAOimpl implements TurnierDAO {
 
     @Override
     public boolean create(Turnier turnier) {
+        String idAbfrage = "Select AUTO_INCREMENT " +
+                "FROM INFORMATION_SCHEMA.TABLES " +
+                "WHERE TABLE_SCHEMA = 'turnierverwaltung_neu' " +
+                "AND TABLE_NAME = 'Turnier'";
+
 
         String sql = "INSERT INTO Turnier("
                 + "Datum, "
-                + "Name, "
-                + "Turnierid)"
-                + "VALUES(?,?,?)";
+                + "Name) "
+                + "VALUES(?,?)";
 
         try {
             SQLConnection con = new SQLConnection();
+            Statement smtID = con.SQLConnection().createStatement();
+            ResultSet count = smtID.executeQuery(idAbfrage);
+            count.next();
+            int turnierID = count.getInt(1);
+            turnier.setTurnierid(turnierID);
+            smtID.close();
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setObject(1, turnier.getDatum());
             smt.setString(2, turnier.getName());
-            smt.setInt(3, turnier.getTurnierid());
             smt.executeUpdate();
             smt.close();
             con.closeCon();
@@ -111,14 +120,15 @@ public class TurnierDAOimpl implements TurnierDAO {
             turnierEingabe.setZaehlweise(turnierResult.getInt("Zaehlweise"));
             turnierEingabe.setFelder(readFelder(turnierEingabe));
             turnierEingabe.setSpielklassen(readSpielklassen(turnierEingabe));
-
             turnierEingabe.setTeams(readTeams(turnierEingabe));
-            for(int i=1; i<=turnierEingabe.getSpielklassen().size();i++){
-                Spielklasse spielklasse = turnierEingabe.getSpielklassen().get(i);
+            Enumeration e = turnierEingabe.getSpielklassen().keys();
+            while (e.hasMoreElements()){
+                int key = (int)e.nextElement();
+                Spielklasse spielklasse = turnierEingabe.getSpielklassen().get(key);
                 readSetzliste(spielklasse);
                 Spielsystem spielsystem = readSpielsystem(spielklasse);
                 if (spielsystem != null){
-                    turnierEingabe.getSpielklassen().get(i).setSpielsystem(spielsystem);
+                    turnierEingabe.getSpielklassen().get(key).setSpielsystem(spielsystem);
                 }
             }
             spielListenFuellen(turnierEingabe);
@@ -219,6 +229,9 @@ public class TurnierDAOimpl implements TurnierDAO {
             while (setzlisteResult.next()) {
                 Team team = spielklasse.getTurnier().getTeams().get(setzlisteResult.getInt("TeamID"));
                 setzliste.add(team);
+            }
+            if (setzliste.size()==0){
+                return null;
             }
             st.close();
             con.closeCon();

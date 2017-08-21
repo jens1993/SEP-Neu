@@ -12,13 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import sample.DAO.auswahlklasse;
 import sample.Spieler;
-import sample.Verein;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -83,7 +80,10 @@ public class spielerVorhandenController implements Initializable
     {
         Spieler spielerzumHinzufuegen = a.getSpielerzumHinzufeuegen();
         System.out.println(spielerzumHinzufuegen.getNName());
+        spielerzumHinzufuegen.getSpielerDAO().create(spielerzumHinzufuegen);
         a.addSpieler(spielerzumHinzufuegen);
+        System.out.println("Erfolg");
+        a.InfoBenachrichtigung("Spieler erfolreich hinzugefügt",spielerzumHinzufuegen.toString()+" wurde hinzugefügt.");
         auswahlklasse.getSpieler().put(spielerzumHinzufuegen.getSpielerID(),spielerzumHinzufuegen);
         try {
             ((Node)(event.getSource())).getScene().getWindow().hide();

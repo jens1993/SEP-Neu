@@ -2,8 +2,13 @@ package sample.DAO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Tab;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import sample.*;
 
 import java.util.ArrayList;
@@ -18,6 +23,7 @@ public class auswahlklasse
     private TurnierDAO turnierDAO = new TurnierDAOimpl();
     private static Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
     private static Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
+    private static Dictionary<String, Stage> stagesdict = new Hashtable<String,Stage>();
     private static Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
     private static Spielklasse aktuelleSpielklassenAuswahl = null;
     private static Turnier aktuelleTurnierAuswahl = null;
@@ -26,7 +32,7 @@ public class auswahlklasse
     private static ArrayList<Stage> stages = new ArrayList<>();
     private static Spiel SpielAuswahlErgebniseintragen;
     private static ObservableList<Spieler> obs_spieler = FXCollections.observableArrayList();
-
+    private static Notifications noteficationBuilder;
 
     public auswahlklasse() {
         turnierliste= turnierDAO.getAllTurniere();
@@ -43,6 +49,7 @@ public class auswahlklasse
     public static ObservableList<Spieler> getObs_spieler() {
         return obs_spieler;
     }
+
 
     public static int getSprachid() {
         return sprachid;
@@ -135,6 +142,17 @@ public class auswahlklasse
     public static void addVerein(Verein verein) {
         vereine.put(verein.getVereinsID(),verein);
     }
+
+
+
+    public static Dictionary<String, Stage> getStagesdict() {
+
+        return stagesdict;
+    }
+
+    public static void addStagesdict(Stage stage, String string) {
+        stagesdict.put(string,stage);
+    }
     /*public Dictionary<Integer, Spielklasse> getSpielklasseDict() {
         spielklassen=spielklasseDAO.getAllSpielklassenDict();
         return spielklassen;
@@ -157,6 +175,38 @@ public class auswahlklasse
     public static void spielklassenAuswahlSpeichern (Spielklasse spielklasse)
     {
         aktuelleSpielklassenAuswahl = spielklasse;
+    }
+    public  void InfoBenachrichtigung(String titel, String text)
+    {
+         noteficationBuilder = Notifications.create()
+                .title(titel)
+                .text(text)
+
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.BOTTOM_RIGHT)
+                .onAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("Klick auf die Notifiaction");
+                    }
+                });
+        noteficationBuilder.showInformation();
+    }
+    public  void WarnungBenachrichtigung(String titel, String text)
+    {
+        noteficationBuilder = Notifications.create()
+                .title(titel)
+                .text(text)
+
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.BOTTOM_RIGHT)
+                .onAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("Klick auf die Notifiaction");
+                    }
+                });
+        noteficationBuilder.showWarning();
     }
 
 

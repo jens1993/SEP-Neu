@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" stylesheets="@/CSS/Badminton.css" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SpielErgebnisEingebenController">
+<GridPane styleClass="spielergebnisEingebenPane" maxHeight="-Infinity" maxWidth="-Infinity" stylesheets="@/CSS/SpielergebnisEingeben.css" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SpielErgebnisEingebenController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="266.0" prefWidth="271.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="204.0" prefWidth="220.0" />
@@ -25,36 +25,36 @@
       <RowConstraints maxHeight="265.0" minHeight="10.0" prefHeight="152.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
+      <VBox styleClass="spielergebnisEingebenBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
          <children>
-            <Button fx:id="btn_OK" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_OK" text="OK">
+            <Button styleClass="spielergebnisEingebenButton" fx:id="btn_OK" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_OK" text="OK">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btn_Abbbruch" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Abbbruch" text="Abbruch">
+            <Button styleClass="spielergebnisEingebenButton" fx:id="btn_Abbbruch" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Abbbruch" text="Abbruch">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btn_Zurueckziehen" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Zurueckziehen" text="Zurückziehen">
+            <Button styleClass="spielergebnisEingebenButton" fx:id="btn_Zurueckziehen" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Zurueckziehen" text="Zurückziehen">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btn_Verlegen" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Verlegen" text="Verlegen">
+            <Button styleClass="spielergebnisEingebenButton" fx:id="btn_Verlegen" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Verlegen" text="Verlegen">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btn_schitzzettel" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_schitzzettel" text="Schitz.-Zettel">
+            <Button styleClass="spielergebnisEingebenButton" fx:id="btn_schitzzettel" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_schitzzettel" text="Schitz.-Zettel">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
          </children>
       </VBox>
-      <GridPane GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
+      <GridPane styleClass="spielergebnisEingebenPane" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="98.0" prefWidth="202.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="318.0" minWidth="196.0" prefWidth="295.0" />
@@ -67,100 +67,100 @@
             <RowConstraints vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. Satz:" GridPane.halignment="RIGHT">
+            <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Satz:" GridPane.halignment="RIGHT">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. Satz:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+            <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Satz:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3. Satz:" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Satz:" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4. Satz:" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+            <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text="4. Satz:" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="5. Satz:" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+            <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text="5. Satz:" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Text>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <HBox styleClass="spielergebnisEingebenBox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <TextField fx:id="ts1_1" maxWidth="50.0">
+                  <TextField styleClass="spielergebnisEingebenTextField" fx:id="ts1_1" maxWidth="50.0">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                  <TextField fx:id="ts1_2" maxWidth="50.0">
+                  <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
+                  <TextField styleClass="spielergebnisEingebenTextField" fx:id="ts1_2" maxWidth="50.0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <HBox styleClass="spielergebnisEingebenBox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="ts2_1" maxWidth="50.0">
+                  <TextField styleClass="spielergebnisEingebenTextField" fx:id="ts2_1" maxWidth="50.0">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                  <TextField fx:id="ts2_2" maxWidth="50.0">
+                  <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
+                  <TextField styleClass="spielergebnisEingebenTextField" fx:id="ts2_2" maxWidth="50.0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <HBox styleClass="spielergebnisEingebenBox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <TextField fx:id="ts3_1" maxWidth="50.0">
+                  <TextField styleClass="spielergebnisEingebenTextField" fx:id="ts3_1" maxWidth="50.0">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                  <TextField fx:id="ts3_2" maxWidth="50.0">
+                  <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
+                  <TextField styleClass="spielergebnisEingebenTextField" fx:id="ts3_2" maxWidth="50.0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <HBox styleClass="spielergebnisEingebenBox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <TextField maxWidth="50.0">
+                  <TextField styleClass="spielergebnisEingebenTextField" maxWidth="50.0">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                  <TextField maxWidth="50.0">
+                  <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
+                  <TextField styleClass="spielergebnisEingebenTextField" maxWidth="50.0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <HBox styleClass="spielergebnisEingebenBox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <TextField maxWidth="50.0">
+                  <TextField styleClass="spielergebnisEingebenTextField" maxWidth="50.0">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                  <TextField maxWidth="50.0">
+                  <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
+                  <TextField styleClass="spielergebnisEingebenTextField" maxWidth="50.0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -169,9 +169,9 @@
             </HBox>
          </children>
       </GridPane>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox styleClass="spielergebnisEingebenBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Heim" underline="true">
+            <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text="Heim" underline="true">
                <VBox.margin>
                   <Insets right="10.0" />
                </VBox.margin>
@@ -179,16 +179,16 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Label fx:id="l_heim" text="Team1">
+            <Label styleClass="spielergebnisEingebenLabel" fx:id="l_heim" text="Team1">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
          </children>
       </VBox>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+      <VBox styleClass="spielergebnisEingebenBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gast" underline="true">
+            <Text styleClass="spielergebnisEingebenText" strokeType="OUTSIDE" strokeWidth="0.0" text="Gast" underline="true">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>
@@ -196,14 +196,14 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Label fx:id="l_gast" text="Team2">
+            <Label styleClass="spielergebnisEingebenLabel" fx:id="l_gast" text="Team2">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
          </children>
       </VBox>
-      <Label fx:id="l_meldungergebnis" textFill="#eb0909" GridPane.rowIndex="3">
+      <Label styleClass="spielergebnisEingebenLabel" fx:id="l_meldungergebnis" textFill="#eb0909" GridPane.rowIndex="3">
          <font>
             <Font size="16.0" />
          </font>

@@ -8,6 +8,8 @@ import java.util.Vector;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import sample.DAO.*;
 import sample.Spielsysteme.*;
 import sample.Enums.*;
@@ -59,6 +61,18 @@ public class Spieler {
 		this.verein = verein;
 		this.extSpielerID = extSpielerID;
 		spielerDAO.create(this);
+
+	}
+	//Spieler erstellen (Prüfung)
+	public Spieler(String vName, String nName, LocalDate gDatum, boolean geschlecht, int[] rPunkte, Verein verein,String extSpielerID, String s)
+	{
+		this.vName = vName;
+		this.nName = nName;
+		this.gDatum = gDatum;
+		this.geschlecht = geschlecht;
+		this.rPunkte = rPunkte;
+		this.verein = verein;
+		this.extSpielerID = extSpielerID;
 
 	}
 	//EINLESEN
@@ -185,6 +199,18 @@ public class Spieler {
 		}
 		else {
 			return "w";
+		}
+	}
+	public ImageView getIGeschlecht() {
+		Image imgmale = new Image("sample/Images/icon/user_male.png",24,24,true,true);
+		Image imgfemale = new Image("sample/Images/icon/user_female.png",24,24,true,true);
+		ImageView imageView = new ImageView(imgmale);
+		ImageView imageView2 = new ImageView(imgfemale);
+		if(geschlecht){
+			return imageView;
+		}
+		else {
+			return imageView2;
 		}
 	}
 	public Verein getVerein() {
