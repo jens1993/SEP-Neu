@@ -105,7 +105,7 @@ public class SpielSystemController_neu implements Initializable
         System.out.println(a.getAktuelleTurnierAuswahl());
         if(a.getAktuelleTurnierAuswahl()!=null) {
             obs_spieler.clear();
-            System.out.println("Anzahl spielklassen = "+a.getAktuelleTurnierAuswahl().getSpielklassen().size());
+            System.out.println("Anzahl spielklassen = "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
             Enumeration enumSpielerIDs = auswahlklasse.getSpieler().keys();
             while (enumSpielerIDs.hasMoreElements()){
                 int key = (int)enumSpielerIDs.nextElement();
@@ -114,27 +114,38 @@ public class SpielSystemController_neu implements Initializable
                 if (!istInSetzListe(spieler)){
                 if(a.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("DAMEN"))
                 {
-                    System.out.println("DAMEN!!!");
+
                     if(!spieler.getGeschlecht())
                     {
                         obs_spieler.add(spieler);
                     }
+                    if(obs_spieler.size()==0)
+                    {
+                        a.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine weiblichen Spieler gefunden!");
+                    }
                 }
                 if(a.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("HERREN"))
                 {
-                    System.out.println("Herren!!!");
+
                     if(spieler.getGeschlecht())
                     {
                         obs_spieler.add(spieler);
+                    }
+                    if(obs_spieler.size()==0)
+                    {
+                        a.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine männlichen Spieler gefunden!");
                     }
 
                 }
                 if(a.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("MIXED"))
                 {
-                    System.out.println("Beide!!!");
                     obs_spieler.add(spieler);
 
                 }
+                    if(obs_spieler.size()==0)
+                    {
+                        a.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine Spieler gefunden!");
+                    }
                 //sp.getDisziplin().contains("einzel")
 
 
@@ -179,6 +190,7 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
             Gruppe gruppe = new Gruppe (ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse);
             try {
                 ausgewaehlte_spielklasse.setSpielsystem( gruppe);
+
                 l_meldungsetzliste1.setText("ERFOLG");
                 a.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
                 TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+a.getAktuelleTurnierAuswahl().getName());

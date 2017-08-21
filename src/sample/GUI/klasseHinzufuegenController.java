@@ -134,13 +134,14 @@ public class klasseHinzufuegenController implements Initializable
 
         Spielklasse spklasse = new Spielklasse(combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),a.getAktuelleTurnierAuswahl());
         spklasse.getSpielklasseDAO().create(spklasse);
-        a.getAktuelleTurnierAuswahl().addSpielklassen(spklasse);
-        a.getAktuelleTurnierAuswahl().addtObs_spielklassen(spklasse);
-        System.out.println("------------------Größe = "+a.getAktuelleTurnierAuswahl().getSpielklassen().size());
+        a.getAktuelleTurnierAuswahl().addObs_spielklassen(spklasse);
+
+        //a.getAktuelleTurnierAuswahl().addObs_spielklassen(spklasse);
+        System.out.println("------------------Größe = "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
         MainController m = new MainController();
         try {
             //m.fuelleCheckCombo();
-            m.reloadcheckbox();
+            //m.reloadcheckbox();
         } catch (Exception e) {
             e.printStackTrace();
         }

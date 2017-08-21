@@ -124,7 +124,7 @@ public class SpielDAOimpl implements SpielDAO {
         ;
         try {
             SQLConnection con = new SQLConnection();
-            System.out.println(spiel.getAufrufZeit()+"-------");
+            //System.out.println(spiel.getAufrufZeit()+"-------");
             PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
             smt.setObject(1, spiel.getAufrufZeit());
             if (spiel.getSchiedsrichter()!=null){

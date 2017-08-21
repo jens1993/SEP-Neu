@@ -22,7 +22,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="1050" prefWidth="1650" styleClass="mainFrame" stylesheets="@/CSS/Main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
+<VBox fx:id="vbox_main" onMouseClicked="#focus" prefHeight="1050" prefWidth="1650" styleClass="mainFrame" stylesheets="@/CSS/Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
 <children>
     <MenuBar styleClass="mainMenuBar">
         <menus>
@@ -105,7 +105,7 @@
                 <content>
                     <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="937.0" prefWidth="1226.0">
                         <children>
-                            <TabPane layoutX="-5.0" layoutY="-4.0" prefHeight="723.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <TabPane layoutX="-5.0" layoutY="-4.0" onMouseClicked="#focus" prefHeight="723.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <tabs>
                                     <Tab styleClass="mainTab" text="Turnierbaum">
                                         <content>
@@ -118,9 +118,9 @@
                                        <children>
                                           <HBox fx:id="hbox_main" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button styleClass="mainButton" mnemonicParsing="false" onAction="#reloadcheckbox" text="Lade Spielklassen neu" />
+                                                <Button mnemonicParsing="false" onAction="#reloadcheckbox" styleClass="mainButton" text="Lade Spielklassen neu" />
                                              </children></HBox>
-                                          <TableView fx:id="tabelle_spiele" prefHeight="964.0" prefWidth="903.0" />
+                                          <TableView fx:id="tabelle_spiele" onMouseClicked="#focus" prefHeight="964.0" prefWidth="903.0" />
                                        </children>
                                     </VBox>
                                  </content>

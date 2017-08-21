@@ -18,8 +18,8 @@ public class Turnier  implements Initializable {
 	private int spielerPausenZeit = 10;
 	private int turnierid;
 
-	private static Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
-	private static ArrayList<Feld> felder = new ArrayList<>();
+	private  Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
+	private  ArrayList<Feld> felder = new ArrayList<>();
 	//private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
 	//private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
 	private static Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
@@ -48,16 +48,54 @@ public class Turnier  implements Initializable {
 	public void setObs_spielklassen(ObservableList<Spielklasse> obs_spielklassen) {
 		this.obs_spielklassen = obs_spielklassen;
 	}
-	public void addtObs_spielklassen(Spielklasse spielklasse) {
+	public void addObs_spielklassen(Spielklasse spielklasse) {
 		this.obs_spielklassen.add(spielklasse);
 	}
 	public void removeobs_spielklassen(Spielklasse spielklasse) {
 		this.obs_spielklassen.remove(spielklasse);
 	}
-
+	public void addObs_spiele(Spiel spiel) {
+		this.obs_spiele.add(spiel);
+	}
+	public void removeobs_spielklassen(Spiel spiel) {
+		this.obs_spiele.remove(spiel);
+	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		obs_spielklassen.addListener(new ListChangeListener<Spielklasse>() {
+			@Override
+			public void onChanged(Change<? extends Spielklasse> c) {
+				// System.out.println("Changed on " + c.toString());
+				System.out.println("Spielklasse Änderung");
+
+				if (c.next()) {
+					//System.out.println(c.getFrom());
+				}
+			}
+		});
+		obs_spiele.addListener(new ListChangeListener<Spiel>() {
+			@Override
+			public void onChanged(Change<? extends Spiel> c) {
+				// System.out.println("Changed on " + c.toString());
+				System.out.println("Spiel Änderung");
+
+				if (c.next()) {
+					//System.out.println(c.getFrom());
+				}
+			}
+		});
 		obs_ausstehendeSpiele.addListener(new ListChangeListener<Spiel>() {
+			@Override
+			public void onChanged(Change<? extends Spiel> c) {
+				// System.out.println("Changed on " + c.toString());
+				System.out.println("ausstehende Spiel Änderung");
+
+				if (c.next()) {
+					//System.out.println(c.getFrom());
+				}
+			}
+		});
+/*		obs_ausstehendeSpiele.addListener(new ListChangeListener<Spiel>() {
 			@Override
 			public void onChanged(Change<? extends Spiel> c) {
 				// System.out.println("Changed on " + c.toString());
@@ -75,8 +113,8 @@ public class Turnier  implements Initializable {
 
 			}
 		});
+	}*/
 	}
-
 
 	public void deleteSpiel(Spiel spiel){
 		this.obs_spiele.remove(spiel);

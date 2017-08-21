@@ -202,14 +202,14 @@ public class Spieler {
 		}
 	}
 	public ImageView getIGeschlecht() {
-		Image imgmale = new Image("sample/Images/icon/user_male.png",24,24,true,true);
-		Image imgfemale = new Image("sample/Images/icon/user_female.png",24,24,true,true);
-		ImageView imageView = new ImageView(imgmale);
-		ImageView imageView2 = new ImageView(imgfemale);
 		if(geschlecht){
+			Image imgmale = new Image("sample/Images/icon/user_male.png",24,24,true,true);
+			ImageView imageView = new ImageView(imgmale);
 			return imageView;
 		}
 		else {
+			Image imgfemale = new Image("sample/Images/icon/user_female.png",24,24,true,true);
+			ImageView imageView2 = new ImageView(imgfemale);
 			return imageView2;
 		}
 	}

@@ -203,7 +203,9 @@ public class TurnierDAOimpl implements TurnierDAO {
             ResultSet spielklassenResult = smt.executeQuery();
             while (spielklassenResult.next()){
                 int spielklasseid = spielklassenResult.getInt("SpielklasseID");
-                spielklassen.put(spielklasseid,new Spielklasse(spielklasseid, spielklassenResult.getString("Disziplin"),spielklassenResult.getString("Niveau"),turnier));
+                Spielklasse spielklasse = new Spielklasse(spielklasseid, spielklassenResult.getString("Disziplin"),spielklassenResult.getString("Niveau"),turnier);
+                spielklassen.put(spielklasseid,spielklasse);
+                turnier.getObs_spielklassen().add(spielklasse);
                 spielklassen.get(spielklasseid).setAktiv(spielklassenResult.getBoolean("aktiv"));
                 spielklassen.get(spielklasseid).setMeldeKosten(spielklassenResult.getFloat("MeldeKosten"));
                 //spielklassen.get(spielklasseid).setSpielsystem(readSpielsystem(spielklassen.get(spielklasseid)));

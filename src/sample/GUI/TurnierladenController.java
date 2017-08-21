@@ -73,7 +73,7 @@ public class TurnierladenController implements Initializable
     private void zeigeTabelle() {
         System.out.println("Print table");
 
-        for (int i = 1; i <= a.getTurnierliste().size()+1; i++) {
+        for (int i = 1; i <= a.getTurnierliste().size(); i++) {
             turniere.add(a.getTurnierliste().get(i));
 
         }
@@ -92,6 +92,7 @@ public class TurnierladenController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         zeigeTabelle();
+
         TurnierlisteTabelle.setRowFactory(tv -> {
             TableRow row = new TableRow();
             row.setOnMouseClicked(event -> {
@@ -136,6 +137,10 @@ public class TurnierladenController implements Initializable
         if(TurnierlisteTabelle.getSelectionModel().getSelectedItem()!=null && (Turnier) TurnierlisteTabelle.getSelectionModel().getSelectedItem()!= a.getAktuelleTurnierAuswahl())
         {
             a.turnierAuswahlSpeichern((Turnier) TurnierlisteTabelle.getSelectionModel().getSelectedItem());
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
+
             t.read(a.getAktuelleTurnierAuswahl());
             //System.out.println(a.getAktuelleTurnierAuswahl().getName());
             a.turnierAuswahlSpeichern(a.getAktuelleTurnierAuswahl());
@@ -143,6 +148,10 @@ public class TurnierladenController implements Initializable
             //Main.getInstance().updateTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
             //a.setAktuelleTurnierAuswahl
             System.out.println("Turnierauswahl durch Doppelklick: = "+item.getName());
+            //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
+            System.out.println("t");
+
+
             //((Node)(event.getSource())).getScene().getWindow().hide();
             try {
                 MainLaden();
