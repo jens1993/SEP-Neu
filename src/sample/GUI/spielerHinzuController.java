@@ -79,6 +79,8 @@ private TextField t_suchleistespielerhinzu;
     private TableColumn tabelle_spielerliste_verein;
     @FXML
     private TableColumn tabelle_spielerliste_geburtstag;
+    @FXML
+    private TableColumn tabelle_spielerliste_SpielerID;
 
     //Tab3
     @FXML
@@ -129,7 +131,7 @@ private TextField t_suchleistespielerhinzu;
             tabelle_spielerliste_vorname.setCellValueFactory(new PropertyValueFactory<Spieler,String>("vName"));
             tabelle_spielerliste_geschlecht.setCellValueFactory(new PropertyValueFactory<ImageView,String>("iGeschlecht"));
 
-
+            tabelle_spielerliste_SpielerID.setCellValueFactory(new PropertyValueFactory<Spieler,String>("ExtSpielerID"));
 
             //TableColumn<Spieler,String> spielerNachnameSpalte = new TableColumn("Nachname");
             tabelle_spielerliste_nachname.setCellValueFactory(new PropertyValueFactory<Spieler,String>("nName"));
@@ -217,7 +219,7 @@ private TextField t_suchleistespielerhinzu;
                 System.out.println("Übereinstimmung gefunden:");
                 System.out.println(sp.getVName()+" "+sp.getNName()+" --- "+spieler_neu.getVName()+" "+spieler_neu.getNName());
                 TurnierDAO t;
-                t = new TurnierDAOimpl();
+                //t = new TurnierDAOimpl();
 
                 vorhandeneSpieler.add(sp);
 
@@ -579,7 +581,29 @@ private TextField t_suchleistespielerhinzu;
             Stage stage = new Stage();
             File file = fileChooser.showOpenDialog(stage);
             if (file != null) {
-                ExcelImport.importExcelData(file.getAbsolutePath());
+                if (ExcelImport.importExcelData(file.getAbsolutePath()))
+                {
+                    /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ExcelImportAbgeschlossen.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage2 = new Stage();
+                    a.addStage(stage2);
+                    stage2.setScene(new Scene(root1));
+                    stage2.show();*/
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Spielerimport");
+                    alert.setHeaderText("Spieler erfolgreich eingelesen! "+ ExcelImport.getObs_spieler_erfolreich());
+                    alert.setContentText("Hurra!");
+
+                    alert.showAndWait();
+                }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Spielerimport");
+                    alert.setHeaderText("Spieler konnten nicht eingelesen werden!");
+                    alert.setContentText("Schade :(");
+
+                    alert.showAndWait();
+                }
             }
 
 

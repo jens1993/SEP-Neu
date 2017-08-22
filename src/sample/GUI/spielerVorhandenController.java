@@ -27,21 +27,28 @@ import java.util.ResourceBundle;
 public class spielerVorhandenController implements Initializable
 {
 
-   @FXML TableView popup_tabelle;
-   @FXML TableView popup_tabelle2;
+    @FXML TableView popup_tabelle;
+    @FXML TableView popup_tabelle2;
 
-   @FXML TableColumn popup_vorname;
-   @FXML TableColumn popup_nachname;
-   @FXML TableColumn popup_vorname2;
-   @FXML TableColumn popup_nachname2;
+    @FXML TableColumn popup_vorname;
+    @FXML TableColumn popup_vorname2;
+
+    @FXML TableColumn popup_nachname;
+    @FXML TableColumn popup_nachname2;
+
     @FXML TableColumn popup_nationalitaet;
     @FXML TableColumn popup_nationalitaet2;
-    @FXML TableColumn popup_gdatum2;
+
     @FXML TableColumn popup_gdatum;
-    @FXML TableColumn popup_geschlecht2;
+    @FXML TableColumn popup_gdatum2;
+
     @FXML TableColumn popup_geschlecht;
+    @FXML TableColumn popup_geschlecht2;
+
     @FXML TableColumn popup_verein;
     @FXML TableColumn popup_verein2;
+
+    @FXML TableColumn popup_spielerid;
     @FXML TableColumn popup_spielerid2;
 
 
@@ -122,6 +129,7 @@ public class spielerVorhandenController implements Initializable
         popup_verein2.setCellValueFactory(new PropertyValueFactory<Spieler,String>("verein"));
         popup_gdatum2.setCellValueFactory(new PropertyValueFactory<Spieler,Date>("gDatum"));
         popup_nationalitaet2.setCellValueFactory(new PropertyValueFactory<Spieler,String>("Nationalitaet"));
+        popup_spielerid.setCellValueFactory(new PropertyValueFactory<Spieler,Integer>("ExtSpielerID"));
 
         System.out.println("Größe = "+obs_neuerSpieler.size());
         popup_tabelle.setItems(obs_neuerSpieler);
@@ -131,7 +139,7 @@ public class spielerVorhandenController implements Initializable
         popup_verein.setCellValueFactory(new PropertyValueFactory<Spieler,String>("verein"));
         popup_gdatum.setCellValueFactory(new PropertyValueFactory<Spieler,Date>("gDatum"));
         popup_nationalitaet.setCellValueFactory(new PropertyValueFactory<Spieler,String>("Nationalitaet"));
-        popup_spielerid2.setCellValueFactory(new PropertyValueFactory<Spieler,Integer>("spielerID"));
+        popup_spielerid2.setCellValueFactory(new PropertyValueFactory<Spieler,Integer>("ExtSpielerID"));
 
 
 
