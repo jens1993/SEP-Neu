@@ -238,7 +238,7 @@ public class MainController implements Initializable, Observable
         spiele.add(turnier.getSpiele().get(4));
         spiele.add(turnier.getSpiele().get(5));
         spiele.add(turnier.getSpiele().get(6));
-        turnier.sechSpielzettelDrucken(spiele);
+        spiele.get(1).spielzettelDrucken();
     }
     private final List<InvalidationListener> listeners = new LinkedList<>();
     @Override

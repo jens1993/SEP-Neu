@@ -5,6 +5,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -37,11 +38,16 @@ public class Spielzettel implements Printable {
             if (page > 0) {
                 return NO_SUCH_PAGE;
             }
+            LocalTime aufrufzeit = spiel.getAufrufZeit();
+            int stunden = aufrufzeit.getHour();
+            int minuten = aufrufzeit.getMinute();
+
+
 
 
             //g2.setStroke(new BasicStroke(12));
             Rectangle2D.Double border = new Rectangle2D.Double(0, 0, pf.getImageableWidth(), pf.getImageableHeight());
-            g2.drawLine((int) pf.getImageableWidth() / 2, 0, (int) pf.getImageableWidth() / 2, (int) pf.getImageableHeight());
+            //g2.drawLine((int) pf.getImageableWidth() / 2, 0, (int) pf.getImageableWidth() / 2, (int) pf.getImageableHeight());
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             Font[] fonts = ge.getAllFonts();
             for (int i = 0; i < fonts.length; i++) { //gibt alle möglichen Schriftarten aus!
@@ -61,13 +67,19 @@ public class Spielzettel implements Printable {
             g2.drawString("Feldnummer:", 22, 110);
 
 
-            g2.drawString("Datum:", 350, 60);
-            g2.drawString(spiel.getSpielsystem().getSpielklasse().getTurnier().getDatum().toString(), 495, 60);
-            g2.drawString("Aufrufzeit:", 350, 85);
-            g2.drawString(spiel.getAufrufZeit().toString(), 495, 85);
+            g2.drawString("Datum:", 370, 60);
+            g2.drawString(spiel.getSpielsystem().getSpielklasse().getTurnier().getDatum().toString(), 525, 60);
+            g2.drawString("Aufrufzeit:", 370, 85);
+
+            if  (minuten<10) {
+                g2.drawString(stunden + ":" + "0" + minuten, 525, 85);
+
+            } else {
+                g2.drawString(stunden + ":" + minuten, 525, 85);
+            }
             if (spiel.getSchiedsrichter() != null) {
-                g2.drawString("Schiedsrichter:", 350, 110);
-                g2.drawString(spiel.getSchiedsrichter().toString(), 495, 110);
+                g2.drawString("Schiedsrichter:", 370, 110);
+                g2.drawString(spiel.getSchiedsrichter().toString(), 525, 110);
             }
             g2.draw(new Rectangle(0, 120, 800, 2));
 
@@ -75,36 +87,57 @@ public class Spielzettel implements Printable {
             //g2.draw(new Rectangle(22, 137, 215, 30));
             //g2.drawString("Spieler Gast:", 525, 160);
             //g2.draw(new Rectangle(522, 137, 215, 30));
-            g2.drawString(spiel.getHeim().getSpielerEins().toString(), 155, 160);
-            g2.drawString(spiel.getGast().getSpielerEins().toString(), 655, 160);
+
+
+
+            String spielerheim = spiel.getHeim().getSpielerEins().toString();
+            String spielergast = spiel.getGast().getSpielerEins().toString();
+            String spielerheimZwei = spiel.getHeim().getSpielerZwei().toString();
+            String spielergastZwei = spiel.getGast().getSpielerZwei().toString();
+
+            g2.drawString(spielerheim, 233 - fontMetrics.stringWidth(spielerheim), 160);
+            g2.drawString(spielergast, 455 + fontMetrics.stringWidth("gegen"), 160);
+
             if (!spiel.getHeim().isEinzel()) {
-                g2.drawString(spiel.getHeim().getSpielerZwei().toString(), 155, 175);
+                g2.drawString(spielerheimZwei, 216 - fontMetrics.stringWidth(spielerheimZwei), 185);
                 // Doppelpartner für Heim eintragen
             }
             if (!spiel.getGast().isEinzel()) {
-                g2.drawString(spiel.getGast().getSpielerZwei().toString(), 655, 175);
+                g2.drawString(spielergastZwei, 455 + fontMetrics.stringWidth("gegen"), 185);
                 // Doppelpartner für Gast eintragen
             }
             g2.drawString("gegen", 350, 160);
 
-            g2.drawString("Satz 1", 150, 250);
-            g2.drawString(":", 370, 250);
-            g2.draw(new Rectangle(300, 223, 50, 40));
-            g2.draw(new Rectangle(395, 223, 50, 40));
-            g2.drawString("Satz 2", 150, 350);
-            g2.drawString(":", 370, 350);
-            g2.draw(new Rectangle(300, 323, 50, 40));
-            g2.draw(new Rectangle(395, 323, 50, 40));
-            g2.drawString("Satz 3", 150, 450);
-            g2.drawString(":", 370, 450);
-            g2.draw(new Rectangle(300, 423, 50, 40));
-            g2.draw(new Rectangle(395, 423, 50, 40));
 
-            g2.draw(new Rectangle(0, 500, 800, 2));
 
-            g2.drawString("Sieger:", 50, 530);
 
-            g2.drawString("Gesamtspielstand:", 450, 530);
+
+
+            /*g2.drawString(spiel.getHeim().getSpielerEins().toString(), 155, 160);
+            g2.drawString(spiel.getGast().getSpielerEins().toString(), 655, 160);
+            if (!spiel.getHeim().isEinzel()) {
+                g2.drawString(spiel.getHeim().getSpielerZwei().toString(), 155, 185);
+                // Doppelpartner für Heim eintragen
+            }
+            if (!spiel.getGast().isEinzel()) {
+                g2.drawString(spiel.getGast().getSpielerZwei().toString(), 655, 185);
+                // Doppelpartner für Gast eintragen
+            }
+            g2.drawString("gegen", 350, 160);*/
+
+            g2.drawString("Satz 1", (int) pf.getImageableWidth() / 2 - 220, 250);
+            g2.drawString(":", (int) pf.getImageableWidth() / 2 , 250);
+            g2.draw(new Rectangle((int) pf.getImageableWidth() / 2 - 70, 223, 50, 40));
+            g2.draw(new Rectangle((int) pf.getImageableWidth() / 2 + 25, 223, 50, 40));
+            g2.drawString("Satz 2", (int) pf.getImageableWidth() / 2 - 220, 350);
+            g2.drawString(":", (int) pf.getImageableWidth() / 2, 350);
+            g2.draw(new Rectangle((int) pf.getImageableWidth() / 2 - 70, 323, 50, 40));
+            g2.draw(new Rectangle((int) pf.getImageableWidth() / 2 + 25, 323, 50, 40));
+            g2.drawString("Satz 3", (int) pf.getImageableWidth() / 2 - 220, 450);
+            g2.drawString(":", (int) pf.getImageableWidth() / 2, 450);
+            g2.draw(new Rectangle((int) pf.getImageableWidth() / 2 - 70, 423, 50, 40));
+            g2.draw(new Rectangle((int) pf.getImageableWidth() / 2 + 25, 423, 50, 40));
+
             // tell the caller that this page is part
             // of the printed document
             return PAGE_EXISTS;
@@ -174,8 +207,6 @@ public class Spielzettel implements Printable {
                 g2.drawString(aktuellesSpiel.getSpielsystem().getSpielklasse().getTurnier().getName(), koordinatenObenLinks[0] + 50, koordinatenObenLinks[1] + 17);
                 g2.drawString("Disziplin:", koordinatenObenLinks[0] + 132, koordinatenObenLinks[1] + 17);
                 g2.drawString(aktuellesSpiel.getSpielsystem().getSpielklasse().getDisziplin(), koordinatenObenLinks[0] + 182, koordinatenObenLinks[1] + 17);
-                g2.drawString("Aufrufzeit:", koordinatenObenLinks[0] + 132, koordinatenObenLinks[1] + 32);
-                g2.drawString(aktuellesSpiel.getAufrufZeit().toString(), koordinatenObenLinks[0] + 182, koordinatenObenLinks[1] + 32);
                 g2.drawString("Feldnummer:", koordinatenObenLinks[0] + 10, koordinatenObenLinks[1] + 32);
 
                 //////////////////////////////// Spielpaarung eintragen
