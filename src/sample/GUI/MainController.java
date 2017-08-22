@@ -310,7 +310,6 @@ public class MainController implements Initializable, Observable
                             // System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                         }
 
-
                     }
                 }
             }
