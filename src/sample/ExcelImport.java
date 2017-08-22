@@ -5,19 +5,44 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.Enumeration;
+import java.util.*;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import sample.DAO.TurnierDAO;
+import sample.DAO.TurnierDAOimpl;
 import sample.DAO.auswahlklasse;
 
 /**
  * Created by Manuel Hüttermann on 15.08.2017.
  */
 public class ExcelImport {
-    public static void importExcelData(String excelDatei) {
+
+    public static ObservableList<Spieler> getObs_spieler_erfolreich() {
+        return obs_spieler_erfolreich;
+    }
+
+    public static void setObs_spieler_erfolreich(ObservableList<Spieler> obs_spieler_erfolreich) {
+        ExcelImport.obs_spieler_erfolreich = obs_spieler_erfolreich;
+    }
+
+    public static ObservableList<Spieler> getObs_spieler_fehlgeschlagen() {
+        return obs_spieler_fehlgeschlagen;
+    }
+
+    public static void setObs_spieler_fehlgeschlagen(ObservableList<Spieler> obs_spieler_fehlgeschlagen) {
+        ExcelImport.obs_spieler_fehlgeschlagen = obs_spieler_fehlgeschlagen;
+    }
+
+    private static ObservableList<Spieler> obs_spieler_erfolreich = FXCollections.observableArrayList();
+    private static ObservableList<Spieler> obs_spieler_fehlgeschlagen = FXCollections.observableArrayList();
+
+
+
+    public static boolean importExcelData(String excelDatei) {
         try {
             FileInputStream iStream = new FileInputStream(excelDatei);
             HSSFWorkbook workbook = new HSSFWorkbook(iStream);
@@ -30,12 +55,13 @@ public class ExcelImport {
 
             worksheet = workbook.getSheet("Mixed");
             readWorkSheetDoubleMixed(worksheet);
-
+            return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
 
@@ -44,38 +70,47 @@ public class ExcelImport {
 
         while ((worksheet.getRow(actualRow) != null)) {
             //get row
-            HSSFRow row = worksheet.getRow(actualRow);
-            readRow(row);
-            actualRow++;
+            try {
+                HSSFRow row = worksheet.getRow(actualRow);
+                readRow(row);
+                actualRow++;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
     private static void readWorkSheetDoubleMixed(HSSFSheet worksheet) {
-        int actualRow = 1;
+        try {
+            int actualRow = 1;
 
-        while ((worksheet.getRow(actualRow) != null)) {
-            //get first row
-            HSSFRow row = worksheet.getRow(actualRow);
-            readRow(row);
-            actualRow++;
+            while ((worksheet.getRow(actualRow) != null)) {
+                //get first row
+                HSSFRow row = worksheet.getRow(actualRow);
+                readRow(row);
+                actualRow++;
 
-            //get second row
-            row = worksheet.getRow(actualRow);
-            if (row != null) {
-                Spieler tempSpieler = readRow(row);
-                if (tempSpieler !=null && !gibtEsSchon(tempSpieler)){
-                    auswahlklasse.getObs_spieler().add(tempSpieler);
-                    auswahlklasse.addSpieler(tempSpieler);
-                    System.out.println(tempSpieler.getVName()+" "+tempSpieler.getNName()+" gespeichert"+ " geschlecht:"+tempSpieler.getGeschlecht()+" extID:"+tempSpieler.getExtSpielerID()+"verein: "+tempSpieler.getVerein()+" gdatum:"+tempSpieler.getGDatum());
+                //get second row
+                row = worksheet.getRow(actualRow);
+                if (row != null) {
+                    Spieler tempSpieler = readRow(row);
+                    if (tempSpieler !=null && !gibtEsSchon(tempSpieler)){
+                        auswahlklasse.getObs_spieler().add(tempSpieler);
+                        auswahlklasse.addSpieler(tempSpieler);
+                        System.out.println(tempSpieler.getVName()+" "+tempSpieler.getNName()+" gespeichert"+ " geschlecht:"+tempSpieler.getGeschlecht()+" extID:"+tempSpieler.getExtSpielerID()+"verein: "+tempSpieler.getVerein()+" gdatum:"+tempSpieler.getGDatum());
+                    }
                 }
+                actualRow++;
             }
-            actualRow++;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     private static boolean gibtEsSchon(Spieler spieler){
         return true; //wenn es den schon gibt;
     }
-    private static Spieler readRow(HSSFRow row) {
+    private static Spieler readRow(HSSFRow row) throws Exception {
         int cellNumber = 0;
         HSSFCell cell = row.getCell(cellNumber);
 
@@ -102,12 +137,17 @@ public class ExcelImport {
                 HSSFCell geschlechtZelle = row.getCell(2);
                 if (geschlechtZelle != null) {
                     geschlecht = (geschlechtZelle.getStringCellValue().toUpperCase().contains("M"));
-                    System.out.println("C1 " + geschlecht);
                 }
                 HSSFCell gdatumZelle = row.getCell(12);
                 if (gdatumZelle != null) {
-                    gDatum = gdatumZelle.getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    System.out.println("M1 " + gdatumZelle.getNumericCellValue());
+                    if(gdatumZelle.getCellTypeEnum()==CellType.NUMERIC){
+                        gDatum = gdatumZelle.getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    }
+                    else{
+                        auswahlklasse.WarnungBenachrichtigung("Formatierungsfehler",vName+" "+nName+": Datumszelle nicht richtig formatiert");
+                        //throw new Exception("Datumszelle nicht richtig formatiert");
+
+                    }
                 }
                 HSSFCell extSpieleridZelle = row.getCell(11);
                 if (extSpieleridZelle != null) {
@@ -171,7 +211,35 @@ public class ExcelImport {
                     }
                 }
                 Spieler neuerSpieler = new Spieler(vName,nName,gDatum,geschlecht,rPunkte,verein,extSpielerID);
+                obs_spieler_erfolreich.add(neuerSpieler);
+
+
+
+
+                ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
+
+                //felderLeeren();
+                for(Enumeration ee = auswahlklasse.getSpieler().elements();ee.hasMoreElements();)
+                {
+                    Spieler sp = (Spieler) ee.nextElement();
+                    if(sp.getNName().equalsIgnoreCase(neuerSpieler.getNName()) && sp.getVName().equalsIgnoreCase(neuerSpieler.getVName()))
+                    {
+
+                        System.out.println("Übereinstimmung gefunden:");
+                        System.out.println(sp.getVName()+" "+sp.getNName()+" --- "+neuerSpieler.getVName()+" "+neuerSpieler.getNName());
+
+
+                        vorhandeneSpieler.add(sp);
+
+                    }
+
+                }
+
+
                 return neuerSpieler;
+
+
+
 
 
                 //für Klassenzuweisung (Einzel/Doppel/Mixed-Spalte)

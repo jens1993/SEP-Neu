@@ -176,7 +176,7 @@ public class auswahlklasse
     {
         aktuelleSpielklassenAuswahl = spielklasse;
     }
-    public  void InfoBenachrichtigung(String titel, String text)
+    public static void InfoBenachrichtigung(String titel, String text)
     {
          noteficationBuilder = Notifications.create()
                 .title(titel)
@@ -192,7 +192,7 @@ public class auswahlklasse
                 });
         noteficationBuilder.showInformation();
     }
-    public  void WarnungBenachrichtigung(String titel, String text)
+    public static void WarnungBenachrichtigung(String titel, String text)
     {
         noteficationBuilder = Notifications.create()
                 .title(titel)
