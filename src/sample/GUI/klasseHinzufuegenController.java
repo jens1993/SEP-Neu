@@ -134,23 +134,25 @@ public class klasseHinzufuegenController implements Initializable
 
         Spielklasse spklasse = new Spielklasse(combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),a.getAktuelleTurnierAuswahl());
         spklasse.getSpielklasseDAO().create(spklasse);
-        a.getAktuelleTurnierAuswahl().addSpielklassen(spklasse);
-        a.getAktuelleTurnierAuswahl().addtObs_spielklassen(spklasse);
-        System.out.println("------------------Größe = "+a.getAktuelleTurnierAuswahl().getSpielklassen().size());
+        a.getAktuelleTurnierAuswahl().addObs_spielklassen(spklasse);
+
+        //a.getAktuelleTurnierAuswahl().addObs_spielklassen(spklasse);
+        System.out.println("------------------Größe = "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
         MainController m = new MainController();
         try {
             //m.fuelleCheckCombo();
-            m.reloadcheckbox();
+            //m.reloadcheckbox();
         } catch (Exception e) {
             e.printStackTrace();
         }
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseUebersicht.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        for (int i=0; i<a.getStages().size()-1;i++){
-            a.getStages().get(i).close();
-        }
-        a.addStage(stage);
+//        for (int i=0; i<a.getStages().size()-1;i++){
+//            a.getStages().get(i).close();
+//        }
+
+        a.getStagesdict().put("KlasseUebersicht",stage);
         stage.setScene(new Scene(root1));
         stage.show();
 

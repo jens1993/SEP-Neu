@@ -271,7 +271,7 @@ public class SpielSystemController implements Initializable
             setzliste_spielerm2.add(spielerneu);
             spielerm2=spielerneu;
             befuellem1=true;
-            System.out.println(ausgewaehlte_spielklasse.getSetzliste().size()+1+"-------------");
+            //System.out.println(ausgewaehlte_spielklasse.getSetzliste().size()+1+"-------------");
             Team t = new Team(spielerm1,spielerm2,ausgewaehlte_spielklasse);
             SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
             ausgewaehlte_spielklasse.addSetzliste(t);
@@ -316,7 +316,7 @@ public class SpielSystemController implements Initializable
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
                                 Parent root1 = (Parent) fxmlLoader.load();
                                 Stage stage = new Stage();
-                                a.addStage(stage);
+                                a.getStagesdict().put("SpielerHinzu",stage);
                                 stage.setScene(new Scene(root1));
                                 stage.show();
                                 stage.setTitle("Spieler");
@@ -341,7 +341,7 @@ public class SpielSystemController implements Initializable
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
                                 Parent root1 = (Parent) fxmlLoader.load();
                                 Stage stage = new Stage();
-                                a.addStage(stage);
+                                a.getStagesdict().put("SpielerHinzu",stage);
                                 stage.setScene(new Scene(root1));
                                 stage.show();
                                 stage.setTitle("Spieler");

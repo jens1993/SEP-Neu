@@ -20,7 +20,7 @@ public class Spiel {
 	private Spieler schiedsrichter;
 	private Spielsystem spielsystem;
 	private Turnier turnier;
-
+    private auswahlklasse auswahlklasse=new auswahlklasse();
 
 
 	private Feld feld;
@@ -114,6 +114,8 @@ public class Spiel {
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		turnier.getObs_ausstehendeSpiele().add(this);
 		spielDAO.create(this);
+		auswahlklasse.getAktuelleTurnierAuswahl().addobsAusstehendeSpiele(this);
+
 		this.status = 1;
 		if(heim.isFreilos()){
 			setErgebnis(new Ergebnis(21,0,21,0));

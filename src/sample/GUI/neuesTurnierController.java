@@ -10,9 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import sample.DAO.TurnierDAO;
-import sample.DAO.TurnierDAOimpl;
-import sample.DAO.auswahlklasse;
+import sample.DAO.*;
+import sample.Feld;
 import sample.Turnier;
 
 import java.math.BigDecimal;
@@ -49,8 +48,17 @@ public class neuesTurnierController implements Initializable
         System.out.println("Name " +Turniername.getText());
         System.out.println("Datum " + date);
         TurnierDAO t = new TurnierDAOimpl();
+        FeldDAO feldDAO = new FeldDAOimpl();
         Turnier turnier = new Turnier(Turniername.getText(),Datum);
         t.create(turnier);
+
+        int anzahlfelder = Integer.parseInt(AnzahlFelder.getText());
+
+        for(int i = 0; i<anzahlfelder;i++)
+        {
+            new Feld(turnier);
+        }
+
         a.InfoBenachrichtigung("Turnier erstellt",turnier.getName()+" wurde erstellt.");
         System.out.println("Erfolg");
 
@@ -58,10 +66,7 @@ public class neuesTurnierController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Turnierladen.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            for (int i=0; i<a.getStages().size();i++){
-                a.getStages().get(i).close();
-            }
-            a.addStage(stage);
+
             a.addStagesdict(stage,"TurnierLaden");
             stage.setScene(new Scene(root1));
             stage.show();
