@@ -219,7 +219,7 @@ private TextField t_suchleistespielerhinzu;
                 System.out.println("Übereinstimmung gefunden:");
                 System.out.println(sp.getVName()+" "+sp.getNName()+" --- "+spieler_neu.getVName()+" "+spieler_neu.getNName());
                 TurnierDAO t;
-                t = new TurnierDAOimpl();
+                //t = new TurnierDAOimpl();
 
                 vorhandeneSpieler.add(sp);
 
