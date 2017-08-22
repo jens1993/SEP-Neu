@@ -422,7 +422,8 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
                                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
                                     Parent root1 = (Parent) fxmlLoader.load();
                                     Stage stage = new Stage();
-                                    a.addStage(stage);
+
+                                    a.getStagesdict().put("SpielerHinzu",stage);
                                     stage.setScene(new Scene(root1));
                                     stage.show();
                                     stage.setTitle("Spieler");
@@ -447,7 +448,8 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
                                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
                                     Parent root1 = (Parent) fxmlLoader.load();
                                     Stage stage = new Stage();
-                                    a.addStage(stage);
+
+                                    a.getStagesdict().put("SpielerHinzu",stage);
                                     stage.setScene(new Scene(root1));
                                     stage.show();
                                     stage.setTitle("Spieler");
@@ -481,7 +483,7 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
 
                             }
                         });
-                        a.getStages().get(0).getTitle();
+
                         // Add MenuItem to ContextMenu
                         contextMenu.getItems().clear();
                         contextMenu.getItems().addAll(item1, item2, item3);

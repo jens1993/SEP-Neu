@@ -92,7 +92,7 @@ public class MainController implements Initializable, Observable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            a.addStage(stage);
+
             a.addStagesdict(stage,"SpielerHinzu");
             stage.setScene(new Scene(root1));
             stage.show();
@@ -109,11 +109,27 @@ public class MainController implements Initializable, Observable
             //System.out.println("test");
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            a.addStage(stage);
+
             a.addStagesdict(stage,"Klassenuebersicht");
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle("Klassenübersicht");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void pressBtn_Felder(ActionEvent event) throws Exception {
+        try {
+            //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzuGruppe.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FeldZuweisung.fxml"));
+            //System.out.println("test");
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+
+            a.addStagesdict(stage,"FeldZuweisung");
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage.setTitle("Felder zuweisen");
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -123,7 +139,8 @@ public class MainController implements Initializable, Observable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("neuesTurnier.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            a.addStage(stage);
+
+
             stage.setScene(new Scene(root1));
             stage.show();
             a.addStagesdict(stage,"NeuesTurnier");
@@ -138,14 +155,12 @@ public class MainController implements Initializable, Observable
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Turnierladen.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        a.addStage(stage);
+
         a.addStagesdict(stage,"Turnierladen");
         stage.setScene(new Scene(root1));
         stage.show();
         stage.setTitle("Turnier auswählen");
-        for(int i=1;i<a.getStages().size();i++){
-            a.getStages().get(i).close();
-        }
+        a.getStagesdict().get("Main").close();
     }
     /*
     @FXML
@@ -200,12 +215,13 @@ public class MainController implements Initializable, Observable
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Einstellungen.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        a.addStage(stage);
+
         a.addStagesdict(stage,"Einstellungen");
         stage.setScene(new Scene(root1));
         stage.show();
         stage.setTitle("Einstellungen");
-        //((Node)(event.getSource())).getScene().getWindow().hide();
+        //((Node)(event.getSource())).
+        // getScene().getWindow().hide();
     }
     @FXML
     public void pressBtn_Statistik (ActionEvent event) throws Exception {
@@ -213,7 +229,7 @@ public class MainController implements Initializable, Observable
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Statistik.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        a.addStage(stage);
+        a.getStagesdict().put("Statistik",stage);
         stage.setScene(new Scene(root1));
         stage.show();
         a.addStagesdict(stage,"Statistiken");
@@ -225,7 +241,8 @@ public class MainController implements Initializable, Observable
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TeamUebersicht.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        a.addStage(stage);
+
+
         stage.setScene(new Scene(root1));
         stage.show();
         a.addStagesdict(stage,"TurnierAuswählen");
@@ -742,8 +759,9 @@ public class MainController implements Initializable, Observable
                     if(clickedRow.getStatus()==1)
                     {
                         //ausstehend
-                        Feld[] feld = new Feld[a.getAktuelleTurnierAuswahl().getFelder().size()];
-                        Feld[] feld2 = new Feld[a.getAktuelleTurnierAuswahl().getFelder().size()];
+                        ArrayList<Feld> feld =new ArrayList<>();
+                        ArrayList<Feld> feld2 =new ArrayList<>();
+
                         Spiel spiel;
                         for(int i=0;i<a.getAktuelleTurnierAuswahl().getFelder().size();i++)
                         {
@@ -752,14 +770,14 @@ public class MainController implements Initializable, Observable
 
                             if(spiel==null)
                             {
-                                feld[i]=a.getAktuelleTurnierAuswahl().getFelder().get(i);
+                                feld.add(a.getAktuelleTurnierAuswahl().getFelder().get(i));
                             }
                             else
                             {
                                 spiel=a.getAktuelleTurnierAuswahl().getFelder().get(i).getInVorbereitung();
                                 if(spiel==null)
                                 {
-                                    feld2[i]=a.getAktuelleTurnierAuswahl().getFelder().get(i);
+                                    feld2.add(a.getAktuelleTurnierAuswahl().getFelder().get(i));
                                 }
                             }
 
@@ -767,22 +785,22 @@ public class MainController implements Initializable, Observable
 
 
                         }
-                        MenuItem[] childMenu1 = new MenuItem[feld.length];
-                        MenuItem[] childMenu2 = new MenuItem[feld2.length];
-                        if(feld.length>0)
+                        MenuItem[] childMenu1 = new MenuItem[feld.size()];
+                        MenuItem[] childMenu2 = new MenuItem[feld2.size()];
+                        if(feld.size()>0)
                         {
-                            for(int i =0;i<feld.length;i++) {
+                            for(int i =0;i<feld.size();i++) {
                                 final int ii = i;
 
-                                if(feld[i]!=null) {
-                                    childMenu1[i] = new MenuItem(feld[i].toString());
+                                if(feld.get(i)!=null) {
+                                    childMenu1[i] = new MenuItem(feld.get(i).toString());
 
                                     childMenu1[i].setOnAction(new EventHandler<ActionEvent>() {
 
                                         @Override
                                         public void handle(ActionEvent event) {
-                                            System.out.println("Feld = " + feld[ii]);
-                                            clickedRow.setFeld(feld[ii]);
+                                            System.out.println("Feld = " + feld.get(ii));
+                                            clickedRow.setFeld(feld.get(ii));
                                             clickedRow.setStatus(2);
                                             a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().remove(clickedRow);
                                             a.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().add(clickedRow);
@@ -794,12 +812,12 @@ public class MainController implements Initializable, Observable
                                 }
                             }
                         }
-                        if(feld2.length>0)
+                        if(feld2.size()>0)
                         {
-                            for(int i =0;i<feld2.length;i++)
+                            for(int i =0;i<feld2.size();i++)
                             {
-                                if(feld2[i]!=null) {
-                                    childMenu2[i] = new MenuItem(feld2[i].toString());
+                                if(feld2.get(i)!=null) {
+                                    childMenu2[i] = new MenuItem(feld2.get(i).toString());
                                     item4.getItems().add(childMenu2[i]);
                                 }
                             }}
@@ -967,24 +985,24 @@ public class MainController implements Initializable, Observable
                 {
                     System.out.println("Ungleiche spielklassen anzahl");
                     //checkComboBox.getItems().setAll(a.getAktuelleTurnierAuswahl().getObs_spielklassen());
-                    a.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
+                    //a.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
                     checkComboBox.getItems().clear();
 
                     //System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
-                    Enumeration enumKeys = auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().keys();
-
-                    while(enumKeys.hasMoreElements()){
-                        int key = (int) enumKeys.nextElement();
-                        a.getAktuelleTurnierAuswahl().getObs_spielklassen().add(a.getAktuelleTurnierAuswahl().getSpielklassen().get(key));
-                        System.out.println("größe = "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
-                        //checkComboBox.getItems().add(obs_spielklassen.get(i-1));
-
-                    }
+//                    Enumeration enumKeys = auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().keys();
+//
+//                    while(enumKeys.hasMoreElements()){
+//                        int key = (int) enumKeys.nextElement();
+//                        a.getAktuelleTurnierAuswahl().getObs_spielklassen().add(a.getAktuelleTurnierAuswahl().getSpielklassen().get(key));
+//                        System.out.println("größe = "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
+//                        //checkComboBox.getItems().add(obs_spielklassen.get(i-1));
+//
+//                    }
 //        hbox_main.getChildren().remove(checkComboBox);
 //        hbox_main.getChildren().add(checkComboBox);
                     checkComboBox.getItems().setAll(a.getAktuelleTurnierAuswahl().getObs_spielklassen());
 
-                    for(int i =0;i<=a.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size();i++)
+                    for(int i =0;i<a.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size();i++)
                     {
                         checkComboBox.getCheckModel().check(a.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().get(i));
                     }

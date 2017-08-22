@@ -316,7 +316,7 @@ public class SpielSystemController implements Initializable
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
                                 Parent root1 = (Parent) fxmlLoader.load();
                                 Stage stage = new Stage();
-                                a.addStage(stage);
+                                a.getStagesdict().put("SpielerHinzu",stage);
                                 stage.setScene(new Scene(root1));
                                 stage.show();
                                 stage.setTitle("Spieler");
@@ -341,7 +341,7 @@ public class SpielSystemController implements Initializable
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
                                 Parent root1 = (Parent) fxmlLoader.load();
                                 Stage stage = new Stage();
-                                a.addStage(stage);
+                                a.getStagesdict().put("SpielerHinzu",stage);
                                 stage.setScene(new Scene(root1));
                                 stage.show();
                                 stage.setTitle("Spieler");
