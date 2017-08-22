@@ -50,6 +50,13 @@ public class Spieler {
 		this.nName = nName;
 		spielerDAO.create(this);
 	}
+	public Spieler(String vName, String nName, LocalDate gDatum, int spielerID){
+		this.vName = vName;
+		this.nName = nName;
+		this.gDatum = gDatum;
+		this.spielerID=spielerID;
+		spielerDAO.create(this);
+	}
 
 	public Spieler(String vName, String nName, LocalDate gDatum, boolean geschlecht, int[] rPunkte, Verein verein,String extSpielerID)
 	{

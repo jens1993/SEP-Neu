@@ -267,7 +267,7 @@ private TextField t_suchleistespielerhinzu;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerVorhanden.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        a.addStage(stage);
+        a.getStagesdict().put("SpielerVorhanden",stage);
         stage.setScene(new Scene(root1));
         stage.show();
         stage.show();
@@ -541,7 +541,7 @@ private TextField t_suchleistespielerhinzu;
 
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            a.addStage(stage);
+            a.getStagesdict().put("NeuerVerein",stage);
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle("Neuer Verein");
@@ -552,7 +552,7 @@ private TextField t_suchleistespielerhinzu;
     @FXML
     public void pressBtn_Abbrechen(ActionEvent event) throws Exception {
         try {
-            a.getStages().get(0).close();
+           // a.getStages().get(0).close();
         } catch(Exception e) {
             e.printStackTrace();
         }

@@ -49,10 +49,10 @@ public class KlasseUebersichtController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzufuegen.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            for (int i=0; i<a.getStages().size()-1;i++){
-                a.getStages().get(i).close();
-            }
-            a.addStage(stage);
+//            for (int i=0; i<a.getStages().size()-1;i++){
+//                a.getStages().get(i).close();
+//            }
+            a.getStagesdict().put("KlasseHinzufuegen",stage);
             stage.setScene(new Scene(root1));
             stage.show();
 
@@ -68,10 +68,10 @@ public class KlasseUebersichtController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielSystem_neu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            for (int i=1; i<a.getStages().size()-1;i++){
-                a.getStages().get(i).close();
-            }
-            a.addStage(stage);
+//            for (int i=1; i<a.getStages().size()-1;i++){
+//                a.getStages().get(i).close();
+//            }
+            a.getStagesdict().put("Spielsytem",stage);
 
             stage.setScene(new Scene(root1));
             stage.show();
