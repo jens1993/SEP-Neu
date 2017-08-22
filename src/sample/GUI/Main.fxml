@@ -66,7 +66,7 @@
                 <items>
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Teilnehmerliste drucken" />
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Startgeldliste drucken" />
-                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Ergebnisformular erstellen" />
+                    <MenuItem mnemonicParsing="false" onAction="#pressBtn_drucken" styleClass="mainItem" text="Ergebnisformular erstellen" />
                     <SeparatorMenuItem mnemonicParsing="false" />
                     <MenuItem mnemonicParsing="false" onAction="#pressBtn_Einstellungen" styleClass="mainItem" text="Optionen" />
                 </items>

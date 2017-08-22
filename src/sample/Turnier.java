@@ -1,4 +1,8 @@
 package sample;
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
@@ -284,6 +288,68 @@ public class Turnier  implements Initializable {
 
 	public void startgeldlisteDrucken() {
 		throw new UnsupportedOperationException();
+	}
+
+	public void sechsSpielzettelDrucken(ArrayList<Spiel> spiele){
+
+		Spielzettel test = new Spielzettel(spiele);
+        /*//*JFrame window = new JFrame();
+		window.setSize(800,600);
+		window.setTitle("Spielzettel");
+		window.setVisible(true);
+		DrawingComponent drawingComponent = new DrawingComponent();
+		window.add(test);*/
+
+		PrinterJob job = PrinterJob.getPrinterJob();
+		//Book book = new Book();
+		PageFormat querFormat = new PageFormat();
+		Paper paper = querFormat.getPaper();
+		//Remove borders from the paper
+		paper.setImageableArea(45, 45, querFormat.getPaper().getWidth()-90, querFormat.getPaper().getHeight()-90);
+		querFormat.setPaper(paper);
+		querFormat.setOrientation(PageFormat.PORTRAIT);
+		//book.append(test,querFormat);
+		job.setPrintable(test,querFormat);
+		try {
+			job.print();
+		}
+		catch (PrinterException e)
+		{
+			System.out.println("Drucken fehlgeschlagen");
+		}
+		System.exit(0);
+
+
+
+		/*sechsSpielzettel test = new sechsSpielzettel(spieler);
+        /*JFrame window = new JFrame();
+        window.setSize(800,600);
+        window.setTitle("Spielzettel");
+        window.setVisible(true);
+        DrawingComponent drawingComponent = new DrawingComponent();
+        window.add(test);
+
+		PrinterJob job = PrinterJob.getPrinterJob();
+		//Book book = new Book();
+		PageFormat querFormat = new PageFormat();
+		Paper paper = querFormat.getPaper();
+		//Remove borders from the paper
+		paper.setImageableArea(45, 45, querFormat.getPaper().getWidth()-90, querFormat.getPaper().getHeight()-90);
+		querFormat.setPaper(paper);
+		querFormat.setOrientation(PageFormat.PORTRAIT);
+		//book.append(test,querFormat);
+		job.setPrintable(test,querFormat);
+		job.printDialog();
+		try {
+			job.print();
+		}
+		catch (PrinterException e)
+		{
+			System.out.println("Drucken fehlgeschlagen");
+		}
+		System.exit(0);*/
+
+
 	}
 
 

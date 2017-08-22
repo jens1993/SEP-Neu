@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+import static sample.DAO.auswahlklasse.getAktuelleTurnierAuswahl;
 import static sample.DAO.auswahlklasse.setSpielAuswahlErgebniseintragen;
 
 /**
@@ -247,6 +248,17 @@ public class MainController implements Initializable, Observable
         stage.show();
         a.addStagesdict(stage,"TurnierAuswählen");
         stage.setTitle("Turnier auswählen");
+    }
+    public void pressBtn_drucken(ActionEvent event) throws Exception{
+        Turnier turnier = getAktuelleTurnierAuswahl();
+        ArrayList<Spiel> spiele = new ArrayList<>();
+        spiele.add(turnier.getSpiele().get(1));
+        spiele.add(turnier.getSpiele().get(2));
+        spiele.add(turnier.getSpiele().get(3));
+        spiele.add(turnier.getSpiele().get(4));
+        spiele.add(turnier.getSpiele().get(5));
+        spiele.add(turnier.getSpiele().get(6));
+        spiele.get(1).spielzettelDrucken();
     }
     private final List<InvalidationListener> listeners = new LinkedList<>();
     @Override
