@@ -1,5 +1,6 @@
 package sample.GUI;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -32,7 +33,7 @@ import java.util.ResourceBundle;
 public class KlasseUebersichtController implements Initializable
 {
     auswahlklasse a = new auswahlklasse();
-    Dictionary<Integer,Spielklasse> turnierauswahlspielklassen = null;
+    ObservableList<Spielklasse> obs_spielklasse=a.getAktuelleTurnierAuswahl().getObs_spielklassen();
     @FXML
     private VBox klassseeinzel_vbox;
     @FXML
@@ -48,10 +49,10 @@ public class KlasseUebersichtController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzufuegen.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            for (int i=0; i<a.getStages().size()-1;i++){
-                a.getStages().get(i).close();
-            }
-            a.addStage(stage);
+//            for (int i=0; i<a.getStages().size()-1;i++){
+//                a.getStages().get(i).close();
+//            }
+            a.getStagesdict().put("KlasseHinzufuegen",stage);
             stage.setScene(new Scene(root1));
             stage.show();
 
@@ -67,10 +68,10 @@ public class KlasseUebersichtController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielSystem_neu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            for (int i=1; i<a.getStages().size()-1;i++){
-                a.getStages().get(i).close();
-            }
-            a.addStage(stage);
+//            for (int i=1; i<a.getStages().size()-1;i++){
+//                a.getStages().get(i).close();
+//            }
+            a.getStagesdict().put("Spielsytem",stage);
 
             stage.setScene(new Scene(root1));
             stage.show();
@@ -85,161 +86,167 @@ public class KlasseUebersichtController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        turnierauswahlspielklassen= a.getAktuelleTurnierAuswahl().getSpielklassen();
+
+
+
+
         Spielklasse sp = null;
-        Label label[] = new Label[turnierauswahlspielklassen.size()];
+        Label label[] = new Label[obs_spielklasse.size()];
         //label[1].setText("jens");
 
         
-        TextFlow[] flow = new TextFlow[turnierauswahlspielklassen.size()+1];
+        TextFlow[] flow = new TextFlow[obs_spielklasse.size()+1];
         final Spielklasse[] spauswahl = {null};
          Hyperlink hp=null;
-        Enumeration enumkeys = turnierauswahlspielklassen.keys();
-        int i=1;
-        while(enumkeys.hasMoreElements()){
 
-            int key = (int)enumkeys.nextElement();
-            sp= turnierauswahlspielklassen.get(key);
-            if(sp.getSetzliste()!=null&&sp.getSetzliste().size()>0)
-            {
-                hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2));
-                //System.out.println(hp+"----------1");
-            }
-            if(sp.getSpiele()!=null&&sp.getSetzliste()!=null&&sp.getSpiele().size()>0)
-            {
-                sp.setSetzliste_gesperrt(true);
-                //System.out.println(sp.isSetzliste_gesperrt());
-                hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2)+" Spiele:"+sp.getSpiele().size());
-                //System.out.println(hp+"----------2");
-            }
-            if(sp.getSetzliste().size()==0||sp.getSetzliste()==null)
-            {
-                sp.setSetzliste_gesperrt(false);
-                hp = new Hyperlink(sp.getDisziplin() + "-" + sp.getNiveau());
-                //System.out.println(hp+"----------3");
-            }
+         for(int i=0;i<obs_spielklasse.size();i++)
+         {
+             sp= obs_spielklasse.get(i);
+             if(sp.getSetzliste()!=null&&sp.getSetzliste().size()>0)
+             {
+                 hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2));
+                 //System.out.println(hp+"----------1");
+             }
+             if(sp.getSpiele()!=null&&sp.getSetzliste()!=null&&sp.getSpiele().size()>0)
+             {
+                 sp.setSetzliste_gesperrt(true);
+                 //System.out.println(sp.isSetzliste_gesperrt());
+                 hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2)+" Spiele:"+sp.getSpiele().size());
+                 //System.out.println(hp+"----------2");
+             }
+             if(sp.getSetzliste().size()==0||sp.getSetzliste()==null)
+             {
+                 sp.setSetzliste_gesperrt(false);
+                 hp = new Hyperlink(sp.getDisziplin() + "-" + sp.getNiveau());
+                 //System.out.println(hp+"----------3");
+             }
 
-            if(sp.getDisziplin().contains("doppel"))
-            {
-                flow[i] = new TextFlow(new Text("Doppelklasse: "),hp);
-                flow[i].setPadding(new Insets(10));
-                klasssedoppel_vbox.getChildren().addAll(flow[i]);
-            }
-            if(sp.getDisziplin().contains("einzel"))
-            {
-                flow[i] = new TextFlow(new Text("Einzelklasse: "),hp);
-                flow[i].setPadding(new Insets(10));
-                klassseeinzel_vbox.getChildren().addAll(flow[i]);
-            }
-            if(sp.getDisziplin().contains("Mix"))
-            {
-                flow[i] = new TextFlow(new Text("Mixedklasse: "),hp);
-                flow[i].setPadding(new Insets(10));
-                klasssemixed_vbox.getChildren().addAll(flow[i]);
-            }
+             if(sp.getDisziplin().contains("doppel"))
+             {
+                 flow[i] = new TextFlow(new Text("Doppelklasse: "),hp);
+                 flow[i].setPadding(new Insets(10));
+                 klasssedoppel_vbox.getChildren().addAll(flow[i]);
+             }
+             if(sp.getDisziplin().contains("einzel"))
+             {
+                 flow[i] = new TextFlow(new Text("Einzelklasse: "),hp);
+                 flow[i].setPadding(new Insets(10));
+                 klassseeinzel_vbox.getChildren().addAll(flow[i]);
+             }
+             if(sp.getDisziplin().contains("Mix"))
+             {
+                 flow[i] = new TextFlow(new Text("Mixedklasse: "),hp);
+                 flow[i].setPadding(new Insets(10));
+                 klasssemixed_vbox.getChildren().addAll(flow[i]);
+             }
+
+             tabpane_uebersicht.setOnMouseClicked(event ->{
+                 if(MouseButton.SECONDARY==event.getButton()) {
+                     ContextMenu contextMenu = new ContextMenu();
+                     MenuItem item1 = new MenuItem("Neue Spielklasse");
+                     item1.setOnAction(new EventHandler<ActionEvent>() {
+
+                         @Override
+                         public void handle(ActionEvent event) {
+                             try {
+                                 pressBtn_neueKlassehinzufuegen(event);
+                             } catch (Exception e) {
+                                 e.printStackTrace();
+                             }
+                         }
+
+                     });
+                     contextMenu.getItems().add(item1);
+                     tabpane_uebersicht.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+
+                         @Override
+                         public void handle(ContextMenuEvent event) {
+
+                             contextMenu.show(tabpane_uebersicht, event.getScreenX(), event.getScreenY());
+                         }
+                     });
+                 }
+             } );
+             Spielklasse[] finalSp = new Spielklasse[obs_spielklasse.size()];
+             int finalI = i;
+             finalSp[i]= sp;
+             Hyperlink finalHp = hp;
+             hp.setOnMouseClicked(event -> {
+                /*spauswahl[finalI] =a.getSpielklasseDAO().getSpielklassenDict(a.getTurnierDAO().
+                        read(a.getAktuelleTurnierAuswahl())).get(finalI);*/
+                 if (finalSp[finalI] != null) {
+                     finalSp[finalI] = a.getAktuelleTurnierAuswahl().getObs_spielklassen().get(finalI);
+                     if(MouseButton.PRIMARY==event.getButton()) {
+
+
+
+
+                         // System.out.println(spauswahl[finalI].getDisziplin());
+                         try {
+                             //((Node)(event.getSource())).getScene().getWindow().hide();
+                             pressBtn_Spielsystem(finalSp[finalI]);
+                         } catch (Exception e) {
+                             e.printStackTrace();
+                         }
+                     }
+
+                     if(MouseButton.SECONDARY==event.getButton()) {
+                         ContextMenu contextMenu = new ContextMenu();
+                         MenuItem item1 = new MenuItem("Spielklasse bearbeiten");
+                         item1.setOnAction(new EventHandler<ActionEvent>() {
+
+                             @Override
+                             public void handle(ActionEvent event) {
+                                 //tabpane_spieler.getSelectionModel().select(tab_sphin);
+                             }
+                         });
+                         MenuItem item2 = new MenuItem("Spielklasse löschen");
+                         item2.setOnAction(new EventHandler<ActionEvent>() {
+
+                             @Override
+                             public void handle(ActionEvent event) {
+                                 System.out.println(finalSp[finalI]);
+                                 boolean erfolgloeschen = finalSp[finalI].getSpielklasseDAO().delete(finalSp[finalI]);
+                                 if(erfolgloeschen)
+                                 {
+                                     a.InfoBenachrichtigung("erfolg", "klasse gelöscht");
+                                     a.getAktuelleTurnierAuswahl().removeobs_spielklassen(finalSp[finalI]);
+                                     a.getAktuelleTurnierAuswahl().removeSpielklassen(finalSp[finalI]);
+                                 }
+                                 else
+                                 {
+                                     a.WarnungBenachrichtigung("Fehler", "klasse konnte nicht gelöscht werden");
+                                 }
+                                 //tabpane_spieler.getSelectionModel().select(tab_sphin);
+                             }
+                         });
+                         contextMenu.getItems().addAll(item1,item2);
+                         finalHp.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+
+                             @Override
+                             public void handle(ContextMenuEvent event) {
+
+                                 contextMenu.show(finalHp, event.getScreenX(), event.getScreenY());
+                             }
+                         });
+
+                     }
+
+
+                 }});
+         }
 
 
             //lbs[i]=new Label(s);//initializing labels
 
-            int finalI = i;
-            Spielklasse[] finalSp = new Spielklasse[turnierauswahlspielklassen.size()];
-            finalSp[i-1]= sp;
-            Hyperlink finalHp = hp;
-            tabpane_uebersicht.setOnMouseClicked(event ->{
-                        if(MouseButton.SECONDARY==event.getButton()) {
-                            ContextMenu contextMenu = new ContextMenu();
-                            MenuItem item1 = new MenuItem("Neue Spielklasse");
-                            item1.setOnAction(new EventHandler<ActionEvent>() {
-
-                                @Override
-                                public void handle(ActionEvent event) {
-                                    try {
-                                        pressBtn_neueKlassehinzufuegen(event);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                            });
-                            contextMenu.getItems().add(item1);
-                            tabpane_uebersicht.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
-
-                                @Override
-                                public void handle(ContextMenuEvent event) {
-
-                                    contextMenu.show(tabpane_uebersicht, event.getScreenX(), event.getScreenY());
-                                }
-                            });
-                        }
-            } );
-            hp.setOnMouseClicked(event -> {
-                /*spauswahl[finalI] =a.getSpielklasseDAO().getSpielklassenDict(a.getTurnierDAO().
-                        read(a.getAktuelleTurnierAuswahl())).get(finalI);*/
-                if (finalSp[finalI - 1] != null) {
-                    finalSp[finalI - 1] = a.getAktuelleTurnierAuswahl().getSpielklassen().get(key);
-                if(MouseButton.PRIMARY==event.getButton()) {
 
 
 
-
-                        // System.out.println(spauswahl[finalI].getDisziplin());
-                        try {
-                            //((Node)(event.getSource())).getScene().getWindow().hide();
-                            pressBtn_Spielsystem(finalSp[finalI - 1]);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                        if(MouseButton.SECONDARY==event.getButton()) {
-                            ContextMenu contextMenu = new ContextMenu();
-                            MenuItem item1 = new MenuItem("Spielklasse bearbeiten");
-                            item1.setOnAction(new EventHandler<ActionEvent>() {
-
-                                @Override
-                                public void handle(ActionEvent event) {
-                                    //tabpane_spieler.getSelectionModel().select(tab_sphin);
-                                }
-                            });
-                            MenuItem item2 = new MenuItem("Spielklasse löschen");
-                            item2.setOnAction(new EventHandler<ActionEvent>() {
-
-                                @Override
-                                public void handle(ActionEvent event) {
-                                    System.out.println(finalSp[finalI - 1]);
-                                    boolean erfolgloeschen = finalSp[finalI - 1].getSpielklasseDAO().delete(finalSp[finalI - 1]);
-                                    if(erfolgloeschen)
-                                    {
-                                        a.InfoBenachrichtigung("erfolg", "klasse gelöscht");
-                                        a.getAktuelleTurnierAuswahl().removeobs_spielklassen(finalSp[finalI - 1]);
-                                        a.getAktuelleTurnierAuswahl().removeSpielklassen(finalSp[finalI - 1]);
-                                    }
-                                    else
-                                    {
-                                        a.WarnungBenachrichtigung("Fehler", "klasse konnte nicht gelöscht werden");
-                                    }
-                                    //tabpane_spieler.getSelectionModel().select(tab_sphin);
-                                }
-                            });
-                            contextMenu.getItems().addAll(item1,item2);
-                            finalHp.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
-
-                                @Override
-                                public void handle(ContextMenuEvent event) {
-
-                                    contextMenu.show(finalHp, event.getScreenX(), event.getScreenY());
-                                }
-                            });
-
-                        }
-
-
-            }});
 
             //doing what you want here with labels
             //...
-            i++;
-        }
+
+
 
 
 

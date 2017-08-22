@@ -1,5 +1,9 @@
 package sample;
 
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.time.LocalTime;
 
 import sample.DAO.*;
@@ -16,7 +20,7 @@ public class Spiel {
 	private Spieler schiedsrichter;
 	private Spielsystem spielsystem;
 	private Turnier turnier;
-
+    private auswahlklasse auswahlklasse=new auswahlklasse();
 
 
 	private Feld feld;
@@ -110,6 +114,8 @@ public class Spiel {
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		turnier.getObs_ausstehendeSpiele().add(this);
 		spielDAO.create(this);
+		auswahlklasse.getAktuelleTurnierAuswahl().addobsAusstehendeSpiele(this);
+
 		this.status = 1;
 		if(heim.isFreilos()){
 			setErgebnis(new Ergebnis(21,0,21,0));
@@ -292,8 +298,64 @@ public class Spiel {
 	}
 
 	public void spielzettelDrucken() {
-		String aufrufzeit = this.aufrufZeit.toString();
-		this.heim.toString();
+
+		Spielzettel test = new Spielzettel(this);
+        /*//*JFrame window = new JFrame();
+		window.setSize(800,600);
+		window.setTitle("Spielzettel");
+		window.setVisible(true);
+		DrawingComponent drawingComponent = new DrawingComponent();
+		window.add(test);*/
+
+		PrinterJob job = PrinterJob.getPrinterJob();
+		//Book book = new Book();
+		PageFormat querFormat = new PageFormat();
+		Paper paper = querFormat.getPaper();
+		//Remove borders from the paper
+		paper.setImageableArea(45, 45, querFormat.getPaper().getWidth()-90, querFormat.getPaper().getHeight()-90);
+		querFormat.setPaper(paper);
+		querFormat.setOrientation(PageFormat.LANDSCAPE);
+		//book.append(test,querFormat);
+		job.setPrintable(test,querFormat);
+		try {
+			job.print();
+		}
+		catch (PrinterException e)
+		{
+			System.out.println("Drucken fehlgeschlagen");
+		}
+		System.exit(0);
+
+
+
+		/*sechsSpielzettel test = new sechsSpielzettel(spieler);
+        /*JFrame window = new JFrame();
+        window.setSize(800,600);
+        window.setTitle("Spielzettel");
+        window.setVisible(true);
+        DrawingComponent drawingComponent = new DrawingComponent();
+        window.add(test);
+
+		PrinterJob job = PrinterJob.getPrinterJob();
+		//Book book = new Book();
+		PageFormat querFormat = new PageFormat();
+		Paper paper = querFormat.getPaper();
+		//Remove borders from the paper
+		paper.setImageableArea(45, 45, querFormat.getPaper().getWidth()-90, querFormat.getPaper().getHeight()-90);
+		querFormat.setPaper(paper);
+		querFormat.setOrientation(PageFormat.PORTRAIT);
+		//book.append(test,querFormat);
+		job.setPrintable(test,querFormat);
+		job.printDialog();
+		try {
+			job.print();
+		}
+		catch (PrinterException e)
+		{
+			System.out.println("Drucken fehlgeschlagen");
+		}
+		System.exit(0);*/
+
 	}
 
 }

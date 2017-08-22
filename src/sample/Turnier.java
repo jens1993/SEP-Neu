@@ -1,4 +1,8 @@
 package sample;
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
@@ -18,8 +22,8 @@ public class Turnier  implements Initializable {
 	private int spielerPausenZeit = 10;
 	private int turnierid;
 
-	private static Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
-	private static ArrayList<Feld> felder = new ArrayList<>();
+	private  Dictionary<Integer, Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
+	private  ArrayList<Feld> felder = new ArrayList<>();
 	//private Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
 	//private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
 	private static Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
@@ -48,16 +52,54 @@ public class Turnier  implements Initializable {
 	public void setObs_spielklassen(ObservableList<Spielklasse> obs_spielklassen) {
 		this.obs_spielklassen = obs_spielklassen;
 	}
-	public void addtObs_spielklassen(Spielklasse spielklasse) {
+	public void addObs_spielklassen(Spielklasse spielklasse) {
 		this.obs_spielklassen.add(spielklasse);
 	}
 	public void removeobs_spielklassen(Spielklasse spielklasse) {
 		this.obs_spielklassen.remove(spielklasse);
 	}
-
+	public void addObs_spiele(Spiel spiel) {
+		this.obs_spiele.add(spiel);
+	}
+	public void removeobs_spielklassen(Spiel spiel) {
+		this.obs_spiele.remove(spiel);
+	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		obs_spielklassen.addListener(new ListChangeListener<Spielklasse>() {
+			@Override
+			public void onChanged(Change<? extends Spielklasse> c) {
+				// System.out.println("Changed on " + c.toString());
+				System.out.println("Spielklasse Änderung");
+
+				if (c.next()) {
+					//System.out.println(c.getFrom());
+				}
+			}
+		});
+		obs_spiele.addListener(new ListChangeListener<Spiel>() {
+			@Override
+			public void onChanged(Change<? extends Spiel> c) {
+				// System.out.println("Changed on " + c.toString());
+				System.out.println("Spiel Änderung");
+
+				if (c.next()) {
+					//System.out.println(c.getFrom());
+				}
+			}
+		});
 		obs_ausstehendeSpiele.addListener(new ListChangeListener<Spiel>() {
+			@Override
+			public void onChanged(Change<? extends Spiel> c) {
+				// System.out.println("Changed on " + c.toString());
+				System.out.println("ausstehende Spiel Änderung");
+
+				if (c.next()) {
+					//System.out.println(c.getFrom());
+				}
+			}
+		});
+/*		obs_ausstehendeSpiele.addListener(new ListChangeListener<Spiel>() {
 			@Override
 			public void onChanged(Change<? extends Spiel> c) {
 				// System.out.println("Changed on " + c.toString());
@@ -75,8 +117,8 @@ public class Turnier  implements Initializable {
 
 			}
 		});
+	}*/
 	}
-
 
 	public void deleteSpiel(Spiel spiel){
 		this.obs_spiele.remove(spiel);
@@ -246,6 +288,68 @@ public class Turnier  implements Initializable {
 
 	public void startgeldlisteDrucken() {
 		throw new UnsupportedOperationException();
+	}
+
+	public void sechsSpielzettelDrucken(ArrayList<Spiel> spiele){
+
+		Spielzettel test = new Spielzettel(spiele);
+        /*//*JFrame window = new JFrame();
+		window.setSize(800,600);
+		window.setTitle("Spielzettel");
+		window.setVisible(true);
+		DrawingComponent drawingComponent = new DrawingComponent();
+		window.add(test);*/
+
+		PrinterJob job = PrinterJob.getPrinterJob();
+		//Book book = new Book();
+		PageFormat querFormat = new PageFormat();
+		Paper paper = querFormat.getPaper();
+		//Remove borders from the paper
+		paper.setImageableArea(45, 45, querFormat.getPaper().getWidth()-90, querFormat.getPaper().getHeight()-90);
+		querFormat.setPaper(paper);
+		querFormat.setOrientation(PageFormat.PORTRAIT);
+		//book.append(test,querFormat);
+		job.setPrintable(test,querFormat);
+		try {
+			job.print();
+		}
+		catch (PrinterException e)
+		{
+			System.out.println("Drucken fehlgeschlagen");
+		}
+		System.exit(0);
+
+
+
+		/*sechsSpielzettel test = new sechsSpielzettel(spieler);
+        /*JFrame window = new JFrame();
+        window.setSize(800,600);
+        window.setTitle("Spielzettel");
+        window.setVisible(true);
+        DrawingComponent drawingComponent = new DrawingComponent();
+        window.add(test);
+
+		PrinterJob job = PrinterJob.getPrinterJob();
+		//Book book = new Book();
+		PageFormat querFormat = new PageFormat();
+		Paper paper = querFormat.getPaper();
+		//Remove borders from the paper
+		paper.setImageableArea(45, 45, querFormat.getPaper().getWidth()-90, querFormat.getPaper().getHeight()-90);
+		querFormat.setPaper(paper);
+		querFormat.setOrientation(PageFormat.PORTRAIT);
+		//book.append(test,querFormat);
+		job.setPrintable(test,querFormat);
+		job.printDialog();
+		try {
+			job.print();
+		}
+		catch (PrinterException e)
+		{
+			System.out.println("Drucken fehlgeschlagen");
+		}
+		System.exit(0);*/
+
+
 	}
 
 

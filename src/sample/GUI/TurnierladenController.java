@@ -16,10 +16,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import sample.DAO.TurnierDAO;
 import sample.DAO.TurnierDAOimpl;
@@ -44,7 +46,7 @@ public class TurnierladenController implements Initializable
 
     @FXML
     private TextField t_turniersuche;
-
+    ContextMenu contextMenu=new ContextMenu();
     @FXML
     public TableView TurnierlisteTabelle;
     @FXML
@@ -73,7 +75,7 @@ public class TurnierladenController implements Initializable
     private void zeigeTabelle() {
         System.out.println("Print table");
 
-        for (int i = 1; i <= a.getTurnierliste().size()+1; i++) {
+        for (int i = 1; i <= a.getTurnierliste().size(); i++) {
             turniere.add(a.getTurnierliste().get(i));
 
         }
@@ -92,6 +94,7 @@ public class TurnierladenController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         zeigeTabelle();
+
         TurnierlisteTabelle.setRowFactory(tv -> {
             TableRow row = new TableRow();
             row.setOnMouseClicked(event -> {
@@ -102,13 +105,55 @@ public class TurnierladenController implements Initializable
                     ((Node)(event.getSource())).getScene().getWindow().hide();
                  //   a.getStagesdict().get("")
                 }
-                else if(! row.isEmpty() && event.getButton()== MouseButton.PRIMARY)
+                if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY ){
+                 contextMenu.hide();
+                }
+                else if(! row.isEmpty() && event.getButton()== MouseButton.SECONDARY)
                 {
-                    System.out.println("KLICK");
+                    System.out.println("R-KLICK");
+                    MenuItem item1 = new MenuItem("Turnier auswählen");
+                    item1.setOnAction(new EventHandler<ActionEvent>() {
 
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //tabpane_spieler.getSelectionModel().select(tab_sphin);
+                        }
+                    });
+                    MenuItem item2 = new MenuItem("Turnier bearbeiten");
+                    item2.setOnAction(new EventHandler<ActionEvent>() {
 
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //tabpane_spieler.getSelectionModel().select(tab_sphin);
+                        }
+                    });
+                    MenuItem item3 = new MenuItem("Turnier löschen");
+                    item3.setOnAction(new EventHandler<ActionEvent>() {
+
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //tabpane_spieler.getSelectionModel().select(tab_sphin);
+                        }
+                    });
+                    if(!contextMenu.isShowing()) {
+                        contextMenu.getItems().clear();
+                        contextMenu.getItems().addAll(item1, item2, item3);
+                    }
+                    TurnierlisteTabelle.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+
+                        @Override
+                        public void handle(ContextMenuEvent event) {
+
+                            if(!contextMenu.isShowing())
+                            {
+                                contextMenu.show(TurnierlisteTabelle, event.getScreenX(), event.getScreenY());
+                            }
+
+                        }
+                    });
                 }
             });
+
             return row ;
         });
         t_turniersuche.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -136,6 +181,10 @@ public class TurnierladenController implements Initializable
         if(TurnierlisteTabelle.getSelectionModel().getSelectedItem()!=null && (Turnier) TurnierlisteTabelle.getSelectionModel().getSelectedItem()!= a.getAktuelleTurnierAuswahl())
         {
             a.turnierAuswahlSpeichern((Turnier) TurnierlisteTabelle.getSelectionModel().getSelectedItem());
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
+
             t.read(a.getAktuelleTurnierAuswahl());
             //System.out.println(a.getAktuelleTurnierAuswahl().getName());
             a.turnierAuswahlSpeichern(a.getAktuelleTurnierAuswahl());
@@ -143,6 +192,10 @@ public class TurnierladenController implements Initializable
             //Main.getInstance().updateTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
             //a.setAktuelleTurnierAuswahl
             System.out.println("Turnierauswahl durch Doppelklick: = "+item.getName());
+            //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
+            System.out.println("t");
+
+
             //((Node)(event.getSource())).getScene().getWindow().hide();
             try {
                 MainLaden();
@@ -155,10 +208,7 @@ public class TurnierladenController implements Initializable
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         primaryStage = new Stage();
-        for (int i=0; i<a.getStages().size();i++){
-            a.getStages().get(i).close();
-        }
-        a.addStage(primaryStage);
+
         a.addStagesdict(primaryStage,"Main");
         primaryStage.setScene(new Scene(root1));
 
@@ -173,7 +223,7 @@ public class TurnierladenController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("neuesTurnier.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            a.addStage(stage);
+
             a.addStagesdict(stage,"NeuesTurnier");
             stage.setScene(new Scene(root1));
             stage.show();

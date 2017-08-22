@@ -50,6 +50,13 @@ public class Spieler {
 		this.nName = nName;
 		spielerDAO.create(this);
 	}
+	public Spieler(String vName, String nName, LocalDate gDatum, int spielerID){
+		this.vName = vName;
+		this.nName = nName;
+		this.gDatum = gDatum;
+		this.spielerID=spielerID;
+		spielerDAO.create(this);
+	}
 
 	public Spieler(String vName, String nName, LocalDate gDatum, boolean geschlecht, int[] rPunkte, Verein verein,String extSpielerID)
 	{
@@ -85,7 +92,7 @@ public class Spieler {
 		this.rPunkte = rPunkte;
 		this.verein = verein;
 		this.meldeGebuehren = meldeGebuehren;
-		Nationalitaet = nationalitaet;
+		this.Nationalitaet = nationalitaet;
 		this.verfuegbar = verfuegbar;
 		this.mattenSpiele = mattenSpiele;
 		this.extSpielerID = extSpielerID;
@@ -202,14 +209,14 @@ public class Spieler {
 		}
 	}
 	public ImageView getIGeschlecht() {
-		Image imgmale = new Image("sample/Images/icon/user_male.png",24,24,true,true);
-		Image imgfemale = new Image("sample/Images/icon/user_female.png",24,24,true,true);
-		ImageView imageView = new ImageView(imgmale);
-		ImageView imageView2 = new ImageView(imgfemale);
 		if(geschlecht){
+			Image imgmale = new Image("sample/Images/icon/user_male.png",24,24,true,true);
+			ImageView imageView = new ImageView(imgmale);
 			return imageView;
 		}
 		else {
+			Image imgfemale = new Image("sample/Images/icon/user_female.png",24,24,true,true);
+			ImageView imageView2 = new ImageView(imgfemale);
 			return imageView2;
 		}
 	}

@@ -104,7 +104,8 @@ public class spielerVorhandenController implements Initializable
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielerHinzu.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        a.addStage(stage);
+
+        a.getStagesdict().put("SpielerHinzu",stage);
         stage.setScene(new Scene(root1));
         stage.show();
         stage.setTitle("Spieler hinzufügen");

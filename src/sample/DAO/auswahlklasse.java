@@ -29,7 +29,7 @@ public class auswahlklasse
     private static Turnier aktuelleTurnierAuswahl = null;
     private static Spieler SpielerzumHinzufeuegen=null;
     private static ArrayList<Spieler> vorhandeneSpieler;
-    private static ArrayList<Stage> stages = new ArrayList<>();
+
     private static Spiel SpielAuswahlErgebniseintragen;
     private static ObservableList<Spieler> obs_spieler = FXCollections.observableArrayList();
     private static Notifications noteficationBuilder;
@@ -83,7 +83,7 @@ public class auswahlklasse
     {
         updateSpieler=spieler;
         tab=tabspeichern;
-        stages.get(0).close();
+
 
     }
 
@@ -96,13 +96,7 @@ public class auswahlklasse
         auswahlklasse.vorhandeneSpieler = vorhandeneSpieler;
     }
 
-    public static ArrayList<Stage> getStages() {
-        return stages;
-    }
 
-    public static void addStage(Stage stage){
-        auswahlklasse.stages.add(0,stage);
-    }
 
     public static Spieler getSpielerzumHinzufeuegen() {
         return SpielerzumHinzufeuegen;
@@ -208,6 +202,7 @@ public class auswahlklasse
                 });
         noteficationBuilder.showWarning();
     }
+
 
 
 }
