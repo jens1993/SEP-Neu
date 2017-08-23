@@ -1,54 +1,54 @@
 /*MAIN*/
 
-.mainButton
-{
-    -fx-background-color: aqua;
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
 }
 
-.mainButtonBar
+.tab-pane
 {
-    -fx-background-color: aqua;
-    
+    -fx-tab-min-width:90px;
 }
 
-.mainTab
-{
-    -fx-background-color: aqua;
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
 }
-
-.mainBox
+.tab-pane .tab
 {
-    -fx-background-color: aqua;
-}
-.mainItem
-{
-    -fx-background-color: aqua;
-}
-
-.mainLabel
-{
-    -fx-background-color: aqua;
-}
-
-.mainMenuBar
-{
-    -fx-background-color: aqua;
-}
-
-.mainPane
-{
-    -fx-background-color: aqua;
+    -fx-background-color: #e6e6e6;
 
 }
 
-.mainTableView
+.tab-pane .tab:selected
 {
-    -fx-background-color: aqua;
+    -fx-background-color: #3c3c3c;
+    fxcolor
 }
 
-.mainSeparator
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #96b946;
+}
+
+.button
 {
-    -fx-background-color: aqua;
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.button:selected .button-label
+{
+    -fx-alignment: CENTER;
+    -fx-text-fill: #96b946;
+    -fx-background-color: #3c3c3c;
 }
 
 /*MAINCONTROLLER*/
