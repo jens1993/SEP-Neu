@@ -152,6 +152,7 @@ public class ExcelImport implements Initializable{
                    // ExcelImport.getVorhandeneSpieler().add(sp);
                 }
                 actualRow++;
+                //
 
                 //get second row
                 row = worksheet.getRow(actualRow);
