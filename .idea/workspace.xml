@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b41b4edd-9e5f-4fba-81f4-0ab06d091ab5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Infos/Protokoll Jens.txt" afterPath="$PROJECT_DIR$/src/Infos/Protokoll Jens.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Infos/Protokoll.txt" afterPath="$PROJECT_DIR$/src/Infos/Protokoll.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ExcelImport.java" afterPath="$PROJECT_DIR$/src/sample/ExcelImport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/MainController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerVorhandenController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerVorhandenController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,29 +66,6 @@
     <breakpoint_rules converted="true" />
   </component>
   <component name="DockManager">
-    <window id="7">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="auswahlklasse.java" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/sample/DAO/auswahlklasse.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="386">
-                    <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-                    <folding>
-                      <element signature="e#2016#2017#0" expanded="true" />
-                      <element signature="e#2060#2061#0" expanded="true" />
-                      <element signature="e#3072#3073#0" expanded="true" />
-                      <element signature="e#3112#3113#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
     <window id="9">
       <content type="file-editors">
         <state>
@@ -309,7 +282,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fxm</find>
       <find>upda</find>
       <find>Exce</find>
       <find>press</find>
@@ -339,6 +311,7 @@
       <find>infob</find>
       <find>put</find>
       <find>obs_erf</find>
+      <find>info</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\jens\Pictures\Programme\sep_funktioniertneeeeeeeeeeeeeeeeeeeeuuuuuuuuuuuuu\SEP-Neu\src</dir>
@@ -1404,14 +1377,7 @@
       <workItem from="1503241540155" duration="16395000" />
       <workItem from="1503320997880" duration="13548000" />
       <workItem from="1503369035385" duration="11417000" />
-      <workItem from="1503405895878" duration="22302000" />
-    </task>
-    <task id="LOCAL-00033" summary="gefuschte Lösung für Schweizer System =)">
-      <created>1501326147853</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1501326147853</updated>
+      <workItem from="1503405895878" duration="22358000" />
     </task>
     <task id="LOCAL-00034" summary="gefuschte Lösung für Schweizer System =)">
       <created>1501341556203</created>
@@ -1749,11 +1715,18 @@
       <option name="project" value="LOCAL" />
       <updated>1503462289395</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Meldeformular funktioniert fast">
+      <created>1503463977860</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1503463977860</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="670561000" />
+    <option name="totallyTimeSpent" value="670617000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -3052,19 +3025,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/DAO/auswahlklasse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-          <folding>
-            <element signature="e#2016#2017#0" expanded="true" />
-            <element signature="e#2060#2061#0" expanded="true" />
-            <element signature="e#3072#3073#0" expanded="true" />
-            <element signature="e#3112#3113#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/ExcelImport.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
@@ -3128,6 +3088,19 @@
         <state relative-caret-position="396">
           <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="53" selection-end-column="45" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/DAO/auswahlklasse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+          <folding>
+            <element signature="e#2016#2017#0" expanded="true" />
+            <element signature="e#2060#2061#0" expanded="true" />
+            <element signature="e#3072#3073#0" expanded="true" />
+            <element signature="e#3112#3113#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
