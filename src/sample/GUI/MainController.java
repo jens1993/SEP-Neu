@@ -22,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -53,7 +54,7 @@ public class MainController implements Initializable, Observable
     @FXML
     private VBox vbox_main;
     @FXML
-    private HBox hbox_main;
+    private GridPane gridPane_main;
     @FXML
     private CheckBox check_gespielteSpiele= new CheckBox();
     @FXML
@@ -1001,11 +1002,21 @@ public class MainController implements Initializable, Observable
 
         lspielklassen = new Label("Spielklassen");
 
-        hbox_main.getChildren().add(lspielklassen);
-        hbox_main.getChildren().add(checkComboBox);
-        hbox_main.getChildren().add(check_aktiveSpiele);
-        hbox_main.getChildren().add(check_ausstehendeSpiele);
-        hbox_main.getChildren().add(check_gespielteSpiele);
+        gridPane_main.getChildren().add(lspielklassen);
+        GridPane.setColumnIndex(lspielklassen,2);
+        GridPane.setRowIndex(lspielklassen,0);
+        gridPane_main.getChildren().add(checkComboBox);
+        GridPane.setColumnIndex(checkComboBox,3);
+        GridPane.setRowIndex(checkComboBox,0);
+        gridPane_main.getChildren().add(check_aktiveSpiele);
+        GridPane.setColumnIndex(check_aktiveSpiele,4);
+        GridPane.setRowIndex(check_aktiveSpiele,0);
+        gridPane_main.getChildren().add(check_ausstehendeSpiele);
+        GridPane.setColumnIndex(check_ausstehendeSpiele,5);
+        GridPane.setRowIndex(check_ausstehendeSpiele,0);
+        gridPane_main.getChildren().add(check_gespielteSpiele);
+        GridPane.setColumnIndex(check_gespielteSpiele,6);
+        GridPane.setRowIndex(check_gespielteSpiele,0);
         check_aktiveSpiele.setText("Aktive Spiele");
         check_aktiveSpiele.setSelected(true);
         check_ausstehendeSpiele.setText("Ausstehende Spiele");

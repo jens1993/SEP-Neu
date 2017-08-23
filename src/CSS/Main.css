@@ -1,9 +1,19 @@
 /*MAIN*/
-
-.tab-pane .tab-header-area .tab-header-background {
-    -fx-opacity: 0;
+.root
+{
+    -fx-background-color: #d8d8d8;
+    -fx-min-width: 640px;
+    -fx-min-height: 480px;
 }
 
+.tab-pane .tab-header-area .tab-header-background
+{
+    -fx-opacity: 0;
+}
+#spieluebersicht
+{
+    -fx-background-color: #96b946;
+}
 .tab-pane
 {
     -fx-tab-min-width:90px;
@@ -21,7 +31,6 @@
 .tab-pane .tab:selected
 {
     -fx-background-color: #3c3c3c;
-    fxcolor
 }
 
 .tab .tab-label {
@@ -36,19 +45,61 @@
     -fx-text-fill: #96b946;
 }
 
+
+.button {
+    -fx-background-radius: 1px;
+    -fx-background-color: #888, -t-button-color;
+    -fx-background-insets: 0, 1px;
+    -fx-border-color: black;
+}
+
 .button
 {
-    -fx-alignment: CENTER;
-    -fx-text-fill: #828282;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
+    -fx-padding: 15px 25px;
+    -fx-font-size: 24px;
+    -fx-text-alignment: center;
+    -fx-cursor: pointer;
+    -fx-outline: none;
+    -fx-border-color: #fff;
+    -fx-background-color: #4CAF50;
+    -fx-border: none;
+    -fx-border-radius: 15px;
+
+}
+.button:hover {background-color: #3e8e41}
+
+.button:armed {
+    -fx-background-color: #3e8e41;
+   
+    -fx-translate-y: 4px;
+}
+.button:hover {
+    -fx-background-color: #888, derive(-t-button-color, 30%);
 }
 
-.button:selected .button-label
+.button:focused {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 0);
+}
+
+.button:armed {
+    -fx-background-color: #888, derive(-t-button-color, -10%);
+}
+
+.button:disabled {
+    -fx-opacity: 100%;
+    -fx-background-color: #888, derive(-t-button-color, -5%);
+}
+
+
+.table-row
 {
-    -fx-alignment: CENTER;
-    -fx-text-fill: #96b946;
-    -fx-background-color: #3c3c3c;
+    -fx-background-color: red;
 }
 
+/*.table-view
+{
+    -fx-background-radius: 1px;
+    -fx-background-color: #888, -t-button-color;
+    -fx-background-insets: 0, 1px;
+}
 /*MAINCONTROLLER*/
