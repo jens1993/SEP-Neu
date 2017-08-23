@@ -1194,13 +1194,20 @@ public class MainController implements Initializable, Observable
                     a.addStage(stage2);
                     stage2.setScene(new Scene(root1));
                     stage2.show();*/
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Spielerimport");
-                    alert.setHeaderText("Spieler erfolgreich eingelesen! ");
-                    alert.setContentText(String.valueOf(ExcelImport.getObs_erf_spieler()));
-
-
-                    alert.showAndWait();
+                    if(ExcelImport.getObs_erf_spieler().size()>0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Spielerimport - Neue Spieler");
+                        alert.setHeaderText("Spieler erfolgreich eingelesen! ");
+                        alert.setContentText(String.valueOf(ExcelImport.getObs_erf_spieler()));
+                        alert.showAndWait();
+                    }
+                    if(ExcelImport.getObs_upd_f_spieler().size()>0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Spielerimport - Update");
+                        alert.setHeaderText("Spieler erfolgreich aktualisiert! ");
+                        alert.setContentText(String.valueOf(ExcelImport.getObs_upd_f_spieler()));
+                        alert.showAndWait();
+                    }
                     //ExcelImport ex = new ExcelImport();
                     //ex.pressBtn_Popup();
                 } else {

@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b41b4edd-9e5f-4fba-81f4-0ab06d091ab5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ExcelImport.java" afterPath="$PROJECT_DIR$/src/sample/ExcelImport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/MainController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/MainController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerVorhandenController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerVorhandenController.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -109,11 +112,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/GUI/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
-              <caret line="1199" column="41" lean-forward="false" selection-start-line="1199" selection-start-column="41" selection-end-line="1199" selection-end-column="41" />
+              <caret line="1198" column="68" lean-forward="false" selection-start-line="1198" selection-start-column="68" selection-end-line="1198" selection-end-column="68" />
               <folding>
                 <element signature="e#17981#17982#0" expanded="true" />
                 <element signature="e#18065#18066#0" expanded="true" />
@@ -146,11 +149,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Protokoll Jens.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Protokoll Jens.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll Jens.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="33" column="26" lean-forward="true" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+            <state relative-caret-position="297">
+              <caret line="23" column="61" lean-forward="false" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -159,8 +162,8 @@
       <file leaf-file-name="spielerVorhandenController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerVorhandenController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="134" column="36" lean-forward="false" selection-start-line="134" selection-start-column="36" selection-end-line="134" selection-end-column="36" />
+            <state relative-caret-position="228">
+              <caret line="95" column="28" lean-forward="false" selection-start-line="95" selection-start-column="28" selection-end-line="95" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -181,8 +184,8 @@
       <file leaf-file-name="ExcelImport.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/ExcelImport.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state relative-caret-position="270">
+              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#714#715#0" expanded="true" />
@@ -192,30 +195,14 @@
                 <element signature="e#1011#1036#0" expanded="true" />
                 <element signature="e#1175#1176#0" expanded="true" />
                 <element signature="e#1213#1214#0" expanded="true" />
-                <element signature="e#5480#5481#0" expanded="true" />
-                <element signature="e#5519#5520#0" expanded="true" />
-                <element signature="e#13195#13196#0" expanded="true" />
-                <element signature="e#13239#13240#0" expanded="true" />
-                <marker date="1503463469688" expanded="false" signature="1856:1867" ph=" { " />
-                <marker date="1503463469688" expanded="false" signature="1897:1903" ph=" }" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="spielerHinzuController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="583" column="0" lean-forward="false" selection-start-line="583" selection-start-column="0" selection-end-line="583" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc;n#t_suchleistespielerhinzu#0;n#spielerHinzuController#0" expanded="false" />
-                <element signature="e#3312#3341#0" expanded="false" />
-                <element signature="method#felderLeeren#0;class#spielerHinzuController#0" expanded="false" />
-                <element signature="e#5030#5056#0" expanded="false" />
-                <element signature="method#pressBtn_Popup#0;class#spielerHinzuController#0" expanded="false" />
-                <element signature="method#zeigePopup#0;class#spielerHinzuController#0" expanded="false" />
-                <element signature="e#11009#11049#0" expanded="false" />
+                <element signature="e#1498#1499#0" expanded="true" />
+                <element signature="e#1538#1539#0" expanded="true" />
+                <element signature="e#5814#5815#0" expanded="true" />
+                <element signature="e#5853#5854#0" expanded="true" />
+                <element signature="e#13529#13530#0" expanded="true" />
+                <element signature="e#13573#13574#0" expanded="true" />
+                <marker date="1503464306014" expanded="false" signature="2190:2201" ph=" { " />
+                <marker date="1503464306014" expanded="false" signature="2231:2237" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -309,9 +296,9 @@
       <find>spieler erfo</find>
       <find>wurde hin</find>
       <find>infob</find>
-      <find>put</find>
-      <find>obs_erf</find>
       <find>info</find>
+      <find>obs_erf</find>
+      <find>put</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\jens\Pictures\Programme\sep_funktioniertneeeeeeeeeeeeeeeeeeeeuuuuuuuuuuuuu\SEP-Neu\src</dir>
@@ -383,13 +370,13 @@
         <option value="$PROJECT_DIR$/src/sample/GUI/FeldZuweisungController.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/TurnierDAOimpl.java" />
         <option value="$PROJECT_DIR$/src/sample/Spielsysteme/GruppeMitEndrunde.java" />
-        <option value="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/auswahlklasse.java" />
-        <option value="$PROJECT_DIR$/src/sample/ExcelImport.java" />
-        <option value="$PROJECT_DIR$/src/sample/GUI/spielerVorhandenController.java" />
-        <option value="$PROJECT_DIR$/src/sample/GUI/MainController.java" />
         <option value="$PROJECT_DIR$/src/Infos/Protokoll.txt" />
         <option value="$PROJECT_DIR$/src/Infos/Protokoll Jens.txt" />
+        <option value="$PROJECT_DIR$/src/sample/ExcelImport.java" />
+        <option value="$PROJECT_DIR$/src/sample/GUI/spielerVorhandenController.java" />
+        <option value="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" />
+        <option value="$PROJECT_DIR$/src/sample/GUI/MainController.java" />
       </list>
     </option>
   </component>
@@ -1377,14 +1364,7 @@
       <workItem from="1503241540155" duration="16395000" />
       <workItem from="1503320997880" duration="13548000" />
       <workItem from="1503369035385" duration="11417000" />
-      <workItem from="1503405895878" duration="22358000" />
-    </task>
-    <task id="LOCAL-00034" summary="gefuschte Lösung für Schweizer System =)">
-      <created>1501341556203</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1501341556204</updated>
+      <workItem from="1503405895878" duration="22663000" />
     </task>
     <task id="LOCAL-00035" summary="Gruppe funktioniert">
       <created>1501364563340</created>
@@ -1722,11 +1702,18 @@
       <option name="project" value="LOCAL" />
       <updated>1503463977860</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="Meldeformular funktioniert fast">
+      <created>1503464032054</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1503464032054</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="670617000" />
+    <option name="totallyTimeSpent" value="670922000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1948,13 +1935,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/ExcelImport.java</url>
-          <line>133</line>
+          <line>142</line>
           <properties />
           <option name="timeStamp" value="271" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/ExcelImport.java</url>
-          <line>316</line>
+          <line>325</line>
           <properties />
           <option name="timeStamp" value="279" />
         </line-breakpoint>
@@ -3009,80 +2996,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="583" column="0" lean-forward="false" selection-start-line="583" selection-start-column="0" selection-end-line="583" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc;n#t_suchleistespielerhinzu#0;n#spielerHinzuController#0" expanded="false" />
-            <element signature="e#3312#3341#0" expanded="false" />
-            <element signature="method#felderLeeren#0;class#spielerHinzuController#0" expanded="false" />
-            <element signature="e#5030#5056#0" expanded="false" />
-            <element signature="method#pressBtn_Popup#0;class#spielerHinzuController#0" expanded="false" />
-            <element signature="method#zeigePopup#0;class#spielerHinzuController#0" expanded="false" />
-            <element signature="e#11009#11049#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/ExcelImport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#714#715#0" expanded="true" />
-            <element signature="e#745#746#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-            <element signature="e#855#856#0" expanded="true" />
-            <element signature="e#1011#1036#0" expanded="true" />
-            <element signature="e#1175#1176#0" expanded="true" />
-            <element signature="e#1213#1214#0" expanded="true" />
-            <element signature="e#5480#5481#0" expanded="true" />
-            <element signature="e#5519#5520#0" expanded="true" />
-            <element signature="e#13195#13196#0" expanded="true" />
-            <element signature="e#13239#13240#0" expanded="true" />
-            <marker date="1503463469688" expanded="false" signature="1856:1867" ph=" { " />
-            <marker date="1503463469688" expanded="false" signature="1897:1903" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerVorhandenController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="134" column="36" lean-forward="false" selection-start-line="134" selection-start-column="36" selection-end-line="134" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="1199" column="41" lean-forward="false" selection-start-line="1199" selection-start-column="41" selection-end-line="1199" selection-end-column="41" />
-          <folding>
-            <element signature="e#17981#17982#0" expanded="true" />
-            <element signature="e#18065#18066#0" expanded="true" />
-            <element signature="e#18552#20298#0" expanded="true" />
-            <element signature="e#20297#20298#0" expanded="true" />
-            <element signature="e#20579#22112#0" expanded="true" />
-            <element signature="e#22111#22112#0" expanded="true" />
-            <element signature="e#22393#24139#0" expanded="true" />
-            <element signature="e#24138#24139#0" expanded="true" />
-            <element signature="e#24420#26105#0" expanded="true" />
-            <element signature="e#26104#26105#0" expanded="true" />
-            <element signature="e#26405#28062#0" expanded="true" />
-            <element signature="e#28061#28062#0" expanded="true" />
-            <element signature="e#28377#30034#0" expanded="true" />
-            <element signature="e#30033#30034#0" expanded="true" />
-            <element signature="e#30323#32009#0" expanded="true" />
-            <element signature="e#32008#32009#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -3106,9 +3019,85 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll Jens.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="33" column="26" lean-forward="true" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+        <state relative-caret-position="297">
+          <caret line="23" column="61" lean-forward="false" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerVorhandenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="95" column="28" lean-forward="false" selection-start-line="95" selection-start-column="28" selection-end-line="95" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1755">
+          <caret line="571" column="4" lean-forward="false" selection-start-line="571" selection-start-column="4" selection-end-line="571" selection-end-column="4" />
+          <folding>
+            <element signature="n#!!doc;n#t_suchleistespielerhinzu#0;n#spielerHinzuController#0" expanded="false" />
+            <element signature="e#3312#3341#0" expanded="false" />
+            <element signature="method#felderLeeren#0;class#spielerHinzuController#0" expanded="false" />
+            <element signature="e#5030#5056#0" expanded="false" />
+            <element signature="method#pressBtn_Popup#0;class#spielerHinzuController#0" expanded="false" />
+            <element signature="method#zeigePopup#0;class#spielerHinzuController#0" expanded="false" />
+            <element signature="e#11009#11049#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/ExcelImport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#714#715#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
+            <element signature="e#808#809#0" expanded="true" />
+            <element signature="e#855#856#0" expanded="true" />
+            <element signature="e#1011#1036#0" expanded="true" />
+            <element signature="e#1175#1176#0" expanded="true" />
+            <element signature="e#1213#1214#0" expanded="true" />
+            <element signature="e#1498#1499#0" expanded="true" />
+            <element signature="e#1538#1539#0" expanded="true" />
+            <element signature="e#5814#5815#0" expanded="true" />
+            <element signature="e#5853#5854#0" expanded="true" />
+            <element signature="e#13529#13530#0" expanded="true" />
+            <element signature="e#13573#13574#0" expanded="true" />
+            <marker date="1503464306014" expanded="false" signature="2190:2201" ph=" { " />
+            <marker date="1503464306014" expanded="false" signature="2231:2237" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/GUI/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="1198" column="68" lean-forward="false" selection-start-line="1198" selection-start-column="68" selection-end-line="1198" selection-end-column="68" />
+          <folding>
+            <element signature="e#17981#17982#0" expanded="true" />
+            <element signature="e#18065#18066#0" expanded="true" />
+            <element signature="e#18552#20298#0" expanded="true" />
+            <element signature="e#20297#20298#0" expanded="true" />
+            <element signature="e#20579#22112#0" expanded="true" />
+            <element signature="e#22111#22112#0" expanded="true" />
+            <element signature="e#22393#24139#0" expanded="true" />
+            <element signature="e#24138#24139#0" expanded="true" />
+            <element signature="e#24420#26105#0" expanded="true" />
+            <element signature="e#26104#26105#0" expanded="true" />
+            <element signature="e#26405#28062#0" expanded="true" />
+            <element signature="e#28061#28062#0" expanded="true" />
+            <element signature="e#28377#30034#0" expanded="true" />
+            <element signature="e#30033#30034#0" expanded="true" />
+            <element signature="e#30323#32009#0" expanded="true" />
+            <element signature="e#32008#32009#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -91,7 +91,7 @@ public class spielerVorhandenController implements Initializable
             obs_vorhandeneSpieler.clear();
             auswahlklasse.getStagesdict().get("SpielerVorhanden").close();
             a.InfoBenachrichtigung("Spieler erfolreich aktualisiert",ExcelImport.getAktuellerSpieler().toString()+" wurde aktualisiert.");
-
+            ExcelImport.getObs_upd_f_spieler().add(ExcelImport.getAktuellerSpieler());
 
             Tabellefuelle();
 

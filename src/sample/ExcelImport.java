@@ -47,6 +47,15 @@ public class ExcelImport implements Initializable{
 
     private static ObservableList obs_erf_spieler=FXCollections.observableArrayList();
 
+    public static ObservableList getObs_upd_f_spieler() {
+        return obs_upd_f_spieler;
+    }
+
+    public static void setObs_upd_f_spieler(ObservableList obs_upd_f_spieler) {
+        ExcelImport.obs_upd_f_spieler = obs_upd_f_spieler;
+    }
+
+    private static ObservableList obs_upd_f_spieler=FXCollections.observableArrayList();
 
 
     //private static ArrayList<Spieler> vorhandeneSpieler;

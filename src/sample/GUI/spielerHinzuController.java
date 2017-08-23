@@ -570,45 +570,4 @@ private TextField t_suchleistespielerhinzu;
         }
     }
 
-    @FXML
-    public void pressBtn_ExcelImport (ActionEvent event) throws Exception {
-        try {
-
-            FileChooser fileChooser = new FileChooser();
-
-            Stage stage = new Stage();
-            File file = fileChooser.showOpenDialog(stage);
-            if (file != null) {
-                if (ExcelImport.importExcelData(file.getAbsolutePath()))
-                {
-
-                    /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ExcelImportAbgeschlossen.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
-                    Stage stage2 = new Stage();
-                    a.addStage(stage2);
-                    stage2.setScene(new Scene(root1));
-                    stage2.show();*/
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Spielerimport");
-                    alert.setHeaderText("Spieler erfolgreich eingelesen! ");
-                    alert.setContentText("Hurra!");
-
-                    alert.showAndWait();
-                }
-                else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Spielerimport");
-                    alert.setHeaderText("Spieler konnten nicht eingelesen werden!");
-                    alert.setContentText("Schade :(");
-
-                    alert.showAndWait();
-                }
-            }
-
-
-            //ExcelImport.importExcelData("C:\\Meldeformular\\meldeformular.xls");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
