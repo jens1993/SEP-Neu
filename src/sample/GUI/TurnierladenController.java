@@ -93,6 +93,12 @@ public class TurnierladenController implements Initializable
             }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().clear();
+        }
         zeigeTabelle();
 
         TurnierlisteTabelle.setRowFactory(tv -> {

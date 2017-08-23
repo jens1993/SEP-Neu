@@ -7,14 +7,12 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -22,15 +20,14 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox_main" onMouseClicked="#focus" prefHeight="1050" prefWidth="1650" styleClass="mainFrame" stylesheets="@/CSS/Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
+<VBox fx:id="vbox_main" onMouseClicked="#focus" prefHeight="1050" prefWidth="1650" styleClass="mainBox" stylesheets="@/CSS/Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
 <children>
-    <MenuBar styleClass="mainMenuBar">
+    <MenuBar prefHeight="32.0" prefWidth="1390.0" styleClass="mainMenuBar">
         <menus>
             <Menu mnemonicParsing="false" styleClass="mainItem" text="Datei">
                 <items>
                     <MenuItem fx:id="menu_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" styleClass="mainItem" text="Turnier laden" />
-                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Turnier speichern" />
-                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Turnier speichern unter" />
+                  <MenuItem mnemonicParsing="false" onAction="#pressBtn_ExcelImport" text="Meldeformular importieren" />
                     <SeparatorMenuItem mnemonicParsing="false" styleClass="mainItem" />
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Programm beenden" />
                 </items>
@@ -41,17 +38,17 @@
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Klassendaten bearbeiten" />
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Spielerdaten bearbeiten" />
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Vereine bearbeiten" />
-                    <SeparatorMenuItem mnemonicParsing="false" styleClass="mainItem" />
+                    <SeparatorMenuItem mnemonicParsing="false" styleClass="mainSeparator" />
                     <MenuItem fx:id="btn_statistik" mnemonicParsing="false" onAction="#pressBtn_laden" styleClass="mainItem" text="Statistiken" />
                 </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Ansicht">
+            <Menu mnemonicParsing="false" styleClass="mainItem" text="Ansicht">
                 <items>
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Feldübersicht" />
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Klassen" />
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Spielübersicht" />
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Zeitplan" />
-                    <SeparatorMenuItem mnemonicParsing="false" />
+                    <SeparatorMenuItem mnemonicParsing="false" styleClass="mainSeparator" />
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Platzierungen" />
                     <Menu mnemonicParsing="false" styleClass="mainItem" text="neues Fenster">
                         <items>
@@ -62,78 +59,75 @@
                     </Menu>
                 </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Sonstiges">
+            <Menu mnemonicParsing="false" styleClass="mainItem" text="Sonstiges">
                 <items>
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Teilnehmerliste drucken" />
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Startgeldliste drucken" />
                     <MenuItem mnemonicParsing="false" onAction="#pressBtn_drucken" styleClass="mainItem" text="Ergebnisformular erstellen" />
-                    <SeparatorMenuItem mnemonicParsing="false" />
+                    <SeparatorMenuItem mnemonicParsing="false" styleClass="mainSeparator" />
                     <MenuItem mnemonicParsing="false" onAction="#pressBtn_Einstellungen" styleClass="mainItem" text="Optionen" />
                 </items>
             </Menu>
         </menus>
     </MenuBar>
-    <Separator prefHeight="19.0" prefWidth="900.0" />
-    <HBox styleClass="mainMenuBar">
+      <Separator prefWidth="200.0" styleClass="mainSeparator" />
+    <HBox prefHeight="86.0" prefWidth="1371.0" styleClass="mainBox">
         <children>
             <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="114.0" styleClass="mainButtonBar">
-                <buttons>
-                    <Button fx:id="btn_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" styleClass="mainButton" text="Turnierübersicht" />
-                </buttons>
-            </ButtonBar>
-            <ButtonBar styleClass="mainButtonBar">
-                <buttons>
-                    <Button fx:id="btn_klassen" mnemonicParsing="false" onAction="#pressBtn_klassen" styleClass="mainButton" text="Klassen" />
-                    <Button fx:id="btn_spieler" mnemonicParsing="false" onAction="#pressBtn_spieler" styleClass="mainButton" text="Spieler" />
-                    <Button mnemonicParsing="false" onAction="#pressBtn_teamLaden" styleClass="mainButton" text="Teams" />
-                    <Button mnemonicParsing="false" onAction="#pressBtn_Felder" styleClass="mainButton" text="Felder" />
-                </buttons>
-            </ButtonBar>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0" styleClass="mainButtonBar">
-                <buttons>
-                    <Button mnemonicParsing="false" styleClass="mainButton" text="Zeitplan" />
-                    <Button mnemonicParsing="false" onAction="#pressBtn_Statistik" styleClass="mainButton" text="Statistik" />
-                </buttons>
-            </ButtonBar>
+               <buttons>
+                  <Button layoutX="49.0" layoutY="38.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="94.0" styleClass="mainButton" text="Button" />
+                  <Button layoutX="115.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="94.0" prefWidth="124.0" styleClass="mainButton" text="Button" />
+                  <Button layoutX="200.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="94.0" prefWidth="124.0" styleClass="mainButton" text="Button" />
+                  <Button layoutX="285.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="94.0" prefWidth="124.0" styleClass="mainButton" text="Button" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="94.0" prefWidth="124.0" styleClass="mainButton" text="Button" />
+               </buttons></ButtonBar>
+            <ButtonBar styleClass="mainButtonBar" />
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" styleClass="mainButtonBar" />
         </children>
     </HBox>
-    <Separator prefWidth="200.0" />
-    <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <Separator prefWidth="200.0" styleClass="mainSeparator" />
+    <SplitPane dividerPositions="0.09344660194174757" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" styleClass="mainPane" VBox.vgrow="ALWAYS">
         <items>
-            <TreeView prefHeight="517.0" prefWidth="224.0" />
-            <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
-                <content>
-                    <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="937.0" prefWidth="1226.0">
-                        <children>
-                            <TabPane layoutX="-5.0" layoutY="-4.0" onMouseClicked="#focus" prefHeight="723.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <tabs>
-                                    <Tab styleClass="mainTab" text="Turnierbaum">
-                                        <content>
-                                            <AnchorPane />
-                                        </content>
-                                    </Tab>
-                                    <Tab fx:id="tab_spieluebersicht" onSelectionChanged="#fuelleSpielElemente" styleClass="mainTab" text="Spielübersicht">
-                                 <content>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="TOP_CENTER" prefHeight="920.0" prefWidth="514.0" styleClass="mainBox">
+               <children>
+                    <Button fx:id="btn_turnierLaden" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" prefHeight="50.0" prefWidth="153.0" styleClass="mainButton" text="Turnierübersicht" textAlignment="CENTER" />
+                    <Button fx:id="btn_klassen" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_klassen" prefHeight="50.0" prefWidth="105.0" styleClass="mainButton" text="Klassen" textAlignment="CENTER" />
+                    <Button fx:id="btn_spieler" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_spieler" prefHeight="50.0" styleClass="mainButton" text="Spieler" textAlignment="CENTER" />
+                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_teamLaden" prefHeight="50.0" styleClass="mainButton" text="Teams" textAlignment="CENTER" />
+                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" styleClass="mainButton" text="Zeitplan" textAlignment="CENTER" />
+                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_Statistik" prefHeight="50.0" styleClass="mainButton" text="Statistik" textAlignment="CENTER" />
+               </children>
+            </VBox>
+              <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="937.0" prefWidth="1226.0" styleClass="mainPane">
+                  <children>
+                      <TabPane layoutX="-5.0" layoutY="-4.0" onMouseClicked="#focus" prefHeight="723.0" prefWidth="825.0" styleClass="mainPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <tabs>
+                              <Tab styleClass="mainTab" text="Turnierbaum">
+                                  <content>
+                                      <AnchorPane />
+                                  </content>
+                              </Tab>
+                              <Tab fx:id="tab_spieluebersicht" onSelectionChanged="#fuelleSpielElemente" styleClass="mainTab" text="Spielübersicht">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0" styleClass="mainBox">
+                                 <children>
+                                    <HBox fx:id="hbox_main" prefHeight="100.0" prefWidth="200.0" styleClass="mainBox">
                                        <children>
-                                          <HBox fx:id="hbox_main" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <Button mnemonicParsing="false" onAction="#reloadcheckbox" styleClass="mainButton" text="Lade Spielklassen neu" />
-                                             </children></HBox>
-                                          <TableView fx:id="tabelle_spiele" onMouseClicked="#focus" prefHeight="964.0" prefWidth="903.0" />
+                                          <Button mnemonicParsing="false" onAction="#reloadcheckbox" styleClass="mainButton" text="Lade Spielklassen neu" />
                                        </children>
-                                    </VBox>
-                                 </content>
-                                    </Tab>
-                                </tabs>
-                            </TabPane>
-                        </children>
-                    </AnchorPane>
-                </content>
-            </ScrollPane>
+                                    </HBox>
+                                    <TableView fx:id="tabelle_spiele" onMouseClicked="#focus" prefHeight="964.0" prefWidth="903.0" styleClass="mainTableView" />
+                                 </children>
+                              </VBox>
+                           </content>
+                              </Tab>
+                          </tabs>
+                      </TabPane>
+                  </children>
+              </AnchorPane>
         </items>
     </SplitPane>
-    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" styleClass="mainBox" VBox.vgrow="NEVER">
         <children>
             <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" styleClass="mainLabel" text="Badminton Turnierverwaltung" HBox.hgrow="ALWAYS">
                 <font>
@@ -143,7 +137,7 @@
                     <Color blue="0.625" green="0.625" red="0.625" fx:id="x4" />
                 </textFill>
             </Label>
-            <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+            <Pane prefHeight="16.0" prefWidth="1233.0" styleClass="mainPane" HBox.hgrow="ALWAYS" />
         </children>
         <padding>
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />

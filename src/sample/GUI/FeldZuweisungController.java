@@ -267,7 +267,7 @@ public class FeldZuweisungController implements Initializable
             //hbox_feld.getChildren().add(hp2);
             hbox_feld.getChildren().add(hp.get(i));
 
-            dictfelder.put(i+1,auswahlklasse.getAktuelleTurnierAuswahl().getFelder().get(i).getFeldID());
+            dictfelder.put(auswahlklasse.getAktuelleTurnierAuswahl().getFelder().get(i).getFeldID(),i+1);
 
             hp.get(i).setOnDragOver(new EventHandler<DragEvent>() {
                 @Override
@@ -294,7 +294,7 @@ public class FeldZuweisungController implements Initializable
                         int id2 = dictfelder.get(id);
                         System.out.println(spiel.getHeim()+"----"+id2);
                         spiel.setFeld(auswahlklasse.getAktuelleTurnierAuswahl().getFelder().get(id2));
-                        spiel.setStatus(2);
+                        //spiel.setStatus(3);
                     }
                 }
             });

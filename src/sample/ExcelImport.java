@@ -3,45 +3,93 @@ package sample;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
-import sample.DAO.TurnierDAO;
-import sample.DAO.TurnierDAOimpl;
 import sample.DAO.auswahlklasse;
 
 /**
  * Created by Manuel Hüttermann on 15.08.2017.
  */
-public class ExcelImport {
+public class ExcelImport implements Initializable{
 
-    public static ObservableList<Spieler> getObs_spieler_erfolreich() {
-        return obs_spieler_erfolreich;
+
+    public static ObservableList getObs_vorh() {
+        return obs_vorh;
     }
 
-    public static void setObs_spieler_erfolreich(ObservableList<Spieler> obs_spieler_erfolreich) {
-        ExcelImport.obs_spieler_erfolreich = obs_spieler_erfolreich;
+    public static void setObs_vorh(ObservableList obs_vorh) {
+        ExcelImport.obs_vorh = obs_vorh;
     }
 
-    public static ObservableList<Spieler> getObs_spieler_fehlgeschlagen() {
-        return obs_spieler_fehlgeschlagen;
+    private static Spieler aktuellerSpieler = new Spieler();
+    private static Dictionary<Spieler, ObservableList> dict_doppelte_spieler = new Hashtable<Spieler, ObservableList>();
+    private static ObservableList obs_vorh=FXCollections.observableArrayList();
+
+    public static ObservableList getObs_erf_spieler() {
+        return obs_erf_spieler;
     }
 
-    public static void setObs_spieler_fehlgeschlagen(ObservableList<Spieler> obs_spieler_fehlgeschlagen) {
-        ExcelImport.obs_spieler_fehlgeschlagen = obs_spieler_fehlgeschlagen;
+    public static void setObs_erf_spieler(ObservableList obs_erf_spieler) {
+        ExcelImport.obs_erf_spieler = obs_erf_spieler;
     }
 
-    private static ObservableList<Spieler> obs_spieler_erfolreich = FXCollections.observableArrayList();
-    private static ObservableList<Spieler> obs_spieler_fehlgeschlagen = FXCollections.observableArrayList();
+    private static ObservableList obs_erf_spieler=FXCollections.observableArrayList();
+
+    public static ObservableList getObs_upd_f_spieler() {
+        return obs_upd_f_spieler;
+    }
+
+    public static void setObs_upd_f_spieler(ObservableList obs_upd_f_spieler) {
+        ExcelImport.obs_upd_f_spieler = obs_upd_f_spieler;
+    }
+
+    private static ObservableList obs_upd_f_spieler=FXCollections.observableArrayList();
 
 
+    //private static ArrayList<Spieler> vorhandeneSpieler;
+    //private static Dictionary<Spieler,ArrayList> dictvorhandenespieler = new Hashtable();
+    //private static Spieler SpielerzumHinzufeuegen=null;
 
+/*
+    public static void setSpielerzumHinzufeuegen(Spieler spielerzumHinzufeuegen) {
+        SpielerzumHinzufeuegen = spielerzumHinzufeuegen;
+    }
+    public static Spieler getSpielerzumHinzufeuegen() {
+        return SpielerzumHinzufeuegen;
+    }
+
+    public static Dictionary<Spieler, ArrayList> getDictvorhandenespieler() {
+        return dictvorhandenespieler;
+    }
+
+    public void setDictvorhandenespieler(Dictionary<Spieler, ArrayList> dictvorhandenespieler) {
+        this.dictvorhandenespieler = dictvorhandenespieler;
+    }
+
+    public static ArrayList<Spieler> getVorhandeneSpieler() {
+        return vorhandeneSpieler;
+    }
+
+    public static void setVorhandeneSpieler(ArrayList<Spieler> vorhandeneSpieler) {
+        ExcelImport.vorhandeneSpieler = vorhandeneSpieler;
+    }
+    public static void addDictvorhandenespieler(Spieler neuerSpieler)
+    {
+        dictvorhandenespieler.put(neuerSpieler,vorhandeneSpieler);
+
+    }*/
     public static boolean importExcelData(String excelDatei) {
         try {
             FileInputStream iStream = new FileInputStream(excelDatei);
@@ -72,7 +120,17 @@ public class ExcelImport {
             //get row
             try {
                 HSSFRow row = worksheet.getRow(actualRow);
-                readRow(row);
+                Spieler sp = readRow(row);
+                if(sp!=null) {
+                    ExcelImport exc= new ExcelImport();
+                    exc.pressBtn_Popup();
+                    //ExcelImport.getObs_vorh().add(sp);
+                    obs_vorh.clear();
+                    dict_doppelte_spieler.remove(sp.getExtSpielerID());
+                    System.out.println("Spieler erfolgreich (ohne Duplikat) erstellt");
+
+
+                }
                 actualRow++;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -89,13 +147,17 @@ public class ExcelImport {
                 //get first row
                 HSSFRow row = worksheet.getRow(actualRow);
                 readRow(row);
+                Spieler sp = readRow(row);
+                if(sp!=null) {
+                   // ExcelImport.getVorhandeneSpieler().add(sp);
+                }
                 actualRow++;
 
                 //get second row
                 row = worksheet.getRow(actualRow);
                 if (row != null) {
                     Spieler tempSpieler = readRow(row);
-                    if (tempSpieler !=null && !gibtEsSchon(tempSpieler)){
+                    if (tempSpieler !=null){
                         auswahlklasse.getObs_spieler().add(tempSpieler);
                         auswahlklasse.addSpieler(tempSpieler);
                         System.out.println(tempSpieler.getVName()+" "+tempSpieler.getNName()+" gespeichert"+ " geschlecht:"+tempSpieler.getGeschlecht()+" extID:"+tempSpieler.getExtSpielerID()+"verein: "+tempSpieler.getVerein()+" gdatum:"+tempSpieler.getGDatum());
@@ -107,10 +169,17 @@ public class ExcelImport {
             e.printStackTrace();
         }
     }
-    private static boolean gibtEsSchon(Spieler spieler){
-        return true; //wenn es den schon gibt;
+
+    public static Spieler getAktuellerSpieler() {
+        return aktuellerSpieler;
     }
+
+    public static void setAktuellerSpieler(Spieler aktuellerSpieler) {
+        ExcelImport.aktuellerSpieler = aktuellerSpieler;
+    }
+
     private static Spieler readRow(HSSFRow row) throws Exception {
+        dict_doppelte_spieler=new Hashtable<>();
         int cellNumber = 0;
         HSSFCell cell = row.getCell(cellNumber);
 
@@ -210,60 +279,99 @@ public class ExcelImport {
                         auswahlklasse.addVerein(verein);
                     }
                 }
-                Spieler neuerSpieler = new Spieler(vName,nName,gDatum,geschlecht,rPunkte,verein,extSpielerID);
-                obs_spieler_erfolreich.add(neuerSpieler);
-
-
-
-
-                ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
-
-                //felderLeeren();
+                Spieler neuerSpieler = new Spieler(vName,nName,gDatum,geschlecht,rPunkte,verein,extSpielerID,"");
                 for(Enumeration ee = auswahlklasse.getSpieler().elements();ee.hasMoreElements();)
                 {
                     Spieler sp = (Spieler) ee.nextElement();
-                    if(sp.getNName().equalsIgnoreCase(neuerSpieler.getNName()) && sp.getVName().equalsIgnoreCase(neuerSpieler.getVName()))
-                    {
+                    if(sp!=null && neuerSpieler!=null) {
+                        if (sp.getNName().equalsIgnoreCase(neuerSpieler.getNName()) && sp.getVName().equalsIgnoreCase(neuerSpieler.getVName()) ) {
 
-                        System.out.println("Übereinstimmung gefunden:");
-                        System.out.println(sp.getVName()+" "+sp.getNName()+" --- "+neuerSpieler.getVName()+" "+neuerSpieler.getNName());
+                            System.out.println("Übereinstimmung gefunden:--");
 
 
-                        vorhandeneSpieler.add(sp);
+                            System.out.println(sp.getVName() + " " + sp.getNName() + " --- " + neuerSpieler.getVName() + " " + neuerSpieler.getNName() + " --- " + neuerSpieler.getExtSpielerID() + " " + neuerSpieler.getExtSpielerID());
 
+
+                            //vorhandeneSpieler.add(sp);
+                            obs_vorh.add(sp);
+
+                            dict_doppelte_spieler.put(neuerSpieler,obs_vorh);
+                            aktuellerSpieler=neuerSpieler;
+
+                            System.out.println(neuerSpieler.getExtSpielerID()+"........"+dict_doppelte_spieler.get(neuerSpieler.getExtSpielerID()));
+                            //exc.pressBtn_Popup();
+
+
+
+
+                        }
                     }
 
                 }
 
+                //obs_spieler_erfolreich.add(neuerSpieler);
+
+
+
+
+
+/*
+
+                //felderLeeren();
+
+
+                if(obs_vorh.size()>0)
+                {
+                    array2.add(obs_vorh);
+                    array2.get(0).add(neuerSpieler);
+
+*/
+/*                    obs_neu_vorh.add(obs_vorh);
+                    ExcelImport.setSpielerzumHinzufeuegen(neuerSpieler);
+                    ExcelImport.setVorhandeneSpieler(vorhandeneSpieler);
+                    ExcelImport.addDictvorhandenespieler(neuerSpieler);*//*
+
+
+
+                }
+                else
+                {
+                    neuerSpieler.getSpielerDAO().create(neuerSpieler);
+                    auswahlklasse.addSpieler(neuerSpieler);
+                    auswahlklasse.getSpieler().put(neuerSpieler.getSpielerID(),neuerSpieler);
+                    auswahlklasse.InfoBenachrichtigung("erf","erf");
+                }
+*/
 
                 return neuerSpieler;
 
-
-
-
-
-                //für Klassenzuweisung (Einzel/Doppel/Mixed-Spalte)
-                /*HSSFCell cellF1 = row.getCell(5);
-                if (cellF1 != null) {
-                    System.out.println("F1 " + cellF1.getStringCellValue());
-                }
-                HSSFCell cellG1 = row.getCell(6);
-                if (cellG1 != null) {
-                    System.out.println("G1 " + cellG1.getStringCellValue());
-                }
-                HSSFCell cellH1 = row.getCell(7);
-                if (cellH1 != null) {
-                    System.out.println("H1 " + cellH1.getStringCellValue());
-                }*/
-                //gemeldet von
-                /*HSSFCell cellQ1 = row.getCell(16);
-                if (cellQ1 != null) {
-                    System.out.println("Q1 " + cellQ1.getStringCellValue());
-                }*/
 
             }
         }
         return null;
     }
+    public  void pressBtn_Popup() throws Exception {
+        //System.out.println("test");
 
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GUI/spielerVorhanden.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        auswahlklasse.getStagesdict().put("SpielerVorhanden",stage);
+        stage.setScene(new Scene(root1));
+        stage.showAndWait();
+        stage.setTitle("Spieler vorhanden");
+    }
+
+    public static Dictionary<Spieler, ObservableList> getDict_doppelte_spieler() {
+        return dict_doppelte_spieler;
+    }
+
+    public static void setDict_doppelte_spieler(Dictionary<Spieler, ObservableList> dict_doppelte_spieler) {
+        ExcelImport.dict_doppelte_spieler = dict_doppelte_spieler;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+       // ExcelImport.getVorhandeneSpieler().clear();
+    }
 }

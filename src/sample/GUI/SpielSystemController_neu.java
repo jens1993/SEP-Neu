@@ -21,6 +21,8 @@ import sample.DAO.auswahlklasse;
 import sample.Spieler;
 import sample.Spielklasse;
 import sample.Spielsysteme.Gruppe;
+import sample.Spielsysteme.KO;
+import sample.Spielsysteme.Spielsystem;
 import sample.Team;
 
 import java.io.IOException;
@@ -190,6 +192,26 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
             Gruppe gruppe = new Gruppe (ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse);
             try {
                 ausgewaehlte_spielklasse.setSpielsystem( gruppe);
+
+                l_meldungsetzliste1.setText("ERFOLG");
+                a.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
+                TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+a.getAktuelleTurnierAuswahl().getName());
+
+
+                //a.getStages().get(0).close();
+
+                //a.getStages().get(2).close();
+
+            } catch (Exception e) {
+                l_meldungsetzliste1.setText("Fehlschlag");
+                a.InfoBenachrichtigung("Fehler","Das Spielsystem konnte nicht erfolgreich gestartet werden");
+                e.printStackTrace();
+            }
+        }
+        if(radio_ko.isSelected()){
+            Spielsystem ko = new KO(ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse);
+            try {
+                ausgewaehlte_spielklasse.setSpielsystem(ko);
 
                 l_meldungsetzliste1.setText("ERFOLG");
                 a.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
