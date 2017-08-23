@@ -50,10 +50,21 @@ public class Spiel {
 	}
 
 	public String getHeimString() {
-		return heim.toString();
+		if(heim != null){
+			return heim.toString();
+		}
+		else{
+			return "ausstehend";
+		}
+
 	}
 	public String getGastString() {
-		return gast.toString();
+		if(gast!=null){
+			return gast.toString();
+		}
+		else{
+			return "ausstehend";
+		}
 	}
 
 	public Team getGast() {
@@ -69,6 +80,12 @@ public class Spiel {
 		this.heim = heim;
 		if(this.gast != null){
 			this.status = 1;
+			if (this.heim.isFreilos()){
+				this.setErgebnis(new Ergebnis(0,21,0,21));
+			}
+			else if(this.gast.isFreilos()){
+				this.setErgebnis(new Ergebnis(21,0,21,0));
+			}
 		}
 		spielDAO.update(this);
 	}
@@ -77,6 +94,12 @@ public class Spiel {
 		this.gast = gast;
 		if(this.heim != null){
 			this.status = 1;
+			if (this.heim.isFreilos()){
+				this.setErgebnis(new Ergebnis(0,21,0,21));
+			}
+			else if(this.gast.isFreilos()){
+				this.setErgebnis(new Ergebnis(21,0,21,0));
+			}
 		}
 		spielDAO.update(this);
 	}
@@ -200,7 +223,46 @@ public class Spiel {
 		this.aufrufZeit = LocalTime.now();
 		this.status = 2;
 	}
+	public String getSpielNummer(){
+		Integer nr = zeitplanNummer;
+		return nr.toString();
+	}
+	public String getRundenName(){
+		if (systemSpielID<20000000){ //Gruppe
+			int rundenNummer = (systemSpielID-10000000)/1000;
+			return "Runde "+(rundenNummer + 1);
+		}
+		else if(systemSpielID<30000000){ //Gruppe mit Endrunde
 
+		}
+		else if(systemSpielID<40000000){ //K.O. system
+			int rundenNummer = (systemSpielID-30000000)/1000;
+			if(rundenNummer==0){
+				return "Finale";
+			}
+			else if(rundenNummer==1){
+				return "Halbfinale";
+			}
+			else if(rundenNummer==2){
+				return "Viertelfinale";
+			}
+			else if(rundenNummer==3){
+				return "Achtelfinale";
+			}
+			else{
+				rundenNummer = spielsystem.getAnzahlRunden() - rundenNummer;
+				return "Runde "+rundenNummer;
+			}
+		}
+		else if(systemSpielID<50000000){ //K.O. mit TrostRunde
+
+		}
+		else{ // Schweizer System
+			int rundenNummer = (systemSpielID-10000000)/1000;
+			return "Runde "+rundenNummer + 1;
+		}
+		return "";
+	}
 	public void setStatus(int status) {
 		this.status = status;
 		spielDAO.update(this);
@@ -246,7 +308,10 @@ public class Spiel {
 		ergebnis.getErgebnisDAO().create(this);
 		this.getSpielsystem().getSpielklasse().getTurnier().getObs_aktiveSpiele().remove(this);
 		this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);
-		this.feld.spielBeenden();
+		if (this.feld != null){
+			this.feld.spielBeenden();
+		}
+
 	}
 
 	public void setErgebnis(Ergebnis ergebnis, String einlesen) {

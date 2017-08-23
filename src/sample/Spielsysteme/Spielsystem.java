@@ -119,7 +119,7 @@ public abstract class Spielsystem {
 		return teamList;
 	}
 	public ArrayList<ArrayList<Spiel>> getRunden(){
-		return null;
+		return runden;
 	}
 
 	public boolean systemWiederherstellen(int spielsystemCode){

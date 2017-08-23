@@ -294,16 +294,23 @@ public class MainController implements Initializable, Observable
                     id = a.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().get(j); //+1?
                     //System.out.println("id= " + id);
                     for (int i = 0; i < a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().size(); i++) {
-
+                        boolean frei=false;
+                        if(a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getGast() != null) {
+                            frei = a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getGast().isFreilos();
+                        }
+                        if(a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getHeim() != null && !frei) {
+                            frei = a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getHeim().isFreilos();
+                        }
 
                         if (a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
                             //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                         }
                         if (id != 0 && id == a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-                            a.getAktuelleTurnierAuswahl().getObs_spiele().add(a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i));
+                            if(!frei) {
+                                a.getAktuelleTurnierAuswahl().getObs_spiele().add(a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i));
+                            }
                             // System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                         }
-
 
                     }
                 }
@@ -338,12 +345,20 @@ public class MainController implements Initializable, Observable
                         if (a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
                             //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                         }
-                        boolean frei = a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGast().isFreilos();
-
+                        boolean frei=false;
+                        if(a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGast() != null) {
+                            frei = a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGast().isFreilos();
+                        }
+                        if(a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeim() != null && !frei) {
+                            frei = a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeim().isFreilos();
+                        }
                         if (id != 0 && id == a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
 
-                            if(a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGastString()=="Freilos"||
-                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGast()==null)
+                            /*if(a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGastString()=="Freilos"||
+                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGast()==null||
+                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeimString()=="Freilos"||
+                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeim()==null)*/
+                            if(frei)
                             {}
                             else {
                                 a.getAktuelleTurnierAuswahl().getObs_spiele().add(a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i));
@@ -385,8 +400,14 @@ public class MainController implements Initializable, Observable
 //                }
 //            }
 //        });
-
-        tabelle_spiele.setItems(a.getAktuelleTurnierAuswahl().getObs_spiele());
+        ObservableList<Spiel> sortListe = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele();
+        sortListe.sort(new Comparator<Spiel>() {
+            @Override
+            public int compare(Spiel o1, Spiel o2) {
+                return o1.getZeitplanNummer()-o2.getZeitplanNummer();
+            }
+        });
+        tabelle_spiele.setItems(sortListe);
 
     }
 
@@ -395,6 +416,47 @@ public class MainController implements Initializable, Observable
         if(a.getAktuelleTurnierAuswahl()!=null) {
 
 
+            TableColumn<Spiel,String> spielNummerSpalte = new TableColumn("#");
+            spielNummerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielNummer"));
+            spielNummerSpalte.setCellFactory(column -> {
+                return new TableCell<Spiel, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty); //This is mandatory
+
+                        if (item == null || empty) { //If the cell is empty
+                            setText(null);
+                            setStyle("");
+                        } else { //If the cell is not empty
+
+                            setText(item); //Put the String data in the cell
+
+                            //We get here all the info of the Person of this row
+                            Spiel spiel = getTableView().getItems().get(getIndex());
+
+                            // Style all persons wich name is "Edgard"
+                            setAlignment(Pos.CENTER_RIGHT);
+                            if (spiel.getStatus()==3) {
+                                setTextFill(Color.RED);
+
+                            }
+                            else if (spiel.getStatus()==2) {
+                                setTextFill(Color.DARKBLUE);
+                            }
+                            else if (spiel.getStatus()==1) {
+                                setTextFill(Color.DARKGREEN);
+                            }
+                            else {
+                                //Here I see if the row of this cell is selected or not
+                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
+                                    setTextFill(Color.WHITE);
+                                else
+                                    setTextFill(Color.BLACK);
+                            }
+                        }
+                    }
+                };
+            });
 
             TableColumn < Spiel, String > spielFeldSpalte = new TableColumn("Feld");
             spielFeldSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("FeldNr"));
@@ -592,9 +654,50 @@ public class MainController implements Initializable, Observable
                 };
             });
 
+            TableColumn < Spiel, String > spielRundeSpalte = new TableColumn("Runde");
+            spielRundeSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("RundenName"));
+            spielRundeSpalte.setCellFactory(column -> {
+                return new TableCell<Spiel, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty); //This is mandatory
+
+                        if (item == null || empty) { //If the cell is empty
+                            setText(null);
+                            setStyle("");
+                        } else { //If the cell is not empty
+
+                            setText(item); //Put the String data in the cell
+
+                            //We get here all the info of the Person of this row
+                            Spiel spiel = getTableView().getItems().get(getIndex());
+
+                            // Style all persons wich name is "Edgard"
+                            if (spiel.getStatus()==3) {
+                                setTextFill(Color.RED);
+
+                            }
+                            else if (spiel.getStatus()==2) {
+                                setTextFill(Color.DARKBLUE);
+                            }
+                            else if (spiel.getStatus()==1) {
+                                setTextFill(Color.DARKGREEN);
+                            }
+                            else {
+                                //Here I see if the row of this cell is selected or not
+                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
+                                    setTextFill(Color.WHITE);
+                                else
+                                    setTextFill(Color.BLACK);
+                            }
+                        }
+                    }
+                };
+            });
+
             //tabelle_spiele.setItems(obs_spiele);
 
-            tabelle_spiele.getColumns().addAll(spielFeldSpalte,spielHeimSpalte,spielGastSpalte,spielErgebnisSpalte,spielSpielklasseSpalte);
+            tabelle_spiele.getColumns().addAll(spielNummerSpalte,spielFeldSpalte,spielHeimSpalte,spielGastSpalte,spielErgebnisSpalte,spielSpielklasseSpalte,spielRundeSpalte);
             /*tabelle_spiele.setRowFactory( tv -> {
                 TableRow<Spiel> row = new TableRow<>();
                 if(row.getItem().getStatus()==3){
@@ -659,9 +762,11 @@ public class MainController implements Initializable, Observable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        ArrayList<ArrayList<Spiel>> alleRunden = Zeitplan.getAlleRunden(auswahlklasse.getAktuelleTurnierAuswahl());
         ContextMenu contextMenu = new ContextMenu();
-
-
+        //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
+        Zeitplan.zeitplanErstellen(auswahlklasse.getAktuelleTurnierAuswahl()); //vergebe Zeitplannummern für die Spiele
 
 
         tabelle_spiele.setRowFactory(tv -> {
@@ -1052,6 +1157,9 @@ public class MainController implements Initializable, Observable
             e.printStackTrace();
 
         }
+
+
+        System.out.println(tabelle_spiele.getSortOrder());
 //        System.out.println("----------------");
 //        for(int i=0;i<obs_spiele.size();i++)
 //        {
