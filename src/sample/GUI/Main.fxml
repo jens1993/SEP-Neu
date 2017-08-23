@@ -29,8 +29,7 @@
             <Menu mnemonicParsing="false" styleClass="mainItem" text="Datei">
                 <items>
                     <MenuItem fx:id="menu_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" styleClass="mainItem" text="Turnier laden" />
-                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Turnier speichern" />
-                    <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Turnier speichern unter" />
+                  <MenuItem mnemonicParsing="false" onAction="#pressBtn_ExcelImport" text="Meldeformular importieren" />
                     <SeparatorMenuItem mnemonicParsing="false" styleClass="mainItem" />
                     <MenuItem mnemonicParsing="false" styleClass="mainItem" text="Programm beenden" />
                 </items>

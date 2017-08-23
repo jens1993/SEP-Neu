@@ -32,7 +32,7 @@ import java.util.*;
  */
 public class spielerHinzuController implements Initializable, Cloneable
 {
-
+//region Deklaration
 @FXML
 private TextField t_suchleistespielerhinzu;
     @FXML
@@ -103,11 +103,16 @@ private TextField t_suchleistespielerhinzu;
     private RadioButton r_m1;
     @FXML
     private RadioButton r_w1;
+
+    //endregion
+
+
     HashMap<Integer, Spieler> spielerhash = new HashMap<Integer, Spieler>();
     auswahlklasse a = new auswahlklasse();
 
     private static Spieler spieler_neu=null;
     private ObservableList<Spieler> obs_spieler = a.getObs_spieler();
+
 
     private void printSpielerZuordnenTableNeu() throws Exception {
 
@@ -117,38 +122,24 @@ private TextField t_suchleistespielerhinzu;
             Enumeration enumSpielerIDs = auswahlklasse.getSpieler().keys();
             while (enumSpielerIDs.hasMoreElements()){
                 int key = (int)enumSpielerIDs.nextElement();
-
                 obs_spieler.add(auswahlklasse.getSpieler().get(key));
-
-
                 spielerhash.put(auswahlklasse.getSpieler().get(key).getSpielerID(),auswahlklasse.getSpieler().get(key));
             }
 
-
-
-
-            //TableColumn<Spieler,String> spielerVornameSpalte = new TableColumn("Vorname");
+            //region PropertyValueFactory
             tabelle_spielerliste_vorname.setCellValueFactory(new PropertyValueFactory<Spieler,String>("vName"));
             tabelle_spielerliste_geschlecht.setCellValueFactory(new PropertyValueFactory<ImageView,String>("iGeschlecht"));
 
             tabelle_spielerliste_SpielerID.setCellValueFactory(new PropertyValueFactory<Spieler,String>("ExtSpielerID"));
 
-            //TableColumn<Spieler,String> spielerNachnameSpalte = new TableColumn("Nachname");
+
             tabelle_spielerliste_nachname.setCellValueFactory(new PropertyValueFactory<Spieler,String>("nName"));
-            //tabelle_spielerliste_geschlecht.setCellValueFactory(new PropertyValueFactory("album"));
+
             tabelle_spielerliste_verein.setCellValueFactory(new PropertyValueFactory<Spieler,String>("verein"));
 
-            //TableColumn<Spieler,Date> spielerGeburtsdatumSpalte = new TableColumn("Geburtsdatum");
             tabelle_spielerliste_geburtstag.setCellValueFactory(new PropertyValueFactory<Spieler,Date>("gDatum"));
             tabelle_spielerliste.setItems(obs_spieler);
-
-
-
-            //TableColumn<Spieler,String> spielerExtSpielerIDSpalte = new TableColumn("ExtSpielerID");
-            //spielerExtSpielerIDSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("extSpielerID"));
-
-            //tabelle_SpielerZuordnen.getColumns().addAll(spielerVornameSpalte,spielerNachnameSpalte,spielerGeburtsdatumSpalte);
-
+            //endregion
 
         }
         else{
@@ -186,7 +177,7 @@ private TextField t_suchleistespielerhinzu;
         }
         else
         {
-
+            //region Spieler erstellen
             l_Meldung.setText("");
             boolean geschlecht = false;
             if (r_m.isSelected())
@@ -207,6 +198,8 @@ private TextField t_suchleistespielerhinzu;
             System.out.println(a.getSpieler().size());
 
         spieler_neu= new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),geschlecht,rpunkte,verein,t_spid.getText(),"");
+        //endregion
+
         ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
 
             felderLeeren();
@@ -230,8 +223,8 @@ private TextField t_suchleistespielerhinzu;
 
         if(vorhandeneSpieler.size()>0)
         {
-            a.setSpielerzumHinzufeuegen(spieler_neu);
-            a.setVorhandeneSpieler(vorhandeneSpieler);
+           /* ExcelImport.setSpielerzumHinzufeuegen(spieler_neu);
+            ExcelImport.setVorhandeneSpieler(vorhandeneSpieler);*/
 
             pressBtn_Popup(event);
         }
@@ -264,6 +257,7 @@ private TextField t_suchleistespielerhinzu;
     {
         tabelle_spielerliste.refresh();
     }
+
     public void pressBtn_Popup (ActionEvent event) throws Exception {
         //System.out.println("test");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerVorhanden.fxml"));
@@ -273,8 +267,10 @@ private TextField t_suchleistespielerhinzu;
         stage.setScene(new Scene(root1));
         stage.show();
         stage.show();
+        stage.show();
         stage.setTitle("Spieler vorhanden");
     }
+
     private void zeigePopup()
     {
         Popup popup = new Popup();
@@ -385,6 +381,7 @@ private TextField t_suchleistespielerhinzu;
 
         l_Meldung.setText("");
 
+        //region Tabelle Spielerliste RowFactory
         tabelle_spielerliste.setRowFactory(tv -> {
             TableRow row = new TableRow();
             row.setOnMouseClicked(event -> {
@@ -454,6 +451,7 @@ private TextField t_suchleistespielerhinzu;
             });
             return row ;
         });
+//endregion
 
         try {
             ladeVereine();
@@ -583,6 +581,7 @@ private TextField t_suchleistespielerhinzu;
             if (file != null) {
                 if (ExcelImport.importExcelData(file.getAbsolutePath()))
                 {
+
                     /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ExcelImportAbgeschlossen.fxml"));
                     Parent root1 = (Parent) fxmlLoader.load();
                     Stage stage2 = new Stage();
@@ -591,7 +590,7 @@ private TextField t_suchleistespielerhinzu;
                     stage2.show();*/
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Spielerimport");
-                    alert.setHeaderText("Spieler erfolgreich eingelesen! "+ ExcelImport.getObs_spieler_erfolreich());
+                    alert.setHeaderText("Spieler erfolgreich eingelesen! ");
                     alert.setContentText("Hurra!");
 
                     alert.showAndWait();

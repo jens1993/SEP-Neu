@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.CheckComboBox;
 import sample.*;
@@ -32,6 +33,7 @@ import sample.DAO.auswahlklasse;
 
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.TableView;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -1067,6 +1069,45 @@ public class MainController implements Initializable, Observable
 //        System.out.println("----------------");
 //        System.out.println(obs_spielklassen_auswahl);
 
+    }
+    @FXML
+    public void pressBtn_ExcelImport (ActionEvent event) throws Exception {
+        try {
+
+            FileChooser fileChooser = new FileChooser();
+
+            Stage stage = new Stage();
+            File file = fileChooser.showOpenDialog(stage);
+            if (file != null) {
+                if (ExcelImport.importExcelData(file.getAbsolutePath())) {
+                    /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ExcelImportAbgeschlossen.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage2 = new Stage();
+                    a.addStage(stage2);
+                    stage2.setScene(new Scene(root1));
+                    stage2.show();*/
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Spielerimport");
+                    alert.setHeaderText("Spieler erfolgreich eingelesen! ");
+                    alert.setContentText("Hurra!");
+
+                    alert.showAndWait();
+                    //ExcelImport ex = new ExcelImport();
+                    //ex.pressBtn_Popup();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Spielerimport");
+                    alert.setHeaderText("Spieler konnten nicht eingelesen werden!");
+                    alert.setContentText("Schade :(");
+
+                    alert.showAndWait();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 
     public void focus(MouseEvent mouseEvent)
