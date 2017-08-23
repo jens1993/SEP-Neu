@@ -1197,7 +1197,8 @@ public class MainController implements Initializable, Observable
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Spielerimport");
                     alert.setHeaderText("Spieler erfolgreich eingelesen! ");
-                    alert.setContentText("Hurra!");
+                    alert.setContentText(String.valueOf(ExcelImport.getObs_erf_spieler()));
+
 
                     alert.showAndWait();
                     //ExcelImport ex = new ExcelImport();

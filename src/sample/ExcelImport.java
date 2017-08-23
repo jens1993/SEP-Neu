@@ -37,6 +37,18 @@ public class ExcelImport implements Initializable{
     private static Dictionary<Spieler, ObservableList> dict_doppelte_spieler = new Hashtable<Spieler, ObservableList>();
     private static ObservableList obs_vorh=FXCollections.observableArrayList();
 
+    public static ObservableList getObs_erf_spieler() {
+        return obs_erf_spieler;
+    }
+
+    public static void setObs_erf_spieler(ObservableList obs_erf_spieler) {
+        ExcelImport.obs_erf_spieler = obs_erf_spieler;
+    }
+
+    private static ObservableList obs_erf_spieler=FXCollections.observableArrayList();
+
+
+
     //private static ArrayList<Spieler> vorhandeneSpieler;
     //private static Dictionary<Spieler,ArrayList> dictvorhandenespieler = new Hashtable();
     //private static Spieler SpielerzumHinzufeuegen=null;

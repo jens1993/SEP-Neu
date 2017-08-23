@@ -19,6 +19,7 @@ import sample.Spiel;
 import sample.Spieler;
 import sample.Verein;
 
+import javax.jws.Oneway;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +31,7 @@ import java.util.ResourceBundle;
  */
 public class spielerVorhandenController implements Initializable
 {
+
 
     @FXML TableView popup_tabelle;
     @FXML TableView popup_tabelle2;
@@ -57,7 +59,7 @@ public class spielerVorhandenController implements Initializable
 
 
 
-    Spieler updateSpieler = new Spieler();
+    Spieler updateSpieler = null;
 
     //ArrayList<Spieler> vorhandeneSpieler;
     ObservableList<Spieler> obs_vorhandeneSpieler = FXCollections.observableArrayList();
@@ -67,6 +69,10 @@ public class spielerVorhandenController implements Initializable
     @FXML
     public  void btn_UpdateSpielerPopup (ActionEvent event)
     {
+        if(updateSpieler!=null)
+        {
+
+
         updateSpieler.setvName(ExcelImport.getAktuellerSpieler().getVName());
         updateSpieler.setnName(ExcelImport.getAktuellerSpieler().getNName());
         updateSpieler.setGeschlecht(ExcelImport.getAktuellerSpieler().getGeschlecht());
@@ -83,6 +89,9 @@ public class spielerVorhandenController implements Initializable
             System.out.println("Neuer Frame");
             obs_neuerSpieler.clear();
             obs_vorhandeneSpieler.clear();
+            auswahlklasse.getStagesdict().get("SpielerVorhanden").close();
+            a.InfoBenachrichtigung("Spieler erfolreich aktualisiert",ExcelImport.getAktuellerSpieler().toString()+" wurde aktualisiert.");
+
 
             Tabellefuelle();
 
@@ -97,7 +106,11 @@ public class spielerVorhandenController implements Initializable
         }
 
 
-
+        }
+        else
+        {
+            a.WarnungBenachrichtigung("Update fehlgeschlagen","Bitte einen Spieler der unteren Tabelle auswählen");
+        }
     }
     @FXML
     public void btn_SpeicherSpielerPopup(ActionEvent event)
@@ -107,7 +120,8 @@ public class spielerVorhandenController implements Initializable
         spielerzumHinzufuegen.getSpielerDAO().create(spielerzumHinzufuegen);
         a.addSpieler(spielerzumHinzufuegen);
         System.out.println("Erfolg");
-        a.InfoBenachrichtigung("Spieler erfolreich hinzugefügt",spielerzumHinzufuegen.toString()+" wurde hinzugefügt.");
+
+        auswahlklasse.getStagesdict().get("SpielerVorhanden").close();
         auswahlklasse.getSpieler().put(spielerzumHinzufuegen.getSpielerID(),spielerzumHinzufuegen);
         try {
             if(ExcelImport.getDict_doppelte_spieler().size()>0)
@@ -117,7 +131,8 @@ public class spielerVorhandenController implements Initializable
                 obs_vorhandeneSpieler.clear();
 
                 Tabellefuelle();
-
+                a.InfoBenachrichtigung("Spieler erfolreich hinzugefügt",spielerzumHinzufuegen.toString()+" wurde hinzugefügt.");
+               ExcelImport.getObs_erf_spieler().add(spielerzumHinzufuegen);
             }
             else {
                 ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -126,6 +141,8 @@ public class spielerVorhandenController implements Initializable
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
     public void pressBtn_LadeSpielerHinzu (ActionEvent event) throws Exception {
         System.out.println("test");
