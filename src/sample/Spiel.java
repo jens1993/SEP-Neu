@@ -77,28 +77,25 @@ public class Spiel {
 	}
 	public void setHeim(Team heim) {
 		this.heim = heim;
-		if(this.gast != null){
+		if(this.gast != null && !(this.systemSpielID<20000000)){
 			this.status = 1;
-			if (this.heim.isFreilos()){
-				this.setErgebnis(new Ergebnis(0,21,0,21));
-			}
-			else if(this.gast.isFreilos()){
-				this.setErgebnis(new Ergebnis(21,0,21,0));
-			}
+
 		}
+		//spielDAO.update(this);
 	}
 
 	public void setGast(Team gast) {
 		this.gast = gast;
-		if(this.heim != null){
+		if(this.heim != null && !(this.systemSpielID<20000000)){
 			this.status = 1;
-			if (this.heim.isFreilos()){
+		/*	if (this.heim.isFreilos()){
 				this.setErgebnis(new Ergebnis(0,21,0,21));
 			}
 			else if(this.gast.isFreilos()){
 				this.setErgebnis(new Ergebnis(21,0,21,0));
-			}
+			}*/
 		}
+		//spielDAO.update(this);
 	}
 
 	public SpielDAO getSpielDAO() {
@@ -137,9 +134,8 @@ public class Spiel {
 		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		turnier.getObs_ausstehendeSpiele().add(this);
-		spielDAO.create(this);
 		auswahlklasse.getAktuelleTurnierAuswahl().addobsAusstehendeSpiele(this);
-
+		//spielDAO.create(this);
 		this.status = 1;
 		if(heim.isFreilos()){
 			setErgebnis(new Ergebnis(21,0,21,0));
@@ -151,9 +147,10 @@ public class Spiel {
 		this.spielsystem = spielsystem;
 		this.systemSpielID = systemSpielID;
 		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
+		//spielDAO.create(this);
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
-		//spielDAO.create(this);
+
 	}
 
 	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielsystem spielsystem) {
@@ -162,10 +159,11 @@ public class Spiel {
 		this.setzPlatzHeim = setzPlatzHeim;
 		this.setzPlatzGast = setzPlatzGast;
 		this.spielsystem=spielsystem;
+		//this.spielDAO.create(this);
 		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
-		//spielDAO.create(this);
+
 	}
 
 
