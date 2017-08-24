@@ -85,6 +85,15 @@
 }
 */
 
+.menubarMargin{
+    -fx-start-margin: 5cm;
+    -fx-end-margin: 5cm;
+}
+
+.gridMargin{
+    -fx-start-margin: 500%;
+
+}
 .button {
     background: #f0f0f0;
     -fx-background-color: linear-gradient(#f0f0f0 25%, #c9c9c9 75%);
