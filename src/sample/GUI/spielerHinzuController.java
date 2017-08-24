@@ -33,6 +33,7 @@ import java.util.*;
 public class spielerHinzuController implements Initializable, Cloneable
 {
 //region Deklaration
+
 @FXML
 private TextField t_suchleistespielerhinzu;
     @FXML
@@ -378,7 +379,7 @@ private TextField t_suchleistespielerhinzu;
         ObservableList vereine = FXCollections.observableArrayList();
         Enumeration enumKeys = auswahlklasse.getVereine().keys();
         while (enumKeys.hasMoreElements()){
-            String key = (String) enumKeys.nextElement();
+            int key = (int) enumKeys.nextElement();
             vereine.add(auswahlklasse.getVereine().get(key));
 
         }
