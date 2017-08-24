@@ -176,7 +176,7 @@ public class ExcelImport implements Initializable{
                     if (tempSpieler !=null){
                         auswahlklasse.getObs_spieler().add(tempSpieler);
                         auswahlklasse.addSpieler(tempSpieler);
-                        System.out.println(tempSpieler.getVName()+" "+tempSpieler.getNName()+" gespeichert"+ " geschlecht:"+tempSpieler.getGeschlecht()+" extID:"+tempSpieler.getExtSpielerID()+"verein: "+tempSpieler.getVerein()+" gdatum:"+tempSpieler.getGDatum());
+                        //System.out.println(tempSpieler.getVName()+" "+tempSpieler.getNName()+" gespeichert"+ " geschlecht:"+tempSpieler.getGeschlecht()+" extID:"+tempSpieler.getExtSpielerID()+"verein: "+tempSpieler.getVerein()+" gdatum:"+tempSpieler.getGDatum());
                         ExcelImport exc= new ExcelImport();
                         exc.pressBtn_Popup();
                         //ExcelImport.getObs_vorh().add(sp);
@@ -366,19 +366,29 @@ public class ExcelImport implements Initializable{
                     Enumeration e = auswahlklasse.getVereine().keys();
                     while (e.hasMoreElements()){
                         int key = (int) e.nextElement();
+
                         if(verein == null) {
                             Verein tempVerein = auswahlklasse.getVereine().get(key);
                             if (tempVerein.getName().contentEquals(vereinsname)) {
                                 verein = tempVerein;
                             } else if (tempVerein.getExtVereinsID().contentEquals(extVereinsID)) {
-                                verein = tempVerein;
+                                System.out.println(extVereinsID);
+                                verein.getVereinDAO().create(new Verein(extVereinsID,vereinsname,verband));
+
+                               auswahlklasse.WarnungBenachrichtigung("Verein wurde erstellt: "+vereinsname,"...");
                             }
                         }
                     }
                     if(verein ==null){
                         {
                             verein = new Verein(extVereinsID,vereinsname,verband);
+
                             auswahlklasse.addVerein(verein);
+                            System.out.println("neu");
+                            auswahlklasse.getVereine().put(auswahlklasse.getVereine().size()+1,verein);
+
+                            auswahlklasse.InfoBenachrichtigung("Neuer Verein",vereinsname+"-"+verband+"("+extVereinsID+")");
+
                         }
                     }
                     Spieler neuerSpieler = new Spieler(vName,nName,gDatum,geschlecht,rPunkte,verein,extSpielerID,"");
@@ -391,7 +401,8 @@ public class ExcelImport implements Initializable{
                             {
 
 
-                            if (sp.getNName().equalsIgnoreCase(neuerSpieler.getNName()) && sp.getVName().equalsIgnoreCase(neuerSpieler.getVName())) {
+                            if ((sp.getNName().equalsIgnoreCase(neuerSpieler.getNName()) && sp.getVName().equalsIgnoreCase(neuerSpieler.getVName()))||
+                                neuerSpieler.getExtSpielerID()!=""&&sp.getExtSpielerID().equalsIgnoreCase(neuerSpieler.getExtSpielerID())) {
 
                                 b=true;
                             }}

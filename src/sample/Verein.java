@@ -10,6 +10,15 @@ public class Verein {
 	private String extVereinsID;
 	private String name;
 	private String verband;
+
+	public VereinDAO getVereinDAO() {
+		return vereinDAO;
+	}
+
+	public void setVereinDAO(VereinDAO vereinDAO) {
+		this.vereinDAO = vereinDAO;
+	}
+
 	VereinDAO vereinDAO = new VereinDAOimpl();
 
 	public int getVereinsID() {

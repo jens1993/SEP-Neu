@@ -513,9 +513,15 @@ private TextField t_suchleistespielerhinzu;
             Enumeration e = auswahlklasse.getSpieler().keys();
             while (e.hasMoreElements()){
                 int key = (int) e.nextElement();
-                if(auswahlklasse.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespielerhinzu.getText().toUpperCase()))
-                {
-                    obs_spieler.add(auswahlklasse.getSpieler().get(key));
+
+                try {
+                    if(auswahlklasse.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespielerhinzu.getText().toUpperCase()))
+                    {
+                        obs_spieler.add(auswahlklasse.getSpieler().get(key));
+                        System.out.println(auswahlklasse.getSpieler().get(key));
+                    }
+                } catch (Exception e1) {
+                    e1.printStackTrace();
                 }
                 ;
             }
