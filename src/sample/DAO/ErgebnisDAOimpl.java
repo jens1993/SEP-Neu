@@ -3,6 +3,7 @@ package sample.DAO;
 import sample.Feld;
 import sample.Spiel;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -21,8 +22,8 @@ public class ErgebnisDAOimpl implements ErgebnisDAO {
             sql += ", (?,?,?)";
         }
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1,ergebnis.getSpielID());
             smt.setInt(2,ergebnis.getErgebnis().getErgebnisArray()[0]);
             smt.setInt(3,ergebnis.getErgebnis().getErgebnisArray()[1]);
@@ -33,9 +34,6 @@ public class ErgebnisDAOimpl implements ErgebnisDAO {
             }
             smt.executeUpdate();
             smt.close();
-
-
-            con.closeCon();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,12 +46,12 @@ public class ErgebnisDAOimpl implements ErgebnisDAO {
     public boolean delete(Spiel ergebnis) {
         String sql = "Delete from Spiel_Satzergebnis Where spielid = ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, ergebnis.getSpielID());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {

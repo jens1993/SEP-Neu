@@ -67,13 +67,12 @@ public class TurnierladenController implements Initializable
 
     public TurnierladenController(String refresh)
     {
-
         primaryStage.setTitle(refresh);
     }
 
     @FXML
     private void zeigeTabelle() {
-        System.out.println("Print table");
+        //System.out.println("Print table");
 
         for (int i = 1; i <= a.getTurnierliste().size(); i++) {
             turniere.add(a.getTurnierliste().get(i));
@@ -93,6 +92,12 @@ public class TurnierladenController implements Initializable
             }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().clear();
+        }
         zeigeTabelle();
 
         TurnierlisteTabelle.setRowFactory(tv -> {
@@ -110,7 +115,7 @@ public class TurnierladenController implements Initializable
                 }
                 else if(! row.isEmpty() && event.getButton()== MouseButton.SECONDARY)
                 {
-                    System.out.println("R-KLICK");
+                    //System.out.println("R-KLICK");
                     MenuItem item1 = new MenuItem("Turnier auswählen");
                     item1.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -191,9 +196,9 @@ public class TurnierladenController implements Initializable
             //System.out.println("Das aktuelle Turnier lautet"+a.getAktuelleTurnierAuswahl().toString());
             //Main.getInstance().updateTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
             //a.setAktuelleTurnierAuswahl
-            System.out.println("Turnierauswahl durch Doppelklick: = "+item.getName());
+            //System.out.println("Turnierauswahl durch Doppelklick: = "+item.getName());
             //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
-            System.out.println("t");
+            //System.out.println("t");
 
 
             //((Node)(event.getSource())).getScene().getWindow().hide();

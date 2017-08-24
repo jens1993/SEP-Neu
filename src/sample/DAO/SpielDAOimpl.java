@@ -21,8 +21,9 @@ public class SpielDAOimpl implements SpielDAO {
                 + "Heim,"
                 + "Gast, "
                 + "Schiedsrichter, "
+                + "Status, "
                 + "SpielklasseID) "
-                + "VALUES(?,?,?,?)";
+                + "VALUES(?,?,?,?,?)";
 
         String sqlzwei = "INSERT INTO spielklasse_spielid("
                 + "SpielID,"
@@ -32,14 +33,14 @@ public class SpielDAOimpl implements SpielDAO {
 
 
         try {
-            SQLConnection con = new SQLConnection();
-            Statement smtID = con.SQLConnection().createStatement();
+            Connection con = SQLConnection.getCon();
+            Statement smtID = con.createStatement();
             ResultSet count = smtID.executeQuery(idAbfrage);
             count.next();
             int spielID = count.getInt(1);
             spiel.setSpielID(spielID);
             smtID.close();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            PreparedStatement smt = con.prepareStatement(sql);
             if(spiel.getHeim()!=null&&spiel.getGast()!=null) {
                 smt.setInt(1, spiel.getHeim().getTeamid());
                 smt.setInt(2, spiel.getGast().getTeamid());
@@ -54,18 +55,19 @@ public class SpielDAOimpl implements SpielDAO {
             else{
                 smt.setNull(3,Types.INTEGER);
             }
-            smt.setInt(4, spiel.getSpielsystem().getSpielklasse().getSpielklasseID());
+            smt.setInt(4,spiel.getStatus());
+            smt.setInt(5, spiel.getSpielsystem().getSpielklasse().getSpielklasseID());
 
 
             smt.executeUpdate();
             smt.close();
-            PreparedStatement smtzwei = con.SQLConnection().prepareStatement(sqlzwei);
+            PreparedStatement smtzwei = con.prepareStatement(sqlzwei);
             smtzwei.setInt(1, spiel.getSpielID());
             smtzwei.setInt(2, spiel.getSpielsystem().getSpielklasse().getSpielklasseID());
             smtzwei.setInt(3, spiel.getSystemSpielID());
             smtzwei.executeUpdate();
             smtzwei.close();
-            con.closeCon();
+            //con.close();
 
 
 
@@ -86,12 +88,12 @@ public class SpielDAOimpl implements SpielDAO {
         String sql2 = "DELETE FROM spiel_satzergebnis WHERE spielID = ?";
         String sql3 = "DELETE FROM spiel WHERE SpielID= ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt1 = con.SQLConnection().prepareStatement(sql1);
+            Connection con =  SQLConnection.getCon();
+            PreparedStatement smt1 = con.prepareStatement(sql1);
             smt1.setInt(1, spiel.getSpielID());
-            PreparedStatement smt2 = con.SQLConnection().prepareStatement(sql2);
+            PreparedStatement smt2 = con.prepareStatement(sql2);
             smt2.setInt(1, spiel.getSpielID());
-            PreparedStatement smt3 = con.SQLConnection().prepareStatement(sql3);
+            PreparedStatement smt3 = con.prepareStatement(sql3);
             smt3.setInt(1, spiel.getSpielID());
             smt1.executeUpdate();
             smt1.close();
@@ -99,7 +101,7 @@ public class SpielDAOimpl implements SpielDAO {
             smt2.close();
             smt3.executeUpdate();
             smt3.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -121,11 +123,11 @@ public class SpielDAOimpl implements SpielDAO {
                 + "SiegerID = ?, "
                 + "SpielklasseID = ? "
                 + "WHERE SpielID = ? "
-        ;
+                ;
         try {
-            SQLConnection con = new SQLConnection();
+            Connection con =  SQLConnection.getCon();
             //System.out.println(spiel.getAufrufZeit()+"-------");
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setObject(1, spiel.getAufrufZeit());
             if (spiel.getSchiedsrichter()!=null){
                 smt.setInt(2, spiel.getSchiedsrichter().getSpielerID());
@@ -163,7 +165,7 @@ public class SpielDAOimpl implements SpielDAO {
             smt.setInt(9, spiel.getSpielID());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {

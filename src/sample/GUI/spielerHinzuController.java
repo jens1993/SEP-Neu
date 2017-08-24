@@ -32,7 +32,7 @@ import java.util.*;
  */
 public class spielerHinzuController implements Initializable, Cloneable
 {
-
+//region Deklaration
 @FXML
 private TextField t_suchleistespielerhinzu;
     @FXML
@@ -79,6 +79,8 @@ private TextField t_suchleistespielerhinzu;
     private TableColumn tabelle_spielerliste_verein;
     @FXML
     private TableColumn tabelle_spielerliste_geburtstag;
+    @FXML
+    private TableColumn tabelle_spielerliste_SpielerID;
 
     //Tab3
     @FXML
@@ -101,52 +103,42 @@ private TextField t_suchleistespielerhinzu;
     private RadioButton r_m1;
     @FXML
     private RadioButton r_w1;
+
+    //endregion
+
+
     HashMap<Integer, Spieler> spielerhash = new HashMap<Integer, Spieler>();
-    auswahlklasse a = new auswahlklasse();
 
     private static Spieler spieler_neu=null;
-    private ObservableList<Spieler> obs_spieler = a.getObs_spieler();
+    private static ObservableList<Spieler> obs_spieler = auswahlklasse.getObs_spieler();
+
 
     private void printSpielerZuordnenTableNeu() throws Exception {
 
-        if(a.getAktuelleTurnierAuswahl()!=null) {
+        if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
 
             obs_spieler.clear();
             Enumeration enumSpielerIDs = auswahlklasse.getSpieler().keys();
             while (enumSpielerIDs.hasMoreElements()){
                 int key = (int)enumSpielerIDs.nextElement();
-
                 obs_spieler.add(auswahlklasse.getSpieler().get(key));
-
-
                 spielerhash.put(auswahlklasse.getSpieler().get(key).getSpielerID(),auswahlklasse.getSpieler().get(key));
             }
 
-
-
-
-            //TableColumn<Spieler,String> spielerVornameSpalte = new TableColumn("Vorname");
+            //region PropertyValueFactory
             tabelle_spielerliste_vorname.setCellValueFactory(new PropertyValueFactory<Spieler,String>("vName"));
             tabelle_spielerliste_geschlecht.setCellValueFactory(new PropertyValueFactory<ImageView,String>("iGeschlecht"));
 
+            tabelle_spielerliste_SpielerID.setCellValueFactory(new PropertyValueFactory<Spieler,String>("ExtSpielerID"));
 
 
-            //TableColumn<Spieler,String> spielerNachnameSpalte = new TableColumn("Nachname");
             tabelle_spielerliste_nachname.setCellValueFactory(new PropertyValueFactory<Spieler,String>("nName"));
-            //tabelle_spielerliste_geschlecht.setCellValueFactory(new PropertyValueFactory("album"));
+
             tabelle_spielerliste_verein.setCellValueFactory(new PropertyValueFactory<Spieler,String>("verein"));
 
-            //TableColumn<Spieler,Date> spielerGeburtsdatumSpalte = new TableColumn("Geburtsdatum");
             tabelle_spielerliste_geburtstag.setCellValueFactory(new PropertyValueFactory<Spieler,Date>("gDatum"));
             tabelle_spielerliste.setItems(obs_spieler);
-
-
-
-            //TableColumn<Spieler,String> spielerExtSpielerIDSpalte = new TableColumn("ExtSpielerID");
-            //spielerExtSpielerIDSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("extSpielerID"));
-
-            //tabelle_SpielerZuordnen.getColumns().addAll(spielerVornameSpalte,spielerNachnameSpalte,spielerGeburtsdatumSpalte);
-
+            //endregion
 
         }
         else{
@@ -172,6 +164,14 @@ private TextField t_suchleistespielerhinzu;
 
     }
 
+    public static ObservableList<Spieler> getObs_spieler() {
+        return obs_spieler;
+    }
+
+    public static void setObs_spieler(ObservableList<Spieler> obs_spielerr) {
+        obs_spieler = obs_spielerr;
+    }
+
     @FXML
     public void pressBtn_SpielerSpeichern(ActionEvent event) throws Exception
     {
@@ -184,7 +184,7 @@ private TextField t_suchleistespielerhinzu;
         }
         else
         {
-
+            //region Spieler erstellen
             l_Meldung.setText("");
             boolean geschlecht = false;
             if (r_m.isSelected())
@@ -202,44 +202,51 @@ private TextField t_suchleistespielerhinzu;
 
 
             Verein verein = combo_verein.getSelectionModel().getSelectedItem();
-            System.out.println(a.getSpieler().size());
+            System.out.println(auswahlklasse.getSpieler().size());
 
         spieler_neu= new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),geschlecht,rpunkte,verein,t_spid.getText(),"");
-        ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
+        //endregion
+
+        //ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
 
             felderLeeren();
-        for(Enumeration e = a.getSpieler().elements();e.hasMoreElements();)
-        {
-            Spieler sp = (Spieler) e.nextElement();
-            if(sp.getNName().equalsIgnoreCase(spieler_neu.getNName()) && sp.getVName().equalsIgnoreCase(spieler_neu.getVName()))
+            Enumeration e = auswahlklasse.getSpieler().elements();
+            ObservableList obs_vorhanden=FXCollections.observableArrayList();
+            while(e.hasMoreElements())
             {
+                Spieler sp = (Spieler) e.nextElement();
+                if(sp!=null&&spieler_neu!=null&&sp.getVName()!=null&&sp.getNName()!=null) {
+                    if (sp.getNName().equalsIgnoreCase(spieler_neu.getNName()) && sp.getVName().equalsIgnoreCase(spieler_neu.getVName())) {
 
-                System.out.println("Übereinstimmung gefunden:");
-                System.out.println(sp.getVName()+" "+sp.getNName()+" --- "+spieler_neu.getVName()+" "+spieler_neu.getNName());
-                TurnierDAO t;
-                t = new TurnierDAOimpl();
+                        System.out.println("Übereinstimmung gefunden:");
+                        System.out.println(sp.getVName() + " " + sp.getNName() + " --- " + spieler_neu.getVName() + " " + spieler_neu.getNName());
+                        TurnierDAO t;
+                        //t = new TurnierDAOimpl();
 
-                vorhandeneSpieler.add(sp);
+                        obs_vorhanden.add(sp);
 
+                    }
+                }
             }
+            ExcelImport.getDict_doppelte_spieler().put(spieler_neu,obs_vorhanden);
 
-        }
 
 
-        if(vorhandeneSpieler.size()>0)
+
+        if(obs_vorhanden.size()>0)
         {
-            a.setSpielerzumHinzufeuegen(spieler_neu);
-            a.setVorhandeneSpieler(vorhandeneSpieler);
+           /* ExcelImport.setSpielerzumHinzufeuegen(spieler_neu);
+            ExcelImport.setVorhandeneSpieler(vorhandeneSpieler);*/
 
             pressBtn_Popup(event);
         }
         else
         {
             spieler_neu.getSpielerDAO().create(spieler_neu);
-            a.addSpieler(spieler_neu);
+            auswahlklasse.addSpieler(spieler_neu);
             auswahlklasse.getSpieler().put(spieler_neu.getSpielerID(),spieler_neu);
             printSpielerZuordnenTableNeu();
-            a.InfoBenachrichtigung("erf",spieler_neu.toString());
+            auswahlklasse.InfoBenachrichtigung("erf",spieler_neu.toString());
         }
 
 
@@ -262,17 +269,20 @@ private TextField t_suchleistespielerhinzu;
     {
         tabelle_spielerliste.refresh();
     }
+
     public void pressBtn_Popup (ActionEvent event) throws Exception {
         //System.out.println("test");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerVorhanden.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        a.getStagesdict().put("SpielerVorhanden",stage);
+        auswahlklasse.getStagesdict().put("SpielerVorhanden",stage);
         stage.setScene(new Scene(root1));
+        stage.show();
         stage.show();
         stage.show();
         stage.setTitle("Spieler vorhanden");
     }
+
     private void zeigePopup()
     {
         Popup popup = new Popup();
@@ -324,12 +334,21 @@ private TextField t_suchleistespielerhinzu;
         spieler_neu.setrPunkte(rpunkte);
         spieler_neu.setGeschlecht(geschlecht);
         spieler_neu.setVerein(v);
-        spieler_neu.getSpielerDAO().update(spieler_neu);
 
-        System.out.println("erf");
+        boolean erfolg = spieler_neu.getSpielerDAO().update(spieler_neu);
 
-        a.getSpieler().remove(spieler_neu.getSpielerID());
-        a.getSpieler().put(spieler_neu.getSpielerID(),spieler_neu);
+        if(!erfolg)
+        {
+            auswahlklasse.WarnungBenachrichtigung("Spieler Update Fehler","fehler");
+        }
+        else
+        {
+            auswahlklasse.InfoBenachrichtigung("erfolg","erfolg");
+        }
+
+
+        auswahlklasse.getSpieler().remove(spieler_neu.getSpielerID());
+        auswahlklasse.getSpieler().put(spieler_neu.getSpielerID(),spieler_neu);
         int index = obs_spieler.indexOf(spieler_neu);
         obs_spieler.remove(spieler_neu);
         obs_spieler.add(index, spieler_neu);
@@ -357,10 +376,10 @@ private TextField t_suchleistespielerhinzu;
 
         System.out.println(auswahlklasse.getVereine().size());
         ObservableList vereine = FXCollections.observableArrayList();
-        Enumeration enumKeys = a.getVereine().keys();
+        Enumeration enumKeys = auswahlklasse.getVereine().keys();
         while (enumKeys.hasMoreElements()){
-            int key = (int) enumKeys.nextElement();
-            vereine.add(a.getVereine().get(key));
+            String key = (String) enumKeys.nextElement();
+            vereine.add(auswahlklasse.getVereine().get(key));
 
         }
         try {
@@ -383,6 +402,7 @@ private TextField t_suchleistespielerhinzu;
 
         l_Meldung.setText("");
 
+        //region Tabelle Spielerliste RowFactory
         tabelle_spielerliste.setRowFactory(tv -> {
             TableRow row = new TableRow();
             row.setOnMouseClicked(event -> {
@@ -414,6 +434,7 @@ private TextField t_suchleistespielerhinzu;
                         public void handle(ActionEvent event) {
                             tabpane_spieler.getSelectionModel().select(tab_spupdate);
                             FuelleFelder(clickedRow);
+                            spieler_neu=clickedRow;
                         }
                     });
                     MenuItem item3 = new MenuItem("Spieler löschen");
@@ -426,11 +447,16 @@ private TextField t_suchleistespielerhinzu;
                                 boolean loeschespieler = clickedRow.getSpielerDAO().delete(clickedRow);
                             if(loeschespieler) {
                                 obs_spieler.remove(clickedRow);
-                                a.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
-                                a.getSpieler().remove(clickedRow);
+                                //auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
+                                auswahlklasse.getSpieler().remove(clickedRow);
                                 tabelle_spielerliste.refresh();
                                 System.out.println("Lösche   " + clickedRow.getNName());
+                                auswahlklasse.InfoBenachrichtigung("erf","erfolg");
 
+                            }
+                            else
+                            {
+                                auswahlklasse.WarnungBenachrichtigung("Fehler","fehler");
                             }
                         }
                     });
@@ -452,6 +478,7 @@ private TextField t_suchleistespielerhinzu;
             });
             return row ;
         });
+//endregion
 
         try {
             ladeVereine();
@@ -466,14 +493,14 @@ private TextField t_suchleistespielerhinzu;
 
 
 
-        if(a.getTab()==3)
+        if(auswahlklasse.getTab()==3)
         {
 
             tab_sphin.setDisable(true);
             tab_spbea.setDisable(true);
             tab_spupdate.setDisable(false);
             tabpane_spieler.getSelectionModel().select(tab_spupdate);
-            FuelleFelder(a.getUpdateSpieler());
+            FuelleFelder(auswahlklasse.getUpdateSpieler());
         }
 
         t_suchleistespielerhinzu.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -483,12 +510,18 @@ private TextField t_suchleistespielerhinzu;
             obs_spieler.clear();
 
             tabelle_spielerliste.refresh();
-            Enumeration e = a.getSpieler().keys();
+            Enumeration e = auswahlklasse.getSpieler().keys();
             while (e.hasMoreElements()){
                 int key = (int) e.nextElement();
-                if(a.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespielerhinzu.getText().toUpperCase()))
-                {
-                    obs_spieler.add(a.getSpieler().get(key));
+
+                try {
+                    if(auswahlklasse.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespielerhinzu.getText().toUpperCase()))
+                    {
+                        obs_spieler.add(auswahlklasse.getSpieler().get(key));
+                        System.out.println(auswahlklasse.getSpieler().get(key));
+                    }
+                } catch (Exception e1) {
+                    e1.printStackTrace();
                 }
                 ;
             }
@@ -527,7 +560,7 @@ private TextField t_suchleistespielerhinzu;
             FuelleFelder(clickedRow);
             System.out.println("geklickt: "+clickedRow.getNName());
 
-            System.out.println("turnier="+a.getAktuelleTurnierAuswahl().getName());
+            System.out.println("turnier="+auswahlklasse.getAktuelleTurnierAuswahl().getName());
 
             spieler_neu=clickedRow;
         }
@@ -541,7 +574,7 @@ private TextField t_suchleistespielerhinzu;
 
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            a.getStagesdict().put("NeuerVerein",stage);
+            auswahlklasse.getStagesdict().put("NeuerVerein",stage);
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle("Neuer Verein");
@@ -570,22 +603,4 @@ private TextField t_suchleistespielerhinzu;
         }
     }
 
-    @FXML
-    public void pressBtn_ExcelImport (ActionEvent event) throws Exception {
-        try {
-
-            FileChooser fileChooser = new FileChooser();
-
-            Stage stage = new Stage();
-            File file = fileChooser.showOpenDialog(stage);
-            if (file != null) {
-                ExcelImport.importExcelData(file.getAbsolutePath());
-            }
-
-
-            //ExcelImport.importExcelData("C:\\Meldeformular\\meldeformular.xls");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -4,10 +4,7 @@ import sample.*;
 import sample.DAO.*;
 import sample.Enums.*;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
 public class KO extends Spielsystem {
 	private boolean platzDreiAusspielen;
@@ -34,20 +31,79 @@ public class KO extends Spielsystem {
 		freiloseHinzufuegen(setzliste);
 		knotenAufbauen(teilnehmerzahl);
 		ersteRundeFuellen(setzliste);
+		alleSpieleSchreiben();
 	}
 
-    public KO(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
+	private void alleSpieleSchreiben() {
+		for (int i=0; i<getRundenArray().size();i++){
+			for(int j=0;j<getRundenArray().get(i).size();j++){
+				Spiel spiel = getRundenArray().get(i).get(j);
+				spiel.getSpielDAO().create(spiel);
+			}
+		}
+	}
+
+	public KO(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
 		this.setSpielklasse(spielklasse);		//Constructor nur für Einlesen aus der Datenbank
 		this.teilnehmerzahl=setzliste.size();
 		setSpielSystemArt(3);
 		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
 		freiloseHinzufuegen(setzliste);
-		knotenAufbauen(teilnehmerzahl);
-		ersteRundeFuellen(setzliste);
+		knotenEinlesen(spiele);
+		alleErgebnisseEinlesen(ergebnisse);
     }
 
+	private void alleErgebnisseEinlesen(Dictionary<Integer, Ergebnis> ergebnisse){
+		Enumeration e = ergebnisse.keys();
+		int key;
+		while(e.hasMoreElements()){
+			key = (int) e.nextElement();
+			getSpielklasse().getSpiele().get(key).setErgebnis(ergebnisse.get(key),"einlesen");
+		}
+	}
 
-    public void alleSpieleErstellen(){
+	private void knotenEinlesen(ArrayList<Spiel> spiele) {
+		Dictionary<Integer,Spiel> dicSpiele = new Hashtable<>();
+		for (int i=0;i<spiele.size();i++){
+			Spiel spiel = spiele.get(i);
+			int key = spiel.getSystemSpielID();
+			spiel.setSpielsystem(this);
+			dicSpiele.put(key,spiel);
+		}
+		teilnehmerzahl=spiele.size()+1;
+		int anzahlRunden = rundenBerechnen();
+		int hoechsterSetzplatz;
+		SpielTree aktuellerKnoten = finale;
+		finale.setSpiel(dicSpiele.get(getSpielSystemArt()*10000000));
+		this.getRundenArray().add(new ArrayList<>());
+		this.getRundenArray().get(0).add(finale.getSpiel());
+
+		for (int i=0; i<anzahlRunden-1; i++){ //erstelle für jeder Runde Spiele
+			aktuellerKnoten = finale.getSpielTree(spielSystemIDberechnen(),finale);
+			hoechsterSetzplatz = (int) Math.pow(2,i+2);
+			this.getRundenArray().add(0,new ArrayList<>());
+			for (int j=1; j<=Math.pow(2,i); j++)
+			{
+				int leftKnotenSpielID = ((aktuellerKnoten.getSpielID()-getSpielSystemArt()*10000000-getAktuelleRunde()*1000)*2+getSpielSystemArt()*10000000+getAktuelleRunde()*1000)+1000;
+				int rightKnotenSpielID = ((aktuellerKnoten.getSpielID()-getSpielSystemArt()*10000000-getAktuelleRunde()*1000)*2+getSpielSystemArt()*10000000+getAktuelleRunde()*1000)+1001;
+				int leftKnotenSetzPlatzHeim = aktuellerKnoten.getSetzplatzHeim();
+				int leftKnotenSetzPlatzGast = hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1;
+				int rightKnotenSetzPlatzHeim = hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1;
+				int rightKnotenSetzPlatzGast = aktuellerKnoten.getSetzplatzGast();
+				aktuellerKnoten.addLeft(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast );
+				aktuellerKnoten.getLeft().setSpiel(dicSpiele.get(leftKnotenSpielID));
+				aktuellerKnoten.addRight(rightKnotenSpielID, rightKnotenSetzPlatzHeim ,rightKnotenSetzPlatzGast );
+				aktuellerKnoten.getRight().setSpiel(dicSpiele.get(rightKnotenSpielID));
+				aktuellerKnoten = aktuellerKnoten.getSpielTree(aktuellerKnoten.getSpielID()+1, finale);
+				this.getRundenArray().get(0).add(dicSpiele.get(leftKnotenSpielID));
+				this.getRundenArray().get(0).add(dicSpiele.get(rightKnotenSpielID));
+			}
+			erhoeheAktuelleRunde();
+		}
+	}
+
+
+	public void alleSpieleErstellen(){
 
 	}
 
@@ -123,13 +179,14 @@ public class KO extends Spielsystem {
 	public boolean beendeMatch(Spiel spiel) {
 
 		int sysID = spiel.getSystemSpielID();
-		if(sysID>1) {
+		if(sysID>getSpielSystemArt()*10000000) {
 			SpielTree parent = finale.getSpielTree(sysID, finale).getParent();
 			if (parent.getLeft().getSpielID() == sysID) {
 				parent.getSpiel().setHeim(spiel.getSieger());
 			} else {
 				parent.getSpiel().setGast(spiel.getSieger());
 			}
+			parent.getSpiel().getSpielDAO().update(parent.getSpiel());
 			return false;
 		}
 		else{

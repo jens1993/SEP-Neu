@@ -25,19 +25,19 @@ public class TurnierDAOimpl implements TurnierDAO {
                 + "VALUES(?,?)";
 
         try {
-            SQLConnection con = new SQLConnection();
-            Statement smtID = con.SQLConnection().createStatement();
+            Connection con = SQLConnection.getCon();
+            Statement smtID = con.createStatement();
             ResultSet count = smtID.executeQuery(idAbfrage);
             count.next();
             int turnierID = count.getInt(1);
             turnier.setTurnierid(turnierID);
             smtID.close();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setObject(1, turnier.getDatum());
             smt.setString(2, turnier.getName());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -58,12 +58,12 @@ public class TurnierDAOimpl implements TurnierDAO {
 
         String sql = "Delete From turnier Where turnierID= ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, turnier.getTurnierid());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -84,8 +84,8 @@ public class TurnierDAOimpl implements TurnierDAO {
                 "Zaehlweise = ? " +
                 "WHERE Turnierid = ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, turnier.getMatchDauer());
             smt.setObject(2, turnier.getDatum());
             smt.setString(3, turnier.getName());
@@ -94,7 +94,7 @@ public class TurnierDAOimpl implements TurnierDAO {
             smt.setInt(6, turnier.getTurnierid());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -109,8 +109,8 @@ public class TurnierDAOimpl implements TurnierDAO {
 
         String sql = "SELECT * FROM turnier WHERE turnierID = ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, turnierEingabe.getTurnierid());
             ResultSet turnierResult = smt.executeQuery();
             turnierResult.next();
@@ -133,7 +133,7 @@ public class TurnierDAOimpl implements TurnierDAO {
             }
             spielListenFuellen(turnierEingabe);
             smt.close();
-            con.closeCon();
+
             //turnier.setSpiele(readSpiele(turnier));
             return turnierEingabe;
         } catch (SQLException e) {
@@ -153,8 +153,8 @@ public class TurnierDAOimpl implements TurnierDAO {
         String sql ="SELECT * FROM Turnier";
 
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             //smt.setInt(1, turnier.getTurnierid());
             ResultSet TurnierResult = smt.executeQuery();
             while (TurnierResult.next()){
@@ -164,7 +164,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 turnierListe.put(turnierid,new Turnier(turnierName,turnierid, Datum.toLocalDate()));
             }
             smt.close();
-            con.closeCon();
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Turnier lesen klappt nicht");
@@ -197,8 +197,8 @@ public class TurnierDAOimpl implements TurnierDAO {
         Dictionary<Integer,Spielklasse> spielklassen = new Hashtable<Integer,Spielklasse>();
         String sql = "SELECT * FROM spielklasse WHERE turnierID = ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, turnier.getTurnierid());
             ResultSet spielklassenResult = smt.executeQuery();
             while (spielklassenResult.next()){
@@ -211,7 +211,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 //spielklassen.get(spielklasseid).setSpielsystem(readSpielsystem(spielklassen.get(spielklasseid)));
             }
             smt.close();
-            con.closeCon();
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Spielklasse lesen klappt nicht");
@@ -220,10 +220,9 @@ public class TurnierDAOimpl implements TurnierDAO {
     }
     private ArrayList<Team> readSetzliste(Spielklasse spielklasse){
         ArrayList<Team> setzliste = new ArrayList<Team>();
-        SQLConnection con = new SQLConnection();
-        Connection connection = con.SQLConnection();
         try {
-            Statement st = connection.createStatement();
+            Connection con = SQLConnection.getCon();
+            Statement st = con.createStatement();
             ResultSet setzlisteResult = st.executeQuery("SELECT team.TeamID FROM spielklasse_setzliste " +
                     "inner JOIN team ON spielklasse_setzliste.teamID = team.TeamID " +
                     "WHERE spielklasse_setzliste.spielklasseID = " + spielklasse.getSpielklasseID() +
@@ -236,7 +235,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 return null;
             }
             st.close();
-            con.closeCon();
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Setzliste Lesen Klappt nicht");
@@ -267,8 +266,8 @@ public class TurnierDAOimpl implements TurnierDAO {
         ArrayList<Spiel> spiele = new ArrayList<>();
         String sql = "SELECT * FROM spiel INNER JOIN spielklasse_spielid on spiel.spielid=spielklasse_spielid.spielid WHERE spiel.spielklasseID = ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, spielklasse.getSpielklasseID());
             ResultSet spielResult = smt.executeQuery();
             while (spielResult.next()){
@@ -299,7 +298,7 @@ public class TurnierDAOimpl implements TurnierDAO {
 
             }
             smt.close();
-            con.closeCon();
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Spiele lesen klappt nicht");
@@ -319,8 +318,8 @@ public class TurnierDAOimpl implements TurnierDAO {
                 "inner join spielklasse_spielid on spiel.spielid=spielklasse_spielid.SpielID " +
                 "where spiel.spielklasseid=?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, spielklasse.getSpielklasseID());
             ResultSet ergebnisResult = smt.executeQuery();
             while (ergebnisResult.next()){
@@ -335,7 +334,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 satzListe.get(spielid).add(satz);
             }
             smt.close();
-            con.closeCon();
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Ergebnisse lesen klappt nicht");
@@ -372,8 +371,8 @@ public class TurnierDAOimpl implements TurnierDAO {
 
         String sql = "SELECT * FROM feld WHERE turnierID = ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, turnier.getTurnierid());
             ResultSet feldResult = smt.executeQuery();
             while (feldResult.next()){
@@ -385,7 +384,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 feld.setFeldnummer(felder.indexOf(feld)+1);
             }
             smt.close();
-            con.closeCon();
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Felder lesen klappt nicht");
@@ -397,15 +396,15 @@ public class TurnierDAOimpl implements TurnierDAO {
     private void readVereine() {
         String sql = "SELECT verein.VereinsID, verein.ExtVereinsID, verein.Name,verein.Verband FROM Verein";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             ResultSet vereinResult = smt.executeQuery();
             while (vereinResult.next()){
                 int vereinsid = vereinResult.getInt("VereinsID");
-                auswahlklasse.getVereine().put(vereinsid,new Verein(vereinsid,vereinResult.getString("ExtVereinsID"),vereinResult.getString("Name"),vereinResult.getString("Verband")));
+                auswahlklasse.getVereine().put(vereinResult.getString("ExtVereinsID"),new Verein(vereinsid,vereinResult.getString("ExtVereinsID"),vereinResult.getString("Name"),vereinResult.getString("Verband")));
             }
             smt.close();
-            con.closeCon();
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Verein lesen klappt nicht");
@@ -422,8 +421,8 @@ public class TurnierDAOimpl implements TurnierDAO {
                 "where turnierid = ? " +
                 "GROUP BY spieler.SpielerID;";*/
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             //smt.setInt(1, turnier.getTurnierid());
             ResultSet spielerResult = smt.executeQuery();
 
@@ -440,7 +439,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                     gdatum = geburtstag.toLocalDate();
                 }
                 if(spielerResult.getDate("Verfuegbar")!=null) {
-                     verfuegbar = spielerResult.getDate("Verfuegbar").toLocalDate();
+                    verfuegbar = spielerResult.getDate("Verfuegbar").toLocalDate();
                 }
                 auswahlklasse.getSpieler().put(spielerID,new Spieler(spielerResult.getString("VName"),
                         spielerResult.getString("NName"),
@@ -454,7 +453,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                         spielerResult.getString("ExtSpielerID")));
             }
             smt.close();
-            con.closeCon();
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Spieler lesen klappt nicht");
@@ -465,8 +464,8 @@ public class TurnierDAOimpl implements TurnierDAO {
 
         String sql = "select * from team inner join spielklasse on team.SpielklasseID = spielklasse.SpielklasseID where turnierid = ? ";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, turnier.getTurnierid());
             ResultSet teamResult = smt.executeQuery();
             while (teamResult.next()){
@@ -474,7 +473,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 teams.put(teamid, new Team(teamid,turnier.getSpielklassen().get(teamResult.getInt("SpielklasseID"))));
             }
             smt.close();
-            con.closeCon();
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Teams lesen klappt nicht");
@@ -484,8 +483,8 @@ public class TurnierDAOimpl implements TurnierDAO {
                 "INNER JOIN spielklasse on team.SpielklasseID = spielklasse.SpielklasseID " +
                 "where turnierid =? ";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smtzwei = con.SQLConnection().prepareStatement(sqlzwei);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smtzwei = con.prepareStatement(sqlzwei);
             smtzwei.setInt(1, turnier.getTurnierid());
             ResultSet teamSpielerResult = smtzwei.executeQuery();
             while (teamSpielerResult.next()){
@@ -496,7 +495,7 @@ public class TurnierDAOimpl implements TurnierDAO {
                 team.addSpieler(spieler);
             }
             smtzwei.close();
-            con.closeCon();
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Spieler den Teams hinzufügen klappt nicht");
@@ -511,8 +510,8 @@ public class TurnierDAOimpl implements TurnierDAO {
 
         String sql = "Select * from spiel INNER JOIN spielklasse on spiel.SpielklasseID = spielklasse.SpielklasseID where turnierid = ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, turnier.getTurnierid());
             ResultSet spieleResult = smt.executeQuery(sql);
             while (spieleResult.next()){

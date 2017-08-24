@@ -22,18 +22,18 @@ public class FeldDAOimpl implements FeldDAO {
                 + "turnierid) "
                 + "VALUES(?)";
         try {
-            SQLConnection con = new SQLConnection();
-            Statement smtID = con.SQLConnection().createStatement();
+            Connection con = SQLConnection.getCon();
+            Statement smtID = con.createStatement();
             ResultSet count = smtID.executeQuery(idAbfrage);
             count.next();
             int feldID = count.getInt(1);
             feld.setFeldID(feldID);
             smtID.close();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, feld.getTurnier().getTurnierid());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -52,15 +52,15 @@ public class FeldDAOimpl implements FeldDAO {
                 + "WHERE FeldID = ? "
                 ;
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, feld.getAktivesSpiel().getSpielID());
             smt.setInt(2, feld.getInVorbereitung().getSpielID());
             smt.setInt(3, feld.getTurnier().getTurnierid());
             smt.setInt(4, feld.getFeldID());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -74,12 +74,12 @@ public class FeldDAOimpl implements FeldDAO {
     public boolean deleteFeld(Feld feld) {
         String sql = "Delete From feld Where feldid= ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, feld.getFeldID());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {

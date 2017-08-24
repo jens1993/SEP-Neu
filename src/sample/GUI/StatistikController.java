@@ -26,18 +26,17 @@ public class StatistikController implements Initializable
 
     @FXML
             public Label anzahlobsspiele;
-    auswahlklasse a = new auswahlklasse();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    lturnier.setText("Turnierinformationen: "+ a.getAktuelleTurnierAuswahl().getName());
-    anzahlSpielklassen.setText(String.valueOf(a.getAktuelleTurnierAuswahl().getObs_spielklassen().size()));
-    anzahlSpiele.setText(String.valueOf(a.getAktuelleTurnierAuswahl().getObs_spiele().size()));
+    lturnier.setText("Turnierinformationen: "+ auswahlklasse.getAktuelleTurnierAuswahl().getName());
+    anzahlSpielklassen.setText(String.valueOf(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()));
+    anzahlSpiele.setText(String.valueOf(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().size()));
     anzahlSpielerimTurnier.setText(String.valueOf(auswahlklasse.getObs_spieler().size()));
     anzahlobsspiele.setText(
             String.valueOf("Aktive "+
-            a.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().size()+"Gespielte "+
-            a.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().size()+"Ausstehende "+
-            a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().size()));
+                    auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().size()+"Gespielte "+
+                    auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().size()+"Ausstehende "+
+                    auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().size()));
     }
 }

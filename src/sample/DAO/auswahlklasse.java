@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Tab;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -22,17 +21,20 @@ public class auswahlklasse
 {
     private TurnierDAO turnierDAO = new TurnierDAOimpl();
     private static Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
-    private static Dictionary<Integer, Verein> vereine = new Hashtable<Integer,Verein>();
+    private static Dictionary<String, Verein> vereine = new Hashtable<String, Verein>();
     private static Dictionary<String, Stage> stagesdict = new Hashtable<String,Stage>();
     private static Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
     private static Spielklasse aktuelleSpielklassenAuswahl = null;
     private static Turnier aktuelleTurnierAuswahl = null;
     private static Spieler SpielerzumHinzufeuegen=null;
     private static ArrayList<Spieler> vorhandeneSpieler;
+  //  private static Dictionary<Spieler,ArrayList> dictvorhandenespieler = new Hashtable();
 
     private static Spiel SpielAuswahlErgebniseintragen;
     private static ObservableList<Spieler> obs_spieler = FXCollections.observableArrayList();
     private static Notifications noteficationBuilder;
+
+
 
     public auswahlklasse() {
         turnierliste= turnierDAO.getAllTurniere();
@@ -50,7 +52,13 @@ public class auswahlklasse
         return obs_spieler;
     }
 
+  /*  public static Dictionary<Spieler, ArrayList> getDictvorhandenespieler() {
+        return dictvorhandenespieler;
+    }
 
+    public static void setDictvorhandenespieler(Dictionary<Spieler, ArrayList> dictvorhandenespieler) {
+        auswahlklasse.dictvorhandenespieler = dictvorhandenespieler;
+    }*/
     public static int getSprachid() {
         return sprachid;
     }
@@ -130,11 +138,11 @@ public class auswahlklasse
     public static Dictionary<Integer, Turnier> getTurnierliste() {
         return turnierliste;
     }
-    public static Dictionary<Integer, Verein> getVereine() {
+    public static Dictionary<String, Verein> getVereine() {
         return vereine;
     }
     public static void addVerein(Verein verein) {
-        vereine.put(verein.getVereinsID(),verein);
+        vereine.put(verein.getExtVereinsID(),verein);
     }
 
 
@@ -204,5 +212,6 @@ public class auswahlklasse
     }
 
 
-
+    public static void setDictvorhandenespieler(Spieler neuerSpieler, ArrayList<Spieler> vorhandeneSpieler) {
+    }
 }

@@ -34,12 +34,23 @@ public class Gruppe extends Spielsystem {
                 rundeErstellen();
                 resetOffeneRundenSpiele();
             }
+            alleSpieleSchreiben();
 			setOffeneRundenSpiele(anzahlTeams/2);
 			resetAktuelleRunde();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	private void alleSpieleSchreiben() {
+		Enumeration e = getSpielklasse().getSpiele().keys();
+		while (e.hasMoreElements()){
+			int key = (int) e.nextElement();
+			Spiel spiel = getSpielklasse().getSpiele().get(key);
+			spiel.getSpielDAO().create(spiel);
+		}
+	}
+
 	public Gruppe(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spielListe, Dictionary<Integer,Ergebnis> ergebnisse) {
 		this.setSpielSystemArt(1); 							//Constructor nur für Einlesen aus der Datenbank
 		setSpielklasse(spielklasse);
@@ -156,6 +167,7 @@ public class Gruppe extends Spielsystem {
 				if(getSpielklasse()!=null){
 					getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setHeim(teamZwei);
 					getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setGast(teamEins);
+
 				}
 				else{
 					spielsystem.getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setHeim(teamZwei);
