@@ -17,6 +17,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
@@ -62,6 +64,8 @@ public class MainController implements Initializable, Observable
     private ChoiceBox choice_spielklassen= new ChoiceBox();
     @FXML
     private javafx.scene.control.TableView tabelle_spiele;
+    @FXML
+    private Tab tab_turnierbaum = new Tab();
 
     auswahlklasse a = new auswahlklasse();
 
@@ -659,7 +663,7 @@ public class MainController implements Initializable, Observable
     public void initialize(URL location, ResourceBundle resources) {
         ContextMenu contextMenu = new ContextMenu();
 
-
+        canvasKlassenvisualisierungErstellen();
 
 
         tabelle_spiele.setRowFactory(tv -> {
@@ -1069,6 +1073,250 @@ public class MainController implements Initializable, Observable
 
     }
 
+    private void canvasKlassenvisualisierungErstellen() {
+        Canvas canvas = new Canvas(1600,800);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        Spielklasse spielklasse = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(0);
+        Dictionary<Integer,Spiel> alleSpiele = spielklasse.getSpiele();
+
+        Enumeration e = alleSpiele.keys();
+        while(e.hasMoreElements()){
+            int key =(int) e.nextElement();
+            Spiel spiel = alleSpiele.get(key);
+        }
+        //////////////////////////////////////////////////////////////////
+        int anzahlSpiele = alleSpiele.size();
+        double anzahlTeilnehmerDouble = (((Math.sqrt(1 + anzahlSpiele*2*4))/2*2)+1)/2;     //(1/2) + (((1/4) + anzahlSpiele*2)^(1/2))
+        int anzahlTeilnehmer = (int) anzahlTeilnehmerDouble;
+        //System.out.println(anzahlTeilnehmer);
+
+        // vierer-übersicht ->
+        gc.beginPath();
+        gc.setStroke(Color.RED); gc.setLineWidth(5);
+        gc.moveTo(60,60); gc.lineTo(660,60); gc.lineTo(660,310);
+        gc.lineTo(60,310); gc.lineTo(60,60); gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(5);gc.moveTo(180,60); gc.lineTo(180,310); gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2);gc.moveTo(300,60); gc.lineTo(300,310); gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2);gc.moveTo(420,60); gc.lineTo(420,310); gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2);gc.moveTo(540,60); gc.lineTo(540,310); gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2);gc.moveTo(660,60); gc.lineTo(660,310); gc.stroke();
+        gc.closePath();
+////////////////////////////////////
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(5); gc.moveTo(60,110); gc.lineTo(660,110); gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2); gc.moveTo(60,160); gc.lineTo(660,160); gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2); gc.moveTo(60,210); gc.lineTo(660,210); gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2); gc.moveTo(60,260); gc.lineTo(660,260); gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2); gc.moveTo(60,310); gc.lineTo(660,310); gc.stroke();
+        gc.closePath();
+        //////////////////////////////////////
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(50); gc.moveTo(205,135);gc.lineTo(275,135);gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN);gc.setLineWidth(50);gc.moveTo(325,185); gc.lineTo(395,185);gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN);gc.setLineWidth(50);gc.moveTo(445,235);gc.lineTo(515,235);gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN);gc.setLineWidth(50);gc.moveTo(565,285);gc.lineTo(635,285);gc.stroke();
+        gc.closePath();
+
+        // 4-Teams-Turnierbaum ->
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2);
+        gc.moveTo(60,330);
+        gc.lineTo(180,330);
+        gc.lineTo(180,380);
+        gc.lineTo(60,380);
+        gc.lineTo(60,330);
+        gc.setStroke(Color.GREEN); gc.setLineWidth(1);
+        gc.moveTo(60,355);
+        gc.lineTo(180,355);
+        gc.moveTo(120,355);
+        gc.lineTo(120,380);
+        gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.RED); gc.setLineWidth(1);
+        gc.moveTo(190,355);
+        gc.lineTo(270,355);
+        gc.lineTo(270,415);
+        gc.lineTo(190,415);
+        gc.setStroke(Color.RED); gc.setLineWidth(1);
+        gc.moveTo(270,385);
+        gc.lineTo(310,385);
+        gc.stroke();
+        gc.closePath();
+
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2);
+        gc.moveTo(60,390);
+        gc.lineTo(180,390);
+        gc.lineTo(180,440);
+        gc.lineTo(60,440);
+        gc.lineTo(60,390);
+        gc.setStroke(Color.GREEN); gc.setLineWidth(1);
+        gc.moveTo(60,415);
+        gc.lineTo(180,415);
+        gc.moveTo(120,415);
+        gc.lineTo(120,440);
+        gc.stroke();
+        gc.closePath();
+
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2);
+        gc.moveTo(60,460);
+        gc.lineTo(180,460);
+        gc.lineTo(180,510);
+        gc.lineTo(60,510);
+        gc.lineTo(60,460);
+        gc.setStroke(Color.GREEN); gc.setLineWidth(1);
+        gc.moveTo(60,485);
+        gc.lineTo(180,485);
+        gc.moveTo(120,485);
+        gc.lineTo(120,510);
+        gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.RED); gc.setLineWidth(1);
+        gc.moveTo(190,485);
+        gc.lineTo(270,485);
+        gc.lineTo(270,545);
+        gc.lineTo(190,545);
+        gc.setStroke(Color.RED); gc.setLineWidth(1);
+        gc.moveTo(270,515);
+        gc.lineTo(310,515);
+        gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2);
+        gc.moveTo(60,520);
+        gc.lineTo(180,520);
+        gc.lineTo(180,570);
+        gc.lineTo(60,570);
+        gc.lineTo(60,520);
+        gc.setStroke(Color.GREEN); gc.setLineWidth(1);
+        gc.moveTo(60,545);
+        gc.lineTo(180,545);
+        gc.moveTo(120,545);
+        gc.lineTo(120,570);
+        gc.stroke();
+        gc.closePath();
+
+        ////////////////////////
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2);
+        gc.moveTo(320,360);
+        gc.lineTo(440,360);
+        gc.lineTo(440,410);
+        gc.lineTo(320,410);
+        gc.lineTo(320,360);
+        gc.setStroke(Color.GREEN); gc.setLineWidth(1);
+        gc.moveTo(320,385);
+        gc.lineTo(440,385);
+        gc.moveTo(380,385);
+        gc.lineTo(380,410);
+        gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.RED); gc.setLineWidth(1);
+        gc.moveTo(450,385);
+        gc.lineTo(530,385);
+        gc.lineTo(530,515);
+        gc.lineTo(450,515);
+        gc.setStroke(Color.RED); gc.setLineWidth(1);
+        gc.moveTo(530,450);
+        gc.lineTo(570,450);
+        gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2);
+        gc.moveTo(320,490);
+        gc.lineTo(440,490);
+        gc.lineTo(440,540);
+        gc.lineTo(320,540);
+        gc.lineTo(320,490);
+        gc.setStroke(Color.GREEN); gc.setLineWidth(1);
+        gc.moveTo(320,515);
+        gc.lineTo(440,515);
+        gc.moveTo(380,515);
+        gc.lineTo(380,540);
+        gc.stroke();
+        gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN); gc.setLineWidth(2);
+        gc.moveTo(580,425);
+        gc.lineTo(700,425);
+        gc.lineTo(700,475);
+        gc.lineTo(580,475);
+        gc.lineTo(580,425);
+        gc.setStroke(Color.GREEN); gc.setLineWidth(1);
+        gc.moveTo(580,450);
+        gc.lineTo(700,450);
+        gc.moveTo(640,450);
+        gc.lineTo(640,475);
+        gc.stroke();
+        gc.closePath();
+        ////////////////////////////////////////////
+
+        int spaltenBreite = 60;
+        int zeilenBreite = 50;
+        for(int zeile = 0; zeile < anzahlTeilnehmer; zeile++ )
+        {
+            for(int spalte = 0;spalte< anzahlTeilnehmer;spalte++){
+                //Hier die Zellen der Tabelle erstellen
+
+            }
+        }
+
+        //gc.strokeText("DUfiuzefuzis isatgwafaw", 300,200);
+        /////////////////////////////////////////////////////////////////////
+        tab_turnierbaum.setContent(canvas);
+
+    }
+
     public void focus(MouseEvent mouseEvent)
     {
 //        System.out.println("..---.."+a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().size());
@@ -1079,7 +1327,6 @@ public class MainController implements Initializable, Observable
 //        System.out.println(a.getAktuelleTurnierAuswahl().getObs_spiele().size());
 //        System.out.println(a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
 //        System.out.println(obs_spielklassen.size());
-
 
 
 

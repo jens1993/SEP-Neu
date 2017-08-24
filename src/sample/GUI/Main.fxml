@@ -107,7 +107,7 @@
                         <children>
                             <TabPane layoutX="-5.0" layoutY="-4.0" onMouseClicked="#focus" prefHeight="723.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <tabs>
-                                    <Tab styleClass="mainTab" text="Turnierbaum">
+                                    <Tab styleClass="mainTab" fx:id="tab_turnierbaum" text="Turnierbaum">
                                         <content>
                                             <AnchorPane />
                                         </content>
