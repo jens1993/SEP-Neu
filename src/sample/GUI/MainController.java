@@ -936,19 +936,19 @@ public class MainController implements Initializable, Observable
         lspielklassen = new Label("Spielklassen");
 
         gridPane_main.getChildren().add(lspielklassen);
-        GridPane.setColumnIndex(lspielklassen,2);
+        GridPane.setColumnIndex(lspielklassen,1);
         GridPane.setRowIndex(lspielklassen,0);
         gridPane_main.getChildren().add(checkComboBox);
-        GridPane.setColumnIndex(checkComboBox,3);
+        GridPane.setColumnIndex(checkComboBox,2);
         GridPane.setRowIndex(checkComboBox,0);
         gridPane_main.getChildren().add(check_aktiveSpiele);
-        GridPane.setColumnIndex(check_aktiveSpiele,4);
+        GridPane.setColumnIndex(check_aktiveSpiele,3);
         GridPane.setRowIndex(check_aktiveSpiele,0);
         gridPane_main.getChildren().add(check_ausstehendeSpiele);
-        GridPane.setColumnIndex(check_ausstehendeSpiele,5);
+        GridPane.setColumnIndex(check_ausstehendeSpiele,4);
         GridPane.setRowIndex(check_ausstehendeSpiele,0);
         gridPane_main.getChildren().add(check_gespielteSpiele);
-        GridPane.setColumnIndex(check_gespielteSpiele,6);
+        GridPane.setColumnIndex(check_gespielteSpiele,5);
         GridPane.setRowIndex(check_gespielteSpiele,0);
         check_aktiveSpiele.setText("Aktive Spiele");
         check_aktiveSpiele.setSelected(true);
@@ -956,7 +956,7 @@ public class MainController implements Initializable, Observable
         check_ausstehendeSpiele.setSelected(true);
         check_gespielteSpiele.setText("Gespielte Spiele");
         check_gespielteSpiele.setSelected(true);
-        checkComboBox.setMaxWidth(250);
+        checkComboBox.setMaxWidth(400);
         checkComboBox.getItems().setAll(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen());
 
         check_aktiveSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
