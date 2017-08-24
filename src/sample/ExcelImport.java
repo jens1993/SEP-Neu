@@ -39,6 +39,7 @@ public class ExcelImport implements Initializable{
     private static Dictionary<Spieler, ObservableList> dict_doppelte_spieler = new Hashtable<Spieler, ObservableList>();
 
     private static ObservableList obs_vorh=FXCollections.observableArrayList();
+    private static ObservableList obs_vereine_erfolgreich=FXCollections.observableArrayList();
     private static ObservableList obs_erf_spieler=FXCollections.observableArrayList();
     public static ObservableList getObs_erf_spieler() {
         return obs_erf_spieler;
@@ -56,6 +57,14 @@ public class ExcelImport implements Initializable{
         ExcelImport.obs_erf_spieler = obs_erf_spieler;
     }
 
+
+    public static ObservableList getObs_vereine_erfolgreich() {
+        return obs_vereine_erfolgreich;
+    }
+
+    public static void setObs_vereine_erfolgreich(ObservableList obs_vereine_erfolgreich) {
+        ExcelImport.obs_vereine_erfolgreich = obs_vereine_erfolgreich;
+    }
 
     public static ObservableList getObs_upd_f_spieler() {
         return obs_upd_f_spieler;
@@ -364,30 +373,25 @@ public class ExcelImport implements Initializable{
 
                     }
                     Enumeration e = auswahlklasse.getVereine().keys();
-                    while (e.hasMoreElements()){
-                        int key = (int) e.nextElement();
 
-                        if(verein == null) {
-                            Verein tempVerein = auswahlklasse.getVereine().get(key);
-                            if (tempVerein.getName().contentEquals(vereinsname)) {
-                                verein = tempVerein;
-                            } else if (tempVerein.getExtVereinsID().contentEquals(extVereinsID)) {
-                                System.out.println(extVereinsID);
-                                verein.getVereinDAO().create(new Verein(extVereinsID,vereinsname,verband));
-
-                               auswahlklasse.WarnungBenachrichtigung("Verein wurde erstellt: "+vereinsname,"...");
-                            }
-                        }
-                    }
                     if(verein ==null){
                         {
-                            verein = new Verein(extVereinsID,vereinsname,verband);
+                            if(auswahlklasse.getVereine().get(extVereinsID)==null)
+                            {
+                                verein = new Verein(extVereinsID,vereinsname,verband);
 
-                            auswahlklasse.addVerein(verein);
-                            System.out.println("neu");
-                            auswahlklasse.getVereine().put(auswahlklasse.getVereine().size()+1,verein);
+                                auswahlklasse.addVerein(verein);
+                                System.out.println("neu");
+                                auswahlklasse.getVereine().put(extSpielerID,verein);
 
-                            auswahlklasse.InfoBenachrichtigung("Neuer Verein",vereinsname+"-"+verband+"("+extVereinsID+")");
+                                //auswahlklasse.InfoBenachrichtigung("Neuer Verein",vereinsname+"-"+verband+"("+extVereinsID+")");
+                                obs_vereine_erfolgreich.add(verein);
+                            }
+                            else
+                            {
+                                System.out.println("wähle verein");
+                                verein =auswahlklasse.getVereine().get(extVereinsID);
+                            }
 
                         }
                     }

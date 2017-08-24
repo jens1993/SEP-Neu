@@ -1146,6 +1146,7 @@ public class MainController implements Initializable, Observable
                         alert.showAndWait();
                         ExcelImport.getObs_erf_spieler().clear();
                     }
+
                     if(ExcelImport.getObs_upd_f_spieler().size()>0) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Spielerimport - Update");
@@ -1153,6 +1154,14 @@ public class MainController implements Initializable, Observable
                         alert.setContentText(String.valueOf(ExcelImport.getObs_upd_f_spieler()));
                         alert.showAndWait();
                         ExcelImport.getObs_upd_f_spieler().clear();
+                    }
+                    if(ExcelImport.getObs_vereine_erfolgreich().size()>0) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Vereinimport - Neue Vereine");
+                        alert.setHeaderText("Vereine erfolgreich hinzugefügt ");
+                        alert.setContentText(String.valueOf(ExcelImport.getObs_vereine_erfolgreich()));
+                        alert.showAndWait();
+                        ExcelImport.getObs_vereine_erfolgreich().clear();
                     }
                     //ExcelImport ex = new ExcelImport();
                     //ex.pressBtn_Popup();

@@ -378,7 +378,7 @@ private TextField t_suchleistespielerhinzu;
         ObservableList vereine = FXCollections.observableArrayList();
         Enumeration enumKeys = auswahlklasse.getVereine().keys();
         while (enumKeys.hasMoreElements()){
-            int key = (int) enumKeys.nextElement();
+            String key = (String) enumKeys.nextElement();
             vereine.add(auswahlklasse.getVereine().get(key));
 
         }
