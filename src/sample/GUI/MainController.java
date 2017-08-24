@@ -1131,6 +1131,7 @@ public class MainController implements Initializable, Observable
             Stage stage = new Stage();
             File file = fileChooser.showOpenDialog(stage);
             if (file != null) {
+
                 if (ExcelImport.importExcelData(file.getAbsolutePath())) {
                     /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ExcelImportAbgeschlossen.fxml"));
                     Parent root1 = (Parent) fxmlLoader.load();
@@ -1138,22 +1139,44 @@ public class MainController implements Initializable, Observable
                     a.addStage(stage2);
                     stage2.setScene(new Scene(root1));
                     stage2.show();*/
-                    if(ExcelImport.getObs_erf_spieler().size()>0) {
+                    if(ExcelImport.getSpielererfolgreich().size()>0) {
+                        String s ="";
+                        Enumeration e = ExcelImport.getSpielererfolgreich().keys();
+                        while(e.hasMoreElements())
+                        {
+                            s+=e.nextElement().toString();
+                            if(e.hasMoreElements())
+                            {
+                                s+=" --- ";
+                            }
+                        }
+
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Spielerimport - Neue Spieler");
                         alert.setHeaderText("Spieler erfolgreich eingelesen! ");
-                        alert.setContentText(String.valueOf(ExcelImport.getObs_erf_spieler()));
+                        alert.setContentText(s);
                         alert.showAndWait();
-                        ExcelImport.getObs_erf_spieler().clear();
+                        //ExcelImport.setSpielererfolgreich(null);
                     }
 
-                    if(ExcelImport.getObs_upd_f_spieler().size()>0) {
+                    if(ExcelImport.getSpielerupdate().size()>0) {
+                        Enumeration eu = ExcelImport.getSpielerupdate().keys();
+                        String s ="";
+                        while(eu.hasMoreElements())
+                        {
+                            s+=eu.nextElement().toString();
+                            if(eu.hasMoreElements())
+                            {
+                                s+=" --- ";
+                            }
+                        }
+
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Spielerimport - Update");
                         alert.setHeaderText("Spieler erfolgreich aktualisiert! ");
-                        alert.setContentText(String.valueOf(ExcelImport.getObs_upd_f_spieler()));
+                        alert.setContentText(String.valueOf(ExcelImport.getSpielerupdate().keys()));
                         alert.showAndWait();
-                        ExcelImport.getObs_upd_f_spieler().clear();
+                        //ExcelImport.setSpielerupdate(null);
                     }
                     if(ExcelImport.getObs_vereine_erfolgreich().size()>0) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -1161,7 +1184,7 @@ public class MainController implements Initializable, Observable
                         alert.setHeaderText("Vereine erfolgreich hinzugefügt ");
                         alert.setContentText(String.valueOf(ExcelImport.getObs_vereine_erfolgreich()));
                         alert.showAndWait();
-                        ExcelImport.getObs_vereine_erfolgreich().clear();
+                        //ExcelImport.getObs_vereine_erfolgreich().clear();
                     }
                     //ExcelImport ex = new ExcelImport();
                     //ex.pressBtn_Popup();
@@ -1173,6 +1196,7 @@ public class MainController implements Initializable, Observable
 
                     alert.showAndWait();
                 }
+                ExcelImport.resetteAlles();
             }
         }
         catch (Exception e)

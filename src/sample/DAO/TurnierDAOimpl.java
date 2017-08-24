@@ -401,7 +401,7 @@ public class TurnierDAOimpl implements TurnierDAO {
             ResultSet vereinResult = smt.executeQuery();
             while (vereinResult.next()){
                 int vereinsid = vereinResult.getInt("VereinsID");
-                auswahlklasse.getVereine().put(vereinResult.getString("ExtVereinsID"),new Verein(vereinsid,vereinResult.getString("ExtVereinsID"),vereinResult.getString("Name"),vereinResult.getString("Verband")));
+                auswahlklasse.getVereine().put(vereinsid,new Verein(vereinsid,vereinResult.getString("ExtVereinsID"),vereinResult.getString("Name"),vereinResult.getString("Verband")));
             }
             smt.close();
 
