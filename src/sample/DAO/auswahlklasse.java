@@ -29,7 +29,7 @@ public class auswahlklasse
     private static Turnier aktuelleTurnierAuswahl = null;
     private static Spieler SpielerzumHinzufeuegen=null;
     private static ArrayList<Spieler> vorhandeneSpieler;
-    private static Dictionary<Spieler,ArrayList> dictvorhandenespieler = new Hashtable();
+  //  private static Dictionary<Spieler,ArrayList> dictvorhandenespieler = new Hashtable();
 
     private static Spiel SpielAuswahlErgebniseintragen;
     private static ObservableList<Spieler> obs_spieler = FXCollections.observableArrayList();
@@ -53,13 +53,13 @@ public class auswahlklasse
         return obs_spieler;
     }
 
-    public static Dictionary<Spieler, ArrayList> getDictvorhandenespieler() {
+  /*  public static Dictionary<Spieler, ArrayList> getDictvorhandenespieler() {
         return dictvorhandenespieler;
     }
 
     public static void setDictvorhandenespieler(Dictionary<Spieler, ArrayList> dictvorhandenespieler) {
         auswahlklasse.dictvorhandenespieler = dictvorhandenespieler;
-    }
+    }*/
     public static int getSprachid() {
         return sprachid;
     }

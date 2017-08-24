@@ -109,14 +109,18 @@ public class ExcelImport implements Initializable{
                     ExcelImport exc= new ExcelImport();
                     exc.pressBtn_Popup();
                     //ExcelImport.getObs_vorh().add(sp);
-                    if(dict_doppelte_spieler.get(sp)==null)
+                    if(dict_doppelte_spieler.get(aktuellerSpieler)==null)
                     {
-                        System.out.println("Spieler nicht vorhanden"+sp.getVName());
                        // auswahlklasse.InfoBenachrichtigung("Spieler nicht vorhanden",sp.toString()+" wurde hinzugefügt.");
                         sp.getSpielerDAO().create(sp);
                         auswahlklasse.getSpieler().put(sp.getSpielerID(),sp);
                         auswahlklasse.getObs_spieler().add(sp);
                         obs_erf_spieler.add(sp);
+                        System.out.println("hhhh");
+                    }
+                    else
+                    {
+                        System.out.println("DUPLIKATE");
                     }
                     obs_vorh.clear();
                     dict_doppelte_spieler.remove(sp.getExtSpielerID());

@@ -207,14 +207,15 @@ private TextField t_suchleistespielerhinzu;
         spieler_neu= new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),geschlecht,rpunkte,verein,t_spid.getText(),"");
         //endregion
 
-        ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
+        //ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
 
             felderLeeren();
             Enumeration e = auswahlklasse.getSpieler().elements();
+            ObservableList obs_vorhanden=FXCollections.observableArrayList();
             while(e.hasMoreElements())
             {
                 Spieler sp = (Spieler) e.nextElement();
-                if(sp!=null) {
+                if(sp!=null&&spieler_neu!=null&&sp.getVName()!=null&&sp.getNName()!=null) {
                     if (sp.getNName().equalsIgnoreCase(spieler_neu.getNName()) && sp.getVName().equalsIgnoreCase(spieler_neu.getVName())) {
 
                         System.out.println("Übereinstimmung gefunden:");
@@ -222,16 +223,17 @@ private TextField t_suchleistespielerhinzu;
                         TurnierDAO t;
                         //t = new TurnierDAOimpl();
 
-                        vorhandeneSpieler.add(sp);
+                        obs_vorhanden.add(sp);
 
                     }
                 }
             }
+            ExcelImport.getDict_doppelte_spieler().put(spieler_neu,obs_vorhanden);
 
 
 
 
-        if(vorhandeneSpieler.size()>0)
+        if(obs_vorhanden.size()>0)
         {
            /* ExcelImport.setSpielerzumHinzufeuegen(spieler_neu);
             ExcelImport.setVorhandeneSpieler(vorhandeneSpieler);*/

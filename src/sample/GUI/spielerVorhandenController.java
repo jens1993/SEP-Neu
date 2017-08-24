@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
 public class spielerVorhandenController implements Initializable
 {
 
-
+//region Deklaration Fxml
     @FXML TableView popup_tabelle;
     @FXML TableView popup_tabelle2;
 
@@ -57,7 +57,7 @@ public class spielerVorhandenController implements Initializable
     @FXML TableColumn popup_spielerid;
     @FXML TableColumn popup_spielerid2;
 
-
+//endregion
 
     Spieler updateSpieler = null;
 
@@ -90,7 +90,7 @@ public class spielerVorhandenController implements Initializable
             obs_vorhandeneSpieler.clear();
             auswahlklasse.getStagesdict().get("SpielerVorhanden").close();
             auswahlklasse.InfoBenachrichtigung("Spieler erfolreich aktualisiert",ExcelImport.getAktuellerSpieler().toString()+" wurde aktualisiert.");
-            ExcelImport.getObs_upd_f_spieler().add(ExcelImport.getAktuellerSpieler());
+           ExcelImport.getObs_upd_f_spieler().add(ExcelImport.getAktuellerSpieler());
 
             Tabellefuelle();
 
@@ -131,7 +131,8 @@ public class spielerVorhandenController implements Initializable
 
                 Tabellefuelle();
                 auswahlklasse.InfoBenachrichtigung("Spieler erfolreich hinzugefügt",spielerzumHinzufuegen.toString()+" wurde hinzugefügt.");
-               ExcelImport.getObs_erf_spieler().add(spielerzumHinzufuegen);
+
+                ExcelImport.getObs_erf_spieler().add(spielerzumHinzufuegen);
             }
             else {
                 ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -143,6 +144,7 @@ public class spielerVorhandenController implements Initializable
 
 
     }
+    //region Button
     public void pressBtn_LadeSpielerHinzu (ActionEvent event) throws Exception {
         System.out.println("test");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielerHinzu.fxml"));
@@ -154,6 +156,7 @@ public class spielerVorhandenController implements Initializable
         stage.show();
         stage.setTitle("Spieler hinzufügen");
     }
+
     public void SpielerVorhanden (ActionEvent event) throws Exception {
         System.out.println("test");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielerVorhanden.fxml"));
@@ -165,78 +168,29 @@ public class spielerVorhandenController implements Initializable
         stage.show();
         stage.setTitle("SpielerVorhanden");
     }
+    //Endregion
     private void Tabellefuelle()
     {
-        if(auswahlklasse.getDictvorhandenespieler().size()>0) {
-            Enumeration e = auswahlklasse.getDictvorhandenespieler().keys();
-            Spieler sp = (Spieler) e.nextElement();
-
-            obs_vorhandeneSpieler = ExcelImport.getDict_doppelte_spieler().get(sp.getExtSpielerID());
+        obs_vorhandeneSpieler=ExcelImport.getDict_doppelte_spieler().get(ExcelImport.getAktuellerSpieler());
 
 
-            obs_neuerSpieler.add(sp);
+        obs_neuerSpieler.add(ExcelImport.getAktuellerSpieler());
+        setTable();
+
+        //ExcelImport.getDict_doppelte_spieler().remove(ExcelImport.getAktuellerSpieler());
 
 
-            setTable();
-            ExcelImport.getDict_doppelte_spieler().remove(sp.getExtSpielerID());
-        }
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (null != ExcelImport.getAktuellerSpieler() && null != ExcelImport.getDict_doppelte_spieler().get(ExcelImport.getAktuellerSpieler())) {
-            System.out.println("BBBBBBBBBBBBTest   " + ExcelImport.getDict_doppelte_spieler());
 
-            if (ExcelImport.getDict_doppelte_spieler().get(ExcelImport.getAktuellerSpieler()).size() > 0) {
-                setTable();
-                Tabellefuelle();
+        obs_neuerSpieler.clear();
+        obs_neuerSpieler.add(ExcelImport.getAktuellerSpieler());
+        obs_vorhandeneSpieler=ExcelImport.getDict_doppelte_spieler().get(ExcelImport.getAktuellerSpieler());
 
-                Enumeration e = auswahlklasse.getDictvorhandenespieler().keys();
-                while (e.hasMoreElements()) {
-                    Spieler sp = (Spieler) e.nextElement();
-                    int key = sp.getSpielerID();
-                    System.out.println();
-                    System.out.println();
-                    System.out.println();
-                    System.out.println("---------" + auswahlklasse.getDictvorhandenespieler().size());
-                    System.out.println("Spieler " + auswahlklasse.getDictvorhandenespieler().get(sp));
-                    System.out.println("---------" + auswahlklasse.getDictvorhandenespieler().get(sp).size());
-                    obs_neuerSpieler.add(sp);
-                    setTable();
-                }
-                obs_neuerSpieler.add(ExcelImport.getAktuellerSpieler());
-            }
-        popup_tabelle2.setItems(ExcelImport.getDict_doppelte_spieler().get(ExcelImport.getAktuellerSpieler()));
-            popup_tabelle.setItems(obs_neuerSpieler);
-        }
+        setTable();
+
     }
-       /*                                   vorhandeneSpieler=auswahlklasse.getDictvorhandenespieler().get(sp);
-
-                }*//*
-
-
-        }
-        else if(ExcelImport.getVorhandeneSpieler()!=null&&ExcelImport.getVorhandeneSpieler().size()>0)
-        {
-        vorhandeneSpieler=ExcelImport.getVorhandeneSpieler();
-
-        for(int i=0;i<vorhandeneSpieler.size();i++)
-        {
-
-            obs_vorhandeneSpieler.add(vorhandeneSpieler.get(i));
-
-        }
-        obs_neuerSpieler.add(ExcelImport.getSpielerzumHinzufeuegen());
-
-
-
-
-
-
-*/
-
-
-
-
 
 
     private void setTable()
