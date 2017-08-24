@@ -321,9 +321,18 @@ private TextField t_suchleistespielerhinzu;
         spieler_neu.setrPunkte(rpunkte);
         spieler_neu.setGeschlecht(geschlecht);
         spieler_neu.setVerein(v);
-        spieler_neu.getSpielerDAO().update(spieler_neu);
 
-        System.out.println("erf");
+        boolean erfolg = spieler_neu.getSpielerDAO().update(spieler_neu);
+
+        if(!erfolg)
+        {
+            auswahlklasse.WarnungBenachrichtigung("Spieler Update Fehler","fehler");
+        }
+        else
+        {
+            auswahlklasse.InfoBenachrichtigung("erfolg","erfolg");
+        }
+
 
         auswahlklasse.getSpieler().remove(spieler_neu.getSpielerID());
         auswahlklasse.getSpieler().put(spieler_neu.getSpielerID(),spieler_neu);
@@ -412,6 +421,7 @@ private TextField t_suchleistespielerhinzu;
                         public void handle(ActionEvent event) {
                             tabpane_spieler.getSelectionModel().select(tab_spupdate);
                             FuelleFelder(clickedRow);
+                            spieler_neu=clickedRow;
                         }
                     });
                     MenuItem item3 = new MenuItem("Spieler löschen");
@@ -424,11 +434,16 @@ private TextField t_suchleistespielerhinzu;
                                 boolean loeschespieler = clickedRow.getSpielerDAO().delete(clickedRow);
                             if(loeschespieler) {
                                 obs_spieler.remove(clickedRow);
-                                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
+                                //auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
                                 auswahlklasse.getSpieler().remove(clickedRow);
                                 tabelle_spielerliste.refresh();
                                 System.out.println("Lösche   " + clickedRow.getNName());
+                                auswahlklasse.InfoBenachrichtigung("erf","erfolg");
 
+                            }
+                            else
+                            {
+                                auswahlklasse.WarnungBenachrichtigung("Fehler","fehler");
                             }
                         }
                     });
