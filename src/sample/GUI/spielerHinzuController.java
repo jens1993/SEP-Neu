@@ -110,7 +110,7 @@ private TextField t_suchleistespielerhinzu;
     HashMap<Integer, Spieler> spielerhash = new HashMap<Integer, Spieler>();
 
     private static Spieler spieler_neu=null;
-    private ObservableList<Spieler> obs_spieler = auswahlklasse.getObs_spieler();
+    private static ObservableList<Spieler> obs_spieler = auswahlklasse.getObs_spieler();
 
 
     private void printSpielerZuordnenTableNeu() throws Exception {
@@ -164,6 +164,14 @@ private TextField t_suchleistespielerhinzu;
 
     }
 
+    public static ObservableList<Spieler> getObs_spieler() {
+        return obs_spieler;
+    }
+
+    public static void setObs_spieler(ObservableList<Spieler> obs_spielerr) {
+        obs_spieler = obs_spielerr;
+    }
+
     @FXML
     public void pressBtn_SpielerSpeichern(ActionEvent event) throws Exception
     {
@@ -202,22 +210,25 @@ private TextField t_suchleistespielerhinzu;
         ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
 
             felderLeeren();
-        for(Enumeration e = auswahlklasse.getSpieler().elements();e.hasMoreElements();)
-        {
-            Spieler sp = (Spieler) e.nextElement();
-            if(sp.getNName().equalsIgnoreCase(spieler_neu.getNName()) && sp.getVName().equalsIgnoreCase(spieler_neu.getVName()))
+            Enumeration e = auswahlklasse.getSpieler().elements();
+            while(e.hasMoreElements())
             {
+                Spieler sp = (Spieler) e.nextElement();
+                if(sp!=null) {
+                    if (sp.getNName().equalsIgnoreCase(spieler_neu.getNName()) && sp.getVName().equalsIgnoreCase(spieler_neu.getVName())) {
 
-                System.out.println("Übereinstimmung gefunden:");
-                System.out.println(sp.getVName()+" "+sp.getNName()+" --- "+spieler_neu.getVName()+" "+spieler_neu.getNName());
-                TurnierDAO t;
-                //t = new TurnierDAOimpl();
+                        System.out.println("Übereinstimmung gefunden:");
+                        System.out.println(sp.getVName() + " " + sp.getNName() + " --- " + spieler_neu.getVName() + " " + spieler_neu.getNName());
+                        TurnierDAO t;
+                        //t = new TurnierDAOimpl();
 
-                vorhandeneSpieler.add(sp);
+                        vorhandeneSpieler.add(sp);
 
+                    }
+                }
             }
 
-        }
+
 
 
         if(vorhandeneSpieler.size()>0)

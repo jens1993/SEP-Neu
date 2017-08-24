@@ -1144,6 +1144,7 @@ public class MainController implements Initializable, Observable
                         alert.setHeaderText("Spieler erfolgreich eingelesen! ");
                         alert.setContentText(String.valueOf(ExcelImport.getObs_erf_spieler()));
                         alert.showAndWait();
+                        ExcelImport.getObs_erf_spieler().clear();
                     }
                     if(ExcelImport.getObs_upd_f_spieler().size()>0) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -1151,6 +1152,7 @@ public class MainController implements Initializable, Observable
                         alert.setHeaderText("Spieler erfolgreich aktualisiert! ");
                         alert.setContentText(String.valueOf(ExcelImport.getObs_upd_f_spieler()));
                         alert.showAndWait();
+                        ExcelImport.getObs_upd_f_spieler().clear();
                     }
                     //ExcelImport ex = new ExcelImport();
                     //ex.pressBtn_Popup();

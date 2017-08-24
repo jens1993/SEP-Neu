@@ -112,6 +112,7 @@ public class ExcelImport implements Initializable{
                     if(dict_doppelte_spieler.get(sp)==null)
                     {
                         System.out.println("Spieler nicht vorhanden"+sp.getVName());
+                       // auswahlklasse.InfoBenachrichtigung("Spieler nicht vorhanden",sp.toString()+" wurde hinzugefügt.");
                         sp.getSpielerDAO().create(sp);
                         auswahlklasse.getSpieler().put(sp.getSpielerID(),sp);
                         auswahlklasse.getObs_spieler().add(sp);
@@ -150,11 +151,14 @@ public class ExcelImport implements Initializable{
                     if(dict_doppelte_spieler.get(sp)==null)
                     {
                         System.out.println("Spieler nicht vorhanden"+sp.getVName());
+                        //auswahlklasse.InfoBenachrichtigung("Spieler nicht vorhanden",sp.toString()+" wurde hinzugefügt.");
                         sp.getSpielerDAO().create(sp);
+                        auswahlklasse.getSpieler().put(sp.getSpielerID(),sp);
+                        auswahlklasse.getObs_spieler().add(sp);
                         obs_erf_spieler.add(sp);
                     }
                     obs_vorh.clear();
-                    dict_doppelte_spieler.remove(sp.getExtSpielerID());
+                    //dict_doppelte_spieler.remove(sp.getExtSpielerID());
                     System.out.println("Spieler erfolgreich (ohne Duplikat) erstellt");
                 }
                 actualRow++;
@@ -169,7 +173,21 @@ public class ExcelImport implements Initializable{
                         auswahlklasse.getObs_spieler().add(tempSpieler);
                         auswahlklasse.addSpieler(tempSpieler);
                         System.out.println(tempSpieler.getVName()+" "+tempSpieler.getNName()+" gespeichert"+ " geschlecht:"+tempSpieler.getGeschlecht()+" extID:"+tempSpieler.getExtSpielerID()+"verein: "+tempSpieler.getVerein()+" gdatum:"+tempSpieler.getGDatum());
-
+                        ExcelImport exc= new ExcelImport();
+                        exc.pressBtn_Popup();
+                        //ExcelImport.getObs_vorh().add(sp);
+                        if(dict_doppelte_spieler.get(tempSpieler)==null)
+                        {
+                            System.out.println("Spieler nicht vorhanden"+tempSpieler.getVName());
+                            //auswahlklasse.InfoBenachrichtigung("Spieler nicht vorhanden",tempSpieler.toString()+" wurde hinzugefügt.");
+                            tempSpieler.getSpielerDAO().create(tempSpieler);
+                            auswahlklasse.getSpieler().put(tempSpieler.getSpielerID(),tempSpieler);
+                            auswahlklasse.getObs_spieler().add(sp);
+                            obs_erf_spieler.add(tempSpieler);
+                        }
+                        obs_vorh.clear();
+                        //dict_doppelte_spieler.remove(sp.getExtSpielerID());
+                        System.out.println("Spieler erfolgreich (ohne Duplikat) erstellt");
                     }
                 }
                 actualRow++;
@@ -188,7 +206,7 @@ public class ExcelImport implements Initializable{
 
 
     private static Spieler readRow(HSSFRow row) throws Exception {
-        dict_doppelte_spieler=new Hashtable<>();
+       // dict_doppelte_spieler=new Hashtable<>();
         int cellNumber = 0;
         HSSFCell cell = row.getCell(cellNumber);
 
@@ -205,7 +223,7 @@ public class ExcelImport implements Initializable{
 
         HSSFCell nachnameZelle = row.getCell(1);
         if (nachnameZelle != null ) {
-            if(nachnameZelle.toString().length()>1&&(nachnameZelle.getStringCellValue() != ""||nachnameZelle.getStringCellValue().toUpperCase()!="FREILOS"||nachnameZelle.getStringCellValue().toUpperCase()!="FREIMELDUNG")) {
+            if(nachnameZelle.toString().length()>1&&(nachnameZelle.getStringCellValue() != ""&&nachnameZelle.getStringCellValue().toUpperCase()!="FREILOS"&&nachnameZelle.getStringCellValue().toUpperCase()!="FREIMELDUNG")) {
                 if(!nachnameZelle.getStringCellValue().substring(0,1).equalsIgnoreCase("#"))
                 {
                     freilos=false;
@@ -367,12 +385,12 @@ public class ExcelImport implements Initializable{
                             boolean b =false;
                             if(sp.getExtSpielerID()!=null&&neuerSpieler.getExtSpielerID()!=null)
                             {
-                                b=true;
-                            }
+
+
                             if (sp.getNName().equalsIgnoreCase(neuerSpieler.getNName()) && sp.getVName().equalsIgnoreCase(neuerSpieler.getVName())) {
 
                                 b=true;
-                            }
+                            }}
                             if(b) {
                                 //vorhandeneSpieler.add(sp);
 
@@ -413,6 +431,7 @@ public class ExcelImport implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // ExcelImport.getVorhandeneSpieler().clear();
+
 
 
     }
