@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -21,7 +20,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox_main" onMouseClicked="#focus" prefHeight="1050" prefWidth="1650" stylesheets="@/CSS/Main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
+<VBox fx:id="vbox_main" onMouseClicked="#focus" prefHeight="1050" prefWidth="1650" stylesheets="@/CSS/Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
 <children>
     <MenuBar prefHeight="32.0" prefWidth="1390.0">
         <menus>
@@ -71,73 +70,105 @@
             </Menu>
         </menus>
     </MenuBar>
-    <HBox prefHeight="86.0" prefWidth="1371.0">
-        <children>
-            <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="114.0">
-               <buttons>
-                  <Button layoutX="49.0" layoutY="38.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="94.0" text="Button" />
-                  <Button layoutX="115.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="94.0" prefWidth="124.0" text="Button" />
-                  <Button layoutX="200.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="94.0" prefWidth="124.0" text="Button" />
-                  <Button layoutX="285.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="94.0" prefWidth="124.0" text="Button" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="94.0" prefWidth="124.0" text="Button" />
-               </buttons></ButtonBar>
-            <ButtonBar />
-        </children>
-    </HBox>
       <GridPane prefHeight="930.0" prefWidth="1650.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="817.0" minWidth="10.0" prefWidth="230.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="250.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="1420.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-              <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="937.0" prefWidth="1226.0" GridPane.columnIndex="1">
+              <AnchorPane id="Content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" prefHeight="0.0" prefWidth="1420.0" GridPane.columnIndex="1">
                   <children>
-                      <TabPane layoutX="-5.0" layoutY="-4.0" onMouseClicked="#focus" prefHeight="723.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <tabs>
-                              <Tab text="Turnierbaum">
-                                  <content>
-                                      <AnchorPane />
-                                  </content>
-                              </Tab>
-                              <Tab id="spieluebersicht" fx:id="tab_spieluebersicht" onSelectionChanged="#fuelleSpielElemente" text="Spielübersicht">
-                           <content>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <GridPane fx:id="gridPane_main" prefHeight="8.0" prefWidth="1369.0">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="705.0" minWidth="0.0" prefWidth="0.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="157.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="367.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="277.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="302.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="284.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="284.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                    </GridPane>
-                                    <TabPane />
-                                    <TableView fx:id="tabelle_spiele" onMouseClicked="#focus" prefHeight="961.0" prefWidth="1420.0" />
-                                 </children>
-                              </VBox>
-                           </content>
-                              </Tab>
-                          </tabs>
-                      </TabPane>
+                  <GridPane layoutY="83.0" prefHeight="1020.0" prefWidth="1420.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="396.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="968.0" minHeight="10.0" prefHeight="957.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                            <TabPane onMouseClicked="#focus" prefHeight="957.0" prefWidth="1439.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
+                                <tabs>
+                                    <Tab text="Turnierbaum">
+                                        <content>
+                                            <AnchorPane prefHeight="918.0" prefWidth="1452.0" />
+                                        </content>
+                                    </Tab>
+                                    <Tab id="spieluebersicht" fx:id="tab_spieluebersicht" onSelectionChanged="#fuelleSpielElemente" text="Spielübersicht">
+                                 <content>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <GridPane fx:id="gridPane_main" prefHeight="8.0" prefWidth="1369.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="705.0" minWidth="0.0" prefWidth="0.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="157.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="367.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="277.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="302.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="284.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1420.0" minWidth="10.0" prefWidth="284.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                          </GridPane>
+                                          <TabPane />
+                                          <TableView fx:id="tabelle_spiele" onMouseClicked="#focus" prefHeight="785.0" prefWidth="1420.0" />
+                                       </children>
+                                    </VBox>
+                                 </content>
+                                    </Tab>
+                                </tabs>
+                            </TabPane>
+                        <GridPane>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="284.0" text="Button" />
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="284.0" text="Button" GridPane.columnIndex="1" />
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="284.0" text="Button" GridPane.columnIndex="2" />
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="284.0" text="Button" GridPane.columnIndex="3" />
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="284.0" text="Button" GridPane.columnIndex="4" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
                   </children>
               </AnchorPane>
-            <VBox alignment="TOP_CENTER" prefWidth="828.0">
+            <VBox alignment="TOP_CENTER" prefHeight="920.0" prefWidth="222.0">
                <children>
-                    <Button fx:id="btn_turnierLaden" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" prefHeight="50.0" prefWidth="153.0" text="Turnierübersicht" textAlignment="CENTER" />
-                    <Button fx:id="btn_klassen" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_klassen" prefHeight="50.0" prefWidth="105.0" text="Klassen" textAlignment="CENTER" />
-                    <Button fx:id="btn_spieler" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_spieler" prefHeight="50.0" text="Spieler" textAlignment="CENTER" />
-                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_teamLaden" prefHeight="50.0" text="Teams" textAlignment="CENTER" />
-                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" text="Zeitplan" textAlignment="CENTER" />
-                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_Statistik" prefHeight="50.0" text="Statistik" textAlignment="CENTER" />
+                  <GridPane prefHeight="891.0" prefWidth="374.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="250.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                          <Button fx:id="btn_turnierLaden" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" prefHeight="36.0" prefWidth="230.0" text="Turnierübersicht" textAlignment="CENTER" />
+                          <Button fx:id="btn_klassen" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_klassen" prefHeight="152.0" prefWidth="180.0" text="Klassen" textAlignment="CENTER" GridPane.rowIndex="1" />
+                          <Button fx:id="btn_spieler" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_spieler" prefHeight="149.0" prefWidth="225.0" text="Spieler" textAlignment="CENTER" GridPane.rowIndex="2" />
+                          <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_teamLaden" prefHeight="148.0" prefWidth="178.0" text="Teams" textAlignment="CENTER" GridPane.rowIndex="3" />
+                          <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" text="Zeitplan" textAlignment="CENTER" GridPane.rowIndex="4" />
+                          <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtn_Statistik" prefHeight="0.0" prefWidth="230.0" text="Statistik" textAlignment="CENTER" GridPane.rowIndex="5" />
+                     </children>
+                  </GridPane>
                </children>
             </VBox>
          </children>
