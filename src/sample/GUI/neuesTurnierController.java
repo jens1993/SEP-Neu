@@ -38,7 +38,6 @@ public class neuesTurnierController implements Initializable
 
     @FXML
     private BigDecimalField AnzahlFelder;
- auswahlklasse a = new auswahlklasse();
     @FXML
     public void erstelleTurnier(ActionEvent event) throws Exception
     {
@@ -59,7 +58,7 @@ public class neuesTurnierController implements Initializable
             new Feld(turnier);
         }
 
-        a.InfoBenachrichtigung("Turnier erstellt",turnier.getName()+" wurde erstellt.");
+        auswahlklasse.InfoBenachrichtigung("Turnier erstellt",turnier.getName()+" wurde erstellt.");
         System.out.println("Erfolg");
 
         try{
@@ -67,11 +66,11 @@ public class neuesTurnierController implements Initializable
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
 
-            a.addStagesdict(stage,"TurnierLaden");
+            auswahlklasse.addStagesdict(stage,"TurnierLaden");
             stage.setScene(new Scene(root1));
             stage.show();
 
-            a.turnierAuswahlSpeichern(turnier);
+            auswahlklasse.turnierAuswahlSpeichern(turnier);
             stage.setTitle("Badminton Turnierverwaltung - Kein Turnier ausgewählt");
 
         }

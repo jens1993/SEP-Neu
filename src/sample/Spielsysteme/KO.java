@@ -31,9 +31,19 @@ public class KO extends Spielsystem {
 		freiloseHinzufuegen(setzliste);
 		knotenAufbauen(teilnehmerzahl);
 		ersteRundeFuellen(setzliste);
+		alleSpieleSchreiben();
 	}
 
-    public KO(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
+	private void alleSpieleSchreiben() {
+		for (int i=0; i<getRundenArray().size();i++){
+			for(int j=0;j<getRundenArray().get(i).size();j++){
+				Spiel spiel = getRundenArray().get(i).get(j);
+				spiel.getSpielDAO().create(spiel);
+			}
+		}
+	}
+
+	public KO(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
 		this.setSpielklasse(spielklasse);		//Constructor nur für Einlesen aus der Datenbank
 		this.teilnehmerzahl=setzliste.size();
 		setSpielSystemArt(3);
@@ -176,6 +186,7 @@ public class KO extends Spielsystem {
 			} else {
 				parent.getSpiel().setGast(spiel.getSieger());
 			}
+			parent.getSpiel().getSpielDAO().update(parent.getSpiel());
 			return false;
 		}
 		else{

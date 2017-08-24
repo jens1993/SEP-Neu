@@ -60,10 +60,9 @@ public class SpielErgebnisEingebenController implements Initializable{
     @FXML
     private Label l_meldungergebnis;
 
-    auswahlklasse a = new auswahlklasse();
-    Dictionary<Integer, Spiel> dictspiele = a.getAktuelleTurnierAuswahl().getSpiele();
+    Dictionary<Integer, Spiel> dictspiele = auswahlklasse.getAktuelleTurnierAuswahl().getSpiele();
 
-    Spiel sp = dictspiele.get(a.getSpielAuswahlErgebniseintragen().getSpielID());
+    Spiel sp = dictspiele.get(auswahlklasse.getSpielAuswahlErgebniseintragen().getSpielID());
 
 
     Ergebnis erg;
@@ -127,10 +126,10 @@ public class SpielErgebnisEingebenController implements Initializable{
             if(erg!=null) {
                 try {
 
-                    a.getSpielAuswahlErgebniseintragen().setErgebnis(erg);
-                    a.getSpielAuswahlErgebniseintragen().setStatus(3);
+                    auswahlklasse.getSpielAuswahlErgebniseintragen().setErgebnis(erg);
+                    auswahlklasse.getSpielAuswahlErgebniseintragen().setStatus(3);
                    // a.getAktuelleTurnierAuswahl().addobsGespielteSpiele(a.getSpielAuswahlErgebniseintragen());
-                    a.getAktuelleTurnierAuswahl().removeobsAusstehendeSpiele(a.getSpielAuswahlErgebniseintragen());
+                    auswahlklasse.getAktuelleTurnierAuswahl().removeobsAusstehendeSpiele(auswahlklasse.getSpielAuswahlErgebniseintragen());
                     l_meldungergebnis.setText("Ergebnis erfolgreich eingetragen");
 
 
@@ -194,7 +193,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         {
             System.out.println("gespieltes Spiel");
 
-            int[] ergebnisArray =a.getSpielAuswahlErgebniseintragen().getErgebnis().getErgebnisArray() ;
+            int[] ergebnisArray =auswahlklasse.getSpielAuswahlErgebniseintragen().getErgebnis().getErgebnisArray() ;
             ts1_1.setText(String.valueOf(ergebnisArray[0]));
             ts1_2.setText(String.valueOf(ergebnisArray[1]));
             ts2_1.setText(String.valueOf(ergebnisArray[2]));
@@ -207,14 +206,14 @@ public class SpielErgebnisEingebenController implements Initializable{
 
 
         //Listener für Textboxen
-        if(a.getSpielAuswahlErgebniseintragen()!=null)
+        if(auswahlklasse.getSpielAuswahlErgebniseintragen()!=null)
         {
-            l_gast.setText(a.getSpielAuswahlErgebniseintragen().getGast().toString());
-            l_heim.setText(a.getSpielAuswahlErgebniseintragen().getHeim().toString());
+            l_gast.setText(auswahlklasse.getSpielAuswahlErgebniseintragen().getGast().toString());
+            l_heim.setText(auswahlklasse.getSpielAuswahlErgebniseintragen().getHeim().toString());
 
-            if(a.getSpielAuswahlErgebniseintragen().getErgebnis()!=null)
+            if(auswahlklasse.getSpielAuswahlErgebniseintragen().getErgebnis()!=null)
             {
-                erg = a.getSpielAuswahlErgebniseintragen().getErgebnis();
+                erg = auswahlklasse.getSpielAuswahlErgebniseintragen().getErgebnis();
                 System.out.println(erg);
             }
 

@@ -14,22 +14,22 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
     @Override
     public boolean create(int setzplatz, Team team,  Spielklasse spielklasse) {
         try {
-            SQLConnection con = new SQLConnection();
+            Connection con = SQLConnection.getCon();
             String sql = "INSERT INTO spielklasse_setzliste ("
-                        + "setzplatz, "
-                        + "spielklasseID, "
-                        + "TeamID) "
-                        + "VALUES (?,?,?)";
+                    + "setzplatz, "
+                    + "spielklasseID, "
+                    + "TeamID) "
+                    + "VALUES (?,?,?)";
 
-                PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
-                smt.setInt(1, setzplatz);
-                smt.setInt(2, spielklasse.getSpielklasseID());
-                smt.setInt(3, team.getTeamid());
-                smt.executeUpdate();
-                smt.close();
-                System.out.println("Setzliste Einfügen klappt");
-            con.closeCon();
-                return true;
+            PreparedStatement smt = con.prepareStatement(sql);
+            smt.setInt(1, setzplatz);
+            smt.setInt(2, spielklasse.getSpielklasseID());
+            smt.setInt(3, team.getTeamid());
+            smt.executeUpdate();
+            smt.close();
+            System.out.println("Setzliste Einfügen klappt");
+
+            return true;
 
 
         } catch (SQLException e) {
@@ -43,13 +43,13 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
     public boolean delete(int spielklasseid) {
         String sql = "Delete From spielklasse_setzliste Where SpielklasseID= ?";
         try{
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, spielklasseid);
             smt.executeUpdate();
             smt.close();
             System.out.println("Setzliste Loeschen klappt");
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -68,14 +68,14 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
                 + "AND setzplatz = ?"
                 ;
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, team.getTeamid());
             smt.setInt(2, spielklasse.getSpielklasseID());
             smt.setInt(3, setzplatz);
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {

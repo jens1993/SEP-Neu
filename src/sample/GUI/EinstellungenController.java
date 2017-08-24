@@ -40,7 +40,6 @@ public class EinstellungenController implements Initializable
     private RadioButton rd;
     @FXML
     private RadioButton re;
-    auswahlklasse a = new auswahlklasse();
 
  SQLConnection sqlConnection = new SQLConnection();
 
@@ -48,13 +47,13 @@ public class EinstellungenController implements Initializable
  {
      if(rd.isSelected())
      {
-         a.setSprachid(1);
+         auswahlklasse.setSprachid(1);
      }
      if(re.isSelected())
      {
-         a.setSprachid(2);
+         auswahlklasse.setSprachid(2);
      }
-     System.out.println(a.getSprachid());
+     System.out.println(auswahlklasse.getSprachid());
  }
  @FXML
  public void btn_einstellungenspeichern(ActionEvent event)
@@ -70,7 +69,7 @@ public class EinstellungenController implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
         try {
             //a.getStagesdict().get("Main").close();
-            Dictionary<String,Stage> stages =a.getStagesdict();
+            Dictionary<String,Stage> stages =auswahlklasse.getStagesdict();
 
             //urnierLaden();
             thost.setText(sqlConnection.getDbHost());
@@ -78,12 +77,12 @@ public class EinstellungenController implements Initializable
             tpw.setText(sqlConnection.getDbPass());
             tuser.setText(sqlConnection.getDbUser());
 
-            if(a.getSprachid()==1)
+            if(auswahlklasse.getSprachid()==1)
             {
                 rd.setSelected(true);
             }
 
-            if(a.getSprachid()==2)
+            if(auswahlklasse.getSprachid()==2)
             {
                 re.setSelected(true);
             }

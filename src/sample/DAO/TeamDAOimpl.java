@@ -2,17 +2,13 @@ package sample.DAO;
 
 import sample.Team;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 /**
  * Created by Florian-PC on 25.07.2017.
  */
 public class TeamDAOimpl implements TeamDAO {
-    auswahlklasse a = new auswahlklasse();
     @Override
     public boolean create(Team team) {
         String idAbfrage = "Select AUTO_INCREMENT " +
@@ -34,31 +30,31 @@ public class TeamDAOimpl implements TeamDAO {
                 + "VALUES(?,?)"
                 ;
         try {
-            SQLConnection con = new SQLConnection();
-            Statement smtID = con.SQLConnection().createStatement();
+            Connection con = SQLConnection.getCon();
+            Statement smtID = con.createStatement();
             ResultSet count = smtID.executeQuery(idAbfrage);
             count.next();
             int teamID = count.getInt("AUTO_INCREMENT");
             System.out.println(teamID);
-            team.setTeamid(count.getInt("AUTO_INCREMENT"),a.getAktuelleSpielklassenAuswahl());
+            team.setTeamid(count.getInt("AUTO_INCREMENT"),auswahlklasse.getAktuelleSpielklassenAuswahl());
             smtID.close();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, team.getSpielklasse().getSpielklasseID());
             smt.executeUpdate();
             smt.close();
-            PreparedStatement smtSpielerEins = con.SQLConnection().prepareStatement(sqlSpielerEins);
+            PreparedStatement smtSpielerEins = con.prepareStatement(sqlSpielerEins);
             smtSpielerEins.setInt(1, team.getTeamid() );
             smtSpielerEins.setInt(2, team.getSpielerEins().getSpielerID());
             smtSpielerEins.executeUpdate();
             smtSpielerEins.close();
             if(team.getSpielerZwei()!=null) {
-                PreparedStatement smtSpielerZwei = con.SQLConnection().prepareStatement(sqlSpielerZwei);
+                PreparedStatement smtSpielerZwei = con.prepareStatement(sqlSpielerZwei);
                 smtSpielerZwei.setInt(1, team.getTeamid());
                 smtSpielerZwei.setInt(2, team.getSpielerZwei().getSpielerID());
                 smtSpielerZwei.executeUpdate();
                 smtSpielerZwei.close();
             }
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -80,24 +76,24 @@ public class TeamDAOimpl implements TeamDAO {
                 + "SpielklasseID, TeamID) "
                 + "VALUES(?,?)";
         try{
-            SQLConnection con = new SQLConnection();
-            Statement smtID = con.SQLConnection().createStatement();
+            Connection con = SQLConnection.getCon();
+            Statement smtID = con.createStatement();
             ResultSet count = smtID.executeQuery(idAbfrage);
             count.next();
             int teamID = count.getInt("AUTO_INCREMENT");
             System.out.println(teamID);
             team.setTeamid(teamID);
             smtID.close();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, team.getSpielklasse().getSpielklasseID());
             smt.setInt(2, team.getTeamid());
             smt.executeUpdate();
             smt.close();
         }
         catch (SQLException e) {
-        e.printStackTrace();
-        System.out.println("Freilos Einfügen Klappt nicht");
-    }
+            e.printStackTrace();
+            System.out.println("Freilos Einfügen Klappt nicht");
+        }
         return false;
     }
 
@@ -113,8 +109,8 @@ public class TeamDAOimpl implements TeamDAO {
                 + "WHERE TeamID = ? "
                 ;
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, team.getSpielklasse().getSpielklasseID());
             smt.setInt(2, team.getGewonneneSpiele());
             smt.setInt(3, team.getGewonneneSaetze());
@@ -124,7 +120,7 @@ public class TeamDAOimpl implements TeamDAO {
             smt.setInt(7, team.getTeamid());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -149,22 +145,22 @@ public class TeamDAOimpl implements TeamDAO {
                 + "VALUES(?,?)"
                 ;
         try {
-            SQLConnection con = new SQLConnection();
+            Connection con = SQLConnection.getCon();
             if(ersterSpieler) {
-                PreparedStatement smtSpielerEins = con.SQLConnection().prepareStatement(sqlSpielerEins);
+                PreparedStatement smtSpielerEins = con.prepareStatement(sqlSpielerEins);
                 smtSpielerEins.setInt(1, team.getTeamid());
                 smtSpielerEins.setInt(2, team.getSpielerEins().getSpielerID());
                 smtSpielerEins.executeUpdate();
                 smtSpielerEins.close();
             }
             else{
-                PreparedStatement smtSpielerZwei = con.SQLConnection().prepareStatement(sqlSpielerZwei);
+                PreparedStatement smtSpielerZwei = con.prepareStatement(sqlSpielerZwei);
                 smtSpielerZwei.setInt(1, team.getTeamid());
                 smtSpielerZwei.setInt(2, team.getSpielerZwei().getSpielerID());
                 smtSpielerZwei.executeUpdate();
                 smtSpielerZwei.close();
             }
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -179,12 +175,12 @@ public class TeamDAOimpl implements TeamDAO {
     public boolean delete(Team team) {
         String sql = "Delete From team Where teamid= ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, team.getTeamid());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {

@@ -37,14 +37,14 @@ public class SpielerDAOimpl implements SpielerDAO {
                 + "ExtSpielerID) "
                 + "VALUES(?,?,?,?,?,?,?,?,?,?)";
         try {
-            SQLConnection con = new SQLConnection();
-            Statement smtID = con.SQLConnection().createStatement();
+            Connection con =  SQLConnection.getCon();
+            Statement smtID = con.createStatement();
             ResultSet count = smtID.executeQuery(idAbfrage);
             count.next();
             int spielerID = count.getInt(1);
             spieler.setSpielerID(spielerID);
             smtID.close();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setString(1, spieler.getVName());
             smt.setString(2, spieler.getNName());
             smt.setObject(3, spieler.getGDatum());
@@ -62,7 +62,7 @@ public class SpielerDAOimpl implements SpielerDAO {
             smt.setString(10, spieler.getExtSpielerID());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -78,12 +78,12 @@ public class SpielerDAOimpl implements SpielerDAO {
     public boolean delete(Spieler spieler) {
         String sql = "Delete From spieler Where spielerID= ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con =  SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, spieler.getSpielerID());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -113,8 +113,8 @@ public class SpielerDAOimpl implements SpielerDAO {
                 "AktuellesSpiel = ? " +
                 "WHERE spielerID = ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con =  SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setString(1, spieler.getVName());
             smt.setString(2, spieler.getNName());
             smt.setObject(3, spieler.getGDatum());
@@ -143,7 +143,7 @@ public class SpielerDAOimpl implements SpielerDAO {
 
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
 
             return true;
 
@@ -161,7 +161,7 @@ public class SpielerDAOimpl implements SpielerDAO {
         String sql = "Select * from spieler Where spielerid=" + spielerID;
         Spieler temp = null;
         try {
-            SQLConnection con = new SQLConnection();
+            Connection con =  SQLConnection.getCon();
             Connection connection = con.SQLConnection();
             Statement st = connection.createStatement();
             ResultSet spielerResult = st.executeQuery(sql);
@@ -182,7 +182,7 @@ public class SpielerDAOimpl implements SpielerDAO {
     /*@Override
     public List<Spieler> getAllSpieler() {
         List<Spieler> alleSpieler = new ArrayList<Spieler>();
-        SQLConnection con = new SQLConnection();
+        Connection con =  SQLConnection.getCon();
         Connection connection = con.SQLConnection();
         int size = 0;
         try {

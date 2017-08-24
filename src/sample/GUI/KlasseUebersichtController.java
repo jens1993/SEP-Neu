@@ -32,8 +32,7 @@ import java.util.ResourceBundle;
  */
 public class KlasseUebersichtController implements Initializable
 {
-    auswahlklasse a = new auswahlklasse();
-    ObservableList<Spielklasse> obs_spielklasse=a.getAktuelleTurnierAuswahl().getObs_spielklassen();
+    ObservableList<Spielklasse> obs_spielklasse=auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen();
     @FXML
     private VBox klassseeinzel_vbox;
     @FXML
@@ -52,7 +51,7 @@ public class KlasseUebersichtController implements Initializable
 //            for (int i=0; i<a.getStages().size()-1;i++){
 //                a.getStages().get(i).close();
 //            }
-            a.getStagesdict().put("KlasseHinzufuegen",stage);
+            auswahlklasse.getStagesdict().put("KlasseHinzufuegen",stage);
             stage.setScene(new Scene(root1));
             stage.show();
 
@@ -64,14 +63,14 @@ public class KlasseUebersichtController implements Initializable
 
     public void pressBtn_Spielsystem(Spielklasse spielklasse) throws Exception {
         try {
-            a.spielklassenAuswahlSpeichern(spielklasse);
+            auswahlklasse.spielklassenAuswahlSpeichern(spielklasse);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielSystem_neu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
 //            for (int i=1; i<a.getStages().size()-1;i++){
 //                a.getStages().get(i).close();
 //            }
-            a.getStagesdict().put("Spielsytem",stage);
+            auswahlklasse.getStagesdict().put("Spielsytem",stage);
 
             stage.setScene(new Scene(root1));
             stage.show();
@@ -175,7 +174,7 @@ public class KlasseUebersichtController implements Initializable
                 /*spauswahl[finalI] =a.getSpielklasseDAO().getSpielklassenDict(a.getTurnierDAO().
                         read(a.getAktuelleTurnierAuswahl())).get(finalI);*/
                  if (finalSp[finalI] != null) {
-                     finalSp[finalI] = a.getAktuelleTurnierAuswahl().getObs_spielklassen().get(finalI);
+                     finalSp[finalI] = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(finalI);
                      if(MouseButton.PRIMARY==event.getButton()) {
 
 
@@ -209,13 +208,13 @@ public class KlasseUebersichtController implements Initializable
                                  boolean erfolgloeschen = finalSp[finalI].getSpielklasseDAO().delete(finalSp[finalI]);
                                  if(erfolgloeschen)
                                  {
-                                     a.InfoBenachrichtigung("erfolg", "klasse gelöscht");
-                                     a.getAktuelleTurnierAuswahl().removeobs_spielklassen(finalSp[finalI]);
-                                     a.getAktuelleTurnierAuswahl().removeSpielklassen(finalSp[finalI]);
+                                     auswahlklasse.InfoBenachrichtigung("erfolg", "klasse gelöscht");
+                                     auswahlklasse.getAktuelleTurnierAuswahl().removeobs_spielklassen(finalSp[finalI]);
+                                     auswahlklasse.getAktuelleTurnierAuswahl().removeSpielklassen(finalSp[finalI]);
                                  }
                                  else
                                  {
-                                     a.WarnungBenachrichtigung("Fehler", "klasse konnte nicht gelöscht werden");
+                                     auswahlklasse.WarnungBenachrichtigung("Fehler", "klasse konnte nicht gelöscht werden");
                                  }
                                  //tabpane_spieler.getSelectionModel().select(tab_sphin);
                              }

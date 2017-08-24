@@ -83,7 +83,6 @@ public class klasseHinzufuegenController implements Initializable
     private static int index_diszipin=0;
     private static int index_anzahlRunden=0;
 
-    auswahlklasse a = new auswahlklasse();
     TurnierDAO t = new TurnierDAOimpl();
     Dictionary<Integer,Turnier> turnierliste = t.getAllTurniere();
 
@@ -132,12 +131,12 @@ public class klasseHinzufuegenController implements Initializable
 
 
 
-        Spielklasse spklasse = new Spielklasse(combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),a.getAktuelleTurnierAuswahl());
+        Spielklasse spklasse = new Spielklasse(combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),auswahlklasse.getAktuelleTurnierAuswahl());
         spklasse.getSpielklasseDAO().create(spklasse);
-        a.getAktuelleTurnierAuswahl().addObs_spielklassen(spklasse);
+        auswahlklasse.getAktuelleTurnierAuswahl().addObs_spielklassen(spklasse);
 
         //a.getAktuelleTurnierAuswahl().addObs_spielklassen(spklasse);
-        System.out.println("------------------Größe = "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
+        System.out.println("------------------Größe = "+auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
         MainController m = new MainController();
         try {
             //m.fuelleCheckCombo();
@@ -152,14 +151,14 @@ public class klasseHinzufuegenController implements Initializable
 //            a.getStages().get(i).close();
 //        }
 
-        a.getStagesdict().put("KlasseUebersicht",stage);
+        auswahlklasse.getStagesdict().put("KlasseUebersicht",stage);
         stage.setScene(new Scene(root1));
         stage.show();
 
 
-        stage.setTitle("Klassenuebersicht: "+a.getAktuelleTurnierAuswahl().getName());
+        stage.setTitle("Klassenuebersicht: "+auswahlklasse.getAktuelleTurnierAuswahl().getName());
 
-        a.InfoBenachrichtigung("erf","klasse erstellt");
+        auswahlklasse.InfoBenachrichtigung("erf","klasse erstellt");
     }
     @FXML
     private void klassenSwitch(ActionEvent event) throws IOException, InterruptedException {
@@ -205,7 +204,7 @@ public class klasseHinzufuegenController implements Initializable
     }
     @FXML
     public void printSpielerZuordnenTable() throws Exception {
-        if(a.getAktuelleTurnierAuswahl()!=null) {
+        if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
             ObservableList<Spieler> spieler = FXCollections.observableArrayList();
             Enumeration enumKeys = auswahlklasse.getSpieler().keys();
             while (enumKeys.hasMoreElements()){

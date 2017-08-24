@@ -55,7 +55,6 @@ public class TeamUebersichtController implements Initializable, Cloneable
     @FXML
     private TextField team2;
 
-    auswahlklasse a = new auswahlklasse();
 
     static Spieler spieler1=null;
     static Spieler spieler2=null;
@@ -63,7 +62,7 @@ public class TeamUebersichtController implements Initializable, Cloneable
     static boolean teammitglied1 = false;
     static boolean teammitglied2 = false;
     private void printSpielerZuordnenTable() throws Exception {
-        if(a.getAktuelleTurnierAuswahl()!=null) {
+        if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
 
             Enumeration enumSpielerIDs = auswahlklasse.getSpieler().keys();
             while (enumSpielerIDs.hasMoreElements()){

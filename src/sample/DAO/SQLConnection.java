@@ -62,7 +62,7 @@ public class SQLConnection
 		this.dbPass = dbPass;
 	}
 
-	private String dbHost = "localhost"; // Hostname
+	private static String dbHost = "localhost"; // Hostname
         private static String dbPort = "3306";      // Port -- Standard: 3306
         private static String dbName = "turnierverwaltung_neu";   // Datenbankname
         private static String dbUser = "root";     // Datenbankuser
@@ -73,7 +73,7 @@ public class SQLConnection
 
 
 
-	public Connection SQLConnection()
+	public static void SQLConnection()
         {
             try 
             {
@@ -92,7 +92,7 @@ public class SQLConnection
             {
 
 				try {
-					pressBtn_Einstellungenneu();
+					//pressBtn_Einstellungenneu();
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -101,7 +101,6 @@ public class SQLConnection
                 System.out.println("SQLState: " + e.getSQLState());
                 System.out.println("VendorError: " + e.getErrorCode());
             }
-            return con;
         }
 	public void pressBtn_Einstellungenneu () throws Exception {
 		System.out.println("test");
@@ -114,17 +113,6 @@ public class SQLConnection
 		stage.setTitle("Einstellungen");
 		//((Node)(event.getSource())).getScene().getWindow().hide();
 	}
-        public boolean closeCon(){
-			try {
-				con.close();
-				return true;
-			} catch (SQLException e) {
-				e.printStackTrace();
-
-			}
-			return false;
-		}
-
         //Funktioniert. Einfach select abfragen
         public ResultSet executeSQL(String sql)
         {
@@ -145,7 +133,15 @@ public class SQLConnection
         	return null;
         }
 
-        //Ergebnis ausgeben (komplette Tabelle z.b.)
+	public static Connection getCon() throws SQLException {
+		if (con==null||con.isClosed()){
+        	SQLConnection();
+		}
+
+		return con;
+	}
+
+	//Ergebnis ausgeben (komplette Tabelle z.b.)
         public void PrintResult(ResultSet r) //als boolean machen, um zu pr�fen ob erfolgreich (gilt f�r alle void sql klassen!) Booleans immer weiterleiten und ganz am ende ausgeben ob erfolgreich 
         {
         	try {

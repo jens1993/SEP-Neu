@@ -34,8 +34,6 @@ public class neuerVereinController
     private javafx.scene.control.TableView tabelle_spiele;
 
 
-    auswahlklasse a = new auswahlklasse();
-
     @FXML
     private TextField t_vname;
     @FXML
@@ -53,12 +51,12 @@ public class neuerVereinController
         try {
 
             verein = new Verein(t_vname.getText(),t_vverband.getText(),t_vextvereinsid.getText());
-            a.addVerein(verein);
+            auswahlklasse.addVerein(verein);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
 
-            a.getStagesdict().put("SpielerHinzu",stage);
+            auswahlklasse.getStagesdict().put("SpielerHinzu",stage);
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle("Neuer Spieler");

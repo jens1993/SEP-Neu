@@ -93,7 +93,6 @@ public class SpielSystemController_neu implements Initializable
     private AnchorPane koTrostRundeNein;
 
     Dictionary<Integer,Spielklasse> turnierauswahlspielklassendict = null;
-    auswahlklasse a = new auswahlklasse();
     Spielklasse ausgewaehlte_spielklasse=  auswahlklasse.getAktuelleSpielklassenAuswahl();
     Spieler spieler_m1=null;
     Spieler spieler_m2=null;
@@ -104,17 +103,17 @@ public class SpielSystemController_neu implements Initializable
     private SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
     Team team = new Team();
     private void printSpielerSpielklasseHinzuTable() throws Exception {
-        System.out.println(a.getAktuelleTurnierAuswahl());
-        if(a.getAktuelleTurnierAuswahl()!=null) {
+        System.out.println(auswahlklasse.getAktuelleTurnierAuswahl());
+        if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
             obs_spieler.clear();
-            System.out.println("Anzahl spielklassen = "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
+            System.out.println("Anzahl spielklassen = "+auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
             Enumeration enumSpielerIDs = auswahlklasse.getSpieler().keys();
             while (enumSpielerIDs.hasMoreElements()){
                 int key = (int)enumSpielerIDs.nextElement();
                 Spieler spieler = auswahlklasse.getSpieler().get(key);
 
                 if (!istInSetzListe(spieler)){
-                if(a.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("DAMEN"))
+                if(auswahlklasse.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("DAMEN"))
                 {
 
                     if(!spieler.getGeschlecht())
@@ -123,10 +122,10 @@ public class SpielSystemController_neu implements Initializable
                     }
                     if(obs_spieler.size()==0)
                     {
-                        a.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine weiblichen Spieler gefunden!");
+                        auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine weiblichen Spieler gefunden!");
                     }
                 }
-                if(a.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("HERREN"))
+                if(auswahlklasse.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("HERREN"))
                 {
 
                     if(spieler.getGeschlecht())
@@ -135,18 +134,18 @@ public class SpielSystemController_neu implements Initializable
                     }
                     if(obs_spieler.size()==0)
                     {
-                        a.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine männlichen Spieler gefunden!");
+                        auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine männlichen Spieler gefunden!");
                     }
 
                 }
-                if(a.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("MIXED"))
+                if(auswahlklasse.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("MIXED"))
                 {
                     obs_spieler.add(spieler);
 
                 }
                     if(obs_spieler.size()==0)
                     {
-                        a.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine Spieler gefunden!");
+                        auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine Spieler gefunden!");
                     }
                 //sp.getDisziplin().contains("einzel")
 
@@ -194,8 +193,8 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
                 ausgewaehlte_spielklasse.setSpielsystem( gruppe);
 
                 l_meldungsetzliste1.setText("ERFOLG");
-                a.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
-                TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+a.getAktuelleTurnierAuswahl().getName());
+                auswahlklasse.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
+                TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+auswahlklasse.getAktuelleTurnierAuswahl().getName());
 
 
                 //a.getStages().get(0).close();
@@ -204,7 +203,7 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
 
             } catch (Exception e) {
                 l_meldungsetzliste1.setText("Fehlschlag");
-                a.InfoBenachrichtigung("Fehler","Das Spielsystem konnte nicht erfolgreich gestartet werden");
+                auswahlklasse.InfoBenachrichtigung("Fehler","Das Spielsystem konnte nicht erfolgreich gestartet werden");
                 e.printStackTrace();
             }
         }
@@ -214,8 +213,8 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
                 ausgewaehlte_spielklasse.setSpielsystem(ko);
 
                 l_meldungsetzliste1.setText("ERFOLG");
-                a.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
-                TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+a.getAktuelleTurnierAuswahl().getName());
+                auswahlklasse.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
+                TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+auswahlklasse.getAktuelleTurnierAuswahl().getName());
 
 
                 //a.getStages().get(0).close();
@@ -224,7 +223,7 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
 
             } catch (Exception e) {
                 l_meldungsetzliste1.setText("Fehlschlag");
-                a.InfoBenachrichtigung("Fehler","Das Spielsystem konnte nicht erfolgreich gestartet werden");
+                auswahlklasse.InfoBenachrichtigung("Fehler","Das Spielsystem konnte nicht erfolgreich gestartet werden");
                 e.printStackTrace();
             }
         }
@@ -289,8 +288,8 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
 
     private void printSpielerSpielklasseVorhandenTable() throws Exception {
 
-        if(a.getAktuelleTurnierAuswahl()!=null) {
-            turnierauswahlspielklassendict = a.getAktuelleTurnierAuswahl().getSpielklassen();
+        if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
+            turnierauswahlspielklassendict = auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen();
             ArrayList<Team> setzliste = ausgewaehlte_spielklasse.getSetzliste();
 
             obs_setzliste.clear();
@@ -445,7 +444,7 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
                                     Parent root1 = (Parent) fxmlLoader.load();
                                     Stage stage = new Stage();
 
-                                    a.getStagesdict().put("SpielerHinzu",stage);
+                                    auswahlklasse.getStagesdict().put("SpielerHinzu",stage);
                                     stage.setScene(new Scene(root1));
                                     stage.show();
                                     stage.setTitle("Spieler");
@@ -465,13 +464,13 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
                                 //FuelleFelder(clickedRow);
 
                                 try {
-                                    a.setUpdateSpieler(clickedRow);
-                                    a.setTab(3);
+                                    auswahlklasse.setUpdateSpieler(clickedRow);
+                                    auswahlklasse.setTab(3);
                                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
                                     Parent root1 = (Parent) fxmlLoader.load();
                                     Stage stage = new Stage();
 
-                                    a.getStagesdict().put("SpielerHinzu",stage);
+                                    auswahlklasse.getStagesdict().put("SpielerHinzu",stage);
                                     stage.setScene(new Scene(root1));
                                     stage.show();
                                     stage.setTitle("Spieler");
@@ -492,8 +491,8 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
                                 boolean loeschespieler = clickedRow.getSpielerDAO().delete(clickedRow);
                                 if (loeschespieler) {
                                     obs_spieler.remove(clickedRow);
-                                    a.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
-                                    a.getSpieler().remove(clickedRow);
+                                    auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
+                                    auswahlklasse.getSpieler().remove(clickedRow);
                                     //tabelle_spielerliste.refresh();
                                     System.out.println("Lösche   " + clickedRow.getNName());
                                     l_meldungsetzliste1.setText(clickedRow.getVName() + " " + clickedRow.getNName() + " wurde erfolgreich gelöscht!");
@@ -531,12 +530,12 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
 
 
                 spielsystem_spielerliste_alleSpieler.refresh();
-                Enumeration e = a.getSpieler().keys();
+                Enumeration e = auswahlklasse.getSpieler().keys();
                 while (e.hasMoreElements()) {
                     int key = (int) e.nextElement();
-                                        if (a.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespieler.getText().toUpperCase())) {
-                        if (!istInSetzListe(a.getSpieler().get(key))) {
-                            obs_spieler.add(a.getSpieler().get(key));
+                                        if (auswahlklasse.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespieler.getText().toUpperCase())) {
+                        if (!istInSetzListe(auswahlklasse.getSpieler().get(key))) {
+                            obs_spieler.add(auswahlklasse.getSpieler().get(key));
                         }
                     }
                     ;

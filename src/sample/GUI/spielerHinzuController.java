@@ -108,15 +108,14 @@ private TextField t_suchleistespielerhinzu;
 
 
     HashMap<Integer, Spieler> spielerhash = new HashMap<Integer, Spieler>();
-    auswahlklasse a = new auswahlklasse();
 
     private static Spieler spieler_neu=null;
-    private ObservableList<Spieler> obs_spieler = a.getObs_spieler();
+    private ObservableList<Spieler> obs_spieler = auswahlklasse.getObs_spieler();
 
 
     private void printSpielerZuordnenTableNeu() throws Exception {
 
-        if(a.getAktuelleTurnierAuswahl()!=null) {
+        if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
 
             obs_spieler.clear();
             Enumeration enumSpielerIDs = auswahlklasse.getSpieler().keys();
@@ -195,7 +194,7 @@ private TextField t_suchleistespielerhinzu;
 
 
             Verein verein = combo_verein.getSelectionModel().getSelectedItem();
-            System.out.println(a.getSpieler().size());
+            System.out.println(auswahlklasse.getSpieler().size());
 
         spieler_neu= new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),geschlecht,rpunkte,verein,t_spid.getText(),"");
         //endregion
@@ -203,7 +202,7 @@ private TextField t_suchleistespielerhinzu;
         ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
 
             felderLeeren();
-        for(Enumeration e = a.getSpieler().elements();e.hasMoreElements();)
+        for(Enumeration e = auswahlklasse.getSpieler().elements();e.hasMoreElements();)
         {
             Spieler sp = (Spieler) e.nextElement();
             if(sp.getNName().equalsIgnoreCase(spieler_neu.getNName()) && sp.getVName().equalsIgnoreCase(spieler_neu.getVName()))
@@ -231,10 +230,10 @@ private TextField t_suchleistespielerhinzu;
         else
         {
             spieler_neu.getSpielerDAO().create(spieler_neu);
-            a.addSpieler(spieler_neu);
+            auswahlklasse.addSpieler(spieler_neu);
             auswahlklasse.getSpieler().put(spieler_neu.getSpielerID(),spieler_neu);
             printSpielerZuordnenTableNeu();
-            a.InfoBenachrichtigung("erf",spieler_neu.toString());
+            auswahlklasse.InfoBenachrichtigung("erf",spieler_neu.toString());
         }
 
 
@@ -263,7 +262,7 @@ private TextField t_suchleistespielerhinzu;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerVorhanden.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        a.getStagesdict().put("SpielerVorhanden",stage);
+        auswahlklasse.getStagesdict().put("SpielerVorhanden",stage);
         stage.setScene(new Scene(root1));
         stage.show();
         stage.show();
@@ -326,8 +325,8 @@ private TextField t_suchleistespielerhinzu;
 
         System.out.println("erf");
 
-        a.getSpieler().remove(spieler_neu.getSpielerID());
-        a.getSpieler().put(spieler_neu.getSpielerID(),spieler_neu);
+        auswahlklasse.getSpieler().remove(spieler_neu.getSpielerID());
+        auswahlklasse.getSpieler().put(spieler_neu.getSpielerID(),spieler_neu);
         int index = obs_spieler.indexOf(spieler_neu);
         obs_spieler.remove(spieler_neu);
         obs_spieler.add(index, spieler_neu);
@@ -355,10 +354,10 @@ private TextField t_suchleistespielerhinzu;
 
         System.out.println(auswahlklasse.getVereine().size());
         ObservableList vereine = FXCollections.observableArrayList();
-        Enumeration enumKeys = a.getVereine().keys();
+        Enumeration enumKeys = auswahlklasse.getVereine().keys();
         while (enumKeys.hasMoreElements()){
             int key = (int) enumKeys.nextElement();
-            vereine.add(a.getVereine().get(key));
+            vereine.add(auswahlklasse.getVereine().get(key));
 
         }
         try {
@@ -425,8 +424,8 @@ private TextField t_suchleistespielerhinzu;
                                 boolean loeschespieler = clickedRow.getSpielerDAO().delete(clickedRow);
                             if(loeschespieler) {
                                 obs_spieler.remove(clickedRow);
-                                a.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
-                                a.getSpieler().remove(clickedRow);
+                                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().remove(clickedRow);
+                                auswahlklasse.getSpieler().remove(clickedRow);
                                 tabelle_spielerliste.refresh();
                                 System.out.println("Lösche   " + clickedRow.getNName());
 
@@ -466,14 +465,14 @@ private TextField t_suchleistespielerhinzu;
 
 
 
-        if(a.getTab()==3)
+        if(auswahlklasse.getTab()==3)
         {
 
             tab_sphin.setDisable(true);
             tab_spbea.setDisable(true);
             tab_spupdate.setDisable(false);
             tabpane_spieler.getSelectionModel().select(tab_spupdate);
-            FuelleFelder(a.getUpdateSpieler());
+            FuelleFelder(auswahlklasse.getUpdateSpieler());
         }
 
         t_suchleistespielerhinzu.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -483,12 +482,12 @@ private TextField t_suchleistespielerhinzu;
             obs_spieler.clear();
 
             tabelle_spielerliste.refresh();
-            Enumeration e = a.getSpieler().keys();
+            Enumeration e = auswahlklasse.getSpieler().keys();
             while (e.hasMoreElements()){
                 int key = (int) e.nextElement();
-                if(a.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespielerhinzu.getText().toUpperCase()))
+                if(auswahlklasse.getSpieler().get(key).toString().toUpperCase().contains(t_suchleistespielerhinzu.getText().toUpperCase()))
                 {
-                    obs_spieler.add(a.getSpieler().get(key));
+                    obs_spieler.add(auswahlklasse.getSpieler().get(key));
                 }
                 ;
             }
@@ -527,7 +526,7 @@ private TextField t_suchleistespielerhinzu;
             FuelleFelder(clickedRow);
             System.out.println("geklickt: "+clickedRow.getNName());
 
-            System.out.println("turnier="+a.getAktuelleTurnierAuswahl().getName());
+            System.out.println("turnier="+auswahlklasse.getAktuelleTurnierAuswahl().getName());
 
             spieler_neu=clickedRow;
         }
@@ -541,7 +540,7 @@ private TextField t_suchleistespielerhinzu;
 
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            a.getStagesdict().put("NeuerVerein",stage);
+            auswahlklasse.getStagesdict().put("NeuerVerein",stage);
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle("Neuer Verein");

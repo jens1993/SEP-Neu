@@ -20,7 +20,6 @@ public class Spiel {
 	private Spieler schiedsrichter;
 	private Spielsystem spielsystem;
 	private Turnier turnier;
-    private auswahlklasse auswahlklasse=new auswahlklasse();
 
 
 	private Feld feld;
@@ -87,7 +86,6 @@ public class Spiel {
 				this.setErgebnis(new Ergebnis(21,0,21,0));
 			}
 		}
-		spielDAO.update(this);
 	}
 
 	public void setGast(Team gast) {
@@ -101,7 +99,10 @@ public class Spiel {
 				this.setErgebnis(new Ergebnis(21,0,21,0));
 			}
 		}
-		spielDAO.update(this);
+	}
+
+	public SpielDAO getSpielDAO() {
+		return spielDAO;
 	}
 
 	public Spieler getSchiedsrichter() {
@@ -152,7 +153,7 @@ public class Spiel {
 		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
-		spielDAO.create(this);
+		//spielDAO.create(this);
 	}
 
 	public Spiel(int systemSpielID, int setzPlatzHeim, int setzPlatzGast, Spielsystem spielsystem) {
@@ -164,7 +165,7 @@ public class Spiel {
 		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
-		spielDAO.create(this);
+		//spielDAO.create(this);
 	}
 
 

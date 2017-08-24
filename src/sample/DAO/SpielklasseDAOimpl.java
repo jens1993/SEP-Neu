@@ -28,21 +28,20 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
                 + "turnierid) "
                 + "VALUES(?,?,?)";
         try {
-            SQLConnection con = new SQLConnection();
-            Statement smtID = con.SQLConnection().createStatement();
+            Connection con = SQLConnection.getCon();
+            Statement smtID = con.createStatement();
             ResultSet count = smtID.executeQuery(idAbfrage);
             count.next();
             int spielklasseID = count.getInt(1);
             spielklasse.setSpielklasseID(spielklasseID);
             smtID.close();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setString(1, spielklasse.getDisziplin());
             smt.setString(2, spielklasse.getNiveau());
             smt.setInt(3, spielklasse.getTurnier().getTurnierid());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
-            auswahlklasse a = new auswahlklasse();
+
             //a.getAktuelleTurnierAuswahl().
             return true;
 
@@ -58,12 +57,12 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
     public boolean delete(Spielklasse spielklasse) {
         String sql = "Delete From spielklasse Where SpielklasseID= ?";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, spielklasse.getSpielklasseID());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -102,11 +101,11 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
 
             try {
                 int zaehler = 1;
-                SQLConnection con = new SQLConnection();
-                PreparedStatement smtErgebnis = con.SQLConnection().prepareStatement(sqlErgebnis);
-                PreparedStatement smtSpielklasseSpielId = con.SQLConnection().prepareStatement(sqlSpielklasseSpielID);
-                PreparedStatement smtSpiel = con.SQLConnection().prepareStatement(sqlSpiel);
-                PreparedStatement smtFreilose = con.SQLConnection().prepareStatement(sqlFreilose);
+                Connection con = SQLConnection.getCon();
+                PreparedStatement smtErgebnis = con.prepareStatement(sqlErgebnis);
+                PreparedStatement smtSpielklasseSpielId = con.prepareStatement(sqlSpielklasseSpielID);
+                PreparedStatement smtSpiel = con.prepareStatement(sqlSpiel);
+                PreparedStatement smtFreilose = con.prepareStatement(sqlFreilose);
                 for (int i=0;i<spielklasse.getSpielsystem().getRunden().size();i++){
                     for (int j=0;j<spielklasse.getSpielsystem().getRunden().get(i).size();j++){
                         Spiel spiel = spielklasse.getSpielsystem().getRunden().get(i).get(j);
@@ -127,7 +126,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
                 smtSpielklasseSpielId.close();
                 smtSpiel.executeUpdate();
                 smtSpiel.close();
-                con.closeCon();
+
                 return true;
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -151,8 +150,8 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
                 + "Aktiv = ? "
                 + "WHERE SpielklasseID = ? ";
         try {
-            SQLConnection con = new SQLConnection();
-            PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
             smt.setString(1, spielklasse.getDisziplin());
             smt.setString(2, spielklasse.getNiveau());
             smt.setInt(3, spielklasse.getSpielsystem().getSpielsystemCode());
@@ -161,7 +160,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             smt.setInt(6, spielklasse.getSpielklasseID());
             smt.executeUpdate();
             smt.close();
-            con.closeCon();
+
             return true;
 
         } catch (SQLException e) {
@@ -174,7 +173,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
 /*    @Override
     public List<Spielklasse> getAllSpielklasse() {
         List<Spielklasse> alleSpielklassen = new ArrayList<Spielklasse>();
-        SQLConnection con = new SQLConnection();
+        Connection con = SQLConnection.getCon();
         Connection connection = con.SQLConnection();
         int size = 0;
         try {
@@ -209,7 +208,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
         String sql = "Select * from spielklasse Where spielklasseID=" + spielklasseID;
         Spielklasse temp = null;
         try {
-            SQLConnection con = new SQLConnection();
+            Connection con = SQLConnection.getCon();
             Connection connection = con.SQLConnection();
             Statement st = connection.createStatement();
             ResultSet spielklasseResult = st.executeQuery(sql);
@@ -230,8 +229,8 @@ public Dictionary<Integer, Spielklasse> getSpielklassenDict(Turnier turniereinga
     String sql ="SELECT * FROM spielklasse WHERE turnierid = ?";
 
     try {
-        SQLConnection con = new SQLConnection();
-        PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+        Connection con = SQLConnection.getCon();
+        PreparedStatement smt = con.prepareStatement(sql);
         smt.setInt(1, turniereingabe.getTurnierid());
         ResultSet TurnierResult = smt.executeQuery();
         while (TurnierResult.next()){
@@ -242,7 +241,7 @@ public Dictionary<Integer, Spielklasse> getSpielklassenDict(Turnier turniereinga
             turnierListe.put(spielklasseid,new Spielklasse(spielklasseid,disziplin,niveau,turnierid));
         }
         smt.close();
-        con.closeCon();
+
         System.out.println("Spielklasse lesen klappt");
     } catch (SQLException e) {
         e.printStackTrace();
@@ -258,8 +257,8 @@ public Dictionary<Integer, Spielklasse> getAllSpielklassenDict() {
     String sql ="SELECT * FROM spielklasse";
 
     try {
-        SQLConnection con = new SQLConnection();
-        PreparedStatement smt = con.SQLConnection().prepareStatement(sql);
+        Connection con = SQLConnection.getCon();
+        PreparedStatement smt = con.prepareStatement(sql);
         //smt.setInt(1, turnier.getTurnierid());
         ResultSet TurnierResult = smt.executeQuery();
         while (TurnierResult.next()){
@@ -270,7 +269,7 @@ public Dictionary<Integer, Spielklasse> getAllSpielklassenDict() {
             turnierListe.put(spielklasseid,new Spielklasse(spielklasseid,disziplin,niveau,turnierid));
         }
         smt.close();
-        con.closeCon();
+
         System.out.println("Spielklasse lesen klappt");
     } catch (SQLException e) {
         e.printStackTrace();
@@ -283,7 +282,7 @@ public Dictionary<Integer, Spielklasse> getAllSpielklassenDict() {
     /*@Override
     public List<Spielklasse> getAllSpielklassen() {
         List<Spielklasse> alleSpielklassen = new ArrayList<Spielklasse>();
-        SQLConnection con = new SQLConnection();
+        Connection con = SQLConnection.getCon();
         Connection connection = con.SQLConnection();
         int size = 0;
         try {
