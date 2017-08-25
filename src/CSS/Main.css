@@ -1,14 +1,15 @@
 /*MAIN*/
 
-.root
-{
-    
+.root {
+    -fx-background-color: #d8d8d8;
+    -fx-min-width: 640px;
+    -fx-min-height: 480px;
 }
 
 
 .tab-pane .tab-header-area .tab-header-background
 {
-    -fx-opacity: 0;
+
 }
 
 .tab-pane
@@ -18,16 +19,19 @@
 
 .tab{
     -fx-background-insets: 0 1 0 1,0,0;
+    -fx-border-color: #828282;
 }
 .tab-pane .tab
 {
-    -fx-background-color: #e6e6e6;
+    -fx-background-color: #888;
+    -fx-border-color: #828282;
 
 }
 
 .tab-pane .tab:selected
 {
-    -fx-background-color: #3c3c3c;
+    -fx-background-color: #888, derive(-fx-color, -7%);
+    -fx-border-color: #828282;
 }
 
 .tab .tab-label {
@@ -35,11 +39,18 @@
     -fx-alignment: CENTER;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
+
 }
 
 .tab:selected .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: #96b946;
+}
+
+.tab:armed .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #96b946;
+    -fx-border-color: #828282;
 }
 
 
@@ -101,12 +112,11 @@
     -fx-background-repeat: stretch;
     -fx-background-size: 70 70;
     -fx-background-position: center center;
-}*/
+}
 
 .button {
     -fx-border-radius: 0;
     -fx-border-radius: 0px;
-    text-shadow: 2px 2px 10px #828282;
     -fx-font-family: Arial;
     -fx-text-fill: #828282;
     -fx-background-color: #e6e6e6;
@@ -116,15 +126,50 @@
     -fx-alignment: CENTER;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
+    }
 
-}
-
-.button:hover {
+    .button:hover {
     -fx-background-color: #dedede;
 }
 
-.button:armed {
-    -fx-background-color: #969396;
+.button:armed
+{
+   -fx-background-color: #888, derive(-fx-color, -5%);
     -fx-text-fill: #ffffff;
+    -fx-border-color: #aaacad;
+
+}
+*/
+
+
+.button {
+    -fx-background-radius: 1px;
+    -fx-background-color: #888, -fx-color;
+    -fx-background-insets: 0, 1px;
+    -fx-border-color: #828282;
+    -fx-border-width: 1px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+}
+
+.button:hover {
+    -fx-background-color: #888, derive(-fx-color, 30%);
+}
+
+.button:focused {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 0);
+}
+
+.button:armed {
+    -fx-background-color: #888, derive(-fx-color, -10%);
+}
+
+.button:disabled {
+    -fx-opacity: 100%;
+    -fx-background-color: #888, derive(-fx-color, -5%);
+}
+
+.button:selected {
+    -fx-background-color: #888, derive(-fx-color, -7%);
 }
 /*MAINCONTROLLER*/
