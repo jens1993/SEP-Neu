@@ -37,6 +37,6 @@ public class StatistikController implements Initializable
             String.valueOf("Aktive "+
                     auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().size()+"Gespielte "+
                     auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().size()+"Ausstehende "+
-                    auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().size()));
+                    auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().size()+ "Zukünftige"+auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().size()));
     }
 }

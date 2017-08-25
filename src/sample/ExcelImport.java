@@ -505,7 +505,38 @@ public class ExcelImport implements Initializable{
                     //System.out.println(aktuellerSpieler.toString()+String.valueOf(aktuellerSpieler.getrPunkte()));
                 }
             }
+            if (aktuellerSpieler != null && aktuellerSpieler.toString()!=null) {
+                if (spielerupdate != null && spielerupdate.size() > 0) {
 
+
+                    if (spielerupdate.get(aktuellerSpieler.toString()) != null) {
+
+
+                        if (spielerupdate.get(aktuellerSpieler.toString()) != null) {
+                            int[] rpunktealt = aktuellerSpieler.getrPunkte();
+                            for (int i = 0; i < spielerupdate.get(aktuellerSpieler.toString()).getrPunkte().length; i++) {
+
+                                if (rpunktealt[i] != 0) {
+                                    System.out.println(rpunktealt[i]);
+                                    if (spielerupdate.get(aktuellerSpieler.toString()).getrPunkte()[i] == 0) {
+                                        spielerupdate.get(aktuellerSpieler.toString()).getrPunkte()[i] = Integer.valueOf(rpunktealt[i]);
+                                    }
+
+                                }
+
+                            }
+                            //spielererfolgreich.get(aktuellerSpieler.toString()).setrPunkte(rpunktekomplett);
+                            // aktuellerSpieler.setrPunkte(rpunktekomplett);
+                            // auswahlklasse.getSpieler().get( spielererfolgreich.get(aktuellerSpieler.getSpielerID())).setrPunkte(rpunktekomplett);
+                            aktuellerSpieler.getSpielerDAO().update(spielerupdate.get(aktuellerSpieler.toString()));
+                            b = true;
+                            System.out.println("Spieler wurde schon hinzugefügt, RLP aktualisiert");
+
+                        }
+                        //System.out.println(aktuellerSpieler.toString()+String.valueOf(aktuellerSpieler.getrPunkte()));
+                    }
+                }
+            }
 
             if(!b&&dict_doppelte_spieler.size()>0)  {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GUI/spielerVorhanden.fxml"));

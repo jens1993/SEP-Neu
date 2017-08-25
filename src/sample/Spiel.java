@@ -77,7 +77,7 @@ public class Spiel {
 	}
 	public void setHeim(Team heim) {
 		this.heim = heim;
-		if(this.gast != null && !(this.systemSpielID<20000000)){
+		if(this.gast != null && !(this.getSystemSpielID()<20000000)){
 			this.status = 1;
 
 		}
@@ -86,7 +86,7 @@ public class Spiel {
 
 	public void setGast(Team gast) {
 		this.gast = gast;
-		if(this.heim != null && !(this.systemSpielID<20000000)){
+		if(this.heim != null && !(this.getSystemSpielID()<20000000)){
 			this.status = 1;
 		/*	if (this.heim.isFreilos()){
 				this.setErgebnis(new Ergebnis(0,21,0,21));
@@ -149,7 +149,7 @@ public class Spiel {
 		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
 		//spielDAO.create(this);
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
-		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
+		this.spielsystem.getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().add(this);
 
 	}
 

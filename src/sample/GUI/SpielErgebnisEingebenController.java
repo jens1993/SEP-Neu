@@ -134,6 +134,7 @@ public class SpielErgebnisEingebenController implements Initializable{
 
 
                 } catch (Exception e) {
+                    e.printStackTrace();
                     l_meldungergebnis.setText("Satz nicht ausgefüllt");
                 }
 
@@ -237,7 +238,7 @@ public class SpielErgebnisEingebenController implements Initializable{
                         }
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
 
         });
@@ -259,7 +260,7 @@ public class SpielErgebnisEingebenController implements Initializable{
                     }
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         });
         ts2_1.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -280,7 +281,7 @@ public class SpielErgebnisEingebenController implements Initializable{
                     }
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
 
                     });
@@ -302,7 +303,7 @@ public class SpielErgebnisEingebenController implements Initializable{
                     }
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         });
         ts3_1.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -323,7 +324,7 @@ public class SpielErgebnisEingebenController implements Initializable{
                     }
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         });
         ts3_2.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -345,7 +346,7 @@ public class SpielErgebnisEingebenController implements Initializable{
                 }
 
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         });
 
