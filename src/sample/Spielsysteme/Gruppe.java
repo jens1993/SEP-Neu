@@ -168,6 +168,8 @@ public class Gruppe extends Spielsystem {
 			for (int i=0;i<getRundenArray().get(i).size();i++){
 				Spiel spiel = getRundenArray().get(rundenIndex).get(i);
 				spiel.setStatus(1);
+				spiel.getSpielsystem().getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().remove(spiel);
+				spiel.getSpielsystem().getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(spiel);
 				if (spiel.getHeim().isFreilos()){
 					spiel.setErgebnis(new Ergebnis(0,21,0,21));
 				}
@@ -198,7 +200,9 @@ public class Gruppe extends Spielsystem {
 					spielsystem.addPlatzierungsliste(teamList,getExtraRunde());
 				}
 			}
-			rundeStarten(getRundenIndex(spiel)+1);
+			else {
+				rundeStarten(getRundenIndex(spiel) + 1);
+			}
 		}
 		return false;
 	}

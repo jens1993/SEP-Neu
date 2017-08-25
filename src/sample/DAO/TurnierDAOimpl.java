@@ -190,6 +190,9 @@ public class TurnierDAOimpl implements TurnierDAO {
             else if (spiel.getStatus()==1){
                 turnierEingabe.getObs_ausstehendeSpiele().add(spiel);
             }
+            else if (spiel.getStatus()==0){
+                turnierEingabe.getObs_zukuenftigeSpiele().add(spiel);
+            }
         }
     }
 

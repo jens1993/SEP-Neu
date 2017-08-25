@@ -62,6 +62,8 @@ public class MainController implements Initializable, Observable
     @FXML
     private CheckBox check_ausstehendeSpiele= new CheckBox();
     @FXML
+    private CheckBox check_zukuenftigeSpiele= new CheckBox();
+    @FXML
     private ChoiceBox choice_spielklassen= new ChoiceBox();
     @FXML
     private javafx.scene.control.TableView tabelle_spiele;
@@ -365,8 +367,39 @@ public class MainController implements Initializable, Observable
                             }
                             //System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
                         }
+                    }
+                }
+            }
+            if (check_zukuenftigeSpiele.isSelected()) {
+                for (int j = 0; j < auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size(); j++) { //<=?
+                    id = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().get(j); //+1
+                    //System.out.println("id= " + id);
+                    for (int i = 0; i < auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().size(); i++) {
 
 
+                        if (auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+                            //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
+                        }
+                        boolean frei=false;
+                        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getGast() != null) {
+                            frei = auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getGast().isFreilos();
+                        }
+                        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getHeim() != null && !frei) {
+                            frei = auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getHeim().isFreilos();
+                        }
+                        if (id != 0 && id == auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
+
+                            /*if(a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGastString()=="Freilos"||
+                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGast()==null||
+                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeimString()=="Freilos"||
+                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeim()==null)*/
+                            if(frei)
+                            {}
+                            else {
+                                auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().add(auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i));
+                            }
+                            //System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
+                        }
                     }
                 }
             }
@@ -938,24 +971,35 @@ public class MainController implements Initializable, Observable
         gridPane_main.getChildren().add(lspielklassen);
         GridPane.setColumnIndex(lspielklassen,2);
         GridPane.setRowIndex(lspielklassen,0);
+
         gridPane_main.getChildren().add(checkComboBox);
         GridPane.setColumnIndex(checkComboBox,3);
         GridPane.setRowIndex(checkComboBox,0);
-        gridPane_main.getChildren().add(check_aktiveSpiele);
-        GridPane.setColumnIndex(check_aktiveSpiele,4);
-        GridPane.setRowIndex(check_aktiveSpiele,0);
-        gridPane_main.getChildren().add(check_ausstehendeSpiele);
-        GridPane.setColumnIndex(check_ausstehendeSpiele,5);
-        GridPane.setRowIndex(check_ausstehendeSpiele,0);
+
         gridPane_main.getChildren().add(check_gespielteSpiele);
-        GridPane.setColumnIndex(check_gespielteSpiele,6);
+        GridPane.setColumnIndex(check_gespielteSpiele,4);
         GridPane.setRowIndex(check_gespielteSpiele,0);
+
+        gridPane_main.getChildren().add(check_aktiveSpiele);
+        GridPane.setColumnIndex(check_aktiveSpiele,5);
+        GridPane.setRowIndex(check_aktiveSpiele,0);
+
+        gridPane_main.getChildren().add(check_ausstehendeSpiele);
+        GridPane.setColumnIndex(check_ausstehendeSpiele,6);
+        GridPane.setRowIndex(check_ausstehendeSpiele,0);
+
+        gridPane_main.getChildren().add(check_zukuenftigeSpiele);
+        GridPane.setColumnIndex(check_zukuenftigeSpiele,7);
+        GridPane.setRowIndex(check_zukuenftigeSpiele,0);
+
         check_aktiveSpiele.setText("Aktive Spiele");
         check_aktiveSpiele.setSelected(true);
         check_ausstehendeSpiele.setText("Ausstehende Spiele");
         check_ausstehendeSpiele.setSelected(true);
         check_gespielteSpiele.setText("Gespielte Spiele");
         check_gespielteSpiele.setSelected(true);
+        check_zukuenftigeSpiele.setText("Zukünftige Spiele");
+        check_zukuenftigeSpiele.setSelected(true);
         checkComboBox.setMaxWidth(250);
         checkComboBox.getItems().setAll(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen());
 
@@ -982,6 +1026,17 @@ public class MainController implements Initializable, Observable
             }
         });
         check_gespielteSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                try {
+                    fuelleSpielElemente();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        check_zukuenftigeSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 try {
@@ -1174,7 +1229,7 @@ public class MainController implements Initializable, Observable
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Spielerimport - Update");
                         alert.setHeaderText("Spieler erfolgreich aktualisiert! ");
-                        alert.setContentText(String.valueOf(ExcelImport.getSpielerupdate().keys()));
+                        alert.setContentText(s);
                         alert.showAndWait();
                         //ExcelImport.setSpielerupdate(null);
                     }
