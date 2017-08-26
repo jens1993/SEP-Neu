@@ -140,7 +140,19 @@ public class neuesTurnierController implements Initializable
             btn_starten.setText("Update");
 
             //System.out.println(turnierzumupdaten.getFelder());
-            AnzahlFelder.setText(String.valueOf(auswahlklasse.getTurnierzumupdaten().getFelder().size()));
+
+            if(auswahlklasse.getTurnierzumupdaten().getFelder().size()>30)
+            {
+                AnzahlFelder.setText(String.valueOf(30));
+            }
+            if(auswahlklasse.getTurnierzumupdaten().getFelder().size()<1)
+            {
+                AnzahlFelder.setText(String.valueOf(1));
+            }
+            else
+            {
+                AnzahlFelder.setText(String.valueOf(auswahlklasse.getTurnierzumupdaten().getFelder().size()));
+            }
             turnierDatum.setValue(auswahlklasse.getTurnierzumupdaten().getDatum());
             Turniername.setText(auswahlklasse.getTurnierzumupdaten().getName());
 
