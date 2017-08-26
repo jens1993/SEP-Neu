@@ -20,7 +20,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox_main" onMouseClicked="#focus" prefHeight="1050" prefWidth="1650" spacing="20.0" styleClass="menubarMargin" stylesheets="@/CSS/Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
+<VBox fx:id="vbox_main"  prefHeight="1050" prefWidth="1650" spacing="20.0" styleClass="menubarMargin" stylesheets="@/CSS/Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
 <children>
     <MenuBar blendMode="SRC_ATOP" prefHeight="32.0" prefWidth="1390.0" styleClass="menubarMargin">
         <menus>
@@ -131,7 +131,7 @@
                 <RowConstraints maxHeight="968.0" minHeight="10.0" prefHeight="809.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                      <TabPane onMouseClicked="#focus" prefHeight="777.0" prefWidth="1410.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
+                      <TabPane  prefHeight="777.0" prefWidth="1410.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
                           <tabs>
                               <Tab text="Turnierbaum">
                                   <content>
@@ -157,7 +157,7 @@
                                       </rowConstraints>
                                     </GridPane>
                                     <TabPane />
-                                    <TableView fx:id="tabelle_spiele" onMouseClicked="#focus" prefHeight="785.0" prefWidth="1420.0" />
+                                    <TableView fx:id="tabelle_spiele"  prefHeight="785.0" prefWidth="1420.0" />
                                  </children>
                               </VBox>
                            </content>

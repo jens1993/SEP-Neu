@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sample.DAO.auswahlklasse;
 import sample.ExcelImport;
@@ -68,6 +69,10 @@ ExcelImport excelImport = new ExcelImport();
     @FXML
     public  void btn_UpdateSpielerPopup (ActionEvent event)
     {
+        if(updateSpieler==null)
+        {
+            updateSpieler=obs_vorhandeneSpieler.get(0);
+        }
         if(updateSpieler!=null)
         {
 
@@ -167,17 +172,12 @@ ExcelImport excelImport = new ExcelImport();
         stage.setTitle("Spieler hinzufügen");
     }
 
-    public void SpielerVorhanden (ActionEvent event) throws Exception {
-        System.out.println("test");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielerVorhanden.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
+@FXML
+public void selectrow(MouseEvent event)
+{
+    System.out.println(popup_tabelle2.getSelectionModel().getSelectedItem());
+}
 
-        auswahlklasse.getStagesdict().put("SpielerVorhanden",stage);
-        stage.setScene(new Scene(root1));
-        stage.show();
-        stage.setTitle("SpielerVorhanden");
-    }
     //Endregion
     private void Tabellefuelle()
     {
@@ -242,5 +242,8 @@ ExcelImport excelImport = new ExcelImport();
             });
             return row ;
         });
+        if(obs_vorhandeneSpieler.size()>0)
+            popup_tabelle2.getSelectionModel().select(obs_vorhandeneSpieler.get(0));
+        popup_tabelle2.refresh();
     }
 }
