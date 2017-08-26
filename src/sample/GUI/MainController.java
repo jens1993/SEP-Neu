@@ -67,7 +67,9 @@ public class MainController implements Initializable, Observable
     @FXML
     private javafx.scene.control.TableView tabelle_spiele;
 
-
+    @FXML
+    private TextField tspielsuche;
+    ObservableList<Spiel> sortListe = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele();
 //wieso integer?
     //wenn integer dann die ids abgehen
 
@@ -373,7 +375,7 @@ public class MainController implements Initializable, Observable
             }
         }
 
-        ObservableList<Spiel> sortListe = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele();
+
         sortListe.sort(new Comparator<Spiel>() {
             @Override
             public int compare(Spiel o1, Spiel o2) {
@@ -698,6 +700,7 @@ public class MainController implements Initializable, Observable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
         ArrayList<ArrayList<Spiel>> alleRunden = Zeitplan.getAlleRunden(auswahlklasse.getAktuelleTurnierAuswahl());
         ContextMenu contextMenu = new ContextMenu();
         //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
@@ -807,6 +810,24 @@ public class MainController implements Initializable, Observable
 
                         }
                     });
+                    MenuItem item9 = new MenuItem("Kompletten Block markieren");
+                    item9.setOnAction(new EventHandler<ActionEvent>() {
+                    ArrayList<Spiel> spielselect = new ArrayList<>();
+                        @Override
+                        public void handle(ActionEvent event) {
+                        for(int i=0;i<sortListe.size();i++)
+                        {
+                            if(sortListe.get(i).getSpielklasseString().equals(clickedRow.getSpielklasseString()))
+                            {
+                                System.out.println(sortListe.get(i));
+                                spielselect.add(sortListe.get(i));
+                                tabelle_spiele.getSelectionModel().select(sortListe.get(i));
+                            }
+                        }
+
+
+                        }
+                    });
 
                     contextMenu.getItems().clear();
                     //0= unvollständig 1 = ausstehend, 2=aktiv, 3=gespielt
@@ -877,17 +898,18 @@ public class MainController implements Initializable, Observable
                                     item4.getItems().add(childMenu2[i]);
                                 }
                             }}
-                        contextMenu.getItems().addAll(item3, item4);
+                        contextMenu.getItems().addAll(item3, item4,item9);
                     }
                     if(clickedRow.getStatus()==2)
                     {   //aktiv
-                        contextMenu.getItems().addAll(item1, item2,item5,item6,item7);
+                        contextMenu.getItems().addAll(item1, item2,item5,item6,item7,item9);
                     }
                     if(clickedRow.getStatus()==3)
                     {
                         //gespielt
-                        contextMenu.getItems().addAll(item1, item8);
+                        contextMenu.getItems().addAll(item1, item8,item9);
                     }
+
                     // Add MenuItem to ContextMenu
 
 
@@ -937,6 +959,25 @@ public class MainController implements Initializable, Observable
         });
 
         lspielklassen = new Label("Spielklassen");
+tspielsuche=new TextField("");
+tspielsuche.setPromptText("Spielsuche");
+        gridPane_main.getChildren().add(tspielsuche);
+        GridPane.setColumnIndex(tspielsuche,0);
+        GridPane.setRowIndex(tspielsuche,0);
+
+
+
+        tspielsuche.textProperty().addListener((observable, oldValue, newValue) -> {
+            // System.out.println("textfield changed from " + oldValue + " to " + newValue);
+            //obs_spieler.clear();
+
+
+        CheckeSpielsuche();
+
+
+        });
+
+
 
         gridPane_main.getChildren().add(lspielklassen);
         GridPane.setColumnIndex(lspielklassen,1);
@@ -1049,6 +1090,25 @@ public class MainController implements Initializable, Observable
 
 
     }
+
+    private void CheckeSpielsuche()
+    {
+        //System.out.println(tspielsuche.getText());
+
+        tabelle_spiele.refresh();
+        Enumeration e = auswahlklasse.getAktuelleTurnierAuswahl().getSpiele().keys();
+        sortListe.clear();
+        while (e.hasMoreElements()){
+            int key = (int) e.nextElement();
+
+            if(auswahlklasse.getAktuelleTurnierAuswahl().getSpiele().get(key).toString().toUpperCase().contains(tspielsuche.getText().toUpperCase()))
+            {
+                sortListe.add(auswahlklasse.getAktuelleTurnierAuswahl().getSpiele().get(key));
+            }
+        }
+
+    }
+
     @FXML
     public void pressBtn_ExcelImport (ActionEvent event) throws Exception {
         try {
@@ -1135,49 +1195,42 @@ public class MainController implements Initializable, Observable
 
 
     private void AllesNeuLaden() {
-        //("maus event");
-        ObservableList index=tabelle_spiele.getSelectionModel().getSelectedIndices();
-        index_neu.clear();
-        for(int i=0;i<index.size();i++)
-        {
-            index_neu.add((Integer) index.get(i));
-        }
+        if (!tspielsuche.getText().equals("")) {
+            CheckeSpielsuche();
+        } else {
+            //("maus event");
+            ObservableList index = tabelle_spiele.getSelectionModel().getSelectedIndices();
+            index_neu.clear();
+            for (int i = 0; i < index.size(); i++) {
+                index_neu.add((Integer) index.get(i));
+            }
 
-        //region checkbox
-        if(check_gespielteSpiele.isSelected())
-        {
-            check_gespielteSpiele.setSelected(false);
-            check_gespielteSpiele.setSelected(true);
-        }
-        else
-        {
-            check_gespielteSpiele.setSelected(true);
-            check_gespielteSpiele.setSelected(false);
-        }
-        if(check_ausstehendeSpiele.isSelected())
-        {
-            check_ausstehendeSpiele.setSelected(false);
-            check_ausstehendeSpiele.setSelected(true);
-        }
-        else
-        {
-            check_ausstehendeSpiele.setSelected(true);
-            check_ausstehendeSpiele.setSelected(false);
-        }
-        if(check_aktiveSpiele.isSelected())
-        {
-            check_aktiveSpiele.setSelected(false);
-            check_aktiveSpiele.setSelected(true);
-        }
-        else
-        {
-            check_aktiveSpiele.setSelected(true);
-            check_aktiveSpiele.setSelected(false);
-        }
+            //region checkbox
+            if (check_gespielteSpiele.isSelected()) {
+                check_gespielteSpiele.setSelected(false);
+                check_gespielteSpiele.setSelected(true);
+            } else {
+                check_gespielteSpiele.setSelected(true);
+                check_gespielteSpiele.setSelected(false);
+            }
+            if (check_ausstehendeSpiele.isSelected()) {
+                check_ausstehendeSpiele.setSelected(false);
+                check_ausstehendeSpiele.setSelected(true);
+            } else {
+                check_ausstehendeSpiele.setSelected(true);
+                check_ausstehendeSpiele.setSelected(false);
+            }
+            if (check_aktiveSpiele.isSelected()) {
+                check_aktiveSpiele.setSelected(false);
+                check_aktiveSpiele.setSelected(true);
+            } else {
+                check_aktiveSpiele.setSelected(true);
+                check_aktiveSpiele.setSelected(false);
+            }
 //endregion
 
 
-        //System.out.println(tabelle_spiele.getItems().size()+"   "+a.getAktuelleTurnierAuswahl().getObs_spiele().size());
+            //System.out.println(tabelle_spiele.getItems().size()+"   "+a.getAktuelleTurnierAuswahl().getObs_spiele().size());
 
 //                for(int i=0;i<a.getAktuelleTurnierAuswahl().getObs_spiele().size();i++)
 //                {
@@ -1187,18 +1240,17 @@ public class MainController implements Initializable, Observable
 //                }
 
 
-        // System.out.println(checkComboBox.getItems().size()+"   "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
+            // System.out.println(checkComboBox.getItems().size()+"   "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
 
 //////////EVENTUELL STATT DICTIONARY OBS LIST
 
-        if(checkComboBox.getItems().size()!=auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size())
-        {
-            System.out.println("Ungleiche spielklassen anzahl");
-            //checkComboBox.getItems().setAll(a.getAktuelleTurnierAuswahl().getObs_spielklassen());
-            //a.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
-            checkComboBox.getItems().clear();
+            if (checkComboBox.getItems().size() != auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()) {
+                System.out.println("Ungleiche spielklassen anzahl");
+                //checkComboBox.getItems().setAll(a.getAktuelleTurnierAuswahl().getObs_spielklassen());
+                //a.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
+                checkComboBox.getItems().clear();
 
-            //System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
+                //System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
 //                    Enumeration enumKeys = auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().keys();
 //
 //                    while(enumKeys.hasMoreElements()){
@@ -1210,29 +1262,26 @@ public class MainController implements Initializable, Observable
 //                    }
 //        hbox_main.getChildren().remove(checkComboBox);
 //        hbox_main.getChildren().add(checkComboBox);
-            checkComboBox.getItems().setAll(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen());
+                checkComboBox.getItems().setAll(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen());
 
-            for(int i =0;i<auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size();i++)
-            {
-                checkComboBox.getCheckModel().check(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().get(i));
+                for (int i = 0; i < auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size(); i++) {
+                    checkComboBox.getCheckModel().check(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().get(i));
+                }
+
+
+            }
+            //System.out.println("t"+index_neu);
+            if (index_neu.size() > 0) {
+
+                //tabelle_spiele.getSelectionModel().selectRange(index_neu.get(0), (index_neu.get(index_neu.size() - 1)) + 1);
+            }
+            for (int i = 0; i < index_neu.size(); i++) {
+
+                tabelle_spiele.getSelectionModel().select(index_neu.get(i));
             }
 
 
         }
-        //System.out.println("t"+index_neu);
-        if(index_neu.size()>0) {
-            tabelle_spiele.getSelectionModel().selectRange(index_neu.get(0), (index_neu.get(index_neu.size() - 1))+1);
-        }
-        for(int i=0;i<index_neu.size();i++)
-        {
-
-            tabelle_spiele.getSelectionModel().select(index_neu.get(i));
-        }
-
-
-
-
-
     }
     }
 
