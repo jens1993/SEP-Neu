@@ -11,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import sample.DAO.FeldDAO;
+import sample.DAO.FeldDAOimpl;
 import sample.GUI.MainController;
 
 public class Turnier  implements Initializable {
@@ -243,8 +245,16 @@ public class Turnier  implements Initializable {
 	}
 
 
+	public void setDatum(LocalDate datum) {
+		this.datum = datum;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public ArrayList<Feld> getFelder() {
+
 		return felder;
 	}
 

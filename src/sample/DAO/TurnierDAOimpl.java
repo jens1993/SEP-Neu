@@ -147,6 +147,38 @@ public class TurnierDAOimpl implements TurnierDAO {
         }
         return turnierEingabe;
     }
+
+    @Override
+    public boolean readFelder_Neu(Turnier turnierEingabe) {
+
+        ArrayList<Feld> felder = new ArrayList<>();
+
+        String sql = "SELECT * FROM feld WHERE turnierID = ?";
+        try {
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
+            smt.setInt(1, turnierEingabe.getTurnierid());
+            ResultSet feldResult = smt.executeQuery();
+            while (feldResult.next()){
+                int feldid = feldResult.getInt("FeldID");
+                Spiel aktivesSpiel = turnierEingabe.getSpiele().get(feldResult.getInt("aktivesSpiel"));
+                Spiel inVorbereitung = turnierEingabe.getSpiele().get(feldResult.getInt("inVorbereitung"));
+                Feld feld = new Feld(feldid,aktivesSpiel,inVorbereitung,turnierEingabe);
+                felder.add(feld);
+                feld.setFeldnummer(felder.indexOf(feld)+1);
+            }
+            smt.close();
+            turnierEingabe.setFelder(felder);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Felder lesen klappt nicht");
+        }
+
+
+        return false;
+    }
+
     @Override
     public Dictionary<Integer,Turnier> getAllTurniere() {
         Dictionary<Integer, Turnier> turnierListe = new Hashtable<Integer,Turnier>();

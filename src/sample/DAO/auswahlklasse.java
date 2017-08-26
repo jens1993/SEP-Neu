@@ -19,6 +19,10 @@ import java.util.Hashtable;
  */
 public class auswahlklasse
 {
+
+
+    private static Turnier turnierzumupdaten;
+
     private TurnierDAO turnierDAO = new TurnierDAOimpl();
     private static Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
     private static Dictionary<Integer, Verein> vereine = new Hashtable<Integer, Verein>();
@@ -36,10 +40,16 @@ public class auswahlklasse
 
 
 
-    public auswahlklasse() {
+    public void readTurnierListe() {
         turnierliste= turnierDAO.getAllTurniere();
     }
+    public static Turnier getTurnierzumupdaten() {
+        return turnierzumupdaten;
+    }
 
+    public static void setTurnierzumupdaten(Turnier turnierzumupdaten) {
+        auswahlklasse.turnierzumupdaten = turnierzumupdaten;
+    }
     public static Spiel getSpielAuswahlErgebniseintragen() {
         return SpielAuswahlErgebniseintragen;
     }
