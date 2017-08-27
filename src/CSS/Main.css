@@ -1,19 +1,17 @@
 /*MAIN*/
-.root
-{
+
+.root {
     -fx-background-color: #d8d8d8;
     -fx-min-width: 640px;
     -fx-min-height: 480px;
 }
 
+
 .tab-pane .tab-header-area .tab-header-background
 {
     -fx-opacity: 0;
 }
-#spieluebersicht
-{
-    -fx-background-color: #96b946;
-}
+
 .tab-pane
 {
     -fx-tab-min-width:90px;
@@ -21,23 +19,27 @@
 
 .tab{
     -fx-background-insets: 0 1 0 1,0,0;
+    -fx-border-color: #828282;
 }
 .tab-pane .tab
 {
-    -fx-background-color: #e6e6e6;
+    -fx-background-color: #888;
+    -fx-border-color: #828282;
 
 }
 
 .tab-pane .tab:selected
 {
-    -fx-background-color: #3c3c3c;
+    -fx-background-color: #888, derive(-fx-color, -7%);
+    -fx-border-color: #828282;
 }
 
 .tab .tab-label {
-    -fx-alignment: CENTER;
     -fx-text-fill: #828282;
+    -fx-alignment: CENTER;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
+
 }
 
 .tab:selected .tab-label {
@@ -45,10 +47,16 @@
     -fx-text-fill: #96b946;
 }
 
+.tab:armed .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #96b946;
+    -fx-border-color: #828282;
+}
 
-.button {
+
+/*.button {
     -fx-background-radius: 1px;
-    -fx-background-color: #888, -t-button-color;
+    -fx-background-color: #888;
     -fx-background-insets: 0, 1px;
     -fx-border-color: black;
 }
@@ -70,11 +78,10 @@
 
 .button:armed {
     -fx-background-color: #3e8e41;
-   
     -fx-translate-y: 4px;
 }
 .button:hover {
-    -fx-background-color: #888, derive(-t-button-color, 30%);
+    -fx-background-color: #888;
 }
 
 .button:focused {
@@ -82,24 +89,87 @@
 }
 
 .button:armed {
-    -fx-background-color: #888, derive(-t-button-color, -10%);
+    -fx-background-color: #888;
 }
 
 .button:disabled {
     -fx-opacity: 100%;
-    -fx-background-color: #888, derive(-t-button-color, -5%);
+    -fx-background-color: #888;
+}
+*/
+
+
+/*.button {
+    background: #f0f0f0;
+    -fx-background-color: linear-gradient(#f0f0f0 25%, #c9c9c9 75%);
+    -fx-border-radius: 2px;
+    -fx-effect: dropshadow(three-pass-box, rgba(189, 179, 189, 1), 10, 0, 0, 0);
+    -fx-font-family: Arial;
+    -fx-font-size: 200%;
+    -fx-text-fill: #787778;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-background-image: url("badminton.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 70 70;
+    -fx-background-position: center center;
 }
 
+.button {
+    -fx-border-radius: 0;
+    -fx-border-radius: 0px;
+    -fx-font-family: Arial;
+    -fx-text-fill: #828282;
+    -fx-background-color: #e6e6e6;
+    -fx-border-color: #aaacad;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(three-pass-box, rgba(161, 161, 161, 1), 10, 0, 0, 0);
+    -fx-alignment: CENTER;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    }
 
-.table-row
-{
-    -fx-background-color: red;
+    .button:hover {
+    -fx-background-color: #dedede;
 }
 
-/*.table-view
+.button:armed
 {
+   -fx-background-color: #888, derive(-fx-color, -5%);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #aaacad;
+
+}
+*/
+
+
+.button {
     -fx-background-radius: 1px;
-    -fx-background-color: #888, -t-button-color;
+    -fx-background-color: #888, -fx-color;
     -fx-background-insets: 0, 1px;
+    -fx-border-color: #828282;
+    -fx-border-width: 1px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+}
+
+.button:hover {
+    -fx-background-color: #888, derive(-fx-color, 30%);
+}
+
+.button:focused {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 0);
+}
+
+.button:armed {
+    -fx-background-color: #888, derive(-fx-color, -10%);
+}
+
+.button:disabled {
+    -fx-opacity: 100%;
+    -fx-background-color: #888, derive(-fx-color, -5%);
+}
+
+.button:selected {
+    -fx-background-color: #888, derive(-fx-color, -7%);
 }
 /*MAINCONTROLLER*/

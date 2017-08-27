@@ -48,7 +48,6 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
             smt.setInt(1, spielklasseid);
             smt.executeUpdate();
             smt.close();
-            System.out.println("Setzliste Loeschen klappt");
 
             return true;
 

@@ -23,18 +23,16 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
-import sample.DAO.TurnierDAO;
-import sample.DAO.TurnierDAOimpl;
-import sample.DAO.auswahlklasse;
-import sample.Main;
-import sample.Spieler;
-import sample.Turnier;
+import sample.*;
+import sample.DAO.*;
 
 import java.net.URL;
 import java.util.Date;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
+
+import static sample.DAO.auswahlklasse.getTurnierzumupdaten;
 
 
 /**
@@ -56,7 +54,7 @@ public class TurnierladenController implements Initializable
     @FXML
     public TableColumn TurnierIDSpalte;
     ObservableList<Turnier> turniere = FXCollections.observableArrayList();
-    auswahlklasse a = new auswahlklasse();
+
     TurnierDAO t = new TurnierDAOimpl();
     Dictionary<Integer,Turnier> turnierliste = t.getAllTurniere();
     private static Stage primaryStage;
@@ -74,12 +72,19 @@ public class TurnierladenController implements Initializable
     private void zeigeTabelle() {
         //System.out.println("Print table");
 
-        for (int i = 1; i <= a.getTurnierliste().size(); i++) {
-            turniere.add(a.getTurnierliste().get(i));
 
-        }
+
+        Enumeration enumKeys = auswahlklasse.getTurnierliste().keys();
+
+                    while(enumKeys.hasMoreElements()){
+                        int key = (int) enumKeys.nextElement();
+                        //index = 0-->Altes Turnier oben!
+                        turniere.add(0,auswahlklasse.getTurnierliste().get(key));
+
+                    }
         TurnierlisteTabelle.setItems(turniere);
         TurnierIDSpalte.setCellValueFactory(new PropertyValueFactory<Turnier,Integer>("turnierid"));
+
         //TurnierIDSpalte.setCellFactory(integerCellFactory);
         TurnierDatumSpalte.setCellValueFactory(new PropertyValueFactory<Turnier,Date>("datum"));
         TurnierNameSpalte.setCellValueFactory(new PropertyValueFactory<Turnier,String>("name"));
@@ -92,6 +97,8 @@ public class TurnierladenController implements Initializable
             }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        auswahlklasse a = new auswahlklasse();
+        a.readTurnierListe();
         if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
             auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
             auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().clear();
@@ -114,13 +121,17 @@ public class TurnierladenController implements Initializable
                  contextMenu.hide();
                 }
                 else if(! row.isEmpty() && event.getButton()== MouseButton.SECONDARY)
-                {
+                { Turnier clickedRow = (Turnier) row.getItem();
+
                     //System.out.println("R-KLICK");
                     MenuItem item1 = new MenuItem("Turnier auswählen");
                     item1.setOnAction(new EventHandler<ActionEvent>() {
 
                         @Override
                         public void handle(ActionEvent event) {
+                            Turnier clickedRow = (Turnier) row.getItem();
+                            printRow(clickedRow);
+
                             //tabpane_spieler.getSelectionModel().select(tab_sphin);
                         }
                     });
@@ -130,14 +141,112 @@ public class TurnierladenController implements Initializable
                         @Override
                         public void handle(ActionEvent event) {
                             //tabpane_spieler.getSelectionModel().select(tab_sphin);
+                           auswahlklasse.setTurnierzumupdaten(clickedRow);
+                            try {
+                                pressBtn_neuesTurnier(event);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                     MenuItem item3 = new MenuItem("Turnier löschen");
                     item3.setOnAction(new EventHandler<ActionEvent>() {
 
+
                         @Override
                         public void handle(ActionEvent event) {
+                            auswahlklasse.setTurnierzumupdaten(clickedRow);
                             //tabpane_spieler.getSelectionModel().select(tab_sphin);
+                           // t.readFelder_Neu(auswahlklasse.getTurnierzumupdaten());
+                            t.read(getTurnierzumupdaten());
+                            int anzahlturnierfelderalt = getTurnierzumupdaten().getFelder().size();
+                            boolean erfolg = false;
+                            FeldDAO feldDAO=new FeldDAOimpl();
+                            for (int i = 0; i < anzahlturnierfelderalt; i++) {
+
+                                //System.out.println("Lösche Feld");
+                                erfolg = feldDAO.deleteFeld(getTurnierzumupdaten().getFelder().get(i));
+
+                                if(!erfolg)
+                                    break;
+                            }
+                            if (!erfolg)
+                                auswahlklasse.WarnungBenachrichtigung("fehler", "fehler");
+
+
+
+                            //Spielklasse löschen
+                            int anzahlspielklassen = getTurnierzumupdaten().getSpielklassen().size();
+                            erfolg = false;
+                            SpielklasseDAO spielklasseDAO = new SpielklasseDAOimpl();;
+
+
+
+                            Enumeration eSpielklassekeys = getTurnierzumupdaten().getSpielklassen().keys();
+                            boolean setzlisteloeschen=false;
+                            SetzlisteDAO setzlisteDAO=new SetzlisteDAOimpl();
+                            TeamDAO teamDAO = new TeamDAOimpl();
+                            while (eSpielklassekeys.hasMoreElements()){
+
+                                int key = (int) eSpielklassekeys.nextElement();
+
+                                for(int i=0;i< getTurnierzumupdaten().getSpielklassen().get(key).getSetzliste().size();i++)
+                                {
+                                    if(getTurnierzumupdaten().getSpielklassen().get(key).getSetzliste().size()>0) {
+                                        int id = getTurnierzumupdaten().getSpielklassen().get(key).getSetzliste().get(i).getTeamid();
+                                        Team team = auswahlklasse.getTurnierzumupdaten().getTeams().get(id);
+                                        //System.out.println(team);
+                                        setzlisteloeschen = setzlisteDAO.delete(
+                                                getTurnierzumupdaten().getSpielklassen().get(key).getSpielklasseID());
+
+
+                                        Enumeration eSpiele =getTurnierzumupdaten().getSpiele().keys();
+                                        while (eSpiele.hasMoreElements()) {
+
+                                            int key2= (int) eSpiele.nextElement();
+                                            Spiel spiel= getTurnierzumupdaten().getSpiele().get(key2);
+                                            spiel.getSpielDAO().delete(spiel);
+                                        }
+                                        teamDAO.delete(team);
+                                    }
+
+                                }
+
+                                if (!setzlisteloeschen)
+                                    auswahlklasse.WarnungBenachrichtigung("Setzliste fehler", "fehler");
+                                //System.out.println("Lösche Spielklasse");
+
+                                erfolg=spielklasseDAO.delete(getTurnierzumupdaten().getSpielklassen().get(key));
+                                if (!erfolg&&getTurnierzumupdaten().getSpielklassen().get(key).getSetzliste().size()>0) {
+                                    auswahlklasse.WarnungBenachrichtigung(" Spielklassenfehler", "fehler");
+
+                                }
+                                if(!erfolg)
+                                    break;
+
+                                }
+
+
+
+
+
+
+                            //Turnier löschen
+                            boolean erfolg2 = t.delete(clickedRow);
+                            if(erfolg2)
+                            {
+                                auswahlklasse.InfoBenachrichtigung("Turnier löschen erfolgreich",clickedRow.getName()+" wurde gelöscht.");
+                                auswahlklasse.getTurnierliste().remove(getTurnierzumupdaten().getTurnierid());
+
+                            }
+                            else
+                            {
+                                auswahlklasse.WarnungBenachrichtigung("Turnier Löschen nicht erfolgreich",clickedRow.getName()+" konnte nicht gelöscht werden!");
+                            }
+                            auswahlklasse.setTurnierzumupdaten(null);
+                            turniere.clear();
+                            zeigeTabelle();
+
                         }
                     });
                     if(!contextMenu.isShowing()) {
@@ -168,31 +277,35 @@ public class TurnierladenController implements Initializable
             turniere.clear();
 
             TurnierlisteTabelle.refresh();
-            Enumeration e = a.getTurnierliste().keys();
+            Enumeration e = auswahlklasse.getTurnierliste().keys();
             while (e.hasMoreElements()){
                 int key = (int) e.nextElement();
-                if(a.getTurnierliste().get(key).getName().toUpperCase().contains(t_turniersuche.getText().toUpperCase()))
+                if(auswahlklasse.getTurnierliste().get(key).getName().toUpperCase().contains(t_turniersuche.getText().toUpperCase()))
                 {
-                    turniere.add(a.getTurnierliste().get(key));
+                    turniere.add(0,auswahlklasse.getTurnierliste().get(key));
                 }
                 ;
             }
 
 
         });
+
+
+        TurnierlisteTabelle.getSelectionModel().select(0);
+
     }
     private void printRow(Turnier item) {
 
-        if(TurnierlisteTabelle.getSelectionModel().getSelectedItem()!=null && (Turnier) TurnierlisteTabelle.getSelectionModel().getSelectedItem()!= a.getAktuelleTurnierAuswahl())
+        if(TurnierlisteTabelle.getSelectionModel().getSelectedItem()!=null && (Turnier) TurnierlisteTabelle.getSelectionModel().getSelectedItem()!= auswahlklasse.getAktuelleTurnierAuswahl())
         {
-            a.turnierAuswahlSpeichern((Turnier) TurnierlisteTabelle.getSelectionModel().getSelectedItem());
+            auswahlklasse.turnierAuswahlSpeichern((Turnier) TurnierlisteTabelle.getSelectionModel().getSelectedItem());
             auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
             auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().clear();
             auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
 
-            t.read(a.getAktuelleTurnierAuswahl());
+            t.read(auswahlklasse.getAktuelleTurnierAuswahl());
             //System.out.println(a.getAktuelleTurnierAuswahl().getName());
-            a.turnierAuswahlSpeichern(a.getAktuelleTurnierAuswahl());
+            auswahlklasse.turnierAuswahlSpeichern(auswahlklasse.getAktuelleTurnierAuswahl());
             //System.out.println("Das aktuelle Turnier lautet"+a.getAktuelleTurnierAuswahl().toString());
             //Main.getInstance().updateTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
             //a.setAktuelleTurnierAuswahl
@@ -214,27 +327,36 @@ public class TurnierladenController implements Initializable
         Parent root1 = (Parent) fxmlLoader.load();
         primaryStage = new Stage();
 
-        a.addStagesdict(primaryStage,"Main");
+        auswahlklasse.addStagesdict(primaryStage,"Main");
         primaryStage.setScene(new Scene(root1));
 
         primaryStage.show();
         primaryStage.setMaximized(true);
-        primaryStage.setTitle("Badminton Turnierverwaltung - Turnier: "+a.getAktuelleTurnierAuswahl().getName());
+        primaryStage.setTitle("Badminton Turnierverwaltung - Turnier: "+auswahlklasse.getAktuelleTurnierAuswahl().getName());
     }
 
     public void pressBtn_neuesTurnier(ActionEvent event) throws Exception {
         try {
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("neuesTurnier.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            //((Node)(event.getSource())).getScene().getWindow().hide();
             Stage stage = new Stage();
 
-            a.addStagesdict(stage,"NeuesTurnier");
+
+            auswahlklasse.addStagesdict(stage,"NeuesTurnier");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("neuesTurnier.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+
             stage.setScene(new Scene(root1));
             stage.show();
-            stage.setTitle("Neues Turnier");
+            if(getTurnierzumupdaten()!=null)
+            {
+                stage.setTitle(getTurnierzumupdaten().getName() +" bearbeiten");
+            }
+            else {
+                stage.setTitle("Neues Turnier");
+            }
         } catch(Exception e) {
             e.printStackTrace();
+
         }
     }
 

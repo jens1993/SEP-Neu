@@ -173,11 +173,14 @@ public class TeamDAOimpl implements TeamDAO {
 
     @Override
     public boolean delete(Team team) {
+
+        deleteteam_spieler(team.getTeamid());
         String sql = "Delete From team Where teamid= ?";
         try {
             Connection con = SQLConnection.getCon();
             PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, team.getTeamid());
+
             smt.executeUpdate();
             smt.close();
 
@@ -186,6 +189,25 @@ public class TeamDAOimpl implements TeamDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Team Loeschen Klappt nicht");
+        }
+        return false;
+    }
+    private boolean deleteteam_spieler(int teamid) {
+
+
+        String sql = "Delete From team_spieler Where teamid= ?";
+        try {
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
+            smt.setInt(1, teamid);
+            smt.executeUpdate();
+            smt.close();
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Team_spieler Loeschen Klappt nicht");
         }
         return false;
     }

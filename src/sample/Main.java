@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import sample.DAO.TurnierDAO;
 import sample.DAO.TurnierDAOimpl;
+import sample.DAO.auswahlklasse;
 import sample.Spielsysteme.Gruppe;
 
 import java.awt.print.PageFormat;
@@ -39,6 +40,7 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("GUI/Turnierladen.fxml"));
             this.primaryStage.setTitle("Badminton Turnierverwaltung -- Kein Turnier ausgewählt");
             Scene scene = new Scene(root);
+            auswahlklasse.getStagesdict().put("TurnierLaden",primaryStage);
             this.primaryStage.setScene(scene);
 
             this.primaryStage.show();

@@ -11,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import sample.DAO.FeldDAO;
+import sample.DAO.FeldDAOimpl;
 import sample.GUI.MainController;
 
 public class Turnier  implements Initializable {
@@ -33,6 +35,7 @@ public class Turnier  implements Initializable {
 	private static ObservableList<Spiel> obs_gespielteSpiele = FXCollections.observableArrayList();
 	private static ObservableList<Spiel> obs_aktiveSpiele = FXCollections.observableArrayList();
 	private static ObservableList<Spiel> obs_ausstehendeSpiele = FXCollections.observableArrayList();
+	private static ObservableList<Spiel> obs_zukuenftigeSpiele = FXCollections.observableArrayList();
 	private static ObservableList<Spielklasse> obs_spielklassen = FXCollections.observableArrayList();
 
 
@@ -142,8 +145,14 @@ public class Turnier  implements Initializable {
 	public void removeobsAusstehendeSpiele(Spiel spiel) {
 		this.obs_ausstehendeSpiele.remove(spiel);
 	}
+	public void removeobsZukuenftigeSpiele(Spiel spiel) {
+		this.obs_ausstehendeSpiele.remove(spiel);
+	}
 	public void addobsGespielteSpiele(Spiel spiel) {
 		this.obs_gespielteSpiele.add(spiel);
+	}
+	public void addobsZukuenftigeSpiele(Spiel spiel) {
+		this.obs_zukuenftigeSpiele.add(spiel);
 	}
 	public void addobsAktiveSpiele(Spiel spiel) {
 		this.obs_aktiveSpiele.add(spiel);
@@ -169,6 +178,9 @@ public class Turnier  implements Initializable {
 
 	public ObservableList<Spiel> getObs_aktiveSpiele() {
 		return obs_aktiveSpiele;
+	}
+	public ObservableList<Spiel> getObs_zukuenftigeSpiele() {
+		return obs_zukuenftigeSpiele;
 	}
 
 	public ObservableList<Spiel> getObs_ausstehendeSpiele() {
@@ -233,8 +245,16 @@ public class Turnier  implements Initializable {
 	}
 
 
+	public void setDatum(LocalDate datum) {
+		this.datum = datum;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public ArrayList<Feld> getFelder() {
+
 		return felder;
 	}
 

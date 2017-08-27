@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sample.DAO.auswahlklasse;
 import sample.ExcelImport;
@@ -58,7 +59,7 @@ public class spielerVorhandenController implements Initializable
     @FXML TableColumn popup_spielerid2;
 
 //endregion
-
+ExcelImport excelImport = new ExcelImport();
     Spieler updateSpieler = null;
 
     //ArrayList<Spieler> vorhandeneSpieler;
@@ -68,29 +69,33 @@ public class spielerVorhandenController implements Initializable
     @FXML
     public  void btn_UpdateSpielerPopup (ActionEvent event)
     {
+        if(updateSpieler==null)
+        {
+            updateSpieler=obs_vorhandeneSpieler.get(0);
+        }
         if(updateSpieler!=null)
         {
 
 
-        updateSpieler.setvName(ExcelImport.getAktuellerSpieler().getVName());
-        updateSpieler.setnName(ExcelImport.getAktuellerSpieler().getNName());
-        updateSpieler.setGeschlecht(ExcelImport.getAktuellerSpieler().getGeschlecht());
-        updateSpieler.setgDatum(ExcelImport.getAktuellerSpieler().getGDatum());
-        updateSpieler.setVerein(ExcelImport.getAktuellerSpieler().getVerein());
-        updateSpieler.setNationalitaet(ExcelImport.getAktuellerSpieler().getNationalitaet());
+        updateSpieler.setvName(excelImport.getAktuellerSpieler().getVName());
+        updateSpieler.setnName(excelImport.getAktuellerSpieler().getNName());
+        updateSpieler.setGeschlecht(excelImport.getAktuellerSpieler().getGeschlecht());
+        updateSpieler.setgDatum(excelImport.getAktuellerSpieler().getGDatum());
+        updateSpieler.setVerein(excelImport.getAktuellerSpieler().getVerein());
+        updateSpieler.setNationalitaet(excelImport.getAktuellerSpieler().getNationalitaet());
 
 
 
         updateSpieler.getSpielerDAO().update(updateSpieler);
 
-        if(ExcelImport.getDict_doppelte_spieler().size()>0)
+        if(excelImport.getDict_doppelte_spieler().size()>0)
         {
             System.out.println("Neuer Frame");
             obs_neuerSpieler.clear();
             obs_vorhandeneSpieler.clear();
             auswahlklasse.getStagesdict().get("SpielerVorhanden").close();
-            auswahlklasse.InfoBenachrichtigung("Spieler erfolreich aktualisiert",ExcelImport.getAktuellerSpieler().toString()+" wurde aktualisiert.");
-           ExcelImport.getObs_upd_f_spieler().add(ExcelImport.getAktuellerSpieler());
+            auswahlklasse.InfoBenachrichtigung("Spieler erfolreich aktualisiert",excelImport.getAktuellerSpieler().toString()+" wurde aktualisiert.");
+            excelImport.getSpielerupdate().put(excelImport.getAktuellerSpieler().toString(),excelImport.getAktuellerSpieler());
 
             Tabellefuelle();
 
@@ -114,16 +119,18 @@ public class spielerVorhandenController implements Initializable
     @FXML
     public void btn_SpeicherSpielerPopup(ActionEvent event)
     {
-        Spieler spielerzumHinzufuegen = ExcelImport.getAktuellerSpieler();
+        Spieler spielerzumHinzufuegen = excelImport.getAktuellerSpieler();
         System.out.println(spielerzumHinzufuegen.getNName());
         spielerzumHinzufuegen.getSpielerDAO().create(spielerzumHinzufuegen);
-        auswahlklasse.addSpieler(spielerzumHinzufuegen);
+        if(auswahlklasse.getSpieler().get(spielerzumHinzufuegen)==null) {
+            auswahlklasse.addSpieler(spielerzumHinzufuegen);
+        }
         System.out.println("Erfolg");
 
         auswahlklasse.getStagesdict().get("SpielerVorhanden").close();
         auswahlklasse.getSpieler().put(spielerzumHinzufuegen.getSpielerID(),spielerzumHinzufuegen);
         try {
-            if(ExcelImport.getDict_doppelte_spieler().size()>0)
+            if(excelImport.getDict_doppelte_spieler().size()>0&&spielerzumHinzufuegen!=null)
             {
                 System.out.println("Neuer Frame");
                 obs_neuerSpieler.clear();
@@ -132,7 +139,15 @@ public class spielerVorhandenController implements Initializable
                 Tabellefuelle();
                 auswahlklasse.InfoBenachrichtigung("Spieler erfolreich hinzugefügt",spielerzumHinzufuegen.toString()+" wurde hinzugefügt.");
 
-                ExcelImport.getObs_erf_spieler().add(spielerzumHinzufuegen);
+                if(excelImport.getSpielererfolgreich()!=null)
+                {
+                if(excelImport.getSpielererfolgreich().get(spielerzumHinzufuegen.toString())==null) {
+                    excelImport.getSpielererfolgreich().put(spielerzumHinzufuegen.toString(), spielerzumHinzufuegen);
+                }}
+                else
+                {
+                    excelImport.setObs_vorh(null);
+                }
             }
             else {
                 ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -157,24 +172,19 @@ public class spielerVorhandenController implements Initializable
         stage.setTitle("Spieler hinzufügen");
     }
 
-    public void SpielerVorhanden (ActionEvent event) throws Exception {
-        System.out.println("test");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SpielerVorhanden.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
+@FXML
+public void selectrow(MouseEvent event)
+{
+    System.out.println(popup_tabelle2.getSelectionModel().getSelectedItem());
+}
 
-        auswahlklasse.getStagesdict().put("SpielerVorhanden",stage);
-        stage.setScene(new Scene(root1));
-        stage.show();
-        stage.setTitle("SpielerVorhanden");
-    }
     //Endregion
     private void Tabellefuelle()
     {
-        obs_vorhandeneSpieler=ExcelImport.getDict_doppelte_spieler().get(ExcelImport.getAktuellerSpieler());
+        obs_vorhandeneSpieler=excelImport.getDict_doppelte_spieler().get(excelImport.getAktuellerSpieler());
 
 
-        obs_neuerSpieler.add(ExcelImport.getAktuellerSpieler());
+        obs_neuerSpieler.add(excelImport.getAktuellerSpieler());
         setTable();
 
         //ExcelImport.getDict_doppelte_spieler().remove(ExcelImport.getAktuellerSpieler());
@@ -185,11 +195,19 @@ public class spielerVorhandenController implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
 
         obs_neuerSpieler.clear();
-        obs_neuerSpieler.add(ExcelImport.getAktuellerSpieler());
-        obs_vorhandeneSpieler=ExcelImport.getDict_doppelte_spieler().get(ExcelImport.getAktuellerSpieler());
+        obs_neuerSpieler.add(excelImport.getAktuellerSpieler());
+        obs_vorhandeneSpieler=excelImport.getDict_doppelte_spieler().get(excelImport.getAktuellerSpieler());
 
         setTable();
 
+
+
+
+
+      /*  popup_tabelle2.requestFocus();
+        popup_tabelle2.getSelectionModel().selectFirst();
+        popup_tabelle2.getFocusModel().focus(0);*/
+        //popup_tabelle2.refresh();
     }
 
 
@@ -224,5 +242,8 @@ public class spielerVorhandenController implements Initializable
             });
             return row ;
         });
+        if(obs_vorhandeneSpieler.size()>0)
+            popup_tabelle2.getSelectionModel().select(obs_vorhandeneSpieler.get(0));
+        popup_tabelle2.refresh();
     }
 }

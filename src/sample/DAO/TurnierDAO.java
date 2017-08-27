@@ -9,6 +9,7 @@ public interface TurnierDAO {
     public boolean delete(Turnier turnier);
     public boolean update(Turnier turnier);
     public Turnier read (Turnier turnierEingabe);
+    public boolean readFelder_Neu (Turnier turnierEingabe);
    // public List<Turnier> getAllTurniere();
 
     public Dictionary<Integer,Turnier> getAllTurniere();
