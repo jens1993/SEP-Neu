@@ -156,7 +156,7 @@ public class SpielSystemController_neu implements Initializable
             spielerVornameSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("vName"));
             TableColumn<Spieler,String> spielerNachnameSpalte = new TableColumn("Nachname");
             spielerNachnameSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("nName"));
-            TableColumn<Spieler,String> spielerVereinSpalte = new TableColumn("Nachname");
+            TableColumn<Spieler,String> spielerVereinSpalte = new TableColumn("Verein");
             spielerVereinSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("verein"));
             TableColumn<Spieler,Date> spielerGeburtsdatumSpalte = new TableColumn("Geburtsdatum");
             spielerGeburtsdatumSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,Date>("gDatum"));
@@ -299,11 +299,13 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
 
             System.out.println("ausgewählte Spielklasse = "+ausgewaehlte_spielklasse.getSpielklasseID()+" "+ausgewaehlte_spielklasse.getDisziplin());
             if (setzliste!=null) {
-                for (int j = 0; j < setzliste.size(); j++) {
-                    obs_setzliste.add(setzliste.get(j));
+                for (int j = 0; j < dicttest.size(); j++) {
+                    obs_setzliste.add(dicttest.get(j));
                 }
             }
             //}
+            TableColumn<Team,String> setzplatz = new TableColumn("Setzplatz");
+            setzplatz.setCellValueFactory(new PropertyValueFactory<Team,String>("Setzplatz"));
             TableColumn<Team,String> spielerEinsSpalte = new TableColumn("Spieler");
             spielerEinsSpalte.setCellValueFactory(new PropertyValueFactory<Team,String>("SpielerEins"));
             TableColumn<Team,String> spielerZweiSpalte = new TableColumn("Partner");
@@ -314,10 +316,10 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
             System.out.println("Spielklasse = "+ausgewaehlte_spielklasse.getDisziplin());
             if (ausgewaehlte_spielklasse.isEinzel()){
                 System.out.println("erfolgreich");
-                spielsystem_setzliste.getColumns().addAll(spielerEinsSpalte);
+                spielsystem_setzliste.getColumns().addAll(setzplatz,spielerEinsSpalte);
             }
             else{
-                spielsystem_setzliste.getColumns().addAll(spielerEinsSpalte,spielerZweiSpalte);
+                spielsystem_setzliste.getColumns().addAll(setzplatz,spielerEinsSpalte,spielerZweiSpalte);
             }
 
         }
@@ -339,6 +341,7 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
 
                 team = new Team(spielerneu,ausgewaehlte_spielklasse);
                 obs_setzliste.add(team);
+                dicttest.put(dicttest.size(),team);
                 ausgewaehlte_spielklasse.addSetzliste(team);
                 boolean erfolg = setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
                 if(erfolg) {
@@ -356,6 +359,7 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
                 System.out.println("doppelklasse");
                 befuellem1=false;
                 obs_setzliste.add(team);
+                //dicttest.put(dicttest.size(),team);
 
 
             }
@@ -391,8 +395,8 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
 
         for (int i = 0; i < ausgewaehlte_spielklasse.getSetzliste().size(); i++) {
             dicttest.put(i, ausgewaehlte_spielklasse.getSetzliste().get(i));
-            System.out.println("Dict: " + dicttest.size());
-            System.out.println(ausgewaehlte_spielklasse.getSetzliste().size());
+            /*System.out.println("Dict: " + dicttest.size());
+            System.out.println(ausgewaehlte_spielklasse.getSetzliste().size());*/
         }
         try {
             printSpielerSpielklasseVorhandenTable();
@@ -584,6 +588,10 @@ private void pressbtn_SpielerEntfernen(ActionEvent event)
 
         });
 
-    }
+
+        auswahlklasse.getStagesdict();
+
+
+    }//Ende Initialize
 
 }

@@ -1,12 +1,11 @@
 package sample;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
-import sample.DAO.SpielklasseDAO;
-import sample.DAO.SpielklasseDAOimpl;
-import sample.DAO.TurnierDAO;
-import sample.DAO.TurnierDAOimpl;
+import sample.DAO.*;
 import sample.Enums.Disziplin;
 import sample.Enums.Niveau;
 import sample.Spielsysteme.Spielsystem;
@@ -24,7 +23,26 @@ public class Spielklasse {
 	private boolean aktiv;
 	private boolean einzel = false;
 	private boolean setzliste_gesperrt= false;
+	private Dictionary<Team,Integer> setzlistedict = new Hashtable<>();
 
+	public Dictionary<Team,Integer> getSetzlistedict()
+	{
+		if(setzlistedict.size()<1)
+		{
+			System.out.println("Leeres Dict.");
+
+			for(int i=0;i<setzliste.size();i++)
+			{
+				setzlistedict.put(setzliste.get(i),i+1);
+			}
+		}
+		//System.out.println(setzlistedict);
+		return setzlistedict;
+	}
+
+	public void setSetzlistedict(Dictionary<Team,Integer> setzlistedict) {
+		this.setzlistedict = setzlistedict;
+	}
 
 	@Override
 	public String toString() {
@@ -159,5 +177,41 @@ public class Spielklasse {
 	}
 	public float getMeldeKosten() {
 		return meldeKosten;
+	}
+
+	public int getSetzplatzanzeigen(Spieler spielerEins, Spieler spielerZwei)
+	{
+		int setzplatznummer=1999;
+
+		Enumeration e = getSetzlistedict().keys();
+		while (e.hasMoreElements())
+		{
+			Team team1= (Team) e.nextElement();
+			if(team1.toString().toUpperCase().contains(spielerEins.toString().toUpperCase()))
+			{
+
+				setzplatznummer=setzlistedict.get(team1);
+				System.out.println("Setzplatz gefunden!"+setzplatznummer);
+				break;
+			}
+			else
+			{
+				if(spielerZwei!=null)
+				{
+					if(	team1.toString().toUpperCase().contains(spielerZwei.toString().toUpperCase()))
+					{
+						setzplatznummer=setzlistedict.get(team1);
+						System.out.println("Setzplatz gefunden!"+setzplatznummer);
+					}
+					else
+					{
+						setzplatznummer=4242;
+
+					}
+				}
+
+			}
+		}
+		return setzplatznummer;
 	}
 }

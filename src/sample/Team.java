@@ -2,9 +2,10 @@ package sample;
 
 import sample.DAO.*;
 import sample.Spielsysteme.*;
-import sample.Enums.*;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ public class Team {
     private Spieler spielerEins;
     private Spieler spielerZwei;
     private Spielklasse spielklasse;
+    private int setzplatznummer=42;
     private boolean einzel = true;
     private int gewonneneSpiele;
     private int gewonneneSaetze;
@@ -24,6 +26,7 @@ public class Team {
     private int verlorenePunkte;
     private boolean freilos = false;
     private List<Team> bisherigeGegner = new ArrayList<Team>();
+
 
 
     public Team(Spielklasse spielklasse) {
@@ -116,6 +119,12 @@ public class Team {
 
     public Spieler getSpielerEins() {
         return spielerEins;
+    }
+    public String getSetzplatz()
+    {
+
+        setzplatznummer=auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzplatzanzeigen(spielerEins,spielerZwei);
+        return String.valueOf(setzplatznummer);
     }
 
     public Spieler getSpielerZwei() {
