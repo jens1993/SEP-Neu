@@ -296,6 +296,40 @@ public class Spiel {
 			return "";
 		}
 	}
+
+	public void setFreilosErgebnis(){
+		if (this.heim != null && this.heim.isFreilos()){
+			this.setErgebnis(new Ergebnis(0,21,0,21));
+			status=3;
+			this.spielsystem.beendeMatch(this);
+			spielDAO.update(this);
+			gast.addGewonnenenSatz();
+			gast.addGewonnenenSatz();
+			gast.addGewonnenesSpiel();
+			gast.addGespieltePunkte(42,0);
+			gast.getTeamDAO().update(gast);
+			ergebnis.getErgebnisDAO().create(this);
+			this.getSpielsystem().getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().remove(this);
+			this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);
+		}
+		else if(this.gast != null && this.gast.isFreilos()){
+			this.setErgebnis(new Ergebnis(21,0,21,0));
+			status=3;
+			this.spielsystem.beendeMatch(this);
+			spielDAO.update(this);
+			heim.addGewonnenenSatz();
+			heim.addGewonnenenSatz();
+			heim.addGewonnenesSpiel();
+			heim.addGespieltePunkte(42,0);
+			heim.getTeamDAO().update(heim);
+			ergebnis.getErgebnisDAO().create(this);
+			this.getSpielsystem().getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().remove(this);
+			this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);
+		}
+
+
+	}
+
 	public void setErgebnis(Ergebnis ergebnis) {
 		this.ergebnis = ergebnis;
 		statistikAktualisieren();

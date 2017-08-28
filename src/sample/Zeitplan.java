@@ -24,6 +24,7 @@ public class Zeitplan {
     }*/
 
     public static void zeitplanErstellen(Turnier turnier){
+        resetteAlles();
         alleSpielsystemeEinlesen(turnier);
         if (spielsystemRunden.size()>1){
             spielSystemeSortieren();
@@ -39,6 +40,12 @@ public class Zeitplan {
             return alleRundenSortiert;
         }
         return null;
+    }
+
+    private static void resetteAlles(){
+        zeitplan.clear();
+        alleRundenSortiert.clear();
+        spielsystemRunden.clear();
     }
 
     private static void alleSpielsystemeEinlesen(Turnier turnier){

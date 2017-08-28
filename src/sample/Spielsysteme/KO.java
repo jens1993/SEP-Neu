@@ -20,6 +20,7 @@ public class KO extends Spielsystem {
 		freiloseHinzufuegen(setzliste);
 		knotenAufbauen(teilnehmerzahl);
 		ersteRundeFuellen(setzliste);
+		alleSpieleSchreiben();
 	}
 
 	public KO(List<Team> setzliste, Spielsystem spielsystem, Spielklasse spielklasse){
@@ -35,10 +36,11 @@ public class KO extends Spielsystem {
 	}
 
 	private void alleSpieleSchreiben() {
-		for (int i=0; i<getRundenArray().size();i++){
-			for(int j=0;j<getRundenArray().get(i).size();j++){
+		for (int i=getRunden().size()-1; i>=0;i--){
+			for(int j=0;j<getRunden().get(i).size();j++){
 				Spiel spiel = getRundenArray().get(i).get(j);
 				spiel.getSpielDAO().create(spiel);
+				spiel.setFreilosErgebnis();
 			}
 		}
 	}
@@ -116,9 +118,12 @@ public class KO extends Spielsystem {
 		int hoechsterSetzplatz;
 		SpielTree aktuellerKnoten = finale;
 		finale.setSpiel(new Spiel(spielSystemIDberechnen(),1,2,this));
+		this.getRundenArray().add(new ArrayList<>());
+		this.getRundenArray().get(0).add(finale.getSpiel());
 
 		for (int i=0; i<anzahlRunden-1; i++){ //erstelle für jeder Runde Spiele
 			aktuellerKnoten = finale.getSpielTree(spielSystemIDberechnen(),finale);
+			this.getRundenArray().add(0,new ArrayList<>());
 			hoechsterSetzplatz = (int) Math.pow(2,i+2);
 			for (int j=1; j<=Math.pow(2,i); j++)
 			{
@@ -128,11 +133,15 @@ public class KO extends Spielsystem {
 				int leftKnotenSetzPlatzGast = hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1;
 				int rightKnotenSetzPlatzHeim = hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1;
 				int rightKnotenSetzPlatzGast = aktuellerKnoten.getSetzplatzGast();
+				Spiel leftSpiel = new Spiel(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast,this);
+				Spiel rightSpiel = new Spiel(rightKnotenSpielID, rightKnotenSetzPlatzHeim , rightKnotenSetzPlatzGast, this);
 				aktuellerKnoten.addLeft(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast );
-				aktuellerKnoten.getLeft().setSpiel(new Spiel(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast,this));
+				aktuellerKnoten.getLeft().setSpiel(leftSpiel);
 				aktuellerKnoten.addRight(rightKnotenSpielID, rightKnotenSetzPlatzHeim ,rightKnotenSetzPlatzGast );
-				aktuellerKnoten.getRight().setSpiel(new Spiel(rightKnotenSpielID, rightKnotenSetzPlatzHeim , rightKnotenSetzPlatzGast, this));
+				aktuellerKnoten.getRight().setSpiel(rightSpiel);
 				aktuellerKnoten = aktuellerKnoten.getSpielTree(aktuellerKnoten.getSpielID()+1, finale);
+				this.getRundenArray().get(0).add(leftSpiel);
+				this.getRundenArray().get(0).add(rightSpiel);
 			}
 			erhoeheAktuelleRunde();
 		}
