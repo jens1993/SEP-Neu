@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b41b4edd-9e5f-4fba-81f4-0ab06d091ab5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SEP/sample/Spiel.class" afterPath="$PROJECT_DIR$/out/production/SEP/sample/Spiel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/MainController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/MainController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spiel.java" afterPath="$PROJECT_DIR$/src/sample/Spiel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spielsysteme/KO.java" afterPath="$PROJECT_DIR$/src/sample/Spielsysteme/KO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Zeitplan.java" afterPath="$PROJECT_DIR$/src/sample/Zeitplan.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Infos/Protokoll Florian.txt" afterPath="$PROJECT_DIR$/src/Infos/Protokoll Florian.txt" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -196,11 +194,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/GUI/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="385">
               <caret line="394" column="243" lean-forward="false" selection-start-line="394" selection-start-column="243" selection-end-line="394" selection-end-column="243" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Protokoll Florian.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll Florian.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="387">
+              <caret line="45" column="58" lean-forward="true" selection-start-line="45" selection-start-column="58" selection-end-line="45" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -213,21 +221,6 @@
               <caret line="52" column="25" lean-forward="false" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="spielerVorhandenController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerVorhandenController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2839">
-              <caret line="220" column="22" lean-forward="false" selection-start-line="220" selection-start-column="22" selection-end-line="220" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="n#!!doc;n#popup_tabelle#0;n#spielerVorhandenController#0" expanded="false" />
-                <element signature="e#5981#5982#0" expanded="false" />
-                <element signature="e#6061#6062#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -322,7 +315,6 @@
         <option value="$PROJECT_DIR$/src/sample/GUI/SpielSystemController.java" />
         <option value="$PROJECT_DIR$/src/sample/Spielzettel.java" />
         <option value="$PROJECT_DIR$/src/sample/Spielsysteme/Spielsystem.java" />
-        <option value="$PROJECT_DIR$/src/Infos/Protokoll Florian.txt" />
         <option value="$PROJECT_DIR$/src/sample/GUI/EinstellungenController.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/klasseHinzufuegenController.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/KlasseUebersichtController.java" />
@@ -362,6 +354,7 @@
         <option value="$PROJECT_DIR$/src/sample/Spiel.java" />
         <option value="$PROJECT_DIR$/src/sample/Zeitplan.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/MainController.java" />
+        <option value="$PROJECT_DIR$/src/Infos/Protokoll Florian.txt" />
       </list>
     </option>
   </component>
@@ -599,6 +592,24 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Resource Bundle 'Main'" />
               <option name="myItemType" value="com.intellij.lang.properties.projectView.ResourceBundleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SEP-Neu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SEP-Neu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Infos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1190,13 +1201,6 @@
       <workItem from="1503837025714" duration="1340000" />
       <workItem from="1503838832218" duration="3131000" />
     </task>
-    <task id="LOCAL-00049" summary="Spielsysteme laden (Gruppe funktioniert)">
-      <created>1501776181271</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1501776181271</updated>
-    </task>
     <task id="LOCAL-00050" summary="Controller Klasse aufgeteilt">
       <created>1501778358373</created>
       <option name="number" value="00050" />
@@ -1533,11 +1537,18 @@
       <option name="project" value="LOCAL" />
       <updated>1503784718673</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="K.O. System, Gruppe und Zeitplan wieder auf aktuellen Stand gebracht. Zukünftige Spiele werden angezeigt. Setzliste immernoch problembehaftet">
+      <created>1503958554566</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1503958554567</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="697897000" />
+    <option name="totallyTimeSpent" value="698265000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1693,7 +1704,6 @@
     <ignored-roots>
       <path value="C:" />
     </ignored-roots>
-    <MESSAGE value="Schweizer System funktioniert (bis auf einlesen)" />
     <MESSAGE value="gefuschte Lösung für Schweizer System =)" />
     <MESSAGE value="Gruppe funktioniert" />
     <MESSAGE value="Gruppe mit Endrunde angefangen" />
@@ -1718,7 +1728,8 @@
     <MESSAGE value="Turnier löschen" />
     <MESSAGE value="Turnier löschen &amp; bearbeiten funktioniert" />
     <MESSAGE value="Main Selection &amp; SpielerVorhanden in Tableview wird (gespeichert) und ausgewählt&#10;Statistik bearbeitet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Main Selection &amp; SpielerVorhanden in Tableview wird (gespeichert) und ausgewählt&#10;Statistik bearbeitet" />
+    <MESSAGE value="K.O. System, Gruppe und Zeitplan wieder auf aktuellen Stand gebracht. Zukünftige Spiele werden angezeigt. Setzliste immernoch problembehaftet" />
+    <option name="LAST_COMMIT_MESSAGE" value="K.O. System, Gruppe und Zeitplan wieder auf aktuellen Stand gebracht. Zukünftige Spiele werden angezeigt. Setzliste immernoch problembehaftet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1927,13 +1938,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll Jens.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="34" column="114" lean-forward="false" selection-start-line="34" selection-start-column="114" selection-end-line="34" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/80708505-281a-4585-a971-8670b83cc227/console.sql" />
     <entry file="file://$PROJECT_DIR$/src/sample/DAO/VereinDAOimpl.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -2307,6 +2311,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="385">
           <caret line="394" column="243" lean-forward="false" selection-start-line="394" selection-start-column="243" selection-end-line="394" selection-end-column="243" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll Florian.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="45" column="58" lean-forward="true" selection-start-line="45" selection-start-column="58" selection-end-line="45" selection-end-column="58" />
           <folding />
         </state>
       </provider>
