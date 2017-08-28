@@ -39,7 +39,6 @@ public class Spielklasse {
 			return	 disziplin +
 					" - " + niveau  ;
 
-
 	}
 
 	public Spielklasse(int spielklasseID, String disziplin, String niveau, Turnier turnier) {

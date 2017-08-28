@@ -23,6 +23,7 @@ public class Zeitplan {
         zeitplanErstellen();
     }*/
 
+
     public static void zeitplanErstellen(Turnier turnier){
         alleSpielsystemeEinlesen(turnier);
         if (spielsystemRunden.size()>1){

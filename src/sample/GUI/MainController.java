@@ -93,7 +93,6 @@ public class MainController implements Initializable, Observable
         try {
 
 
-
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
@@ -923,6 +922,7 @@ public class MainController implements Initializable, Observable
                 }
             }
         });
+
         check_ausstehendeSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {

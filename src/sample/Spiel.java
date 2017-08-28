@@ -310,7 +310,6 @@ public class Spiel {
 		if (this.feld != null){
 			this.feld.spielBeenden();
 		}
-
 	}
 
 	public void setErgebnis(Ergebnis ergebnis, String einlesen) {

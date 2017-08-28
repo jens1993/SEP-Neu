@@ -28,6 +28,7 @@ public class Spielzettel implements Printable {
         this.sechs = true;
     }
 
+
     public int print(Graphics g, PageFormat pf, int page)
             throws PrinterException {
         Graphics2D g2 = (Graphics2D) g;

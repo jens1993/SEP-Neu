@@ -22,6 +22,7 @@ public class KO extends Spielsystem {
 		ersteRundeFuellen(setzliste);
 	}
 
+
 	public KO(List<Team> setzliste, Spielsystem spielsystem, Spielklasse spielklasse){
 		this.spielsystem = spielsystem;
 		this.setSpielklasse(spielklasse);
