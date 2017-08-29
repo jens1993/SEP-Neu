@@ -17,6 +17,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
@@ -31,6 +33,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.CheckComboBox;
 import sample.*;
 import sample.DAO.auswahlklasse;
+import sample.GUI.Visualisierung.Turnierbaum;
 
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.TableView;
@@ -50,7 +53,7 @@ public class MainController implements Initializable, Observable
     final ObservableList<Spielklasse> strings = FXCollections.observableArrayList();
     final CheckComboBox<Spielklasse> checkComboBox = new CheckComboBox<Spielklasse>();
     private Label lspielklassen;
-     ArrayList<Integer> index_neu = new ArrayList<Integer>();
+    ArrayList<Integer> index_neu = new ArrayList<Integer>();
 
     @FXML
     private VBox vbox_main;
@@ -68,6 +71,10 @@ public class MainController implements Initializable, Observable
     private ChoiceBox choice_spielklassen= new ChoiceBox();
     @FXML
     private javafx.scene.control.TableView tabelle_spiele;
+    @FXML
+    private Tab tab_spieluebersicht = new Tab();
+    @FXML
+    private Tab tab_turnierbaum = new Tab();
 
     @FXML
     private TextField tspielsuche;
@@ -742,6 +749,12 @@ public class MainController implements Initializable, Observable
         ContextMenu contextMenu = new ContextMenu();
         //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
         Zeitplan.zeitplanErstellen(auswahlklasse.getAktuelleTurnierAuswahl()); //vergebe Zeitplannummern für die Spiele
+        Canvas spieluebersicht = new Canvas(1600,800);
+        GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
+        Turnierbaum turnierbaum = new Turnierbaum();
+        turnierbaum.erstelleTurnierbaum(gc);
+        tab_turnierbaum.setContent(spieluebersicht);
+
 
 
         tabelle_spiele.setRowFactory(tv -> {
