@@ -29,6 +29,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -63,6 +64,10 @@ public class MainController implements Initializable, Observable
     private VBox vbox_main;
     @FXML
     private GridPane gridPane_main;
+    @FXML
+    private Button btn_klassen;
+    @FXML
+    private Button btn_turnierLaden;
     @FXML
     private CheckBox check_gespielteSpiele= new CheckBox();
     @FXML
@@ -748,7 +753,7 @@ public class MainController implements Initializable, Observable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
+        tooltipsHinzufuegen();
         ArrayList<ArrayList<Spiel>> alleRunden = Zeitplan.getAlleRunden(auswahlklasse.getAktuelleTurnierAuswahl());
         ContextMenu contextMenu = new ContextMenu();
         //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
@@ -1155,6 +1160,16 @@ tspielsuche.setPromptText("Spielsuche");
 
     }
 
+    private void tooltipsHinzufuegen() {
+        Tooltip klassenTooltip = new Tooltip();
+        klassenTooltip.setText("Hier klassen erstellen\n und Setzliste hinzufügen");
+        btn_klassen.setTooltip(klassenTooltip);
+
+        Tooltip turnieruebersichtTooltip = new Tooltip();
+        turnieruebersichtTooltip.setText("Turnier laden oder neues Turnier erstellen");
+        btn_turnierLaden.setTooltip(turnieruebersichtTooltip);
+    }
+
     private void klassenTabsErstellen() {
         TabPane tabPane_spielklassen = new TabPane();
         tab_turnierbaum.setContent(tabPane_spielklassen);
@@ -1172,7 +1187,10 @@ tspielsuche.setPromptText("Spielsuche");
     private void klassenVisualisierung(Spielsystem spielsystem, Tab tab) {
         if (spielsystem.getSpielSystemArt()==3){
             Canvas spieluebersicht = new Canvas(5000,5000);
+            spieluebersicht.applyCss();
             GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
+            gc.setFill(Color.rgb(216,216,216));
+            gc.fillRect(0,0,5000,5000);
             Turnierbaum turnierbaum = new Turnierbaum();
             if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
                 turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), gc);

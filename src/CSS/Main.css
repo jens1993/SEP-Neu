@@ -11,10 +11,16 @@
 {
     -fx-opacity: 0;
 }
-
+.tooltip{
+    -fx-background-color: purple;
+}
 .tab-pane
 {
     -fx-tab-min-width:90px;
+}
+
+.canvas{
+    -fx-background-color: #d8d8d8;
 }
 
 .tab{
