@@ -54,6 +54,10 @@ import static sample.DAO.auswahlklasse.setSpielAuswahlErgebniseintragen;
  */
 public class MainController implements Initializable, Observable
 {
+
+    String baseName = "resources.Main";
+    String titel ="";
+
     final ObservableList<Spielklasse> strings = FXCollections.observableArrayList();
     final CheckComboBox<Spielklasse> checkComboBox = new CheckComboBox<Spielklasse>();
     private Label lspielklassen;
@@ -132,7 +136,19 @@ public class MainController implements Initializable, Observable
             auswahlklasse.addStagesdict(stage,"Klassenuebersicht");
             stage.setScene(new Scene(root1));
             stage.show();
-            stage.setTitle("Klassenübersicht");
+
+
+            try
+            {
+                ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+                titel = bundle.getString("klasseuebersicht");
+            }
+            catch ( MissingResourceException e ) {
+                System.err.println( e );
+            }
+            stage.setTitle(titel);
+
+
         } catch(Exception e) {
             e.printStackTrace();
         }

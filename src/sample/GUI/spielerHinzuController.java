@@ -558,6 +558,26 @@ private TextField t_suchleistespielerhinzu;
         }
         t_spielersuche.setText(titel);
 
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("r_m");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        r_m.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("r_w");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        r_w.setText(titel);
+
         ContextMenu contextMenu = new ContextMenu();
 
 

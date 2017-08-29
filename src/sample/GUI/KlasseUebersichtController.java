@@ -25,6 +25,7 @@ import javax.xml.ws.RequestWrapper;
 import java.net.URL;
 import java.util.Dictionary;
 import java.util.Enumeration;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
@@ -32,6 +33,9 @@ import java.util.ResourceBundle;
  */
 public class KlasseUebersichtController implements Initializable
 {
+    String baseName = "resources.Main";
+    String titel ="";
+
     ObservableList<Spielklasse> obs_spielklasse=auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen();
     @FXML
     private VBox klassseeinzel_vbox;
@@ -41,22 +45,39 @@ public class KlasseUebersichtController implements Initializable
     private VBox klasssemixed_vbox;
     @FXML
     private TabPane tabpane_uebersicht;
+
+    @FXML
+    private Button b_neueKlasse;
+    @FXML
+    private Tab tab_einzel;
+    @FXML
+    private Tab tab_doppel;
+
     //Label label2 = new Label("Search---------------------");
 
-    public void pressBtn_neueKlassehinzufuegen(ActionEvent event) throws Exception{
+    public void pressBtn_neueKlassehinzufuegen(ActionEvent event) throws Exception {
         try {
+            //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzuGruppe.fxml"));
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzufuegen.fxml"));
+            //System.out.println("test");
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-//            for (int i=0; i<a.getStages().size()-1;i++){
-//                a.getStages().get(i).close();
-//            }
-            auswahlklasse.getStagesdict().put("KlasseHinzufuegen",stage);
+
+            auswahlklasse.addStagesdict(stage, "klasseHinzufuegen");
             stage.setScene(new Scene(root1));
             stage.show();
 
-            stage.setTitle("Neue Klasse");
-        } catch(Exception e) {
+
+            try {
+                ResourceBundle bundle = ResourceBundle.getBundle(baseName);
+                titel = bundle.getString("klasseHinzufuegen");
+            } catch (MissingResourceException e) {
+                System.err.println(e);
+            }
+            stage.setTitle(titel);
+
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -85,7 +106,35 @@ public class KlasseUebersichtController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("b_neueKlasse");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        b_neueKlasse.setText(titel);
 
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tab_einzel");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tab_einzel.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tab_doppel");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tab_doppel.setText(titel);
 
 
 

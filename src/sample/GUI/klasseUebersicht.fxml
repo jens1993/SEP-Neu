@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
@@ -11,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/CSS/klasseUebersicht.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.KlasseUebersichtController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/CSS/klasseUebersicht.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.KlasseUebersichtController">
     <columnConstraints>
         <ColumnConstraints />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -25,7 +29,7 @@
     <children>
         <TabPane fx:id="tabpane_uebersicht" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="182.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
             <tabs>
-                <Tab styleClass="klasseuebersichtTab" text="Einzel">
+                <Tab fx:id="tab_einzel" styleClass="klasseuebersichtTab">
                     <content>
                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
                             <content>
@@ -38,7 +42,7 @@
                         </ScrollPane>
                     </content>
                 </Tab>
-                <Tab styleClass="klasseuebersichtTab" text="Doppel">
+                <Tab fx:id="tab_doppel" styleClass="klasseuebersichtTab">
                <content>
                   <VBox fx:id="klasssedoppel_vbox" prefHeight="200.0" prefWidth="100.0" styleClass="klasseuebersichtVBox" />
                </content>
@@ -58,7 +62,7 @@
         </TabPane>
         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <children>
-                <Button mnemonicParsing="false" onAction="#pressBtn_neueKlassehinzufuegen" styleClass="klasseuebersichtButton" text="Neue Klasse">
+                <Button fx:id="b_neueKlasse" mnemonicParsing="false" onAction="#pressBtn_neueKlassehinzufuegen" styleClass="klasseuebersichtButton">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin></Button>
