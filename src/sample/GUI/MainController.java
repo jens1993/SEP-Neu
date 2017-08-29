@@ -1,6 +1,7 @@
 package sample.GUI;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import javafx.animation.PauseTransition;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
@@ -28,6 +29,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import sample.*;
 import sample.DAO.auswahlklasse;
@@ -38,6 +40,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.ScheduledFuture;
 
 import static sample.DAO.auswahlklasse.getAktuelleTurnierAuswahl;
 import static sample.DAO.auswahlklasse.setSpielAuswahlErgebniseintragen;
@@ -1003,14 +1006,13 @@ tspielsuche.setPromptText("Spielsuche");
         GridPane.setRowIndex(tspielsuche,0);
 
 
-
+        PauseTransition pause = new PauseTransition(Duration.millis(300));
         tspielsuche.textProperty().addListener((observable, oldValue, newValue) -> {
             // System.out.println("textfield changed from " + oldValue + " to " + newValue);
             //obs_spieler.clear();
 
-
-        CheckeSpielsuche();
-
+            pause.setOnFinished(event -> CheckeSpielsuche());
+            pause.playFromStart();
 
         });
 
