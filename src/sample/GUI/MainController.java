@@ -36,6 +36,7 @@ import org.controlsfx.control.CheckComboBox;
 import sample.*;
 import sample.DAO.auswahlklasse;
 import sample.GUI.Visualisierung.Turnierbaum;
+import sample.Spielsysteme.Spielsystem;
 
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.TableView;
@@ -752,18 +753,7 @@ public class MainController implements Initializable, Observable
         ContextMenu contextMenu = new ContextMenu();
         //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
         Zeitplan.zeitplanErstellen(auswahlklasse.getAktuelleTurnierAuswahl()); //vergebe Zeitplannummern für die Spiele
-        Canvas spieluebersicht = new Canvas(5000,5000);
-        GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
-        Turnierbaum turnierbaum = new Turnierbaum();
-        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>0) {
-            Spielklasse spielklasse = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(0);
-            if(spielklasse.getSpielsystem()!=null) {
-                turnierbaum.erstelleTurnierbaum(spielklasse, gc);
-                ScrollPane scrollPane = new ScrollPane();
-                tab_turnierbaum.setContent(scrollPane);
-                scrollPane.setContent(spieluebersicht);
-            }
-        }
+        klassenTabsErstellen();
 
 
         tabelle_spiele.setRowFactory(tv -> {
@@ -1162,6 +1152,37 @@ tspielsuche.setPromptText("Spielsuche");
 
         tabelle_spiele.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+
+    }
+
+    private void klassenTabsErstellen() {
+        TabPane tabPane_spielklassen = new TabPane();
+        tab_turnierbaum.setContent(tabPane_spielklassen);
+        for(int i=0;i<auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size();i++){
+            Spielklasse spielklasse = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(i);
+            if(spielklasse.getSpielsystem()!=null) {
+                Tab tab = new Tab(spielklasse.toString());
+                tab.setClosable(false);
+                tabPane_spielklassen.getTabs().add(tab);
+                klassenVisualisierung(spielklasse.getSpielsystem(),tab);
+            }
+        }
+    }
+
+    private void klassenVisualisierung(Spielsystem spielsystem, Tab tab) {
+        if (spielsystem.getSpielSystemArt()==3){
+            Canvas spieluebersicht = new Canvas(5000,5000);
+            GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
+            Turnierbaum turnierbaum = new Turnierbaum();
+            if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
+                turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), gc);
+                    ScrollPane scrollPane = new ScrollPane();
+                    tab.setContent(scrollPane);
+                    scrollPane.setContent(spieluebersicht);
+
+            }
+
+        }
 
     }
 
