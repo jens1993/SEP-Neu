@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -32,6 +33,10 @@ import java.util.*;
  */
 public class spielerHinzuController implements Initializable, Cloneable
 {
+
+    String baseName = "resources.Main";
+    String titel ="";
+
 //region Deklaration
 
 @FXML
@@ -104,6 +109,34 @@ private TextField t_suchleistespielerhinzu;
     private RadioButton r_m1;
     @FXML
     private RadioButton r_w1;
+
+
+    @FXML
+    private Text t_vorname;
+    @FXML
+    private Text t_nachname;
+    @FXML
+    private Text t_gdatum;
+    @FXML
+    private Text t_spielerid;
+    @FXML
+    private Text t_ranglistenpunkte;
+    @FXML
+    private Text t_verein;
+    @FXML
+    private Text t_geschlecht;
+    @FXML
+    private Text t_einzel;
+    @FXML
+    private Text t_doppel;
+    @FXML
+    private Button b_neuerVerein;
+    @FXML
+    private Button b_abbrechen;
+    @FXML
+    private Button b_spielerspeichern;
+    @FXML
+    private Text t_spielersuche;
 
     //endregion
 
@@ -395,7 +428,135 @@ private TextField t_suchleistespielerhinzu;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_vorname");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_vorname.setText(titel);
 
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_nachname");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_nachname.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_gdatum");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_gdatum.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_spielerid");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_spielerid.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_ranglistenpunkte");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_ranglistenpunkte.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_verein");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_verein.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_geschlecht");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_geschlecht.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_einzel");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_einzel.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_doppel");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_doppel.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("b_neuerVerein");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        b_neuerVerein.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("b_abbrechen");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        b_abbrechen.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("b_spielerspeichern");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        b_spielerspeichern.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_spielersuche");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_spielersuche.setText(titel);
 
         ContextMenu contextMenu = new ContextMenu();
 

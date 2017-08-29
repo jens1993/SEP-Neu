@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.DAO.TurnierDAO;
 import sample.DAO.TurnierDAOimpl;
@@ -25,16 +26,16 @@ import sample.Turnier;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by jens on 03.08.2017.
  */
 public class klasseHinzufuegenController implements Initializable
 {
+
+    String baseName = "resources.Main";
+    String titel ="";
 
     @FXML
     private ChoiceBox<Niveau> combo_niveau=new ChoiceBox<>();
@@ -77,6 +78,28 @@ public class klasseHinzufuegenController implements Initializable
     private TableColumn spielerNachnameSpalte;
     @FXML
     private TableColumn spielerGeburstdatumSpalte;
+
+
+    @FXML
+    private Text t_disziplin;
+    @FXML
+    private Text t_niveau;
+    @FXML
+    private Text t_zaehlweise;
+    @FXML
+    private RadioButton rb_mitVerlaengerung;
+    @FXML
+    private RadioButton rb_ohneVerlaengerung;
+    @FXML
+    private Button b_klasseSpeichern;
+    @FXML
+    private Button b_tabelleLaden;
+    @FXML
+    private Button b_gebeSpielernameAus;
+    @FXML
+    private Tab tab_klassendaten;
+    @FXML
+    private Tab tab_spielerZuordnen;
 
 
     private static int index_niveau=0;
@@ -256,6 +279,139 @@ public class klasseHinzufuegenController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_disziplin");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_disziplin.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_niveau");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_niveau.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_zaehlweise");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_zaehlweise.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("rb_mitVerlaengerung");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        rb_mitVerlaengerung.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("rb_ohneVerlaengerung");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        rb_ohneVerlaengerung.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("b_klasseSpeichern");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        b_klasseSpeichern.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tab_klassendaten");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tab_klassendaten.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tab_spielerZuordnen");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tab_spielerZuordnen.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("b_tabelleLaden");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        b_tabelleLaden.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("b_gebeSpielernameAus");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        b_gebeSpielernameAus.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("spielerVornameSpalte");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        spielerVornameSpalte.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("spielerNachnameSpalte");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        spielerNachnameSpalte.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("spielerGeburstdatumSpalte");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        spielerGeburstdatumSpalte.setText(titel);
+
+
+
         try {
             printSpielerZuordnenTable();
             comboBoxFill();
