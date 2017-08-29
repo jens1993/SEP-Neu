@@ -19,176 +19,39 @@ public class Turnierbaum {
     int anzahlTeilnehmer = (int) anzahlTeilnehmerDouble;
 
 
-    public void erstelleTurnierbaum(GraphicsContext gc) {
-        Enumeration e = alleSpiele.keys();
-            int key =(int) e.nextElement();
-            Spiel spiel = alleSpiele.get(key);
+    public void erstelleTurnierbaum(Spielklasse spielklasse, GraphicsContext gc) {
+        ArrayList<ArrayList<Spiel>> runden = spielklasse.getSpielsystem().getRunden();
+        int xObenLinks = 20; //Startpunkt
+        int yObenLinks = 20;
+        int breite = 200;
+        int hoehe = 50;
+        int xAbstand = 100;
+        int yAbstand = 20;
+        ArrayList<TurnierbaumSpiel> letzteRunde = new ArrayList<>();
+        ArrayList<TurnierbaumSpiel> neueRunde = new ArrayList<>();
+        for(int j=0; j<runden.get(0).size();j++){
 
+            Spiel aktuellesSpiel = runden.get(0).get(j);
+            TurnierbaumSpiel turnierbaumSpiel = new TurnierbaumSpiel(xObenLinks,yObenLinks,breite,hoehe,aktuellesSpiel,xAbstand, yAbstand);
+            turnierbaumSpiel.draw(gc);
+            yObenLinks += hoehe + yAbstand;
+            letzteRunde.add(turnierbaumSpiel);
 
-        // 4-Teams-Turnierbaum ->
+        }
 
-        TurnierbaumSpiel turnierbaumSpiel = new TurnierbaumSpiel(60,330,120,50,spiel);
-        turnierbaumSpiel.draw(gc);
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(1);
-        gc.moveTo(60, 355);
-        gc.lineTo(180, 355);
-        gc.moveTo(120, 355);
-        gc.lineTo(120, 380);
-        gc.stroke();
-        gc.closePath();
+        for(int i=0;i<letzteRunde.size();i++){
+            if(i%2==0){
+                TurnierbaumSpiel neuesSpiel = letzteRunde.get(i).neuesSpielerstellen(gc);
+                if (neuesSpiel!=null) {
+                    neuesSpiel.draw(gc);
+                    letzteRunde.add(neuesSpiel);
+                }
+            }
+            else{
+                letzteRunde.get(i).linieZuNaechstemSpiel(letzteRunde.get(i),letzteRunde.get(letzteRunde.size()-1),gc);
+            }
+        }
 
-        gc.beginPath();
-        gc.setStroke(Color.RED);
-        gc.setLineWidth(1);
-        gc.moveTo(190, 355);
-        gc.lineTo(270, 355);
-        gc.lineTo(270, 415);
-        gc.lineTo(190, 415);
-        gc.setStroke(Color.RED);
-        gc.setLineWidth(1);
-        gc.moveTo(270, 385);
-        gc.lineTo(310, 385);
-        gc.stroke();
-        gc.closePath();
-
-
-        gc.beginPath();
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(2);
-        gc.moveTo(60, 390);
-        gc.lineTo(180, 390);
-        gc.lineTo(180, 440);
-        gc.lineTo(60, 440);
-        gc.lineTo(60, 390);
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(1);
-        gc.moveTo(60, 415);
-        gc.lineTo(180, 415);
-        gc.moveTo(120, 415);
-        gc.lineTo(120, 440);
-        gc.stroke();
-        gc.closePath();
-
-
-        gc.beginPath();
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(2);
-        gc.moveTo(60, 460);
-        gc.lineTo(180, 460);
-        gc.lineTo(180, 510);
-        gc.lineTo(60, 510);
-        gc.lineTo(60, 460);
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(1);
-        gc.moveTo(60, 485);
-        gc.lineTo(180, 485);
-        gc.moveTo(120, 485);
-        gc.lineTo(120, 510);
-        gc.stroke();
-        gc.closePath();
-
-        gc.beginPath();
-        gc.setStroke(Color.RED);
-        gc.setLineWidth(1);
-        gc.moveTo(190, 485);
-        gc.lineTo(270, 485);
-        gc.lineTo(270, 545);
-        gc.lineTo(190, 545);
-        gc.setStroke(Color.RED);
-        gc.setLineWidth(1);
-        gc.moveTo(270, 515);
-        gc.lineTo(310, 515);
-        gc.stroke();
-        gc.closePath();
-
-        gc.beginPath();
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(2);
-        gc.moveTo(60, 520);
-        gc.lineTo(180, 520);
-        gc.lineTo(180, 570);
-        gc.lineTo(60, 570);
-        gc.lineTo(60, 520);
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(1);
-        gc.moveTo(60, 545);
-        gc.lineTo(180, 545);
-        gc.moveTo(120, 545);
-        gc.lineTo(120, 570);
-        gc.stroke();
-        gc.closePath();
-
-        ////////////////////////
-
-        gc.beginPath();
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(2);
-        gc.moveTo(320, 360);
-        gc.lineTo(440, 360);
-        gc.lineTo(440, 410);
-        gc.lineTo(320, 410);
-        gc.lineTo(320, 360);
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(1);
-        gc.moveTo(320, 385);
-        gc.lineTo(440, 385);
-        gc.moveTo(380, 385);
-        gc.lineTo(380, 410);
-        gc.stroke();
-        gc.closePath();
-
-        gc.beginPath();
-        gc.setStroke(Color.RED);
-        gc.setLineWidth(1);
-        gc.moveTo(450, 385);
-        gc.lineTo(530, 385);
-        gc.lineTo(530, 515);
-        gc.lineTo(450, 515);
-        gc.setStroke(Color.RED);
-        gc.setLineWidth(1);
-        gc.moveTo(530, 450);
-        gc.lineTo(570, 450);
-        gc.stroke();
-        gc.closePath();
-
-        gc.beginPath();
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(2);
-        gc.moveTo(320, 490);
-        gc.lineTo(440, 490);
-        gc.lineTo(440, 540);
-        gc.lineTo(320, 540);
-        gc.lineTo(320, 490);
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(1);
-        gc.moveTo(320, 515);
-        gc.lineTo(440, 515);
-        gc.moveTo(380, 515);
-        gc.lineTo(380, 540);
-        gc.stroke();
-        gc.closePath();
-
-        gc.beginPath();
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(2);
-        gc.moveTo(580, 425);
-        gc.lineTo(700, 425);
-        gc.lineTo(700, 475);
-        gc.lineTo(580, 475);
-        gc.lineTo(580, 425);
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(1);
-        gc.moveTo(580, 450);
-        gc.lineTo(700, 450);
-        gc.moveTo(640, 450);
-        gc.lineTo(640, 475);
-        gc.stroke();
-        gc.closePath();
-        ////////////////////////////////////////////
-
-        int spaltenBreite = 60;
-        int zeilenBreite = 50;
         for (int zeile = 0; zeile < anzahlTeilnehmer; zeile++) {
             for (int spalte = 0; spalte < anzahlTeilnehmer; spalte++) {
                 //Hier die Zellen der Tabelle erstellen

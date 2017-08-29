@@ -752,12 +752,18 @@ public class MainController implements Initializable, Observable
         ContextMenu contextMenu = new ContextMenu();
         //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
         Zeitplan.zeitplanErstellen(auswahlklasse.getAktuelleTurnierAuswahl()); //vergebe Zeitplannummern für die Spiele
-        Canvas spieluebersicht = new Canvas(1600,800);
+        Canvas spieluebersicht = new Canvas(5000,5000);
         GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
         Turnierbaum turnierbaum = new Turnierbaum();
-        turnierbaum.erstelleTurnierbaum(gc);
-        tab_turnierbaum.setContent(spieluebersicht);
-
+        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>0) {
+            Spielklasse spielklasse = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(0);
+            if(spielklasse.getSpielsystem()!=null) {
+                turnierbaum.erstelleTurnierbaum(spielklasse, gc);
+                ScrollPane scrollPane = new ScrollPane();
+                tab_turnierbaum.setContent(scrollPane);
+                scrollPane.setContent(spieluebersicht);
+            }
+        }
 
 
         tabelle_spiele.setRowFactory(tv -> {
