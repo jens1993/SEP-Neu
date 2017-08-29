@@ -1,6 +1,7 @@
 package sample.GUI;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import javafx.animation.PauseTransition;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
@@ -17,6 +18,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
@@ -28,9 +31,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import sample.*;
 import sample.DAO.auswahlklasse;
+import sample.GUI.Visualisierung.Turnierbaum;
+import sample.Spielsysteme.Spielsystem;
 
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.TableView;
@@ -38,6 +44,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.ScheduledFuture;
 
 import static sample.DAO.auswahlklasse.getAktuelleTurnierAuswahl;
 import static sample.DAO.auswahlklasse.setSpielAuswahlErgebniseintragen;
@@ -50,7 +57,7 @@ public class MainController implements Initializable, Observable
     final ObservableList<Spielklasse> strings = FXCollections.observableArrayList();
     final CheckComboBox<Spielklasse> checkComboBox = new CheckComboBox<Spielklasse>();
     private Label lspielklassen;
-     ArrayList<Integer> index_neu = new ArrayList<Integer>();
+    ArrayList<Integer> index_neu = new ArrayList<Integer>();
 
     @FXML
     private VBox vbox_main;
@@ -68,6 +75,10 @@ public class MainController implements Initializable, Observable
     private ChoiceBox choice_spielklassen= new ChoiceBox();
     @FXML
     private javafx.scene.control.TableView tabelle_spiele;
+    @FXML
+    private Tab tab_spieluebersicht = new Tab();
+    @FXML
+    private Tab tab_turnierbaum = new Tab();
 
     @FXML
     private TextField tspielsuche;
@@ -742,6 +753,7 @@ public class MainController implements Initializable, Observable
         ContextMenu contextMenu = new ContextMenu();
         //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
         Zeitplan.zeitplanErstellen(auswahlklasse.getAktuelleTurnierAuswahl()); //vergebe Zeitplannummern für die Spiele
+        klassenTabsErstellen();
 
 
         tabelle_spiele.setRowFactory(tv -> {
@@ -1003,14 +1015,13 @@ tspielsuche.setPromptText("Spielsuche");
         GridPane.setRowIndex(tspielsuche,0);
 
 
-
+        PauseTransition pause = new PauseTransition(Duration.millis(300));
         tspielsuche.textProperty().addListener((observable, oldValue, newValue) -> {
             // System.out.println("textfield changed from " + oldValue + " to " + newValue);
             //obs_spieler.clear();
 
-
-        CheckeSpielsuche();
-
+            pause.setOnFinished(event -> CheckeSpielsuche());
+            pause.playFromStart();
 
         });
 
@@ -1141,6 +1152,37 @@ tspielsuche.setPromptText("Spielsuche");
 
         tabelle_spiele.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+
+    }
+
+    private void klassenTabsErstellen() {
+        TabPane tabPane_spielklassen = new TabPane();
+        tab_turnierbaum.setContent(tabPane_spielklassen);
+        for(int i=0;i<auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size();i++){
+            Spielklasse spielklasse = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(i);
+            if(spielklasse.getSpielsystem()!=null) {
+                Tab tab = new Tab(spielklasse.toString());
+                tab.setClosable(false);
+                tabPane_spielklassen.getTabs().add(tab);
+                klassenVisualisierung(spielklasse.getSpielsystem(),tab);
+            }
+        }
+    }
+
+    private void klassenVisualisierung(Spielsystem spielsystem, Tab tab) {
+        if (spielsystem.getSpielSystemArt()==3){
+            Canvas spieluebersicht = new Canvas(5000,5000);
+            GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
+            Turnierbaum turnierbaum = new Turnierbaum();
+            if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
+                turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), gc);
+                    ScrollPane scrollPane = new ScrollPane();
+                    tab.setContent(scrollPane);
+                    scrollPane.setContent(spieluebersicht);
+
+            }
+
+        }
 
     }
 

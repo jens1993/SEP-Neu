@@ -16,12 +16,7 @@ public class Zeitplan {
     private static ObservableList<Spiel> zeitplan = FXCollections.observableArrayList();
     private static ArrayList<ArrayList<ArrayList<Spiel>>> spielsystemRunden = new ArrayList<>();
     private static ArrayList<ArrayList<Spiel>> alleRundenSortiert = new ArrayList<>();
-    //private Turnier turnier;
 
-    /*public Zeitplan(Turnier turnier) {
-        this.turnier = turnier;
-        zeitplanErstellen();
-    }*/
 
     public static void zeitplanErstellen(Turnier turnier){
         resetteAlles();
