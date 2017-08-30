@@ -7,10 +7,6 @@ import javafx.scene.text.Font;
 import sample.Ergebnis;
 import sample.Spiel;
 
-import javax.xml.transform.*;
-import java.awt.*;
-import java.util.Properties;
-
 public class TurnierbaumSpiel {
     private int yObenLinks;
     private int xObenLinks;
@@ -21,14 +17,14 @@ public class TurnierbaumSpiel {
     private int yAbstand;
 
 
-   /* public TurnierbaumSpiel(int xObenLinks, int yObenLinks, int breite, int hoehe, Spiel spiel) {
-        this.yObenLinks = yObenLinks;
-        this.xObenLinks = xObenLinks;
-        this.breite = breite;
-        this.hoehe = hoehe;
-        this.spiel = spiel;
-    }
-*/
+    /* public TurnierbaumSpiel(int xObenLinks, int yObenLinks, int breite, int hoehe, Spiel spiel) {
+         this.yObenLinks = yObenLinks;
+         this.xObenLinks = xObenLinks;
+         this.breite = breite;
+         this.hoehe = hoehe;
+         this.spiel = spiel;
+     }
+ */
     public TurnierbaumSpiel(int xObenLinks, int yObenLinks, int breite, int hoehe, Spiel spiel, int xAbstand, int yAbstand) {
         this.yObenLinks = yObenLinks;
         this.xObenLinks = xObenLinks;
@@ -53,11 +49,12 @@ public class TurnierbaumSpiel {
     }
 
     public void draw(GraphicsContext gc){
-        Font schriftart = new Font("Calibri Light",12);
+        Font schriftart = new Font("Calibri",12);
         Font fetteschriftart = new Font ("Calibri Bold", 12);
         /*for (int i=0;i<Font.getFontNames().size();i++){
             System.out.println(Font.getFontNames().get(i));
         }*/
+        gc.setFill(Color.BLACK);
         gc.beginPath();
         gc.setStroke(Color.GREEN);
         gc.setLineWidth(2);
@@ -76,9 +73,10 @@ public class TurnierbaumSpiel {
         gc.lineTo(xObenLinks+breite*0.42,yObenLinks+hoehe*0.5);
         gc.moveTo(xObenLinks+breite*0.59,yObenLinks+ hoehe*0.5);
         gc.lineTo(xObenLinks+breite,yObenLinks+hoehe*0.5);
-        gc.fillText("gegen",xObenLinks+breite*0.43,yObenLinks+hoehe*0.55);
         gc.stroke();
         gc.closePath();
+        gc.setFont(schriftart);
+        gc.fillText("gegen",xObenLinks+breite*0.43,yObenLinks+hoehe*0.55);
 
         if (spiel.getHeim()==spiel.getSieger()&&spiel.getHeim()!=null) {
             gc.setFont(fetteschriftart);
@@ -154,75 +152,3 @@ public class TurnierbaumSpiel {
         return neueSystemSpielID;
     }
 }
-
-
-
-
-
-
-    /*public class ScrollTransformer extends Transformer {
-        private static final double MIN_SCALE = .1;
-        private static final double MAX_SCALE = 5;
-
-        private double currentScale = 1;
-
-
-        @Override
-        public void transform(Source xmlSource, Result outputTarget) throws TransformerException {
-
-        }
-
-        @Override
-        public void setParameter(String name, Object value) {
-
-        }
-
-        @Override
-        public Object getParameter(String name) {
-            return null;
-        }
-
-        @Override
-        public void clearParameters() {
-
-        }
-
-        @Override
-        public void setURIResolver(URIResolver resolver) {
-
-        }
-
-        @Override
-        public URIResolver getURIResolver() {
-            return null;
-        }
-
-        @Override
-        public void setOutputProperties(Properties oformat) {
-
-        }
-
-        @Override
-        public Properties getOutputProperties() {
-            return null;
-        }
-
-        @Override
-        public void setOutputProperty(String name, String value) throws IllegalArgumentException {
-
-        }
-
-        @Override
-        public String getOutputProperty(String name) throws IllegalArgumentException {
-            return null;
-        }
-
-        @Override
-        public void setErrorListener(ErrorListener listener) throws IllegalArgumentException {
-
-        }
-
-        @Override
-        public ErrorListener getErrorListener() {
-            return null;
-        }*/

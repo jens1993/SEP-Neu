@@ -175,7 +175,7 @@ public class KO extends Spielsystem {
 	private void freiloseHinzufuegen (List<Team> setzliste){
 		for (int i=setzliste.size(); i<Math.pow(2,rundenBerechnen());i++){
 			setzliste.add(new Team("Freilos",this.getSpielklasse()));
-			super.setzlisteDAO.update(setzliste.size(),setzliste.get(setzliste.size()-1),this.getSpielklasse());
+			super.setzlisteDAO.create(setzliste.size(),setzliste.get(setzliste.size()-1),this.getSpielklasse());
 		}
 	}
 
