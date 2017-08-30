@@ -29,12 +29,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import sample.*;
 import sample.DAO.auswahlklasse;
+import sample.GUI.Visualisierung.GruppenTabelle;
 import sample.GUI.Visualisierung.Turnierbaum;
 import sample.Spielsysteme.Spielsystem;
 
@@ -68,6 +70,18 @@ public class MainController implements Initializable, Observable
     @FXML
     private GridPane gridPane_main;
     @FXML
+    private Button btn_klassen;
+    @FXML
+    private Button btn_turnierLaden;
+    @FXML
+    private Button btn_spieler;
+    @FXML
+    private Button btn_teams;
+    @FXML
+    private Button btn_zeitplan;
+    @FXML
+    private Button btn_statistik;
+    @FXML
     private CheckBox check_gespielteSpiele= new CheckBox();
     @FXML
     private CheckBox check_aktiveSpiele= new CheckBox();
@@ -83,6 +97,8 @@ public class MainController implements Initializable, Observable
     private Tab tab_spieluebersicht = new Tab();
     @FXML
     private Tab tab_turnierbaum = new Tab();
+    @FXML
+    private HBox hbox_felder;
 
     @FXML
     private TextField tspielsuche;
@@ -764,13 +780,13 @@ public class MainController implements Initializable, Observable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
+        tooltipsHinzufuegen();
         ArrayList<ArrayList<Spiel>> alleRunden = Zeitplan.getAlleRunden(auswahlklasse.getAktuelleTurnierAuswahl());
         ContextMenu contextMenu = new ContextMenu();
         //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
         Zeitplan.zeitplanErstellen(auswahlklasse.getAktuelleTurnierAuswahl()); //vergebe Zeitplannummern für die Spiele
         klassenTabsErstellen();
-
+        felderHinzufuegen();
 
         tabelle_spiele.setRowFactory(tv -> {
             TableRow row = new TableRow();
@@ -1024,8 +1040,8 @@ public class MainController implements Initializable, Observable
         });
 
         lspielklassen = new Label("Spielklassen");
-tspielsuche=new TextField("");
-tspielsuche.setPromptText("Spielsuche");
+        tspielsuche=new TextField("");
+        tspielsuche.setPromptText("Spielsuche");
         gridPane_main.getChildren().add(tspielsuche);
         GridPane.setColumnIndex(tspielsuche,0);
         GridPane.setRowIndex(tspielsuche,0);
@@ -1171,6 +1187,44 @@ tspielsuche.setPromptText("Spielsuche");
 
     }
 
+    private void felderHinzufuegen() {
+        for (int i=1; i<=auswahlklasse.getAktuelleTurnierAuswahl().getFelder().size();i++){
+            Button feld = new Button(i+"");
+            feld.getStyleClass().add("feld");
+            feld.setMaxSize(50,170);
+            feld.setPrefSize(50,170);
+            hbox_felder.getChildren().add(feld);
+        }
+    }
+
+    private void tooltipsHinzufuegen() {
+        Tooltip klassenTooltip = new Tooltip();
+        klassenTooltip.setText("Hier klassen erstellen\n und Setzliste hinzufügen");
+        btn_klassen.setTooltip(klassenTooltip);
+
+        Tooltip turnieruebersichtTooltip = new Tooltip();
+        turnieruebersichtTooltip.setText("Turnier laden oder neues Turnier erstellen");
+        btn_turnierLaden.setTooltip(turnieruebersichtTooltip);
+
+        Tooltip spielerTooltip = new Tooltip();
+        spielerTooltip.setText("Turnier laden oder neues Turnier erstellen");
+        btn_spieler.setTooltip(spielerTooltip);
+
+        Tooltip teamsTooltip = new Tooltip();
+        teamsTooltip.setText("Turnier laden oder neues Turnier erstellen");
+        btn_teams.setTooltip(teamsTooltip);
+
+        Tooltip zeitplanTooltip = new Tooltip();
+        zeitplanTooltip.setText("Turnier laden oder neues Turnier erstellen");
+        btn_zeitplan.setTooltip(zeitplanTooltip);
+
+        Tooltip statistikTooltip = new Tooltip();
+        statistikTooltip.setText("Turnier laden oder neues Turnier erstellen");
+        btn_statistik.setTooltip(statistikTooltip);
+
+
+    }
+
     private void klassenTabsErstellen() {
         TabPane tabPane_spielklassen = new TabPane();
         tab_turnierbaum.setContent(tabPane_spielklassen);
@@ -1188,14 +1242,31 @@ tspielsuche.setPromptText("Spielsuche");
     private void klassenVisualisierung(Spielsystem spielsystem, Tab tab) {
         if (spielsystem.getSpielSystemArt()==3){
             Canvas spieluebersicht = new Canvas(5000,5000);
+            //spieluebersicht.applyCss();
             GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
+            gc.setFill(Color.rgb(216,216,216));
+            gc.fillRect(0,0,5000,5000);
             Turnierbaum turnierbaum = new Turnierbaum();
             if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
                 turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), gc);
                     ScrollPane scrollPane = new ScrollPane();
                     tab.setContent(scrollPane);
                     scrollPane.setContent(spieluebersicht);
+            }
 
+        }
+        if (spielsystem.getSpielSystemArt()==1){
+            Canvas spieluebersicht = new Canvas(5000,5000);
+            //spieluebersicht.applyCss();
+            GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
+            gc.setFill(Color.rgb(216,216,216));
+            gc.fillRect(0,0,5000,5000);
+            GruppenTabelle gruppenTabelle = new GruppenTabelle();
+            if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
+                gruppenTabelle.erstelleGruppenTabelle(spielsystem.getSpielklasse(), gc);
+                ScrollPane scrollPane = new ScrollPane();
+                tab.setContent(scrollPane);
+                scrollPane.setContent(spieluebersicht);
             }
 
         }

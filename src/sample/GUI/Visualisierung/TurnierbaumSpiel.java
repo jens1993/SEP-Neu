@@ -1,7 +1,11 @@
 package sample.GUI.Visualisierung;
 
+import com.sun.javafx.scene.control.skin.Utils;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import sample.Ergebnis;
 import sample.Spiel;
 
@@ -15,14 +19,14 @@ public class TurnierbaumSpiel {
     private int yAbstand;
 
 
-   /* public TurnierbaumSpiel(int xObenLinks, int yObenLinks, int breite, int hoehe, Spiel spiel) {
-        this.yObenLinks = yObenLinks;
-        this.xObenLinks = xObenLinks;
-        this.breite = breite;
-        this.hoehe = hoehe;
-        this.spiel = spiel;
-    }
-*/
+    /* public TurnierbaumSpiel(int xObenLinks, int yObenLinks, int breite, int hoehe, Spiel spiel) {
+         this.yObenLinks = yObenLinks;
+         this.xObenLinks = xObenLinks;
+         this.breite = breite;
+         this.hoehe = hoehe;
+         this.spiel = spiel;
+     }
+ */
     public TurnierbaumSpiel(int xObenLinks, int yObenLinks, int breite, int hoehe, Spiel spiel, int xAbstand, int yAbstand) {
         this.yObenLinks = yObenLinks;
         this.xObenLinks = xObenLinks;
@@ -47,6 +51,12 @@ public class TurnierbaumSpiel {
     }
 
     public void draw(GraphicsContext gc){
+        Font schriftart = new Font("Calibri",12);
+        Font fetteschriftart = new Font ("Calibri Bold", 12);
+        /*for (int i=0;i<Font.getFontNames().size();i++){
+            System.out.println(Font.getFontNames().get(i));
+        }*/
+        gc.setFill(Color.BLACK);
         gc.beginPath();
         gc.setStroke(Color.GREEN);
         gc.setLineWidth(2);
@@ -55,10 +65,71 @@ public class TurnierbaumSpiel {
         gc.lineTo(xObenLinks+breite, yObenLinks+hoehe);
         gc.lineTo(xObenLinks, yObenLinks+hoehe);
         gc.lineTo(xObenLinks, yObenLinks);
-        gc.strokeText(spiel.getHeimString(),xObenLinks+10,yObenLinks+20);
         gc.stroke();
         gc.closePath();
+        gc.beginPath();
+        gc.setStroke(Color.GREEN);
+        gc.setLineWidth(1);
+        gc.moveTo(xObenLinks,yObenLinks+ hoehe*0.5);
+        gc.lineTo(xObenLinks+breite,yObenLinks+hoehe*0.5);
+        gc.stroke();
+        gc.closePath();
+
+        gc.setFont(schriftart);
+        if (spiel.getHeim()==spiel.getSieger()&&spiel.getHeim()!=null) {
+            Font gepruefteSchriftart = textPruefen(spiel.getHeimString(),fetteschriftart);
+            Text text = new Text(spiel.getHeimString());
+            text.setFont(gepruefteSchriftart);
+            double textbreite = text.getBoundsInLocal().getWidth();
+            double xstart = xObenLinks + (breite-textbreite)/2;
+            gc.setFont(gepruefteSchriftart);
+            gc.fillText(spiel.getHeimString(), xstart, yObenLinks + 17);
+        }
+        else{
+            Font gepruefteSchriftart = textPruefen(spiel.getHeimString(),schriftart);
+            Text text = new Text(spiel.getHeimString());
+            text.setFont(gepruefteSchriftart);
+            double textbreite = text.getBoundsInLocal().getWidth();
+            double xstart = xObenLinks + (breite-textbreite)/2;
+            gc.setFont(gepruefteSchriftart);
+            gc.fillText(spiel.getHeimString(), xstart, yObenLinks + 17);
+        }
+
+        if (spiel.getGast()==spiel.getSieger()&&spiel.getGast()!=null) {
+            Font gepruefteSchriftart = textPruefen(spiel.getGastString(),fetteschriftart);
+            Text text = new Text(spiel.getGastString());
+            text.setFont(gepruefteSchriftart);
+            double textbreite = text.getBoundsInLocal().getWidth();
+            double xstart = xObenLinks + (breite-textbreite)/2;
+            gc.setFont(gepruefteSchriftart);
+            gc.fillText(spiel.getGastString(), xstart, yObenLinks + 42);
+        }
+        else{
+            Font gepruefteSchriftart = textPruefen(spiel.getGastString(),schriftart);
+            Text text = new Text(spiel.getGastString());
+            text.setFont(gepruefteSchriftart);
+            double textbreite = text.getBoundsInLocal().getWidth();
+            double xstart = xObenLinks + (breite-textbreite)/2;
+            gc.setFont(gepruefteSchriftart);
+            gc.fillText(spiel.getGastString(), xstart, yObenLinks + 42);
+        }
+
     }
+
+    private Font textPruefen(String string, Font schriftart){
+
+        Text text = new Text(string);
+        text.setFont(schriftart);
+        double textbreite = text.getBoundsInLocal().getWidth();
+        while(textbreite>breite){
+            schriftart = new Font(schriftart.getName(),schriftart.getSize()-1);
+            text.setFont(schriftart);
+            textbreite = text.getBoundsInLocal().getWidth();
+        }
+        return schriftart;
+    }
+
+
 
     public void linieZuNaechstemSpiel(TurnierbaumSpiel spiel1, TurnierbaumSpiel spiel2, GraphicsContext gc){
         Ergebnis ergebnis = spiel.getErgebnis();
@@ -76,9 +147,22 @@ public class TurnierbaumSpiel {
         gc.lineTo(xEnde, yEnde);
         gc.stroke();
         gc.closePath();
+        Font schriftart = new Font("Calibri",12);
+        //gc.fillText(ergebnis.getErgebnisArray().toString(),xWendePunkt,yStart);
         if(ergebnis!=null){
-            ergebnis.getErgebnisArray(); //[0] = satz1Heim [1] = satz1Gast [2] = satz2Heim.....
+            int[] ergebnisarray = ergebnis.getErgebnisArray(); //[0] = satz1Heim [1] = satz1Gast [2] = satz2Heim.....
+            for(int i=0;i<ergebnisarray.length;i++){
+                int satzpunkte = ergebnisarray[i];
+                if(i%2==0){ //heimsätze
+                    gc.fillText(satzpunkte+"",xStart+5+i*10,yStart-3);
+                }
+                else{ //gastsätze
+                    gc.fillText(satzpunkte+"",xStart+5+(i-1)*10 ,yStart+schriftart.getSize());
+                }
+            }
         }
+
+
     }
 
     public TurnierbaumSpiel neuesSpielerstellen(GraphicsContext gc) {

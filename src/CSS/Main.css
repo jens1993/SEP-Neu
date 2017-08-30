@@ -11,10 +11,24 @@
 {
     -fx-opacity: 0;
 }
-
+.tooltip
+{
+    -fx-background-radius: 1px;
+    -fx-background-color: #888, derive(-fx-color, -7%);
+    -fx-background-insets: 0, 1px;
+    -fx-border-color: #828282;
+    -fx-border-width: 1px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-text-fill: black;
+}
 .tab-pane
 {
     -fx-tab-min-width:90px;
+}
+
+.canvas{
+    -fx-background-color: #d8d8d8;
 }
 
 .tab{
@@ -171,5 +185,12 @@
 
 .button:selected {
     -fx-background-color: #888, derive(-fx-color, -7%);
+}
+
+.feld{
+    -fx-background-radius: 1px;
+    -fx-background-image: url("/sample/images/Badmintonfeld.jpg");
+    -fx-background-size: 45px;
+    -fx-background-repeat: no-repeat;
 }
 /*MAINCONTROLLER*/

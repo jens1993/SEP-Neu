@@ -85,7 +85,7 @@ public class Zeitplan {
     private static void listenVereinen(){
         int spielnummer = 1;
         for(int i=alleRundenSortiert.size()-1;i>=0;i--){
-            for(int j=alleRundenSortiert.get(i).size()-1;j>=0;j--){
+            for(int j=0;j>alleRundenSortiert.get(i).size();j++){
                 Spiel spiel = alleRundenSortiert.get(i).get(j);
                 zeitplan.add(spiel);
                 spiel.setZeitplanNummer(spielnummer);

@@ -59,8 +59,6 @@ public class Turnierbaum {
             }
         }
     }
-    //gc.strokeText("DUfiuzefuzis isatgwafaw", 300,200);
-    /////////////////////////////////////////////////////////////////////
 
 }
 
