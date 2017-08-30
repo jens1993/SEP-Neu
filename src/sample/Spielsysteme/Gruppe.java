@@ -170,13 +170,13 @@ public class Gruppe extends Spielsystem {
 				spiel.setStatus(1);
 				spiel.getSpielsystem().getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().remove(spiel);
 				spiel.getSpielsystem().getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(spiel);
-				spiel.setFreilosErgebnis();
-			/*	if (spiel.getHeim().isFreilos()){
+				//spiel.setFreilosErgebnis();
+				if (spiel.getHeim().isFreilos()){
 					spiel.setErgebnis(new Ergebnis(0,21,0,21));
 				}
 				else if(spiel.getGast().isFreilos()){
 					spiel.setErgebnis(new Ergebnis(21,0,21,0));
-				}*/
+				}
 				spiel.getSpielDAO().update(spiel);
 			}
 		}

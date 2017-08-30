@@ -2,6 +2,10 @@ package sample.GUI.Visualisierung;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import sample.*;
 import sample.DAO.auswahlklasse;
@@ -19,7 +23,7 @@ public class Turnierbaum {
     int anzahlTeilnehmer = (int) anzahlTeilnehmerDouble;
 
 
-    public void erstelleTurnierbaum(Spielklasse spielklasse, GraphicsContext gc) {
+    public void erstelleTurnierbaum(Spielklasse spielklasse, Tab tab) {
         ArrayList<ArrayList<Spiel>> runden = spielklasse.getSpielsystem().getRunden();
         int xObenLinks = 20; //Startpunkt
         int yObenLinks = 20;
@@ -27,6 +31,25 @@ public class Turnierbaum {
         int hoehe = 50;
         int xAbstand = 100;
         int yAbstand = 20;
+        int gesamtHoehe =runden.get(0).size()*(hoehe+yAbstand)+yObenLinks+2-yAbstand;
+        int gesamtBreite = runden.size()*(breite+xAbstand)+xObenLinks+2-xAbstand;
+
+        Canvas canvas = new Canvas();
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        AnchorPane anchorPane = new AnchorPane();
+        ScrollPane scrollPane = new ScrollPane();
+        tab.setContent(scrollPane);
+        scrollPane.setContent(anchorPane);
+        anchorPane.getChildren().add(canvas);
+        canvas.setHeight(gesamtHoehe);
+        canvas.setWidth(gesamtBreite);
+        canvas.setStyle("-fx-background-color: deeppink");
+        scrollPane.setStyle("-fx-background-color: yellow");
+        anchorPane.setStyle("-fx-background-color: #96b946");
+
+        gc.setFill(Color.rgb(216,216,216));
+        gc.fillRect(0,0,gc.getCanvas().getWidth(),gc.getCanvas().getHeight());
+
         ArrayList<TurnierbaumSpiel> letzteRunde = new ArrayList<>();
         ArrayList<TurnierbaumSpiel> neueRunde = new ArrayList<>();
         for(int j=0; j<runden.get(0).size();j++){

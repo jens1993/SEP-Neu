@@ -299,7 +299,7 @@ public class Spiel {
 
 	public void setFreilosErgebnis(){
 		if (this.heim != null && this.heim.isFreilos()){
-			this.setErgebnis(new Ergebnis(0,21,0,21));
+			this.ergebnis = new Ergebnis(0,21,0,21);
 			status=3;
 			this.spielsystem.beendeMatch(this);
 			spielDAO.update(this);
@@ -313,7 +313,7 @@ public class Spiel {
 			this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);
 		}
 		else if(this.gast != null && this.gast.isFreilos()){
-			this.setErgebnis(new Ergebnis(21,0,21,0));
+			this.ergebnis = new Ergebnis(21,0,21,0);
 			status=3;
 			this.spielsystem.beendeMatch(this);
 			spielDAO.update(this);
