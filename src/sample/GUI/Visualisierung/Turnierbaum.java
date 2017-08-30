@@ -43,12 +43,14 @@ public class Turnierbaum {
         anchorPane.getChildren().add(canvas);
         canvas.setHeight(gesamtHoehe);
         canvas.setWidth(gesamtBreite);
-        canvas.setStyle("-fx-background-color: deeppink");
-        scrollPane.setStyle("-fx-background-color: yellow");
+        /*
+        anchorPane.setMinWidth(1999);
+        anchorPane.setMinHeight(1999);
+        */
         anchorPane.setStyle("-fx-background-color: #96b946");
 
         gc.setFill(Color.rgb(216,216,216));
-        gc.fillRect(0,0,gc.getCanvas().getWidth(),gc.getCanvas().getHeight());
+        //gc.fillRect(0,0,gc.getCanvas().getWidth(),gc.getCanvas().getHeight());
 
         ArrayList<TurnierbaumSpiel> letzteRunde = new ArrayList<>();
         ArrayList<TurnierbaumSpiel> neueRunde = new ArrayList<>();
