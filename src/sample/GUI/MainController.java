@@ -1239,15 +1239,9 @@ public class MainController implements Initializable, Observable
 
         }
         if (spielsystem.getSpielSystemArt()==1){
-            Canvas spieluebersicht = new Canvas(2000,2000);
-            //spieluebersicht.applyCss();
-            GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
-            GruppenTabelle gruppenTabelle = new GruppenTabelle();
+            GruppenTabelle gruppenTabelle = new GruppenTabelle(spielsystem.getSpielklasse(), tab);
             if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
-                gruppenTabelle.erstelleGruppenTabelle(spielsystem.getSpielklasse(), gc);
-                ScrollPane scrollPane = new ScrollPane();
-                tab.setContent(scrollPane);
-                scrollPane.setContent(spieluebersicht);
+                gruppenTabelle.erstelleGruppenTabelle();
             }
         }
     }
