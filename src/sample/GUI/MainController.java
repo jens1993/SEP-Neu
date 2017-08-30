@@ -1066,6 +1066,8 @@ public class MainController implements Initializable, Observable
         gridPane_main.getChildren().add(check_zukuenftigeSpiele);
         GridPane.setColumnIndex(check_zukuenftigeSpiele,6);
         GridPane.setRowIndex(check_zukuenftigeSpiele,0);
+        GridPane.setColumnIndex(check_zukuenftigeSpiele,7);
+        GridPane.setRowIndex(check_zukuenftigeSpiele,0);
         check_aktiveSpiele.setText("Aktive Spiele");
         check_aktiveSpiele.setSelected(true);
         check_ausstehendeSpiele.setText("Ausstehende Spiele");
@@ -1180,8 +1182,8 @@ public class MainController implements Initializable, Observable
         for (int i=1; i<=auswahlklasse.getAktuelleTurnierAuswahl().getFelder().size();i++){
             Button feld = new Button(i+"");
             feld.getStyleClass().add("feld");
-            feld.setMaxSize(50,170);
-            feld.setPrefSize(50,170);
+            feld.setMaxSize(100,300);
+            feld.setPrefSize(100,300);
             hbox_felder.getChildren().add(feld);
         }
     }

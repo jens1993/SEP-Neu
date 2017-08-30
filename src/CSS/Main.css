@@ -1,15 +1,12 @@
 /*MAIN*/
 
-.root {
+.root
+{
     -fx-background-color: #d8d8d8;
     -fx-min-width: 640px;
     -fx-min-height: 480px;
 }
 
-.tab-pane .tab-header-area .tab-header-background
-{
-    -fx-opacity: 0;
-}
 .tooltip
 {
     -fx-background-radius: 1px;
@@ -21,6 +18,12 @@
     -fx-background-radius: 0px;
     -fx-text-fill: black;
 }
+
+.tab-pane .tab-header-area .tab-header-background
+{
+    -fx-opacity: 0;
+}
+
 .tab-pane
 {
     -fx-tab-min-width:90px;
@@ -101,8 +104,9 @@
     -fx-background-image: url("/sample/images/Badmintonfeld.jpg");
     -fx-background-size: 45px;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 90%;
+    -fx-background-size: 96%;
     -fx-background-position: center;
+
 }
 
 .feld:focused{
@@ -110,7 +114,7 @@
     -fx-background-image: url("/sample/images/Badmintonfeld2.jpg");
     -fx-background-size: 45px;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 90%;
+    -fx-background-size: 96%;
     -fx-background-position: center;
 }
 /*MAINCONTROLLER*/
