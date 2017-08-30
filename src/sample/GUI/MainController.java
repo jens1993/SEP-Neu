@@ -14,6 +14,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -25,9 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
@@ -95,6 +95,8 @@ public class MainController implements Initializable, Observable
     private Tab tab_turnierbaum = new Tab();
     @FXML
     private HBox hbox_felder;
+    @FXML
+    TabPane tabPane_spielklassen = new TabPane();
 
     @FXML
     private TextField tspielsuche;
@@ -1210,7 +1212,6 @@ public class MainController implements Initializable, Observable
     }
 
     private void klassenTabsErstellen() {
-        TabPane tabPane_spielklassen = new TabPane();
         tab_turnierbaum.setContent(tabPane_spielklassen);
         for(int i=0;i<auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size();i++){
             Spielklasse spielklasse = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(i);
@@ -1225,26 +1226,19 @@ public class MainController implements Initializable, Observable
 
     private void klassenVisualisierung(Spielsystem spielsystem, Tab tab) {
         if (spielsystem.getSpielSystemArt()==3){
-            Canvas spieluebersicht = new Canvas(5000,5000);
-            //spieluebersicht.applyCss();
-            GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
-            gc.setFill(Color.rgb(216,216,216));
-            gc.fillRect(0,0,5000,5000);
+
+            //gc.setFill(Color.rgb(216,216,216));
+            //gc.fillRect(0,0,5000,5000);
             Turnierbaum turnierbaum = new Turnierbaum();
             if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
-                turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), gc);
-                    ScrollPane scrollPane = new ScrollPane();
-                    tab.setContent(scrollPane);
-                    scrollPane.setContent(spieluebersicht);
+                turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), tab);
             }
 
         }
         if (spielsystem.getSpielSystemArt()==1){
-            Canvas spieluebersicht = new Canvas(5000,5000);
+            Canvas spieluebersicht = new Canvas(2000,2000);
             //spieluebersicht.applyCss();
             GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
-            gc.setFill(Color.rgb(216,216,216));
-            gc.fillRect(0,0,5000,5000);
             GruppenTabelle gruppenTabelle = new GruppenTabelle();
             if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
                 gruppenTabelle.erstelleGruppenTabelle(spielsystem.getSpielklasse(), gc);
@@ -1255,6 +1249,11 @@ public class MainController implements Initializable, Observable
 
         }
 
+    }
+    public void zoomIn(){
+        ScrollPane aktuellesScrollPane = (ScrollPane) tabPane_spielklassen.getSelectionModel().getSelectedItem().getContent();
+        aktuellesScrollPane.setScaleX(2);
+        aktuellesScrollPane.setScaleY(2);
     }
 
     private void CheckeSpielsuche()

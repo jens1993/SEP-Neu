@@ -189,7 +189,6 @@ public class TurnierbaumSpiel {
         neueSystemSpielID = ((int)neueSystemSpielID/2);
         neueSystemSpielID = neueSystemSpielID+(alteRundenNummer-1)*1000;
         neueSystemSpielID += spiel.getSpielsystem().getSpielSystemArt()*10000000;
-        System.out.println(neueSystemSpielID);
         return neueSystemSpielID;
     }
 }
