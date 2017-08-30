@@ -101,6 +101,8 @@
     -fx-background-image: url("/sample/images/Badmintonfeld.jpg");
     -fx-background-size: 45px;
     -fx-background-repeat: no-repeat;
+    -fx-background-size: 75%;
+    -fx-background-position: center;
 }
 
 .feld:focused{
@@ -108,5 +110,7 @@
     -fx-background-image: url("/sample/images/Badmintonfeld2.jpg");
     -fx-background-size: 45px;
     -fx-background-repeat: no-repeat;
+    -fx-background-size: 75%;
+    -fx-background-position: center;
 }
 /*MAINCONTROLLER*/
