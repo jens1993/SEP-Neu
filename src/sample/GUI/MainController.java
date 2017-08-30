@@ -17,6 +17,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.print.PageLayout;
+import javafx.print.Printer;
+import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -1063,6 +1066,8 @@ public class MainController implements Initializable, Observable
         gridPane_main.getChildren().add(check_zukuenftigeSpiele);
         GridPane.setColumnIndex(check_zukuenftigeSpiele,6);
         GridPane.setRowIndex(check_zukuenftigeSpiele,0);
+        GridPane.setColumnIndex(check_zukuenftigeSpiele,7);
+        GridPane.setRowIndex(check_zukuenftigeSpiele,0);
         check_aktiveSpiele.setText("Aktive Spiele");
         check_aktiveSpiele.setSelected(true);
         check_ausstehendeSpiele.setText("Ausstehende Spiele");
@@ -1177,8 +1182,8 @@ public class MainController implements Initializable, Observable
         for (int i=1; i<=auswahlklasse.getAktuelleTurnierAuswahl().getFelder().size();i++){
             Button feld = new Button(i+"");
             feld.getStyleClass().add("feld");
-            feld.setMaxSize(50,170);
-            feld.setPrefSize(50,170);
+            feld.setMaxSize(100,300);
+            feld.setPrefSize(100,300);
             hbox_felder.getChildren().add(feld);
         }
     }
@@ -1207,8 +1212,6 @@ public class MainController implements Initializable, Observable
         Tooltip statistikTooltip = new Tooltip();
         statistikTooltip.setText("Turnier laden oder neues Turnier erstellen");
         btn_statistik.setTooltip(statistikTooltip);
-
-
     }
 
     private void klassenTabsErstellen() {
@@ -1229,7 +1232,7 @@ public class MainController implements Initializable, Observable
 
             //gc.setFill(Color.rgb(216,216,216));
             //gc.fillRect(0,0,5000,5000);
-            Turnierbaum turnierbaum = new Turnierbaum();
+            Turnierbaum turnierbaum = new Turnierbaum(20,20,200,50,100,20);
             if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
                 turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), tab);
             }
@@ -1246,10 +1249,9 @@ public class MainController implements Initializable, Observable
                 tab.setContent(scrollPane);
                 scrollPane.setContent(spieluebersicht);
             }
-
         }
-
     }
+
     public void zoomIn(){
         ScrollPane aktuellesScrollPane = (ScrollPane) tabPane_spielklassen.getSelectionModel().getSelectedItem().getContent();
         aktuellesScrollPane.setScaleX(2);

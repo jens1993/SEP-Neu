@@ -1,5 +1,6 @@
 package sample.GUI.Visualisierung;
 
+import javafx.print.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
@@ -16,25 +17,50 @@ import java.util.Enumeration;
 
 public class Turnierbaum {
 
+    private int xObenLinks = 20; //Startpunkt
+    private int yObenLinks = 20;
+    private int breite = 200;
+    private int hoehe = 50;
+    private int xAbstand = 100;
+    private int yAbstand = 20;
+
     Spielklasse spielklasse = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(0);
     Dictionary<Integer,Spiel> alleSpiele = spielklasse.getSpiele();
     int anzahlSpiele = alleSpiele.size();
     double anzahlTeilnehmerDouble = (((Math.sqrt(1 + anzahlSpiele*2*4))/2*2)+1)/2;     //(1/2) + (((1/4) + anzahlSpiele*2)^(1/2))
     int anzahlTeilnehmer = (int) anzahlTeilnehmerDouble;
+    Canvas canvas;
 
+    private void druckeTurnierbaum(){
+        Printer printer = Printer.getDefaultPrinter();
+        PageLayout pageLayout = printer.createPageLayout(Paper.A4, PageOrientation.PORTRAIT, 0,0,0,0 );
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+        if(printerJob!=null && printerJob.showPrintDialog(auswahlklasse.getStagesdict().get("Main"))){
+            boolean success = printerJob.printPage(pageLayout, canvas);
+            if (success) {
+                printerJob.endJob();
+            }
+        }
+
+    }
+
+    public Turnierbaum(int xObenLinks, int yObenLinks, int breite, int hoehe, int xAbstand, int yAbstand) {
+        this.xObenLinks = xObenLinks;
+        this.yObenLinks = yObenLinks;
+        this.breite = breite;
+        this.hoehe = hoehe;
+        this.xAbstand = xAbstand;
+        this.yAbstand = yAbstand;
+    }
 
     public void erstelleTurnierbaum(Spielklasse spielklasse, Tab tab) {
         ArrayList<ArrayList<Spiel>> runden = spielklasse.getSpielsystem().getRunden();
-        int xObenLinks = 20; //Startpunkt
-        int yObenLinks = 20;
-        int breite = 200;
-        int hoehe = 50;
-        int xAbstand = 100;
-        int yAbstand = 20;
+
         int gesamtHoehe =runden.get(0).size()*(hoehe+yAbstand)+yObenLinks+2-yAbstand;
         int gesamtBreite = runden.size()*(breite+xAbstand)+xObenLinks+2-xAbstand;
 
         Canvas canvas = new Canvas();
+        this.canvas = canvas;
         GraphicsContext gc = canvas.getGraphicsContext2D();
         AnchorPane anchorPane = new AnchorPane();
         ScrollPane scrollPane = new ScrollPane();
@@ -43,12 +69,14 @@ public class Turnierbaum {
         anchorPane.getChildren().add(canvas);
         canvas.setHeight(gesamtHoehe);
         canvas.setWidth(gesamtBreite);
-        canvas.setStyle("-fx-background-color: deeppink");
-        scrollPane.setStyle("-fx-background-color: yellow");
-        anchorPane.setStyle("-fx-background-color: #96b946");
+        /*
+        anchorPane.setMinWidth(1999);
+        anchorPane.setMinHeight(1999);
+        */
+        anchorPane.setStyle("-fx-background-color: #d8d8d8");
 
         gc.setFill(Color.rgb(216,216,216));
-        gc.fillRect(0,0,gc.getCanvas().getWidth(),gc.getCanvas().getHeight());
+        //gc.fillRect(0,0,gc.getCanvas().getWidth(),gc.getCanvas().getHeight());
 
         ArrayList<TurnierbaumSpiel> letzteRunde = new ArrayList<>();
         ArrayList<TurnierbaumSpiel> neueRunde = new ArrayList<>();
@@ -61,7 +89,6 @@ public class Turnierbaum {
             letzteRunde.add(turnierbaumSpiel);
 
         }
-
         for(int i=0;i<letzteRunde.size();i++){
             if(i%2==0){
                 TurnierbaumSpiel neuesSpiel = letzteRunde.get(i).neuesSpielerstellen(gc);
@@ -74,15 +101,8 @@ public class Turnierbaum {
                 letzteRunde.get(i).linieZuNaechstemSpiel(letzteRunde.get(i),letzteRunde.get(letzteRunde.size()-1),gc);
             }
         }
-
-        for (int zeile = 0; zeile < anzahlTeilnehmer; zeile++) {
-            for (int spalte = 0; spalte < anzahlTeilnehmer; spalte++) {
-                //Hier die Zellen der Tabelle erstellen
-
-            }
-        }
+        //druckeTurnierbaum();
     }
-
 }
 
 
