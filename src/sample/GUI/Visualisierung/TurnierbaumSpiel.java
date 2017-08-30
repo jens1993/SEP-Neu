@@ -1,9 +1,15 @@
 package sample.GUI.Visualisierung;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import sample.Ergebnis;
 import sample.Spiel;
+
+import javax.xml.transform.*;
+import java.awt.*;
+import java.util.Properties;
 
 public class TurnierbaumSpiel {
     private int yObenLinks;
@@ -47,6 +53,11 @@ public class TurnierbaumSpiel {
     }
 
     public void draw(GraphicsContext gc){
+        Font schriftart = new Font("Calibri Light",12);
+        Font fetteschriftart = new Font ("Calibri Bold", 12);
+        /*for (int i=0;i<Font.getFontNames().size();i++){
+            System.out.println(Font.getFontNames().get(i));
+        }*/
         gc.beginPath();
         gc.setStroke(Color.GREEN);
         gc.setLineWidth(2);
@@ -55,10 +66,41 @@ public class TurnierbaumSpiel {
         gc.lineTo(xObenLinks+breite, yObenLinks+hoehe);
         gc.lineTo(xObenLinks, yObenLinks+hoehe);
         gc.lineTo(xObenLinks, yObenLinks);
-        gc.strokeText(spiel.getHeimString(),xObenLinks+10,yObenLinks+20);
         gc.stroke();
         gc.closePath();
+
+        gc.beginPath();
+        gc.setStroke(Color.GREEN);
+        gc.setLineWidth(1);
+        gc.moveTo(xObenLinks,yObenLinks+ hoehe*0.5);
+        gc.lineTo(xObenLinks+breite*0.42,yObenLinks+hoehe*0.5);
+        gc.moveTo(xObenLinks+breite*0.59,yObenLinks+ hoehe*0.5);
+        gc.lineTo(xObenLinks+breite,yObenLinks+hoehe*0.5);
+        gc.fillText("gegen",xObenLinks+breite*0.43,yObenLinks+hoehe*0.55);
+        gc.stroke();
+        gc.closePath();
+
+        if (spiel.getHeim()==spiel.getSieger()&&spiel.getHeim()!=null) {
+            gc.setFont(fetteschriftart);
+            gc.fillText(spiel.getHeimString(), xObenLinks + 10, yObenLinks + 15);
+        }
+        else{
+            gc.setFont(schriftart);
+            gc.fillText(spiel.getHeimString(), xObenLinks + 10, yObenLinks + 15);
+        }
+
+        if (spiel.getGast()==spiel.getSieger()&&spiel.getGast()!=null) {
+            gc.setFont(fetteschriftart);
+            gc.fillText(spiel.getGastString(), xObenLinks + 10, yObenLinks + 45);
+        }
+        else{
+            gc.setFont(schriftart);
+            gc.fillText(spiel.getGastString(), xObenLinks + 10, yObenLinks + 45);
+        }
+
     }
+
+
 
     public void linieZuNaechstemSpiel(TurnierbaumSpiel spiel1, TurnierbaumSpiel spiel2, GraphicsContext gc){
         Ergebnis ergebnis = spiel.getErgebnis();
@@ -76,9 +118,12 @@ public class TurnierbaumSpiel {
         gc.lineTo(xEnde, yEnde);
         gc.stroke();
         gc.closePath();
+
+        //gc.fillText(ergebnis.getErgebnisArray().toString(),xWendePunkt,yStart);
         if(ergebnis!=null){
             ergebnis.getErgebnisArray(); //[0] = satz1Heim [1] = satz1Gast [2] = satz2Heim.....
         }
+
     }
 
     public TurnierbaumSpiel neuesSpielerstellen(GraphicsContext gc) {
@@ -109,3 +154,75 @@ public class TurnierbaumSpiel {
         return neueSystemSpielID;
     }
 }
+
+
+
+
+
+
+    /*public class ScrollTransformer extends Transformer {
+        private static final double MIN_SCALE = .1;
+        private static final double MAX_SCALE = 5;
+
+        private double currentScale = 1;
+
+
+        @Override
+        public void transform(Source xmlSource, Result outputTarget) throws TransformerException {
+
+        }
+
+        @Override
+        public void setParameter(String name, Object value) {
+
+        }
+
+        @Override
+        public Object getParameter(String name) {
+            return null;
+        }
+
+        @Override
+        public void clearParameters() {
+
+        }
+
+        @Override
+        public void setURIResolver(URIResolver resolver) {
+
+        }
+
+        @Override
+        public URIResolver getURIResolver() {
+            return null;
+        }
+
+        @Override
+        public void setOutputProperties(Properties oformat) {
+
+        }
+
+        @Override
+        public Properties getOutputProperties() {
+            return null;
+        }
+
+        @Override
+        public void setOutputProperty(String name, String value) throws IllegalArgumentException {
+
+        }
+
+        @Override
+        public String getOutputProperty(String name) throws IllegalArgumentException {
+            return null;
+        }
+
+        @Override
+        public void setErrorListener(ErrorListener listener) throws IllegalArgumentException {
+
+        }
+
+        @Override
+        public ErrorListener getErrorListener() {
+            return null;
+        }*/
