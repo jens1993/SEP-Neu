@@ -69,6 +69,14 @@ public class MainController implements Initializable, Observable
     @FXML
     private Button btn_turnierLaden;
     @FXML
+    private Button btn_spieler;
+    @FXML
+    private Button btn_teams;
+    @FXML
+    private Button btn_zeitplan;
+    @FXML
+    private Button btn_statistik;
+    @FXML
     private CheckBox check_gespielteSpiele= new CheckBox();
     @FXML
     private CheckBox check_aktiveSpiele= new CheckBox();
@@ -1168,6 +1176,24 @@ tspielsuche.setPromptText("Spielsuche");
         Tooltip turnieruebersichtTooltip = new Tooltip();
         turnieruebersichtTooltip.setText("Turnier laden oder neues Turnier erstellen");
         btn_turnierLaden.setTooltip(turnieruebersichtTooltip);
+
+        Tooltip spielerTooltip = new Tooltip();
+        spielerTooltip.setText("Turnier laden oder neues Turnier erstellen");
+        btn_spieler.setTooltip(spielerTooltip);
+
+        Tooltip teamsTooltip = new Tooltip();
+        teamsTooltip.setText("Turnier laden oder neues Turnier erstellen");
+        btn_teams.setTooltip(teamsTooltip);
+
+        Tooltip zeitplanTooltip = new Tooltip();
+        zeitplanTooltip.setText("Turnier laden oder neues Turnier erstellen");
+        btn_zeitplan.setTooltip(zeitplanTooltip);
+
+        Tooltip statistikTooltip = new Tooltip();
+        statistikTooltip.setText("Turnier laden oder neues Turnier erstellen");
+        btn_statistik.setTooltip(statistikTooltip);
+
+
     }
 
     private void klassenTabsErstellen() {
