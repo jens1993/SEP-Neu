@@ -47,7 +47,7 @@ public class Turnierbaum {
         anchorPane.setMinWidth(1999);
         anchorPane.setMinHeight(1999);
         */
-        anchorPane.setStyle("-fx-background-color: #96b946");
+        anchorPane.setStyle("-fx-background-color: #d8d8d8");
 
         gc.setFill(Color.rgb(216,216,216));
         //gc.fillRect(0,0,gc.getCanvas().getWidth(),gc.getCanvas().getHeight());
