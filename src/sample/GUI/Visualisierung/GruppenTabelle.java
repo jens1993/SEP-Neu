@@ -1,7 +1,10 @@
 package sample.GUI.Visualisierung;
 
 import com.sun.javafx.scene.control.skin.Utils;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -13,91 +16,113 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 
 public class GruppenTabelle {
-    private int yObenLinks;
-    private int xObenLinks;
-    private int breite;
-    private int hoehe;
-    private Spiel spiel;
-    private int xAbstand;
-    private int yAbstand;
+    private Spielklasse spielklasse;
+    private Tab tab;
 
+    public GruppenTabelle(Spielklasse spielklasse, Tab tab) {
+        this.spielklasse = spielklasse;
+        this.tab = tab;
+    }
 
+    public void erstelleGruppenTabelle(){
 
-        Spielklasse spielklasse = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(0);
-        Dictionary<Integer, Spiel> alleSpiele = spielklasse.getSpiele();
-        int anzahlSpiele = alleSpiele.size();
-        double anzahlTeilnehmerDouble = (((Math.sqrt(1 + anzahlSpiele * 2 * 4)) / 2 * 2) + 1) / 2;     //(1/2) + (((1/4) + anzahlSpiele*2)^(1/2))
-        int anzahlTeilnehmer = (int) anzahlTeilnehmerDouble;
-
-
-    public void erstelleGruppenTabelle(Spielklasse spielklasse,GraphicsContext gc){
-
-        this.yObenLinks = yObenLinks;
-        this.xObenLinks = xObenLinks;
-        this.breite = breite;
-        this.hoehe = hoehe;
-        this.spiel = spiel;
-        this.xAbstand=xAbstand;
-        this.yAbstand=yAbstand;
         ArrayList<Team> teams = spielklasse.getSetzliste();
         ArrayList<ArrayList<Spiel>> runden = spielklasse.getSpielsystem().getRunden();
-        int xObenLinks = 20; //Startpunkt
+
+        int anzahlSpiele =spielklasse.getSpiele().size();
+        double anzahlTeilnehmerDouble = (((Math.sqrt(1 + anzahlSpiele * 2 * 4)) / 2 * 2) + 1) / 2;
+        int anzahlTeilnehmer = (int) anzahlTeilnehmerDouble;
+
+        int xObenLinksLeereZelle = 20;
+        int yObenLinksLeereZelle = 20;
+        int xObenLinks = 170; //Startpunkt
         int yObenLinks = 20;
-        int breite = 200;
-        int hoehe = 50;
+        int zellenBreite = 150;
+        int zellenHoehe = 50;
         int xAbstand = 100;
         int yAbstand = 20;
-        ArrayList<TurnierbaumSpiel> letzteRunde = new ArrayList<>();
-        ArrayList<TurnierbaumSpiel> neueRunde = new ArrayList<>();
-        for(int j=0; j<runden.get(0).size();j++){
 
-            Spiel aktuellesSpiel = runden.get(0).get(j);
-            TurnierbaumSpiel turnierbaumSpiel = new TurnierbaumSpiel(xObenLinks,yObenLinks,breite,hoehe,aktuellesSpiel,xAbstand, yAbstand);
-            turnierbaumSpiel.draw(gc);
-            yObenLinks += hoehe + yAbstand;
-            letzteRunde.add(turnierbaumSpiel);
+        Canvas spieluebersicht = new Canvas(2000,2000);
+        GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
+        ScrollPane scrollPane = new ScrollPane();
+        tab.setContent(scrollPane);
+        scrollPane.setContent(spieluebersicht);
 
-        }
+        //Leere Zelle oben links erstellen
+        gc.beginPath();
+        gc.setStroke(Color.GREEN);
+        gc.setLineWidth(1);
+        gc.beginPath();
+        gc.moveTo(xObenLinksLeereZelle, yObenLinksLeereZelle);
+        gc.lineTo(xObenLinksLeereZelle+zellenBreite, yObenLinksLeereZelle);
+        gc.lineTo(xObenLinksLeereZelle+zellenBreite, yObenLinksLeereZelle+zellenHoehe);
+        gc.lineTo(xObenLinksLeereZelle, yObenLinksLeereZelle+zellenHoehe);
+        gc.lineTo(xObenLinksLeereZelle, yObenLinksLeereZelle);
+        gc.stroke();
+        gc.closePath();
 
-        for(int i=0;i<letzteRunde.size();i++){
-            if(i%2==0){
-                TurnierbaumSpiel neuesSpiel = letzteRunde.get(i).neuesSpielerstellen(gc);
-                if (neuesSpiel!=null) {
-                    neuesSpiel.draw(gc);
-                    letzteRunde.add(neuesSpiel);
-                }
+
+        for(int i=0; i<teams.size();i++){
+
+            Team aktuellesTeam = teams.get(i);
+            if(!aktuellesTeam.isFreilos()) {
+                gc.beginPath();
+                gc.setStroke(Color.GREEN);
+                gc.setLineWidth(1);
+                gc.beginPath();
+                gc.moveTo(xObenLinks + i * zellenBreite, yObenLinks - i * zellenHoehe);
+                gc.lineTo(xObenLinks + i * zellenBreite + zellenBreite, yObenLinks - i * zellenHoehe);
+                gc.lineTo(xObenLinks + i * zellenBreite + zellenBreite, yObenLinks - i * zellenHoehe + zellenHoehe);
+                gc.lineTo(xObenLinks + i * zellenBreite, yObenLinks - i * zellenHoehe + zellenHoehe);
+                gc.lineTo(xObenLinks + i * zellenBreite, yObenLinks - i * zellenHoehe);
+                gc.fillText(aktuellesTeam.toString(), xObenLinks + i * zellenBreite + 40, yObenLinks - i * zellenHoehe + 30);
+
+                gc.stroke();
+                gc.closePath();
+
+
+                gc.beginPath();
+                gc.setStroke(Color.GREEN);
+                gc.setLineWidth(1);
+                gc.beginPath();
+                gc.moveTo(xObenLinks - zellenBreite, yObenLinks + zellenHoehe);
+                gc.lineTo(xObenLinks, yObenLinks + zellenHoehe);
+                gc.lineTo(xObenLinks, yObenLinks + zellenHoehe + zellenHoehe);
+                gc.lineTo(xObenLinks - zellenBreite, yObenLinks + zellenHoehe + zellenHoehe);
+                gc.lineTo(xObenLinks - zellenBreite, yObenLinks + zellenHoehe);
+                gc.fillText(aktuellesTeam.toString(), xObenLinks - zellenBreite + 40, yObenLinks + zellenHoehe + 30);
+                gc.stroke();
+                gc.closePath();
+
+
+                //Titelreihe und Titelspalte erstellen
+
+                yObenLinks += zellenHoehe;
             }
-            else{
-                letzteRunde.get(i).linieZuNaechstemSpiel(letzteRunde.get(i),letzteRunde.get(letzteRunde.size()-1),gc);
-            }
+
         }
 
         for (int zeile = 0; zeile < anzahlTeilnehmer; zeile++) {
             for (int spalte = 0; spalte < anzahlTeilnehmer; spalte++) {
                 //Hier die Zellen der Tabelle erstellen
 
+
+                /*gc.beginPath();
+                gc.setStroke(Color.GREEN);
+                gc.setLineWidth(1);
+                gc.beginPath();
+                gc.moveTo(xObenLinks-zellenBreite, yObenLinks+zellenHoehe-yAbstand);
+                gc.lineTo(xObenLinks, yObenLinks+zellenHoehe-yAbstand);
+                gc.lineTo(xObenLinks, yObenLinks+zellenHoehe+zellenHoehe-yAbstand);
+                gc.lineTo(xObenLinks-zellenBreite, yObenLinks+zellenHoehe+zellenHoehe-yAbstand);
+                gc.lineTo(xObenLinks-zellenBreite, yObenLinks+zellenHoehe-yAbstand);
+                gc.stroke();
+                gc.closePath();*/
+
             }
         }
 
 
-        gc.setFill(Color.BLACK);
-        gc.beginPath();
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(2);
-        gc.moveTo(xObenLinks, yObenLinks);
-        gc.lineTo(xObenLinks+breite, yObenLinks);
-        gc.lineTo(xObenLinks+breite, yObenLinks+hoehe);
-        gc.lineTo(xObenLinks, yObenLinks+hoehe);
-        gc.lineTo(xObenLinks, yObenLinks);
-        gc.stroke();
-        gc.closePath();
-        gc.beginPath();
-        gc.setStroke(Color.GREEN);
-        gc.setLineWidth(1);
-        gc.moveTo(xObenLinks,yObenLinks+ hoehe*0.5);
-        gc.lineTo(xObenLinks+breite,yObenLinks+hoehe*0.5);
-        gc.stroke();
-        gc.closePath();
 
         /*Font schriftart = new Font("Calibri",12);
         Font fetteschriftart = new Font ("Calibri Bold", 12);
