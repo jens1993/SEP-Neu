@@ -1023,8 +1023,8 @@ public class MainController implements Initializable, Observable
         });
 
         lspielklassen = new Label("Spielklassen");
-tspielsuche=new TextField("");
-tspielsuche.setPromptText("Spielsuche");
+        tspielsuche=new TextField("");
+        tspielsuche.setPromptText("Spielsuche");
         gridPane_main.getChildren().add(tspielsuche);
         GridPane.setColumnIndex(tspielsuche,0);
         GridPane.setRowIndex(tspielsuche,0);
