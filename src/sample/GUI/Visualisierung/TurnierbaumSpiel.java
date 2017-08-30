@@ -77,39 +77,56 @@ public class TurnierbaumSpiel {
 
         gc.setFont(schriftart);
         if (spiel.getHeim()==spiel.getSieger()&&spiel.getHeim()!=null) {
+            Font gepruefteSchriftart = textPruefen(spiel.getHeimString(),fetteschriftart);
             Text text = new Text(spiel.getHeimString());
-            text.setFont(fetteschriftart);
+            text.setFont(gepruefteSchriftart);
             double textbreite = text.getBoundsInLocal().getWidth();
             double xstart = xObenLinks + (breite-textbreite)/2;
-            gc.setFont(fetteschriftart);
+            gc.setFont(gepruefteSchriftart);
             gc.fillText(spiel.getHeimString(), xstart, yObenLinks + 17);
         }
         else{
+            Font gepruefteSchriftart = textPruefen(spiel.getHeimString(),schriftart);
             Text text = new Text(spiel.getHeimString());
-            text.setFont(schriftart);
+            text.setFont(gepruefteSchriftart);
             double textbreite = text.getBoundsInLocal().getWidth();
             double xstart = xObenLinks + (breite-textbreite)/2;
-            gc.setFont(schriftart);
+            gc.setFont(gepruefteSchriftart);
             gc.fillText(spiel.getHeimString(), xstart, yObenLinks + 17);
         }
 
         if (spiel.getGast()==spiel.getSieger()&&spiel.getGast()!=null) {
+            Font gepruefteSchriftart = textPruefen(spiel.getGastString(),fetteschriftart);
             Text text = new Text(spiel.getGastString());
-            text.setFont(fetteschriftart);
+            text.setFont(gepruefteSchriftart);
             double textbreite = text.getBoundsInLocal().getWidth();
             double xstart = xObenLinks + (breite-textbreite)/2;
-            gc.setFont(fetteschriftart);
+            gc.setFont(gepruefteSchriftart);
             gc.fillText(spiel.getGastString(), xstart, yObenLinks + 42);
         }
         else{
+            Font gepruefteSchriftart = textPruefen(spiel.getGastString(),schriftart);
             Text text = new Text(spiel.getGastString());
-            text.setFont(schriftart);
+            text.setFont(gepruefteSchriftart);
             double textbreite = text.getBoundsInLocal().getWidth();
             double xstart = xObenLinks + (breite-textbreite)/2;
-            gc.setFont(schriftart);
+            gc.setFont(gepruefteSchriftart);
             gc.fillText(spiel.getGastString(), xstart, yObenLinks + 42);
         }
 
+    }
+
+    private Font textPruefen(String string, Font schriftart){
+
+        Text text = new Text(string);
+        text.setFont(schriftart);
+        double textbreite = text.getBoundsInLocal().getWidth();
+        while(textbreite>breite){
+            schriftart = new Font(schriftart.getName(),schriftart.getSize()-1);
+            text.setFont(schriftart);
+            textbreite = text.getBoundsInLocal().getWidth();
+        }
+        return schriftart;
     }
 
 

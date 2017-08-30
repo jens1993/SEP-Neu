@@ -15,7 +15,7 @@ public class GruppenTabelle {
     double anzahlTeilnehmerDouble = (((Math.sqrt(1 + anzahlSpiele*2*4))/2*2)+1)/2;     //(1/2) + (((1/4) + anzahlSpiele*2)^(1/2))
     int anzahlTeilnehmer = (int) anzahlTeilnehmerDouble;
 
-    public void erstelleGruppenTabelle(GraphicsContext gc){
+    public void erstelleGruppenTabelle(Spielklasse spielklasse, GraphicsContext gc){
         gc.beginPath();
         gc.setStroke(Color.RED);
         gc.setLineWidth(5);

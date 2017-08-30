@@ -36,6 +36,7 @@ import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 import sample.*;
 import sample.DAO.auswahlklasse;
+import sample.GUI.Visualisierung.GruppenTabelle;
 import sample.GUI.Visualisierung.Turnierbaum;
 import sample.Spielsysteme.Spielsystem;
 
@@ -1225,7 +1226,7 @@ public class MainController implements Initializable, Observable
     private void klassenVisualisierung(Spielsystem spielsystem, Tab tab) {
         if (spielsystem.getSpielSystemArt()==3){
             Canvas spieluebersicht = new Canvas(5000,5000);
-            spieluebersicht.applyCss();
+            //spieluebersicht.applyCss();
             GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
             gc.setFill(Color.rgb(216,216,216));
             gc.fillRect(0,0,5000,5000);
@@ -1235,7 +1236,21 @@ public class MainController implements Initializable, Observable
                     ScrollPane scrollPane = new ScrollPane();
                     tab.setContent(scrollPane);
                     scrollPane.setContent(spieluebersicht);
+            }
 
+        }
+        if (spielsystem.getSpielSystemArt()==1){
+            Canvas spieluebersicht = new Canvas(5000,5000);
+            //spieluebersicht.applyCss();
+            GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
+            gc.setFill(Color.rgb(216,216,216));
+            gc.fillRect(0,0,5000,5000);
+            GruppenTabelle gruppenTabelle = new GruppenTabelle();
+            if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
+                gruppenTabelle.erstelleGruppenTabelle(spielsystem.getSpielklasse(), gc);
+                ScrollPane scrollPane = new ScrollPane();
+                tab.setContent(scrollPane);
+                scrollPane.setContent(spieluebersicht);
             }
 
         }

@@ -218,7 +218,7 @@ public class Team {
                 }
             }
             else if(this.einzel == false){
-                return this.spielerEins.toString() + " / " + this.spielerZwei.toString();
+                return this.spielerEins.getNName()+" "+this.spielerEins.getVName().charAt(0)+"." + " / " + this.spielerZwei.getNName()+" "+this.spielerZwei.getVName().charAt(0)+".";
             }
         }
         return "Fehler";
