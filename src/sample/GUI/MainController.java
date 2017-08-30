@@ -92,6 +92,8 @@ public class MainController implements Initializable, Observable
     private Tab tab_spieluebersicht = new Tab();
     @FXML
     private Tab tab_turnierbaum = new Tab();
+    @FXML
+    private HBox hbox_felder;
 
     @FXML
     private TextField tspielsuche;
@@ -767,7 +769,7 @@ public class MainController implements Initializable, Observable
         //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
         Zeitplan.zeitplanErstellen(auswahlklasse.getAktuelleTurnierAuswahl()); //vergebe Zeitplannummern für die Spiele
         klassenTabsErstellen();
-
+        felderHinzufuegen();
 
         tabelle_spiele.setRowFactory(tv -> {
             TableRow row = new TableRow();
@@ -1166,6 +1168,16 @@ tspielsuche.setPromptText("Spielsuche");
         tabelle_spiele.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 
+    }
+
+    private void felderHinzufuegen() {
+        for (int i=1; i<=auswahlklasse.getAktuelleTurnierAuswahl().getFelder().size();i++){
+            Button feld = new Button(i+"");
+            feld.getStyleClass().add("feld");
+            feld.setMaxSize(50,170);
+            feld.setPrefSize(50,170);
+            hbox_felder.getChildren().add(feld);
+        }
     }
 
     private void tooltipsHinzufuegen() {
