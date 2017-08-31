@@ -308,7 +308,7 @@ public class MainController implements Initializable
         checkComboBoxFuellen();
 
 
-        tabelle_spiele.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        //tabelle_spiele.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 
     }
@@ -830,15 +830,16 @@ public class MainController implements Initializable
 
 
     private void AllesNeuLaden() {
+        int indexalt = tabelle_spiele.getSelectionModel().getSelectedIndex();
         if (!tspielsuche.getText().equals("")) {
             CheckeSpielsuche();
         } else {
             //("maus event");
-            ObservableList index = tabelle_spiele.getSelectionModel().getSelectedIndices();
-            index_neu.clear();
+            //ObservableList index = tabelle_spiele.getSelectionModel().getSelectedIndices();
+            /*index_neu.clear();
             for (int i = 0; i < index.size(); i++) {
                 index_neu.add((Integer) index.get(i));
-            }
+            }*/
 
             //region checkbox
             if (check_gespielteSpiele.isSelected()) {
@@ -912,15 +913,11 @@ public class MainController implements Initializable
 
 
             }
-            //System.out.println("t"+index_neu);
-            if (index_neu.size() > 0) {
 
-                //tabelle_spiele.getSelectionModel().selectRange(index_neu.get(0), (index_neu.get(index_neu.size() - 1)) + 1);
-            }
-            for (int i = 0; i < index_neu.size(); i++) {
+            /*for (int i = 0; i < index_neu.size(); i++) {*/
 
-                tabelle_spiele.getSelectionModel().select(index_neu.get(i));
-            }
+                tabelle_spiele.getSelectionModel().select(indexalt);
+            /*}*/
 
 
         }
