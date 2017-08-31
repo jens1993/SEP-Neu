@@ -19,8 +19,8 @@ public class GruppeMitEndrunde extends Spielsystem{
 	private Dictionary<Integer,ArrayList<Team>> allePlatzierungslisten = new Hashtable();
 	private Spielsystem endrunde;
 
-	public GruppeMitEndrunde(List<Team> setzliste, Spielklasse spielklasse, int anzahlGruppen, int anzahlWeiterkommender) {
-		this.setzliste = setzliste;
+	public GruppeMitEndrunde(Spielklasse spielklasse, int anzahlGruppen, int anzahlWeiterkommender) {
+		this.setzliste = spielklasse.getSetzliste();
 		this.anzahlGruppen = anzahlGruppen;
 		this.anzahlWeiterkommender = anzahlWeiterkommender;
 		setSpielklasse(spielklasse);
@@ -121,6 +121,13 @@ public class GruppeMitEndrunde extends Spielsystem{
 		}
 	}
 
+	public ArrayList<Gruppe> getAlleGruppen() {
+		return alleGruppen;
+	}
+
+	public Spielsystem getEndrunde() {
+		return endrunde;
+	}
 
 	@Override
 	public List<Team> getPlatzierungsliste() {

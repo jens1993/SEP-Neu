@@ -1,9 +1,6 @@
 package sample.GUI;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.animation.PauseTransition;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,17 +11,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.print.PageLayout;
-import javafx.print.Printer;
-import javafx.print.PrinterJob;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
@@ -32,7 +22,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -41,29 +30,25 @@ import sample.*;
 import sample.DAO.auswahlklasse;
 import sample.GUI.Visualisierung.GruppenTabelle;
 import sample.GUI.Visualisierung.Turnierbaum;
+import sample.Spielsysteme.GruppeMitEndrunde;
 import sample.Spielsysteme.Spielsystem;
 
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.text.TableView;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.ScheduledFuture;
-
-import static sample.DAO.auswahlklasse.getAktuelleTurnierAuswahl;
-import static sample.DAO.auswahlklasse.setSpielAuswahlErgebniseintragen;
 
 /**
  * Created by jens on 03.08.2017.
  */
-public class MainController implements Initializable, Observable
+public class MainController implements Initializable
 {
     final ObservableList<Spielklasse> strings = FXCollections.observableArrayList();
     final CheckComboBox<Spielklasse> checkComboBox = new CheckComboBox<Spielklasse>();
     private Label lspielklassen;
     ArrayList<Integer> index_neu = new ArrayList<Integer>();
 
+    //region FXML Deklaration
     @FXML
     private VBox vbox_main;
     @FXML
@@ -103,26 +88,14 @@ public class MainController implements Initializable, Observable
 
     @FXML
     private TextField tspielsuche;
+
+    //endregion
+
     ObservableList<Spiel> sortListe = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele();
 //wieso integer?
     //wenn integer dann die ids abgehen
 
 
-    public void spieleRefresh(){
-        //tabelle_spiele.refresh();
-
-    }
-
-    public void pressBtn_laden(ActionEvent event) throws Exception{
-        try{
-
-            printSpielTable();
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-            System.out.println("Fehler beim laden");
-        }
-    }
 
     public void pressBtn_spieler(ActionEvent event) throws Exception {
         try {
@@ -158,37 +131,6 @@ public class MainController implements Initializable, Observable
             e.printStackTrace();
         }
     }
-    public void pressBtn_Felder(ActionEvent event) throws Exception {
-        try {
-            //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzuGruppe.fxml"));
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FeldZuweisung.fxml"));
-            //System.out.println("test");
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-
-            auswahlklasse.addStagesdict(stage,"FeldZuweisung");
-            stage.setScene(new Scene(root1));
-            stage.show();
-            stage.setTitle("Felder zuweisen");
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void pressBtn_neuesTurnier(ActionEvent event) throws Exception {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("neuesTurnier.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-
-
-            stage.setScene(new Scene(root1));
-            stage.show();
-            auswahlklasse.addStagesdict(stage,"NeuesTurnier");
-            stage.setTitle("Neues Turnier");
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void pressBtn_turnierLaden (ActionEvent event) throws Exception {
 
@@ -202,54 +144,7 @@ public class MainController implements Initializable, Observable
         stage.setTitle("Turnier auswählen");
         auswahlklasse.getStagesdict().get("Main").close();
     }
-    /*
-    @FXML
-    public void reloadcheckbox()
-    {
 
-        a.getAktuelleTurnierAuswahl().getObs_spiele().clear();
-        checkComboBox.getItems().clear();
-
-        //System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
-        Enumeration enumKeys = auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().keys();
-
-        while(enumKeys.hasMoreElements()){
-            int key = (int) enumKeys.nextElement();
-            a.getAktuelleTurnierAuswahl().getObs_spielklassen().add(a.getAktuelleTurnierAuswahl().getSpielklassen().get(key));
-            //System.out.println("größe = "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
-            //checkComboBox.getItems().add(obs_spielklassen.get(i-1));
-
-        }
-//        hbox_main.getChildren().remove(checkComboBox);
-//        hbox_main.getChildren().add(checkComboBox);
-        checkComboBox.getItems().setAll(a.getAktuelleTurnierAuswahl().getObs_spielklassen());
-
-
-        System.out.println("Lade CheckCombobox ohne Button");
-
-    }*/
-    @FXML
-    public void reloadcheckbox(ActionEvent event)
-    {
-        auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
-        checkComboBox.getItems().clear();
-
-        //System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
-
-        Enumeration enumKeys = auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().keys();
-        while(enumKeys.hasMoreElements()){
-            int key = (int) enumKeys.nextElement();
-            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().add(auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key));
-            //System.out.println("größe = "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
-//            checkComboBox.getItems().add(obs_spielklassen.get(i-1));
-
-        }
-        checkComboBox.getItems().setAll(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen());
-
-
-        //System.out.println("test");
-
-    }
     public void pressBtn_Einstellungen (ActionEvent event) throws Exception {
         //System.out.println("test");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Einstellungen.fxml"));
@@ -276,175 +171,20 @@ public class MainController implements Initializable, Observable
         stage.setTitle("Statistiken: "+auswahlklasse.getAktuelleTurnierAuswahl().getName());
         //((Node)(event.getSource())).getScene().getWindow().hide();
     }
-    public void pressBtn_teamLaden (ActionEvent event) throws Exception {
-        //System.out.println("test");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TeamUebersicht.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
 
-
-        stage.setScene(new Scene(root1));
-        stage.show();
-        auswahlklasse.addStagesdict(stage,"TurnierAuswählen");
-        stage.setTitle("Turnier auswählen");
-    }
-    public void pressBtn_drucken(ActionEvent event) throws Exception{
-        Turnier turnier = getAktuelleTurnierAuswahl();
-        ArrayList<Spiel> spiele = new ArrayList<>();
-        spiele.add(turnier.getSpiele().get(1));
-        spiele.add(turnier.getSpiele().get(2));
-        spiele.add(turnier.getSpiele().get(3));
-        spiele.add(turnier.getSpiele().get(4));
-        spiele.add(turnier.getSpiele().get(5));
-        spiele.add(turnier.getSpiele().get(6));
-        spiele.get(1).spielzettelDrucken();
-    }
-    private final List<InvalidationListener> listeners = new LinkedList<>();
-    @Override
-    public void addListener(InvalidationListener listener) {
-        listeners.add(listener);
-    }
-
-    @Override
-    public void removeListener(InvalidationListener listener) {
-        listeners.remove(listener);
-    }
-    public void invalidate() {
-        for (InvalidationListener listener : listeners) {
-            try {
-                listener.invalidated(this);
-            } catch (RuntimeException ex) {
-            }
-        }
-    }
     @FXML
     private void fuelleSpielElemente() throws Exception{
-
         auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
-        auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().removeAll();
-
-
-        int id=0;
         if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl()!=null&&auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size()>0) {
-            if (check_gespielteSpiele.isSelected()) {
-                for (int j = 0; j < auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size(); j++) { //<=?
-                    id = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().get(j); //+1?
-                    //System.out.println("id= " + id);
-                    for (int i = 0; i < auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().size(); i++) {
-                        boolean frei=false;
-                        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getGast() != null) {
-                            frei = auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getGast().isFreilos();
-                        }
-                        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getHeim() != null && !frei) {
-                            frei = auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getHeim().isFreilos();
-                        }
-
-                        if (auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-                            //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
-                        }
-                        if (id != 0 && id == auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-                            if(!frei) {
-                                auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().add(auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().get(i));
-                            }
-                            // System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
-                        }
-
-                    }
-                }
-            }
-
-            if (check_aktiveSpiele.isSelected()) {
-                for (int j = 0; j < auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size(); j++) { //<=?
-                    id = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().get(j);//+1
-                    //System.out.println("id= " + id);
-                    for (int i = 0; i < auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().size(); i++) {
-
-
-                        if (auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-                            //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
-                        }
-                        if (id != 0 && id == auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-                            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().add(auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().get(i));
-                            //System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
-                        }
-
-
-                    }
-                }
-            }
-            if (check_ausstehendeSpiele.isSelected()) {
-                for (int j = 0; j < auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size(); j++) { //<=?
-                    id = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().get(j); //+1
-                    //System.out.println("id= " + id);
-                    for (int i = 0; i < auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().size(); i++) {
-
-
-                        if (auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-                            //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
-                        }
-                        boolean frei=false;
-                        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGast() != null) {
-                            frei = auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGast().isFreilos();
-                        }
-                        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeim() != null && !frei) {
-                            frei = auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeim().isFreilos();
-                        }
-                        if (id != 0 && id == auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-
-                            /*if(a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGastString()=="Freilos"||
-                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGast()==null||
-                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeimString()=="Freilos"||
-                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeim()==null)*/
-                            if(frei)
-                            {}
-                            else {
-                                auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().add(auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i));
-                            }
-                            //System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
-                        }
-
-
-                    }
-                }
-            }
-            if (check_zukuenftigeSpiele.isSelected()) {
-                for (int j = 0; j < auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size(); j++) { //<=?
-                    id = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().get(j); //+1
-                    //System.out.println("id= " + id);
-                    for (int i = 0; i < auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().size(); i++) {
-
-
-                        if (auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-                            //   System.out.println("spid= "+a.getAktuelleTurnierAuswahl().getAusstehendeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
-                        }
-                        boolean frei=false;
-                        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getGast() != null) {
-                            frei = auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getGast().isFreilos();
-                        }
-                        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getHeim() != null && !frei) {
-                            frei = auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getHeim().isFreilos();
-                        }
-                        if (id != 0 && id == auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i).getSpielsystem().getSpielklasse() != null) {
-
-                            /*if(a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGastString()=="Freilos"||
-                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getGast()==null||
-                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeimString()=="Freilos"||
-                                    a.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().get(i).getHeim()==null)*/
-                            if(frei)
-                            {}
-                            else {
-                                auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().add(auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().get(i));
-                            }
-                            //System.out.println("id =" + id + " spid= " + obs_spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID());
-                        }
-
-
-                    }
-                }
-            }
+            fuelleCheckboxSpielElemente(check_gespielteSpiele,auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele());
+            fuelleCheckboxSpielElemente(check_aktiveSpiele,auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele());
+            fuelleCheckboxSpielElemente(check_ausstehendeSpiele,auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele());
+            fuelleCheckboxSpielElemente(check_zukuenftigeSpiele,auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele());
         }
+        sortiereTabelleSpiele();
+    }
 
-
+    private void sortiereTabelleSpiele() {
         sortListe.sort(new Comparator<Spiel>() {
             @Override
             public int compare(Spiel o1, Spiel o2) {
@@ -452,331 +192,247 @@ public class MainController implements Initializable, Observable
             }
         });
         tabelle_spiele.setItems(sortListe);
+    }
 
+    private void fuelleCheckboxSpielElemente(CheckBox checkBox, ObservableList<Spiel> spiele) {
+        int id;
+        if (checkBox.isSelected()) {
+            for (int j = 0; j < auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size(); j++) {
+                id = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().get(j);
+                for (int i = 0; i < spiele.size(); i++) {
+                    if (spiele.get(i).getSpielsystem().getSpielklasse() != null) {
+                    }
+                    boolean frei=false;
+                    if(spiele.get(i).getGast() != null) {
+                        frei = spiele.get(i).getGast().isFreilos();
+                    }
+                    if(spiele.get(i).getHeim() != null && !frei) {
+                        frei = spiele.get(i).getHeim().isFreilos();
+                    }
+                    if (id != 0 && id == spiele.get(i).getSpielsystem().getSpielklasse().getSpielklasseID() && spiele.get(i).getSpielsystem().getSpielklasse() != null) {
+                        if(frei)
+                        {}
+                        else {
+                            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().add(spiele.get(i));
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void printSpielTable() throws Exception {
         tabelle_spiele.getColumns().removeAll();
         if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
-
-
-            TableColumn<Spiel,String> spielNummerSpalte = new TableColumn("#");
-            spielNummerSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("spielNummer"));
-            spielNummerSpalte.setCellFactory(column -> {
-                return new TableCell<Spiel, String>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty); //This is mandatory
-
-                        if (item == null || empty) { //If the cell is empty
-                            setText(null);
-                            setStyle("");
-                        } else { //If the cell is not empty
-
-                            setText(item); //Put the String data in the cell
-
-                            //We get here all the info of the Person of this row
-                            Spiel spiel = getTableView().getItems().get(getIndex());
-
-                            // Style all persons wich name is "Edgard"
-                            setAlignment(Pos.CENTER_RIGHT);
-                            if (spiel.getStatus()==3) {
-                                setTextFill(Color.RED);
-
-                            }
-                            else if (spiel.getStatus()==2) {
-                                setTextFill(Color.DARKBLUE);
-                            }
-                            else if (spiel.getStatus()==1) {
-                                setTextFill(Color.DARKGREEN);
-                            }
-                            else {
-                                //Here I see if the row of this cell is selected or not
-                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
-                                    setTextFill(Color.WHITE);
-                                else
-                                    setTextFill(Color.BLACK);
-                            }
-                        }
-                    }
-                };
-            });
-
-            TableColumn < Spiel, String > spielFeldSpalte = new TableColumn("Feld");
-            spielFeldSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("FeldNr"));
-            spielFeldSpalte.setCellFactory(column -> {
-                return new TableCell<Spiel, String>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty); //This is mandatory
-
-                        if (item == null || empty) { //If the cell is empty
-                            setText(null);
-                            setStyle("");
-                        } else { //If the cell is not empty
-
-                            setText(item); //Put the String data in the cell
-
-                            //We get here all the info of the Person of this row
-                            Spiel spiel = getTableView().getItems().get(getIndex());
-
-                            // Style all persons wich name is "Edgard"
-                            if (spiel.getStatus()==3) {
-                                setTextFill(Color.RED);
-
-                            }
-                            else if (spiel.getStatus()==2) {
-                                setTextFill(Color.DARKBLUE);
-                            }
-                            else {
-                                //Here I see if the row of this cell is selected or not
-                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
-                                    setTextFill(Color.WHITE);
-                                else
-                                    setTextFill(Color.BLACK);
-                            }
-                        }
-                    }
-                };
-            });
-
-            TableColumn<Spiel,String> spielHeimSpalte = new TableColumn("Heim");
-            spielHeimSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("HeimString"));
-            spielHeimSpalte.setCellFactory(column -> {
-                return new TableCell<Spiel, String>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty); //This is mandatory
-
-                        if (item == null || empty) { //If the cell is empty
-                            setText(null);
-                            setStyle("");
-                        } else { //If the cell is not empty
-
-                            setText(item); //Put the String data in the cell
-
-                            //We get here all the info of the Person of this row
-                            Spiel spiel = getTableView().getItems().get(getIndex());
-
-                            // Style all persons wich name is "Edgard"
-                            setAlignment(Pos.CENTER_RIGHT);
-                            if (spiel.getStatus()==3) {
-                                setTextFill(Color.RED);
-
-                            }
-                            else if (spiel.getStatus()==2) {
-                                setTextFill(Color.DARKBLUE);
-                            }
-                            else if (spiel.getStatus()==1) {
-                                setTextFill(Color.DARKGREEN);
-                            }
-                            else {
-                                //Here I see if the row of this cell is selected or not
-                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
-                                    setTextFill(Color.WHITE);
-                                else
-                                    setTextFill(Color.BLACK);
-                            }
-                        }
-                    }
-                };
-            });
-
-            TableColumn<Spiel,String> spielGastSpalte = new TableColumn("Gast");
-            spielGastSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("GastString"));
-            spielGastSpalte.setCellFactory(column -> {
-                return new TableCell<Spiel, String>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty); //This is mandatory
-
-                        if (item == null || empty) { //If the cell is empty
-                            setText(null);
-                            setStyle("");
-                        } else { //If the cell is not empty
-
-                            setText(item); //Put the String data in the cell
-
-                            //We get here all the info of the Person of this row
-                            Spiel spiel = getTableView().getItems().get(getIndex());
-
-                            // Style all persons wich name is "Edgard"
-                            if (spiel.getStatus()==3) {
-                                setTextFill(Color.RED);
-                            }
-                            else if (spiel.getStatus()==2) {
-                                setTextFill(Color.DARKBLUE);
-                            }
-                            else if (spiel.getStatus()==1) {
-                                setTextFill(Color.DARKGREEN);
-                            }
-                            else {
-                                //Here I see if the row of this cell is selected or not
-                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
-                                    setTextFill(Color.WHITE);
-                                else
-                                    setTextFill(Color.BLACK);
-                            }
-                        }
-                    }
-                };
-            });
-            TableColumn<Spiel,String> spielErgebnisSpalte = new TableColumn("Ergebnis");
-            spielErgebnisSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("ErgebnisString"));
-            spielErgebnisSpalte.setCellFactory(column -> {
-                return new TableCell<Spiel, String>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty); //This is mandatory
-
-                        if (item == null || empty) { //If the cell is empty
-                            setText(null);
-                            setStyle("");
-                        } else { //If the cell is not empty
-
-                            setText(item); //Put the String data in the cell
-
-                            //We get here all the info of the Person of this row
-                            Spiel spiel = getTableView().getItems().get(getIndex());
-
-                            // Style all persons wich name is "Edgard"
-                            if (spiel.getStatus()==3) {
-                                setTextFill(Color.RED);
-                            }
-                            else if (spiel.getStatus()==2) {
-                                setTextFill(Color.DARKBLUE);
-                            }
-                            else if (spiel.getStatus()==1) {
-                                setTextFill(Color.DARKGREEN);
-                            } else {
-                                //Here I see if the row of this cell is selected or not
-                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
-                                    setTextFill(Color.WHITE);
-                                else
-                                    setTextFill(Color.BLACK);
-                            }
-                        }
-                    }
-                };
-            });
-            TableColumn<Spiel,String> spielSpielklasseSpalte = new TableColumn("Spielklasse");
-            spielSpielklasseSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("SpielklasseString"));
-            spielSpielklasseSpalte.setCellFactory(column -> {
-                return new TableCell<Spiel, String>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty); //This is mandatory
-
-                        if (item == null || empty) { //If the cell is empty
-                            setText(null);
-                            setStyle("");
-                        } else { //If the cell is not empty
-
-                            setText(item); //Put the String data in the cell
-
-                            //We get here all the info of the Person of this row
-                            Spiel spiel = getTableView().getItems().get(getIndex());
-
-                            // Style all persons wich name is "Edgard"
-                            if (spiel.getStatus()==3) {
-                                setTextFill(Color.RED);
-                            }
-                            else if (spiel.getStatus()==2) {
-                                setTextFill(Color.DARKBLUE);
-                            }
-                            else if (spiel.getStatus()==1) {
-                                setTextFill(Color.DARKGREEN);
-                            } else {
-                                //Here I see if the row of this cell is selected or not
-                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
-                                    setTextFill(Color.WHITE);
-                                else
-                                    setTextFill(Color.BLACK);
-                            }
-                        }
-                    }
-                };
-            });
-
-            TableColumn < Spiel, String > spielRundeSpalte = new TableColumn("Runde");
-            spielRundeSpalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>("RundenName"));
-            spielRundeSpalte.setCellFactory(column -> {
-                return new TableCell<Spiel, String>() {
-                    @Override
-                    protected void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty); //This is mandatory
-
-                        if (item == null || empty) { //If the cell is empty
-                            setText(null);
-                            setStyle("");
-                        } else { //If the cell is not empty
-
-                            setText(item); //Put the String data in the cell
-
-                            //We get here all the info of the Person of this row
-                            Spiel spiel = getTableView().getItems().get(getIndex());
-
-                            // Style all persons wich name is "Edgard"
-                            if (spiel.getStatus()==3) {
-                                setTextFill(Color.RED);
-
-                            }
-                            else if (spiel.getStatus()==2) {
-                                setTextFill(Color.DARKBLUE);
-                            }
-                            else if (spiel.getStatus()==1) {
-                                setTextFill(Color.DARKGREEN);
-                            }
-                            else {
-                                //Here I see if the row of this cell is selected or not
-                                if(getTableView().getSelectionModel().getSelectedItems().contains(spiel))
-                                    setTextFill(Color.WHITE);
-                                else
-                                    setTextFill(Color.BLACK);
-                            }
-                        }
-                    }
-                };
-            });
-
-            //tabelle_spiele.setItems(obs_spiele);
-
+            TableColumn<Spiel,String> spielNummerSpalte = tableColoumnsetCellFactory("#","SpielNummer");
+            TableColumn<Spiel,String> spielFeldSpalte = tableColoumnsetCellFactory("Feld","FeldNr");
+            TableColumn<Spiel,String> spielHeimSpalte = tableColoumnsetCellFactory("Heim","HeimString");
+            TableColumn<Spiel,String> spielGastSpalte = tableColoumnsetCellFactory("Gast","GastString");
+            TableColumn<Spiel,String> spielErgebnisSpalte = tableColoumnsetCellFactory("Ergebnis","ErgebnisString");
+            TableColumn<Spiel,String> spielSpielklasseSpalte = tableColoumnsetCellFactory("Spielklasse","SpielklasseString");
+            TableColumn<Spiel,String> spielRundeSpalte = tableColoumnsetCellFactory("Runde","RundenName");
             tabelle_spiele.getColumns().addAll(spielNummerSpalte,spielFeldSpalte,spielHeimSpalte,spielGastSpalte,spielErgebnisSpalte,spielSpielklasseSpalte,spielRundeSpalte);
-
         }
-
         else{
             System.out.println("kann Turnier nicht laden");
         }
     }
 
-    private void turnierLaden() throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Turnierladen.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root1);
-        stage.setScene(scene);
-        stage.setAlwaysOnTop(true);
-        stage.show();
-        auswahlklasse.addStagesdict(stage,"TurnierAuswählen");
-        stage.setTitle("Turnier auswählen");
+    private TableColumn<Spiel, String> tableColoumnsetCellFactory(String tabellenspaltentext, String getFunktion) {
+        TableColumn<Spiel,String> spalte = new TableColumn(tabellenspaltentext);
 
+        spalte.setCellValueFactory(new PropertyValueFactory<Spiel,String>(getFunktion));
+        spalte.setCellFactory(column -> {
+            return new TableCell<Spiel, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        setText(item);
+                        Spiel spiel = getTableView().getItems().get(getIndex());
+                        if(tabellenspaltentext.equals("Heim")||tabellenspaltentext.equals("#")) {
+                            setAlignment(Pos.CENTER_RIGHT);
+                        }
+                        if (spiel.getStatus()==3) {
+                            setTextFill(Color.RED);
+                        }
+                        else if (spiel.getStatus()==2) {
+                            setTextFill(Color.DARKBLUE);
+                        }
+                        else if (spiel.getStatus()==1) {
+                            setTextFill(Color.DARKGREEN);
+                        }
+                        else {
+                            setTextFill(Color.BLACK);
+                        }
+                    }
+                }
+            };
+        });
+        return spalte;
     }
-
-
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         tooltipsHinzufuegen();
-        ArrayList<ArrayList<Spiel>> alleRunden = Zeitplan.getAlleRunden(auswahlklasse.getAktuelleTurnierAuswahl());
-        ContextMenu contextMenu = new ContextMenu();
         //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
         Zeitplan.zeitplanErstellen(auswahlklasse.getAktuelleTurnierAuswahl()); //vergebe Zeitplannummern für die Spiele
         klassenTabsErstellen();
         felderHinzufuegen();
 
+        tabelleSpieleContextMenu();
+
+        checkComboBoxListener();
+
+
+        layoutErstellen();
+        suchleisteListener();
+
+
+        checkboxListener(check_aktiveSpiele);
+        checkboxListener(check_ausstehendeSpiele);
+        checkboxListener(check_gespielteSpiele);
+        checkboxListener(check_zukuenftigeSpiele);
+
+        tabelle_spiele.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                AllesNeuLaden();
+            }
+            });
+
+
+        checkComboBoxFuellen();
+
+
+        //tabelle_spiele.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+
+    }
+
+    private void checkComboBoxFuellen() {
+        try {
+
+            printSpielTable();
+
+            fuelleSpielElemente();
+
+            for(int i = 0; i< auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size(); i++)
+            {
+                checkComboBox.getCheckModel().check(i);
+            }
+            //obs_spielklassen_auswahl=checkComboBox.getCheckModel().getCheckedItems();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().clear();
+            for(int i=0;i<checkComboBox.getCheckModel().getCheckedItems().size();i++)
+            {
+                auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().add(checkComboBox.getCheckModel().getCheckedItems().get(i).getSpielklasseID());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    private void checkboxListener(CheckBox checkBox) {
+        checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                try {
+                    fuelleSpielElemente();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void layoutErstellen() {
+        lspielklassen = new Label("Spielklassen");
+        tspielsuche=new TextField("");
+        tspielsuche.setPromptText("Spielsuche");
+        gridPane_main.getChildren().add(tspielsuche);
+        GridPane.setColumnIndex(tspielsuche,0);
+        GridPane.setRowIndex(tspielsuche,0);
+
+
+        gridPane_main.getChildren().add(lspielklassen);
+        GridPane.setColumnIndex(lspielklassen,1);
+        GridPane.setRowIndex(lspielklassen,0);
+        gridPane_main.getChildren().add(checkComboBox);
+        GridPane.setColumnIndex(checkComboBox,2);
+        GridPane.setRowIndex(checkComboBox,0);
+        gridPane_main.getChildren().add(check_aktiveSpiele);
+        GridPane.setColumnIndex(check_aktiveSpiele,3);
+        GridPane.setRowIndex(check_aktiveSpiele,0);
+        gridPane_main.getChildren().add(check_ausstehendeSpiele);
+        GridPane.setColumnIndex(check_ausstehendeSpiele,4);
+        GridPane.setRowIndex(check_ausstehendeSpiele,0);
+        gridPane_main.getChildren().add(check_gespielteSpiele);
+        GridPane.setColumnIndex(check_gespielteSpiele,5);
+        GridPane.setRowIndex(check_gespielteSpiele,0);
+        gridPane_main.getChildren().add(check_zukuenftigeSpiele);
+        GridPane.setColumnIndex(check_zukuenftigeSpiele,6);
+        GridPane.setRowIndex(check_zukuenftigeSpiele,0);
+        GridPane.setColumnIndex(check_zukuenftigeSpiele,7);
+        GridPane.setRowIndex(check_zukuenftigeSpiele,0);
+        check_aktiveSpiele.setText("Aktive Spiele");
+        check_aktiveSpiele.setSelected(true);
+        check_ausstehendeSpiele.setText("Ausstehende Spiele");
+        check_ausstehendeSpiele.setSelected(true);
+        check_gespielteSpiele.setText("Gespielte Spiele");
+        check_gespielteSpiele.setSelected(true);
+        check_zukuenftigeSpiele.setText("Zukünftige Spiele");
+        check_zukuenftigeSpiele.setSelected(true);
+        checkComboBox.setMaxWidth(400);
+        checkComboBox.getItems().setAll(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen());
+    }
+
+    private void suchleisteListener() {
+        PauseTransition pause = new PauseTransition(Duration.millis(300));
+        tspielsuche.textProperty().addListener((observable, oldValue, newValue) -> {
+            // System.out.println("textfield changed from " + oldValue + " to " + newValue);
+            //obs_spieler.clear();
+
+            pause.setOnFinished(event -> CheckeSpielsuche());
+            pause.playFromStart();
+
+        });
+    }
+
+    private void checkComboBoxListener() {
+        checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<Spielklasse>() {
+            public void onChanged(Change<? extends Spielklasse> c) {
+                //System.out.println(checkComboBox.getCheckModel().getCheckedIndices());
+                //obs_spielklassen_auswahl=checkComboBox.getCheckModel().getCheckedIndices();
+                auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().clear();
+                for(int i=0;i<checkComboBox.getCheckModel().getCheckedItems().size();i++)
+                {
+                    auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().add(checkComboBox.getCheckModel().getCheckedItems().get(i).getSpielklasseID());
+
+                }
+                //System.out.println(obs_spielklassen_auswahl);
+                try {
+                    //System.out.println("Auswahl geändert"+ checkComboBox.getCheckModel().getCheckedIndices());
+                    fuelleSpielElemente();
+//                    tabelle_spiele.getItems().clear();
+//                    tabelle_spiele.setItems(obs_spiele);
+//                    tabelle_spiele.refresh();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void tabelleSpieleContextMenu() {
+        ContextMenu contextMenu = new ContextMenu();
         tabelle_spiele.setRowFactory(tv -> {
             TableRow row = new TableRow();
             row.setOnMouseClicked(event -> {
@@ -826,7 +482,7 @@ public class MainController implements Initializable, Observable
 
                         }
                     });
-                    Menu  item3 = new Menu ("Felder zuweisen");
+                    Menu item3 = new Menu ("Felder zuweisen");
                     item3.setOnAction(new EventHandler<ActionEvent>() {
 
                         @Override
@@ -997,185 +653,6 @@ public class MainController implements Initializable, Observable
             });
             return row ;
         });
-
-        // create the data to show in the CheckComboBox
-
-        // Create the CheckComboBox with the data
-
-
-        // and listen to the relevant events (e.g. when the selected indices or
-        // selected items change).
-        checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<Spielklasse>() {
-            public void onChanged(Change<? extends Spielklasse> c) {
-                //System.out.println(checkComboBox.getCheckModel().getCheckedIndices());
-                //obs_spielklassen_auswahl=checkComboBox.getCheckModel().getCheckedIndices();
-                auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().clear();
-                for(int i=0;i<checkComboBox.getCheckModel().getCheckedItems().size();i++)
-                {
-                    auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().add(checkComboBox.getCheckModel().getCheckedItems().get(i).getSpielklasseID());
-
-                }
-                //System.out.println(obs_spielklassen_auswahl);
-                try {
-                    //System.out.println("Auswahl geändert"+ checkComboBox.getCheckModel().getCheckedIndices());
-                    fuelleSpielElemente();
-//                    tabelle_spiele.getItems().clear();
-//                    tabelle_spiele.setItems(obs_spiele);
-//                    tabelle_spiele.refresh();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        lspielklassen = new Label("Spielklassen");
-        tspielsuche=new TextField("");
-        tspielsuche.setPromptText("Spielsuche");
-        gridPane_main.getChildren().add(tspielsuche);
-        GridPane.setColumnIndex(tspielsuche,0);
-        GridPane.setRowIndex(tspielsuche,0);
-
-
-        PauseTransition pause = new PauseTransition(Duration.millis(300));
-        tspielsuche.textProperty().addListener((observable, oldValue, newValue) -> {
-            // System.out.println("textfield changed from " + oldValue + " to " + newValue);
-            //obs_spieler.clear();
-
-            pause.setOnFinished(event -> CheckeSpielsuche());
-            pause.playFromStart();
-
-        });
-
-
-
-        gridPane_main.getChildren().add(lspielklassen);
-        GridPane.setColumnIndex(lspielklassen,1);
-        GridPane.setRowIndex(lspielklassen,0);
-        gridPane_main.getChildren().add(checkComboBox);
-        GridPane.setColumnIndex(checkComboBox,2);
-        GridPane.setRowIndex(checkComboBox,0);
-        gridPane_main.getChildren().add(check_aktiveSpiele);
-        GridPane.setColumnIndex(check_aktiveSpiele,3);
-        GridPane.setRowIndex(check_aktiveSpiele,0);
-        gridPane_main.getChildren().add(check_ausstehendeSpiele);
-        GridPane.setColumnIndex(check_ausstehendeSpiele,4);
-        GridPane.setRowIndex(check_ausstehendeSpiele,0);
-        gridPane_main.getChildren().add(check_gespielteSpiele);
-        GridPane.setColumnIndex(check_gespielteSpiele,5);
-        GridPane.setRowIndex(check_gespielteSpiele,0);
-        gridPane_main.getChildren().add(check_zukuenftigeSpiele);
-        GridPane.setColumnIndex(check_zukuenftigeSpiele,6);
-        GridPane.setRowIndex(check_zukuenftigeSpiele,0);
-        GridPane.setColumnIndex(check_zukuenftigeSpiele,7);
-        GridPane.setRowIndex(check_zukuenftigeSpiele,0);
-        check_aktiveSpiele.setText("Aktive Spiele");
-        check_aktiveSpiele.setSelected(true);
-        check_ausstehendeSpiele.setText("Ausstehende Spiele");
-        check_ausstehendeSpiele.setSelected(true);
-        check_gespielteSpiele.setText("Gespielte Spiele");
-        check_gespielteSpiele.setSelected(true);
-        check_zukuenftigeSpiele.setText("Zukünftige Spiele");
-        check_zukuenftigeSpiele.setSelected(true);
-        checkComboBox.setMaxWidth(400);
-        checkComboBox.getItems().setAll(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen());
-
-        check_aktiveSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
-                    fuelleSpielElemente();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        check_ausstehendeSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
-                    fuelleSpielElemente();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        check_gespielteSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
-                    fuelleSpielElemente();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        check_zukuenftigeSpiele.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                try {
-                    fuelleSpielElemente();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        tabelle_spiele.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                AllesNeuLaden();
-            }
-            });
-
-        //reloadcheckbox();
-        try {
-            //urnierLaden();
-
-            printSpielTable();
-
-            fuelleSpielElemente();
-            for(int i=0;i<auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size();i++)
-            {
-                checkComboBox.getCheckModel().check(i);
-            }
-            //obs_spielklassen_auswahl=checkComboBox.getCheckModel().getCheckedItems();
-            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().clear();
-            for(int i=0;i<checkComboBox.getCheckModel().getCheckedItems().size();i++)
-            {
-                auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().add(checkComboBox.getCheckModel().getCheckedItems().get(i).getSpielklasseID());
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-
-
-        //System.out.println(tabelle_spiele.getSortOrder());
-//        System.out.println("----------------");
-//        for(int i=0;i<obs_spiele.size();i++)
-//        {
-//            System.out.println("Staus: "+obs_spiele.get(i).getStatus());
-//            System.out.println("Klasse: "+obs_spiele.get(i).getSpielklasseString());
-//
-//        }
-//
-//        System.out.println("----------------");
-//        System.out.println("----------------");
-//        System.out.println("----------------");
-//        System.out.println(obs_spielklassen);
-//        System.out.println("----------------");
-//        System.out.println("----------------");
-//        System.out.println("----------------");
-//        System.out.println(obs_spielklassen_auswahl);
-
-
-        tabelle_spiele.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-
     }
 
     private void felderHinzufuegen() {
@@ -1185,6 +662,7 @@ public class MainController implements Initializable, Observable
             feld.setMaxSize(100,300);
             feld.setPrefSize(100,300);
             hbox_felder.getChildren().add(feld);
+            hbox_felder.setSpacing(20);
         }
     }
 
@@ -1201,9 +679,6 @@ public class MainController implements Initializable, Observable
         spielerTooltip.setText("Turnier laden oder neues Turnier erstellen");
         btn_spieler.setTooltip(spielerTooltip);
 
-        Tooltip teamsTooltip = new Tooltip();
-        teamsTooltip.setText("Turnier laden oder neues Turnier erstellen");
-        btn_teams.setTooltip(teamsTooltip);
 
         Tooltip zeitplanTooltip = new Tooltip();
         zeitplanTooltip.setText("Turnier laden oder neues Turnier erstellen");
@@ -1228,21 +703,48 @@ public class MainController implements Initializable, Observable
     }
 
     private void klassenVisualisierung(Spielsystem spielsystem, Tab tab) {
-        if (spielsystem.getSpielSystemArt()==3){
-
-            //gc.setFill(Color.rgb(216,216,216));
-            //gc.fillRect(0,0,5000,5000);
-            Turnierbaum turnierbaum = new Turnierbaum(20,20,200,50,100,20);
-            if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
-                turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), tab);
-            }
-
-        }
         if (spielsystem.getSpielSystemArt()==1){
-            GruppenTabelle gruppenTabelle = new GruppenTabelle(spielsystem.getSpielklasse(), tab);
-            if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
-                gruppenTabelle.erstelleGruppenTabelle();
-            }
+            gruppeVisualisierung(spielsystem, tab);
+        }
+        else if(spielsystem.getSpielSystemArt()==2){
+            gruppeMitEndrundeVisualisierung(spielsystem, tab);
+        }
+        else if (spielsystem.getSpielSystemArt()==3){
+            koVisualisierung(spielsystem, tab);
+        }
+
+    }
+
+    private void gruppeVisualisierung(Spielsystem spielsystem, Tab tab) {
+        GruppenTabelle gruppenTabelle = new GruppenTabelle(spielsystem.getSpielklasse(), tab);
+        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
+            gruppenTabelle.erstelleGruppenTabelle();
+        }
+    }
+
+    private void gruppeMitEndrundeVisualisierung(Spielsystem spielsystem, Tab tab) {
+        GruppeMitEndrunde gruppeMitEndrunde = (GruppeMitEndrunde) spielsystem;
+        TabPane tabPane = new TabPane();
+        tab.setContent(tabPane);
+        for(int i = 0;i<gruppeMitEndrunde.getAlleGruppen().size();i++){
+            Tab gruppe = new Tab("Gruppe "+(i+1));
+            tabPane.getTabs().add(gruppe);
+        }
+        Tab endrunde = new Tab("Endrunde");
+        tabPane.getTabs().add(endrunde);
+    }
+
+    private void koVisualisierung(Spielsystem spielsystem, Tab tab) {
+        Turnierbaum turnierbaum = new Turnierbaum(20,20,180,50,100,20);
+        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
+            Canvas canvas = new Canvas();
+            VBox vBox = new VBox();
+            ScrollPane scrollPane = new ScrollPane();
+            tab.setContent(scrollPane);
+            scrollPane.setContent(vBox);
+            vBox.getChildren().add(canvas);
+            turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), canvas);
+            vBox.setStyle("-fx-background-color: #d8d8d8");
         }
     }
 
@@ -1267,6 +769,7 @@ public class MainController implements Initializable, Observable
                 sortListe.add(auswahlklasse.getAktuelleTurnierAuswahl().getSpiele().get(key));
             }
         }
+        sortiereTabelleSpiele();
 
     }
 
@@ -1356,15 +859,16 @@ public class MainController implements Initializable, Observable
 
 
     private void AllesNeuLaden() {
+        int indexalt = tabelle_spiele.getSelectionModel().getSelectedIndex();
         if (!tspielsuche.getText().equals("")) {
             CheckeSpielsuche();
         } else {
             //("maus event");
-            ObservableList index = tabelle_spiele.getSelectionModel().getSelectedIndices();
-            index_neu.clear();
+            //ObservableList index = tabelle_spiele.getSelectionModel().getSelectedIndices();
+            /*index_neu.clear();
             for (int i = 0; i < index.size(); i++) {
                 index_neu.add((Integer) index.get(i));
-            }
+            }*/
 
             //region checkbox
             if (check_gespielteSpiele.isSelected()) {
@@ -1438,18 +942,97 @@ public class MainController implements Initializable, Observable
 
 
             }
-            //System.out.println("t"+index_neu);
-            if (index_neu.size() > 0) {
 
-                //tabelle_spiele.getSelectionModel().selectRange(index_neu.get(0), (index_neu.get(index_neu.size() - 1)) + 1);
-            }
-            for (int i = 0; i < index_neu.size(); i++) {
+            /*for (int i = 0; i < index_neu.size(); i++) {*/
 
-                tabelle_spiele.getSelectionModel().select(index_neu.get(i));
-            }
+                tabelle_spiele.getSelectionModel().select(indexalt);
+            /*}*/
 
 
         }
     }
+        /*Später für Drag & DROP
+    public void pressBtn_Felder(ActionEvent event) throws Exception {
+        try {
+            //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseHinzuGruppe.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FeldZuweisung.fxml"));
+            //System.out.println("test");
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+
+            auswahlklasse.addStagesdict(stage,"FeldZuweisung");
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage.setTitle("Felder zuweisen");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    */
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+    @FXML
+    public void reloadcheckbox()
+    {
+
+        a.getAktuelleTurnierAuswahl().getObs_spiele().clear();
+        checkComboBox.getItems().clear();
+
+        //System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
+        Enumeration enumKeys = auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().keys();
+
+        while(enumKeys.hasMoreElements()){
+            int key = (int) enumKeys.nextElement();
+            a.getAktuelleTurnierAuswahl().getObs_spielklassen().add(a.getAktuelleTurnierAuswahl().getSpielklassen().get(key));
+            //System.out.println("größe = "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
+            //checkComboBox.getItems().add(obs_spielklassen.get(i-1));
+
+        }
+//        hbox_main.getChildren().remove(checkComboBox);
+//        hbox_main.getChildren().add(checkComboBox);
+        checkComboBox.getItems().setAll(a.getAktuelleTurnierAuswahl().getObs_spielklassen());
+
+
+        System.out.println("Lade CheckCombobox ohne Button");
+
+    }
+    @FXML
+    public void reloadcheckbox(ActionEvent event)
+    {
+        auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
+        checkComboBox.getItems().clear();
+
+        //System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());
+
+        Enumeration enumKeys = auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().keys();
+        while(enumKeys.hasMoreElements()){
+            int key = (int) enumKeys.nextElement();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().add(auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key));
+            //System.out.println("größe = "+a.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
+//            checkComboBox.getItems().add(obs_spielklassen.get(i-1));
+
+        }
+        checkComboBox.getItems().setAll(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen());
+
+
+        //System.out.println("test");
+
+    }
+    */
