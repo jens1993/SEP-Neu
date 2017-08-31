@@ -7,6 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import sample.*;
 import sample.DAO.auswahlklasse;
@@ -53,42 +54,25 @@ public class Turnierbaum {
         this.yAbstand = yAbstand;
     }
 
-    public void erstelleTurnierbaum(Spielklasse spielklasse, Tab tab) {
+    public void erstelleTurnierbaum(Spielklasse spielklasse, Canvas canvas) {
         ArrayList<ArrayList<Spiel>> runden = spielklasse.getSpielsystem().getRunden();
-
         int gesamtHoehe =runden.get(0).size()*(hoehe+yAbstand)+yObenLinks+2-yAbstand;
         int gesamtBreite = runden.size()*(breite+xAbstand)+xObenLinks+2-xAbstand;
 
-        Canvas canvas = new Canvas();
         this.canvas = canvas;
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        AnchorPane anchorPane = new AnchorPane();
-        ScrollPane scrollPane = new ScrollPane();
-        tab.setContent(scrollPane);
-        scrollPane.setContent(anchorPane);
-        anchorPane.getChildren().add(canvas);
         canvas.setHeight(gesamtHoehe);
         canvas.setWidth(gesamtBreite);
-        /*
-        anchorPane.setMinWidth(1999);
-        anchorPane.setMinHeight(1999);
-        */
-        anchorPane.setStyle("-fx-background-color: #d8d8d8");
-
-        gc.setFill(Color.rgb(216,216,216));
-        //gc.fillRect(0,0,gc.getCanvas().getWidth(),gc.getCanvas().getHeight());
 
         ArrayList<TurnierbaumSpiel> letzteRunde = new ArrayList<>();
-        ArrayList<TurnierbaumSpiel> neueRunde = new ArrayList<>();
         for(int j=0; j<runden.get(0).size();j++){
-
             Spiel aktuellesSpiel = runden.get(0).get(j);
             TurnierbaumSpiel turnierbaumSpiel = new TurnierbaumSpiel(xObenLinks,yObenLinks,breite,hoehe,aktuellesSpiel,xAbstand, yAbstand);
             turnierbaumSpiel.draw(gc);
             yObenLinks += hoehe + yAbstand;
             letzteRunde.add(turnierbaumSpiel);
-
         }
+
         for(int i=0;i<letzteRunde.size();i++){
             if(i%2==0){
                 TurnierbaumSpiel neuesSpiel = letzteRunde.get(i).neuesSpielerstellen(gc);

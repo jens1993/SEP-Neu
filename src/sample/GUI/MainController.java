@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
@@ -29,6 +30,7 @@ import sample.*;
 import sample.DAO.auswahlklasse;
 import sample.GUI.Visualisierung.GruppenTabelle;
 import sample.GUI.Visualisierung.Turnierbaum;
+import sample.Spielsysteme.GruppeMitEndrunde;
 import sample.Spielsysteme.Spielsystem;
 
 import java.io.File;
@@ -701,21 +703,48 @@ public class MainController implements Initializable
     }
 
     private void klassenVisualisierung(Spielsystem spielsystem, Tab tab) {
-        if (spielsystem.getSpielSystemArt()==3){
-
-            //gc.setFill(Color.rgb(216,216,216));
-            //gc.fillRect(0,0,5000,5000);
-            Turnierbaum turnierbaum = new Turnierbaum(20,20,180,50,100,20);
-            if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
-                turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), tab);
-            }
-
-        }
         if (spielsystem.getSpielSystemArt()==1){
-            GruppenTabelle gruppenTabelle = new GruppenTabelle(spielsystem.getSpielklasse(), tab);
-            if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
-                gruppenTabelle.erstelleGruppenTabelle();
-            }
+            gruppeVisualisierung(spielsystem, tab);
+        }
+        else if(spielsystem.getSpielSystemArt()==2){
+            gruppeMitEndrundeVisualisierung(spielsystem, tab);
+        }
+        else if (spielsystem.getSpielSystemArt()==3){
+            koVisualisierung(spielsystem, tab);
+        }
+
+    }
+
+    private void gruppeVisualisierung(Spielsystem spielsystem, Tab tab) {
+        GruppenTabelle gruppenTabelle = new GruppenTabelle(spielsystem.getSpielklasse(), tab);
+        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
+            gruppenTabelle.erstelleGruppenTabelle();
+        }
+    }
+
+    private void gruppeMitEndrundeVisualisierung(Spielsystem spielsystem, Tab tab) {
+        GruppeMitEndrunde gruppeMitEndrunde = (GruppeMitEndrunde) spielsystem;
+        TabPane tabPane = new TabPane();
+        tab.setContent(tabPane);
+        for(int i = 0;i<gruppeMitEndrunde.getAlleGruppen().size();i++){
+            Tab gruppe = new Tab("Gruppe "+(i+1));
+            tabPane.getTabs().add(gruppe);
+        }
+        Tab endrunde = new Tab("Endrunde");
+        tabPane.getTabs().add(endrunde);
+    }
+
+    private void koVisualisierung(Spielsystem spielsystem, Tab tab) {
+        Turnierbaum turnierbaum = new Turnierbaum(20,20,180,50,100,20);
+        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
+            Canvas canvas = new Canvas();
+            VBox vBox = new VBox();
+            ScrollPane scrollPane = new ScrollPane();
+            tab.setContent(scrollPane);
+            scrollPane.setContent(vBox);
+            vBox.getChildren().add(canvas);
+            turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), canvas);
+            vBox.setStyle("-fx-background-color: #d8d8d8");
         }
     }
 

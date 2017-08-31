@@ -23,6 +23,7 @@ import sample.DAO.auswahlklasse;
 import sample.Spieler;
 import sample.Spielklasse;
 import sample.Spielsysteme.Gruppe;
+import sample.Spielsysteme.GruppeMitEndrunde;
 import sample.Spielsysteme.KO;
 import sample.Spielsysteme.Spielsystem;
 import sample.Team;
@@ -47,6 +48,11 @@ public class SpielSystemController_neu implements Initializable
     private TextField t_suchleistesetzliste;
     @FXML
     private Label l_meldungsetzliste1;
+
+    @FXML
+    private TextField textField_anzahlWeiterkommender;
+    @FXML
+    private TextField textField_gruppenGroesse;
 
     @FXML
     private TableView spielsystem_spielerliste_alleSpieler;
@@ -190,45 +196,69 @@ public class SpielSystemController_neu implements Initializable
 
 
             if(radio_gruppe.isSelected()){
-                Gruppe gruppe = new Gruppe (ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse);
-                try {
-                    ausgewaehlte_spielklasse.setSpielsystem( gruppe);
-
-                    l_meldungsetzliste1.setText("ERFOLG");
-                    auswahlklasse.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
-                    TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+auswahlklasse.getAktuelleTurnierAuswahl().getName());
-
-
-                    //a.getStages().get(0).close();
-
-                    //a.getStages().get(2).close();
-
-                } catch (Exception e) {
-                    l_meldungsetzliste1.setText("Fehlschlag");
-                    auswahlklasse.InfoBenachrichtigung("Fehler","Das Spielsystem konnte nicht erfolgreich gestartet werden");
-                    e.printStackTrace();
-                }
+                gruppenSystemStarten();
             }
             if(radio_ko.isSelected()){
-                Spielsystem ko = new KO(ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse);
-                try {
-                    ausgewaehlte_spielklasse.setSpielsystem(ko);
-
-                    l_meldungsetzliste1.setText("ERFOLG");
-                    auswahlklasse.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
-                    TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+auswahlklasse.getAktuelleTurnierAuswahl().getName());
-
-
-                    //a.getStages().get(0).close();
-
-                    //a.getStages().get(2).close();
-
-                } catch (Exception e) {
-                    l_meldungsetzliste1.setText("Fehlschlag");
-                    auswahlklasse.InfoBenachrichtigung("Fehler","Das Spielsystem konnte nicht erfolgreich gestartet werden");
-                    e.printStackTrace();
-                }
+                koSystemStarten();
             }
+            if (radio_gruppeMitE.isSelected()){
+                gruppeMitEndrundeStarten();
+            }
+        }
+    }
+
+    private void gruppeMitEndrundeStarten() {
+        try{
+            int gruppenGroesse = Integer.valueOf(textField_gruppenGroesse.getText());
+            int anzahlGruppen = ausgewaehlte_spielklasse.getSetzliste().size()/gruppenGroesse;
+            int anzahlWeiterkommender = Integer.valueOf(textField_anzahlWeiterkommender.getText());
+
+            GruppeMitEndrunde gruppeMitEndrunde = new GruppeMitEndrunde(ausgewaehlte_spielklasse,anzahlGruppen,anzahlWeiterkommender);
+        }
+        catch (NumberFormatException e){
+            System.out.println("Bitte nur zahlen eintragen");
+        }
+    }
+
+    private void gruppenSystemStarten() {
+        Gruppe gruppe = new Gruppe (ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse);
+        try {
+            ausgewaehlte_spielklasse.setSpielsystem( gruppe);
+
+            l_meldungsetzliste1.setText("ERFOLG");
+            auswahlklasse.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
+            TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+auswahlklasse.getAktuelleTurnierAuswahl().getName());
+
+
+            //a.getStages().get(0).close();
+
+            //a.getStages().get(2).close();
+
+        } catch (Exception e) {
+            l_meldungsetzliste1.setText("Fehlschlag");
+            auswahlklasse.InfoBenachrichtigung("Fehler","Das Spielsystem konnte nicht erfolgreich gestartet werden");
+            e.printStackTrace();
+        }
+    }
+
+    private void koSystemStarten() {
+        Spielsystem ko = new KO(ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse);
+        try {
+            ausgewaehlte_spielklasse.setSpielsystem(ko);
+
+            l_meldungsetzliste1.setText("ERFOLG");
+            auswahlklasse.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
+            TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+auswahlklasse.getAktuelleTurnierAuswahl().getName());
+
+
+            //a.getStages().get(0).close();
+
+            //a.getStages().get(2).close();
+
+        } catch (Exception e) {
+            l_meldungsetzliste1.setText("Fehlschlag");
+            auswahlklasse.InfoBenachrichtigung("Fehler","Das Spielsystem konnte nicht erfolgreich gestartet werden");
+            e.printStackTrace();
         }
     }
 
