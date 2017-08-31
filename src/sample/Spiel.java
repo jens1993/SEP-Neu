@@ -45,7 +45,32 @@ public class Spiel {
 	@Override
 	public String toString() {
 
-		return (heim.toString()  +" --- "+ gast.toString()) ;
+		String s="";
+		if(heim!=null)
+		{
+			if(heim.getSpielerEins()!=null)
+			{
+				s+=heim.getSpielerEins().toString();
+			}
+			if(heim.getSpielerZwei()!=null)
+			{
+				s+=heim.getSpielerZwei().toString();
+			}
+		}
+		if(gast!=null)
+		{
+			if(gast.getSpielerEins()!=null)
+			{
+				s+=gast.getSpielerEins().toString();
+			}
+			if(gast.getSpielerZwei()!=null)
+			{
+				s+=gast.getSpielerZwei().toString();
+			}
+
+		}
+
+		return s;
 	}
 
 	public String getHeimString() {

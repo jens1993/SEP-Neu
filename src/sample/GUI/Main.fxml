@@ -39,7 +39,7 @@
                     <MenuItem mnemonicParsing="false" text="Spielerdaten bearbeiten" />
                     <MenuItem mnemonicParsing="false" text="Vereine bearbeiten" />
                     <SeparatorMenuItem mnemonicParsing="false" />
-                    <MenuItem mnemonicParsing="false" onAction="#pressBtn_laden" text="Statistiken" />
+                    <MenuItem mnemonicParsing="false" text="Statistiken" />
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Ansicht">
@@ -106,10 +106,8 @@
                            <GridPane.margin>
                               <Insets bottom="60.0" left="40.0" right="40.0" top="10.0" />
                            </GridPane.margin></Button>
-                          <Button fx:id="btn_teams" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBtn_teamLaden" prefHeight="36.0" prefWidth="160.0" text="Teams" textAlignment="CENTER" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets bottom="60.0" left="40.0" right="40.0" top="10.0" />
-                           </GridPane.margin></Button>
+
+
                           <Button fx:id="btn_zeitplan" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="160.0" text="Zeitplan" textAlignment="CENTER" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets bottom="60.0" left="40.0" right="40.0" top="10.0" />
