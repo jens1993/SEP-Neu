@@ -74,7 +74,7 @@ public class GruppenTabelle {
                 gc.lineTo(xObenLinks + i * zellenBreite + zellenBreite, yObenLinks - i * zellenHoehe);
                 gc.lineTo(xObenLinks + i * zellenBreite + zellenBreite, yObenLinks - i * zellenHoehe + zellenHoehe);
                 gc.lineTo(xObenLinks + i * zellenBreite, yObenLinks - i * zellenHoehe + zellenHoehe);
-                gc.lineTo(xObenLinks + i * zellenBreite, yObenLinks - i * zellenHoehe);
+                //gc.lineTo(xObenLinks + i * zellenBreite, yObenLinks - i * zellenHoehe);
                 gc.fillText(aktuellesTeam.toString(), xObenLinks + i * zellenBreite + 40, yObenLinks - i * zellenHoehe + 30);
 
                 gc.stroke();
@@ -85,8 +85,8 @@ public class GruppenTabelle {
                 gc.setStroke(Color.GREEN);
                 gc.setLineWidth(1);
                 gc.beginPath();
-                gc.moveTo(xObenLinks - zellenBreite, yObenLinks + zellenHoehe);
-                gc.lineTo(xObenLinks, yObenLinks + zellenHoehe);
+                //gc.moveTo(xObenLinks - zellenBreite, yObenLinks + zellenHoehe);
+                gc.moveTo(xObenLinks, yObenLinks + zellenHoehe);
                 gc.lineTo(xObenLinks, yObenLinks + zellenHoehe + zellenHoehe);
                 gc.lineTo(xObenLinks - zellenBreite, yObenLinks + zellenHoehe + zellenHoehe);
                 gc.lineTo(xObenLinks - zellenBreite, yObenLinks + zellenHoehe);
@@ -106,19 +106,20 @@ public class GruppenTabelle {
             for (int spalte = 0; spalte < anzahlTeilnehmer; spalte++) {
                 //Hier die Zellen der Tabelle erstellen
 
-
-                /*gc.beginPath();
-                gc.setStroke(Color.GREEN);
-                gc.setLineWidth(1);
-                gc.beginPath();
-                gc.moveTo(xObenLinks-zellenBreite, yObenLinks+zellenHoehe-yAbstand);
-                gc.lineTo(xObenLinks, yObenLinks+zellenHoehe-yAbstand);
-                gc.lineTo(xObenLinks, yObenLinks+zellenHoehe+zellenHoehe-yAbstand);
-                gc.lineTo(xObenLinks-zellenBreite, yObenLinks+zellenHoehe+zellenHoehe-yAbstand);
-                gc.lineTo(xObenLinks-zellenBreite, yObenLinks+zellenHoehe-yAbstand);
-                gc.stroke();
-                gc.closePath();*/
-
+                Team aktuellesTeam = teams.get(zeile);
+                aktuellesTeam = teams.get(spalte);
+                aktuellesTeam  = teams.get(zeile);
+                if(!aktuellesTeam.isFreilos()) {
+                    gc.beginPath();
+                    gc.setStroke(Color.GREEN);
+                    gc.setLineWidth(1);
+                    gc.beginPath();
+                    gc.moveTo(xObenLinks + zeile * zellenBreite , yObenLinks + zellenHoehe- spalte * zellenHoehe);
+                    gc.lineTo(xObenLinks + zeile * zellenBreite + zellenBreite, yObenLinks + zellenHoehe- spalte * zellenHoehe);
+                    gc.lineTo(xObenLinks + zeile * zellenBreite + zellenBreite, yObenLinks- spalte * zellenHoehe);
+                    gc.stroke();
+                    gc.closePath();
+                }
             }
         }
 
