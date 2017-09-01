@@ -175,41 +175,40 @@ public class Spielklasse {
 	{
 		this.setzliste.add(team);
 	}
+	public void removeSetzliste (Team team )
+	{
+		this.setzliste.remove(team);
+	}
 	public float getMeldeKosten() {
 		return meldeKosten;
 	}
 
 	public int getSetzplatzanzeigen(Spieler spielerEins, Spieler spielerZwei)
 	{
-		int setzplatznummer=1999;
+		int setzplatznummer=-1;
 
 		Enumeration e = getSetzlistedict().keys();
 		while (e.hasMoreElements())
 		{
 			Team team1= (Team) e.nextElement();
-			if(team1.toString().toUpperCase().contains(spielerEins.toString().toUpperCase()))
-			{
+			if(spielerEins!=null) {
+				if (team1.toStringKomplett().toUpperCase().contains(spielerEins.toString().toUpperCase())) {
 
-				setzplatznummer=setzlistedict.get(team1);
-				System.out.println("Setzplatz gefunden!"+setzplatznummer);
-				break;
-			}
-			else
-			{
-				if(spielerZwei!=null)
-				{
-					if(	team1.toString().toUpperCase().contains(spielerZwei.toString().toUpperCase()))
-					{
-						setzplatznummer=setzlistedict.get(team1);
-						System.out.println("Setzplatz gefunden!"+setzplatznummer);
-					}
-					else
-					{
-						setzplatznummer=4242;
+					setzplatznummer = setzlistedict.get(team1);
+					System.out.println("Setzplatz gefunden!" + setzplatznummer);
+					break;
+				} else {
+					if (spielerZwei != null) {
+						if (team1.toStringKomplett().toUpperCase().contains(spielerZwei.toString().toUpperCase())) {
+							setzplatznummer = setzlistedict.get(team1);
+							System.out.println("Setzplatz gefunden!" + setzplatznummer);
+						} else {
+							setzplatznummer = -1;
 
+						}
 					}
+
 				}
-
 			}
 		}
 		return setzplatznummer;

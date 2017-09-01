@@ -9,6 +9,9 @@ import java.util.List;
  */
 public interface SetzlisteDAO {
     public boolean create(int setzplatz, Team team,  Spielklasse spielklasse);
+
+    boolean deleteSetzplatz(int spielklasseid, int teamid);
+
     public boolean delete(int spielklasseid);
     public boolean update(int setzplatz, Team team,  Spielklasse spielklasse);
 }

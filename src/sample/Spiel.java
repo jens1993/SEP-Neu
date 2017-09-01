@@ -90,7 +90,23 @@ public class Spiel {
 			return "ausstehend";
 		}
 	}
+	public String getHeimStringKomplett() {
+		if(heim != null){
+			return heim.toStringKomplett();
+		}
+		else{
+			return "ausstehend";
+		}
 
+	}
+	public String getGastStringKomplett() {
+		if(gast!=null){
+			return gast.toStringKomplett();
+		}
+		else{
+			return "ausstehend";
+		}
+	}
 	public Team getGast() {
 		return gast;
 	}
