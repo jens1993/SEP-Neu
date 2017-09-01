@@ -14,6 +14,8 @@ import sample.DAO.auswahlklasse;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 public class GruppenTabelle {
     private Spielklasse spielklasse;
@@ -117,10 +119,26 @@ public class GruppenTabelle {
                     gc.moveTo(xObenLinks + zeile * zellenBreite , yObenLinks + zellenHoehe- spalte * zellenHoehe);
                     gc.lineTo(xObenLinks + zeile * zellenBreite + zellenBreite, yObenLinks + zellenHoehe- spalte * zellenHoehe);
                     gc.lineTo(xObenLinks + zeile * zellenBreite + zellenBreite, yObenLinks- spalte * zellenHoehe);
+                    gc.fillText("-hier Ergebnis-", xObenLinks + 40 + zeile * zellenBreite, yObenLinks + 30 + zellenHoehe - spalte * zellenHoehe);
                     gc.stroke();
                     gc.closePath();
                 }
             }
+        }
+
+        Enumeration e = spielklasse.getSpiele().keys();
+        while(e.hasMoreElements()){
+            int key =(int) e.nextElement();
+            Spiel spiel = spielklasse.getSpiele().get(key);
+            Team heim = spiel.getHeim();
+            Team gast = spiel.getGast();
+            if(!heim.isFreilos()&&!gast.isFreilos()){
+                int indexHeim = teams.indexOf(heim);
+                int indexGast = teams.indexOf(gast);
+
+            }
+
+
         }
 
 
