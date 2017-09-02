@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b41b4edd-9e5f-4fba-81f4-0ab06d091ab5" name="Default" comment="Tabelle setzliste ist editierbar">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SEP/sample/Spielklasse.class" afterPath="$PROJECT_DIR$/out/production/SEP/sample/Spielklasse.class" />
+    <list default="true" id="b41b4edd-9e5f-4fba-81f4-0ab06d091ab5" name="Default" comment="Setzliste bearbeitbar, Reihenfolge wird automatsich angepasst&#10;Mehrere Teams gleichzeitig zur Setzliste hinzufügen">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Infos/Protokoll Jens.txt" afterPath="$PROJECT_DIR$/src/Infos/Protokoll Jens.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java" afterPath="$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spielklasse.java" afterPath="$PROJECT_DIR$/src/sample/Spielklasse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Team.java" afterPath="$PROJECT_DIR$/src/sample/Team.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -182,7 +177,7 @@
         <entry file="file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="254">
-              <caret line="736" column="32" lean-forward="false" selection-start-line="736" selection-start-column="32" selection-end-line="736" selection-end-column="32" />
+              <caret line="736" column="0" lean-forward="false" selection-start-line="736" selection-start-column="0" selection-end-line="736" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1382,14 +1377,7 @@
       <workItem from="1503838832218" duration="6785000" />
       <workItem from="1504008033744" duration="1083000" />
       <workItem from="1504179351504" duration="6282000" />
-      <workItem from="1504264175981" duration="30345000" />
-    </task>
-    <task id="LOCAL-00054" summary="SpielListe">
-      <created>1502219328238</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1502219328239</updated>
+      <workItem from="1504264175981" duration="30411000" />
     </task>
     <task id="LOCAL-00055" summary="SpielListe">
       <created>1502273742021</created>
@@ -1727,11 +1715,18 @@
       <option name="project" value="LOCAL" />
       <updated>1504277721708</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="Setzliste bearbeitbar, Reihenfolge wird automatsich angepasst&#10;Mehrere Teams gleichzeitig zur Setzliste hinzufügen">
+      <created>1504368193639</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1504368193639</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="737417000" />
+    <option name="totallyTimeSpent" value="737483000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1825,7 +1820,6 @@
     <ignored-roots>
       <path value="C:" />
     </ignored-roots>
-    <MESSAGE value="Schweizer System funktioniert ohne Fusch" />
     <MESSAGE value="Turnier laden funktioniert" />
     <MESSAGE value="Spielsysteme laden (Gruppe funktioniert)" />
     <MESSAGE value="Controller Klasse aufgeteilt" />
@@ -1850,7 +1844,8 @@
     <MESSAGE value="Main Controller gründlich aufgeräumt" />
     <MESSAGE value="300ms Wartezeit in der Main Suche" />
     <MESSAGE value="Tabelle setzliste ist editierbar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tabelle setzliste ist editierbar" />
+    <MESSAGE value="Setzliste bearbeitbar, Reihenfolge wird automatsich angepasst&#10;Mehrere Teams gleichzeitig zur Setzliste hinzufügen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Setzliste bearbeitbar, Reihenfolge wird automatsich angepasst&#10;Mehrere Teams gleichzeitig zur Setzliste hinzufügen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2875,7 +2870,7 @@
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
-          <caret line="736" column="32" lean-forward="false" selection-start-line="736" selection-start-column="32" selection-end-line="736" selection-end-column="32" />
+          <caret line="736" column="0" lean-forward="false" selection-start-line="736" selection-start-column="0" selection-end-line="736" selection-end-column="0" />
           <folding />
         </state>
       </provider>
