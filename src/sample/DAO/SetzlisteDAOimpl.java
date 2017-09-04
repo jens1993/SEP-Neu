@@ -38,7 +38,26 @@ public class SetzlisteDAOimpl implements SetzlisteDAO {
         }
         return false;
     }
+    @Override
+    public boolean deleteSetzplatz(int spielklasseid,int teamid) {
+        String sql = "Delete From spielklasse_setzliste Where SpielklasseID= ? AND TeamID=?";
+        try{
+            Connection con = SQLConnection.getCon();
+            PreparedStatement smt = con.prepareStatement(sql);
+            smt.setInt(1, spielklasseid);
+            smt.setInt(2,teamid);
+            smt.executeUpdate();
+            smt.close();
 
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Setzliste Loeschen Klappt nicht");
+        }
+
+        return false;
+    }
     @Override
     public boolean delete(int spielklasseid) {
         String sql = "Delete From spielklasse_setzliste Where SpielklasseID= ?";

@@ -11,15 +11,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sample.DAO.SetzlisteDAO;
-import sample.DAO.SetzlisteDAOimpl;
-import sample.DAO.auswahlklasse;
+import sample.DAO.*;
 import sample.Spieler;
 import sample.Spielklasse;
 import sample.Spielsysteme.Gruppe;
@@ -38,6 +35,7 @@ import java.util.*;
 
 public class SpielSystemController_neu implements Initializable
 {
+    TableColumn<Team,String> setzplatz = new TableColumn("Setzplatz");
     Dictionary<Integer, Team> dicttest = new Hashtable<>();
     @FXML
     private Tab tabsperst;
@@ -110,6 +108,15 @@ public class SpielSystemController_neu implements Initializable
     private static Team teams = null;
     private SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
     Team team = new Team();
+
+    private void fuelleobs_setzliste() {
+        obs_setzliste.clear();
+        if (obs_setzliste!=null) {
+            for (int j = 0; j < dicttest.size(); j++) {
+                obs_setzliste.add(dicttest.get(j));
+            }
+        }
+    }
     private void printSpielerSpielklasseHinzuTable() throws Exception {
         System.out.println(auswahlklasse.getAktuelleTurnierAuswahl());
         if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
@@ -330,23 +337,68 @@ public class SpielSystemController_neu implements Initializable
             //obsvorhanden_spieler.add(ausgewaehlte_spielklasse.getSetzliste().get(i-1));
 
             System.out.println("ausgewählte Spielklasse = "+ausgewaehlte_spielklasse.getSpielklasseID()+" "+ausgewaehlte_spielklasse.getDisziplin());
-            if (setzliste!=null) {
-                for (int j = 0; j < dicttest.size(); j++) {
-                    obs_setzliste.add(dicttest.get(j));
-                }
-            }
+            fuelleobs_setzliste();
             //}
-            TableColumn<Team,String> setzplatz = new TableColumn("Setzplatz");
+
             setzplatz.setCellValueFactory(new PropertyValueFactory<Team,String>("Setzplatz"));
+            setzplatz.setCellFactory(TextFieldTableCell.forTableColumn());
+
+            spielsystem_setzliste.setEditable(true);
+            setzplatz.setEditable(true);
+            setzplatz.setOnEditStart(new EventHandler<TableColumn.CellEditEvent<Team, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Team, String> event) {
+
+                }
+            });
             setzplatz.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Team, String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Team, String> event) {
-                    final String value = event.getNewValue() != null ?
-                            event.getNewValue() : event.getOldValue();
-                     //event.getTableView().getItems().get(event.getTablePosition().getRow())).setSetzplatz(value);
-                    spielsystem_setzliste.refresh();
+                    Team t = (Team) event.getTableView().getItems().get(event.getTablePosition().getRow());
+                    try
+                    {
+                        Integer.parseInt(event.getNewValue());
+                    }
+                    catch (Exception e)
+                    {
+                        event.getTableView().getItems().set(event.getTablePosition().getRow(), t);
+                        return;
+                    }
+                    if (!event.getNewValue().equals(event.getOldValue())&&Integer.parseInt(event.getNewValue()) > 0 && Integer.parseInt(event.getNewValue()) <= ausgewaehlte_spielklasse.getSetzliste().size())
+                    {
+
+
+                        int alterplatz = Integer.parseInt(event.getOldValue());
+                        ausgewaehlte_spielklasse.removeSetzlistedict(Integer.parseInt(event.getOldValue()), t);
+                        System.out.println("tttt");
+                        ausgewaehlte_spielklasse.addSetzlistedict(Integer.parseInt(event.getNewValue()), alterplatz, t);
+                        System.out.println(event.getNewValue());
+                        TurnierDAO turnierDAO = new TurnierDAOimpl();
+
+                        System.out.println(t + "wurde bearbeitet");
+                        fuelleobs_setzliste();
+                        sortiereTabelleSetzliste();
+                        spielsystem_setzliste.refresh();
+                        spielsystem_setzliste.getSelectionModel().select(t);
+
+                    }
+                    else
+                    {
+
+                        Team to = event.getTableView().getItems().get(event.getTablePosition().getRow());
+
+
+                            event.getTableView().getItems().set(event.getTablePosition().getRow(), to);
+
+
+
+
+
+                        auswahlklasse.WarnungBenachrichtigung("Wertebereich","Bitte nur Zahlen zwischen 1-+"+ausgewaehlte_spielklasse.getSetzliste().size()+" eingeben");
+                    }
                 }
             });
+
 
 
 
@@ -355,6 +407,8 @@ public class SpielSystemController_neu implements Initializable
             spielerEinsSpalte.setCellValueFactory(new PropertyValueFactory<Team,String>("SpielerEins"));
             TableColumn<Team,String> spielerZweiSpalte = new TableColumn("Partner");
             spielerZweiSpalte.setCellValueFactory(new PropertyValueFactory<Team,String>("SpielerZwei"));
+
+
 
             spielsystem_setzliste.setItems(obs_setzliste);
             System.out.println("einzel = "+ausgewaehlte_spielklasse.isEinzel());
@@ -375,20 +429,70 @@ public class SpielSystemController_neu implements Initializable
 
     }
 
+
+
+    private void removeTeam(Team team)
+    {
+
+        System.out.println(team.toStringKomplett());
+                obs_setzliste.remove(team);
+                if(ausgewaehlte_spielklasse.isEinzel()) {
+                    obs_spieler.addAll(team.getSpielerEins());
+                }
+                else {
+                    obs_spieler.addAll(team.getSpielerEins(),team.getSpielerZwei());
+                }
+
+
+                //dicttest.put(dicttest.size(),team);
+                //ausgewaehlte_spielklasse.addSetzliste(team);
+
+/*                boolean erfolg = setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
+                if(erfolg) {
+                    //dicttest.put(team.getTeamid(),team)
+                    l_meldungsetzliste1.setText(team.getSpielerEins().getVName() + " " + team.getSpielerEins().getNName() + " wurde der Setzliste hinzugefügt!");
+                }
+                else
+                {
+                    l_meldungsetzliste1.setText("fehler");
+                }*/
+
+            ausgewaehlte_spielklasse.removeSetzliste(team);
+            setzlisteDAO.deleteSetzplatz(ausgewaehlte_spielklasse.getSpielklasseID(),team.getTeamid());
+            team.getTeamDAO().delete(team);
+
+
+            //ausgewaehlte_spielklasse.addSetzliste(team);
+
+            //team.getTeamDAO().addSpieler(team, false);
+            //setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size()+1,team,ausgewaehlte_spielklasse);
+
+
+            //l_meldungsetzliste1.setText(team.getSpielerEins().getVName()+" "+team.getSpielerEins().getNName()+" und "+team.getSpielerZwei().getVName()+" "+team.getSpielerZwei().getNName()+" wurden aus der Setzliste entfernt!");
+
+
+    }
+    private void sortiereTabelleSetzliste() {
+        obs_setzliste.sort(new Comparator<Team>() {
+            @Override
+            public int compare(Team o1, Team o2) {
+                return Integer.parseInt(o1.getSetzplatz())- Integer.parseInt(o2.getSetzplatz());
+            }
+        });
+        spielsystem_setzliste.setItems(obs_setzliste);
+    }
     private void addSpieler(Spieler spielerneu)
     {
 
-        System.out.println(spielerneu.getNName());
+//        System.out.println(spielerneu.getNName());
         obs_spieler.remove(spielerneu);
         if(befuellem1) {
-
-
             if(ausgewaehlte_spielklasse.isEinzel()){
-
                 team = new Team(spielerneu,ausgewaehlte_spielklasse);
                 obs_setzliste.add(team);
                 dicttest.put(dicttest.size(),team);
                 ausgewaehlte_spielklasse.addSetzliste(team);
+
                 boolean erfolg = setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
                 if(erfolg) {
                     //dicttest.put(team.getTeamid(),team)
@@ -426,7 +530,7 @@ public class SpielSystemController_neu implements Initializable
             ausgewaehlte_spielklasse.addSetzliste(team);
 
             //team.getTeamDAO().addSpieler(team, false);
-            //setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size()+1,team,ausgewaehlte_spielklasse);
+            setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
 
 
             l_meldungsetzliste1.setText(team.getSpielerEins().getVName()+" "+team.getSpielerEins().getNName()+" und "+team.getSpielerZwei().getVName()+" "+team.getSpielerZwei().getNName()+" wurden der Setzliste hinzugefügt!");
@@ -441,67 +545,10 @@ public class SpielSystemController_neu implements Initializable
         int newColumnIndex = columnIndex + offset;
         return spielsystem_setzliste.getVisibleLeafColumn(newColumnIndex);
     }
-    @SuppressWarnings("unchecked")
-    private void selectPrevious() {
-        if (spielsystem_setzliste.getSelectionModel().isCellSelectionEnabled()) {
-            // in cell selection mode, we have to wrap around, going from
-            // right-to-left, and then wrapping to the end of the previous line
-            TablePosition  pos = spielsystem_setzliste.getFocusModel()
-                    .getFocusedCell();
-            if (pos.getColumn() - 1 >= 0) {
-                // go to previous row
-                spielsystem_setzliste.getSelectionModel().select(pos.getRow(),
-                        getTableColumn(pos.getTableColumn(), -1));
-            } else if (pos.getRow() < spielsystem_setzliste.getItems().size()) {
-                // wrap to end of previous row
-                spielsystem_setzliste.getSelectionModel().select(pos.getRow() - 1,
-                        spielsystem_setzliste.getVisibleLeafColumn(
-                                spielsystem_setzliste.getVisibleLeafColumns().size() - 1));
-            }
-        } else {
-            int focusIndex = spielsystem_setzliste.getFocusModel().getFocusedIndex();
-            if (focusIndex == -1) {
-                spielsystem_setzliste.getSelectionModel().select(spielsystem_setzliste.getItems().size() - 1);
-            } else if (focusIndex > 0) {
-                spielsystem_setzliste.getSelectionModel().select(focusIndex - 1);
-            }
-        }
-    }
-    @SuppressWarnings("unchecked")
-    private void editFocusedCell() {
-        final TablePosition focusedCell = spielsystem_setzliste.getFocusModel().getFocusedCell();
-        spielsystem_setzliste.edit(focusedCell.getRow(), focusedCell.getTableColumn());
-    }
 
-    private void setTableEditable() {
-        spielsystem_setzliste.setEditable(true);
-        // allows the individual cells to be selected
-        spielsystem_setzliste.getSelectionModel().cellSelectionEnabledProperty().set(true);
-        // when character or numbers pressed it will start edit in editable
-        // fields
-        spielsystem_setzliste.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().isLetterKey() || event.getCode().isDigitKey()) {
-                    editFocusedCell();
-                } else if (event.getCode() == KeyCode.RIGHT ||
-                        event.getCode() == KeyCode.TAB) {
-                    spielsystem_setzliste.getSelectionModel().selectNext();
-                    event.consume();
-                } else if (event.getCode() == KeyCode.LEFT) {
-                    // work around due to
-                    // TableView.getSelectionModel().selectPrevious() due to a bug
-                    // stopping it from working on
-                    // the first column in the last row of the table
-                    selectPrevious();
-                    event.consume();
-                }
-
-            }
-        });
-    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        spielsystem_spielerliste_alleSpieler.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         System.out.println("------------------"+ausgewaehlte_spielklasse.isSetzliste_gesperrt());
 
         for (int i = 0; i < ausgewaehlte_spielklasse.getSetzliste().size(); i++) {
@@ -537,7 +584,7 @@ public class SpielSystemController_neu implements Initializable
                     }
 
                     if (!row.isEmpty() && event.getButton() == MouseButton.SECONDARY) {
-                        //Spieler clickedRow = (Spieler) row.getItem();
+                        Team clickedRow = (Team) row.getItem();
                         //(((Node)(event.getSource())).getScene().getWindow().hide();
                         MenuItem item1 = new MenuItem("Setzplatz bearbeiten");
                         item1.setOnAction(new EventHandler<ActionEvent>() {
@@ -547,7 +594,9 @@ public class SpielSystemController_neu implements Initializable
                                 System.out.println(row.getItem().toString());
                                 row.setEditable(true);
                                 //row.getTableView().getEditingCell().
+                                TablePosition<Team, ?> pos = spielsystem_setzliste.getFocusModel().getFocusedCell() ;
                                 spielsystem_setzliste.setEditable(true);
+                                spielsystem_setzliste.edit(pos.getRow(),setzplatz);
 
                             }
                         });
@@ -559,7 +608,7 @@ public class SpielSystemController_neu implements Initializable
                                 //tabpane_spieler.getSelectionModel().select(tab_spupdate);
                                 //FuelleFelder(clickedRow);
 
-
+                                removeTeam(clickedRow);
 
                             }
                         });
@@ -668,10 +717,37 @@ public class SpielSystemController_neu implements Initializable
 
                             }
                         });
+                        MenuItem item4 ;
+                        if(spielsystem_spielerliste_alleSpieler.getSelectionModel().getSelectedItems().size()>1)
+                        {
+                            item4 = new MenuItem("Alle markierten Teams zur Setzliste hinzufügen");
+                        }
+                        else
+                        {
+                            item4 = new MenuItem("Team zur Setzliste hinzufügen");
+                        }
 
+                        item4.setOnAction(new EventHandler<ActionEvent>() {
+
+                            @Override
+                            public void handle(ActionEvent event) {
+
+                                System.out.println(spielsystem_spielerliste_alleSpieler.getSelectionModel().getSelectedItems());
+                                ObservableList markierteTeams=FXCollections.observableArrayList(spielsystem_spielerliste_alleSpieler.getSelectionModel().getSelectedItems());
+
+                                for(int i=0;i<markierteTeams.size();i++)
+                                {
+                                    Spieler spieler = (Spieler) markierteTeams.get(i);
+                                    addSpieler(spieler);
+                                }
+                                //addSpieler(clickedRow);
+
+
+                            }
+                        });
                         // Add MenuItem to ContextMenu
                         contextMenu.getItems().clear();
-                        contextMenu.getItems().addAll(item1, item2, item3);
+                        contextMenu.getItems().addAll(item4, item1, item2, item3);
 
                         // When user right-click on Circle
                         spielsystem_spielerliste_alleSpieler.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {

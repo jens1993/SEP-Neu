@@ -95,7 +95,22 @@ public class MainController implements Initializable
 //wieso integer?
     //wenn integer dann die ids abgehen
 
+    public void pressBtn_Test(ActionEvent event) throws Exception {
+        try {
 
+
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("JavaFXDynTable.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage.setTitle("Jens test");
+        } catch(Exception e) {
+            e.printStackTrace();
+            System.out.println("Fehler beim laden");
+        }
+    }
 
     public void pressBtn_spieler(ActionEvent event) throws Exception {
         try {
@@ -226,8 +241,8 @@ public class MainController implements Initializable
         if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
             TableColumn<Spiel,String> spielNummerSpalte = tableColoumnsetCellFactory("#","SpielNummer");
             TableColumn<Spiel,String> spielFeldSpalte = tableColoumnsetCellFactory("Feld","FeldNr");
-            TableColumn<Spiel,String> spielHeimSpalte = tableColoumnsetCellFactory("Heim","HeimString");
-            TableColumn<Spiel,String> spielGastSpalte = tableColoumnsetCellFactory("Gast","GastString");
+            TableColumn<Spiel,String> spielHeimSpalte = tableColoumnsetCellFactory("Heim","HeimStringKomplett");
+            TableColumn<Spiel,String> spielGastSpalte = tableColoumnsetCellFactory("Gast","GastStringKomplett");
             TableColumn<Spiel,String> spielErgebnisSpalte = tableColoumnsetCellFactory("Ergebnis","ErgebnisString");
             TableColumn<Spiel,String> spielSpielklasseSpalte = tableColoumnsetCellFactory("Spielklasse","SpielklasseString");
             TableColumn<Spiel,String> spielRundeSpalte = tableColoumnsetCellFactory("Runde","RundenName");
