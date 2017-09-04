@@ -119,7 +119,7 @@ public class GruppenTabelle {
                     gc.moveTo(xObenLinks + zeile * zellenBreite , yObenLinks + zellenHoehe- spalte * zellenHoehe);
                     gc.lineTo(xObenLinks + zeile * zellenBreite + zellenBreite, yObenLinks + zellenHoehe- spalte * zellenHoehe);
                     gc.lineTo(xObenLinks + zeile * zellenBreite + zellenBreite, yObenLinks- spalte * zellenHoehe);
-                    gc.fillText(spiel.getHeim().toString(),xObenLinks + 40 + zeile * zellenBreite, yObenLinks + 30 + zellenHoehe - spalte * zellenHoehe);
+                    gc.fillText("spiel.getHeim().toString()",xObenLinks + 40 + zeile * zellenBreite, yObenLinks + 30 + zellenHoehe - spalte * zellenHoehe);
                     gc.stroke();
                     gc.closePath();
                 }
