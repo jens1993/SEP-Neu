@@ -119,7 +119,7 @@ public class GruppenTabelle {
                     gc.moveTo(xObenLinks + zeile * zellenBreite , yObenLinks + zellenHoehe- spalte * zellenHoehe);
                     gc.lineTo(xObenLinks + zeile * zellenBreite + zellenBreite, yObenLinks + zellenHoehe- spalte * zellenHoehe);
                     gc.lineTo(xObenLinks + zeile * zellenBreite + zellenBreite, yObenLinks- spalte * zellenHoehe);
-                    gc.fillText("-hier Ergebnis-", xObenLinks + 40 + zeile * zellenBreite, yObenLinks + 30 + zellenHoehe - spalte * zellenHoehe);
+                    gc.fillText(spiel.getHeim().toString(),xObenLinks + 40 + zeile * zellenBreite, yObenLinks + 30 + zellenHoehe - spalte * zellenHoehe);
                     gc.stroke();
                     gc.closePath();
                 }
@@ -135,6 +135,18 @@ public class GruppenTabelle {
             if(!heim.isFreilos()&&!gast.isFreilos()){
                 int indexHeim = teams.indexOf(heim);
                 int indexGast = teams.indexOf(gast);
+                if(spiel.getErgebnis()==null){
+                    spiel.getRundenName();
+                }
+                else{
+                    int[] ergebnisArray = spiel.getErgebnis().getErgebnisArray();
+                    int satz1Heim = ergebnisArray[0];
+                    int satz1Gast = ergebnisArray[1];
+
+                }
+
+
+
 
             }
 
