@@ -97,6 +97,7 @@ public class Team {
     private int verlorenePunkte;
     private boolean freilos = false;
     private List<Team> bisherigeGegner = new ArrayList<Team>();
+    private int setzplatz;
 
 
 
@@ -166,6 +167,11 @@ public class Team {
         teamDAO.createFreilos(this);
         this.spielklasse.getTurnier().getTeams().put(teamid,this);
     }
+
+    public void setSetzplatz(int setzplatz) {
+        this.setzplatz = setzplatz;
+    }
+
     public boolean istImTeam(Spieler spieler){
         if (spielerEins==spieler){
             return true;
@@ -191,7 +197,7 @@ public class Team {
     public Spieler getSpielerEins() {
         return spielerEins;
     }
-    public String getSetzplatz()
+    public String getSetzplatzString()
     {
 
         if(auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzplatzanzeigen(spielerEins,spielerZwei)!="")
@@ -204,6 +210,10 @@ public class Team {
             return "-1";
         }
 
+    }
+
+    public int getSetzplatz() {
+        return setzplatz;
     }
 
     public Spieler getSpielerZwei() {

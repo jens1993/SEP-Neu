@@ -340,7 +340,7 @@ public class SpielSystemController_neu implements Initializable
             fuelleobs_setzliste();
             //}
 
-            setzplatz.setCellValueFactory(new PropertyValueFactory<Team,String>("Setzplatz"));
+            setzplatz.setCellValueFactory(new PropertyValueFactory<Team,String>("SetzplatzString"));
             setzplatz.setCellFactory(TextFieldTableCell.forTableColumn());
 
             spielsystem_setzliste.setEditable(true);
@@ -476,7 +476,7 @@ public class SpielSystemController_neu implements Initializable
         obs_setzliste.sort(new Comparator<Team>() {
             @Override
             public int compare(Team o1, Team o2) {
-                return Integer.parseInt(o1.getSetzplatz())- Integer.parseInt(o2.getSetzplatz());
+                return Integer.parseInt(o1.getSetzplatzString())- Integer.parseInt(o2.getSetzplatzString());
             }
         });
         spielsystem_setzliste.setItems(obs_setzliste);

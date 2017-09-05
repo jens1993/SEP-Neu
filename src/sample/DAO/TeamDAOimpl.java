@@ -105,7 +105,8 @@ public class TeamDAOimpl implements TeamDAO {
                 + "GewonneneSaetze = ?, "
                 + "VerloreneSaetze = ?, "
                 + "GewonnnenePunkte = ?, "
-                + "VerlorenePunkte = ? "
+                + "VerlorenePunkte = ?, "
+                + "FesterSetzplatz = ? "
                 + "WHERE TeamID = ? "
                 ;
         try {
@@ -118,6 +119,7 @@ public class TeamDAOimpl implements TeamDAO {
             smt.setInt(5, team.getGewonnnenePunkte());
             smt.setInt(6, team.getVerlorenePunkte());
             smt.setInt(7, team.getTeamid());
+            smt.setInt(8, team.getSetzplatz());
             smt.executeUpdate();
             smt.close();
 
