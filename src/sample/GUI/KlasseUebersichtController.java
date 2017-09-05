@@ -53,6 +53,7 @@ public class KlasseUebersichtController implements Initializable
     @FXML
     private Tab tab_doppel;
 
+
     //Label label2 = new Label("Search---------------------");
 
     public void pressBtn_neueKlassehinzufuegen(ActionEvent event) throws Exception {
@@ -142,157 +143,169 @@ public class KlasseUebersichtController implements Initializable
         Label label[] = new Label[obs_spielklasse.size()];
         //label[1].setText("jens");
 
-        
+
         TextFlow[] flow = new TextFlow[obs_spielklasse.size()+1];
         final Spielklasse[] spauswahl = {null};
-         Hyperlink hp=null;
+        Hyperlink hp=null;
 
-         for(int i=0;i<obs_spielklasse.size();i++)
-         {
-             sp= obs_spielklasse.get(i);
-             if(sp.getSetzliste()!=null&&sp.getSetzliste().size()>0)
-             {
-                 hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2));
-                 //System.out.println(hp+"----------1");
-             }
-             if(sp.getSpiele()!=null&&sp.getSetzliste()!=null&&sp.getSpiele().size()>0)
-             {
-                 sp.setSetzliste_gesperrt(true);
-                 //System.out.println(sp.isSetzliste_gesperrt());
-                 hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2)+" Spiele:"+sp.getSpiele().size());
-                 //System.out.println(hp+"----------2");
-             }
-             if(sp.getSetzliste().size()==0||sp.getSetzliste()==null)
-             {
-                 sp.setSetzliste_gesperrt(false);
-                 hp = new Hyperlink(sp.getDisziplin() + "-" + sp.getNiveau());
-                 //System.out.println(hp+"----------3");
-             }
+        try{
+            ResourceBundle bundle = ResourceBundle.getBundle(baseName);
+            String einzelklasse = bundle.getString("einzelklasse");
+            String doppelklasse = bundle.getString("doppelklasse");
+            String mixedklasse = bundle.getString("mixedklasse");
 
-             if(sp.getDisziplin().contains("doppel"))
-             {
-                 flow[i] = new TextFlow(new Text("Doppelklasse: "),hp);
-                 flow[i].setPadding(new Insets(10));
-                 klasssedoppel_vbox.getChildren().addAll(flow[i]);
-             }
-             if(sp.getDisziplin().contains("einzel"))
-             {
-                 flow[i] = new TextFlow(new Text("Einzelklasse: "),hp);
-                 flow[i].setPadding(new Insets(10));
-                 klassseeinzel_vbox.getChildren().addAll(flow[i]);
-             }
-             if(sp.getDisziplin().contains("Mix"))
-             {
-                 flow[i] = new TextFlow(new Text("Mixedklasse: "),hp);
-                 flow[i].setPadding(new Insets(10));
-                 klasssemixed_vbox.getChildren().addAll(flow[i]);
-             }
 
-             tabpane_uebersicht.setOnMouseClicked(event ->{
-                 if(MouseButton.SECONDARY==event.getButton()) {
-                     ContextMenu contextMenu = new ContextMenu();
-                     MenuItem item1 = new MenuItem("Neue Spielklasse");
-                     item1.setOnAction(new EventHandler<ActionEvent>() {
+            for(int i=0;i<obs_spielklasse.size();i++)
+            {
+                sp= obs_spielklasse.get(i);
+                if(sp.getSetzliste()!=null&&sp.getSetzliste().size()>0)
+                {
+                    hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2));
+                    //System.out.println(hp+"----------1");
+                }
+                if(sp.getSpiele()!=null&&sp.getSetzliste()!=null&&sp.getSpiele().size()>0)
+                {
+                    sp.setSetzliste_gesperrt(true);
+                    //System.out.println(sp.isSetzliste_gesperrt());
+                    hp = new Hyperlink(sp.getDisziplin()+"-"+sp.getNiveau()+" Spieler:"+(sp.getSetzliste().size()*2)+" Spiele:"+sp.getSpiele().size());
+                    //System.out.println(hp+"----------2");
+                }
+                if(sp.getSetzliste().size()==0||sp.getSetzliste()==null)
+                {
+                    sp.setSetzliste_gesperrt(false);
+                    hp = new Hyperlink(sp.getDisziplin() + "-" + sp.getNiveau());
+                    //System.out.println(hp+"----------3");
+                }
 
-                         @Override
-                         public void handle(ActionEvent event) {
-                             try {
-                                 pressBtn_neueKlassehinzufuegen(event);
-                             } catch (Exception e) {
-                                 e.printStackTrace();
-                             }
-                         }
+                if(sp.getDisziplin().contains("doppel"))
+                {
+                    flow[i] = new TextFlow(new Text(doppelklasse),hp);
 
-                     });
-                     contextMenu.getItems().add(item1);
-                     tabpane_uebersicht.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+                    flow[i].setPadding(new Insets(10));
+                    klasssedoppel_vbox.getChildren().addAll(flow[i]);
+                }
+                if(sp.getDisziplin().contains("einzel"))
+                {
+                    flow[i] = new TextFlow(new Text(einzelklasse),hp);
+                    flow[i].setPadding(new Insets(10));
+                    klassseeinzel_vbox.getChildren().addAll(flow[i]);
+                }
+                if(sp.getDisziplin().contains("Mix"))
+                {
+                    flow[i] = new TextFlow(new Text(mixedklasse),hp);
+                    flow[i].setPadding(new Insets(10));
+                    klasssemixed_vbox.getChildren().addAll(flow[i]);
+                }
 
-                         @Override
-                         public void handle(ContextMenuEvent event) {
+                tabpane_uebersicht.setOnMouseClicked(event ->{
+                    if(MouseButton.SECONDARY==event.getButton()) {
+                        ContextMenu contextMenu = new ContextMenu();
+                        MenuItem item1 = new MenuItem("Neue Spielklasse");
+                        item1.setOnAction(new EventHandler<ActionEvent>() {
 
-                             contextMenu.show(tabpane_uebersicht, event.getScreenX(), event.getScreenY());
-                         }
-                     });
-                 }
-             } );
-             Spielklasse[] finalSp = new Spielklasse[obs_spielklasse.size()];
-             int finalI = i;
-             finalSp[i]= sp;
-             Hyperlink finalHp = hp;
-             hp.setOnMouseClicked(event -> {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                try {
+                                    pressBtn_neueKlassehinzufuegen(event);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        });
+                        contextMenu.getItems().add(item1);
+                        tabpane_uebersicht.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+
+                            @Override
+                            public void handle(ContextMenuEvent event) {
+
+                                contextMenu.show(tabpane_uebersicht, event.getScreenX(), event.getScreenY());
+                            }
+                        });
+                    }
+                } );
+                Spielklasse[] finalSp = new Spielklasse[obs_spielklasse.size()];
+                int finalI = i;
+                finalSp[i]= sp;
+                Hyperlink finalHp = hp;
+                hp.setOnMouseClicked(event -> {
                 /*spauswahl[finalI] =a.getSpielklasseDAO().getSpielklassenDict(a.getTurnierDAO().
                         read(a.getAktuelleTurnierAuswahl())).get(finalI);*/
-                 if (finalSp[finalI] != null) {
-                     finalSp[finalI] = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(finalI);
-                     if(MouseButton.PRIMARY==event.getButton()) {
+                    if (finalSp[finalI] != null) {
+                        finalSp[finalI] = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(finalI);
+                        if(MouseButton.PRIMARY==event.getButton()) {
 
 
 
 
-                         // System.out.println(spauswahl[finalI].getDisziplin());
-                         try {
-                             //((Node)(event.getSource())).getScene().getWindow().hide();
-                             pressBtn_Spielsystem(finalSp[finalI]);
-                         } catch (Exception e) {
-                             e.printStackTrace();
-                         }
-                     }
+                            // System.out.println(spauswahl[finalI].getDisziplin());
+                            try {
+                                //((Node)(event.getSource())).getScene().getWindow().hide();
+                                pressBtn_Spielsystem(finalSp[finalI]);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
 
-                     if(MouseButton.SECONDARY==event.getButton()) {
-                         ContextMenu contextMenu = new ContextMenu();
-                         MenuItem item1 = new MenuItem("Spielklasse bearbeiten");
-                         item1.setOnAction(new EventHandler<ActionEvent>() {
+                        if(MouseButton.SECONDARY==event.getButton()) {
+                            ContextMenu contextMenu = new ContextMenu();
+                            MenuItem item1 = new MenuItem("Spielklasse bearbeiten");
+                            item1.setOnAction(new EventHandler<ActionEvent>() {
 
-                             @Override
-                             public void handle(ActionEvent event) {
-                                 //tabpane_spieler.getSelectionModel().select(tab_sphin);
-                             }
-                         });
-                         MenuItem item2 = new MenuItem("Spielklasse löschen");
-                         item2.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    //tabpane_spieler.getSelectionModel().select(tab_sphin);
+                                }
+                            });
+                            MenuItem item2 = new MenuItem("Spielklasse löschen");
+                            item2.setOnAction(new EventHandler<ActionEvent>() {
 
-                             @Override
-                             public void handle(ActionEvent event) {
-                                 System.out.println(finalSp[finalI]);
-                                 boolean erfolgloeschen = finalSp[finalI].getSpielklasseDAO().delete(finalSp[finalI]);
-                                 if(erfolgloeschen)
-                                 {
-                                     auswahlklasse.InfoBenachrichtigung("erfolg", "klasse gelöscht");
-                                     auswahlklasse.getAktuelleTurnierAuswahl().removeobs_spielklassen(finalSp[finalI]);
-                                     auswahlklasse.getAktuelleTurnierAuswahl().removeSpielklassen(finalSp[finalI]);
-                                 }
-                                 else
-                                 {
-                                     auswahlklasse.WarnungBenachrichtigung("Fehler", "klasse konnte nicht gelöscht werden");
-                                 }
-                                 //tabpane_spieler.getSelectionModel().select(tab_sphin);
-                             }
-                         });
-                         contextMenu.getItems().addAll(item1,item2);
-                         finalHp.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    System.out.println(finalSp[finalI]);
+                                    boolean erfolgloeschen = finalSp[finalI].getSpielklasseDAO().delete(finalSp[finalI]);
+                                    if(erfolgloeschen)
+                                    {
+                                        auswahlklasse.InfoBenachrichtigung("erfolg", "klasse gelöscht");
+                                        auswahlklasse.getAktuelleTurnierAuswahl().removeobs_spielklassen(finalSp[finalI]);
+                                        auswahlklasse.getAktuelleTurnierAuswahl().removeSpielklassen(finalSp[finalI]);
+                                    }
+                                    else
+                                    {
+                                        auswahlklasse.WarnungBenachrichtigung("Fehler", "klasse konnte nicht gelöscht werden");
+                                    }
+                                    //tabpane_spieler.getSelectionModel().select(tab_sphin);
+                                }
+                            });
+                            contextMenu.getItems().addAll(item1,item2);
+                            finalHp.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
 
-                             @Override
-                             public void handle(ContextMenuEvent event) {
+                                @Override
+                                public void handle(ContextMenuEvent event) {
 
-                                 contextMenu.show(finalHp, event.getScreenX(), event.getScreenY());
-                             }
-                         });
+                                    contextMenu.show(finalHp, event.getScreenX(), event.getScreenY());
+                                }
+                            });
 
-                     }
-
-
-                 }});
-         }
+                        }
 
 
-            //lbs[i]=new Label(s);//initializing labels
+                    }});
+            }
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+
+
+        //lbs[i]=new Label(s);//initializing labels
 
 
 
 
 
-            //doing what you want here with labels
-            //...
+        //doing what you want here with labels
+        //...
 
 
 
