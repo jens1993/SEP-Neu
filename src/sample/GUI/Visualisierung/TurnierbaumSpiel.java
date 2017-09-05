@@ -1,13 +1,12 @@
 package sample.GUI.Visualisierung;
 
-import com.sun.javafx.scene.control.skin.Utils;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import sample.Ergebnis;
 import sample.Spiel;
+import sample.Team;
 
 public class TurnierbaumSpiel {
     private int yObenLinks;

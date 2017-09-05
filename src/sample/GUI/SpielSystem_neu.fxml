@@ -117,13 +117,13 @@
                               <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gruppengröße:" GridPane.halignment="RIGHT" />
-                                    <TextField maxWidth="200.0" GridPane.columnIndex="1">
+                                    <TextField maxWidth="200.0" fx:id="textField_gruppenGroesse" GridPane.columnIndex="1">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </TextField>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Weiterkommender:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                                    <TextField maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <TextField maxWidth="200.0" fx:id="textField_anzahlWeiterkommender" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>

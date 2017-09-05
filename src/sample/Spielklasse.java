@@ -39,7 +39,83 @@ public class Spielklasse {
 		//System.out.println(setzlistedict);
 		return setzlistedict;
 	}
+	public void removeSetzlistedict(int setzplatz, Team team)
+	{
 
+		setzlistedict.remove(team);
+		SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
+		setzlisteDAO.deleteSetzplatz(auswahlklasse.getAktuelleSpielklassenAuswahl().getSpielklasseID(),team.getTeamid());
+
+
+	}
+	public void addSetzlistedict(int setzplatzneu,int setzplatzalt,  Team teamalt)
+	{
+
+		if(setzlistedict.size()<1)
+		{
+			System.out.println("Leeres Dict.");
+
+			for(int i=0;i<setzliste.size();i++)
+			{
+				setzlistedict.put(setzliste.get(i),i+1);
+			}
+		}
+		else
+		{
+
+
+				System.out.println("Setzplatz wurde erhöht");
+				SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
+				Enumeration e = setzlistedict.keys();
+				while (e.hasMoreElements()) {
+					Team key = (Team) e.nextElement();
+
+
+					if (setzlistedict.get(key) < setzplatzalt && setzlistedict.get(key) < setzplatzneu) {
+						System.out.println("1.Übernehmen + Erhöhen");
+					}
+					if (setzlistedict.get(key) > setzplatzalt && setzlistedict.get(key) <= setzplatzneu) {
+						System.out.println("2. Key-1 + Erhöhen");
+						int platz = setzlistedict.get(key) - 1;
+						setzlistedict.remove(key);
+
+						setzlisteDAO.deleteSetzplatz(auswahlklasse.getAktuelleSpielklassenAuswahl().getSpielklasseID(),key.getTeamid());
+						setzlisteDAO.create(platz,key,auswahlklasse.getAktuelleSpielklassenAuswahl());
+						setzlistedict.put(key, platz);
+
+					}
+					if (setzlistedict.get(key) > setzplatzalt && setzlistedict.get(key) > setzplatzneu) {
+						System.out.println("3.Übernehmen + Erhöhen");
+					}
+					if (setzlistedict.get(key) < setzplatzalt && setzlistedict.get(key) >= setzplatzneu) {
+						System.out.println("2. Key+1 + Verringern");
+						int platz = setzlistedict.get(key) + 1;
+						setzlistedict.remove(key);
+						setzlisteDAO.deleteSetzplatz(auswahlklasse.getAktuelleSpielklassenAuswahl().getSpielklasseID(),key.getTeamid());
+						setzlisteDAO.create(platz,key,auswahlklasse.getAktuelleSpielklassenAuswahl());
+						setzlistedict.put(key, platz);
+					}
+
+
+
+				}
+		}
+
+
+
+
+
+			System.out.println("test");
+
+
+			setzlistedict.put(teamalt,setzplatzneu);
+			SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
+			setzlisteDAO.create(setzplatzneu,teamalt,auswahlklasse.getAktuelleSpielklassenAuswahl());
+
+
+		//System.out.println(setzlistedict);
+
+	}
 	public void setSetzlistedict(Dictionary<Team,Integer> setzlistedict) {
 		this.setzlistedict = setzlistedict;
 	}
@@ -174,42 +250,44 @@ public class Spielklasse {
 	public void addSetzliste (Team team )
 	{
 		this.setzliste.add(team);
+		this.setzlistedict.put(team,setzlistedict.size()+1);
+	}
+	public void removeSetzliste (Team team )
+	{
+		this.setzliste.remove(team);
 	}
 	public float getMeldeKosten() {
 		return meldeKosten;
 	}
 
-	public int getSetzplatzanzeigen(Spieler spielerEins, Spieler spielerZwei)
+	public String getSetzplatzanzeigen(Spieler spielerEins, Spieler spielerZwei)
 	{
-		int setzplatznummer=1999;
+		String setzplatznummer="";
 
 		Enumeration e = getSetzlistedict().keys();
 		while (e.hasMoreElements())
 		{
 			Team team1= (Team) e.nextElement();
-			if(team1.toString().toUpperCase().contains(spielerEins.toString().toUpperCase()))
-			{
+			if(team1!=null) {
+				if (spielerEins != null) {
+					if (team1.toStringKomplett().toUpperCase().contains(spielerEins.toString().toUpperCase())) {
 
-				setzplatznummer=setzlistedict.get(team1);
-				System.out.println("Setzplatz gefunden!"+setzplatznummer);
-				break;
-			}
-			else
-			{
-				if(spielerZwei!=null)
-				{
-					if(	team1.toString().toUpperCase().contains(spielerZwei.toString().toUpperCase()))
-					{
-						setzplatznummer=setzlistedict.get(team1);
-						System.out.println("Setzplatz gefunden!"+setzplatznummer);
-					}
-					else
-					{
-						setzplatznummer=4242;
+						setzplatznummer = String.valueOf(setzlistedict.get(team1));
+						//System.out.println("Setzplatz gefunden!" + setzplatznummer);
+						break;
+					} else {
+						if (spielerZwei != null) {
+							if (team1.toStringKomplett().toUpperCase().contains(spielerZwei.toString().toUpperCase())) {
+								setzplatznummer = String.valueOf(setzlistedict.get(team1));
+								//System.out.println("Setzplatz gefunden!" + setzplatznummer);
+							} else {
+
+
+							}
+						}
 
 					}
 				}
-
 			}
 		}
 		return setzplatznummer;

@@ -56,10 +56,6 @@ import static sample.DAO.auswahlklasse.setSpielAuswahlErgebniseintragen;
  */
 public class MainController implements Initializable, Observable
 {
-
-    String baseName = "resources.Main";
-    String titel ="";
-
     final ObservableList<Spielklasse> strings = FXCollections.observableArrayList();
     final CheckComboBox<Spielklasse> checkComboBox = new CheckComboBox<Spielklasse>();
     private Label lspielklassen;
@@ -104,18 +100,6 @@ public class MainController implements Initializable, Observable
 
     @FXML
     private TextField tspielsuche;
-
-    @FXML
-    private Menu m_datei;
-    @FXML
-    private Menu m_turnier;
-    @FXML
-    private Menu m_ansicht;
-    @FXML
-    private Menu m_sonstiges;
-
-
-
     ObservableList<Spiel> sortListe = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele();
 //wieso integer?
     //wenn integer dann die ids abgehen
@@ -166,19 +150,7 @@ public class MainController implements Initializable, Observable
             auswahlklasse.addStagesdict(stage,"Klassenuebersicht");
             stage.setScene(new Scene(root1));
             stage.show();
-
-
-            try
-            {
-                ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-                titel = bundle.getString("klasseuebersicht");
-            }
-            catch ( MissingResourceException e ) {
-                System.err.println( e );
-            }
-            stage.setTitle(titel);
-
-
+            stage.setTitle("Klassenübersicht");
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -793,116 +765,6 @@ public class MainController implements Initializable, Observable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        try
-        {
-            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-            titel = bundle.getString("btn_turnierLaden");
-        }
-        catch ( MissingResourceException e ) {
-            System.err.println( e );
-        }
-        btn_turnierLaden.setText(titel);
-
-        try
-        {
-            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-            titel = bundle.getString("btn_klassen");
-        }
-        catch ( MissingResourceException e ) {
-            System.err.println( e );
-        }
-        btn_klassen.setText(titel);
-
-        try
-        {
-            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-            titel = bundle.getString("btn_spieler");
-        }
-        catch ( MissingResourceException e ) {
-            System.err.println( e );
-        }
-        btn_spieler.setText(titel);
-
-        try
-        {
-            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-            titel = bundle.getString("btn_zeitplan");
-        }
-        catch ( MissingResourceException e ) {
-            System.err.println( e );
-        }
-        btn_zeitplan.setText(titel);
-
-        try
-        {
-            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-            titel = bundle.getString("btn_statistik");
-        }
-        catch ( MissingResourceException e ) {
-            System.err.println( e );
-        }
-        btn_statistik.setText(titel);
-
-        try
-        {
-            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-            titel = bundle.getString("tab_turnierbaum");
-        }
-        catch ( MissingResourceException e ) {
-            System.err.println( e );
-        }
-        tab_turnierbaum.setText(titel);
-
-        try
-        {
-            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-            titel = bundle.getString("tab_spieluebersicht");
-        }
-        catch ( MissingResourceException e ) {
-            System.err.println( e );
-        }
-        tab_spieluebersicht.setText(titel);
-
-        try
-        {
-            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-            titel = bundle.getString("m_datei");
-        }
-        catch ( MissingResourceException e ) {
-            System.err.println( e );
-        }
-        m_datei.setText(titel);
-
-        try
-        {
-            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-            titel = bundle.getString("m_turnier");
-        }
-        catch ( MissingResourceException e ) {
-            System.err.println( e );
-        }
-        m_turnier.setText(titel);
-
-        try
-        {
-            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-            titel = bundle.getString("m_ansicht");
-        }
-        catch ( MissingResourceException e ) {
-            System.err.println( e );
-        }
-        m_ansicht.setText(titel);
-
-        try
-        {
-            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
-            titel = bundle.getString("m_sonstiges");
-        }
-        catch ( MissingResourceException e ) {
-            System.err.println( e );
-        }
-        m_sonstiges.setText(titel);
 
         tooltipsHinzufuegen();
         ArrayList<ArrayList<Spiel>> alleRunden = Zeitplan.getAlleRunden(auswahlklasse.getAktuelleTurnierAuswahl());
