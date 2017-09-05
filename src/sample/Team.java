@@ -211,6 +211,19 @@ public class Team {
         }
 
     }
+    public String getSetzplatzString2()
+    {
+
+        if(setzplatz==0)
+        {
+            return "";
+        }
+        else
+        {
+            return String.valueOf(setzplatz);
+        }
+
+    }
 
     public int getSetzplatz() {
         return setzplatz;

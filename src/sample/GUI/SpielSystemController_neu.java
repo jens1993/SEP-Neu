@@ -98,6 +98,8 @@ public class SpielSystemController_neu implements Initializable
     @FXML
     private AnchorPane koTrostRundeNein;
 
+    private ArrayList<Team> team_setzliste = new ArrayList<>();
+
     Dictionary<Integer,Spielklasse> turnierauswahlspielklassendict = null;
     Spielklasse ausgewaehlte_spielklasse=  auswahlklasse.getAktuelleSpielklassenAuswahl();
     Spieler spieler_m1=null;
@@ -340,7 +342,7 @@ public class SpielSystemController_neu implements Initializable
             fuelleobs_setzliste();
             //}
 
-            setzplatz.setCellValueFactory(new PropertyValueFactory<Team,String>("SetzplatzString"));
+            setzplatz.setCellValueFactory(new PropertyValueFactory<Team,String>("SetzplatzString2"));
             setzplatz.setCellFactory(TextFieldTableCell.forTableColumn());
 
             spielsystem_setzliste.setEditable(true);
@@ -366,20 +368,60 @@ public class SpielSystemController_neu implements Initializable
                     }
                     if (!event.getNewValue().equals(event.getOldValue())&&Integer.parseInt(event.getNewValue()) > 0 && Integer.parseInt(event.getNewValue()) <= ausgewaehlte_spielklasse.getSetzliste().size())
                     {
+                        boolean erfolg=true;
+
+                        for(int i=0;i<team_setzliste.size();i++)
+                        {
+                            if(team_setzliste.get(i).equals(t))
+                            {
+                                System.out.println("true"+t);
+                                team_setzliste.remove(i);
+                            }
+
+                            if(team_setzliste.get(i).getSetzplatz()==Integer.parseInt(event.getNewValue()))
+                            {
+                                System.out.println("gleicher setzplatz");
+                                Team to = event.getTableView().getItems().get(event.getTablePosition().getRow());
+                                event.getTableView().getItems().set(event.getTablePosition().getRow(), to);
+                                erfolg=false;
+
+/*                                team_setzliste.get(i).setSetzplatz(0);
+                                event.getTableView().getItems().set());
+                                team_setzliste.remove(i);*/
+                            }
+                        }
+                        if(erfolg)
+                        {
+                            t.setSetzplatz(Integer.parseInt(event.getNewValue()));
+                            team_setzliste.add(t);
+                            t.getTeamDAO().update(t);
+                            System.out.println(team_setzliste);
+                            sortiereTabelleSetzliste();
+
+                        }
 
 
-                        int alterplatz = Integer.parseInt(event.getOldValue());
-                        ausgewaehlte_spielklasse.removeSetzlistedict(Integer.parseInt(event.getOldValue()), t);
-                        System.out.println("tttt");
-                        ausgewaehlte_spielklasse.addSetzlistedict(Integer.parseInt(event.getNewValue()), alterplatz, t);
-                        System.out.println(event.getNewValue());
-                        TurnierDAO turnierDAO = new TurnierDAOimpl();
 
-                        System.out.println(t + "wurde bearbeitet");
-                        fuelleobs_setzliste();
-                        sortiereTabelleSetzliste();
-                        spielsystem_setzliste.refresh();
-                        spielsystem_setzliste.getSelectionModel().select(t);
+
+                       /* if(!event.getOldValue().equals(""))
+                        {
+                            int alterplatz = Integer.parseInt(event.getOldValue());
+                            ausgewaehlte_spielklasse.removeSetzlistedict(Integer.parseInt(event.getOldValue()), t);
+                            System.out.println("tttt");
+                            ausgewaehlte_spielklasse.addSetzlistedict(Integer.parseInt(event.getNewValue()), alterplatz, t);
+                            System.out.println(event.getNewValue());
+                            TurnierDAO turnierDAO = new TurnierDAOimpl();
+
+                            System.out.println(t + "wurde bearbeitet");
+                            fuelleobs_setzliste();
+                            sortiereTabelleSetzliste();
+                            spielsystem_setzliste.refresh();
+                            spielsystem_setzliste.getSelectionModel().select(t);
+                        }
+                        else
+                        {
+
+                        }*/
 
                     }
                     else
@@ -476,7 +518,23 @@ public class SpielSystemController_neu implements Initializable
         obs_setzliste.sort(new Comparator<Team>() {
             @Override
             public int compare(Team o1, Team o2) {
-                return Integer.parseInt(o1.getSetzplatzString())- Integer.parseInt(o2.getSetzplatzString());
+                if(o1.getSetzplatzString2().equals("")&&o2.getSetzplatzString2().equals(""))
+                {
+                    return 0;
+                }
+                else if(o1.getSetzplatzString2().equals(""))
+                {
+                    return 1000000 - Integer.parseInt(o2.getSetzplatzString2());
+                }
+                else if(o2.getSetzplatzString2().equals(""))
+                {
+                    return Integer.parseInt(o1.getSetzplatzString2())-1000000;
+                }
+                else
+                {
+                    return Integer.parseInt(o1.getSetzplatzString2())- Integer.parseInt(o2.getSetzplatzString2());
+                }
+
             }
         });
         spielsystem_setzliste.setItems(obs_setzliste);
@@ -816,7 +874,7 @@ public class SpielSystemController_neu implements Initializable
 
         auswahlklasse.getStagesdict();
 
-
+        sortiereTabelleSetzliste();
     }//Ende Initialize
 
 }
