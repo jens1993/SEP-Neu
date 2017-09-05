@@ -127,7 +127,7 @@ public class GruppenTabelle {
         }
 
         Enumeration e = spielklasse.getSpiele().keys();
-        while(e.hasMoreElements()){
+      /*  while(e.hasMoreElements()){
             int key =(int) e.nextElement();
             Spiel spiel = spielklasse.getSpiele().get(key);
             Team heim = spiel.getHeim();
@@ -150,9 +150,8 @@ public class GruppenTabelle {
 
             }
 
-
         }
-
+*/
 
 
         /*Font schriftart = new Font("Calibri",12);
