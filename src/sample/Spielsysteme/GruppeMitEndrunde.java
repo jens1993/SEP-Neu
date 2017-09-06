@@ -3,10 +3,7 @@ import sample.*;
 import sample.DAO.*;
 import sample.Enums.*;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
 public class GruppeMitEndrunde extends Spielsystem{
 	private int anzahlGruppen;
@@ -30,11 +27,30 @@ public class GruppeMitEndrunde extends Spielsystem{
 
 	public GruppeMitEndrunde(List<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
 		this.setzliste = setzliste;		//Constructor nur für Einlesen aus der Datenbank
-		this.anzahlGruppen = anzahlGruppen;
+		this.anzahlGruppen = ermittleAnzahlGruppen(spiele);
 		this.anzahlWeiterkommender = anzahlWeiterkommender;
 		setSpielklasse(spielklasse);
 		setzListeAufteilen();
-		gruppenErstellen();
+		gruppenEinlesen(spiele, ergebnisse);
+	}
+
+	private int ermittleAnzahlGruppen(ArrayList<Spiel> spiele) {
+		int anzahlGruppen = 0;
+		for (int i=0; i<spiele.size();i++){
+			Spiel spiel = spiele.get(i);
+			int systemSpielID = spiel.getSystemSpielID();
+			int gruppenNummer = systemSpielID/100000 - (spiel.getSystemSpielID()/10000000)*100;
+			if (gruppenNummer>anzahlGruppen){
+				anzahlGruppen = gruppenNummer;
+			}
+		}
+		return anzahlGruppen;
+	}
+
+	private void gruppenEinlesen(ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
+		for(int i=0; i<alleSetzListen.size();i++){
+			alleGruppen.add(new Gruppe(alleSetzListen.get(i),this,this.getSpielklasse(),i+1, spiele, ergebnisse));
+		}
 	}
 
 	private void setzListeAufteilen(){
@@ -80,7 +96,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 	private void freiloseHinzufuegen (){
 		while ((double)templist.size()%(anzahlGruppen*2)>0){
 			templist.add(new Team("Freilos",this));
-			super.setzlisteDAO.update(templist.size(),templist.get(templist.size()-1),this.getSpielklasse());
+			super.setzlisteDAO.create(templist.size(),templist.get(templist.size()-1),this.getSpielklasse());
 		}
 	}
 	private void endRundeErstellen(){
@@ -113,9 +129,6 @@ public class GruppeMitEndrunde extends Spielsystem{
 
 	public void addPlatzierungsliste(ArrayList<Team> platzierungsliste, int extraRundenID){
 		this.allePlatzierungslisten.put(extraRundenID-1,platzierungsliste);
-		if(allePlatzierungslisten.size()==4) {
-			int justforbreakpoint = 0;
-		}
 		if (allePlatzierungslisten.size()==anzahlGruppen){
 			endRundeErstellen();
 		}

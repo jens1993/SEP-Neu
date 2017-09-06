@@ -505,7 +505,9 @@ public class TurnierDAOimpl implements TurnierDAO {
             ResultSet teamResult = smt.executeQuery();
             while (teamResult.next()){
                 int teamid = teamResult.getInt("TeamID");
-                teams.put(teamid, new Team(teamid,turnier.getSpielklassen().get(teamResult.getInt("SpielklasseID"))));
+                Team team = new Team(teamid,turnier.getSpielklassen().get(teamResult.getInt("SpielklasseID")));
+                team.setSetzplatz(teamResult.getInt("FesterSetzplatz"));
+                teams.put(teamid, team);
             }
             smt.close();
 
