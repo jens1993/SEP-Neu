@@ -299,16 +299,10 @@ public class MainController implements Initializable
         Zeitplan.zeitplanErstellen(auswahlklasse.getAktuelleTurnierAuswahl()); //vergebe Zeitplannummern für die Spiele
         klassenTabsErstellen();
         felderHinzufuegen();
-
         tabelleSpieleContextMenu();
-
         checkComboBoxListener();
-
-
         layoutErstellen();
         suchleisteListener();
-
-
         checkboxListener(check_aktiveSpiele);
         checkboxListener(check_ausstehendeSpiele);
         checkboxListener(check_gespielteSpiele);
@@ -332,11 +326,8 @@ public class MainController implements Initializable
 
     private void checkComboBoxFuellen() {
         try {
-
             printSpielTable();
-
             fuelleSpielElemente();
-
             for(int i = 0; i< auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size(); i++)
             {
                 checkComboBox.getCheckModel().check(i);
@@ -347,10 +338,8 @@ public class MainController implements Initializable
             {
                 auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().add(checkComboBox.getCheckModel().getCheckedItems().get(i).getSpielklasseID());
             }
-
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 

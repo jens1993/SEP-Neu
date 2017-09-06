@@ -49,7 +49,19 @@ public class GruppeMitEndrunde extends Spielsystem{
 
 	private void gruppenEinlesen(ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
 		for(int i=0; i<alleSetzListen.size();i++){
-			alleGruppen.add(new Gruppe(alleSetzListen.get(i),this,this.getSpielklasse(),i+1, spiele, ergebnisse));
+			ArrayList<Spiel> gruppenSpiele = new ArrayList<>();
+			Dictionary<Integer,Ergebnis> gruppenErgebnisse = new Hashtable<>();
+			for (int j=0;j<spiele.size();j++){
+				Spiel spiel = spiele.get(j);
+				int gruppenNummer = (spiel.getSystemSpielID()-spiel.getSystemSpielID()/10000000 * 10000000)/100000;
+				if (i+1 == gruppenNummer){
+					gruppenSpiele.add(spiel);
+					if (ergebnisse.get(spiel.getSpielID())!=null){
+						gruppenErgebnisse.put(spiel.getSpielID(),ergebnisse.get(spiel.getSpielID()));
+					}
+				}
+			}
+			alleGruppen.add(new Gruppe(alleSetzListen.get(i),this,this.getSpielklasse(),i+1, gruppenSpiele, gruppenErgebnisse));
 		}
 	}
 

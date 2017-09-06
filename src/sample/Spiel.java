@@ -118,7 +118,7 @@ public class Spiel {
 	}
 	public void setHeim(Team heim) {
 		this.heim = heim;
-		if(this.gast != null && !(this.getSystemSpielID()<20000000)){
+		if(this.gast != null && !(this.getSystemSpielID()<30000000)){
 			this.status = 1;
 
 		}
@@ -127,7 +127,7 @@ public class Spiel {
 
 	public void setGast(Team gast) {
 		this.gast = gast;
-		if(this.heim != null && !(this.getSystemSpielID()<20000000)){
+		if(this.heim != null && !(this.getSystemSpielID()<30000000)){
 			this.status = 1;
 		/*	if (this.heim.isFreilos()){
 				this.setErgebnis(new Ergebnis(0,21,0,21));

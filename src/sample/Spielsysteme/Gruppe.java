@@ -60,7 +60,7 @@ public class Gruppe extends Spielsystem {
 	private void alleSpieleSchreiben() {
 		for (int i=0; i<getRunden().size(); i++){
 			for(int j=0;j<getRunden().get(i).size();j++){
-				Spiel spiel = getRundenArray().get(i).get(j);
+				Spiel spiel = spielsystem.getRundenArray().get(i).get(j);
 				spiel.getSpielDAO().create(spiel);
 			}
 		}
@@ -78,10 +78,10 @@ public class Gruppe extends Spielsystem {
 			resetOffeneRundenSpiele();
 			for (int j=0; j<anzahlTeams/2;j++){
 				Spiel spiel = new Spiel(spielSystemIDberechnen(),this);
-				if(this.getRundenArray().size()<=getAktuelleRunde()){
-					this.getRundenArray().add(new ArrayList<>());
+				if(spielsystem.getRundenArray().size()<=getAktuelleRunde()){
+					spielsystem.getRundenArray().add(new ArrayList<>());
 				}
-				this.getRundenArray().get(getAktuelleRunde()).add(spiel);
+				spielsystem.getRundenArray().get(getAktuelleRunde()).add(spiel);
 				erhoeheOffeneRundenSpiele();
 			}
 			erhoeheAktuelleRunde();
@@ -156,9 +156,9 @@ public class Gruppe extends Spielsystem {
 	}
 
 	private void rundeStarten(int rundenIndex){
-		if(getRundenArray().get(rundenIndex)!=null){
-			for (int i=0;i<getRundenArray().get(i).size();i++){
-				Spiel spiel = getRundenArray().get(rundenIndex).get(i);
+		if(spielsystem.getRundenArray().get(rundenIndex)!=null){
+			for (int i=0;i<spielsystem.getRundenArray().get(i).size();i++){
+				Spiel spiel = spielsystem.getRundenArray().get(rundenIndex).get(i);
 				spiel.setStatus(1);
 				spiel.getSpielsystem().getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().remove(spiel);
 				spiel.getSpielsystem().getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(spiel);
@@ -202,8 +202,8 @@ public class Gruppe extends Spielsystem {
 	}
 
 	private int getRundenIndex(Spiel spiel){
-		for (int i=0;i<getRundenArray().size();i++){
-			if (getRundenArray().get(i).contains(spiel)){
+		for (int i=0;i<spielsystem.getRundenArray().size();i++){
+			if (spielsystem.getRundenArray().get(i).contains(spiel)){
 				return i;
 			}
 		}
@@ -250,12 +250,13 @@ public class Gruppe extends Spielsystem {
 	private void rundenListeEinlesen(ArrayList<Spiel> spiele){
 		for (int i=0;i<spiele.size();i++){
 			int spielklasseSpielID=spiele.get(i).getSystemSpielID();
-			int rundenNummer = (spielklasseSpielID-getSpielSystemArt()*10000000)/1000;
+			int rundenNummer = (spielklasseSpielID-getSpielSystemArt()*10000000);
+			rundenNummer = (rundenNummer - (rundenNummer /100000 * 100000)) /1000;
 			Spiel spiel =spiele.get(i);
-			while(getRundenArray().size()-1<rundenNummer){
-				getRundenArray().add(new ArrayList<>());
+			while(spielsystem.getRundenArray().size()-1<rundenNummer){
+				spielsystem.getRundenArray().add(new ArrayList<>());
 			}
-			getRundenArray().get(rundenNummer).add(spiel);
+			spielsystem.getRundenArray().get(rundenNummer).add(spiel);
 		}
 	}
 
