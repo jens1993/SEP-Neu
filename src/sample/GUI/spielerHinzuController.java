@@ -578,6 +578,36 @@ private TextField t_suchleistespielerhinzu;
         }
         r_w.setText(titel);
 
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tab_sphin");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tab_sphin.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tab_spbea");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tab_spbea.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tab_spupdate");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tab_spupdate.setText(titel);
+
         ContextMenu contextMenu = new ContextMenu();
 
 

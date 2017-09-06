@@ -43,6 +43,11 @@ import java.util.*;
  */
 public class MainController implements Initializable
 {
+
+
+    String baseName = "resources.Main";
+    String titel ="";
+
     final ObservableList<Spielklasse> strings = FXCollections.observableArrayList();
     final CheckComboBox<Spielklasse> checkComboBox = new CheckComboBox<Spielklasse>();
     private Label lspielklassen;
@@ -53,18 +58,6 @@ public class MainController implements Initializable
     private VBox vbox_main;
     @FXML
     private GridPane gridPane_main;
-    @FXML
-    private Button btn_klassen;
-    @FXML
-    private Button btn_turnierLaden;
-    @FXML
-    private Button btn_spieler;
-    @FXML
-    private Button btn_teams;
-    @FXML
-    private Button btn_zeitplan;
-    @FXML
-    private Button btn_statistik;
     @FXML
     private CheckBox check_gespielteSpiele= new CheckBox();
     @FXML
@@ -85,9 +78,27 @@ public class MainController implements Initializable
     private HBox hbox_felder;
     @FXML
     TabPane tabPane_spielklassen = new TabPane();
-
     @FXML
     private TextField tspielsuche;
+
+    @FXML
+    private Button btn_turnierLaden;
+    @FXML
+    private Button btn_klassen;
+    @FXML
+    private Button btn_spieler;
+    @FXML
+    private Button btn_zeitplan;
+    @FXML
+    private Button btn_statistik;
+    @FXML
+    private Menu m_datei;
+    @FXML
+    private Menu m_turnier;
+    @FXML
+    private Menu m_ansicht;
+    @FXML
+    private Menu m_sonstiges;
 
     //endregion
 
@@ -97,7 +108,6 @@ public class MainController implements Initializable
 
     public void pressBtn_Test(ActionEvent event) throws Exception {
         try {
-
 
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("JavaFXDynTable.fxml"));
@@ -293,6 +303,117 @@ public class MainController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_turnierLaden");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_turnierLaden.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_klassen");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_klassen.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_spieler");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_spieler.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_zeitplan");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_zeitplan.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_statistik");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_statistik.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tab_turnierbaum");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tab_turnierbaum.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tab_spieluebersicht");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tab_spieluebersicht.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("m_datei");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        m_datei.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("m_turnier");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        m_turnier.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("m_ansicht");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        m_ansicht.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("m_sonstiges");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        m_sonstiges.setText(titel);
+
 
         tooltipsHinzufuegen();
         //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();

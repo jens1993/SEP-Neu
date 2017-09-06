@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -20,11 +26,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox_main" prefHeight="1050" prefWidth="1650" spacing="20.0" styleClass="menubarMargin" stylesheets="@/CSS/Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
+<VBox fx:id="vbox_main" prefHeight="1050" prefWidth="1650" spacing="20.0" styleClass="menubarMargin" stylesheets="@/CSS/Main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainController">
     <children>
         <MenuBar blendMode="SRC_ATOP" prefHeight="32.0" prefWidth="1390.0" styleClass="menubarMargin">
             <menus>
-                <Menu mnemonicParsing="false" text="Datei">
+                <Menu fx:id="m_datei" mnemonicParsing="false">
                     <items>
                         <MenuItem fx:id="menu_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="Turnier laden" />
                         <MenuItem mnemonicParsing="false" onAction="#pressBtn_ExcelImport" text="Meldeformular importieren" />
@@ -32,7 +38,7 @@
                         <MenuItem mnemonicParsing="false" text="Programm beenden" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Turnier">
+                <Menu fx:id="m_turnier" mnemonicParsing="false">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Turnierdaten bearbeiten" />
                         <MenuItem mnemonicParsing="false" text="Klassendaten bearbeiten" />
@@ -42,7 +48,7 @@
                         <MenuItem mnemonicParsing="false" text="Statistiken" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Ansicht">
+                <Menu fx:id="m_ansicht" mnemonicParsing="false">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Feldübersicht" />
                         <MenuItem mnemonicParsing="false" text="Klassen" />
@@ -60,7 +66,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#pressBtn_Test" text="Test von Jens" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Sonstiges">
+                <Menu fx:id="m_sonstiges" mnemonicParsing="false">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Teilnehmerliste drucken" />
                         <MenuItem mnemonicParsing="false" text="Startgeldliste drucken" />
@@ -95,25 +101,25 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Button fx:id="btn_turnierLaden" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" prefHeight="36.0" prefWidth="160.0" text="Turnierübersicht" textAlignment="CENTER">
+                                <Button fx:id="btn_turnierLaden" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" prefHeight="36.0" prefWidth="160.0" textAlignment="CENTER">
                                     <GridPane.margin>
                                         <Insets bottom="60.0" left="40.0" right="40.0" top="10.0" />
                                     </GridPane.margin></Button>
-                                <Button fx:id="btn_klassen" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBtn_klassen" prefHeight="36.0" prefWidth="160.0" text="Klassen" textAlignment="CENTER" GridPane.rowIndex="1">
+                                <Button fx:id="btn_klassen" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBtn_klassen" prefHeight="36.0" prefWidth="160.0" textAlignment="CENTER" GridPane.rowIndex="1">
                                     <GridPane.margin>
                                         <Insets bottom="60.0" left="40.0" right="40.0" top="10.0" />
                                     </GridPane.margin></Button>
-                                <Button fx:id="btn_spieler" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBtn_spieler" prefHeight="36.0" prefWidth="160.0" text="Spieler" textAlignment="CENTER" GridPane.rowIndex="2">
+                                <Button fx:id="btn_spieler" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBtn_spieler" prefHeight="36.0" prefWidth="160.0" textAlignment="CENTER" GridPane.rowIndex="2">
                                     <GridPane.margin>
                                         <Insets bottom="60.0" left="40.0" right="40.0" top="10.0" />
                                     </GridPane.margin></Button>
 
 
-                                <Button fx:id="btn_zeitplan" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="160.0" text="Zeitplan" textAlignment="CENTER" GridPane.rowIndex="4">
+                                <Button fx:id="btn_zeitplan" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="36.0" prefWidth="160.0" textAlignment="CENTER" GridPane.rowIndex="4">
                                     <GridPane.margin>
                                         <Insets bottom="60.0" left="40.0" right="40.0" top="10.0" />
                                     </GridPane.margin></Button>
-                                <Button fx:id="btn_statistik" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBtn_Statistik" prefHeight="36.0" prefWidth="160.0" text="Statistik" textAlignment="CENTER" GridPane.rowIndex="5">
+                                <Button fx:id="btn_statistik" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressBtn_Statistik" prefHeight="36.0" prefWidth="160.0" textAlignment="CENTER" GridPane.rowIndex="5">
                                     <GridPane.margin>
                                         <Insets bottom="60.0" left="40.0" right="40.0" top="10.0" />
                                     </GridPane.margin></Button>
@@ -132,12 +138,12 @@
                     <children>
                         <TabPane prefHeight="777.0" prefWidth="1410.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
                             <tabs>
-                                <Tab fx:id="tab_turnierbaum" text="Turnierbaum">
+                                <Tab fx:id="tab_turnierbaum">
                                     <content>
                                         <AnchorPane prefHeight="918.0" prefWidth="1452.0" />
                                     </content>
                                 </Tab>
-                                <Tab fx:id="tab_spieluebersicht" onSelectionChanged="#fuelleSpielElemente" text="Spielübersicht">
+                                <Tab fx:id="tab_spieluebersicht" onSelectionChanged="#fuelleSpielElemente">
                                     <content>
                                         <VBox prefHeight="200.0" prefWidth="100.0">
                                             <children>
