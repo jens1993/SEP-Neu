@@ -302,7 +302,7 @@ public class MainController implements Initializable
 
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+        public void initialize(URL location, ResourceBundle resources) {
 
         try
         {
