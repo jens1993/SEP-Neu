@@ -162,6 +162,18 @@ public class Spiel {
 	public int getSystemSpielID() {
 		return systemSpielID;
 	}
+	public int getSystemSpielArt() {
+		return systemSpielID/10000000;
+	}
+	public int getVorrundenNummer(){ //0 für Endrunde / einzige Runde
+		return (systemSpielID - getSystemSpielArt()*10000000)/100000;
+	}
+	public int getRundenNummer(){
+		return (systemSpielID - getSystemSpielArt()*10000000-getVorrundenNummer()*100000)/1000;
+	}
+	public int getSpielNummerInRunde(){
+		return (systemSpielID - getSystemSpielArt()*10000000-getVorrundenNummer()*100000 - getRundenNummer()*1000);
+	}
 
 	public int getSpielID() {
 		return spielID;
@@ -273,12 +285,17 @@ public class Spiel {
 			return "Runde "+(rundenNummer + 1);
 		}
 		else if(systemSpielID<30000000){ //Gruppe mit Endrunde
-
+			if(getVorrundenNummer()!=0){
+				return "Runde "+(getRundenNummer());
+			}
 		}
 		else if(systemSpielID<40000000){ //K.O. system
 			int rundenNummer = (systemSpielID-30000000)/1000;
-			if(rundenNummer==0){
+			if(rundenNummer==0 && getVorrundenNummer()==0){
 				return "Finale";
+			}
+			else if(rundenNummer==0 && getVorrundenNummer()==1){
+				return "Spiel um 3";
 			}
 			else if(rundenNummer==1){
 				return "Halbfinale";

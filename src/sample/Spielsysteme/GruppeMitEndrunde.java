@@ -23,7 +23,9 @@ public class GruppeMitEndrunde extends Spielsystem{
 		setSpielklasse(spielklasse);
 		setzListeAufteilen();
 		gruppenErstellen();
+		rundenArrayErstellen();
 	}
+
 
 	public GruppeMitEndrunde(List<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
 		this.setzliste = setzliste;		//Constructor nur für Einlesen aus der Datenbank
@@ -32,6 +34,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 		setSpielklasse(spielklasse);
 		setzListeAufteilen();
 		gruppenEinlesen(spiele, ergebnisse);
+		rundenArrayErstellen();
 	}
 
 	private int ermittleAnzahlGruppen(ArrayList<Spiel> spiele) {
@@ -56,8 +59,8 @@ public class GruppeMitEndrunde extends Spielsystem{
 				int gruppenNummer = (spiel.getSystemSpielID()-spiel.getSystemSpielID()/10000000 * 10000000)/100000;
 				if (i+1 == gruppenNummer){
 					gruppenSpiele.add(spiel);
-					if (ergebnisse.get(spiel.getSpielID())!=null){
-						gruppenErgebnisse.put(spiel.getSpielID(),ergebnisse.get(spiel.getSpielID()));
+					if (ergebnisse.get(spiel.getSystemSpielID())!=null){
+						gruppenErgebnisse.put(spiel.getSystemSpielID(),ergebnisse.get(spiel.getSystemSpielID()));
 					}
 				}
 			}
@@ -135,7 +138,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 				}
 			}
 		}
-		endrunde= new KO(endrundenSetzliste,this, this.getSpielklasse());
+		endrunde= new KO(endrundenSetzliste,this, this.getSpielklasse(),true);
 	}
 
 
@@ -145,6 +148,27 @@ public class GruppeMitEndrunde extends Spielsystem{
 			endRundeErstellen();
 		}
 	}
+
+	private void rundenArrayErstellen() {
+		for (int i=0;i< alleGruppen.size();i++){
+			ArrayList<ArrayList<Spiel>> gruppenArrayList = alleGruppen.get(i).getRundenArray();
+			arrayListIntegrieren(gruppenArrayList);
+		}
+	}
+
+	private void arrayListIntegrieren(ArrayList<ArrayList<Spiel>> gruppenArrayList) {
+		ArrayList<ArrayList<Spiel>> gesamtArrayList = this.getRundenArray();
+		while(gruppenArrayList.size()>gesamtArrayList.size()){
+			gesamtArrayList.add(new ArrayList<>());
+		}
+		for(int i=0;i<gruppenArrayList.size();i++){
+			for (int j=0;j<gruppenArrayList.get(i).size();j++){
+				Spiel spiel = gruppenArrayList.get(i).get(j);
+				gesamtArrayList.get(i).add(spiel);
+			}
+		}
+	}
+
 
 	public ArrayList<Gruppe> getAlleGruppen() {
 		return alleGruppen;
@@ -161,11 +185,27 @@ public class GruppeMitEndrunde extends Spielsystem{
 
 	@Override
 	public boolean beendeMatch(Spiel spiel) {
+		int systemSpielID = spiel.getSystemSpielID();
+		int extraRundenNummer = systemSpielID-spiel.getSystemSpielID()/10000000 * 10000000;
+		extraRundenNummer = extraRundenNummer / 100000;
+		for (int i=0;i<alleGruppen.size();i++){
+			if (alleGruppen.get(i).getExtraRunde()==extraRundenNummer){
+				alleGruppen.get(i).beendeMatch(spiel);
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public boolean beendeMatch(Spiel spiel, String einlesen) {
+		int systemSpielID = spiel.getSystemSpielID();
+		int extraRundenNummer = systemSpielID-spiel.getSystemSpielID()/10000000 * 10000000;
+		extraRundenNummer = extraRundenNummer / 100000;
+		for (int i=0;i<alleGruppen.size();i++){
+			if (alleGruppen.get(i).getExtraRunde()==extraRundenNummer){
+				alleGruppen.get(i).beendeMatch(spiel,"einlesen");
+			}
+		}
 		return false;
 	}
 }
