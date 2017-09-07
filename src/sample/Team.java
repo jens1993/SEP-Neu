@@ -199,7 +199,6 @@ public class Team {
     }
     public String getSetzplatzString()
     {
-
         if(auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzplatzanzeigen(spielerEins,spielerZwei)!="")
         {
             setzplatznummer= Integer.parseInt(auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzplatzanzeigen(spielerEins,spielerZwei));
@@ -209,7 +208,6 @@ public class Team {
         {
             return "-1";
         }
-
     }
     public String getSetzplatzString2()
     {
