@@ -720,7 +720,7 @@ public class MainController implements Initializable
     }
 
     private void gruppeVisualisierung(Spielsystem spielsystem, Tab tab) {
-        GruppenTabelle gruppenTabelle = new GruppenTabelle(spielsystem.getSpielklasse(), tab);
+        GruppenTabelle gruppenTabelle = new GruppenTabelle(spielsystem, tab);
         if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
             gruppenTabelle.erstelleGruppenTabelle();
         }
@@ -732,23 +732,29 @@ public class MainController implements Initializable
         tab.setContent(tabPane);
         for(int i = 0;i<gruppeMitEndrunde.getAlleGruppen().size();i++){
             Tab gruppe = new Tab("Gruppe "+(i+1));
+            gruppe.setClosable(false);
             tabPane.getTabs().add(gruppe);
+            gruppeVisualisierung(gruppeMitEndrunde.getAlleGruppen().get(i),gruppe);
         }
         Tab endrunde = new Tab("Endrunde");
+        endrunde.setClosable(false);
         tabPane.getTabs().add(endrunde);
+        koVisualisierung(gruppeMitEndrunde.getEndrunde(),endrunde);
     }
 
     private void koVisualisierung(Spielsystem spielsystem, Tab tab) {
-        Turnierbaum turnierbaum = new Turnierbaum(20,20,180,50,100,20);
-        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
-            Canvas canvas = new Canvas();
-            VBox vBox = new VBox();
-            ScrollPane scrollPane = new ScrollPane();
-            tab.setContent(scrollPane);
-            scrollPane.setContent(vBox);
-            vBox.getChildren().add(canvas);
-            turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), canvas);
-            vBox.setStyle("-fx-background-color: #d8d8d8");
+        if (spielsystem!=null) {
+            Turnierbaum turnierbaum = new Turnierbaum(20, 20, 180, 50, 100, 20);
+            if (auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size() > 1) {
+                Canvas canvas = new Canvas();
+                VBox vBox = new VBox();
+                ScrollPane scrollPane = new ScrollPane();
+                tab.setContent(scrollPane);
+                scrollPane.setContent(vBox);
+                vBox.getChildren().add(canvas);
+                turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), canvas);
+                vBox.setStyle("-fx-background-color: #d8d8d8");
+            }
         }
     }
 

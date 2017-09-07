@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import sample.*;
 import sample.DAO.auswahlklasse;
+import sample.Spielsysteme.Spielsystem;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -18,22 +19,22 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class GruppenTabelle {
-    private Spielklasse spielklasse;
+    private Spielsystem spielsystem;
     private Tab tab;
 
-    public GruppenTabelle(Spielklasse spielklasse, Tab tab) {
-        this.spielklasse = spielklasse;
+    public GruppenTabelle(Spielsystem spielsystem, Tab tab) {
+        this.spielsystem = spielsystem;
         this.tab = tab;
     }
 
     public void erstelleGruppenTabelle(){
 
-        ArrayList<Team> teams = spielklasse.getSetzliste();
-        ArrayList<ArrayList<Spiel>> runden = spielklasse.getSpielsystem().getRunden();
+        ArrayList<Team> teams = spielsystem.getSetzliste();
+        ArrayList<ArrayList<Spiel>> runden = spielsystem.getRunden();
 
-        int anzahlSpiele =spielklasse.getSpiele().size();
-        double anzahlTeilnehmerDouble = (((Math.sqrt(1 + anzahlSpiele * 2 * 4)) / 2 * 2) + 1) / 2;
-        int anzahlTeilnehmer = (int) anzahlTeilnehmerDouble;
+        //int anzahlSpiele = spielklasse.getSpiele().size();
+        //double anzahlTeilnehmerDouble = (((Math.sqrt(1 + anzahlSpiele * 2 * 4)) / 2 * 2) + 1) / 2;
+        int anzahlTeilnehmer = spielsystem.getSetzliste().size();
 
         int xObenLinksLeereZelle = 20;
         int yObenLinksLeereZelle = 20;
@@ -41,8 +42,6 @@ public class GruppenTabelle {
         int yObenLinks = 20;
         int zellenBreite = 150;
         int zellenHoehe = 50;
-        int xAbstand = 100;
-        int yAbstand = 20;
 
         Canvas spieluebersicht = new Canvas(2000,2000);
         GraphicsContext gc = spieluebersicht.getGraphicsContext2D();
@@ -126,7 +125,7 @@ public class GruppenTabelle {
             }
         }
 
-        Enumeration e = spielklasse.getSpiele().keys();
+        //Enumeration e = spielklasse.getSpiele().keys();
       /*  while(e.hasMoreElements()){
             int key =(int) e.nextElement();
             Spiel spiel = spielklasse.getSpiele().get(key);

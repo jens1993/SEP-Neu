@@ -292,4 +292,7 @@ public class SchweizerSystem extends Spielsystem {
 			super.setzlisteDAO.update(teamList.size(),teamList.get(teamList.size()-1),this.getSpielklasse());
 		}
 	}
+	public ArrayList<Team> getSetzliste(){
+		return teamList;
+	}
 }

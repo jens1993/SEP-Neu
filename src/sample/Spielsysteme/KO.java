@@ -11,9 +11,11 @@ public class KO extends Spielsystem {
 	static int teilnehmerzahl;
 	private SpielTree finale;
 	private Spielsystem spielsystem;
+	private ArrayList<Team> setzliste;
 
-	public KO(List<Team> setzliste, Spielklasse spielklasse,boolean platzDreiAusspielen){
+	public KO(ArrayList<Team> setzliste, Spielklasse spielklasse,boolean platzDreiAusspielen){
 		this.setSpielklasse(spielklasse);
+		this.setzliste=setzliste;
 		this.platzDreiAusspielen = platzDreiAusspielen;
 		this.teilnehmerzahl=setzliste.size();
 		setSpielSystemArt(3);
@@ -27,8 +29,9 @@ public class KO extends Spielsystem {
 		alleSpieleSchreiben();
 	}
 
-	public KO(List<Team> setzliste, Spielsystem spielsystem, Spielklasse spielklasse,boolean platzDreiAusspielen){
+	public KO(ArrayList<Team> setzliste, Spielsystem spielsystem, Spielklasse spielklasse,boolean platzDreiAusspielen){
 		this.spielsystem = spielsystem;
+		this.setzliste=setzliste;
 		this.platzDreiAusspielen = platzDreiAusspielen;
 		this.setSpielklasse(spielklasse);
 		this.teilnehmerzahl=setzliste.size();
@@ -242,5 +245,9 @@ public class KO extends Spielsystem {
 	@Override
 	public boolean beendeMatch(Spiel spiel, String einlesen) {
 		return false;
+	}
+
+	public ArrayList<Team> getSetzliste(){
+		return setzliste;
 	}
 }

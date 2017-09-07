@@ -8,8 +8,8 @@ import java.util.*;
 public class GruppeMitEndrunde extends Spielsystem{
 	private int anzahlGruppen;
 	private int anzahlWeiterkommender;
-	private List<Team> endrundenSetzliste = new ArrayList<>();
-	private List<Team> setzliste;
+	private ArrayList<Team> endrundenSetzliste = new ArrayList<>();
+	private ArrayList<Team> setzliste;
 	private ArrayList<Team> templist = new ArrayList<>();
 	private ArrayList<ArrayList<Team>> alleSetzListen = new ArrayList<>();
 	private ArrayList<Gruppe> alleGruppen = new ArrayList<>();
@@ -17,6 +17,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 	private Spielsystem endrunde;
 
 	public GruppeMitEndrunde(Spielklasse spielklasse, int anzahlGruppen, int anzahlWeiterkommender) {
+		this.setSpielSystemArt(2);
 		this.setzliste = spielklasse.getSetzliste();
 		this.anzahlGruppen = anzahlGruppen;
 		this.anzahlWeiterkommender = anzahlWeiterkommender;
@@ -27,7 +28,8 @@ public class GruppeMitEndrunde extends Spielsystem{
 	}
 
 
-	public GruppeMitEndrunde(List<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
+	public GruppeMitEndrunde(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
+		this.setSpielSystemArt(2);
 		this.setzliste = setzliste;		//Constructor nur für Einlesen aus der Datenbank
 		this.anzahlGruppen = ermittleAnzahlGruppen(spiele);
 		this.anzahlWeiterkommender = anzahlWeiterkommender;
@@ -207,5 +209,8 @@ public class GruppeMitEndrunde extends Spielsystem{
 			}
 		}
 		return false;
+	}
+	public ArrayList<Team> getSetzliste(){
+		return setzliste;
 	}
 }
