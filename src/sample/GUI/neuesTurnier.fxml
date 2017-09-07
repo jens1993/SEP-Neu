@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import jfxtras.labs.scene.control.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -14,7 +22,7 @@
 <?import javafx.scene.text.Text?>
 <?import jfxtras.labs.scene.control.BigDecimalField?>
 
-<GridPane prefHeight="126.0" prefWidth="418.0" styleClass="neuesTurnierPane" stylesheets="@/CSS/neuesTurnier.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.neuesTurnierController">
+<GridPane prefHeight="126.0" prefWidth="418.0" styleClass="neuesTurnierPane" stylesheets="@/CSS/neuesTurnier.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.neuesTurnierController">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="124.0" />
@@ -30,7 +38,7 @@
    <children>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="neuesTurnierBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="neuesTurnierLabel" text="Turniername ">
+            <Text fx:id="t_turniername" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="neuesTurnierLabel">
                <stroke>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -45,19 +53,19 @@
       <TextField fx:id="Turniername" styleClass="neuesTurnierTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="neuesTurnierBox" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="neuesTurnierLabel" text="Datum " />
+            <Text fx:id="t_datum" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="neuesTurnierLabel" />
          </children>
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="neuesTurnierBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="neuesTurnierLabel" text="Anzahl Felder " />
+            <Text fx:id="t_anzahlFelder" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="neuesTurnierLabel" />
          </children>
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="neuesTurnierBox" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="311.0" styleClass="neuesTurnierBox" GridPane.columnIndex="2" GridPane.rowIndex="4">
          <children>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" styleClass="neuesTurnierButton" text="Abbrechen" />
-            <Button fx:id="btn_starten" mnemonicParsing="false" onAction="#erstelleTurnier" prefHeight="25.0" prefWidth="75.0" styleClass="neuesTurnierButton" text="Starten">
+            <Button fx:id="btn_abbrechen" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" styleClass="neuesTurnierButton" />
+            <Button fx:id="btn_starten" mnemonicParsing="false" onAction="#erstelleTurnier" prefHeight="25.0" prefWidth="75.0" styleClass="neuesTurnierButton">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>

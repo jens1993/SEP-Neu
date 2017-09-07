@@ -30,7 +30,7 @@
 
 <TabPane fx:id="tabpane_spieler" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="702.0" styleClass="spielerHinzuPane" stylesheets="@/CSS/spielerHinzu.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.spielerHinzuController">
     <tabs>
-        <Tab id="tab_spieler_hinzufuegen" fx:id="tab_sphin" styleClass="spielerHinzuTab" text="Spieler hinzufügen">
+        <Tab id="tab_spieler_hinzufuegen" fx:id="tab_sphin" styleClass="spielerHinzuTab">
             <content>
                 <GridPane prefHeight="435.0" prefWidth="718.0" styleClass="spielerHinzuPane">
                     <columnConstraints>
@@ -183,7 +183,7 @@
                 </GridPane>
             </content>
         </Tab>
-        <Tab id="tab_spieler_bearbeiten" fx:id="tab_spbea" styleClass="spielerHinzuTab" text="Spieler bearbeiten">
+        <Tab id="tab_spieler_bearbeiten" fx:id="tab_spbea" styleClass="spielerHinzuTab">
          <content>
             <GridPane fx:id="grid" styleClass="spielerHinzuPane">
                <columnConstraints>
@@ -215,7 +215,7 @@
             </GridPane>
          </content>
         </Tab>
-      <Tab id="tab_spieler_hinzufuegen" fx:id="tab_spupdate" disable="true" styleClass="spielerHinzuTab" text="Spieler updaten">
+      <Tab id="tab_spieler_hinzufuegen" fx:id="tab_spupdate" disable="true" styleClass="spielerHinzuTab">
          <content>
             <GridPane prefHeight="435.0" prefWidth="718.0" styleClass="spielerHinzuPane">
                <columnConstraints>

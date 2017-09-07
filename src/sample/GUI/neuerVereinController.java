@@ -10,9 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -23,13 +21,18 @@ import sample.Spiel;
 import sample.Verein;
 
 import java.net.URL;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
  * Created by jens on 03.08.2017.
  */
-public class neuerVereinController
+public class neuerVereinController implements Initializable
 {
+
+    String baseName = "resources.Main";
+    String titel ="";
+
     @FXML
     private javafx.scene.control.TableView tabelle_spiele;
 
@@ -40,6 +43,14 @@ public class neuerVereinController
     private TextField t_vverband;
     @FXML
     private TextField t_vextvereinsid;
+    @FXML
+    private Label lab_name;
+    @FXML
+    private Label lab_verband;
+    @FXML
+    private Label lab_vereinsId;
+    @FXML
+    private Button btn_speichern;
 
     VereinDAO v = new VereinDAOimpl();
     Verein verein = null;
@@ -63,6 +74,51 @@ public class neuerVereinController
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("lab_name");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        lab_name.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("lab_verband");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        lab_verband.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("lab_vereinsId");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        lab_vereinsId.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_speichern");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_speichern.setText(titel);
+
     }
 
 }

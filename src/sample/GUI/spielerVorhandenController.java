@@ -22,16 +22,28 @@ import sample.Verein;
 
 import javax.jws.Oneway;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by jens on 03.08.2017.
  */
 public class spielerVorhandenController implements Initializable
 {
+
+    String baseName = "resources.Main";
+    String titel ="";
+
+    @FXML
+    private Label lab_neuerSpieler;
+    @FXML
+    private Label lab_VorhandSpieler;
+    @FXML
+    private Button btn_zurück;
+    @FXML
+    private Button btn_SpielerSpeichern;
+    @FXML
+    private Button btn_SpielerUpdaten;
+
 
 //region Deklaration Fxml
     @FXML TableView popup_tabelle;
@@ -193,6 +205,215 @@ public void selectrow(MouseEvent event)
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("lab_neuerSpieler");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        lab_neuerSpieler.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_spielerid");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_spielerid.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_vorname");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_vorname.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_nachname");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_nachname.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_geschlecht");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_geschlecht.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_gdatum");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_gdatum.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_verein");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_verein.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_nationalitaet");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_nationalitaet.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("lab_VorhandSpieler");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        lab_VorhandSpieler.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_spielerid2");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_spielerid2.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_vorname2");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_vorname2.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_nachname2");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_nachname2.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_geschlecht2");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_geschlecht2.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_gdatum2");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_gdatum2.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_verein2");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_verein2.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("popup_nationalitaet2");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        popup_nationalitaet2.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_zurück");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_zurück.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_SpielerSpeichern");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_SpielerSpeichern.setText(titel);
+
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_SpielerUpdaten");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_SpielerUpdaten.setText(titel);
 
         obs_neuerSpieler.clear();
         obs_neuerSpieler.add(excelImport.getAktuellerSpieler());

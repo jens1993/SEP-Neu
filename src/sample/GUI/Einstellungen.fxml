@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
@@ -12,49 +17,49 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<AnchorPane prefHeight="301.0" prefWidth="341.0" stylesheets="@/CSS/Einstellungen.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.EinstellungenController">
+<AnchorPane prefHeight="301.0" prefWidth="341.0" stylesheets="@/CSS/Einstellungen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.EinstellungenController">
    <children>
       <TabPane layoutY="-1.0" prefHeight="319.0" prefWidth="366.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab styleClass="einstellungenTab" text="Spieleinstellung">
+          <Tab fx:id="tab_Spieleinstellung" styleClass="einstellungenTab">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="137.0" layoutY="14.0" styleClass="einstellungenLabel" text="Sprache">
+                        <Label fx:id="lab_Sprache" layoutX="137.0" layoutY="14.0" styleClass="einstellungenLabel">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <RadioButton fx:id="rd" layoutX="28.0" layoutY="48.0" mnemonicParsing="false" onAction="#radioswitch" styleClass="einstellungenRadioButton" text="Deutsch">
+                        <RadioButton fx:id="rd" layoutX="28.0" layoutY="48.0" mnemonicParsing="false" onAction="#radioswitch" styleClass="einstellungenRadioButton">
                            <toggleGroup>
                               <ToggleGroup fx:id="sprache" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="re" layoutX="137.0" layoutY="48.0" mnemonicParsing="false" onAction="#radioswitch" styleClass="einstellungenRadioButton" text="Englisch" toggleGroup="$sprache" />
-                        <RadioButton layoutX="24.0" layoutY="151.0" mnemonicParsing="false" styleClass="einstellungenRadioButton" text="Verlierer" />
-                        <RadioButton layoutX="131.0" layoutY="151.0" mnemonicParsing="false" styleClass="einstellungenRadioButton" text="Gewinner" />
-                        <RadioButton layoutX="273.0" layoutY="151.0" mnemonicParsing="false" styleClass="einstellungenRadioButton" text=" aus" />
-                        <Label layoutX="104.0" layoutY="122.0" styleClass="einstellungenLabel" text="Vormerkung als Schiedsrichter" />
-                        <ToggleSwitch layoutX="29.0" layoutY="84.0" text="Schiedsrichter stanndardmäßig verwenden" />
-                        <Label layoutX="24.0" layoutY="171.0" prefHeight="28.0" prefWidth="104.0" text="Ausstehende Spiele" />
+                        <RadioButton fx:id="re" layoutX="137.0" layoutY="48.0" mnemonicParsing="false" onAction="#radioswitch" styleClass="einstellungenRadioButton" toggleGroup="$sprache" />
+                        <RadioButton fx:id="rb_Verlierer" layoutX="24.0" layoutY="151.0" mnemonicParsing="false" styleClass="einstellungenRadioButton" />
+                        <RadioButton fx:id="rb_Gewinner" layoutX="131.0" layoutY="151.0" mnemonicParsing="false" styleClass="einstellungenRadioButton" />
+                        <RadioButton fx:id="rb_aus" layoutX="273.0" layoutY="151.0" mnemonicParsing="false" styleClass="einstellungenRadioButton" text=" " />
+                        <Label fx:id="lab_VormSchiri" layoutX="104.0" layoutY="122.0" styleClass="einstellungenLabel" />
+                        <ToggleSwitch fx:id="ts_SchiriStandVerw" layoutX="29.0" layoutY="84.0" />
+                        <Label fx:id="lab_ausstehSpiel" layoutX="24.0" layoutY="171.0" prefHeight="28.0" prefWidth="104.0" />
                         <ColorPicker layoutX="167.0" layoutY="172.0" />
                         <ColorPicker layoutX="167.0" layoutY="214.0" />
                         <ColorPicker layoutX="167.0" layoutY="251.0" />
-                        <Label layoutX="29.0" layoutY="206.0" text="Aktive Spiele" />
-                        <Label layoutX="29.0" layoutY="255.0" text="Gespielte Spiele" />
-                        <Button layoutX="-1.0" layoutY="3.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="Standard wiederherstellen" />
+                        <Label fx:id="lab_aktiveSpiele" layoutX="29.0" layoutY="206.0" />
+                        <Label fx:id="lab_gespielSpiele" layoutX="29.0" layoutY="255.0" />
+                        <Button fx:id="b_standard" layoutX="-1.0" layoutY="3.0" mnemonicParsing="false" prefHeight="25.0" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab styleClass="einstellungenTab" text="Drucker">
+            <Tab fx:id="tab_Drucker" styleClass="einstellungenTab">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="14.0" layoutY="49.0" styleClass="einstellungenLabel" text="aktueller Drucker" />
+                        <Label fx:id="lab_aktDruck" layoutX="14.0" layoutY="49.0" styleClass="einstellungenLabel" />
                         <TextField layoutX="146.0" layoutY="45.0" styleClass="einstellungenTextfield" />
-                        <Button layoutX="14.0" layoutY="198.0" mnemonicParsing="false" styleClass="einstellungenButton" text="Testseite drucken" />
-                        <Button layoutX="14.0" layoutY="145.0" mnemonicParsing="false" styleClass="einstellungenButton" text="Drucker ändern" />
+                        <Button fx:id="b_tsDrucken" layoutX="14.0" layoutY="198.0" mnemonicParsing="false" styleClass="einstellungenButton" />
+                        <Button fx:id="b_DruckAender" layoutX="14.0" layoutY="145.0" mnemonicParsing="false" styleClass="einstellungenButton" />
                      </children>
                   </AnchorPane>
               </content>

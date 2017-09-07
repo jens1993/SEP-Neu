@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import sample.DAO.*;
@@ -22,29 +23,45 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Dictionary;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import jfxtras.labs.scene.control.BigDecimalField;
+
+import javax.swing.plaf.basic.BasicToolTipUI;
+
 /**
  * Created by jens on 03.08.2017.
  */
 public class neuesTurnierController implements Initializable
 {
+
+    String baseName = "resources.Main";
+    String titel ="";
+
     boolean erfolg = false;
     TurnierDAO turnierDao = new TurnierDAOimpl();
 
     Dictionary<Integer,Turnier> turnierliste = turnierDao.getAllTurniere();
     @FXML
-    private Button btn_starten;
-    @FXML
     private TextField Turniername;
     @FXML
     private DatePicker turnierDatum;
-
     @FXML
     private BigDecimalField AnzahlFelder;
     @FXML
+    private Text t_turniername;
+    @FXML
+    private Text t_datum;
+    @FXML
+    private Text t_anzahlFelder;
+    @FXML
+    private Button btn_abbrechen;
+    @FXML
+    private Button btn_starten;
 
+
+    @FXML
     public void erstelleTurnier(ActionEvent event) throws Exception {
 
         String date = turnierDatum.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -128,6 +145,57 @@ public class neuesTurnierController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_turniername");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_turniername.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_datum");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_datum.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_anzahlFelder");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_anzahlFelder.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_abbrechen");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_abbrechen.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_starten");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_starten.setText(titel);
+
         BigDecimal v = new BigDecimal(1);
         AnzahlFelder.setMinValue(v);
         v=new BigDecimal(30);

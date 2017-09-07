@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -10,55 +13,54 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="441.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SpielerEigenschaft">
+<AnchorPane prefHeight="441.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SpielerEigenschaft">
    <children>
       <TabPane prefHeight="441.0" prefWidth="360.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Allgemein">
+          <Tab fx:id="tab_allgemein">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextField layoutX="83.0" layoutY="42.0" prefHeight="25.0" prefWidth="246.0" />
                         <TextField layoutX="83.0" layoutY="78.0" prefHeight="25.0" prefWidth="247.0" />
-                        <RadioButton layoutX="83.0" layoutY="156.0" mnemonicParsing="false" text="männlich">
+                        <RadioButton fx:id="rb_maennlich" layoutX="83.0" layoutY="156.0" mnemonicParsing="false">
                            <toggleGroup>
                               <ToggleGroup fx:id="geschlecht" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="183.0" layoutY="156.0" mnemonicParsing="false" text="weiblich" toggleGroup="$geschlecht" />
+                        <RadioButton fx:id="rb_weiblich" layoutX="183.0" layoutY="156.0" mnemonicParsing="false" toggleGroup="$geschlecht" />
                         <TextField layoutX="83.0" layoutY="194.0" prefHeight="25.0" prefWidth="246.0" />
-                        <Label layoutX="14.0" layoutY="46.0" text="Vorname" />
-                        <Label layoutX="14.0" layoutY="82.0" text="Nachname" />
+                        <Label fx:id="lab_vorname" layoutX="14.0" layoutY="46.0" />
+                        <Label fx:id="lab_nachname" layoutX="14.0" layoutY="82.0" />
                         <Label layoutX="14.0" layoutY="116.0" />
-                        <Label layoutX="14.0" layoutY="156.0" text="Geschlecht" />
-                        <Label layoutX="14.0" layoutY="198.0" text="SpielerID" />
-                        <Label layoutX="14.0" layoutY="243.0" text="Verein" />
-                        <Label layoutX="14.0" layoutY="116.0" text="Geburtstag" />
+                        <Label fx:id="lab_geschlecht" layoutX="14.0" layoutY="156.0" />
+                        <Label fx:id="lab_spielerId" layoutX="14.0" layoutY="198.0" />
+                        <Label fx:id="lab_verein" layoutX="14.0" layoutY="243.0" />
+                        <Label fx:id="lab_geburtstag" layoutX="14.0" layoutY="116.0" />
                         <DatePicker layoutX="83.0" layoutY="112.0" prefHeight="25.0" prefWidth="244.0" />
                         <ChoiceBox layoutX="83.0" layoutY="239.0" prefHeight="25.0" prefWidth="248.0" />
                         <ChoiceBox layoutX="83.0" layoutY="281.0" prefHeight="25.0" prefWidth="246.0" />
-                        <Label layoutX="12.0" layoutY="285.0" text="Nationalität" />
+                        <Label fx:id="lab_nationalität" layoutX="12.0" layoutY="285.0" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Adresse">
+          <Tab fx:id="tab_adresse">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
-            <Tab text="Verfügbarkeit">
+            <Tab fx:id="tab_verfügbarkeit">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab text="Gebühren">
+            <Tab fx:id="tab_gebühren">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab text="Notizen">
+            <Tab fx:id="tab_notizen">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
