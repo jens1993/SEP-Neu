@@ -98,6 +98,9 @@ public class SpielSystemController_neu implements Initializable
     @FXML
     private AnchorPane koTrostRundeNein;
 
+    @FXML
+    private RadioButton radio_platzDreiAusspielen;
+
     private ArrayList<Team> team_setzliste = new ArrayList<>();
 
     Dictionary<Integer,Spielklasse> turnierauswahlspielklassendict = null;
@@ -221,11 +224,18 @@ public class SpielSystemController_neu implements Initializable
             int gruppenGroesse = Integer.valueOf(textField_gruppenGroesse.getText());
             int anzahlGruppen = ausgewaehlte_spielklasse.getSetzliste().size()/gruppenGroesse;
             int anzahlWeiterkommender = Integer.valueOf(textField_anzahlWeiterkommender.getText());
-
             GruppeMitEndrunde gruppeMitEndrunde = new GruppeMitEndrunde(ausgewaehlte_spielklasse,anzahlGruppen,anzahlWeiterkommender);
+            l_meldungsetzliste1.setText("ERFOLG");
+            auswahlklasse.InfoBenachrichtigung("Spielsystem start","Das Spielsystem wurde erfolgreich gestartet");
+            TurnierladenController t = new TurnierladenController("Badminton Turnierverwaltung - "+auswahlklasse.getAktuelleTurnierAuswahl().getName());
         }
         catch (NumberFormatException e){
             System.out.println("Bitte nur zahlen eintragen");
+        }
+        catch (Exception e) {
+            l_meldungsetzliste1.setText("Fehlschlag");
+            auswahlklasse.InfoBenachrichtigung("Fehler","Das Spielsystem konnte nicht erfolgreich gestartet werden");
+            e.printStackTrace();
         }
     }
 
@@ -251,8 +261,10 @@ public class SpielSystemController_neu implements Initializable
     }
 
     private void koSystemStarten() {
-        Spielsystem ko = new KO(ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse);
+        boolean platzDreiAusspielen = radio_platzDreiAusspielen.isSelected() ;
+        Spielsystem ko = new KO(ausgewaehlte_spielklasse.getSetzliste(),ausgewaehlte_spielklasse, platzDreiAusspielen);
         try {
+
             ausgewaehlte_spielklasse.setSpielsystem(ko);
 
             l_meldungsetzliste1.setText("ERFOLG");

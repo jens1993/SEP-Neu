@@ -218,7 +218,7 @@
                                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Platz 3 ausspielen:" GridPane.halignment="RIGHT" />
                                                       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                                          <children>
-                                                            <RadioButton mnemonicParsing="false" text="Ja">
+                                                            <RadioButton mnemonicParsing="false" fx:id="radio_platzDreiAusspielen" text="Ja">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="Platz3ausspielen" />
                                                                </toggleGroup>

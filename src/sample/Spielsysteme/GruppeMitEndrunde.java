@@ -138,7 +138,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 				}
 			}
 		}
-		endrunde= new KO(endrundenSetzliste,this, this.getSpielklasse());
+		endrunde= new KO(endrundenSetzliste,this, this.getSpielklasse(),true);
 	}
 
 
