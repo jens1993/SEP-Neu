@@ -280,17 +280,14 @@ public class Spiel {
 		return nr.toString();
 	}
 	public String getRundenName(){
-		if (systemSpielID<20000000){ //Gruppe
-			int rundenNummer = (systemSpielID-10000000)/1000;
-			return "Runde "+(rundenNummer + 1);
+		if (systemSpielID<20000000 ||(systemSpielID<30000000&&getVorrundenNummer()!=0)){ //Gruppe und Gruppenphase bei Gruppe mit Endrunde
+			return "Runde "+(getRundenNummer() + 1);
 		}
-		else if(systemSpielID<30000000){ //Gruppe mit Endrunde
-			if(getVorrundenNummer()!=0){
-				return "Runde "+(getRundenNummer());
-			}
-		}
+		/*else if(){ //Gruppe mit Endrunde
+			return "Runde "+(getRundenNummer()+1);
+		}*/
 		else if(systemSpielID<40000000){ //K.O. system
-			int rundenNummer = (systemSpielID-30000000)/1000;
+			int rundenNummer = (systemSpielID-systemSpielID/10000000*10000000)/1000;
 			if(rundenNummer==0 && getVorrundenNummer()==0){
 				return "Finale";
 			}
@@ -305,6 +302,15 @@ public class Spiel {
 			}
 			else if(rundenNummer==3){
 				return "Achtelfinale";
+			}
+			else if(rundenNummer==4){
+				return "1/16-Finale";
+			}
+			else if(rundenNummer==5){
+				return "1/32-Finale";
+			}
+			else if(rundenNummer==6){
+				return "1/64-Finale";
 			}
 			else{
 				rundenNummer = spielsystem.getAnzahlRunden() - rundenNummer;

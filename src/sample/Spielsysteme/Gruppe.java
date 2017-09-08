@@ -211,6 +211,9 @@ public class Gruppe extends Spielsystem {
 		}
 		return 0;
 	}
+	public ArrayList<Team> getSetzliste(){
+		return teamList;
+	}
 
 	//Einlesenregion
 

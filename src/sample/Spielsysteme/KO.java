@@ -11,9 +11,12 @@ public class KO extends Spielsystem {
 	static int teilnehmerzahl;
 	private SpielTree finale;
 	private Spielsystem spielsystem;
+	private ArrayList<Team> setzliste;
+	private int anzahlFreilose = 0;
 
-	public KO(List<Team> setzliste, Spielklasse spielklasse,boolean platzDreiAusspielen){
+	public KO(ArrayList<Team> setzliste, Spielklasse spielklasse,boolean platzDreiAusspielen){
 		this.setSpielklasse(spielklasse);
+		this.setzliste=setzliste;
 		this.platzDreiAusspielen = platzDreiAusspielen;
 		this.teilnehmerzahl=setzliste.size();
 		setSpielSystemArt(3);
@@ -27,8 +30,9 @@ public class KO extends Spielsystem {
 		alleSpieleSchreiben();
 	}
 
-	public KO(List<Team> setzliste, Spielsystem spielsystem, Spielklasse spielklasse,boolean platzDreiAusspielen){
+	public KO(ArrayList<Team> setzliste, Spielsystem spielsystem, Spielklasse spielklasse,boolean platzDreiAusspielen){
 		this.spielsystem = spielsystem;
+		this.setzliste=setzliste;
 		this.platzDreiAusspielen = platzDreiAusspielen;
 		this.setSpielklasse(spielklasse);
 		this.teilnehmerzahl=setzliste.size();
@@ -41,6 +45,23 @@ public class KO extends Spielsystem {
 		}
 		ersteRundeFuellen(setzliste);
 		alleSpieleSchreiben();
+	}
+
+	public KO(int anzahlSpieler, Spielsystem gruppeMitEndrunde, Spielklasse spielklasse, boolean platzDreiAusspielen, boolean einlesen) {
+		this.spielsystem = gruppeMitEndrunde;//Constructor für Endrunde bei Gruppe mit Endrunde
+		this.platzDreiAusspielen = platzDreiAusspielen;
+		this.setSpielklasse(spielklasse);
+		this.teilnehmerzahl=anzahlSpieler;
+		setSpielSystemArt(2);
+		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
+		freiloseHinzufuegen(anzahlSpieler);
+		knotenAufbauen(teilnehmerzahl);
+		if(platzDreiAusspielen){
+			spielUmDreiErstellen();
+		}
+		if(!einlesen) {
+			alleSpieleSchreiben();
+		}
 	}
 
 	private void alleSpieleSchreiben() {
@@ -186,6 +207,11 @@ public class KO extends Spielsystem {
 			super.setzlisteDAO.create(setzliste.size(),setzliste.get(setzliste.size()-1),this.getSpielklasse());
 		}
 	}
+	private void freiloseHinzufuegen (int anzahlTeilnehmer){
+		for (int i=anzahlTeilnehmer; i<Math.pow(2,rundenBerechnen());i++){
+			anzahlFreilose++;
+		}
+	}
 
 	@Override
 	public List<Team> getPlatzierungsliste() {
@@ -242,5 +268,9 @@ public class KO extends Spielsystem {
 	@Override
 	public boolean beendeMatch(Spiel spiel, String einlesen) {
 		return false;
+	}
+
+	public ArrayList<Team> getSetzliste(){
+		return setzliste;
 	}
 }

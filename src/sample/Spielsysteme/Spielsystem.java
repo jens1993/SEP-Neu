@@ -122,6 +122,7 @@ public abstract class Spielsystem {
 		ArrayList<ArrayList<Spiel>> neueRunden = (ArrayList<ArrayList<Spiel>>)runden.clone();
 		return neueRunden;
 	}
+	public abstract ArrayList<Team> getSetzliste();
 
 	public boolean systemWiederherstellen(int spielsystemCode){
 		return false;
