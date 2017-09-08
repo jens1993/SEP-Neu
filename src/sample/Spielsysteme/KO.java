@@ -12,6 +12,7 @@ public class KO extends Spielsystem {
 	private SpielTree finale;
 	private Spielsystem spielsystem;
 	private ArrayList<Team> setzliste;
+	private int anzahlFreilose = 0;
 
 	public KO(ArrayList<Team> setzliste, Spielklasse spielklasse,boolean platzDreiAusspielen){
 		this.setSpielklasse(spielklasse);
@@ -44,6 +45,23 @@ public class KO extends Spielsystem {
 		}
 		ersteRundeFuellen(setzliste);
 		alleSpieleSchreiben();
+	}
+
+	public KO(int anzahlSpieler, Spielsystem gruppeMitEndrunde, Spielklasse spielklasse, boolean platzDreiAusspielen, boolean einlesen) {
+		this.spielsystem = gruppeMitEndrunde;//Constructor für Endrunde bei Gruppe mit Endrunde
+		this.platzDreiAusspielen = platzDreiAusspielen;
+		this.setSpielklasse(spielklasse);
+		this.teilnehmerzahl=anzahlSpieler;
+		setSpielSystemArt(2);
+		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
+		freiloseHinzufuegen(anzahlSpieler);
+		knotenAufbauen(teilnehmerzahl);
+		if(platzDreiAusspielen){
+			spielUmDreiErstellen();
+		}
+		if(!einlesen) {
+			alleSpieleSchreiben();
+		}
 	}
 
 	private void alleSpieleSchreiben() {
@@ -187,6 +205,11 @@ public class KO extends Spielsystem {
 		for (int i=setzliste.size(); i<Math.pow(2,rundenBerechnen());i++){
 			setzliste.add(new Team("Freilos",this.getSpielklasse()));
 			super.setzlisteDAO.create(setzliste.size(),setzliste.get(setzliste.size()-1),this.getSpielklasse());
+		}
+	}
+	private void freiloseHinzufuegen (int anzahlTeilnehmer){
+		for (int i=anzahlTeilnehmer; i<Math.pow(2,rundenBerechnen());i++){
+			anzahlFreilose++;
 		}
 	}
 

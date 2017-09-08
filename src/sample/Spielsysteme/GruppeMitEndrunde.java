@@ -1,7 +1,5 @@
 package sample.Spielsysteme;
 import sample.*;
-import sample.DAO.*;
-import sample.Enums.*;
 
 import java.util.*;
 
@@ -24,6 +22,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 		setSpielklasse(spielklasse);
 		setzListeAufteilen();
 		gruppenErstellen();
+		endRundeErstellen();
 		rundenArrayErstellen();
 	}
 
@@ -32,10 +31,10 @@ public class GruppeMitEndrunde extends Spielsystem{
 		this.setSpielSystemArt(2);
 		this.setzliste = setzliste;		//Constructor nur für Einlesen aus der Datenbank
 		this.anzahlGruppen = ermittleAnzahlGruppen(spiele);
-		this.anzahlWeiterkommender = anzahlWeiterkommender;
+
 		setSpielklasse(spielklasse);
 		setzListeAufteilen();
-		gruppenEinlesen(spiele, ergebnisse);
+		spieleEinlesen(spiele, ergebnisse);
 		rundenArrayErstellen();
 	}
 
@@ -52,10 +51,13 @@ public class GruppeMitEndrunde extends Spielsystem{
 		return anzahlGruppen;
 	}
 
-	private void gruppenEinlesen(ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
+	private void spieleEinlesen(ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
+		ArrayList<Spiel> endrundenSpiele = new ArrayList<>();
+		Dictionary<Integer,Ergebnis> endrundenErgebnisse = new Hashtable<>();
 		for(int i=0; i<alleSetzListen.size();i++){
 			ArrayList<Spiel> gruppenSpiele = new ArrayList<>();
 			Dictionary<Integer,Ergebnis> gruppenErgebnisse = new Hashtable<>();
+
 			for (int j=0;j<spiele.size();j++){
 				Spiel spiel = spiele.get(j);
 				int gruppenNummer = (spiel.getSystemSpielID()-spiel.getSystemSpielID()/10000000 * 10000000)/100000;
@@ -65,9 +67,19 @@ public class GruppeMitEndrunde extends Spielsystem{
 						gruppenErgebnisse.put(spiel.getSystemSpielID(),ergebnisse.get(spiel.getSystemSpielID()));
 					}
 				}
+				else if(gruppenNummer==0 && !endrundenSpiele.contains(spiel)){
+					endrundenSpiele.add(spiel);
+					if (ergebnisse.get(spiel.getSystemSpielID())!=null){
+						endrundenErgebnisse.put(spiel.getSystemSpielID(),ergebnisse.get(spiel.getSystemSpielID()));
+					}
+				}
 			}
+
 			alleGruppen.add(new Gruppe(alleSetzListen.get(i),this,this.getSpielklasse(),i+1, gruppenSpiele, gruppenErgebnisse));
+
 		}
+		this.anzahlWeiterkommender = endrundenSpiele.size()+1;
+		endrunde= new KO(anzahlWeiterkommender,this, this.getSpielklasse(),false, true);
 	}
 
 	private void setzListeAufteilen(){
@@ -117,37 +129,14 @@ public class GruppeMitEndrunde extends Spielsystem{
 		}
 	}
 	private void endRundeErstellen(){
-		int qualiPlaetzeJeGruppe = anzahlWeiterkommender/anzahlGruppen;
-		int wildCards = anzahlWeiterkommender-qualiPlaetzeJeGruppe*anzahlGruppen;
-		Team tempTeam;
-		for(int i=0; i<qualiPlaetzeJeGruppe;i++){
-			if (i%2==0){
-				for (int j=0;j<allePlatzierungslisten.size();j++){
-					tempTeam=allePlatzierungslisten.get(j).get(i);
-					endrundenSetzliste.add(tempTeam);
-				}
-			}
-			else{
-				for (int k=allePlatzierungslisten.size()-1;k>=0;k--){
-					tempTeam=allePlatzierungslisten.get(k).get(i);
-					endrundenSetzliste.add(tempTeam);
-				}
-				for (int l=i*anzahlGruppen;l<(i+1)*anzahlGruppen;l++){
-					tempTeam=endrundenSetzliste.get(l);
-					endrundenSetzliste.remove(tempTeam);
-					l++;
-					endrundenSetzliste.add(l,tempTeam);
-				}
-			}
-		}
-		endrunde= new KO(endrundenSetzliste,this, this.getSpielklasse(),true);
+		endrunde= new KO(anzahlWeiterkommender,this, this.getSpielklasse(),false, false);
 	}
 
 
 	public void addPlatzierungsliste(ArrayList<Team> platzierungsliste, int extraRundenID){
 		this.allePlatzierungslisten.put(extraRundenID-1,platzierungsliste);
 		if (allePlatzierungslisten.size()==anzahlGruppen){
-			endRundeErstellen();
+			//endRundeErstellen();
 		}
 	}
 
@@ -155,6 +144,13 @@ public class GruppeMitEndrunde extends Spielsystem{
 		for (int i=0;i< alleGruppen.size();i++){
 			ArrayList<ArrayList<Spiel>> gruppenArrayList = alleGruppen.get(i).getRundenArray();
 			arrayListIntegrieren(gruppenArrayList);
+		}
+		ArrayList<ArrayList<Spiel>> endrundenArrayList = endrunde.getRunden();
+		for (int i=0;i<endrundenArrayList.size();i++){
+			this.getRundenArray().add(new ArrayList<>());
+			for (int j=0;j<endrundenArrayList.get(i).size();j++){
+				this.getRundenArray().get(getRundenArray().size()-1).add(endrundenArrayList.get(i).get(j));
+			}
 		}
 	}
 
@@ -214,3 +210,32 @@ public class GruppeMitEndrunde extends Spielsystem{
 		return setzliste;
 	}
 }
+
+/*
+
+	private void endRundeErstellen(){
+		int qualiPlaetzeJeGruppe = anzahlWeiterkommender/anzahlGruppen;
+		int wildCards = anzahlWeiterkommender-qualiPlaetzeJeGruppe*anzahlGruppen;
+		Team tempTeam;
+		for(int i=0; i<qualiPlaetzeJeGruppe;i++){
+			if (i%2==0){
+				for (int j=0;j<allePlatzierungslisten.size();j++){
+					tempTeam=allePlatzierungslisten.get(j).get(i);
+					endrundenSetzliste.add(tempTeam);
+				}
+			}
+			else{
+				for (int k=allePlatzierungslisten.size()-1;k>=0;k--){
+					tempTeam=allePlatzierungslisten.get(k).get(i);
+					endrundenSetzliste.add(tempTeam);
+				}
+				for (int l=i*anzahlGruppen;l<(i+1)*anzahlGruppen;l++){
+					tempTeam=endrundenSetzliste.get(l);
+					endrundenSetzliste.remove(tempTeam);
+					l++;
+					endrundenSetzliste.add(l,tempTeam);
+				}
+			}
+		}
+		endrunde= new KO(endrundenSetzliste,this, this.getSpielklasse(),true);
+	}*/
