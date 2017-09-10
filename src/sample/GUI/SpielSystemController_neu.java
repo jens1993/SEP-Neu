@@ -16,6 +16,7 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 import sample.DAO.*;
 import sample.Spieler;
 import sample.Spielklasse;
@@ -28,6 +29,7 @@ import sample.Team;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Manuel Hüttermann on 04.08.2017.
@@ -35,7 +37,7 @@ import java.util.*;
 
 public class SpielSystemController_neu implements Initializable
 {
-    TableColumn<Team,String> setzplatz = new TableColumn("Setzplatz");
+    TableColumn<Team,Integer> setzplatz = new TableColumn("Setzplatz");
     //Dictionary<Integer, Team> dicttest = new Hashtable<>();
     @FXML
     private Tab tabsperst;
@@ -114,17 +116,19 @@ public class SpielSystemController_neu implements Initializable
     private SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
     Team team = new Team();
 
+    //Linke Tabelle füllen beim Laden
     private void fuelleobs_setzliste() {
         obs_setzliste.clear();
 
-        for(int i=0;i<auswahlklasse.getAktuelleTurnierAuswahl().getTeams().size();i++)
+        for(int i=1;i<=auswahlklasse.getAktuelleTurnierAuswahl().getTeams().size();i++)
         {
 
             if(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i)!=null) {
                 if (auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i).getSpielklasse().equals(ausgewaehlte_spielklasse)) {
-                    if (!auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i).getSetzplatzString2().equals("")) {
+/*                    if (!auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i).getSetzplatzString2().equals("")) {
                         obs_setzliste.add(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i));
-                    }
+                    }*/
+                    obs_setzliste.add(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i));
                 }
             }
         }
@@ -134,7 +138,11 @@ public class SpielSystemController_neu implements Initializable
             }
         }*/
     }
+
     private void printSpielerSpielklasseHinzuTable() throws Exception {
+        boolean weiblich=false;
+        boolean maennlich=false;
+        //boolean alle=false;
         System.out.println(auswahlklasse.getAktuelleTurnierAuswahl());
         if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
             obs_spieler.clear();
@@ -154,7 +162,8 @@ public class SpielSystemController_neu implements Initializable
                         }
                         if(obs_spieler.size()==0)
                         {
-                            auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine weiblichen Spieler gefunden!");
+                            weiblich=true;
+                            //auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine weiblichen Spieler gefunden!");
                         }
                     }
                     if(auswahlklasse.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("HERREN"))
@@ -166,7 +175,8 @@ public class SpielSystemController_neu implements Initializable
                         }
                         if(obs_spieler.size()==0)
                         {
-                            auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine männlichen Spieler gefunden!");
+                            maennlich=true;
+                            //auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine männlichen Spieler gefunden!");
                         }
 
                     }
@@ -175,15 +185,29 @@ public class SpielSystemController_neu implements Initializable
                         obs_spieler.add(spieler);
 
                     }
-                    if(obs_spieler.size()==0)
+/*                    if(obs_spieler.size()==0)
                     {
-                        auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine Spieler gefunden!");
-                    }
+                        alle=true;
+                        //auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine Spieler gefunden!");
+                    }*/
                     //sp.getDisziplin().contains("einzel")
+
 
 
                 }
             }
+            if(weiblich)
+            {
+                auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine weiblichen Spieler gefunden!");
+            }
+            if(maennlich)
+            {
+                auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine männlichen Spieler gefunden!");
+            }
+/*            if(alle)
+            {
+                auswahlklasse.WarnungBenachrichtigung("Keine Spieler", "Es wurden keine Spieler gefunden!");
+            }*/
             TableColumn<Spieler,String> spielerVornameSpalte = new TableColumn("Vorname");
             spielerVornameSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("vName"));
             TableColumn<Spieler,String> spielerNachnameSpalte = new TableColumn("Nachname");
@@ -366,63 +390,94 @@ public class SpielSystemController_neu implements Initializable
             fuelleobs_setzliste();
             //}
 
-            setzplatz.setCellValueFactory(new PropertyValueFactory<Team,String>("SetzplatzString2"));
-            setzplatz.setCellFactory(TextFieldTableCell.forTableColumn());
+            setzplatz.setCellValueFactory(new PropertyValueFactory<Team,Integer>("Setzplatz"));
+            setzplatz.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
             spielsystem_setzliste.setEditable(true);
             setzplatz.setEditable(true);
-            setzplatz.setOnEditStart(new EventHandler<TableColumn.CellEditEvent<Team, String>>() {
+            setzplatz.setOnEditStart(new EventHandler<TableColumn.CellEditEvent<Team, Integer>>() {
                 @Override
-                public void handle(TableColumn.CellEditEvent<Team, String> event) {
+                public void handle(TableColumn.CellEditEvent<Team, Integer> event) {
 
                 }
             });
-            setzplatz.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Team, String>>() {
+            setzplatz.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Team, Integer>>() {
                 @Override
-                public void handle(TableColumn.CellEditEvent<Team, String> event) {
+                public void handle(TableColumn.CellEditEvent<Team, Integer> event) {
                     Team t = (Team) event.getTableView().getItems().get(event.getTablePosition().getRow());
                     try
                     {
-                        Integer.parseInt(event.getNewValue());
+                        event.getNewValue();
                     }
                     catch (Exception e)
                     {
                         event.getTableView().getItems().set(event.getTablePosition().getRow(), t);
                         return;
                     }
-                    if (!event.getNewValue().equals(event.getOldValue())&&Integer.parseInt(event.getNewValue()) > 0 && Integer.parseInt(event.getNewValue()) <= ausgewaehlte_spielklasse.getSetzliste().size())
+                    if (!event.getNewValue().equals(event.getOldValue())&&event.getNewValue() > 0 && event.getNewValue() <= obs_setzliste.size())
                     {
                         boolean erfolg=true;
-
-                        for(int i=0;i<team_setzliste.size();i++)
+                        SetzlisteDAO setzlisteDAO=new SetzlisteDAOimpl();
+                        for(int i=0;i<obs_setzliste.size();i++)
                         {
-                            if(team_setzliste.get(i).equals(t))
-                            {
-                                System.out.println("true"+t);
-                                team_setzliste.remove(i);
-                            }
+                            boolean loeschen=false;
+                            boolean doppelt=false;
 
-                            if(team_setzliste.get(i).getSetzplatz()==Integer.parseInt(event.getNewValue()))
+                            if(obs_setzliste.get(i).getSetzplatz()==event.getNewValue())
                             {
                                 System.out.println("gleicher setzplatz");
-                                Team to = event.getTableView().getItems().get(event.getTablePosition().getRow());
-                                event.getTableView().getItems().set(event.getTablePosition().getRow(), to);
                                 erfolg=false;
+                                Team to = event.getTableView().getItems().get(event.getTablePosition().getRow());
+                                List<Team> list = FXCollections.observableList(obs_setzliste);
 
-/*                                team_setzliste.get(i).setSetzplatz(0);
-                                event.getTableView().getItems().set());
-                                team_setzliste.remove(i);*/
+                                for(int j =0;j<list.size();j++)
+                                {
+                                    if(list.get(j).getSetzplatz()>=event.getNewValue())
+                                    {
+                                        boolean verschieben=false;
+                                        for(int k=j;k<list.size();k++)
+                                        {
+
+                                        }
+                                        System.out.println("Setzplatz wird verschoben");
+                                        list.get(j).setSetzplatz(list.get(j).getSetzplatz()+1);
+                                        list.get(j).getTeamDAO().update(list.get(j));
+                                        erfolg=true;
+                                        //list.get(j).set
+                                    }
+
+                                }
+
+/*                                event.getTableView().getItems().set(event.getTablePosition().getRow(), to);
+                                ObservableList<Team> obs_neu=FXCollections.observableArrayList(obs_setzliste);
+                                */
                             }
+
+/*
+                            else if(obs_setzliste.get(i).equals(t))
+                            {
+                                System.out.println("true"+t);
+                                obs_setzliste.remove(i);
+                                loeschen=true;
+                            }*/
                         }
-                        if(erfolg)
+                        if(!erfolg)
                         {
-                            t.setSetzplatz(Integer.parseInt(event.getNewValue()));
-                            team_setzliste.add(t);
+                            obs_setzliste.add(t);
+                        }
+
+                        t.setSetzplatz(event.getNewValue());
+                        t.getTeamDAO().update(t);
+                        sortiereTabelleSetzliste();
+/*                        if(erfolg)
+                        {
+                            t.setSetzplatz(event.getNewValue());
+                            obs_setzliste.add(t);
                             t.getTeamDAO().update(t);
-                            System.out.println(team_setzliste);
+                            System.out.println(obs_setzliste);
                             sortiereTabelleSetzliste();
 
-                        }
+                        }*/
 
 
 
@@ -460,7 +515,7 @@ public class SpielSystemController_neu implements Initializable
 
 
 
-                        auswahlklasse.WarnungBenachrichtigung("Wertebereich","Bitte nur Zahlen zwischen 1-+"+ausgewaehlte_spielklasse.getSetzliste().size()+" eingeben");
+                        auswahlklasse.WarnungBenachrichtigung("Wertebereich","Bitte nur Zahlen zwischen 1-"+obs_setzliste.size()+" eingeben");
                     }
                 }
             });
@@ -495,6 +550,13 @@ public class SpielSystemController_neu implements Initializable
 
     }
 
+    private void pruefeSetzplatz(int j, ObservableList<Team> obs_neu, String neuerSetzplatz ) {
+        if(obs_neu.get(j).getSetzplatz()==Integer.parseInt(neuerSetzplatz))
+        {
+            System.out.println("gleich");
+
+        }
+    }
 
 
     private void removeTeam(Team team)
@@ -575,7 +637,8 @@ public class SpielSystemController_neu implements Initializable
                 //dicttest.put(dicttest.size(),team);
                 ausgewaehlte_spielklasse.addSetzliste(team);
 
-                boolean erfolg = setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
+/*  Setzliste DAO wird benötigt
+               boolean erfolg = setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
                 if(erfolg) {
                     //dicttest.put(team.getTeamid(),team)
                     l_meldungsetzliste1.setText(team.getSpielerEins().getVName() + " " + team.getSpielerEins().getNName() + " wurde der Setzliste hinzugefügt!");
@@ -583,7 +646,7 @@ public class SpielSystemController_neu implements Initializable
                 else
                 {
                     l_meldungsetzliste1.setText("fehler");
-                }
+                }*/
             }
 
             else{
@@ -612,7 +675,7 @@ public class SpielSystemController_neu implements Initializable
             ausgewaehlte_spielklasse.addSetzliste(team);
 
             //team.getTeamDAO().addSpieler(team, false);
-            setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
+            //setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
 
 
             l_meldungsetzliste1.setText(team.getSpielerEins().getVName()+" "+team.getSpielerEins().getNName()+" und "+team.getSpielerZwei().getVName()+" "+team.getSpielerZwei().getNName()+" wurden der Setzliste hinzugefügt!");
