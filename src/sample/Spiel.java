@@ -118,7 +118,7 @@ public class Spiel {
 	}
 	public void setHeim(Team heim) {
 		this.heim = heim;
-		if(this.gast != null && !(this.getSystemSpielID()<20000000)){
+		if(this.gast != null && !(this.getSystemSpielID()<30000000)){
 			this.status = 1;
 
 		}
@@ -127,7 +127,7 @@ public class Spiel {
 
 	public void setGast(Team gast) {
 		this.gast = gast;
-		if(this.heim != null && !(this.getSystemSpielID()<20000000)){
+		if(this.heim != null && !(this.getSystemSpielID()<30000000)){
 			this.status = 1;
 		/*	if (this.heim.isFreilos()){
 				this.setErgebnis(new Ergebnis(0,21,0,21));
@@ -161,6 +161,18 @@ public class Spiel {
 
 	public int getSystemSpielID() {
 		return systemSpielID;
+	}
+	public int getSystemSpielArt() {
+		return systemSpielID/10000000;
+	}
+	public int getVorrundenNummer(){ //0 für Endrunde / einzige Runde
+		return (systemSpielID - getSystemSpielArt()*10000000)/100000;
+	}
+	public int getRundenNummer(){
+		return (systemSpielID - getSystemSpielArt()*10000000-getVorrundenNummer()*100000)/1000;
+	}
+	public int getSpielNummerInRunde(){
+		return (systemSpielID - getSystemSpielArt()*10000000-getVorrundenNummer()*100000 - getRundenNummer()*1000);
 	}
 
 	public int getSpielID() {
@@ -268,17 +280,19 @@ public class Spiel {
 		return nr.toString();
 	}
 	public String getRundenName(){
-		if (systemSpielID<20000000){ //Gruppe
-			int rundenNummer = (systemSpielID-10000000)/1000;
-			return "Runde "+(rundenNummer + 1);
+		if (systemSpielID<20000000 ||(systemSpielID<30000000&&getVorrundenNummer()!=0)){ //Gruppe und Gruppenphase bei Gruppe mit Endrunde
+			return "Runde "+(getRundenNummer() + 1);
 		}
-		else if(systemSpielID<30000000){ //Gruppe mit Endrunde
-
-		}
+		/*else if(){ //Gruppe mit Endrunde
+			return "Runde "+(getRundenNummer()+1);
+		}*/
 		else if(systemSpielID<40000000){ //K.O. system
-			int rundenNummer = (systemSpielID-30000000)/1000;
-			if(rundenNummer==0){
+			int rundenNummer = (systemSpielID-systemSpielID/10000000*10000000)/1000;
+			if(rundenNummer==0 && getVorrundenNummer()==0){
 				return "Finale";
+			}
+			else if(rundenNummer==0 && getVorrundenNummer()==1){
+				return "Spiel um 3";
 			}
 			else if(rundenNummer==1){
 				return "Halbfinale";
@@ -288,6 +302,15 @@ public class Spiel {
 			}
 			else if(rundenNummer==3){
 				return "Achtelfinale";
+			}
+			else if(rundenNummer==4){
+				return "1/16-Finale";
+			}
+			else if(rundenNummer==5){
+				return "1/32-Finale";
+			}
+			else if(rundenNummer==6){
+				return "1/64-Finale";
 			}
 			else{
 				rundenNummer = spielsystem.getAnzahlRunden() - rundenNummer;

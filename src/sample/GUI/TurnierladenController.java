@@ -27,10 +27,7 @@ import sample.*;
 import sample.DAO.*;
 
 import java.net.URL;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static sample.DAO.auswahlklasse.getTurnierzumupdaten;
 
@@ -41,6 +38,9 @@ import static sample.DAO.auswahlklasse.getTurnierzumupdaten;
 
 public class TurnierladenController implements Initializable
 {
+
+    String baseName = "resources.Main";
+    String titel ="";
 
     @FXML
     private TextField t_turniersuche;
@@ -54,6 +54,8 @@ public class TurnierladenController implements Initializable
     @FXML
     public TableColumn TurnierIDSpalte;
     ObservableList<Turnier> turniere = FXCollections.observableArrayList();
+    @FXML
+    private Button btn_neuesTurnier;
 
     TurnierDAO t = new TurnierDAOimpl();
     Dictionary<Integer,Turnier> turnierliste = t.getAllTurniere();
@@ -97,6 +99,47 @@ public class TurnierladenController implements Initializable
             }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_neuesTurnier");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_neuesTurnier.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("t_turniersuche");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        t_turniersuche.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("TurnierDatumSpalte");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        TurnierDatumSpalte.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("TurnierNameSpalte");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        TurnierNameSpalte.setText(titel);
+
         auswahlklasse a = new auswahlklasse();
         a.readTurnierListe();
         if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {

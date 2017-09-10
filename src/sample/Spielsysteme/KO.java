@@ -11,28 +11,57 @@ public class KO extends Spielsystem {
 	static int teilnehmerzahl;
 	private SpielTree finale;
 	private Spielsystem spielsystem;
+	private ArrayList<Team> setzliste;
+	private int anzahlFreilose = 0;
 
-	public KO(List<Team> setzliste, Spielklasse spielklasse){
+	public KO(ArrayList<Team> setzliste, Spielklasse spielklasse,boolean platzDreiAusspielen){
 		this.setSpielklasse(spielklasse);
+		this.setzliste=setzliste;
+		this.platzDreiAusspielen = platzDreiAusspielen;
 		this.teilnehmerzahl=setzliste.size();
 		setSpielSystemArt(3);
 		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
 		freiloseHinzufuegen(setzliste);
 		knotenAufbauen(teilnehmerzahl);
+		if(platzDreiAusspielen) {
+			spielUmDreiErstellen();
+		}
 		ersteRundeFuellen(setzliste);
 		alleSpieleSchreiben();
 	}
 
-	public KO(List<Team> setzliste, Spielsystem spielsystem, Spielklasse spielklasse){
+	public KO(ArrayList<Team> setzliste, Spielsystem spielsystem, Spielklasse spielklasse,boolean platzDreiAusspielen){
 		this.spielsystem = spielsystem;
+		this.setzliste=setzliste;
+		this.platzDreiAusspielen = platzDreiAusspielen;
 		this.setSpielklasse(spielklasse);
 		this.teilnehmerzahl=setzliste.size();
 		setSpielSystemArt(2);
 		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
 		freiloseHinzufuegen(setzliste);
 		knotenAufbauen(teilnehmerzahl);
+		if(platzDreiAusspielen) {
+			spielUmDreiErstellen();
+		}
 		ersteRundeFuellen(setzliste);
 		alleSpieleSchreiben();
+	}
+
+	public KO(int anzahlSpieler, Spielsystem gruppeMitEndrunde, Spielklasse spielklasse, boolean platzDreiAusspielen, boolean einlesen) {
+		this.spielsystem = gruppeMitEndrunde;//Constructor für Endrunde bei Gruppe mit Endrunde
+		this.platzDreiAusspielen = platzDreiAusspielen;
+		this.setSpielklasse(spielklasse);
+		this.teilnehmerzahl=anzahlSpieler;
+		setSpielSystemArt(2);
+		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
+		freiloseHinzufuegen(anzahlSpieler);
+		knotenAufbauen(teilnehmerzahl);
+		if(platzDreiAusspielen){
+			spielUmDreiErstellen();
+		}
+		if(!einlesen) {
+			alleSpieleSchreiben();
+		}
 	}
 
 	private void alleSpieleSchreiben() {
@@ -178,6 +207,11 @@ public class KO extends Spielsystem {
 			super.setzlisteDAO.create(setzliste.size(),setzliste.get(setzliste.size()-1),this.getSpielklasse());
 		}
 	}
+	private void freiloseHinzufuegen (int anzahlTeilnehmer){
+		for (int i=anzahlTeilnehmer; i<Math.pow(2,rundenBerechnen());i++){
+			anzahlFreilose++;
+		}
+	}
 
 	@Override
 	public List<Team> getPlatzierungsliste() {
@@ -187,10 +221,12 @@ public class KO extends Spielsystem {
 	@Override
 	public boolean beendeMatch(Spiel spiel) {
 
-		int sysID = spiel.getSystemSpielID();
-		if(sysID>getSpielSystemArt()*10000000) {
-			SpielTree parent = finale.getSpielTree(sysID, finale).getParent();
-			if (parent.getLeft().getSpielID() == sysID) {
+		if(spiel.getRundenNummer()>0) {
+			if (spiel.getRundenNummer()==1&&platzDreiAusspielen){
+				verliererZuSpielUmDreiHinzufuegen(spiel);
+			}
+			SpielTree parent = finale.getSpielTree(spiel.getSystemSpielID(), finale).getParent();
+			if (parent.getLeft().getSpielID() == spiel.getSystemSpielID()) {
 				parent.getSpiel().setHeim(spiel.getSieger());
 			} else {
 				parent.getSpiel().setGast(spiel.getSieger());
@@ -203,8 +239,38 @@ public class KO extends Spielsystem {
 		}
 	}
 
+	private void verliererZuSpielUmDreiHinzufuegen(Spiel spiel) {
+		Spiel spielUmDrei = getSpielklasse().getSpiele().get(getSpielSystemArt()*10000000 + 100000);
+		Team verlierer;
+		if(spiel.getSieger()!=null){
+			if (spiel.getSieger()==spiel.getHeim()){
+				verlierer=spiel.getGast();
+			}
+			else{
+				verlierer=spiel.getHeim();
+			}
+			if (spiel.getSpielNummerInRunde()==0){
+				spielUmDrei.setHeim(verlierer);
+			}
+			else{
+				spielUmDrei.setGast(verlierer);
+			}
+		}
+	}
+
+	private void spielUmDreiErstellen() {
+		int spielUmDreiSystemSpielID =getSpielSystemArt()*10000000+100000;
+		Spiel spielUmDrei = new Spiel(spielUmDreiSystemSpielID,this.spielsystem);
+		spielsystem.getSpielklasse().getSpiele().put(spielUmDreiSystemSpielID,spielUmDrei);
+		getRundenArray().get(0).add(spielUmDrei);
+	}
+
 	@Override
 	public boolean beendeMatch(Spiel spiel, String einlesen) {
 		return false;
+	}
+
+	public ArrayList<Team> getSetzliste(){
+		return setzliste;
 	}
 }

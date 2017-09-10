@@ -10,6 +10,7 @@ import sample.Enums.*;
 public class KOmitTrostrunde extends Spielsystem{
 	private int tRbisPlatz;
 	private int ausspielenBisPlatz;
+	private ArrayList<Team> setzliste;
 
 
     public KOmitTrostrunde(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
@@ -25,5 +26,8 @@ public class KOmitTrostrunde extends Spielsystem{
 	@Override
 	public boolean beendeMatch(Spiel spiel, String einlesen) {
 		return false;
+	}
+	public ArrayList<Team> getSetzliste(){
+		return setzliste;
 	}
 }

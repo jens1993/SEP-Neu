@@ -43,6 +43,11 @@ import java.util.*;
  */
 public class MainController implements Initializable
 {
+
+
+    String baseName = "resources.Main";
+    String titel ="";
+
     final ObservableList<Spielklasse> strings = FXCollections.observableArrayList();
     final CheckComboBox<Spielklasse> checkComboBox = new CheckComboBox<Spielklasse>();
     private Label lspielklassen;
@@ -53,18 +58,6 @@ public class MainController implements Initializable
     private VBox vbox_main;
     @FXML
     private GridPane gridPane_main;
-    @FXML
-    private Button btn_klassen;
-    @FXML
-    private Button btn_turnierLaden;
-    @FXML
-    private Button btn_spieler;
-    @FXML
-    private Button btn_teams;
-    @FXML
-    private Button btn_zeitplan;
-    @FXML
-    private Button btn_statistik;
     @FXML
     private CheckBox check_gespielteSpiele= new CheckBox();
     @FXML
@@ -85,9 +78,27 @@ public class MainController implements Initializable
     private HBox hbox_felder;
     @FXML
     TabPane tabPane_spielklassen = new TabPane();
-
     @FXML
     private TextField tspielsuche;
+
+    @FXML
+    private Button btn_turnierLaden;
+    @FXML
+    private Button btn_klassen;
+    @FXML
+    private Button btn_spieler;
+    @FXML
+    private Button btn_zeitplan;
+    @FXML
+    private Button btn_statistik;
+    @FXML
+    private Menu m_datei;
+    @FXML
+    private Menu m_turnier;
+    @FXML
+    private Menu m_ansicht;
+    @FXML
+    private Menu m_sonstiges;
 
     //endregion
 
@@ -97,7 +108,6 @@ public class MainController implements Initializable
 
     public void pressBtn_Test(ActionEvent event) throws Exception {
         try {
-
 
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("JavaFXDynTable.fxml"));
@@ -292,23 +302,128 @@ public class MainController implements Initializable
 
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+        public void initialize(URL location, ResourceBundle resources) {
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_turnierLaden");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_turnierLaden.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_klassen");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_klassen.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_spieler");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_spieler.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_zeitplan");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_zeitplan.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_statistik");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_statistik.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tab_turnierbaum");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tab_turnierbaum.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tab_spieluebersicht");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tab_spieluebersicht.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("m_datei");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        m_datei.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("m_turnier");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        m_turnier.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("m_ansicht");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        m_ansicht.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("m_sonstiges");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        m_sonstiges.setText(titel);
+
 
         tooltipsHinzufuegen();
         //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
         Zeitplan.zeitplanErstellen(auswahlklasse.getAktuelleTurnierAuswahl()); //vergebe Zeitplannummern für die Spiele
         klassenTabsErstellen();
         felderHinzufuegen();
-
         tabelleSpieleContextMenu();
-
         checkComboBoxListener();
-
-
         layoutErstellen();
         suchleisteListener();
-
-
         checkboxListener(check_aktiveSpiele);
         checkboxListener(check_ausstehendeSpiele);
         checkboxListener(check_gespielteSpiele);
@@ -332,11 +447,8 @@ public class MainController implements Initializable
 
     private void checkComboBoxFuellen() {
         try {
-
             printSpielTable();
-
             fuelleSpielElemente();
-
             for(int i = 0; i< auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size(); i++)
             {
                 checkComboBox.getCheckModel().check(i);
@@ -347,10 +459,8 @@ public class MainController implements Initializable
             {
                 auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().add(checkComboBox.getCheckModel().getCheckedItems().get(i).getSpielklasseID());
             }
-
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 
@@ -731,7 +841,7 @@ public class MainController implements Initializable
     }
 
     private void gruppeVisualisierung(Spielsystem spielsystem, Tab tab) {
-        GruppenTabelle gruppenTabelle = new GruppenTabelle(spielsystem.getSpielklasse(), tab);
+        GruppenTabelle gruppenTabelle = new GruppenTabelle(spielsystem, tab);
         if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
             gruppenTabelle.erstelleGruppenTabelle();
         }
@@ -743,23 +853,29 @@ public class MainController implements Initializable
         tab.setContent(tabPane);
         for(int i = 0;i<gruppeMitEndrunde.getAlleGruppen().size();i++){
             Tab gruppe = new Tab("Gruppe "+(i+1));
+            gruppe.setClosable(false);
             tabPane.getTabs().add(gruppe);
+            gruppeVisualisierung(gruppeMitEndrunde.getAlleGruppen().get(i),gruppe);
         }
         Tab endrunde = new Tab("Endrunde");
+        endrunde.setClosable(false);
         tabPane.getTabs().add(endrunde);
+        koVisualisierung(gruppeMitEndrunde.getEndrunde(),endrunde);
     }
 
     private void koVisualisierung(Spielsystem spielsystem, Tab tab) {
-        Turnierbaum turnierbaum = new Turnierbaum(20,20,180,50,100,20);
-        if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()>1) {
-            Canvas canvas = new Canvas();
-            VBox vBox = new VBox();
-            ScrollPane scrollPane = new ScrollPane();
-            tab.setContent(scrollPane);
-            scrollPane.setContent(vBox);
-            vBox.getChildren().add(canvas);
-            turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), canvas);
-            vBox.setStyle("-fx-background-color: #d8d8d8");
+        if (spielsystem!=null) {
+            Turnierbaum turnierbaum = new Turnierbaum(20, 20, 180, 50, 100, 20);
+            if (auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size() > 1) {
+                Canvas canvas = new Canvas();
+                VBox vBox = new VBox();
+                ScrollPane scrollPane = new ScrollPane();
+                tab.setContent(scrollPane);
+                scrollPane.setContent(vBox);
+                vBox.getChildren().add(canvas);
+                turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), canvas);
+                vBox.setStyle("-fx-background-color: #d8d8d8");
+            }
         }
     }
 

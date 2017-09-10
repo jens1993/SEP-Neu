@@ -58,9 +58,9 @@ public class Gruppe extends Spielsystem {
 	}
 
 	private void alleSpieleSchreiben() {
-		for (int i=0; i<getRunden().size(); i++){
-			for(int j=0;j<getRunden().get(i).size();j++){
-				Spiel spiel = getRundenArray().get(i).get(j);
+		for (int i=0; i<this.getRundenArray().size(); i++){
+			for(int j=0;j<this.getRundenArray().get(i).size();j++){
+				Spiel spiel = this.getRundenArray().get(i).get(j);
 				spiel.getSpielDAO().create(spiel);
 			}
 		}
@@ -81,7 +81,9 @@ public class Gruppe extends Spielsystem {
 				if(this.getRundenArray().size()<=getAktuelleRunde()){
 					this.getRundenArray().add(new ArrayList<>());
 				}
-				this.getRundenArray().get(getAktuelleRunde()).add(spiel);
+				if(!this.getRundenArray().get(getAktuelleRunde()).contains(spiel)) {
+					this.getRundenArray().get(getAktuelleRunde()).add(spiel);
+				}
 				erhoeheOffeneRundenSpiele();
 			}
 			erhoeheAktuelleRunde();
@@ -129,8 +131,8 @@ public class Gruppe extends Spielsystem {
 
 				}
 				else{
-					spielsystem.getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setHeim(teamZwei);
-					spielsystem.getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setGast(teamEins);
+					this.getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setHeim(teamZwei);
+					this.getSpielklasse().getSpiele().get(spielSystemIDberechnen()-1000).setGast(teamEins);
 				}
 				erhoeheOffeneRundenSpiele();
 			}
@@ -156,9 +158,9 @@ public class Gruppe extends Spielsystem {
 	}
 
 	private void rundeStarten(int rundenIndex){
-		if(getRundenArray().get(rundenIndex)!=null){
-			for (int i=0;i<getRundenArray().get(i).size();i++){
-				Spiel spiel = getRundenArray().get(rundenIndex).get(i);
+		if(this.getRundenArray().get(rundenIndex)!=null){
+			for (int i=0;i<this.getRundenArray().get(rundenIndex).size();i++){
+				Spiel spiel = this.getRundenArray().get(rundenIndex).get(i);
 				spiel.setStatus(1);
 				spiel.getSpielsystem().getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().remove(spiel);
 				spiel.getSpielsystem().getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(spiel);
@@ -202,12 +204,15 @@ public class Gruppe extends Spielsystem {
 	}
 
 	private int getRundenIndex(Spiel spiel){
-		for (int i=0;i<getRundenArray().size();i++){
-			if (getRundenArray().get(i).contains(spiel)){
+		for (int i=0;i<this.getRundenArray().size();i++){
+			if (this.getRundenArray().get(i).contains(spiel)){
 				return i;
 			}
 		}
 		return 0;
+	}
+	public ArrayList<Team> getSetzliste(){
+		return teamList;
 	}
 
 	//Einlesenregion
@@ -250,12 +255,13 @@ public class Gruppe extends Spielsystem {
 	private void rundenListeEinlesen(ArrayList<Spiel> spiele){
 		for (int i=0;i<spiele.size();i++){
 			int spielklasseSpielID=spiele.get(i).getSystemSpielID();
-			int rundenNummer = (spielklasseSpielID-getSpielSystemArt()*10000000)/1000;
+			int rundenNummer = (spielklasseSpielID-getSpielSystemArt()*10000000);
+			rundenNummer = (rundenNummer - (rundenNummer /100000 * 100000)) /1000;
 			Spiel spiel =spiele.get(i);
-			while(getRundenArray().size()-1<rundenNummer){
-				getRundenArray().add(new ArrayList<>());
+			while(this.getRundenArray().size()-1<rundenNummer){
+				this.getRundenArray().add(new ArrayList<>());
 			}
-			getRundenArray().get(rundenNummer).add(spiel);
+			this.getRundenArray().get(rundenNummer).add(spiel);
 		}
 	}
 
