@@ -36,7 +36,7 @@ import java.util.*;
 public class SpielSystemController_neu implements Initializable
 {
     TableColumn<Team,String> setzplatz = new TableColumn("Setzplatz");
-    Dictionary<Integer, Team> dicttest = new Hashtable<>();
+    //Dictionary<Integer, Team> dicttest = new Hashtable<>();
     @FXML
     private Tab tabsperst;
     //Tab1
@@ -113,11 +113,23 @@ public class SpielSystemController_neu implements Initializable
 
     private void fuelleobs_setzliste() {
         obs_setzliste.clear();
-        if (obs_setzliste!=null) {
+
+        for(int i=0;i<auswahlklasse.getAktuelleTurnierAuswahl().getTeams().size();i++)
+        {
+
+            if(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i)!=null) {
+                if (auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i).getSpielklasse().equals(ausgewaehlte_spielklasse)) {
+                    if (!auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i).getSetzplatzString2().equals("")) {
+                        obs_setzliste.add(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i));
+                    }
+                }
+            }
+        }
+/*        if (obs_setzliste!=null) {
             for (int j = 0; j < dicttest.size(); j++) {
                 obs_setzliste.add(dicttest.get(j));
             }
-        }
+        }*/
     }
     private void printSpielerSpielklasseHinzuTable() throws Exception {
         System.out.println(auswahlklasse.getAktuelleTurnierAuswahl());
@@ -548,7 +560,7 @@ public class SpielSystemController_neu implements Initializable
             if(ausgewaehlte_spielklasse.isEinzel()){
                 team = new Team(spielerneu,ausgewaehlte_spielklasse);
                 obs_setzliste.add(team);
-                dicttest.put(dicttest.size(),team);
+                //dicttest.put(dicttest.size(),team);
                 ausgewaehlte_spielklasse.addSetzliste(team);
 
                 boolean erfolg = setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
@@ -609,11 +621,11 @@ public class SpielSystemController_neu implements Initializable
         spielsystem_spielerliste_alleSpieler.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         System.out.println("------------------"+ausgewaehlte_spielklasse.isSetzliste_gesperrt());
 
-        for (int i = 0; i < ausgewaehlte_spielklasse.getSetzliste().size(); i++) {
+/*        for (int i = 0; i < ausgewaehlte_spielklasse.getSetzliste().size(); i++) {
             dicttest.put(i, ausgewaehlte_spielklasse.getSetzliste().get(i));
-            /*System.out.println("Dict: " + dicttest.size());
-            System.out.println(ausgewaehlte_spielklasse.getSetzliste().size());*/
-        }
+            *//*System.out.println("Dict: " + dicttest.size());
+            System.out.println(ausgewaehlte_spielklasse.getSetzliste().size());*//*
+        }*/
         try {
             printSpielerSpielklasseVorhandenTable();
             printSpielerSpielklasseHinzuTable();
@@ -846,12 +858,15 @@ public class SpielSystemController_neu implements Initializable
 
 
         }
-        t_suchleistesetzliste.textProperty().addListener((observable, oldValue, newValue) -> {
+
+/*    Suchleiste wird noch benötigt
+
+    t_suchleistesetzliste.textProperty().addListener((observable, oldValue, newValue) -> {
             // System.out.println("textfield changed from " + oldValue + " to " + newValue);
             //obs_spieler.clear();
             //ausgewaehlte_spielklasse.getSetzliste().
             obs_setzliste.clear();
-            for (int i = 0; i < ausgewaehlte_spielklasse.getSetzliste().size(); i++) {
+            for (int i = 0; i < obs_setzliste.size(); i++) {
                 dicttest.put(i, ausgewaehlte_spielklasse.getSetzliste().get(i));
                 System.out.println("Dict: " + dicttest.size());
                 System.out.println(ausgewaehlte_spielklasse.getSetzliste().size());
@@ -869,7 +884,7 @@ public class SpielSystemController_neu implements Initializable
             }
 
 
-        });
+        });*/
 
 
         auswahlklasse.getStagesdict();
