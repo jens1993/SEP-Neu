@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b41b4edd-9e5f-4fba-81f4-0ab06d091ab5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SEP/sample/Spiel.class" afterPath="$PROJECT_DIR$/out/production/SEP/sample/Spiel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java" afterPath="$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Team.java" afterPath="$PROJECT_DIR$/src/sample/Team.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -199,8 +199,8 @@
       <file leaf-file-name="SpielSystemController_neu.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="436" column="66" lean-forward="false" selection-start-line="436" selection-start-column="66" selection-end-line="436" selection-end-column="66" />
+            <state relative-caret-position="297">
+              <caret line="446" column="88" lean-forward="false" selection-start-line="446" selection-start-column="88" selection-end-line="446" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -1375,14 +1375,7 @@
       <workItem from="1504101347197" duration="4383000" />
       <workItem from="1504109089992" duration="2147000" />
       <workItem from="1504597876232" duration="31000" />
-      <workItem from="1504610082718" duration="16308000" />
-    </task>
-    <task id="LOCAL-00057" summary="Spielerhinzufügen">
-      <created>1502298998423</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1502298998424</updated>
+      <workItem from="1504610082718" duration="17714000" />
     </task>
     <task id="LOCAL-00058" summary="Spielerhinzufügen ContextMenu + Verein hinzufügen">
       <created>1502336516260</created>
@@ -1720,11 +1713,18 @@
       <option name="project" value="LOCAL" />
       <updated>1505050227523</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="Setzliste setzplatz">
+      <created>1505057518462</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1505057518462</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="738729000" />
+    <option name="totallyTimeSpent" value="740135000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1985,39 +1985,39 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java</url>
-          <line>493</line>
+          <line>500</line>
           <properties />
           <option name="timeStamp" value="390" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java</url>
-          <line>481</line>
+          <line>488</line>
           <properties />
           <option name="timeStamp" value="404" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java</url>
-          <line>622</line>
+          <line>629</line>
           <properties />
           <option name="timeStamp" value="405" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java</url>
-          <line>475</line>
+          <line>482</line>
           <properties />
           <option name="timeStamp" value="407" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java</url>
-          <line>553</line>
+          <line>560</line>
           <properties />
           <option name="timeStamp" value="412" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java</url>
-          <line>443</line>
+          <line>439</line>
           <properties />
-          <option name="timeStamp" value="415" />
+          <option name="timeStamp" value="419" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/sample/DAO/ErgebnisDAOimpl.java</url>
@@ -2059,22 +2059,15 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="417" />
+      <option name="time" value="420" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i)" language="JAVA" />
-        <watch expression="auswahlklasse.getAktuelleTurnierAuswahl().getTeams()" language="JAVA" />
-        <watch expression="auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i).getSetzplatzString2()" language="JAVA" />
-        <watch expression="team" language="JAVA" />
-        <watch expression="team_setzliste" language="JAVA" />
-        <watch expression="obs_setzliste.get(i)" language="JAVA" />
-        <watch expression="obs_neu" language="JAVA" />
-        <watch expression="event.getNewValue()" language="JAVA" />
-        <watch expression="list" language="JAVA" />
+        <watch expression="list.get(k).getSetzplatz()" language="JAVA" />
         <watch expression="list.get(j).getSetzplatz()" language="JAVA" />
-        <watch expression="team.getSetzplatz()" language="JAVA" />
         <watch expression="list.get(j)" language="JAVA" />
+        <watch expression="list.get(k)" language="JAVA" />
+        <watch expression="list.get(k).getSetzplatz()==list.get(j).getSetzplatz()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
@@ -2605,8 +2598,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="436" column="66" lean-forward="false" selection-start-line="436" selection-start-column="66" selection-end-line="436" selection-end-column="66" />
+        <state relative-caret-position="297">
+          <caret line="446" column="88" lean-forward="false" selection-start-line="446" selection-start-column="88" selection-end-line="446" selection-end-column="88" />
           <folding />
         </state>
       </provider>

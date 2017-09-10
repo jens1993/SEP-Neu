@@ -435,9 +435,16 @@ public class SpielSystemController_neu implements Initializable
                                     if(list.get(j).getSetzplatz()>=event.getNewValue())
                                     {
                                         boolean verschieben=false;
-                                        for(int k=j;k<list.size();k++)
+                                        for(int k=0;k<list.size();k++)
                                         {
-
+                                            if(list.get(k).getSetzplatz()==list.get(j).getSetzplatz()&&list.get(k)!=list.get(j))
+                                            {
+                                                verschieben=true;
+                                            }
+                                        }
+                                        if(verschieben)
+                                        {
+                                            System.out.println("Setzplatz wird wirklich verschoben----");
                                         }
                                         System.out.println("Setzplatz wird verschoben");
                                         list.get(j).setSetzplatz(list.get(j).getSetzplatz()+1);
