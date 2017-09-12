@@ -261,7 +261,7 @@ public class SpielSystemController_neu implements Initializable
     }
     @FXML
     private void pressbtn_spielklasseStarten(ActionEvent event){
-        if(!ausgewaehlte_spielklasse.isSetzliste_gesperrt())
+        if(ausgewaehlte_spielklasse.getSetzliste().size()>0)
         {
 
 
@@ -385,6 +385,8 @@ public class SpielSystemController_neu implements Initializable
         {
             auswahlklasse.WarnungBenachrichtigung("Fehler","Fehler");
         }
+        fuelleobs_setzliste();
+        sortiereTabelleSetzliste();
     }
     @FXML
     void erstelleSetzlisteRLP(ActionEvent event) {
@@ -392,39 +394,32 @@ public class SpielSystemController_neu implements Initializable
         boolean erfolg=false;
         ArrayList <Team> teamsohnesetzplatz=new ArrayList<>();
         ObservableList<Team> obs_teamsohne = FXCollections.observableArrayList();
-        int index=0;
+        int index=1;
         for(int i=0;i<obs_setzliste.size();i++)
         {
             if(obs_setzliste.get(i).getSetzplatz()>0)
             {
                 erfolg= setzlisteDAO.create(obs_setzliste.get(i).getSetzplatz(),obs_setzliste.get(i),obs_setzliste.get(i).getSpielklasse());
+                index++;
+                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(obs_setzliste.get(i),i+1);
+                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(obs_setzliste.get(i));
             }
             if(obs_setzliste.get(i).getSetzplatz()==0)
             {
                 teamsohnesetzplatz.add(obs_setzliste.get(i));
                 obs_teamsohne.add(obs_setzliste.get(i));
+
                 //erfolg= setzlisteDAO.create(i+1,obs_setzliste.get(i),obs_setzliste.get(i).getSpielklasse());
             }
-            index=i;
         }
 
         teamsohnesetzplatz.sort(new Comparator<Team>() {
             @Override
             public int compare(Team z1, Team z2) {
                 if (z1.getRLPanzeigen() > z2.getRLPanzeigen())
-                    return 1;
-                if (z1.getRLPanzeigen() < z2.getRLPanzeigen())
                     return -1;
-                return 0;
-            }
-        });
-        obs_teamsohne.sort(new Comparator<Team>() {
-            @Override
-            public int compare(Team z1, Team z2) {
-                if (z1.getRLPanzeigen() > z2.getRLPanzeigen())
-                    return 1;
                 if (z1.getRLPanzeigen() < z2.getRLPanzeigen())
-                    return -1;
+                    return 1;
                 return 0;
             }
         });
@@ -432,16 +427,23 @@ public class SpielSystemController_neu implements Initializable
 
         for (int i=0;i<teamsohnesetzplatz.size();i++)
         {
-            erfolg=setzlisteDAO.create(index+i,obs_setzliste.get(i),obs_setzliste.get(i).getSpielklasse());
+            erfolg=setzlisteDAO.create(index+i,teamsohnesetzplatz.get(i),teamsohnesetzplatz.get(i).getSpielklasse());
+            auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(teamsohnesetzplatz.get(i),index+i);
+            auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(teamsohnesetzplatz.get(i));
         }
         if(erfolg)
         {
             auswahlklasse.InfoBenachrichtigung("Erfolg","Erfolg");
+            auswahlklasse.getAktuelleSpielklassenAuswahl().setSetzliste_gesperrt(true);
+            pruefeSperrungSetzliste();
         }
         if(!erfolg)
         {
             auswahlklasse.WarnungBenachrichtigung("Fehler","Fehler");
         }
+        fuelleobs_setzliste();
+        sortiereTabelleSetzliste();
+
     }
     @FXML
     private void klassenSwitch(ActionEvent event) throws IOException, InterruptedException {
@@ -782,6 +784,8 @@ public class SpielSystemController_neu implements Initializable
             }
         });
         spielsystem_setzliste.setItems(obs_setzliste);
+        setzplatz.setSortType(TableColumn.SortType.ASCENDING);
+        spielsystem_setzliste.getSortOrder().add(setzplatz);
         spielsystem_setzliste.refresh();
     }
     private void addSpieler(Spieler spielerneu)
@@ -852,6 +856,7 @@ public class SpielSystemController_neu implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        tabsperst.setDisable(true);
         spielsystem_spielerliste_alleSpieler.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         System.out.println("------------------"+ausgewaehlte_spielklasse.isSetzliste_gesperrt());
 
@@ -1120,7 +1125,7 @@ public class SpielSystemController_neu implements Initializable
     }//Ende Initialize
 
     private void pruefeSperrungSetzliste() {
-        tabsperst.setDisable(true);
+        tabsperst.setDisable(false);
         l_meldungsetzliste1.setText("Setzliste gesperrt!!!");
         spielsystem_spielerliste_alleSpieler.setVisible(false);
 

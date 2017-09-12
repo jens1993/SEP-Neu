@@ -216,6 +216,11 @@ public class Spielklasse {
 	}
 
 	public boolean isSetzliste_gesperrt() {
+
+		if(this.getSetzliste().size()>0||this.getSpiele().size()>0)
+		{
+			setzliste_gesperrt=true;
+		}
 		return setzliste_gesperrt;
 	}
 
