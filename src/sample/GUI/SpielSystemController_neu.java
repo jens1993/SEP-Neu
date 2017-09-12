@@ -355,7 +355,7 @@ public class SpielSystemController_neu implements Initializable
 
     @FXML
     void erstelleSetzlisteNormal(ActionEvent event) {
-
+        spielsystem_setzliste.setEditable(false);
         System.out.println(obs_setzliste);
         SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
         boolean erfolg=false;
@@ -390,6 +390,7 @@ public class SpielSystemController_neu implements Initializable
     }
     @FXML
     void erstelleSetzlisteRLP(ActionEvent event) {
+        spielsystem_setzliste.setEditable(false);
         SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
         boolean erfolg=false;
         ArrayList <Team> teamsohnesetzplatz=new ArrayList<>();
@@ -507,7 +508,11 @@ public class SpielSystemController_neu implements Initializable
             setzplatz.setCellValueFactory(new PropertyValueFactory<Team,Integer>("Setzplatz"));
             setzplatz.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
-            spielsystem_setzliste.setEditable(true);
+            if(!ausgewaehlte_spielklasse.isSetzliste_gesperrt())
+            {
+                spielsystem_setzliste.setEditable(true);
+            }
+
             setzplatz.setEditable(true);
             setzplatz.setOnEditStart(new EventHandler<TableColumn.CellEditEvent<Team, Integer>>() {
                 @Override
@@ -784,8 +789,8 @@ public class SpielSystemController_neu implements Initializable
             }
         });
         spielsystem_setzliste.setItems(obs_setzliste);
-        setzplatz.setSortType(TableColumn.SortType.ASCENDING);
-        spielsystem_setzliste.getSortOrder().add(setzplatz);
+        /*setzplatz.setSortType(TableColumn.SortType.ASCENDING);
+        spielsystem_setzliste.getSortOrder().add(setzplatz);*/
         spielsystem_setzliste.refresh();
     }
     private void addSpieler(Spieler spielerneu)
@@ -925,7 +930,11 @@ public class SpielSystemController_neu implements Initializable
                             @Override
                             public void handle(ContextMenuEvent event) {
 
-                                contextMenu.show(spielsystem_setzliste, event.getScreenX(), event.getScreenY());
+                                if(!ausgewaehlte_spielklasse.isSetzliste_gesperrt())
+                                {
+                                    contextMenu.show(spielsystem_setzliste, event.getScreenX(), event.getScreenY());
+                                }
+
                             }
                         });
                     }
