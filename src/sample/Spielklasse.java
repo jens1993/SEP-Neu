@@ -39,6 +39,7 @@ public class Spielklasse {
 		//System.out.println(setzlistedict);
 		return setzlistedict;
 	}
+/*
 	public void removeSetzlistedict(int setzplatz, Team team)
 	{
 
@@ -119,6 +120,7 @@ public class Spielklasse {
 	public void setSetzlistedict(Dictionary<Team,Integer> setzlistedict) {
 		this.setzlistedict = setzlistedict;
 	}
+*/
 
 	@Override
 	public String toString() {
@@ -247,15 +249,6 @@ public class Spielklasse {
 		this.setzliste = setzliste;
 	}
 
-	public void addSetzliste (Team team )
-	{
-		this.setzliste.add(team);
-		this.setzlistedict.put(team,setzlistedict.size()+1);
-	}
-	public void removeSetzliste (Team team )
-	{
-		this.setzliste.remove(team);
-	}
 	public float getMeldeKosten() {
 		return meldeKosten;
 	}

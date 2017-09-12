@@ -1,6 +1,9 @@
 package sample;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import sample.DAO.*;
 import sample.Spielsysteme.*;
 
@@ -135,6 +138,47 @@ public class Team {
     public Spieler getSpielerEins() {
         return spielerEins;
     }
+
+    public int getRLPanzeigen()
+    {
+        int rlp=-0;
+        int index=-1;
+
+        if(this!=null) {
+            if (spielklasse.getDisziplin().contains("doppel")) {
+                index = 1;
+            }
+            if (spielklasse.getDisziplin().contains("einzel")) {
+                index = 0;
+            }
+            if (spielklasse.getDisziplin().contains("Mix")) {
+                index = 2;
+            }
+
+            if (spielklasse.isEinzel()) {
+                if(spielerEins!=null) {
+                if (spielerEins.getrPunkte() != null) {
+                    rlp = getSpielerEins().getrPunkte()[index];
+                }}
+
+            } else {
+                if(spielerEins!=null) {
+                    if (spielerEins.getrPunkte() != null) {
+                        rlp = getSpielerEins().getrPunkte()[index];
+                    }
+                }
+                if(spielerZwei!=null) {
+                if (spielerEins.getrPunkte() != null) {
+                    rlp += getSpielerZwei().getrPunkte()[index];
+                }}
+
+            }
+        }
+        return rlp;
+
+
+    }
+
     public String getSetzplatzString()
     {
         if(auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzplatzanzeigen(spielerEins,spielerZwei)!="")
@@ -162,6 +206,15 @@ public class Team {
     }
 
     public int getSetzplatz() {
+
+        if(setzplatz==0)
+        {
+            if(auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this)!=null) {
+                if (auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this) > 0) {
+                    setzplatz = auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this);
+                }
+            }
+        }
         return setzplatz;
     }
 
