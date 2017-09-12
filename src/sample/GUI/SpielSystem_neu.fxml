@@ -34,7 +34,11 @@
                       <Menu mnemonicParsing="false" text="Setzliste erstellen">
                         <items>
                           <MenuItem mnemonicParsing="false" onAction="#erstelleSetzlisteNormal" text="Nach Setzlisten-Reihenfolge" />
-                              <MenuItem mnemonicParsing="false" onAction="#erstelleSetzlisteRLP" text="Nach Ranglistenpunkte" />
+                              <Menu fx:id="menu_rlp" mnemonicParsing="false" text="Nach Ranglistenpunkte">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#erstelleSetzlisteRLP" text="Alle" />
+                                </items>
+                              </Menu>
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="Spieler">

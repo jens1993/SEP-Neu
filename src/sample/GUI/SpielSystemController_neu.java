@@ -41,6 +41,9 @@ public class SpielSystemController_neu implements Initializable
     //Dictionary<Integer, Team> dicttest = new Hashtable<>();
     @FXML
     private Tab tabsperst;
+
+    @FXML
+    private Menu menu_rlp;
     //Tab1
     @FXML
     private TextField t_suchleistespieler;
@@ -126,7 +129,7 @@ public class SpielSystemController_neu implements Initializable
             int key = (int) enumTeams.nextElement();
             Team team = auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key);
 
-            if (team.getSpielklasse().getSpielklasseID()==ausgewaehlte_spielklasse.getSpielklasseID()) {
+            if (team.getSpielklasse().getSpielklasseID()==ausgewaehlte_spielklasse.getSpielklasseID()&&team.toStringKomplett()!="") {
                 obs_setzliste.add(team);
             }
 
@@ -148,6 +151,7 @@ public class SpielSystemController_neu implements Initializable
             }
         }*/
         System.out.println();
+        pruefeAnzahlRLPItems();
 /*        if (obs_setzliste!=null) {
             for (int j = 0; j < dicttest.size(); j++) {
                 obs_setzliste.add(dicttest.get(j));
@@ -261,7 +265,7 @@ public class SpielSystemController_neu implements Initializable
     }
     @FXML
     private void pressbtn_spielklasseStarten(ActionEvent event){
-        if(ausgewaehlte_spielklasse.getSetzliste().size()>0)
+        if(ausgewaehlte_spielklasse.getSetzliste().size()>0&&ausgewaehlte_spielklasse.getSpiele().size()<=0)
         {
 
 
@@ -850,6 +854,7 @@ public class SpielSystemController_neu implements Initializable
 
         }
         spielsystem_setzliste.refresh();
+        pruefeAnzahlRLPItems();
     }
 
     private TableColumn getTableColumn(
@@ -1132,6 +1137,45 @@ public class SpielSystemController_neu implements Initializable
 
         sortiereTabelleSetzliste();
     }//Ende Initialize
+
+    private void pruefeAnzahlRLPItems()
+    {
+        menu_rlp.getItems().clear();
+        MenuItem alle=new MenuItem("Alle");
+        menu_rlp.getItems().add(alle);
+        if(obs_setzliste.size()>2)
+        {
+
+
+        int anzahl = (int) (Math.log( obs_setzliste.size() ) / Math.log( 2.0 ));
+        System.out.println(anzahl);
+        MenuItem[] item = new MenuItem[anzahl];
+
+        for(int i=0;i<anzahl;i++)
+        {
+            item[i]=new MenuItem(String.valueOf(Math.round(Math.pow(2,anzahl)))+" Setzplätze erstellen");
+            //item[anzahl].setText(String.valueOf(Math.round(Math.pow(2,anzahl)))+" Setzplätze erstellen");
+            int finalI = i;
+            item[finalI].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    System.out.println(event.getEventType().getName());
+                    System.out.println(finalI);
+                }
+            });
+        }
+
+        while(anzahl>0)
+        {
+
+
+            item[anzahl-1].setText(String.valueOf(Math.round(Math.pow(2,anzahl)))+" Setzplätze erstellen");
+            menu_rlp.getItems().add(item[anzahl-1]);
+            anzahl--;
+        }
+
+        }
+    }
 
     private void pruefeSperrungSetzliste() {
         tabsperst.setDisable(false);
