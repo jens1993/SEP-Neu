@@ -13,6 +13,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 	private ArrayList<Gruppe> alleGruppen = new ArrayList<>();
 	private Dictionary<Integer,ArrayList<Team>> allePlatzierungslisten = new Hashtable();
 	private Spielsystem endrunde;
+	private Dictionary<Integer,Integer[]> setzPlatze = new Hashtable<>();
 
 	public GruppeMitEndrunde(Spielklasse spielklasse, int anzahlGruppen, int anzahlWeiterkommender) {
 		this.setSpielSystemArt(2);
@@ -31,7 +32,6 @@ public class GruppeMitEndrunde extends Spielsystem{
 		this.setSpielSystemArt(2);
 		this.setzliste = setzliste;		//Constructor nur für Einlesen aus der Datenbank
 		this.anzahlGruppen = ermittleAnzahlGruppen(spiele);
-
 		setSpielklasse(spielklasse);
 		setzListeAufteilen();
 		spieleEinlesen(spiele, ergebnisse);
@@ -74,7 +74,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 					}
 				}
 			}
-
+			this.anzahlWeiterkommender = endrundenSpiele.size()+1;
 			alleGruppen.add(new Gruppe(alleSetzListen.get(i),this,this.getSpielklasse(),i+1, gruppenSpiele, gruppenErgebnisse));
 
 		}
@@ -134,9 +134,17 @@ public class GruppeMitEndrunde extends Spielsystem{
 
 
 	public void addPlatzierungsliste(ArrayList<Team> platzierungsliste, int extraRundenID){
-		this.allePlatzierungslisten.put(extraRundenID-1,platzierungsliste);
-		if (allePlatzierungslisten.size()==anzahlGruppen){
-			//endRundeErstellen();
+		for(int i=0;i<endrunde.getRunden().get(0).size();i++){
+			Spiel spiel = endrunde.getRunden().get(0).get(i);
+			int setzplatzheim = spiel.getSetzPlatzHeim();
+			int setzplatzgast = spiel.getSetzPlatzGast();
+			if(setzPlatze.get(setzplatzheim) != null && setzPlatze.get(setzplatzheim)[0]==extraRundenID){
+				spiel.setHeim(platzierungsliste.get(setzPlatze.get(setzplatzheim)[1]-1));
+			}
+			if(setzPlatze.get(setzplatzgast) != null && setzPlatze.get(setzplatzgast)[0]==extraRundenID){
+				spiel.setGast(platzierungsliste.get(setzPlatze.get(setzplatzgast)[1]-1));
+			}
+
 		}
 	}
 
@@ -206,6 +214,19 @@ public class GruppeMitEndrunde extends Spielsystem{
 		}
 		return false;
 	}
+
+	public int getAnzahlWeiterkommender() {
+		return anzahlWeiterkommender;
+	}
+
+	public Dictionary<Integer, Integer[]> getSetzPlatze() {
+		return setzPlatze;
+	}
+
+	public int getAnzahlGruppen() {
+		return anzahlGruppen;
+	}
+
 	public ArrayList<Team> getSetzliste(){
 		return setzliste;
 	}
