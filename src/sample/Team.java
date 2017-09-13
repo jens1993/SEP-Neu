@@ -1,6 +1,9 @@
 package sample;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import sample.DAO.*;
 import sample.Spielsysteme.*;
 
@@ -15,71 +18,7 @@ import java.util.List;
 public class Team {
 
 
-    private  SimpleIntegerProperty id ;
-    private  SimpleIntegerProperty value_0;
-    private  SimpleIntegerProperty value_1;
-    private  SimpleIntegerProperty value_2;
-    private  SimpleIntegerProperty value_3;
-    private  SimpleIntegerProperty value_4;
 
-    Team(int i, int v0, int v1, int v2, int v3,
-           int v4) {
-        this.id = new SimpleIntegerProperty(i);
-        this.value_0 = new SimpleIntegerProperty(v0);
-        this.value_1 = new SimpleIntegerProperty(v1);
-        this.value_2 = new SimpleIntegerProperty(v2);
-        this.value_3 = new SimpleIntegerProperty(v3);
-        this.value_4 = new SimpleIntegerProperty(v4);
-    }
-
-    public int getId() {
-        return id.get();
-    }
-
-    public void setId(int v) {
-        id.set(v);
-    }
-
-    public int getValue_0() {
-        return value_0.get();
-    }
-
-    public void setValue_0(int v) {
-        value_0.set(v);
-    }
-
-
-    public int getValue_1() {
-        return value_1.get();
-    }
-
-    public void setValue_1(int v) {
-        value_1.set(v);
-    }
-
-    public int getValue_2() {
-        return value_2.get();
-    }
-
-    public void setValue_2(int v) {
-        value_2.set(v);
-    }
-
-    public int getValue_3() {
-        return value_3.get();
-    }
-
-    public void setValue_3(int v) {
-        value_3.set(v);
-    }
-
-    public int getValue_4() {
-        return value_4.get();
-    }
-
-    public void setValue_4(int v) {
-        value_4.set(v);
-    }
 
 
 
@@ -98,6 +37,7 @@ public class Team {
     private boolean freilos = false;
     private List<Team> bisherigeGegner = new ArrayList<Team>();
     private int setzplatz;
+
 
 
 
@@ -123,6 +63,7 @@ public class Team {
         this.spielerEins = spielerEins;   //teamID
         this.einzel = true;
         this.spielklasse = spielklasse;
+        //teamDAO.update(this);
 
     }
     public void addSpieler(Spieler spieler){
@@ -197,6 +138,47 @@ public class Team {
     public Spieler getSpielerEins() {
         return spielerEins;
     }
+
+    public int getRLPanzeigen()
+    {
+        int rlp=-0;
+        int index=-1;
+
+        if(this!=null) {
+            if (spielklasse.getDisziplin().contains("doppel")) {
+                index = 1;
+            }
+            if (spielklasse.getDisziplin().contains("einzel")) {
+                index = 0;
+            }
+            if (spielklasse.getDisziplin().contains("Mix")) {
+                index = 2;
+            }
+
+            if (spielklasse.isEinzel()) {
+                if(spielerEins!=null) {
+                if (spielerEins.getrPunkte() != null) {
+                    rlp = getSpielerEins().getrPunkte()[index];
+                }}
+
+            } else {
+                if(spielerEins!=null) {
+                    if (spielerEins.getrPunkte() != null) {
+                        rlp = getSpielerEins().getrPunkte()[index];
+                    }
+                }
+                if(spielerZwei!=null) {
+                if (spielerEins.getrPunkte() != null) {
+                    rlp += getSpielerZwei().getrPunkte()[index];
+                }}
+
+            }
+        }
+        return rlp;
+
+
+    }
+
     public String getSetzplatzString()
     {
         if(auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzplatzanzeigen(spielerEins,spielerZwei)!="")
@@ -224,6 +206,15 @@ public class Team {
     }
 
     public int getSetzplatz() {
+
+        if(setzplatz==0)
+        {
+            if(auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this)!=null) {
+                if (auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this) > 0) {
+                    setzplatz = auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this);
+                }
+            }
+        }
         return setzplatz;
     }
 
