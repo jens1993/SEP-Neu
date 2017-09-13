@@ -32,47 +32,47 @@
             <menus>
                 <Menu fx:id="m_datei" mnemonicParsing="false">
                     <items>
-                        <MenuItem fx:id="menu_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" text="Turnier laden" />
-                        <MenuItem mnemonicParsing="false" onAction="#pressBtn_ExcelImport" text="Meldeformular importieren" />
+                        <MenuItem fx:id="menu_turnierLaden" mnemonicParsing="false" onAction="#pressBtn_turnierLaden" />
+                        <MenuItem fx:id="menu_Meldeform_import" mnemonicParsing="false" onAction="#pressBtn_ExcelImport" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Programm beenden" />
+                        <MenuItem fx:id="menu_Prog_beenden" mnemonicParsing="false" />
                     </items>
                 </Menu>
                 <Menu fx:id="m_turnier" mnemonicParsing="false">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Turnierdaten bearbeiten" />
-                        <MenuItem mnemonicParsing="false" text="Klassendaten bearbeiten" />
-                        <MenuItem mnemonicParsing="false" text="Spielerdaten bearbeiten" />
-                        <MenuItem mnemonicParsing="false" text="Vereine bearbeiten" />
+                        <MenuItem fx:id="menu_Turnierdaten_bearbeiten" mnemonicParsing="false" />
+                        <MenuItem fx:id="menu_Klassendaten_bearbeiten" mnemonicParsing="false" />
+                        <MenuItem fx:id="menu_Spielerdaten_bearbeiten" mnemonicParsing="false" />
+                        <MenuItem fx:id="menu_Vereine_bearbeiten" mnemonicParsing="false" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Statistiken" />
+                        <MenuItem fx:id="menu_statistiken" mnemonicParsing="false" />
                     </items>
                 </Menu>
                 <Menu fx:id="m_ansicht" mnemonicParsing="false">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Feldübersicht" />
-                        <MenuItem mnemonicParsing="false" text="Klassen" />
-                        <MenuItem mnemonicParsing="false" text="Spielübersicht" />
-                        <MenuItem mnemonicParsing="false" text="Zeitplan" />
+                        <MenuItem fx:id="menu_Feldübersicht" mnemonicParsing="false" />
+                        <MenuItem fx:id="menu_Klassen" mnemonicParsing="false" />
+                        <MenuItem fx:id="menu_spielübersicht" mnemonicParsing="false" />
+                        <MenuItem fx:id="menu_Zeitplan" mnemonicParsing="false" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Platzierungen" />
-                        <Menu mnemonicParsing="false" text="neues Fenster">
+                        <MenuItem fx:id="menu_Platzierung" mnemonicParsing="false" />
+                        <Menu fx:id="m_neuesFenster" mnemonicParsing="false">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Klassen" />
-                                <MenuItem mnemonicParsing="false" text="Spielübersicht" />
-                                <MenuItem mnemonicParsing="false" text="Zeitplan" />
+                                <MenuItem fx:id="menu_klassen" mnemonicParsing="false" />
+                                <MenuItem fx:id="menu_Spielübersicht" mnemonicParsing="false" />
+                                <MenuItem fx:id="menu_zeitplan" mnemonicParsing="false" />
                             </items>
                         </Menu>
-                        <MenuItem mnemonicParsing="false" onAction="#pressBtn_Test" text="Test von Jens" />
+                        <MenuItem fx:id="menu_x" mnemonicParsing="false" onAction="#pressBtn_Test" />
                     </items>
                 </Menu>
                 <Menu fx:id="m_sonstiges" mnemonicParsing="false">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Teilnehmerliste drucken" />
-                        <MenuItem mnemonicParsing="false" text="Startgeldliste drucken" />
-                        <MenuItem mnemonicParsing="false" onAction="#zoomIn" text="Ergebnisformular erstellen" />
+                        <MenuItem fx:id="menu_Teilnehmerl_drucken" mnemonicParsing="false" />
+                        <MenuItem fx:id="menu_Startgeldl_drucken" mnemonicParsing="false" />
+                        <MenuItem fx:id="menu_Ergebnisf_erstellen" mnemonicParsing="false" onAction="#zoomIn" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#pressBtn_Einstellungen" text="Optionen" />
+                        <MenuItem fx:id="menu_Optionen" mnemonicParsing="false" onAction="#pressBtn_Einstellungen" />
                     </items>
                 </Menu>
             </menus>
@@ -190,7 +190,7 @@
         </GridPane>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
             <children>
-                <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="160.0" text="Badminton Turnierverwaltung" HBox.hgrow="ALWAYS">
+                <Label fx:id="lab_Badmin_Turnierverw" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="160.0" HBox.hgrow="ALWAYS">
                     <font>
                         <Font size="11.0" fx:id="x3" />
                     </font>

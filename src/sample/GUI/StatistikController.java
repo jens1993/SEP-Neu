@@ -13,6 +13,7 @@ import sample.DAO.auswahlklasse;
 import javafx.scene.chart.*;
 
 import java.net.URL;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
@@ -20,6 +21,10 @@ import java.util.ResourceBundle;
  */
 public class StatistikController implements Initializable
 {
+
+    String baseName = "resources.Main";
+    String titel ="";
+
     @FXML
     public Label lturnier;
     @FXML
@@ -30,13 +35,72 @@ public class StatistikController implements Initializable
     public Label anzahlSpiele;
     @FXML
     public HBox hbox_statistik;
-@FXML
-public AnchorPane anchorpane_statistik;
     @FXML
-            public Label anzahlobsspiele;
+    public AnchorPane anchorpane_statistik;
+    @FXML
+    public Label anzahlobsspiele;
+    @FXML
+    public Label lab_spielklassen;
+    @FXML
+    private Label lab_spieler;
+    @FXML
+    private Label lab_obsSpiele;
+    @FXML
+    private Label lab_spiele;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("lturnier");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        lturnier.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("lab_spielklassen");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        lab_spielklassen.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("lab_spieler");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        lab_spieler.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("lab_obsSpiele");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        lab_obsSpiele.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("lab_spiele");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        lab_spiele.setText(titel);
+
     lturnier.setText("Turnierinformationen: "+ auswahlklasse.getAktuelleTurnierAuswahl().getName());
     anzahlSpielklassen.setText(String.valueOf(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()));
     anzahlSpiele.setText(String.valueOf(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().size()));

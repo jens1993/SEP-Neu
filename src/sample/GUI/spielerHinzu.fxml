@@ -197,12 +197,12 @@
                <children>
                   <TableView fx:id="tabelle_spielerliste" prefHeight="200.0" prefWidth="200.0" styleClass="spielerHinzuTableView" GridPane.columnSpan="2" GridPane.rowIndex="1">
                     <columns>
-                      <TableColumn fx:id="tabelle_spielerliste_vorname" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" text="Vorname" />
-                      <TableColumn fx:id="tabelle_spielerliste_nachname" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" text="Nachname" />
-                        <TableColumn fx:id="tabelle_spielerliste_verein" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" text="Verein" />
-                        <TableColumn fx:id="tabelle_spielerliste_SpielerID" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" text="Spieler ID" />
-                        <TableColumn fx:id="tabelle_spielerliste_geschlecht" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" text="Geschlecht" />
-                        <TableColumn fx:id="tabelle_spielerliste_geburtstag" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" text="Geburtstag" />
+                      <TableColumn fx:id="tabelle_spielerliste_vorname" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" />
+                      <TableColumn fx:id="tabelle_spielerliste_nachname" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" />
+                        <TableColumn fx:id="tabelle_spielerliste_verein" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" />
+                        <TableColumn fx:id="tabelle_spielerliste_SpielerID" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" />
+                        <TableColumn fx:id="tabelle_spielerliste_geschlecht" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" />
+                        <TableColumn fx:id="tabelle_spielerliste_geburtstag" minWidth="117.0" prefWidth="-1.0" styleClass="spielerHinzuTableColumn" />
                     </columns>
                   </TableView>
                   <Text fx:id="t_spielersuche" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" GridPane.halignment="CENTER" />
@@ -248,7 +248,7 @@
                      </GridPane.margin></TextField>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="spielerHinzuBox" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
-                        <RadioButton fx:id="r_m1" mnemonicParsing="false" selected="true" styleClass="spielerHinzuRadioButton" text="männlich">
+                        <RadioButton fx:id="r_m1" mnemonicParsing="false" selected="true" styleClass="spielerHinzuRadioButton">
                            <toggleGroup>
                               <ToggleGroup fx:id="geschlecht1" />
                            </toggleGroup>
@@ -256,7 +256,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </RadioButton>
-                        <RadioButton fx:id="r_w1" mnemonicParsing="false" styleClass="spielerHinzuRadioButton" text="weiblich" toggleGroup="$geschlecht1">
+                        <RadioButton fx:id="r_w1" mnemonicParsing="false" styleClass="spielerHinzuRadioButton" toggleGroup="$geschlecht1">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin></RadioButton>
@@ -270,7 +270,7 @@
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin></DatePicker>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" text="Vorname:" GridPane.halignment="RIGHT">
+                  <Text fx:id="text_Vorname" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" GridPane.halignment="RIGHT">
                      <stroke>
                         <LinearGradient endX="1.0" endY="1.0">
                            <stops>
@@ -280,20 +280,20 @@
                         </LinearGradient>
                      </stroke>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" text="Geburtsdatum:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" text="Nachname:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" text="SpielerID:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" text="Verein:" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" text="Ranglistenpunkte:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" text="Geschlecht:" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+                  <Text fx:id="text_Gdatum" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                  <Text fx:id="text_Nachname" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <Text fx:id="text_SpielerID" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <Text fx:id="text_Verein" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                  <Text fx:id="text_Ranglistenpkt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+                  <Text fx:id="text_Geschlecht" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="spielerHinzuBox" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <Button minWidth="80.0" mnemonicParsing="false" onAction="#pressBtn_AbbrechenBearbeiten" styleClass="spielerHinzuButton" text="Abbrechen">
+                        <Button fx:id="btn_abbrechen_update" minWidth="80.0" mnemonicParsing="false" onAction="#pressBtn_AbbrechenBearbeiten" styleClass="spielerHinzuButton">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Button minWidth="110.0" mnemonicParsing="false" onAction="#pressBtn_SpielerUpdaten" styleClass="spielerHinzuButton" text="Spieler updaten">
+                        <Button fx:id="btn_Spielerupdaten" minWidth="110.0" mnemonicParsing="false" onAction="#pressBtn_SpielerUpdaten" styleClass="spielerHinzuButton">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -304,7 +304,7 @@
                      <children>
                         <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" styleClass="spielerHinzuBox">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" text="Einzel ">
+                              <Text fx:id="text_einzel" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText">
                                  <VBox.margin>
                                     <Insets left="10.0" />
                                  </VBox.margin>
@@ -318,7 +318,7 @@
                         </VBox>
                         <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" styleClass="spielerHinzuBox">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText" text="Doppel ">
+                              <Text fx:id="text_doppel" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielerHinzuText">
                                  <VBox.margin>
                                     <Insets left="10.0" />
                                  </VBox.margin>

@@ -99,6 +99,52 @@ public class MainController implements Initializable
     private Menu m_ansicht;
     @FXML
     private Menu m_sonstiges;
+    @FXML
+    private Menu m_neuesFenster;
+    @FXML
+    private MenuItem menu_turnierLaden;
+    @FXML
+    private MenuItem menu_Meldeform_import;
+    @FXML
+    private MenuItem menu_Prog_beenden;
+    @FXML
+    private MenuItem menu_Turnierdaten_bearbeiten;
+    @FXML
+    private MenuItem menu_Klassendaten_bearbeiten;
+    @FXML
+    private MenuItem menu_Spielerdaten_bearbeiten;
+    @FXML
+    private MenuItem menu_Vereine_bearbeiten;
+    @FXML
+    private MenuItem menu_statistiken;
+    @FXML
+    private MenuItem menu_Feldübersicht;
+    @FXML
+    private MenuItem menu_Klassen;
+    @FXML
+    private MenuItem menu_spielübersicht;
+    @FXML
+    private MenuItem menu_Zeitplan;
+    @FXML
+    private MenuItem menu_Platzierung;
+    @FXML
+    private MenuItem menu_klassen;
+    @FXML
+    private MenuItem menu_Spielübersicht;
+    @FXML
+    private MenuItem menu_zeitplan;
+    @FXML
+    private MenuItem menu_x;
+    @FXML
+    private MenuItem menu_Teilnehmerl_drucken;
+    @FXML
+    private MenuItem menu_Startgeldl_drucken;
+    @FXML
+    private MenuItem menu_Ergebnisf_erstellen;
+    @FXML
+    private MenuItem menu_Optionen;
+    @FXML
+    private Label lab_Badmin_Turnierverw;
 
     //endregion
 
@@ -125,8 +171,6 @@ public class MainController implements Initializable
     public void pressBtn_spieler(ActionEvent event) throws Exception {
         try {
 
-
-
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerHinzu.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
@@ -134,7 +178,17 @@ public class MainController implements Initializable
             auswahlklasse.addStagesdict(stage,"SpielerHinzu");
             stage.setScene(new Scene(root1));
             stage.show();
-            stage.setTitle("Spieler hinzufügen");
+
+            try {
+                ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+                titel = bundle.getString("spielerHinzufuegen");
+            }
+            catch ( MissingResourceException e ) {
+                System.err.println( e );
+            }
+            stage.setTitle(titel);
+            auswahlklasse.getStagesdict().put(titel,stage);
+
         } catch(Exception e) {
             e.printStackTrace();
             System.out.println("Fehler beim laden");
@@ -151,7 +205,19 @@ public class MainController implements Initializable
             auswahlklasse.addStagesdict(stage,"Klassenuebersicht");
             stage.setScene(new Scene(root1));
             stage.show();
-            stage.setTitle("Klassenübersicht");
+
+            try
+            {
+                ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+                titel = bundle.getString("klassenuebersicht");
+            }
+            catch ( MissingResourceException e ) {
+                System.err.println( e );
+            }
+            stage.setTitle(titel);
+            auswahlklasse.getStagesdict().put(titel,stage);
+
+
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -413,6 +479,236 @@ public class MainController implements Initializable
             System.err.println( e );
         }
         m_sonstiges.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("m_neuesFenster");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        m_neuesFenster.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_turnierLaden");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_turnierLaden.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Meldeform_import");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Meldeform_import.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Prog_beenden");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Prog_beenden.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Turnierdaten_bearbeiten");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Turnierdaten_bearbeiten.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Klassendaten_bearbeiten");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Klassendaten_bearbeiten.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Spielerdaten_bearbeiten");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Spielerdaten_bearbeiten.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Vereine_bearbeiten");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Vereine_bearbeiten.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_statistiken");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_statistiken.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Feldübersicht");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Feldübersicht.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Klassen");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Klassen.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_spielübersicht");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_spielübersicht.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Zeitplan");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Zeitplan.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Platzierung");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Platzierung.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_klassen");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_klassen.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Spielübersicht");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Spielübersicht.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_zeitplan");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_zeitplan.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_x");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_x.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Teilnehmerl_drucken");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Teilnehmerl_drucken.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Startgeldl_drucken");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Startgeldl_drucken.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Ergebnisf_erstellen");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Ergebnisf_erstellen.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("menu_Optionen");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        menu_Optionen.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("lab_Badmin_Turnierverw");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        lab_Badmin_Turnierverw.setText(titel);
 
 
         tooltipsHinzufuegen();

@@ -75,18 +75,6 @@ private TextField t_suchleistespielerhinzu;
     //Tab2
     @FXML
     private TableView tabelle_spielerliste;
-    @FXML
-    private TableColumn tabelle_spielerliste_vorname;
-    @FXML
-    private TableColumn tabelle_spielerliste_nachname;
-    @FXML
-    private TableColumn tabelle_spielerliste_geschlecht;
-    @FXML
-    private TableColumn tabelle_spielerliste_verein;
-    @FXML
-    private TableColumn tabelle_spielerliste_geburtstag;
-    @FXML
-    private TableColumn tabelle_spielerliste_SpielerID;
 
     //Tab3
     @FXML
@@ -105,10 +93,6 @@ private TextField t_suchleistespielerhinzu;
     private TextField t_rd1;
     @FXML
     private TextField t_rm1;
-    @FXML
-    private RadioButton r_m1;
-    @FXML
-    private RadioButton r_w1;
 
 
     @FXML
@@ -137,6 +121,45 @@ private TextField t_suchleistespielerhinzu;
     private Button b_spielerspeichern;
     @FXML
     private Text t_spielersuche;
+    @FXML
+    private TableColumn tabelle_spielerliste_vorname;
+    @FXML
+    private TableColumn tabelle_spielerliste_nachname;
+    @FXML
+    private TableColumn tabelle_spielerliste_verein;
+    @FXML
+    private TableColumn tabelle_spielerliste_SpielerID;
+    @FXML
+    private TableColumn tabelle_spielerliste_geschlecht;
+    @FXML
+    private TableColumn tabelle_spielerliste_geburtstag;
+    @FXML
+    private RadioButton r_m1;
+    @FXML
+    private RadioButton r_w1;
+    @FXML
+    private Text text_Vorname;
+    @FXML
+    private Text text_Gdatum;
+    @FXML
+    private Text text_Nachname;
+    @FXML
+    private Text text_SpielerID;
+    @FXML
+    private Text text_Verein;
+    @FXML
+    private Text text_Ranglistenpkt;
+    @FXML
+    private Text text_Geschlecht;
+    @FXML
+    private Button btn_abbrechen_update;
+    @FXML
+    private Button btn_Spielerupdaten;
+    @FXML
+    private Text text_einzel;
+    @FXML
+    private Text text_doppel;
+
 
     //endregion
 
@@ -607,6 +630,196 @@ private TextField t_suchleistespielerhinzu;
             System.err.println( e );
         }
         tab_spupdate.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tabelle_spielerliste_vorname");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tabelle_spielerliste_vorname.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tabelle_spielerliste_nachname");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tabelle_spielerliste_nachname.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tabelle_spielerliste_verein");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tabelle_spielerliste_verein.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tabelle_spielerliste_SpielerID");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tabelle_spielerliste_SpielerID.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tabelle_spielerliste_geschlecht");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tabelle_spielerliste_geschlecht.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("tabelle_spielerliste_geburtstag");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        tabelle_spielerliste_geburtstag.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("r_m1");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        r_m1.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("r_w1");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        r_w1.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("text_Vorname");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        text_Vorname.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("text_Gdatum");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        text_Gdatum.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("text_Nachname");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        text_Nachname.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("text_SpielerID");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        text_SpielerID.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("text_Verein");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        text_Verein.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("text_Ranglistenpkt");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        text_Ranglistenpkt.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("text_Geschlecht");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        text_Geschlecht.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_abbrechen_update");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_abbrechen_update.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("btn_Spielerupdaten");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        btn_Spielerupdaten.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("text_einzel");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        text_einzel.setText(titel);
+
+        try
+        {
+            ResourceBundle bundle = ResourceBundle.getBundle( baseName );
+            titel = bundle.getString("text_doppel");
+        }
+        catch ( MissingResourceException e ) {
+            System.err.println( e );
+        }
+        text_doppel.setText(titel);
 
         ContextMenu contextMenu = new ContextMenu();
 

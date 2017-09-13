@@ -76,7 +76,7 @@ public class KlasseUebersichtController implements Initializable
                 System.err.println(e);
             }
             stage.setTitle(titel);
-
+            auswahlklasse.getStagesdict().put(titel,stage);
 
         } catch (Exception e) {
             e.printStackTrace();
