@@ -1,5 +1,6 @@
 package sample.GUI;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -82,7 +83,10 @@ public class SpielSystemController_neu implements Initializable
 
     @FXML
     private RadioButton radio_trostJa;
-
+    @FXML
+    private FontAwesomeIconView pfeil_links;
+    @FXML
+    private FontAwesomeIconView pfeil_rechts;
     @FXML
     private RadioButton radio_trostNein;
 
@@ -126,6 +130,7 @@ public class SpielSystemController_neu implements Initializable
 
 
         Enumeration enumTeams = auswahlklasse.getAktuelleTurnierAuswahl().getTeams().keys();
+
         while (enumTeams.hasMoreElements()) {
             int key = (int) enumTeams.nextElement();
             Team team = auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key);
@@ -742,6 +747,7 @@ public class SpielSystemController_neu implements Initializable
 
         team.getTeamDAO().delete(team);
         obs_setzliste.remove(team);
+        auswahlklasse.getAktuelleTurnierAuswahl().getTeams().remove(team.getTeamid());
         if(!keinsetzplatz) {
             for (int i = altersetzplatz - 1; i < obs_setzliste.size(); i++) {
                 if (obs_setzliste.get(i).getSetzplatz() > 0) {
@@ -752,31 +758,6 @@ public class SpielSystemController_neu implements Initializable
                 }
             }
         }
-        //dicttest.put(dicttest.size(),team);
-        //ausgewaehlte_spielklasse.addSetzliste(team);
-
-/*                boolean erfolg = setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size(),team,ausgewaehlte_spielklasse);
-                if(erfolg) {
-                    //dicttest.put(team.getTeamid(),team)
-                    l_meldungsetzliste1.setText(team.getSpielerEins().getVName() + " " + team.getSpielerEins().getNName() + " wurde der Setzliste hinzugefügt!");
-                }
-                else
-                {
-                    l_meldungsetzliste1.setText("fehler");
-                }*/
-
-            /*ausgewaehlte_spielklasse.removeSetzliste(team);
-            setzlisteDAO.deleteSetzplatz(ausgewaehlte_spielklasse.getSpielklasseID(),team.getTeamid());*/
-
-
-
-        //ausgewaehlte_spielklasse.addSetzliste(team);
-
-        //team.getTeamDAO().addSpieler(team, false);
-        //setzlisteDAO.create(ausgewaehlte_spielklasse.getSetzliste().size()+1,team,ausgewaehlte_spielklasse);
-
-
-        //l_meldungsetzliste1.setText(team.getSpielerEins().getVName()+" "+team.getSpielerEins().getNName()+" und "+team.getSpielerZwei().getVName()+" "+team.getSpielerZwei().getNName()+" wurden aus der Setzliste entfernt!");
 
 
     }
@@ -812,7 +793,8 @@ public class SpielSystemController_neu implements Initializable
         spielsystem_setzliste.getSortOrder().add(setzplatz);*/
         spielsystem_setzliste.refresh();
     }
-    private void addSpieler(Spieler spielerneu)
+    private void
+    addSpieler(Spieler spielerneu)
     {
 
 //        System.out.println(spielerneu.getNName());
@@ -1173,10 +1155,15 @@ public class SpielSystemController_neu implements Initializable
     private void markierteTeamszurSpielerliste() {
         ObservableList markierteTeams= FXCollections.observableArrayList(spielsystem_setzliste.getSelectionModel().getSelectedItems());
 
+        if(!ausgewaehlte_spielklasse.isSetzliste_gesperrt())
+        {
+
+
         for(int i=0;i<markierteTeams.size();i++)
         {
             Team team = (Team) markierteTeams.get(i);
             removeTeam(team);
+        }
         }
     }
 
@@ -1227,6 +1214,9 @@ public class SpielSystemController_neu implements Initializable
 
     private void pruefeSperrungSetzliste() {
         tabsperst.setDisable(false);
+        ausgewaehlte_spielklasse.setSetzliste_gesperrt(true);
+        pfeil_links.setVisible(false);
+        pfeil_rechts.setVisible(false);
         l_meldungsetzliste1.setText("Setzliste gesperrt!!!");
         spielsystem_spielerliste_alleSpieler.setVisible(false);
 
