@@ -29,7 +29,7 @@ public class Spielklasse {
 	{
 		if(setzlistedict.size()<1)
 		{
-			System.out.println("Leeres Dict.");
+			//System.out.println("Leeres Dict.");
 
 			for(int i=0;i<setzliste.size();i++)
 			{

@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
@@ -130,7 +131,10 @@ public class SpielSystemController_neu implements Initializable
             Team team = auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key);
 
             if (team.getSpielklasse().getSpielklasseID()==ausgewaehlte_spielklasse.getSpielklasseID()&&team.toStringKomplett()!="") {
-                obs_setzliste.add(team);
+                if (team.toString().toUpperCase().contains(t_suchleistesetzliste.getText().toUpperCase())) {
+                    obs_setzliste.add(team);
+                }
+
             }
 
 
@@ -172,7 +176,7 @@ public class SpielSystemController_neu implements Initializable
                 int key = (int)enumSpielerIDs.nextElement();
                 Spieler spieler = auswahlklasse.getSpieler().get(key);
 
-                if (!istInSetzListe(spieler)){
+                if (!istInSetzListe(spieler)&&spieler.toString()!=""){
                     if(auswahlklasse.getAktuelleSpielklassenAuswahl().toString().toUpperCase().contains("DAMEN"))
                     {
 
@@ -360,7 +364,7 @@ public class SpielSystemController_neu implements Initializable
     @FXML
     void erstelleSetzlisteNormal(ActionEvent event) {
         spielsystem_setzliste.setEditable(false);
-        System.out.println(obs_setzliste);
+        //System.out.println(obs_setzliste);
         SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
         boolean erfolg=false;
         for(int i=0;i<obs_setzliste.size();i++)
@@ -704,12 +708,21 @@ public class SpielSystemController_neu implements Initializable
     }
 
 
+    @FXML
+    void verschiebevonSetzliste(MouseEvent event) {
 
+        markierteTeamszurSpielerliste();
+    }
+    @FXML
+    void verschiebevonSpielerliste(MouseEvent event) {
+
+        markierteSpielerzurSetzliste();
+    }
     private void removeTeam(Team team)
     {
         int altersetzplatz=team.getSetzplatz();
 
-        System.out.println(team.toStringKomplett());
+        //System.out.println(team.toStringKomplett());
         obs_setzliste.remove(team);
         if(ausgewaehlte_spielklasse.isEinzel()) {
             obs_spieler.addAll(team.getSpielerEins());
@@ -730,8 +743,8 @@ public class SpielSystemController_neu implements Initializable
         if(!keinsetzplatz) {
             for (int i = altersetzplatz - 1; i < obs_setzliste.size(); i++) {
                 if (obs_setzliste.get(i).getSetzplatz() > 0) {
-                    System.out.println("Senke Setzplatz um 1");
-                    System.out.println(obs_setzliste.get(i).getSetzplatz() + "          -1");
+                    //System.out.println("Senke Setzplatz um 1");
+                    //System.out.println(obs_setzliste.get(i).getSetzplatz() + "          -1");
                     obs_setzliste.get(i).setSetzplatz(obs_setzliste.get(i).getSetzplatz() - 1);
                     obs_setzliste.get(i).getTeamDAO().update(obs_setzliste.get(i));
                 }
@@ -868,6 +881,7 @@ public class SpielSystemController_neu implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
         tabsperst.setDisable(true);
         spielsystem_spielerliste_alleSpieler.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        spielsystem_setzliste.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         System.out.println("------------------"+ausgewaehlte_spielklasse.isSetzliste_gesperrt());
 
 /*        for (int i = 0; i < ausgewaehlte_spielklasse.getSetzliste().size(); i++) {
@@ -1048,14 +1062,8 @@ public class SpielSystemController_neu implements Initializable
                             @Override
                             public void handle(ActionEvent event) {
 
-                                System.out.println(spielsystem_spielerliste_alleSpieler.getSelectionModel().getSelectedItems());
-                                ObservableList markierteTeams=FXCollections.observableArrayList(spielsystem_spielerliste_alleSpieler.getSelectionModel().getSelectedItems());
-
-                                for(int i=0;i<markierteTeams.size();i++)
-                                {
-                                    Spieler spieler = (Spieler) markierteTeams.get(i);
-                                    addSpieler(spieler);
-                                }
+                                //System.out.println(spielsystem_spielerliste_alleSpieler.getSelectionModel().getSelectedItems());
+                                markierteSpielerzurSetzliste();
                                 //addSpieler(clickedRow);
 
 
@@ -1099,6 +1107,25 @@ public class SpielSystemController_neu implements Initializable
 
 
             });
+            t_suchleistesetzliste.textProperty().addListener((observable, oldValue, newValue) -> {
+                // System.out.println("textfield changed from " + oldValue + " to " + newValue);
+                //obs_spieler.clear();
+
+                obs_setzliste.clear();
+
+
+
+
+                fuelleobs_setzliste();
+
+
+                spielsystem_setzliste.refresh();
+
+
+
+
+
+            });
 
 
 
@@ -1137,6 +1164,25 @@ public class SpielSystemController_neu implements Initializable
 
         sortiereTabelleSetzliste();
     }//Ende Initialize
+
+    private void markierteSpielerzurSetzliste() {
+        ObservableList markierteTeams= FXCollections.observableArrayList(spielsystem_spielerliste_alleSpieler.getSelectionModel().getSelectedItems());
+
+        for(int i=0;i<markierteTeams.size();i++)
+        {
+            Spieler spieler = (Spieler) markierteTeams.get(i);
+            addSpieler(spieler);
+        }
+    }
+    private void markierteTeamszurSpielerliste() {
+        ObservableList markierteTeams= FXCollections.observableArrayList(spielsystem_setzliste.getSelectionModel().getSelectedItems());
+
+        for(int i=0;i<markierteTeams.size();i++)
+        {
+            Team team = (Team) markierteTeams.get(i);
+            removeTeam(team);
+        }
+    }
 
     private void pruefeAnzahlRLPItems()
     {
