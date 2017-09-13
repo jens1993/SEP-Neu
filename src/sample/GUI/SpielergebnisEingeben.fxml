@@ -80,6 +80,15 @@
                   <TextField fx:id="ts1_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
                </children>
             </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Label />
+                  <Label fx:id="zwei_s" text="Label" />
+                  <TextField fx:id="ts2_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
+                  <TextField fx:id="ts2_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+               </children>
+            </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
                   <Label />
@@ -98,15 +107,6 @@
                   <TextField fx:id="ts4_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-               <children>
-                  <Label />
-                  <Label fx:id="zwei_s" text="Label" />
-                  <TextField fx:id="ts2_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
-                  <TextField fx:id="ts2_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
-               </children>
-            </HBox>
             <HBox fx:id="hbox_5" prefHeight="100.0" prefWidth="200.0" visible="false" GridPane.rowIndex="5">
                <children>
                   <Label />
@@ -123,5 +123,10 @@
       <Button fx:id="btn_Zurueckziehen" layoutX="513.0" layoutY="137.0" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Zurueckziehen" styleClass="spielergebnisEingebenButton" />
       <Button fx:id="btn_Verlegen" layoutX="513.0" layoutY="175.0" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Verlegen" styleClass="spielergebnisEingebenButton" />
       <Button fx:id="btn_schitzzettel" layoutX="513.0" layoutY="221.0" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_schitzzettel" styleClass="spielergebnisEingebenButton" />
+      <Label fx:id="l_meldungergebnis" layoutX="25.0" layoutY="384.0" textAlignment="CENTER" textFill="#e1101e">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

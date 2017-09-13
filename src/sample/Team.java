@@ -209,9 +209,11 @@ public class Team {
 
         if(setzplatz==0)
         {
-            if(auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this)!=null) {
-                if (auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this) > 0) {
-                    setzplatz = auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this);
+            if(auswahlklasse.getAktuelleSpielklassenAuswahl()!=null) {
+                if (auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this) != null) {
+                    if (auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this) > 0) {
+                        setzplatz = auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this);
+                    }
                 }
             }
         }

@@ -82,8 +82,8 @@ public class SpielErgebnisEingebenController implements Initializable{
     private Label l_heim;
     @FXML
     private Label l_gast;
-    //@FXML
-    //private Label l_meldungergebnis;
+    @FXML
+    private Label l_meldungergebnis;
     @FXML
     private Label eins_s;
     @FXML
@@ -120,28 +120,28 @@ public class SpielErgebnisEingebenController implements Initializable{
 
         if(s11<0||s12<0)
         {
-            //l_meldungergebnis.setText("Negative Ergebnisse sind ungültig");
+            l_meldungergebnis.setText("Negative Ergebnisse sind ungültig");
             return false;
         }
         if (Math.abs(s11-s12)<2)
         {
             if (!((s11==29 && s12==30)||s11==30 && s12==29)){
-               // l_meldungergebnis.setText("Ein Satz muss mit 2 Punkten Differenz gewonnen werden");
+               l_meldungergebnis.setText("Ein Satz muss mit 2 Punkten Differenz gewonnen werden");
                 System.out.println("Fehler in Satz ");
                 return false;
             }
         }
         if(s11<21&&s12<21)
         {
-          //  l_meldungergebnis.setText("Ein Satz muss mindestens 21 Punkte haben");
+            l_meldungergebnis.setText("Ein Satz muss mindestens 21 Punkte haben");
             return false;
         }
         if (s11>30 || s12>30){
-           // l_meldungergebnis.setText("Ein Satz kann maximal bis 30 Punkte gehen");
+            l_meldungergebnis.setText("Ein Satz kann maximal bis 30 Punkte gehen");
             return false;
         }
         if((s11>18 && s12>18) && Math.abs(s11-s12)>2 ){
-          //  l_meldungergebnis.setText("Ungültiges Satzergebnis ");
+            l_meldungergebnis.setText("Ungültiges Satzergebnis ");
             return false;
         }
 
@@ -169,12 +169,12 @@ public class SpielErgebnisEingebenController implements Initializable{
                     auswahlklasse.getSpielAuswahlErgebniseintragen().setStatus(3);
                    // a.getAktuelleTurnierAuswahl().addobsGespielteSpiele(a.getSpielAuswahlErgebniseintragen());
                     auswahlklasse.getAktuelleTurnierAuswahl().removeobsAusstehendeSpiele(auswahlklasse.getSpielAuswahlErgebniseintragen());
-                    //l_meldungergebnis.setText("Ergebnis erfolgreich eingetragen");
+                    l_meldungergebnis.setText("Ergebnis erfolgreich eingetragen");
 
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                   // l_meldungergebnis.setText("Satz nicht ausgefüllt");
+                    l_meldungergebnis.setText("Satz nicht ausgefüllt");
                 }
 
             }
@@ -245,7 +245,7 @@ public class SpielErgebnisEingebenController implements Initializable{
 
             erg = new Ergebnis(s11,s12,s21,s22,s31,s32);
 
-           // l_meldungergebnis.setText("Ergebnis ist ausgefüllt!");
+           l_meldungergebnis.setText("Ergebnis ist ausgefüllt!");
 
             //a.getAktuelleTurnierAuswahl().
         }
@@ -436,12 +436,12 @@ public class SpielErgebnisEingebenController implements Initializable{
 
                         if(!gueltigesErgebnis(s11,s12))
                         {
-                           // l_meldungergebnis.setText("Satz 1 prüfen");
+                            l_meldungergebnis.setText("Satz 1 prüfen");
 
                         }
                         else
                         {
-                            //l_meldungergebnis.setText("Satz 1 OK");
+                            l_meldungergebnis.setText("Satz 1 OK");
                         }
 
                 } catch (Exception e) {
@@ -458,12 +458,12 @@ public class SpielErgebnisEingebenController implements Initializable{
                 {
                     if(!gueltigesErgebnis(s11,s12))
                     {
-                        // l_meldungergebnis.setText("Satz 1 prüfen");
+                         l_meldungergebnis.setText("Satz 1 prüfen");
 
                     }
                     else
                     {
-                        // l_meldungergebnis.setText("Satz 1 OK");
+                         l_meldungergebnis.setText("Satz 1 OK");
                     }
                 }
             } catch (Exception e) {
@@ -479,12 +479,12 @@ public class SpielErgebnisEingebenController implements Initializable{
                 {
                     if(!gueltigesErgebnis(s21,s22))
                     {
-                        // l_meldungergebnis.setText("Satz 2 prüfen");
+                        l_meldungergebnis.setText("Satz 2 prüfen");
 
                     }
                     else
                     {
-                        // l_meldungergebnis.setText("Satz 2 OK");
+                        l_meldungergebnis.setText("Satz 2 OK");
                     }
                 }
             } catch (Exception e) {
@@ -501,12 +501,12 @@ public class SpielErgebnisEingebenController implements Initializable{
                 {
                     if(!gueltigesErgebnis(s21,s22))
                     {
-                        // l_meldungergebnis.setText("Satz 2 prüfen");
+                         l_meldungergebnis.setText("Satz 2 prüfen");
 
                     }
                     else
                     {
-                        //l_meldungergebnis.setText("Satz 2 OK");
+                        l_meldungergebnis.setText("Satz 2 OK");
                     }
                 }
             } catch (Exception e) {
@@ -522,12 +522,12 @@ public class SpielErgebnisEingebenController implements Initializable{
                 {
                     if(!gueltigesErgebnis(s31,s32))
                     {
-                        //l_meldungergebnis.setText("Satz 3 prüfen");
+                        l_meldungergebnis.setText("Satz 3 prüfen");
 
                     }
                     else
                     {
-                        // l_meldungergebnis.setText("Satz 3 OK");
+                        l_meldungergebnis.setText("Satz 3 OK");
                     }
                 }
             } catch (Exception e) {
@@ -543,12 +543,12 @@ public class SpielErgebnisEingebenController implements Initializable{
                 {
                     if(!gueltigesErgebnis(s31,s32))
                     {
-                        // l_meldungergebnis.setText("Satz 3 prüfen");
+                        l_meldungergebnis.setText("Satz 3 prüfen");
 
                     }
                     else
                     {
-                        // l_meldungergebnis.setText("Satz 3 OK");
+                        l_meldungergebnis.setText("Satz 3 OK");
                     }
                 }
 
