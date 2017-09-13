@@ -31,7 +31,7 @@ public class KO extends Spielsystem {
 	}
 
 	public KO(ArrayList<Team> setzliste, Spielsystem spielsystem, Spielklasse spielklasse,boolean platzDreiAusspielen){
-		this.spielsystem = spielsystem;
+		this.spielsystem = spielsystem;//Constructor für Endrunde bei Gruppe mit Endrunde
 		this.setzliste=setzliste;
 		this.platzDreiAusspielen = platzDreiAusspielen;
 		this.setSpielklasse(spielklasse);
@@ -48,7 +48,7 @@ public class KO extends Spielsystem {
 	}
 
 	public KO(int anzahlSpieler, Spielsystem gruppeMitEndrunde, Spielklasse spielklasse, boolean platzDreiAusspielen, boolean einlesen) {
-		this.spielsystem = gruppeMitEndrunde;//Constructor für Endrunde bei Gruppe mit Endrunde
+		this.spielsystem = gruppeMitEndrunde;//Constructor für Endrunde bei Gruppe mit Endrunde einlesen
 		this.platzDreiAusspielen = platzDreiAusspielen;
 		this.setSpielklasse(spielklasse);
 		this.teilnehmerzahl=anzahlSpieler;
@@ -64,6 +64,17 @@ public class KO extends Spielsystem {
 		}
 	}
 
+	public KO(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
+		this.setSpielklasse(spielklasse);		//Constructor nur für Einlesen aus der Datenbank
+		this.teilnehmerzahl=setzliste.size();
+		setSpielSystemArt(3);
+		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
+		freiloseHinzufuegen(setzliste);
+		knotenEinlesen(spiele);
+		alleErgebnisseEinlesen(ergebnisse);
+	}
+
+
 	private void alleSpieleSchreiben() {
 		for (int i=getRunden().size()-1; i>=0;i--){
 			for(int j=0;j<getRunden().get(i).size();j++){
@@ -74,15 +85,6 @@ public class KO extends Spielsystem {
 		}
 	}
 
-	public KO(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
-		this.setSpielklasse(spielklasse);		//Constructor nur für Einlesen aus der Datenbank
-		this.teilnehmerzahl=setzliste.size();
-		setSpielSystemArt(3);
-		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
-		freiloseHinzufuegen(setzliste);
-		knotenEinlesen(spiele);
-		alleErgebnisseEinlesen(ergebnisse);
-    }
 
 	private void alleErgebnisseEinlesen(Dictionary<Integer, Ergebnis> ergebnisse){
 		Enumeration e = ergebnisse.keys();
@@ -162,8 +164,8 @@ public class KO extends Spielsystem {
 				int leftKnotenSetzPlatzGast = hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1;
 				int rightKnotenSetzPlatzHeim = hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1;
 				int rightKnotenSetzPlatzGast = aktuellerKnoten.getSetzplatzGast();
-				Spiel leftSpiel = new Spiel(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast,this);
-				Spiel rightSpiel = new Spiel(rightKnotenSpielID, rightKnotenSetzPlatzHeim , rightKnotenSetzPlatzGast, this);
+				Spiel leftSpiel = new Spiel(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast,this.spielsystem);
+				Spiel rightSpiel = new Spiel(rightKnotenSpielID, rightKnotenSetzPlatzHeim , rightKnotenSetzPlatzGast, this.spielsystem);
 				aktuellerKnoten.addLeft(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast );
 				aktuellerKnoten.getLeft().setSpiel(leftSpiel);
 				aktuellerKnoten.addRight(rightKnotenSpielID, rightKnotenSetzPlatzHeim ,rightKnotenSetzPlatzGast );

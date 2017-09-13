@@ -11,6 +11,7 @@ public class Gruppe extends Spielsystem {
 	private Spielsystem spielsystem;
 	int anzahlTeams;
 	int[][] schablone;
+	private ArrayList<Integer> setzPlaetzeFuerEndrunde = new ArrayList<>();
 
 	public Gruppe(ArrayList<Team> setzliste, Spielklasse spielklasse) {
 		try {
@@ -55,6 +56,34 @@ public class Gruppe extends Spielsystem {
 		setOffeneRundenSpiele(anzahlTeams/2);
 		resetAktuelleRunde();
 		rundeStarten(0);
+		setzPlaetzeFuerEndrundeBerechnen();
+	}
+
+	private void setzPlaetzeFuerEndrundeBerechnen() {
+		GruppeMitEndrunde hauptsystem = (GruppeMitEndrunde) spielsystem;
+		int anzahlGruppen = hauptsystem.getAnzahlGruppen();
+		int gruppenNummer = getExtraRunde();
+		for (int i=0;i<Math.ceil(hauptsystem.getAnzahlWeiterkommender()/anzahlGruppen);i++){
+			int zeile = i+1;
+			int setzPlatzFuerEndrunde;
+			if(zeile%2==0) {
+				setzPlatzFuerEndrunde = anzahlGruppen * zeile - (gruppenNummer - 1);
+				if (setzPlatzFuerEndrunde % 2 == 0) {
+					setzPlatzFuerEndrunde--;
+				}
+				else
+				{
+					setzPlatzFuerEndrunde++;
+				}
+			}
+			else{
+				setzPlatzFuerEndrunde = anzahlGruppen*i+gruppenNummer;
+			}
+			Integer[] array = new Integer[2];
+			array[0] = gruppenNummer;
+			array[1] = zeile;
+			hauptsystem.getSetzPlatze().put(setzPlatzFuerEndrunde,array);
+		}
 	}
 
 	private void alleSpieleSchreiben() {
@@ -241,6 +270,7 @@ public class Gruppe extends Spielsystem {
 		alleSpieleEinlesen(spielListe);
 		resetAktuelleRunde();
 		alleErgebnisseEinlesen(ergebnisse);
+		setzPlaetzeFuerEndrundeBerechnen();
 	}
 
 

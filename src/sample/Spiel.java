@@ -5,6 +5,7 @@ import java.awt.print.Paper;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.time.LocalTime;
+import java.util.Dictionary;
 
 import sample.DAO.*;
 import sample.Spielsysteme.*;
@@ -78,7 +79,15 @@ public class Spiel {
 			return heim.toString();
 		}
 		else{
-			return "ausstehend";
+			if (spielsystem.getSpielSystemArt()==2&&getVorrundenNummer()==0){
+				GruppeMitEndrunde hauptsystem = (GruppeMitEndrunde) spielsystem;
+				Dictionary<Integer, Integer[]> setzplatze = hauptsystem.getSetzPlatze();
+				if (setzplatze.get(setzPlatzHeim)!=null){
+					Integer[] gruppePlatzierung = setzplatze.get(setzPlatzHeim);
+					return ("Gruppe"+gruppePlatzierung[0]+" #"+gruppePlatzierung[1]);
+				}
+			}
+			return "ausstehend" + getVorrundenNummer();
 		}
 
 	}
@@ -87,6 +96,14 @@ public class Spiel {
 			return gast.toString();
 		}
 		else{
+			if (spielsystem.getSpielSystemArt()==2&&getVorrundenNummer()==0){
+				GruppeMitEndrunde hauptsystem = (GruppeMitEndrunde) spielsystem;
+				Dictionary<Integer, Integer[]> setzplatze = hauptsystem.getSetzPlatze();
+				if (setzplatze.get(setzPlatzGast)!=null){
+					Integer[] gruppePlatzierung = setzplatze.get(setzPlatzGast);
+					return ("Gruppe"+gruppePlatzierung[0]+" #"+gruppePlatzierung[1]);
+				}
+			}
 			return "ausstehend";
 		}
 	}
@@ -95,6 +112,14 @@ public class Spiel {
 			return heim.toStringKomplett();
 		}
 		else{
+			if (spielsystem instanceof sample.Spielsysteme.GruppeMitEndrunde && getVorrundenNummer()==0){
+				GruppeMitEndrunde hauptsystem = (GruppeMitEndrunde) spielsystem;
+				Dictionary<Integer, Integer[]> setzplatze = hauptsystem.getSetzPlatze();
+				if (setzplatze.get(setzPlatzHeim)!=null && hauptsystem.getEndrunde().getRunden().get(0).contains(this)){
+					Integer[] gruppePlatzierung = setzplatze.get(setzPlatzHeim);
+					return ("Gruppe"+gruppePlatzierung[0]+" #"+gruppePlatzierung[1]);
+				}
+			}
 			return "ausstehend";
 		}
 
@@ -104,6 +129,14 @@ public class Spiel {
 			return gast.toStringKomplett();
 		}
 		else{
+			if (spielsystem instanceof sample.Spielsysteme.GruppeMitEndrunde && getVorrundenNummer()==0){
+				GruppeMitEndrunde hauptsystem = (GruppeMitEndrunde) spielsystem;
+				Dictionary<Integer, Integer[]> setzplatze = hauptsystem.getSetzPlatze();
+				if (setzplatze.get(setzPlatzGast)!=null && hauptsystem.getEndrunde().getRunden().get(0).contains(this)){
+					Integer[] gruppePlatzierung = setzplatze.get(setzPlatzGast);
+					return ("Gruppe"+gruppePlatzierung[0]+" #"+gruppePlatzierung[1]);
+				}
+			}
 			return "ausstehend";
 		}
 	}
