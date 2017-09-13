@@ -1,355 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import jfxtras.scene.layout.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SpielErgebnisEingebenController">
+<AnchorPane prefHeight="432.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SpielErgebnisEingebenController">
    <children>
-      <GridPane layoutY="301.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="600.0" styleClass="spielergebnisEingebenPane" stylesheets="@/CSS/SpielergebnisEingeben.css">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="266.0" prefWidth="271.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="204.0" prefWidth="220.0" />
-            <ColumnConstraints hgrow="SOMETIMES" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="89.0" minHeight="11.0" prefHeight="89.0" />
-          <RowConstraints maxHeight="113.0" minHeight="44.0" prefHeight="44.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="87.0" minHeight="40.0" prefHeight="46.0" vgrow="SOMETIMES" />
-            <RowConstraints prefHeight="100.0" vgrow="SOMETIMES" />
-            <RowConstraints prefHeight="100.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="spielergebnisEingebenBox" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
-               <children>
-                  <Button fx:id="btn_OK" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_OK" styleClass="spielergebnisEingebenButton">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="btn_Abbbruch" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Abbbruch" styleClass="spielergebnisEingebenButton">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="btn_Zurueckziehen" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Zurueckziehen" styleClass="spielergebnisEingebenButton">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="btn_Verlegen" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Verlegen" styleClass="spielergebnisEingebenButton">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="btn_schitzzettel" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_schitzzettel" styleClass="spielergebnisEingebenButton">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
-            <GridPane styleClass="spielergebnisEingebenPane" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="98.0" prefWidth="202.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="318.0" minWidth="196.0" prefWidth="295.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Text fx:id="eins_satz" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" GridPane.halignment="RIGHT">
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <Text fx:id="zwei_satz" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <Text fx:id="drei_satz" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <Text fx:id="vier_satz" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <Text fx:id="fuenf_satz" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="spielergebnisEingebenBox" GridPane.columnIndex="1">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
-                        <StackPane maxHeight="37.0" maxWidth="190.0" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Users/Manuel%20Hüttermann/Desktop/green_check.jpg" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets left="10.0" />
-                                 </StackPane.margin>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Users/Manuel%20Hüttermann/Desktop/red_cross.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets left="10.0" />
-                                 </StackPane.margin>
-                              </AnchorPane>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="spielergebnisEingebenBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
-                        <StackPane maxHeight="37.0" maxWidth="190.0" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Users/Manuel%20Hüttermann/Desktop/green_check.jpg" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets left="10.0" />
-                                 </StackPane.margin>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Users/Manuel%20Hüttermann/Desktop/red_cross.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets left="10.0" />
-                                 </StackPane.margin>
-                              </AnchorPane>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="spielergebnisEingebenBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
-                        <StackPane maxHeight="37.0" maxWidth="190.0" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Users/Manuel%20Hüttermann/Desktop/green_check.jpg" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets left="10.0" />
-                                 </StackPane.margin>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Users/Manuel%20Hüttermann/Desktop/red_cross.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets left="10.0" />
-                                 </StackPane.margin>
-                              </AnchorPane>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="spielergebnisEingebenBox" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
-                        <StackPane maxHeight="37.0" maxWidth="190.0" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Users/Manuel%20Hüttermann/Desktop/green_check.jpg" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets left="10.0" />
-                                 </StackPane.margin>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Users/Manuel%20Hüttermann/Desktop/red_cross.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets left="10.0" />
-                                 </StackPane.margin>
-                              </AnchorPane>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="spielergebnisEingebenBox" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <children>
-                        <TextField maxWidth="50.0" styleClass="spielergebnisEingebenTextField">
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
-                        <TextField maxWidth="50.0" styleClass="spielergebnisEingebenTextField">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <StackPane maxHeight="37.0" maxWidth="190.0" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Users/Manuel%20Hüttermann/Desktop/green_check.jpg" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets left="10.0" />
-                                 </StackPane.margin>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                       <image>
-                                          <Image url="@../../../../Users/Manuel%20Hüttermann/Desktop/red_cross.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets left="10.0" />
-                                 </StackPane.margin>
-                              </AnchorPane>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                     <children>
-                        <Button minWidth="44.0" mnemonicParsing="false" text="+">
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                        <Button minWidth="44.0" mnemonicParsing="false" text="-">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Satz hinzufügen:" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
-                     <GridPane.margin>
-                        <Insets right="5.0" />
-                     </GridPane.margin>
-                  </Text>
-               </children>
-            </GridPane>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="spielergebnisEingebenBox" GridPane.rowIndex="1">
-               <children>
-                  <Text fx:id="t_heim" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" underline="true">
-                     <VBox.margin>
-                        <Insets right="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="spielergebnisEingebenBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <Text fx:id="t_gast" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" underline="true">
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Aktionen">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="menu_neuersatzhinzufuegen" mnemonicParsing="false" onAction="#menu_neuerSatz" text="Satz hinzufügen" />
+                  <MenuItem fx:id="menu_satzentfernen" mnemonicParsing="false" onAction="#menu_Satzentfernen" text="Satz entfernen" />
+              <MenuItem mnemonicParsing="false" onAction="#pressbtn_OK" text="Ergebnis speichern" />
+                  <MenuItem mnemonicParsing="false" text="Ergebnis zurückziehen" />
+                  <MenuItem mnemonicParsing="false" text="Spiel verlegen" />
+                  <MenuItem mnemonicParsing="false" text="Schiedsrichter Zettel drucken" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Hilfe">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" text="Abbrechen" />
+              <MenuItem mnemonicParsing="false" text="Über" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <GridPane layoutY="27.0" prefHeight="219.0" prefWidth="513.0">
+      <GridPane layoutX="61.0" layoutY="35.0" prefHeight="394.0" prefWidth="419.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="425.0" minWidth="10.0" prefWidth="425.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -357,27 +48,80 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="l_heim" styleClass="spielergebnisEingebenLabel" text="Team1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="l_gast" styleClass="spielergebnisEingebenLabel" text="Team2" GridPane.columnIndex="1">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="ts1_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" GridPane.rowIndex="1" />
-            <TextField fx:id="ts1_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="ts2_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="ts2_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" GridPane.rowIndex="2" />
-            <TextField fx:id="ts3_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" GridPane.rowIndex="3" />
-            <TextField fx:id="ts3_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField maxWidth="50.0" styleClass="spielergebnisEingebenTextField" GridPane.rowIndex="4" />
-            <TextField maxWidth="50.0" styleClass="spielergebnisEingebenTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="l_heim" styleClass="spielergebnisEingebenLabel" text="Team1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="l_gast" styleClass="spielergebnisEingebenLabel" text="Team2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="76.0" prefWidth="419.0" GridPane.rowIndex="1">
+               <children>
+                  <StackPane prefHeight="95.0" prefWidth="173.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </StackPane>
+                  <Label />
+                  <Label fx:id="eins_s" text="Label" />
+                  <TextField fx:id="ts1_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
+                  <TextField fx:id="ts1_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <Label />
+                  <Label fx:id="drei_s" text="Label" />
+                  <TextField fx:id="ts3_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
+                  <TextField fx:id="ts3_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+               </children>
+            </HBox>
+            <HBox fx:id="hbox_4" prefHeight="100.0" prefWidth="200.0" visible="false" GridPane.rowIndex="4">
+               <children>
+                  <Label />
+                  <Label fx:id="vier_s" text="Label" />
+                  <TextField fx:id="ts4_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
+                  <TextField fx:id="ts4_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Label />
+                  <Label fx:id="zwei_s" text="Label" />
+                  <TextField fx:id="ts2_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
+                  <TextField fx:id="ts2_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+               </children>
+            </HBox>
+            <HBox fx:id="hbox_5" prefHeight="100.0" prefWidth="200.0" visible="false" GridPane.rowIndex="5">
+               <children>
+                  <Label />
+                  <Label fx:id="fuenf_s" text="Label" />
+                  <TextField fx:id="ts5_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
+                  <TextField fx:id="ts5_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField" />
+               </children>
+            </HBox>
          </children>
       </GridPane>
+      <Button fx:id="btn_OK" layoutX="513.0" layoutY="64.0" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_OK" styleClass="spielergebnisEingebenButton" />
+      <Button fx:id="btn_Abbbruch" layoutX="513.0" layoutY="98.0" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Abbbruch" styleClass="spielergebnisEingebenButton" />
+      <Button fx:id="btn_Zurueckziehen" layoutX="513.0" layoutY="137.0" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Zurueckziehen" styleClass="spielergebnisEingebenButton" />
+      <Button fx:id="btn_Verlegen" layoutX="513.0" layoutY="175.0" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_Verlegen" styleClass="spielergebnisEingebenButton" />
+      <Button fx:id="btn_schitzzettel" layoutX="513.0" layoutY="221.0" minWidth="90.0" mnemonicParsing="false" onAction="#pressbtn_schitzzettel" styleClass="spielergebnisEingebenButton" />
    </children>
 </AnchorPane>

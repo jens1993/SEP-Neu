@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import org.omg.PortableInterceptor.INACTIVE;
 import sample.DAO.auswahlklasse;
@@ -25,12 +27,21 @@ public class SpielErgebnisEingebenController implements Initializable{
     String baseName = "resources.Main";
     String titel ="";
 
+
+    @FXML
+    private HBox hbox_5;
+    @FXML
+    private HBox hbox_4;
     @FXML
     private Button btn_OK;
 
     @FXML
     private Button btn_Abbbruch;
+    @FXML
+    private MenuItem menu_neuersatzhinzufuegen;
 
+    @FXML
+    private MenuItem menu_satzentfernen;
     @FXML
     private Button btn_Zurueckziehen;
 
@@ -57,7 +68,16 @@ public class SpielErgebnisEingebenController implements Initializable{
 
     @FXML
     private TextField ts3_2;
+    @FXML
+    private TextField ts4_1;
 
+    @FXML
+    private TextField ts4_2;
+    @FXML
+    private TextField ts5_1;
+
+    @FXML
+    private TextField ts5_2;
     @FXML
     private Label l_heim;
     @FXML
@@ -65,19 +85,19 @@ public class SpielErgebnisEingebenController implements Initializable{
     @FXML
     private Label l_meldungergebnis;
     @FXML
-    private Text eins_satz;
+    private Label eins_s;
     @FXML
-    private Text zwei_satz;
+    private Label zwei_s;
     @FXML
-    private Text drei_satz;
+    private Label drei_s;
     @FXML
-    private Text vier_satz;
+    private Label vier_s;
     @FXML
-    private Text fuenf_satz;
+    private Label fuenf_s;
     @FXML
-    private Text t_heim;
+    private Label t_heim;
     @FXML
-    private Text t_gast;
+    private Label t_gast;
 
     Dictionary<Integer, Spiel> dictspiele = auswahlklasse.getAktuelleTurnierAuswahl().getSpiele();
 
@@ -171,6 +191,53 @@ public class SpielErgebnisEingebenController implements Initializable{
         }
 
     }
+
+    private void leereSatzfelder(TextField textField1, TextField textField2)
+    {
+        textField1.setText("");
+        textField2.setText("");
+    }
+
+    @FXML
+    void menu_Satzentfernen(ActionEvent event) {
+
+        if(hbox_4.isVisible()&&hbox_5.isVisible())
+        {
+            hbox_5.setVisible(false);
+            menu_neuersatzhinzufuegen.setVisible(true);
+            leereSatzfelder(ts5_1,ts5_2);
+        }
+        else if (hbox_4.isVisible()&&!hbox_5.isVisible())
+        {
+            hbox_4.setVisible(false);
+            menu_satzentfernen.setVisible(false);
+            leereSatzfelder(ts4_1,ts4_2);
+        }
+
+
+
+    }
+
+    @FXML
+    void menu_neuerSatz(ActionEvent event) {
+        if(hbox_4.isVisible()&&!hbox_5.isVisible())
+        {
+            hbox_5.setVisible(true);
+            menu_neuersatzhinzufuegen.setVisible(false);
+
+        }
+        if (!hbox_4.isVisible()&&!hbox_5.isVisible())
+        {
+            hbox_4.setVisible(true);
+            menu_satzentfernen.setVisible(true);
+        }
+        else
+        {
+            System.out.println("Alle Sätze sichtbar");
+        }
+    }
+
+
     private void setzeErgebnis()
     {
         if(s11!=-1&&s12!=-1&&s21!=-1&&s22!=-1&&s31!=-1&&s32!=-1)
@@ -200,7 +267,7 @@ public class SpielErgebnisEingebenController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
-
+        menu_satzentfernen.setVisible(false);
         try
         {
             ResourceBundle bundle = ResourceBundle.getBundle( baseName );
@@ -259,7 +326,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         catch ( MissingResourceException e ) {
             System.err.println( e );
         }
-        eins_satz.setText(titel);
+        eins_s.setText(titel);
 
         try
         {
@@ -269,7 +336,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         catch ( MissingResourceException e ) {
             System.err.println( e );
         }
-        zwei_satz.setText(titel);
+        zwei_s.setText(titel);
 
         try
         {
@@ -279,7 +346,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         catch ( MissingResourceException e ) {
             System.err.println( e );
         }
-        drei_satz.setText(titel);
+        drei_s.setText(titel);
 
         try
         {
@@ -289,7 +356,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         catch ( MissingResourceException e ) {
             System.err.println( e );
         }
-        vier_satz.setText(titel);
+        vier_s.setText(titel);
 
         try
         {
@@ -299,7 +366,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         catch ( MissingResourceException e ) {
             System.err.println( e );
         }
-        fuenf_satz.setText(titel);
+        fuenf_s.setText(titel);
 
         try
         {
@@ -309,7 +376,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         catch ( MissingResourceException e ) {
             System.err.println( e );
         }
-        t_heim.setText(titel);
+        l_heim.setText(titel);
 
         try
         {
@@ -319,7 +386,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         catch ( MissingResourceException e ) {
             System.err.println( e );
         }
-        t_gast.setText(titel);
+       l_gast.setText(titel);
 
 
         if(sp!=null && sp.getStatus()==1)
