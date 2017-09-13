@@ -166,8 +166,8 @@ private TextField t_suchleistespielerhinzu;
 
     HashMap<Integer, Spieler> spielerhash = new HashMap<Integer, Spieler>();
 
-    private static Spieler spieler_neu=null;
-    private static ObservableList<Spieler> obs_spieler = auswahlklasse.getObs_spieler();
+    public static Spieler spieler_neu=null;
+    public static ObservableList<Spieler> obs_spieler = auswahlklasse.getObs_spieler();
 
 
     private void printSpielerZuordnenTableNeu() throws Exception {
@@ -262,6 +262,7 @@ private TextField t_suchleistespielerhinzu;
             System.out.println(auswahlklasse.getSpieler().size());
 
         spieler_neu= new Spieler(t_vn.getText(),t_nn.getText(),d_geb.getValue(),geschlecht,rpunkte,verein,t_spid.getText(),"");
+
         //endregion
 
         //ArrayList<Spieler> vorhandeneSpieler = new ArrayList<>();
@@ -285,7 +286,12 @@ private TextField t_suchleistespielerhinzu;
                     }
                 }
             }
+             Dictionary <Spieler,ObservableList> obs = new Hashtable<>();
+            ExcelImport.setDict_doppelte_spieler(obs);
+            ExcelImport.setAktuellerSpieler(spieler_neu);
             ExcelImport.getDict_doppelte_spieler().put(spieler_neu,obs_vorhanden);
+
+
 
 
 

@@ -36,21 +36,13 @@ public class SpielErgebnisEingebenController implements Initializable{
     @FXML
     private Button btn_OK;
 
-    @FXML
-    private Button btn_Abbbruch;
+
     @FXML
     private MenuItem menu_neuersatzhinzufuegen;
 
     @FXML
     private MenuItem menu_satzentfernen;
-    @FXML
-    private Button btn_Zurueckziehen;
 
-    @FXML
-    private Button btn_Verlegen;
-
-    @FXML
-    private Button btn_schitzzettel;
 
     @FXML
     private TextField ts1_1;
@@ -132,6 +124,10 @@ public class SpielErgebnisEingebenController implements Initializable{
     int s22=-1;
     int s31=-1;
     int s32=-1;
+    int s41=-1;
+    int s42=-1;
+    int s51=-1;
+    int s52=-1;
 
     @FXML
     void pressbtn_Abbbruch(ActionEvent event) {
@@ -264,7 +260,25 @@ public class SpielErgebnisEingebenController implements Initializable{
 
     private void setzeErgebnis()
     {
-        if(s11!=-1&&s12!=-1&&s21!=-1&&s22!=-1&&s31!=-1&&s32!=-1)
+        if(s11!=-1&&s12!=-1&&s21!=-1&&s22!=-1&&s31!=-1&&s32!=-1&&s41!=-1&&s42!=-1&&s51!=-1&&s52!=-1)
+        {
+
+            erg = new Ergebnis(s11,s12,s21,s22,s31,s32,s41,s42,s51,s52);
+
+            l_meldungergebnis.setText("Ergebnis ist ausgefüllt!");
+
+            //a.getAktuelleTurnierAuswahl().
+        }
+        else if(s11!=-1&&s12!=-1&&s21!=-1&&s22!=-1&&s31!=-1&&s32!=-1&&s41!=-1&&s42!=-1)
+        {
+
+            erg = new Ergebnis(s11,s12,s21,s22,s31,s32,s41,s42);
+
+            l_meldungergebnis.setText("Ergebnis ist ausgefüllt!");
+
+            //a.getAktuelleTurnierAuswahl().
+        }
+        else if(s11!=-1&&s12!=-1&&s21!=-1&&s22!=-1&&s31!=-1&&s32!=-1)
         {
 
             erg = new Ergebnis(s11,s12,s21,s22,s31,s32);
@@ -291,6 +305,7 @@ public class SpielErgebnisEingebenController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
+        l_meldungergebnis.setVisible(false);
         menu_satzentfernen.setVisible(false);
         try
         {
@@ -310,7 +325,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         catch ( MissingResourceException e ) {
             System.err.println( e );
         }
-        btn_Abbbruch.setText(titel);
+        //btn_Abbbruch.setText(titel);
 
         try
         {
@@ -320,7 +335,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         catch ( MissingResourceException e ) {
             System.err.println( e );
         }
-        btn_Zurueckziehen.setText(titel);
+       // btn_Zurueckziehen.setText(titel);
 
         try
         {
@@ -330,7 +345,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         catch ( MissingResourceException e ) {
             System.err.println( e );
         }
-        btn_Verlegen.setText(titel);
+        //btn_Verlegen.setText(titel);
 
         try
         {
@@ -340,7 +355,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         catch ( MissingResourceException e ) {
             System.err.println( e );
         }
-        btn_schitzzettel.setText(titel);
+        //btn_schitzzettel.setText(titel);
 
         try
         {
@@ -452,149 +467,231 @@ public class SpielErgebnisEingebenController implements Initializable{
         }
 
         ts1_1.textProperty().addListener((observable, oldValue, newValue) -> {
-
+            if(ts1_1.getText()!="") {
                 try {
                     s11 = Integer.parseInt(ts1_1.getText());
                     setzeErgebnis();
 
 
-                        if(!gueltigesErgebnis(s11,s12))
-                        {
-                            l_meldungergebnis.setText("Satz 1 prüfen");
-                            zeigeRedCross1();
-
-                        }
-                        else
-                        {
-                            l_meldungergebnis.setText("Satz 1 OK");
-                            zeigeGreenCheck1();
-                        }
+                    satz1Gueltigkeit();
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    zeigeRedCross1();
                 }
+            }
 
         });
         ts1_2.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(ts1_2.getText()!="")
+            {
             try {
                 s12 = Integer.parseInt(ts1_2.getText());
                 setzeErgebnis();
 
-                if(s11>-1)
-                {
-                    if(!gueltigesErgebnis(s11,s12))
-                    {
-                         l_meldungergebnis.setText("Satz 1 prüfen");
-                        zeigeRedCross1();
-
-                    }
-                    else
-                    {
-                         l_meldungergebnis.setText("Satz 1 OK");
-                        zeigeGreenCheck1();
-                    }
-                }
+                satz1Gueltigkeit();
             } catch (Exception e) {
+                zeigeRedCross1();
                 e.printStackTrace();
-            }
+            }}
         });
         ts2_1.textProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                s21 = Integer.parseInt(ts2_1.getText());
-                setzeErgebnis();
+            if(ts1_1.getText()!="") {
+                try {
+                    s21 = Integer.parseInt(ts2_1.getText());
+                    setzeErgebnis();
 
-                if(s22>-1)
-                {
-                    if(!gueltigesErgebnis(s21,s22))
-                    {
-                        l_meldungergebnis.setText("Satz 2 prüfen");
-                        zeigeRedCross2();
-
-                    }
-                    else
-                    {
-                        l_meldungergebnis.setText("Satz 2 OK");
-                        zeigeGreenCheck2();
-                    }
+                    satz2Gueltigkeit();
+                } catch (Exception e) {
+                    zeigeRedCross2();
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
 
                     });
         ts2_2.textProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                s22 = Integer.parseInt(ts2_2.getText());
-                setzeErgebnis();
+            if(ts2_2.getText()!="") {
+                try {
+                    s22 = Integer.parseInt(ts2_2.getText());
+                    setzeErgebnis();
 
-                if(s21>-1)
-                {
-                    if(!gueltigesErgebnis(s21,s22))
-                    {
-                         l_meldungergebnis.setText("Satz 2 prüfen");
-                         zeigeRedCross2();
-
-                    }
-                    else
-                    {
-                        l_meldungergebnis.setText("Satz 2 OK");
-                        zeigeGreenCheck2();
-                    }
+                    satz2Gueltigkeit();
+                } catch (Exception e) {
+                    zeigeRedCross2();
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         });
         ts3_1.textProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                s31 = Integer.parseInt(ts3_1.getText());
-                setzeErgebnis();
+            if(ts3_1.getText()!="") {
+                try {
+                    s31 = Integer.parseInt(ts3_1.getText());
+                    setzeErgebnis();
 
-                if(s32>-1)
-                {
-                    if(!gueltigesErgebnis(s31,s32))
-                    {
-                        l_meldungergebnis.setText("Satz 3 prüfen");
-                        zeigeRedCross3();
-
-                    }
-                    else
-                    {
-                        l_meldungergebnis.setText("Satz 3 OK");
-                        zeigeGreenCheck3();
-                    }
+                    satz3Gueltigkeit();
+                } catch (Exception e) {
+                    zeigeRedCross3();
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         });
         ts3_2.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(ts3_2.getText()!="")
+            {
             try {
-                s32 = Integer.parseInt(ts1_2.getText());
+                s32 = Integer.parseInt(ts3_2.getText());
                 setzeErgebnis();
 
-                if(s31>-1)
-                {
-                    if(!gueltigesErgebnis(s31,s32))
-                    {
-                        l_meldungergebnis.setText("Satz 3 prüfen");
-                        zeigeRedCross3();
-
-                    }
-                    else
-                    {
-                        l_meldungergebnis.setText("Satz 3 OK");
-                        zeigeGreenCheck3();
-                    }
-                }
+                satz3Gueltigkeit();
 
             } catch (Exception e) {
+                zeigeRedCross3();
                 e.printStackTrace();
             }
+            }
         });
+        ts4_1.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(ts4_1.getText()!="") {
+                try {
+                    s41 = Integer.parseInt(ts4_1.getText());
+                    setzeErgebnis();
 
+
+                    satz4Gueltigkeit();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    zeigeRedCross4();
+                }
+            }
+
+        });
+        ts4_2.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(ts4_2.getText()!="")
+            {
+                try {
+                    s42 = Integer.parseInt(ts4_2.getText());
+                    setzeErgebnis();
+
+                    satz4Gueltigkeit();
+                } catch (Exception e) {
+                    zeigeRedCross4();
+                    e.printStackTrace();
+                }}
+        });
+        ts5_1.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(ts5_1.getText()!="") {
+                try {
+                    s51 = Integer.parseInt(ts5_1.getText());
+                    setzeErgebnis();
+
+
+                    satz5Gueltigkeit();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    zeigeRedCross5();
+                }
+            }
+
+        });
+        ts5_2.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(ts5_2.getText()!="")
+            {
+                try {
+                    s52 = Integer.parseInt(ts5_2.getText());
+                    setzeErgebnis();
+
+                    satz5Gueltigkeit();
+                } catch (Exception e) {
+                    zeigeRedCross5();
+                    e.printStackTrace();
+                }}
+        });
     }
 
+    private void satz3Gueltigkeit() {
+        if(s32>-1&&s31>-1)
+        {
+            if(!gueltigesErgebnis(s31,s32))
+            {
+                l_meldungergebnis.setText("Satz 3 prüfen");
+                zeigeRedCross3();
+
+            }
+            else
+            {
+                l_meldungergebnis.setText("Satz 3 OK");
+                zeigeGreenCheck3();
+            }
+        }
+    }
+
+    private void satz1Gueltigkeit() {
+        if(s11>-1&&s12>-1)
+        {
+            if(!gueltigesErgebnis(s11,s12))
+            {
+                 l_meldungergebnis.setText("Satz 1 prüfen");
+                zeigeRedCross1();
+
+            }
+            else
+            {
+                 l_meldungergebnis.setText("Satz 1 OK");
+                zeigeGreenCheck1();
+            }
+        }
+    }
+
+    private void satz2Gueltigkeit() {
+        if(s22>-1&&s21>-1)
+        {
+            if(!gueltigesErgebnis(s21,s22))
+            {
+                l_meldungergebnis.setText("Satz 2 prüfen");
+                zeigeRedCross2();
+
+            }
+            else
+            {
+                l_meldungergebnis.setText("Satz 2 OK");
+                zeigeGreenCheck2();
+            }
+        }
+    }
+    private void satz4Gueltigkeit() {
+        if(s41>-1&&s42>-1)
+        {
+            if(!gueltigesErgebnis(s41,s42))
+            {
+                l_meldungergebnis.setText("Satz 4 prüfen");
+                zeigeRedCross4();
+
+            }
+            else
+            {
+                l_meldungergebnis.setText("Satz 4 OK");
+                zeigeGreenCheck4();
+            }
+        }
+    }
+    private void satz5Gueltigkeit() {
+        if(s51>-1&&s52>-1)
+        {
+            if(!gueltigesErgebnis(s51,s52))
+            {
+                l_meldungergebnis.setText("Satz 5 prüfen");
+                zeigeRedCross5();
+
+            }
+            else
+            {
+                l_meldungergebnis.setText("Satz 5 OK");
+                zeigeGreenCheck5();
+            }
+        }
+    }
     private void zeigeGreenCheck1() {
         red_cross_1.setVisible(false);
         green_check_1.setVisible(true);

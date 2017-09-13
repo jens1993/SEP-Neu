@@ -193,10 +193,19 @@ public void selectrow(MouseEvent event)
     //Endregion
     private void Tabellefuelle()
     {
-        obs_vorhandeneSpieler=excelImport.getDict_doppelte_spieler().get(excelImport.getAktuellerSpieler());
+        if(excelImport.getDict_doppelte_spieler().get(excelImport.getAktuellerSpieler()).size()>0)
+        {
+            obs_vorhandeneSpieler=excelImport.getDict_doppelte_spieler().get(excelImport.getAktuellerSpieler());
 
 
-        obs_neuerSpieler.add(excelImport.getAktuellerSpieler());
+            obs_neuerSpieler.add(excelImport.getAktuellerSpieler());
+        }
+/*        else
+        {
+            obs_vorhandeneSpieler=auswahlklasse.getObs_vorhandeneSpielerSpielerhinzu();
+            obs_neuerSpieler.add(auswahlklasse.getNeuerSpielerSpielerhinzu());
+        }*/
+
         setTable();
 
         //ExcelImport.getDict_doppelte_spieler().remove(ExcelImport.getAktuellerSpieler());
@@ -463,8 +472,10 @@ public void selectrow(MouseEvent event)
             });
             return row ;
         });
-        if(obs_vorhandeneSpieler.size()>0)
-            popup_tabelle2.getSelectionModel().select(obs_vorhandeneSpieler.get(0));
+
+            if (obs_vorhandeneSpieler.size() > 0)
+                popup_tabelle2.getSelectionModel().select(obs_vorhandeneSpieler.get(0));
+
         popup_tabelle2.refresh();
     }
 }

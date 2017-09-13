@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -22,6 +23,11 @@ public class auswahlklasse
 
 
     private static Turnier turnierzumupdaten;
+
+
+
+
+
 
     private TurnierDAO turnierDAO = new TurnierDAOimpl();
     private static Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
