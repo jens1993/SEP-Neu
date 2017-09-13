@@ -78,12 +78,12 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="76.0" prefWidth="419.0" GridPane.rowIndex="1">
                <children>
                   <Label fx:id="eins_s" text="Label" />
-                  <TextField fx:id="ts1_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField">
+                  <TextField fx:id="ts1_1" maxWidth="50.0" onMouseClicked="#pruefekleinesergebnis1" onMouseEntered="#pruefekleinesergebnis1" onMousePressed="#pruefekleinesergebnis1" styleClass="spielergebnisEingebenTextField">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin></TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
-                  <TextField fx:id="ts1_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField">
+                  <TextField fx:id="ts1_2" maxWidth="50.0" onMouseClicked="#pruefekleinesergebnis1" onMousePressed="#pruefekleinesergebnis1" styleClass="spielergebnisEingebenTextField">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin></TextField>
@@ -92,12 +92,12 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
                   <Label fx:id="zwei_s" text="Label" />
-                  <TextField fx:id="ts2_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField">
+                  <TextField fx:id="ts2_1" maxWidth="50.0" onMouseClicked="#pruefekleinesergebnis2" onMousePressed="#pruefekleinesergebnis2" styleClass="spielergebnisEingebenTextField">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin></TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
-                  <TextField fx:id="ts2_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField">
+                  <TextField fx:id="ts2_2" maxWidth="50.0" onMouseClicked="#pruefekleinesergebnis2" onMousePressed="#pruefekleinesergebnis2" styleClass="spielergebnisEingebenTextField">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin></TextField>
@@ -106,12 +106,12 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
                   <Label fx:id="drei_s" text="Label" />
-                  <TextField fx:id="ts3_1" maxWidth="50.0" styleClass="spielergebnisEingebenTextField">
+                  <TextField fx:id="ts3_1" maxWidth="50.0" onMouseClicked="#pruefekleinesergebnis3" onMouseDragEntered="#pruefekleinesergebnis3" onMousePressed="#pruefekleinesergebnis3" styleClass="spielergebnisEingebenTextField">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin></TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="spielergebnisEingebenText" text=":" />
-                  <TextField fx:id="ts3_2" maxWidth="50.0" styleClass="spielergebnisEingebenTextField">
+                  <TextField fx:id="ts3_2" maxWidth="50.0" onMouseClicked="#pruefekleinesergebnis3" onMouseDragEntered="#pruefekleinesergebnis3" onMousePressed="#pruefekleinesergebnis3" styleClass="spielergebnisEingebenTextField">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin></TextField>

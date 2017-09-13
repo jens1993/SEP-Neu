@@ -363,6 +363,7 @@ public class SpielSystemController_neu implements Initializable
 
     @FXML
     void erstelleSetzlisteNormal(ActionEvent event) {
+        t_suchleistesetzliste.setText("");
         spielsystem_setzliste.setEditable(false);
         //System.out.println(obs_setzliste);
         SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
@@ -398,6 +399,7 @@ public class SpielSystemController_neu implements Initializable
     }
     @FXML
     void erstelleSetzlisteRLP(ActionEvent event) {
+        t_suchleistesetzliste.setText("");
         spielsystem_setzliste.setEditable(false);
         SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
         boolean erfolg=false;
@@ -1107,30 +1109,24 @@ public class SpielSystemController_neu implements Initializable
 
 
             });
-            t_suchleistesetzliste.textProperty().addListener((observable, oldValue, newValue) -> {
-                // System.out.println("textfield changed from " + oldValue + " to " + newValue);
-                //obs_spieler.clear();
 
-                obs_setzliste.clear();
-
-
-
-
-                fuelleobs_setzliste();
-
-
-                spielsystem_setzliste.refresh();
-
-
-
-
-
-            });
 
 
 
 
         }
+        t_suchleistesetzliste.textProperty().addListener((observable, oldValue, newValue) -> {
+            // System.out.println("textfield changed from " + oldValue + " to " + newValue);
+            //obs_spieler.clear();
+
+            obs_setzliste.clear();
+            fuelleobs_setzliste();
+
+            spielsystem_setzliste.refresh();
+              setzplatz.setSortType(TableColumn.SortType.ASCENDING);
+        spielsystem_setzliste.getSortOrder().add(setzplatz);
+
+        });
 
 /*    Suchleiste wird noch benötigt
 
@@ -1188,6 +1184,12 @@ public class SpielSystemController_neu implements Initializable
     {
         menu_rlp.getItems().clear();
         MenuItem alle=new MenuItem("Alle");
+        alle.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                erstelleSetzlisteRLP(event);
+            }
+        });
         menu_rlp.getItems().add(alle);
         if(obs_setzliste.size()>2)
         {
@@ -1230,7 +1232,9 @@ public class SpielSystemController_neu implements Initializable
 
         t_suchleistespieler.setVisible(false);
 
-        btnentf.setVisible(false);
+
+        spielsystem_setzliste.getSortOrder().add(setzplatz);
+        //btnentf.setVisible(false);
     }
 
 }

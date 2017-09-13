@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import org.omg.PortableInterceptor.INACTIVE;
@@ -305,6 +306,19 @@ public class SpielErgebnisEingebenController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
+
+        s11=-1;
+        s12=-1;
+        s21=-1;
+        s22=-1;
+        s31=-1;
+        s32=-1;
+        s41=-1;
+        s42=-1;
+        s51=-1;
+        s52=-1;
+
+
         l_meldungergebnis.setVisible(false);
         menu_satzentfernen.setVisible(false);
         try
@@ -467,7 +481,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         }
 
         ts1_1.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(ts1_1.getText()!="") {
+            if(!ts1_1.equals("")&&ts1_1.getText().length()>0) {
                 try {
                     s11 = Integer.parseInt(ts1_1.getText());
                     setzeErgebnis();
@@ -483,8 +497,8 @@ public class SpielErgebnisEingebenController implements Initializable{
 
         });
         ts1_2.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(ts1_2.getText()!="")
-            {
+            if(!ts1_2.equals("")&&ts1_2.getText().length()>0) {
+
             try {
                 s12 = Integer.parseInt(ts1_2.getText());
                 setzeErgebnis();
@@ -496,7 +510,7 @@ public class SpielErgebnisEingebenController implements Initializable{
             }}
         });
         ts2_1.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(ts1_1.getText()!="") {
+            if(!ts2_1.equals("")&&ts2_1.getText().length()>0) {
                 try {
                     s21 = Integer.parseInt(ts2_1.getText());
                     setzeErgebnis();
@@ -510,7 +524,7 @@ public class SpielErgebnisEingebenController implements Initializable{
 
                     });
         ts2_2.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(ts2_2.getText()!="") {
+            if(!ts2_2.equals("")&&ts2_2.getText().length()>0) {
                 try {
                     s22 = Integer.parseInt(ts2_2.getText());
                     setzeErgebnis();
@@ -523,7 +537,7 @@ public class SpielErgebnisEingebenController implements Initializable{
             }
         });
         ts3_1.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(ts3_1.getText()!="") {
+            if(!ts3_1.equals("")&&ts3_1.getText().length()>0) {
                 try {
                     s31 = Integer.parseInt(ts3_1.getText());
                     setzeErgebnis();
@@ -536,8 +550,7 @@ public class SpielErgebnisEingebenController implements Initializable{
             }
         });
         ts3_2.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(ts3_2.getText()!="")
-            {
+            if(!ts3_2.equals("")&&ts3_2.getText().length()>0) {
             try {
                 s32 = Integer.parseInt(ts3_2.getText());
                 setzeErgebnis();
@@ -551,7 +564,7 @@ public class SpielErgebnisEingebenController implements Initializable{
             }
         });
         ts4_1.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(ts4_1.getText()!="") {
+            if(!ts4_1.equals("")&&ts4_1.getText().length()>0) {
                 try {
                     s41 = Integer.parseInt(ts4_1.getText());
                     setzeErgebnis();
@@ -567,8 +580,8 @@ public class SpielErgebnisEingebenController implements Initializable{
 
         });
         ts4_2.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(ts4_2.getText()!="")
-            {
+            if(!ts4_2.equals("")&&ts4_2.getText().length()>0) {
+
                 try {
                     s42 = Integer.parseInt(ts4_2.getText());
                     setzeErgebnis();
@@ -580,7 +593,7 @@ public class SpielErgebnisEingebenController implements Initializable{
                 }}
         });
         ts5_1.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(ts5_1.getText()!="") {
+            if(!ts5_1.equals("")&&ts5_1.getText().length()>0) {
                 try {
                     s51 = Integer.parseInt(ts5_1.getText());
                     setzeErgebnis();
@@ -596,8 +609,8 @@ public class SpielErgebnisEingebenController implements Initializable{
 
         });
         ts5_2.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(ts5_2.getText()!="")
-            {
+            if(!ts5_2.equals("")&&ts5_2.getText().length()>0) {
+
                 try {
                     s52 = Integer.parseInt(ts5_2.getText());
                     setzeErgebnis();
@@ -625,8 +638,60 @@ public class SpielErgebnisEingebenController implements Initializable{
                 zeigeGreenCheck3();
             }
         }
-    }
 
+    }
+    @FXML
+    void pruefekleinesergebnis1(MouseEvent event) {
+
+            if (s11 < 18&&s11>-1&&ts1_2.getText().equals("")) {
+                ts1_2.setText("21");
+            }
+            if (s12 < 18&&s12>-1&&ts1_1.getText().equals("")) {
+                ts1_1.setText("21");
+            }
+        if (s11 > 21&&s11<29&&ts1_2.getText().equals("")) {
+            ts1_2.setText(String.valueOf(Integer.parseInt(ts1_1.getText())+2));
+        }
+        if (s12 > 21&&s12<29&&ts1_1.getText().equals("")) {
+            ts1_1.setText(String.valueOf(Integer.parseInt(ts1_2.getText())+2));
+        }
+    }
+    @FXML
+    void pruefekleinesergebnis2(MouseEvent event) {
+        if (s21 < 18&&s21>-1&&ts2_2.getText().equals("")) {
+            ts2_2.setText("21");
+        }
+        if (s22 < 18&&s22>-1&&ts2_2.getText().equals("")) {
+            ts2_1.setText("21");
+        }
+    }
+    @FXML
+    void pruefekleinesergebnis3(MouseEvent event) {
+        if (s31 < 18&&s31>-1&&ts3_2.getText().equals("")) {
+            ts3_2.setText("21");
+        }
+        if (s32 < 18&&s32>-1&&ts3_1.getText().equals("")) {
+            ts3_1.setText("21");
+        }
+    }
+    @FXML
+    void pruefekleinesergebnis4(MouseEvent event) {
+        if (s41 < 18&&s41>-1&&ts4_2.getText().equals("")) {
+            ts4_2.setText("21");
+        }
+        if (s42 < 18&&s42>-1&&ts4_1.getText().equals("")) {
+            ts4_1.setText("21");
+        }
+    }
+    @FXML
+    void pruefekleinesergebnis5(MouseEvent event) {
+        if (s51 < 18&&s51>-1&&ts5_2.getText().equals("")) {
+            ts5_2.setText("21");
+        }
+        if (s52 < 18&&s52>-1&&ts5_1.getText().equals("")) {
+            ts5_1.setText("21");
+        }
+    }
     private void satz1Gueltigkeit() {
         if(s11>-1&&s12>-1)
         {
