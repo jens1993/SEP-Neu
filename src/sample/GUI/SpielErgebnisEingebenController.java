@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import org.omg.PortableInterceptor.INACTIVE;
@@ -98,6 +99,26 @@ public class SpielErgebnisEingebenController implements Initializable{
     private Label t_heim;
     @FXML
     private Label t_gast;
+    @FXML
+    private ImageView green_check_1;
+    @FXML
+    private ImageView green_check_2;
+    @FXML
+    private ImageView green_check_3;
+    @FXML
+    private ImageView green_check_4;
+    @FXML
+    private ImageView green_check_5;
+    @FXML
+    private ImageView red_cross_1;
+    @FXML
+    private ImageView red_cross_2;
+    @FXML
+    private ImageView red_cross_3;
+    @FXML
+    private ImageView red_cross_4;
+    @FXML
+    private ImageView red_cross_5;
 
     Dictionary<Integer, Spiel> dictspiele = auswahlklasse.getAktuelleTurnierAuswahl().getSpiele();
 
@@ -127,6 +148,7 @@ public class SpielErgebnisEingebenController implements Initializable{
         {
             if (!((s11==29 && s12==30)||s11==30 && s12==29)){
                l_meldungergebnis.setText("Ein Satz muss mit 2 Punkten Differenz gewonnen werden");
+
                 System.out.println("Fehler in Satz ");
                 return false;
             }
@@ -147,6 +169,8 @@ public class SpielErgebnisEingebenController implements Initializable{
 
         return true;
     }
+
+
     @FXML
     void pressbtn_OK(ActionEvent event) {
 
@@ -437,11 +461,13 @@ public class SpielErgebnisEingebenController implements Initializable{
                         if(!gueltigesErgebnis(s11,s12))
                         {
                             l_meldungergebnis.setText("Satz 1 prüfen");
+                            zeigeRedCross1();
 
                         }
                         else
                         {
                             l_meldungergebnis.setText("Satz 1 OK");
+                            zeigeGreenCheck1();
                         }
 
                 } catch (Exception e) {
@@ -459,11 +485,13 @@ public class SpielErgebnisEingebenController implements Initializable{
                     if(!gueltigesErgebnis(s11,s12))
                     {
                          l_meldungergebnis.setText("Satz 1 prüfen");
+                        zeigeRedCross1();
 
                     }
                     else
                     {
                          l_meldungergebnis.setText("Satz 1 OK");
+                        zeigeGreenCheck1();
                     }
                 }
             } catch (Exception e) {
@@ -480,11 +508,13 @@ public class SpielErgebnisEingebenController implements Initializable{
                     if(!gueltigesErgebnis(s21,s22))
                     {
                         l_meldungergebnis.setText("Satz 2 prüfen");
+                        zeigeRedCross2();
 
                     }
                     else
                     {
                         l_meldungergebnis.setText("Satz 2 OK");
+                        zeigeGreenCheck2();
                     }
                 }
             } catch (Exception e) {
@@ -502,11 +532,13 @@ public class SpielErgebnisEingebenController implements Initializable{
                     if(!gueltigesErgebnis(s21,s22))
                     {
                          l_meldungergebnis.setText("Satz 2 prüfen");
+                         zeigeRedCross2();
 
                     }
                     else
                     {
                         l_meldungergebnis.setText("Satz 2 OK");
+                        zeigeGreenCheck2();
                     }
                 }
             } catch (Exception e) {
@@ -523,11 +555,13 @@ public class SpielErgebnisEingebenController implements Initializable{
                     if(!gueltigesErgebnis(s31,s32))
                     {
                         l_meldungergebnis.setText("Satz 3 prüfen");
+                        zeigeRedCross3();
 
                     }
                     else
                     {
                         l_meldungergebnis.setText("Satz 3 OK");
+                        zeigeGreenCheck3();
                     }
                 }
             } catch (Exception e) {
@@ -544,11 +578,13 @@ public class SpielErgebnisEingebenController implements Initializable{
                     if(!gueltigesErgebnis(s31,s32))
                     {
                         l_meldungergebnis.setText("Satz 3 prüfen");
+                        zeigeRedCross3();
 
                     }
                     else
                     {
                         l_meldungergebnis.setText("Satz 3 OK");
+                        zeigeGreenCheck3();
                     }
                 }
 
@@ -557,5 +593,51 @@ public class SpielErgebnisEingebenController implements Initializable{
             }
         });
 
+    }
+
+    private void zeigeGreenCheck1() {
+        red_cross_1.setVisible(false);
+        green_check_1.setVisible(true);
+    }
+
+    private void zeigeRedCross1() {
+        red_cross_1.setVisible(true);
+        green_check_1.setVisible(false);
+    }
+    private void zeigeGreenCheck2() {
+        red_cross_2.setVisible(false);
+        green_check_2.setVisible(true);
+    }
+
+    private void zeigeRedCross2() {
+        red_cross_2.setVisible(true);
+        green_check_2.setVisible(false);
+    }
+    private void zeigeGreenCheck3() {
+        red_cross_3.setVisible(false);
+        green_check_3.setVisible(true);
+    }
+
+    private void zeigeRedCross3() {
+        red_cross_3.setVisible(true);
+        green_check_3.setVisible(false);
+    }
+    private void zeigeGreenCheck4() {
+        red_cross_4.setVisible(false);
+        green_check_4.setVisible(true);
+    }
+
+    private void zeigeRedCross4() {
+        red_cross_4.setVisible(true);
+        green_check_4.setVisible(false);
+    }
+    private void zeigeGreenCheck5() {
+        red_cross_5.setVisible(false);
+        green_check_5.setVisible(true);
+    }
+
+    private void zeigeRedCross5() {
+        red_cross_5.setVisible(true);
+        green_check_5.setVisible(false);
     }
 }
