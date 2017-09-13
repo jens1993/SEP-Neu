@@ -4,6 +4,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -20,13 +23,33 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" stylesheets="@/CSS/SpielSystem_Neu.css" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="917.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SpielSystemController_neu">
-  <tabs>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="917.0" stylesheets="@/CSS/SpielSystem_Neu.css" tabClosingPolicy="UNAVAILABLE" tabMinWidth="280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SpielSystemController_neu">
+   <tabs>
       <Tab text="Setzliste">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="808.0" prefWidth="1070.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="654.0" prefWidth="917.0">
                <children>
-                  <GridPane layoutX="6.0" prefHeight="721.0" prefWidth="911.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <MenuBar prefHeight="25.0" prefWidth="917.0">
+                     <menus>
+                        <Menu mnemonicParsing="false" text="Setzliste erstellen">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#erstelleSetzlisteNormal" text="Nach Setzlisten-Reihenfolge" />
+                              <Menu fx:id="menu_rlp" mnemonicParsing="false" text="Nach Ranglistenpunkte">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#erstelleSetzlisteRLP" text="Alle" />
+                                 </items>
+                              </Menu>
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Spieler">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Hinzufügen" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Hilfe" />
+                     </menus>
+                  </MenuBar>
+                  <GridPane layoutX="6.0" layoutY="23.0" prefHeight="698.0" prefWidth="911.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="459.0" minWidth="10.0" prefWidth="390.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="550.0" minWidth="10.0" prefWidth="521.0" />
@@ -45,8 +68,8 @@
                            <children>
                               <HBox prefHeight="25.0" prefWidth="365.0">
                                  <children>
-                                    <TextField fx:id="t_suchleistesetzliste" prefHeight="25.0" prefWidth="237.0" promptText="Setzliste durchsuchen" />
                                     <Button fx:id="btnentf" mnemonicParsing="false" text="Spieler entfernen" />
+                                    <TextField fx:id="t_suchleistesetzliste" prefHeight="25.0" prefWidth="237.0" promptText="Setzliste durchsuchen" />
                                  </children>
                               </HBox>
                               <TableView fx:id="spielsystem_setzliste" prefHeight="690.0" prefWidth="410.0" />
@@ -117,13 +140,13 @@
                               <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gruppengröße:" GridPane.halignment="RIGHT" />
-                                    <TextField maxWidth="200.0" fx:id="textField_gruppenGroesse" GridPane.columnIndex="1">
+                                    <TextField fx:id="textField_gruppenGroesse" maxWidth="200.0" GridPane.columnIndex="1">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </TextField>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Weiterkommender:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                                    <TextField maxWidth="200.0" fx:id="textField_anzahlWeiterkommender" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <TextField fx:id="textField_anzahlWeiterkommender" maxWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
@@ -218,7 +241,7 @@
                                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Platz 3 ausspielen:" GridPane.halignment="RIGHT" />
                                                       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                                          <children>
-                                                            <RadioButton mnemonicParsing="false" fx:id="radio_platzDreiAusspielen" text="Ja">
+                                                            <RadioButton fx:id="radio_platzDreiAusspielen" mnemonicParsing="false" text="Ja">
                                                                <toggleGroup>
                                                                   <ToggleGroup fx:id="Platz3ausspielen" />
                                                                </toggleGroup>
@@ -310,5 +333,5 @@
             </GridPane>
          </content>
       </Tab>
-  </tabs>
+   </tabs>
 </TabPane>
