@@ -136,7 +136,7 @@ public class SpielSystemController_neu implements Initializable
             int key = (int) enumTeams.nextElement();
             Team team = auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key);
 
-            if (team.getSpielklasse().getSpielklasseID()==ausgewaehlte_spielklasse.getSpielklasseID()&&team.toStringKomplett()!="") {
+            if (team.getSpielklasse().getSpielklasseID()==ausgewaehlte_spielklasse.getSpielklasseID()&&!team.isFreilos()) {
                 if (team.toString().toUpperCase().contains(t_suchleistesetzliste.getText().toUpperCase())) {
                     obs_setzliste.add(team);
                 }
