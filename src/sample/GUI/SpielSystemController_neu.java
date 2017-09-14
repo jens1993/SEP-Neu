@@ -293,7 +293,8 @@ public class SpielSystemController_neu implements Initializable
     private void gruppeMitEndrundeStarten() {
         try{
             int gruppenGroesse = Integer.valueOf(textField_gruppenGroesse.getText());
-            int anzahlGruppen = ausgewaehlte_spielklasse.getSetzliste().size()/gruppenGroesse;
+            int anzahlGruppen = (int) Math.ceil(ausgewaehlte_spielklasse.getSetzliste().size()/gruppenGroesse);
+            System.out.println("Math.ceil: " + (int) Math.ceil(ausgewaehlte_spielklasse.getSetzliste().size()/gruppenGroesse));
             int anzahlWeiterkommender = Integer.valueOf(textField_anzahlWeiterkommender.getText());
             GruppeMitEndrunde gruppeMitEndrunde = new GruppeMitEndrunde(ausgewaehlte_spielklasse,anzahlGruppen,anzahlWeiterkommender);
             l_meldungsetzliste1.setText("ERFOLG");

@@ -30,7 +30,7 @@ public class KO extends Spielsystem {
 		alleSpieleSchreiben();
 	}
 
-	public KO(ArrayList<Team> setzliste, Spielsystem spielsystem, Spielklasse spielklasse,boolean platzDreiAusspielen){
+	/*public KO(ArrayList<Team> setzliste, Spielsystem spielsystem, Spielklasse spielklasse,boolean platzDreiAusspielen){
 		this.spielsystem = spielsystem;//Constructor für Endrunde bei Gruppe mit Endrunde
 		this.setzliste=setzliste;
 		this.platzDreiAusspielen = platzDreiAusspielen;
@@ -45,9 +45,9 @@ public class KO extends Spielsystem {
 		}
 		ersteRundeFuellen(setzliste);
 		alleSpieleSchreiben();
-	}
+	}*/
 
-	public KO(int anzahlSpieler, Spielsystem gruppeMitEndrunde, Spielklasse spielklasse, boolean platzDreiAusspielen, boolean einlesen) {
+	public KO(int anzahlSpieler, Spielsystem gruppeMitEndrunde, Spielklasse spielklasse, boolean platzDreiAusspielen) {
 		this.spielsystem = gruppeMitEndrunde;//Constructor für Endrunde bei Gruppe mit Endrunde einlesen
 		this.platzDreiAusspielen = platzDreiAusspielen;
 		this.setSpielklasse(spielklasse);
@@ -59,10 +59,24 @@ public class KO extends Spielsystem {
 		if(platzDreiAusspielen){
 			spielUmDreiErstellen();
 		}
-		if(!einlesen) {
-			alleSpieleSchreiben();
-		}
+		alleSpieleSchreiben();
 	}
+
+	public KO(int anzahlSpieler, Spielsystem gruppeMitEndrunde, Spielklasse spielklasse, boolean platzDreiAusspielen, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
+		this.spielsystem = gruppeMitEndrunde;//Constructor für Endrunde bei Gruppe mit Endrunde einlesen
+		this.platzDreiAusspielen = platzDreiAusspielen;
+		this.setSpielklasse(spielklasse);
+		this.teilnehmerzahl=anzahlSpieler;
+		setSpielSystemArt(2);
+		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
+		freiloseHinzufuegen(anzahlSpieler);
+		knotenEinlesen(spiele);
+		if(platzDreiAusspielen){
+			spielUmDreiErstellen();
+		}
+		alleErgebnisseEinlesen(ergebnisse);
+	}
+
 
 	public KO(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
 		this.setSpielklasse(spielklasse);		//Constructor nur für Einlesen aus der Datenbank
@@ -100,7 +114,7 @@ public class KO extends Spielsystem {
 		for (int i=0;i<spiele.size();i++){
 			Spiel spiel = spiele.get(i);
 			int key = spiel.getSystemSpielID();
-			spiel.setSpielsystem(this);
+			spiel.setSpielsystem(this.spielsystem);
 			dicSpiele.put(key,spiel);
 		}
 		teilnehmerzahl=spiele.size()+1;
@@ -120,9 +134,13 @@ public class KO extends Spielsystem {
 				int leftKnotenSpielID = ((aktuellerKnoten.getSpielID()-getSpielSystemArt()*10000000-getAktuelleRunde()*1000)*2+getSpielSystemArt()*10000000+getAktuelleRunde()*1000)+1000;
 				int rightKnotenSpielID = ((aktuellerKnoten.getSpielID()-getSpielSystemArt()*10000000-getAktuelleRunde()*1000)*2+getSpielSystemArt()*10000000+getAktuelleRunde()*1000)+1001;
 				int leftKnotenSetzPlatzHeim = aktuellerKnoten.getSetzplatzHeim();
+				dicSpiele.get(leftKnotenSpielID).setSetzPlatzHeim(leftKnotenSetzPlatzHeim);
 				int leftKnotenSetzPlatzGast = hoechsterSetzplatz - aktuellerKnoten.getSetzplatzHeim() + 1;
+				dicSpiele.get(leftKnotenSpielID).setSetzPlatzGast(leftKnotenSetzPlatzGast);
 				int rightKnotenSetzPlatzHeim = hoechsterSetzplatz - aktuellerKnoten.getSetzplatzGast() + 1;
+				dicSpiele.get(rightKnotenSpielID).setSetzPlatzHeim(rightKnotenSetzPlatzHeim);
 				int rightKnotenSetzPlatzGast = aktuellerKnoten.getSetzplatzGast();
+				dicSpiele.get(rightKnotenSpielID).setSetzPlatzGast(rightKnotenSetzPlatzGast);
 				aktuellerKnoten.addLeft(leftKnotenSpielID, leftKnotenSetzPlatzHeim, leftKnotenSetzPlatzGast );
 				aktuellerKnoten.getLeft().setSpiel(dicSpiele.get(leftKnotenSpielID));
 				aktuellerKnoten.addRight(rightKnotenSpielID, rightKnotenSetzPlatzHeim ,rightKnotenSetzPlatzGast );
@@ -135,14 +153,6 @@ public class KO extends Spielsystem {
 		}
 	}
 
-
-	public void alleSpieleErstellen(){
-
-	}
-
-	public SpielTree getFinale() {
-		return finale;
-	}
 
 	public SpielTree knotenAufbauen (int teilnehmerzahl){
 		int anzahlRunden = rundenBerechnen();

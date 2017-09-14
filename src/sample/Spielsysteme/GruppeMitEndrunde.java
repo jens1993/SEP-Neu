@@ -11,7 +11,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 	private ArrayList<Team> templist = new ArrayList<>();
 	private ArrayList<ArrayList<Team>> alleSetzListen = new ArrayList<>();
 	private ArrayList<Gruppe> alleGruppen = new ArrayList<>();
-	private Dictionary<Integer,ArrayList<Team>> allePlatzierungslisten = new Hashtable();
+	private ArrayList<ArrayList<Team>> allePlatzierungslisten = new ArrayList<>();
 	private Spielsystem endrunde;
 	private Dictionary<Integer,Integer[]> setzPlatze = new Hashtable<>();
 
@@ -79,7 +79,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 
 		}
 		this.anzahlWeiterkommender = endrundenSpiele.size()+1;
-		endrunde= new KO(anzahlWeiterkommender,this, this.getSpielklasse(),false, true);
+		endrunde= new KO(anzahlWeiterkommender,this, this.getSpielklasse(),false, endrundenSpiele, endrundenErgebnisse);
 	}
 
 	private void setzListeAufteilen(){
@@ -129,7 +129,7 @@ public class GruppeMitEndrunde extends Spielsystem{
 		}
 	}
 	private void endRundeErstellen(){
-		endrunde= new KO(anzahlWeiterkommender,this, this.getSpielklasse(),false, false);
+		endrunde= new KO(anzahlWeiterkommender,this, this.getSpielklasse(),false);
 	}
 
 
@@ -140,11 +140,39 @@ public class GruppeMitEndrunde extends Spielsystem{
 			int setzplatzgast = spiel.getSetzPlatzGast();
 			if(setzPlatze.get(setzplatzheim) != null && setzPlatze.get(setzplatzheim)[0]==extraRundenID){
 				spiel.setHeim(platzierungsliste.get(setzPlatze.get(setzplatzheim)[1]-1));
+				spiel.getSpielDAO().update(spiel);
 			}
 			if(setzPlatze.get(setzplatzgast) != null && setzPlatze.get(setzplatzgast)[0]==extraRundenID){
 				spiel.setGast(platzierungsliste.get(setzPlatze.get(setzplatzgast)[1]-1));
+				spiel.getSpielDAO().update(spiel);
 			}
-
+		}
+		allePlatzierungslisten.add(platzierungsliste);
+		if (allePlatzierungslisten.size()==alleGruppen.size()){
+			int wildcards = anzahlWeiterkommender%anzahlGruppen;
+			int platzierungFuerWildcard = (int) Math.ceil(anzahlWeiterkommender/anzahlGruppen);
+			ArrayList<Team> platzierteTeams = new ArrayList<>();
+			Dictionary<Integer,Team> wildCardTeams = new Hashtable<>(); //Dictionary mit Setzplatz;
+			for (int i=0;i<allePlatzierungslisten.size();i++){
+				platzierteTeams.add(allePlatzierungslisten.get(i).get(platzierungFuerWildcard-1)); //füge alle Teams mit der gesuchten Platzierung hinzu
+			}
+			sortList(platzierteTeams);
+			int setzplatz = (platzierungFuerWildcard-1)*anzahlGruppen +1;
+			for (int i=0;i<wildcards;i++){
+				wildCardTeams.put(setzplatz,platzierteTeams.get(i));
+				setzplatz++;
+			}
+			for (int i=0;i<endrunde.getRunden().get(0).size();i++){
+				Spiel spiel = endrunde.getRunden().get(0).get(i);
+				int setzplatzheim = spiel.getSetzPlatzHeim();
+				int setzplatzgast = spiel.getSetzPlatzGast();
+				if (wildCardTeams.get(setzplatzheim)!=null){
+					spiel.setHeim(wildCardTeams.get(setzplatzheim));
+				}
+				if (wildCardTeams.get(setzplatzgast)!=null){
+					spiel.setGast(wildCardTeams.get(setzplatzgast));
+				}
+			}
 		}
 	}
 

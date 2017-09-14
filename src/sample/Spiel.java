@@ -452,26 +452,28 @@ public class Spiel {
 	}
 
 	private void statistikAktualisieren() {
-		int satzpunkteHeim = 0;
-		int satzpunkteGast = 0;
-		heim.addBisherigenGegner(gast);
-		gast.addBisherigenGegner(heim);
-		getSieger().addGewonnenesSpiel();
-		int i=0;
-		while (i<ergebnis.getErgebnisArray().length/2){
-			satzpunkteHeim = ergebnis.getErgebnisArray()[i*2];
-			satzpunkteGast = ergebnis.getErgebnisArray()[i*2+1];
-			heim.addGespieltePunkte(satzpunkteHeim,satzpunkteGast);
-			gast.addGespieltePunkte(satzpunkteGast,satzpunkteHeim);
-			if (satzpunkteHeim>satzpunkteGast) {
-				heim.addGewonnenenSatz();
-				gast.addVerlorenenSatz();
+		if (heim != null && gast !=null) {
+			int satzpunkteHeim = 0;
+			int satzpunkteGast = 0;
+
+			heim.addBisherigenGegner(gast);
+			gast.addBisherigenGegner(heim);
+			getSieger().addGewonnenesSpiel();
+			int i = 0;
+			while (i < ergebnis.getErgebnisArray().length / 2) {
+				satzpunkteHeim = ergebnis.getErgebnisArray()[i * 2];
+				satzpunkteGast = ergebnis.getErgebnisArray()[i * 2 + 1];
+				heim.addGespieltePunkte(satzpunkteHeim, satzpunkteGast);
+				gast.addGespieltePunkte(satzpunkteGast, satzpunkteHeim);
+				if (satzpunkteHeim > satzpunkteGast) {
+					heim.addGewonnenenSatz();
+					gast.addVerlorenenSatz();
+				} else {
+					gast.addGewonnenenSatz();
+					heim.addVerlorenenSatz();
+				}
+				i++;
 			}
-			else{
-				gast.addGewonnenenSatz();
-				heim.addVerlorenenSatz();
-			}
-			i++;
 		}
 	}
 
@@ -484,6 +486,14 @@ public class Spiel {
 		this.turnier.getSpiele().put(spielID,this);
 	}
 
+	public void setSetzPlatzHeim(int setzPlatzHeim) {
+		this.setzPlatzHeim = setzPlatzHeim;
+	}
+
+	public void setSetzPlatzGast(int setzPlatzGast) {
+		this.setzPlatzGast = setzPlatzGast;
+	}
+
 	public int getSetzPlatzHeim() {
 		return setzPlatzHeim;
 	}
@@ -493,24 +503,14 @@ public class Spiel {
 	}
 
 	public void spielzettelDrucken() {
-
 		Spielzettel test = new Spielzettel(this);
-        /*//*JFrame window = new JFrame();
-		window.setSize(800,600);
-		window.setTitle("Spielzettel");
-		window.setVisible(true);
-		DrawingComponent drawingComponent = new DrawingComponent();
-		window.add(test);*/
 
 		PrinterJob job = PrinterJob.getPrinterJob();
-		//Book book = new Book();
 		PageFormat querFormat = new PageFormat();
 		Paper paper = querFormat.getPaper();
-		//Remove borders from the paper
 		paper.setImageableArea(45, 45, querFormat.getPaper().getWidth()-90, querFormat.getPaper().getHeight()-90);
 		querFormat.setPaper(paper);
 		querFormat.setOrientation(PageFormat.LANDSCAPE);
-		//book.append(test,querFormat);
 		job.setPrintable(test,querFormat);
 		try {
 			job.print();
@@ -520,37 +520,6 @@ public class Spiel {
 			System.out.println("Drucken fehlgeschlagen");
 		}
 		System.exit(0);
-
-
-
-		/*sechsSpielzettel test = new sechsSpielzettel(spieler);
-        /*JFrame window = new JFrame();
-        window.setSize(800,600);
-        window.setTitle("Spielzettel");
-        window.setVisible(true);
-        DrawingComponent drawingComponent = new DrawingComponent();
-        window.add(test);
-
-		PrinterJob job = PrinterJob.getPrinterJob();
-		//Book book = new Book();
-		PageFormat querFormat = new PageFormat();
-		Paper paper = querFormat.getPaper();
-		//Remove borders from the paper
-		paper.setImageableArea(45, 45, querFormat.getPaper().getWidth()-90, querFormat.getPaper().getHeight()-90);
-		querFormat.setPaper(paper);
-		querFormat.setOrientation(PageFormat.PORTRAIT);
-		//book.append(test,querFormat);
-		job.setPrintable(test,querFormat);
-		job.printDialog();
-		try {
-			job.print();
-		}
-		catch (PrinterException e)
-		{
-			System.out.println("Drucken fehlgeschlagen");
-		}
-		System.exit(0);*/
-
 	}
 
 }
