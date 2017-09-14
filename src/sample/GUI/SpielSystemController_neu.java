@@ -1,9 +1,12 @@
 package sample.GUI;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +45,8 @@ public class SpielSystemController_neu implements Initializable
     //region Deklaration
     TableColumn<Team,Integer> setzplatz = new TableColumn("Setzplatz");
     //Dictionary<Integer, Team> dicttest = new Hashtable<>();
+    @FXML
+    private Label anzahlsetzlistespieler;
     @FXML
     private Tab tabsperst;
 
@@ -955,7 +960,11 @@ public class SpielSystemController_neu implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        obs_setzliste.addListener((ListChangeListener)(c -> {
+        anzahlsetzlistespieler.setText(obs_setzliste.size()+" Spieler");
+        }));
         tabsperst.setDisable(false);
+
         spielsystem_spielerliste_alleSpieler.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         spielsystem_setzliste.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         System.out.println("------------------"+ausgewaehlte_spielklasse.isSetzliste_gesperrt());
@@ -1207,6 +1216,9 @@ public class SpielSystemController_neu implements Initializable
         auswahlklasse.getStagesdict();
 
         sortiereTabelleSetzliste();
+
+
+
     }//Ende Initialize
 
     private void markierteSpielerzurSetzliste() {

@@ -71,7 +71,12 @@
                            <children>
                               <HBox prefHeight="25.0" prefWidth="365.0">
                                  <children>
-                                    <TextField fx:id="t_suchleistesetzliste" prefHeight="25.0" prefWidth="303.0" promptText="Setzliste durchsuchen" />
+                                    <TextField fx:id="t_suchleistesetzliste" prefHeight="25.0" prefWidth="225.0" promptText="Setzliste durchsuchen" />
+                                    <Label fx:id="anzahlsetzlistespieler" text="Label">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </HBox>
                               <TableView fx:id="spielsystem_setzliste" prefHeight="673.0" prefWidth="441.0" />
