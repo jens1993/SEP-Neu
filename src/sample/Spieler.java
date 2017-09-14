@@ -184,7 +184,28 @@ public class Spieler {
 		//spielerDAO.update(this);
 	}
 
+	public int getRLPanzeigen()
+	{
+		int rlp=-0;
+		int index=-1;
 
+		if(this!=null) {
+			if (auswahlklasse.getAktuelleSpielklassenAuswahl().getDisziplin().contains("doppel")) {
+				index = 1;
+			}
+			if (auswahlklasse.getAktuelleSpielklassenAuswahl().getDisziplin().contains("einzel")) {
+				index = 0;
+			}
+			if (auswahlklasse.getAktuelleSpielklassenAuswahl().getDisziplin().contains("Mix")) {
+				index = 2;
+			}
+			rlp=rPunkte[index];
+
+		}
+		return rlp;
+
+
+	}
 	public String getNationalitaet() {
 		return Nationalitaet;
 	}

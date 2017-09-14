@@ -207,7 +207,8 @@ public class Team {
 
     public int getSetzplatz() {
 
-        if(setzplatz==0)
+/* wenn 0 -->dann spielklasse_setzplatz
+  if(setzplatz==0)
         {
             if(auswahlklasse.getAktuelleSpielklassenAuswahl()!=null) {
                 if (auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().get(this) != null) {
@@ -216,7 +217,7 @@ public class Team {
                     }
                 }
             }
-        }
+        }*/
         return setzplatz;
     }
 

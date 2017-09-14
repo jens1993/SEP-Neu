@@ -37,9 +37,10 @@
                               <MenuItem mnemonicParsing="false" onAction="#erstelleSetzlisteNormal" text="Nach Setzlisten-Reihenfolge" />
                               <Menu fx:id="menu_rlp" mnemonicParsing="false" text="Nach Ranglistenpunkte">
                                  <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#erstelleSetzlisteRLP" text="Alle" />
+                                    <MenuItem mnemonicParsing="false" text="Alle" />
                                  </items>
                               </Menu>
+                              <MenuItem mnemonicParsing="false" onAction="#erstelleSetzlisteZufall" text="Zufällig" />
                            </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Spieler">
@@ -52,9 +53,9 @@
                   </MenuBar>
                   <GridPane layoutX="6.0" layoutY="23.0" prefHeight="698.0" prefWidth="911.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="459.0" minWidth="10.0" prefWidth="435.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="550.0" minWidth="10.0" prefWidth="128.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="550.0" minWidth="10.0" prefWidth="521.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="459.0" minWidth="10.0" prefWidth="322.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="550.0" minWidth="10.0" prefWidth="46.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="562.0" minWidth="10.0" prefWidth="562.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -70,10 +71,10 @@
                            <children>
                               <HBox prefHeight="25.0" prefWidth="365.0">
                                  <children>
-                                    <TextField fx:id="t_suchleistesetzliste" prefHeight="25.0" prefWidth="237.0" promptText="Setzliste durchsuchen" />
+                                    <TextField fx:id="t_suchleistesetzliste" prefHeight="25.0" prefWidth="303.0" promptText="Setzliste durchsuchen" />
                                  </children>
                               </HBox>
-                              <TableView fx:id="spielsystem_setzliste" prefHeight="690.0" prefWidth="410.0" />
+                              <TableView fx:id="spielsystem_setzliste" prefHeight="673.0" prefWidth="441.0" />
                            </children>
                         </VBox>
                         <VBox fx:id="vbox_pfeile" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="21.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
