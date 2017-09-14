@@ -217,7 +217,7 @@ public class Spielklasse {
 
 	public boolean isSetzliste_gesperrt() {
 
-		if(this.getSetzliste().size()>0||this.getSpiele().size()>0)
+		if(this.getSpiele().size()>0)
 		{
 			setzliste_gesperrt=true;
 		}

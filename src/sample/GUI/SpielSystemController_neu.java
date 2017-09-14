@@ -39,6 +39,7 @@ import java.util.stream.Collectors;
 
 public class SpielSystemController_neu implements Initializable
 {
+    //region Deklaration
     TableColumn<Team,Integer> setzplatz = new TableColumn("Setzplatz");
     //Dictionary<Integer, Team> dicttest = new Hashtable<>();
     @FXML
@@ -124,11 +125,11 @@ public class SpielSystemController_neu implements Initializable
     private SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
     Team team = new Team();
 
+    //endregion
     //Linke Tabelle füllen beim Laden
+
     private void fuelleobs_setzliste() {
         obs_setzliste.clear();
-
-
         Enumeration enumTeams = auswahlklasse.getAktuelleTurnierAuswahl().getTeams().keys();
 
         while (enumTeams.hasMoreElements()) {
@@ -141,31 +142,8 @@ public class SpielSystemController_neu implements Initializable
                 }
 
             }
-
-
         }
-
-
-/*            for(int i=1;i<=auswahlklasse.getAktuelleTurnierAuswahl().getTeams().size();i++)
-        {
-
-            if(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i)!=null) {
-                if (auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i).getSpielklasse().getSpielklasseID()==ausgewaehlte_spielklasse.getSpielklasseID()) {
-*//*                    if (!auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i).getSetzplatzString2().equals("")) {
-                        obs_setzliste.add(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i));
-                    }*//*
-                    obs_setzliste.add(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(i));
-                }
-
-            }
-        }*/
-        System.out.println();
         pruefeAnzahlRLPItems();
-/*        if (obs_setzliste!=null) {
-            for (int j = 0; j < dicttest.size(); j++) {
-                obs_setzliste.add(dicttest.get(j));
-            }
-        }*/
     }
 
     private void printSpielerSpielklasseHinzuTable() throws Exception {
@@ -251,9 +229,10 @@ public class SpielSystemController_neu implements Initializable
             spielerVereinSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,String>("verein"));
             TableColumn<Spieler,Date> spielerGeburtsdatumSpalte = new TableColumn("Geburtsdatum");
             spielerGeburtsdatumSpalte.setCellValueFactory(new PropertyValueFactory<Spieler,Date>("gDatum"));
-
+            TableColumn<Spieler,Integer> spielerRLP = new TableColumn("Ranglistenpunkte");
+            spielerRLP.setCellValueFactory(new PropertyValueFactory<Spieler,Integer>("RLPanzeigen"));
             spielsystem_spielerliste_alleSpieler.setItems(obs_spieler);
-            spielsystem_spielerliste_alleSpieler.getColumns().addAll(spielerVornameSpalte,spielerNachnameSpalte,spielerVereinSpalte,spielerGeburtsdatumSpalte);
+            spielsystem_spielerliste_alleSpieler.getColumns().addAll(spielerVornameSpalte,spielerNachnameSpalte,spielerRLP,spielerVereinSpalte,spielerGeburtsdatumSpalte);
         }
         else{
             System.out.println("kann Spielerliste nicht laden");
@@ -274,6 +253,16 @@ public class SpielSystemController_neu implements Initializable
     }
     @FXML
     private void pressbtn_spielklasseStarten(ActionEvent event){
+        if(ausgewaehlte_spielklasse.getSetzlistedict().size()==0)
+        {
+            System.out.println("Spielklasse_Setzliste wird erstellt");
+            for(int i=0;i<obs_setzliste.size();i++)
+            {
+                setzlisteDAO.create(i+1,obs_setzliste.get(i),obs_setzliste.get(i).getSpielklasse());
+                ausgewaehlte_spielklasse.getSetzlistedict().put(obs_setzliste.get(i),i+1);
+                ausgewaehlte_spielklasse.getSetzliste().add(obs_setzliste.get(i));
+            }
+        }
         if(ausgewaehlte_spielklasse.getSetzliste().size()>0&&ausgewaehlte_spielklasse.getSpiele().size()<=0)
         {
 
@@ -376,59 +365,135 @@ public class SpielSystemController_neu implements Initializable
         boolean erfolg=false;
         for(int i=0;i<obs_setzliste.size();i++)
         {
+
             if(obs_setzliste.get(i).getSetzplatz()>0)
             {
 
-                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(obs_setzliste.get(i));
-                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(obs_setzliste.get(i),obs_setzliste.get(i).getSetzplatz());
-                erfolg= setzlisteDAO.create(obs_setzliste.get(i).getSetzplatz(),obs_setzliste.get(i),obs_setzliste.get(i).getSpielklasse());
+
+/*                    auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(obs_setzliste.get(i));
+                    auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(obs_setzliste.get(i),obs_setzliste.get(i).getSetzplatz());
+                    erfolg= setzlisteDAO.create(obs_setzliste.get(i).getSetzplatz(),obs_setzliste.get(i),obs_setzliste.get(i).getSpielklasse());*/
+
+
             }
             if(obs_setzliste.get(i).getSetzplatz()==0)
             {
-                erfolg= setzlisteDAO.create(i+1,obs_setzliste.get(i),obs_setzliste.get(i).getSpielklasse());
+/*                erfolg= setzlisteDAO.create(i+1,obs_setzliste.get(i),obs_setzliste.get(i).getSpielklasse());
                 auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(obs_setzliste.get(i),i+1);
-                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(obs_setzliste.get(i));
+                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(obs_setzliste.get(i));*/
+                obs_setzliste.get(i).setSetzplatz(i+1);
+                obs_setzliste.get(i).getTeamDAO().update(obs_setzliste.get(i));
             }
         }
-        if(erfolg)
+/*        if(erfolg)
         {
             auswahlklasse.InfoBenachrichtigung("Erfolg","Erfolg");
             auswahlklasse.getAktuelleSpielklassenAuswahl().setSetzliste_gesperrt(true);
-            pruefeSperrungSetzliste();
+            //pruefeSperrungSetzliste();
         }
         if(!erfolg)
         {
             auswahlklasse.WarnungBenachrichtigung("Fehler","Fehler");
-        }
+        }*/
         fuelleobs_setzliste();
         sortiereTabelleSetzliste();
     }
+
     @FXML
-    void erstelleSetzlisteRLP(ActionEvent event) {
+    void erstelleSetzlisteZufall(ActionEvent event) {
         t_suchleistesetzliste.setText("");
         spielsystem_setzliste.setEditable(false);
         SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
         boolean erfolg=false;
         ArrayList <Team> teamsohnesetzplatz=new ArrayList<>();
-        ObservableList<Team> obs_teamsohne = FXCollections.observableArrayList();
+        ArrayList <Team> teamsohnesetzplatz_random=new ArrayList<>();
         int index=1;
+
         for(int i=0;i<obs_setzliste.size();i++)
         {
-            if(obs_setzliste.get(i).getSetzplatz()>0)
-            {
-                erfolg= setzlisteDAO.create(obs_setzliste.get(i).getSetzplatz(),obs_setzliste.get(i),obs_setzliste.get(i).getSpielklasse());
+            System.out.println(i);
+
+            if (obs_setzliste.get(i).getSetzplatz() > 0) {
+/*                erfolg = setzlisteDAO.create(obs_setzliste.get(i).getSetzplatz(), obs_setzliste.get(i), obs_setzliste.get(i).getSpielklasse());
+
+                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(obs_setzliste.get(i), i + 1);
+                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(obs_setzliste.get(i));*/
                 index++;
-                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(obs_setzliste.get(i),i+1);
-                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(obs_setzliste.get(i));
             }
-            if(obs_setzliste.get(i).getSetzplatz()==0)
-            {
+            if (obs_setzliste.get(i).getSetzplatz() == 0) {
                 teamsohnesetzplatz.add(obs_setzliste.get(i));
-                obs_teamsohne.add(obs_setzliste.get(i));
 
                 //erfolg= setzlisteDAO.create(i+1,obs_setzliste.get(i),obs_setzliste.get(i).getSpielklasse());
             }
         }
+
+
+        teamsohnesetzplatz.sort(new Comparator<Team>() {
+            @Override
+            public int compare(Team z1, Team z2) {
+                if (z1.getRLPanzeigen() > z2.getRLPanzeigen())
+                    return -1;
+                if (z1.getRLPanzeigen() < z2.getRLPanzeigen())
+                    return 1;
+                return 0;
+            }
+        });
+
+        Collections.shuffle(teamsohnesetzplatz);
+        for(int i=0;i<teamsohnesetzplatz.size();i++)
+        {
+/*            erfolg=setzlisteDAO.create(index,teamsohnesetzplatz.get(i),teamsohnesetzplatz.get(i).getSpielklasse());
+
+            auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(teamsohnesetzplatz.get(i),index);
+            auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(teamsohnesetzplatz.get(i));*/
+            teamsohnesetzplatz.get(i).setSetzplatz(index);
+            teamsohnesetzplatz.get(i).getTeamDAO().update(teamsohnesetzplatz.get(i));
+            index++;
+        }
+
+
+/*        if(erfolg)
+        {
+            auswahlklasse.InfoBenachrichtigung("Erfolg","Erfolg");
+            auswahlklasse.getAktuelleSpielklassenAuswahl().setSetzliste_gesperrt(true);
+            // pruefeSperrungSetzliste();
+        }
+        if(!erfolg)
+        {
+            auswahlklasse.WarnungBenachrichtigung("Fehler","Fehler");
+        }*/
+        fuelleobs_setzliste();
+        sortiereTabelleSetzliste();
+
+    }
+
+    void erstelleSetzlisteRLPAnzahlSpieler(int anzahlspieler) {
+        t_suchleistesetzliste.setText("");
+        spielsystem_setzliste.setEditable(false);
+        SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
+        boolean erfolg=false;
+        ArrayList <Team> teamsohnesetzplatz=new ArrayList<>();
+        ArrayList <Team> teamsohnesetzplatz_random=new ArrayList<>();
+        int index=1;
+
+        for(int i=0;i<obs_setzliste.size();i++)
+        {
+            System.out.println(i);
+
+            if (obs_setzliste.get(i).getSetzplatz() > 0) {
+/*                erfolg = setzlisteDAO.create(obs_setzliste.get(i).getSetzplatz(), obs_setzliste.get(i), obs_setzliste.get(i).getSpielklasse());
+
+                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(obs_setzliste.get(i), i + 1);
+                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(obs_setzliste.get(i));*/
+                index++;
+            }
+            if (obs_setzliste.get(i).getSetzplatz() == 0) {
+                teamsohnesetzplatz.add(obs_setzliste.get(i));
+
+                //erfolg= setzlisteDAO.create(i+1,obs_setzliste.get(i),obs_setzliste.get(i).getSpielklasse());
+            }
+        }
+
 
         teamsohnesetzplatz.sort(new Comparator<Team>() {
             @Override
@@ -442,22 +507,47 @@ public class SpielSystemController_neu implements Initializable
         });
 
 
-        for (int i=0;i<teamsohnesetzplatz.size();i++)
+        for(int i=0;i<teamsohnesetzplatz.size();i++)
         {
-            erfolg=setzlisteDAO.create(index+i,teamsohnesetzplatz.get(i),teamsohnesetzplatz.get(i).getSpielklasse());
-            auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(teamsohnesetzplatz.get(i),index+i);
-            auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(teamsohnesetzplatz.get(i));
+            if(i<anzahlspieler&&teamsohnesetzplatz.get(i)!=null)
+            {
+/*                erfolg=setzlisteDAO.create(index,teamsohnesetzplatz.get(i),teamsohnesetzplatz.get(i).getSpielklasse());
+
+                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(teamsohnesetzplatz.get(i),index);
+                auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(teamsohnesetzplatz.get(i));*/
+                teamsohnesetzplatz.get(i).setSetzplatz(index);
+                teamsohnesetzplatz.get(i).getTeamDAO().update(teamsohnesetzplatz.get(i));
+                index++;
+            }
+            else
+            {
+                if(teamsohnesetzplatz.get(i)!=null)
+                {
+                    teamsohnesetzplatz_random.add(teamsohnesetzplatz.get(i));
+                }
+
+            }
         }
-        if(erfolg)
+
+        Collections.shuffle(teamsohnesetzplatz_random);
+        for (int i=0;i<teamsohnesetzplatz_random.size();i++)
+        {
+/*            erfolg=setzlisteDAO.create(index,teamsohnesetzplatz_random.get(i),teamsohnesetzplatz_random.get(i).getSpielklasse());
+
+            auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzlistedict().put(teamsohnesetzplatz_random.get(i),index);
+            auswahlklasse.getAktuelleSpielklassenAuswahl().getSetzliste().add(teamsohnesetzplatz_random.get(i));*/
+            index++;
+        }
+/*        if(erfolg)
         {
             auswahlklasse.InfoBenachrichtigung("Erfolg","Erfolg");
             auswahlklasse.getAktuelleSpielklassenAuswahl().setSetzliste_gesperrt(true);
-            pruefeSperrungSetzliste();
+            //pruefeSperrungSetzliste();
         }
         if(!erfolg)
         {
             auswahlklasse.WarnungBenachrichtigung("Fehler","Fehler");
-        }
+        }*/
         fuelleobs_setzliste();
         sortiereTabelleSetzliste();
 
@@ -746,6 +836,7 @@ public class SpielSystemController_neu implements Initializable
             keinsetzplatz=true;
         }
 
+        setzlisteDAO.deleteSetzplatz(ausgewaehlte_spielklasse.getSpielklasseID(),team.getTeamid());
         team.getTeamDAO().delete(team);
         obs_setzliste.remove(team);
         auswahlklasse.getAktuelleTurnierAuswahl().getTeams().remove(team.getTeamid());
@@ -864,7 +955,7 @@ public class SpielSystemController_neu implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tabsperst.setDisable(true);
+        tabsperst.setDisable(false);
         spielsystem_spielerliste_alleSpieler.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         spielsystem_setzliste.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         System.out.println("------------------"+ausgewaehlte_spielklasse.isSetzliste_gesperrt());
@@ -880,7 +971,7 @@ public class SpielSystemController_neu implements Initializable
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(ausgewaehlte_spielklasse.isSetzliste_gesperrt()||ausgewaehlte_spielklasse.getSetzliste().size()>0)
+        if(ausgewaehlte_spielklasse.isSetzliste_gesperrt())
         {
             pruefeSperrungSetzliste();
         }
@@ -1106,37 +1197,11 @@ public class SpielSystemController_neu implements Initializable
             fuelleobs_setzliste();
 
             spielsystem_setzliste.refresh();
-              setzplatz.setSortType(TableColumn.SortType.ASCENDING);
-        spielsystem_setzliste.getSortOrder().add(setzplatz);
+            setzplatz.setSortType(TableColumn.SortType.ASCENDING);
+            spielsystem_setzliste.getSortOrder().add(setzplatz);
 
         });
 
-/*    Suchleiste wird noch benötigt
-
-    t_suchleistesetzliste.textProperty().addListener((observable, oldValue, newValue) -> {
-            // System.out.println("textfield changed from " + oldValue + " to " + newValue);
-            //obs_spieler.clear();
-            //ausgewaehlte_spielklasse.getSetzliste().
-            obs_setzliste.clear();
-            for (int i = 0; i < obs_setzliste.size(); i++) {
-                dicttest.put(i, ausgewaehlte_spielklasse.getSetzliste().get(i));
-                System.out.println("Dict: " + dicttest.size());
-                System.out.println(ausgewaehlte_spielklasse.getSetzliste().size());
-            }
-            spielsystem_setzliste.refresh();
-            Enumeration e = dicttest.keys();
-            while (e.hasMoreElements()) {
-                int key = (int) e.nextElement();
-                if (ausgewaehlte_spielklasse.getSetzliste().get(key).toString() != null) {
-                    if (ausgewaehlte_spielklasse.getSetzliste().get(key).toString().toUpperCase().contains(t_suchleistesetzliste.getText().toUpperCase())) {
-                        obs_setzliste.add(ausgewaehlte_spielklasse.getSetzliste().get(key));
-                    }
-                    ;
-                }
-            }
-
-
-        });*/
 
 
         auswahlklasse.getStagesdict();
@@ -1160,11 +1225,11 @@ public class SpielSystemController_neu implements Initializable
         {
 
 
-        for(int i=0;i<markierteTeams.size();i++)
-        {
-            Team team = (Team) markierteTeams.get(i);
-            removeTeam(team);
-        }
+            for(int i=0;i<markierteTeams.size();i++)
+            {
+                Team team = (Team) markierteTeams.get(i);
+                removeTeam(team);
+            }
         }
     }
 
@@ -1175,7 +1240,7 @@ public class SpielSystemController_neu implements Initializable
         alle.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                erstelleSetzlisteRLP(event);
+                erstelleSetzlisteRLPAnzahlSpieler(obs_setzliste.size());
             }
         });
         menu_rlp.getItems().add(alle);
@@ -1195,8 +1260,9 @@ public class SpielSystemController_neu implements Initializable
                 item[finalI].setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        System.out.println(event.getEventType().getName());
-                        System.out.println(finalI);
+                        int anzahl = (int) Math.pow(2,finalI+1);
+                        System.out.println(anzahl);
+                        erstelleSetzlisteRLPAnzahlSpieler(anzahl);
                     }
                 });
             }
@@ -1214,18 +1280,22 @@ public class SpielSystemController_neu implements Initializable
     }
 
     private void pruefeSperrungSetzliste() {
-        tabsperst.setDisable(false);
-        ausgewaehlte_spielklasse.setSetzliste_gesperrt(true);
-        pfeil_links.setVisible(false);
-        pfeil_rechts.setVisible(false);
-        l_meldungsetzliste1.setText("Setzliste gesperrt!!!");
-        spielsystem_spielerliste_alleSpieler.setVisible(false);
+        if(ausgewaehlte_spielklasse.getSpiele().size()>0)
+        {
+            tabsperst.setDisable(false);
+            ausgewaehlte_spielklasse.setSetzliste_gesperrt(true);
+            pfeil_links.setVisible(false);
+            pfeil_rechts.setVisible(false);
+            l_meldungsetzliste1.setText("Setzliste gesperrt!!!");
+            spielsystem_spielerliste_alleSpieler.setVisible(false);
 
-        t_suchleistespieler.setVisible(false);
+            t_suchleistespieler.setVisible(false);
 
 
-        spielsystem_setzliste.getSortOrder().add(setzplatz);
-        //btnentf.setVisible(false);
+            spielsystem_setzliste.getSortOrder().add(setzplatz);
+            //btnentf.setVisible(false);
+        }
+
     }
 
 }
