@@ -20,6 +20,7 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import sample.DAO.*;
@@ -46,13 +47,23 @@ public class SpielSystemController_neu implements Initializable
     TableColumn<Team,Integer> setzplatz = new TableColumn("Setzplatz");
     //Dictionary<Integer, Team> dicttest = new Hashtable<>();
     @FXML
+    private Button btn_stoppen;
+    @FXML
+    private Label label_spiele;
+    @FXML
+    private Label label_spieler;
+    @FXML
     private Label anzahlsetzlistespieler;
+    @FXML
+    private VBox vbox_allespieler;
     @FXML
     private Tab tabsperst;
 
     @FXML
     private Menu menu_rlp;
     //Tab1
+    @FXML
+    private VBox vbox_info;
     @FXML
     private TextField t_suchleistespieler;
     @FXML
@@ -402,6 +413,7 @@ public class SpielSystemController_neu implements Initializable
         }*/
         fuelleobs_setzliste();
         sortiereTabelleSetzliste();
+        pruefeSperrungSetzliste();
     }
 
     @FXML
@@ -469,7 +481,7 @@ public class SpielSystemController_neu implements Initializable
         }*/
         fuelleobs_setzliste();
         sortiereTabelleSetzliste();
-
+        pruefeSperrungSetzliste();
     }
 
     void erstelleSetzlisteRLPAnzahlSpieler(int anzahlspieler) {
@@ -555,7 +567,7 @@ public class SpielSystemController_neu implements Initializable
         }*/
         fuelleobs_setzliste();
         sortiereTabelleSetzliste();
-
+        pruefeSperrungSetzliste();
     }
     @FXML
     private void klassenSwitch(ActionEvent event) throws IOException, InterruptedException {
@@ -961,7 +973,7 @@ public class SpielSystemController_neu implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         obs_setzliste.addListener((ListChangeListener)(c -> {
-        anzahlsetzlistespieler.setText(obs_setzliste.size()+" Spieler");
+            anzahlsetzlistespieler.setText(obs_setzliste.size()+" Spieler");
         }));
         tabsperst.setDisable(false);
 
@@ -985,6 +997,11 @@ public class SpielSystemController_neu implements Initializable
             pruefeSperrungSetzliste();
         }
         else {
+            btn_stoppen.setVisible(false);
+            label_spieler.setVisible(false);
+            label_spiele.setVisible(false);
+            vbox_info.setVisible(false);
+            vbox_info.setDisable(true);
             ContextMenu contextMenu = new ContextMenu();
 
 
@@ -1290,11 +1307,20 @@ public class SpielSystemController_neu implements Initializable
 
         }
     }
+    @FXML
+    private void stoppeSpielsystem(ActionEvent event)
+    {
+        boolean erfolg=ausgewaehlte_spielklasse.getSpielklasseDAO().stoppeSpielsystem(ausgewaehlte_spielklasse);
 
+        if(erfolg)
+        {
+            auswahlklasse.InfoBenachrichtigung("Stop","stop erfolgreich");
+        }
+    }
     private void pruefeSperrungSetzliste() {
         if(ausgewaehlte_spielklasse.getSpiele().size()>0)
         {
-            tabsperst.setDisable(false);
+            tabsperst.setDisable(true);
             ausgewaehlte_spielklasse.setSetzliste_gesperrt(true);
             pfeil_links.setVisible(false);
             pfeil_rechts.setVisible(false);
@@ -1305,7 +1331,23 @@ public class SpielSystemController_neu implements Initializable
 
 
             spielsystem_setzliste.getSortOrder().add(setzplatz);
+            btn_stoppen.setVisible(true);
+            label_spiele.setVisible(true);
+            label_spiele.setText("Anzahl Spiele: "+ausgewaehlte_spielklasse.getSpiele().size());
+            label_spieler.setVisible(true);
+            label_spieler.setText("Anzahl Spieler in der Setzliste: "+ausgewaehlte_spielklasse.getSetzlistedict().size());
+            vbox_info.setDisable(false);
+            vbox_info.setVisible(true);
             //btnentf.setVisible(false);
+        }
+        else
+        {
+            btn_stoppen.setVisible(false);
+            label_spieler.setVisible(false);
+            label_spiele.setVisible(false);
+            vbox_info.setDisable(true);
+            vbox_info.setVisible(false);
+
         }
 
     }

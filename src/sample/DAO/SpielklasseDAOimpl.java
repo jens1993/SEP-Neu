@@ -83,6 +83,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
             String sqlErgebnis = "DELETE FROM spiel_satzergebnis WHERE SpielID= 'start'";
             String sqlSpielklasseSpielID = "DELETE FROM spielklasse_spielid WHERE SpielID= 'start'";
             String sqlSpiel = "DELETE FROM spiel WHERE SpielID= 'start'";
+            String sqlspiel_setzliste = "DELETE FROM spielklasse_setzliste WHERE TeamID= 'start'";
             String sqlFreilose = "DELETE FROM TEAM WHERE TeamID = 'start'";
             for (int i=0;i<spielklasse.getSpielsystem().getRunden().size();i++){
                 for (int j=0;j<spielklasse.getSpielsystem().getRunden().get(i).size();j++){
@@ -92,10 +93,16 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
                 }
             }
             int freilosZaehler =0;
-            for (int k=0;k<spielklasse.getSetzliste().size();k++){
+            for (int k=0;k<spielklasse.getSetzliste().size();k++)
+            {
                 if(spielklasse.getSetzliste().get(k).isFreilos()){
                     sqlFreilose += " OR TeamID= ?";
+
                     freilosZaehler++;
+                }
+                else
+                {
+                    sqlspiel_setzliste += " OR TeamID= ?";
                 }
             }
 
@@ -106,6 +113,7 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
                 PreparedStatement smtSpielklasseSpielId = con.prepareStatement(sqlSpielklasseSpielID);
                 PreparedStatement smtSpiel = con.prepareStatement(sqlSpiel);
                 PreparedStatement smtFreilose = con.prepareStatement(sqlFreilose);
+                PreparedStatement smtspiel_setzliste = con.prepareStatement(sqlspiel_setzliste);
                 for (int i=0;i<spielklasse.getSpielsystem().getRunden().size();i++){
                     for (int j=0;j<spielklasse.getSpielsystem().getRunden().get(i).size();j++){
                         Spiel spiel = spielklasse.getSpielsystem().getRunden().get(i).get(j);
@@ -115,15 +123,25 @@ public class SpielklasseDAOimpl implements SpielklasseDAO {
                         zaehler++;
                     }
                 }
+                int index=1;
                 for (int k=0;k<spielklasse.getSetzliste().size();k++){
                     if(spielklasse.getSetzliste().get(k).isFreilos()){
                         smtFreilose.setInt(freilosZaehler,spielklasse.getSetzliste().get(k).getTeamid());
+
+                    }
+                    else
+                    {
+
+                        smtspiel_setzliste.setInt(index,spielklasse.getSetzliste().get(k).getTeamid());
+                        index++;
                     }
                 }
                 smtErgebnis.executeUpdate();
                 smtErgebnis.close();
                 smtSpielklasseSpielId.executeUpdate();
                 smtSpielklasseSpielId.close();
+                smtspiel_setzliste.executeUpdate();
+                smtspiel_setzliste.close();
                 smtSpiel.executeUpdate();
                 smtSpiel.close();
 

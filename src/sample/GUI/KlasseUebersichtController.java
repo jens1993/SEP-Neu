@@ -1,5 +1,6 @@
 package sample.GUI;
 
+import com.sun.javafx.scene.control.skin.LabeledText;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import sample.DAO.auswahlklasse;
+import sample.ExcelImport;
 import sample.Spielklasse;
 
 import javax.xml.ws.RequestWrapper;
@@ -37,6 +39,9 @@ public class KlasseUebersichtController implements Initializable
     String titel ="";
 
     ObservableList<Spielklasse> obs_spielklasse=auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen();
+    ContextMenu context_spielklasse = new ContextMenu();
+    ContextMenu contextMenu_all = new ContextMenu();
+
     @FXML
     private VBox klassseeinzel_vbox;
     @FXML
@@ -198,8 +203,10 @@ public class KlasseUebersichtController implements Initializable
                 }
 
                 tabpane_uebersicht.setOnMouseClicked(event ->{
+
                     if(MouseButton.SECONDARY==event.getButton()) {
-                        ContextMenu contextMenu = new ContextMenu();
+
+
                         MenuItem item1 = new MenuItem("Neue Spielklasse");
                         item1.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -213,15 +220,24 @@ public class KlasseUebersichtController implements Initializable
                             }
 
                         });
-                        contextMenu.getItems().add(item1);
+                        contextMenu_all.getItems().clear();
+                        contextMenu_all.getItems().add(item1);
                         tabpane_uebersicht.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
 
                             @Override
                             public void handle(ContextMenuEvent event) {
 
-                                contextMenu.show(tabpane_uebersicht, event.getScreenX(), event.getScreenY());
+                                if(!contextMenu_all.isShowing())
+                                {
+                                    contextMenu_all.show(tabpane_uebersicht, event.getScreenX(), event.getScreenY());
+                                }
+
                             }
                         });
+                    }
+                    else
+                    {
+                        contextMenu_all.hide();
                     }
                 } );
                 Spielklasse[] finalSp = new Spielklasse[obs_spielklasse.size()];
@@ -229,13 +245,27 @@ public class KlasseUebersichtController implements Initializable
                 finalSp[i]= sp;
                 Hyperlink finalHp = hp;
                 hp.setOnMouseClicked(event -> {
+
                 /*spauswahl[finalI] =a.getSpielklasseDAO().getSpielklassenDict(a.getTurnierDAO().
                         read(a.getAktuelleTurnierAuswahl())).get(finalI);*/
-                    if (finalSp[finalI] != null) {
+                boolean erf=false;
+                try
+                {
+                    ((LabeledText) event.getPickResult().getIntersectedNode()).getText().toUpperCase().contains("HERREN");
+                    ((LabeledText) event.getPickResult().getIntersectedNode()).getText().toUpperCase().contains("DAMEN");
+                    ((LabeledText) event.getPickResult().getIntersectedNode()).getText().toUpperCase().contains("MIX");
+                }
+                catch (Exception e)
+                {
+                    erf=true;
+                    e.printStackTrace();
+                }
+                    if (finalSp[finalI] != null&&erf ) {
+                        contextMenu_all.hide();
                         finalSp[finalI] = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(finalI);
                         if(MouseButton.PRIMARY==event.getButton()) {
 
-
+                            context_spielklasse.hide();
 
 
                             // System.out.println(spauswahl[finalI].getDisziplin());
@@ -248,7 +278,11 @@ public class KlasseUebersichtController implements Initializable
                         }
 
                         if(MouseButton.SECONDARY==event.getButton()) {
-                            ContextMenu contextMenu = new ContextMenu();
+
+                            if(context_spielklasse.isShowing())
+                            {
+                                context_spielklasse.hide();
+                            }
                             MenuItem item1 = new MenuItem("Spielklasse bearbeiten");
                             item1.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -263,6 +297,12 @@ public class KlasseUebersichtController implements Initializable
                                 @Override
                                 public void handle(ActionEvent event) {
                                     System.out.println(finalSp[finalI]);
+                                    Enumeration enumeration=auswahlklasse.getAktuelleTurnierAuswahl().getTeams().keys();
+                                    while (enumeration.hasMoreElements())
+                                    {
+                                        int key = (int) enumeration.nextElement();
+                                        auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key).getTeamDAO().delete(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key));
+                                    }
                                     boolean erfolgloeschen = finalSp[finalI].getSpielklasseDAO().delete(finalSp[finalI]);
                                     if(erfolgloeschen)
                                     {
@@ -277,20 +317,26 @@ public class KlasseUebersichtController implements Initializable
                                     //tabpane_spieler.getSelectionModel().select(tab_sphin);
                                 }
                             });
-                            contextMenu.getItems().addAll(item1,item2);
+                            context_spielklasse.getItems().clear();
+                            context_spielklasse.getItems().addAll(item1,item2);
                             finalHp.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
 
                                 @Override
                                 public void handle(ContextMenuEvent event) {
 
-                                    contextMenu.show(finalHp, event.getScreenX(), event.getScreenY());
+                                    {
+                                        context_spielklasse.show(finalHp, event.getScreenX(), event.getScreenY());
+                                    }
+
                                 }
                             });
 
                         }
 
 
-                    }});
+                    }}
+
+                    );
             }
         }
         catch ( MissingResourceException e ) {
