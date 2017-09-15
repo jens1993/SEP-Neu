@@ -25,10 +25,7 @@ import sample.Spielklasse;
 
 import javax.xml.ws.RequestWrapper;
 import java.net.URL;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by jens on 03.08.2017.
@@ -204,7 +201,7 @@ public class KlasseUebersichtController implements Initializable
 
                 tabpane_uebersicht.setOnMouseClicked(event ->{
 
-                    if(MouseButton.SECONDARY==event.getButton()) {
+                    if(MouseButton.SECONDARY==event.getButton()&&(event.getTarget()==klassseeinzel_vbox||event.getTarget()==klasssedoppel_vbox||event.getTarget()==klasssemixed_vbox)) {
 
 
                         MenuItem item1 = new MenuItem("Neue Spielklasse");
@@ -240,7 +237,7 @@ public class KlasseUebersichtController implements Initializable
                         contextMenu_all.hide();
                     }
                 } );
-                Spielklasse[] finalSp = new Spielklasse[obs_spielklasse.size()];
+                Spielklasse[] finalSp = new Spielklasse[Integer.valueOf(obs_spielklasse.size())];
                 int finalI = i;
                 finalSp[i]= sp;
                 Hyperlink finalHp = hp;
@@ -248,19 +245,7 @@ public class KlasseUebersichtController implements Initializable
 
                 /*spauswahl[finalI] =a.getSpielklasseDAO().getSpielklassenDict(a.getTurnierDAO().
                         read(a.getAktuelleTurnierAuswahl())).get(finalI);*/
-                boolean erf=false;
-                try
-                {
-                    ((LabeledText) event.getPickResult().getIntersectedNode()).getText().toUpperCase().contains("HERREN");
-                    ((LabeledText) event.getPickResult().getIntersectedNode()).getText().toUpperCase().contains("DAMEN");
-                    ((LabeledText) event.getPickResult().getIntersectedNode()).getText().toUpperCase().contains("MIX");
-                }
-                catch (Exception e)
-                {
-                    erf=true;
-                    e.printStackTrace();
-                }
-                    if (finalSp[finalI] != null&&erf ) {
+                    if (finalSp[finalI] != null ) {
                         contextMenu_all.hide();
                         finalSp[finalI] = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().get(finalI);
                         if(MouseButton.PRIMARY==event.getButton()) {
@@ -297,28 +282,37 @@ public class KlasseUebersichtController implements Initializable
                                 @Override
                                 public void handle(ActionEvent event) {
                                     System.out.println(finalSp[finalI]);
-                                    Enumeration enumeration=auswahlklasse.getAktuelleTurnierAuswahl().getTeams().keys();
-                                    while (enumeration.hasMoreElements())
+                                    if(finalSp[finalI].getSetzliste().size()>0)
                                     {
-                                        int key = (int) enumeration.nextElement();
-                                        auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key).getTeamDAO().delete(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key));
-                                    }
-                                    boolean erfolgloeschen = finalSp[finalI].getSpielklasseDAO().delete(finalSp[finalI]);
-                                    if(erfolgloeschen)
-                                    {
-                                        auswahlklasse.InfoBenachrichtigung("erfolg", "klasse gelöscht");
-                                        auswahlklasse.getAktuelleTurnierAuswahl().removeobs_spielklassen(finalSp[finalI]);
-                                        auswahlklasse.getAktuelleTurnierAuswahl().removeSpielklassen(finalSp[finalI]);
+                                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                                        alert.setTitle("Spielklasse löschen");
+                                        alert.setHeaderText("Das Spielsystem ist aktiv");
+                                        alert.setContentText("Möchten Sie die Spielklasse wirklich löschen?");
+                                        ButtonType buttonTypeOne = new ButtonType("Ja");
+                                        ButtonType buttonTypeTwo = new ButtonType("Nein");
+                                        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
+                                        Optional<ButtonType> result = alert.showAndWait();
+                                        if (result.get() == buttonTypeOne){
+
+
+                                            Spielklassekomplettloeschen(finalSp[finalI]);
+
+                                            // ... user chose OK
+                                        } else {
+                                            // ... user chose CANCEL or closed the dialog
+                                        }
                                     }
                                     else
                                     {
-                                        auswahlklasse.WarnungBenachrichtigung("Fehler", "klasse konnte nicht gelöscht werden");
+                                        Spielklassekomplettloeschen(finalSp[finalI]);
                                     }
+
                                     //tabpane_spieler.getSelectionModel().select(tab_sphin);
                                 }
                             });
                             context_spielklasse.getItems().clear();
                             context_spielklasse.getItems().addAll(item1,item2);
+                            contextMenu_all.getItems().clear();
                             finalHp.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
 
                                 @Override
@@ -365,5 +359,34 @@ public class KlasseUebersichtController implements Initializable
 //A label with the text element and graphical icon
 //GridPane_NeueKlasse.add(label2,1,0);
 
+    }
+
+    private void Spielklassekomplettloeschen(Spielklasse spielklasse) {
+        if(spielklasse.getSetzliste().size()>0)
+        {
+            spielklasse.getSpielklasseDAO().stoppeSpielsystem(spielklasse);
+        }
+        Enumeration enumeration= auswahlklasse.getAktuelleTurnierAuswahl().getTeams().keys();
+        while (enumeration.hasMoreElements())
+        {
+            int key = (int) enumeration.nextElement();
+            if( auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key).getSpielklasse()==spielklasse)
+            {
+                auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key).getTeamDAO().delete(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key));
+            }
+
+        }
+        boolean erfolgloeschen = spielklasse.getSpielklasseDAO().delete(spielklasse);
+        auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().remove(spielklasse.getSpielklasseID());
+        if(erfolgloeschen)
+        {
+            auswahlklasse.InfoBenachrichtigung("erfolg", "klasse gelöscht");
+            auswahlklasse.getAktuelleTurnierAuswahl().removeobs_spielklassen(spielklasse);
+            auswahlklasse.getAktuelleTurnierAuswahl().removeSpielklassen(spielklasse);
+        }
+        else
+        {
+            auswahlklasse.WarnungBenachrichtigung("Fehler", "klasse konnte nicht gelöscht werden");
+        }
     }
 }

@@ -157,7 +157,7 @@ public class klasseHinzufuegenController implements Initializable
         Spielklasse spklasse = new Spielklasse(combo_disziplin.getValue(),Niveau.valueOf(String.valueOf(combo_niveau.getValue())),auswahlklasse.getAktuelleTurnierAuswahl());
         spklasse.getSpielklasseDAO().create(spklasse);
         auswahlklasse.getAktuelleTurnierAuswahl().addObs_spielklassen(spklasse);
-
+        auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().put(spklasse.getSpielklasseID(),spklasse);
         //a.getAktuelleTurnierAuswahl().addObs_spielklassen(spklasse);
         System.out.println("------------------Größe = "+auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size());
         MainController m = new MainController();

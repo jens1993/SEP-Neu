@@ -39,6 +39,12 @@ public class spielerHinzuController implements Initializable, Cloneable
 
 //region Deklaration
 
+    private Spieler doppelpartner1;
+    private Spielklasse doppelspielklasse=null;
+
+    @FXML
+    private Label label_partner;
+
 @FXML
 private TextField t_suchleistespielerhinzu;
     @FXML
@@ -868,6 +874,107 @@ private TextField t_suchleistespielerhinzu;
                             spieler_neu=clickedRow;
                         }
                     });
+                    Menu item4 = new Menu("zur Setzliste hinzufügen");
+                    item4.setOnAction(new EventHandler<ActionEvent>() {
+
+                        @Override
+                        public void handle(ActionEvent event) {
+
+                        }
+                    });
+                    Enumeration enumeration=auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().keys();
+
+                    MenuItem[] i = new MenuItem[auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().size()];
+                    int index=0;
+                    ArrayList besetzt = clickedRow.checkeSetzlisteMitglied(clickedRow);
+                    while(enumeration.hasMoreElements())
+                    {
+                        boolean bbesetzt=false;
+
+                        int key = (int) enumeration.nextElement();
+
+
+                        for(int j =0;j<besetzt.size();j++)
+                        {
+                            if(auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key).equals(besetzt.get(j)))
+                            {
+                                bbesetzt=true;
+                            }
+                        }
+
+
+                        if(!bbesetzt&&
+
+                                (clickedRow.getGeschlecht()&&auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key).toString().toUpperCase().contains("HERREN")
+
+                                        ||(!clickedRow.getGeschlecht()&&auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key).toString().toUpperCase().contains("DAMEN"))
+
+                                ))
+
+                        {
+
+
+                            i[index] = new MenuItem(auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key).toString());
+                            i[index].setOnAction(new EventHandler<ActionEvent>() {
+
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    boolean b =false;
+                                    if(auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key).isEinzel())
+                                    {
+                                        Team team = new Team(clickedRow,auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key));
+                                        auswahlklasse.getAktuelleTurnierAuswahl().getTeams().put(team.getTeamid(),team);
+                                        auswahlklasse.InfoBenachrichtigung("Erf",clickedRow.toString()+" wurde "+auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key).toString()+" hinzugefügt");
+                                    }
+                                    else
+                                    {
+                                        if(label_partner.getText().equals(""))
+                                        {
+                                            label_partner.setText(clickedRow.toString());
+                                            doppelpartner1=clickedRow;
+                                            doppelspielklasse=auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key);
+                                        }
+                                        else
+                                        {
+                                            if(!label_partner.getText().equals(clickedRow.toString()))
+                                            {
+                                                Team team = new Team(doppelpartner1,clickedRow,auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key));
+                                                auswahlklasse.getAktuelleTurnierAuswahl().getTeams().put(team.getTeamid(),team);
+                                                auswahlklasse.InfoBenachrichtigung("Erf",team.toString()+" wurde "+auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key).toString()+" hinzugefügt");
+
+                                                label_partner.setText("");
+                                                doppelpartner1=null;
+                                                doppelspielklasse=null;
+                                            }
+                                            else
+                                            {
+                                                auswahlklasse.WarnungBenachrichtigung("Gleicher Spieler","gleich");
+                                            }
+                                            System.out.println("t");
+                                        }
+                                    }
+
+                                }
+                            });
+                            if(doppelspielklasse==null)
+                            {
+                                item4.getItems().addAll(i[index]);
+                            }
+                            if(doppelspielklasse!=null)
+                            {
+                                if(doppelspielklasse==auswahlklasse.getAktuelleTurnierAuswahl().getSpielklassen().get(key))
+                                {
+                                    item4.getItems().addAll(i[index]);
+                                }
+
+                            }
+
+                            index++;
+                        }
+
+                    }
+
+
                     MenuItem item3 = new MenuItem("Spieler löschen");
                     item3.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -894,7 +1001,16 @@ private TextField t_suchleistespielerhinzu;
 
                     // Add MenuItem to ContextMenu
                     contextMenu.getItems().clear();
-                    contextMenu.getItems().addAll(item1, item2, item3);
+
+                    if(item4.getItems().size()>0)
+                    {
+                        contextMenu.getItems().addAll(item1, item2, item3,item4);
+                    }
+                    else
+                    {
+                        contextMenu.getItems().addAll(item1, item2, item3);
+                    }
+
 
                     // When user right-click on Circle
                     tabelle_spielerliste.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {

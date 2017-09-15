@@ -375,7 +375,6 @@ public class SpielSystemController_neu implements Initializable
     @FXML
     void erstelleSetzlisteNormal(ActionEvent event) {
         t_suchleistesetzliste.setText("");
-        spielsystem_setzliste.setEditable(false);
         //System.out.println(obs_setzliste);
         SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
         boolean erfolg=false;
@@ -419,7 +418,7 @@ public class SpielSystemController_neu implements Initializable
     @FXML
     void erstelleSetzlisteZufall(ActionEvent event) {
         t_suchleistesetzliste.setText("");
-        spielsystem_setzliste.setEditable(false);
+
         SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
         boolean erfolg=false;
         ArrayList <Team> teamsohnesetzplatz=new ArrayList<>();
@@ -486,7 +485,7 @@ public class SpielSystemController_neu implements Initializable
 
     void erstelleSetzlisteRLPAnzahlSpieler(int anzahlspieler) {
         t_suchleistesetzliste.setText("");
-        spielsystem_setzliste.setEditable(false);
+
         SetzlisteDAO setzlisteDAO = new SetzlisteDAOimpl();
         boolean erfolg=false;
         ArrayList <Team> teamsohnesetzplatz=new ArrayList<>();
@@ -658,6 +657,7 @@ public class SpielSystemController_neu implements Initializable
                     }
                     if (!event.getNewValue().equals(event.getOldValue())&&event.getNewValue() > 0 && event.getNewValue() <= obs_setzliste.size())
                     {
+                        boolean neuerwertleer=true;
                         int freiersetzplatz=-1;
                         boolean erfolg=false;
                         SetzlisteDAO setzlisteDAO=new SetzlisteDAOimpl();
@@ -677,62 +677,84 @@ public class SpielSystemController_neu implements Initializable
 
                                 Team to = event.getTableView().getItems().get(event.getTablePosition().getRow());
 
-                                if (!doppelt && list.get(i).getSetzplatz() < event.getNewValue() && list.get(i).getSetzplatz() != i + 1) {
+                                if (!doppelt&&list.get(i).getSetzplatz() < event.getNewValue() && list.get(i).getSetzplatz() != i + 1) {
                                     System.out.println("Kleinerer Setzplatz gefunden");
-                                    freiersetzplatz = i;
-                                    break;
-                                }
-
-                                if (doppelt && list.get(i).getSetzplatz() >= event.getNewValue()) {
-                                    System.out.println("Setzplatz wird verschoben");
-                                    list.get(i).setSetzplatz(list.get(i).getSetzplatz() + 1);
-                                    list.get(i).getTeamDAO().update(list.get(i));
-                                }
-/*
-                            if (doppelt && list.get(i).getSetzplatz() != i + 1) {
-                                freiersetzplatz = i;
-                                erfolg=true;
-                                break;
-                            }*/
-
-
-
-/*                                for(int j =0;j<list.size();j++)
-                                {
-                                    if(list.get(j).getSetzplatz()>=event.getNewValue())
+                                    if(freiersetzplatz==-1||freiersetzplatz>i)
                                     {
-
-                                        System.out.println("Setzplatz wird verschoben");
-                                        list.get(j).setSetzplatz(list.get(j).getSetzplatz()+1);
-                                        list.get(j).getTeamDAO().update(list.get(j));
-                                        erfolg=true;
-                                        //list.get(j).set
+                                        freiersetzplatz = i;
+                                        i=0;
                                     }
 
-                                }*/
+                                }
+                                if(list.get(i).getSetzplatz()==freiersetzplatz+1&&event.getOldValue()!=0)
+                                {
+                                    freiersetzplatz=-2;
+                                }
+                                if(list.get(i).getSetzplatz()==event.getNewValue())
+                                {
+                                    neuerwertleer=false;
+                                }
 
-/*                                event.getTableView().getItems().set(event.getTablePosition().getRow(), to);
-                                ObservableList<Team> obs_neu=FXCollections.observableArrayList(obs_setzliste);
-                                */
 
-
-/*
-                            else if(obs_setzliste.get(i).equals(t))
-                            {
-                                System.out.println("true"+t);
-                                obs_setzliste.remove(i);
-                                loeschen=true;
-                            }*/
+                                if (doppelt && list.get(i).getSetzplatz() >= event.getNewValue()&&event.getOldValue()==0) {
+                                    System.out.println("Setzplatz wird verschoben, alt = 0 "+list.get(i));
+                                    list.get(i).setSetzplatz(list.get(i).getSetzplatz() + 1);
+                                    list.get(i).getTeamDAO().update(list.get(i));
+                                    freiersetzplatz=-1;
+                                }
+                                if (doppelt && list.get(i).getSetzplatz()>event.getOldValue()&&list.get(i).getSetzplatz()<=event.getNewValue()&&event.getOldValue()!=0) {
+                                    System.out.println("Setzplatz größer als alter, aber kleiner als neuer "+list.get(i));
+                                    list.get(i).setSetzplatz(list.get(i).getSetzplatz() - 1);
+                                    list.get(i).getTeamDAO().update(list.get(i));
+                                    freiersetzplatz=-1;
+                                }
+                                if (doppelt && list.get(i).getSetzplatz()>=event.getNewValue()&&list.get(i).getSetzplatz()<event.getOldValue()&&event.getOldValue()!=0)
+                                {
+                                    System.out.println("Setzplatz kleiner als alter, aber größer als neuer "+list.get(i));
+                                    list.get(i).setSetzplatz(list.get(i).getSetzplatz() + 1);
+                                    list.get(i).getTeamDAO().update(list.get(i));
+                                    freiersetzplatz=-1;
+                                }
 
                             }
                         }
-                        if(freiersetzplatz>-1)
+                        if(freiersetzplatz>-1&&event.getOldValue()==0)
                         {
                             System.out.println("freiersetzplatz"+freiersetzplatz);
                             t.setSetzplatz(freiersetzplatz+1);
                         }
 
-                        else if(!erfolg)
+                        else if(neuerwertleer)
+                        {
+
+                            int altersetzplatz=t.getSetzplatz();
+                            boolean keinsetzplatz=false;
+                            if(t.getSetzplatz()==0)
+                            {
+                                keinsetzplatz=true;
+                            }
+
+                            if(!keinsetzplatz) {
+                                for (int i = altersetzplatz - 1; i < obs_setzliste.size(); i++) {
+                                    if (obs_setzliste.get(i).getSetzplatz() > 0) {
+                                        //System.out.println("Senke Setzplatz um 1");
+                                        //System.out.println(obs_setzliste.get(i).getSetzplatz() + "          -1");
+                                        obs_setzliste.get(i).setSetzplatz(obs_setzliste.get(i).getSetzplatz() - 1);
+                                        obs_setzliste.get(i).getTeamDAO().update(obs_setzliste.get(i));
+                                    }
+                                }
+                            }
+
+                            if(freiersetzplatz>-1)
+                            {
+                                t.setSetzplatz(freiersetzplatz);
+                            }
+                            else {
+                                t.setSetzplatz(event.getNewValue());
+                            }
+
+                        }
+                            else if(!erfolg)
                         {
                             t.setSetzplatz(event.getNewValue());
                         }
@@ -774,6 +796,10 @@ public class SpielSystemController_neu implements Initializable
                         }*/
 
                     }
+                    if(event.getNewValue()==0)
+                    {
+                        setzplatzZuruecksetzen(t);
+                    }
                     else
                     {
 
@@ -800,7 +826,7 @@ public class SpielSystemController_neu implements Initializable
             spielerEinsSpalte.setCellValueFactory(new PropertyValueFactory<Team,String>("SpielerEins"));
             TableColumn<Team,String> spielerZweiSpalte = new TableColumn("Partner");
             spielerZweiSpalte.setCellValueFactory(new PropertyValueFactory<Team,String>("SpielerZwei"));
-            TableColumn<Team,Integer> RLPSpalte = new TableColumn("Ranglistenpunkte");
+            TableColumn<Team,Integer> RLPSpalte = new TableColumn("RLP");
             RLPSpalte.setCellValueFactory(new PropertyValueFactory<Team,Integer>("RLPanzeigen"));
 
 
@@ -1040,10 +1066,24 @@ public class SpielSystemController_neu implements Initializable
 
                             }
                         });
+                        MenuItem item4 = new MenuItem("Setzplatz zurücksetzen");
+                        item4.setOnAction(new EventHandler<ActionEvent>() {
+
+                            @Override
+                            public void handle(ActionEvent event) {
+                                //tabpane_spieler.getSelectionModel().select(tab_spupdate);
+                                //FuelleFelder(clickedRow);
+
+                                setzplatzZuruecksetzen(clickedRow);
+
+
+
+                            }
+                        });
 
                         // Add MenuItem to ContextMenu
                         contextMenu.getItems().clear();
-                        contextMenu.getItems().addAll(item1, item2);
+                        contextMenu.getItems().addAll(item1, item2,item4);
 
                         // When user right-click on Circle
                         spielsystem_setzliste.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
@@ -1237,6 +1277,19 @@ public class SpielSystemController_neu implements Initializable
 
 
     }//Ende Initialize
+
+    private void setzplatzZuruecksetzen(Team clickedRow) {
+        removeTeam(clickedRow);
+        if(ausgewaehlte_spielklasse.isEinzel())
+        {
+            addSpieler(clickedRow.getSpielerEins());
+        }
+        else
+        {
+            addSpieler(clickedRow.getSpielerEins());
+            addSpieler(clickedRow.getSpielerZwei());
+        }
+    }
 
     private void markierteSpielerzurSetzliste() {
         ObservableList markierteTeams= FXCollections.observableArrayList(spielsystem_spielerliste_alleSpieler.getSelectionModel().getSelectedItems());

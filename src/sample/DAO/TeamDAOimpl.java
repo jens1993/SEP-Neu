@@ -36,7 +36,7 @@ public class TeamDAOimpl implements TeamDAO {
             count.next();
             int teamID = count.getInt("AUTO_INCREMENT");
             System.out.println(teamID);
-            team.setTeamid(count.getInt("AUTO_INCREMENT"),auswahlklasse.getAktuelleSpielklassenAuswahl());
+            team.setTeamid(count.getInt("AUTO_INCREMENT"),team.getSpielklasse());
             smtID.close();
             PreparedStatement smt = con.prepareStatement(sql);
             smt.setInt(1, team.getSpielklasse().getSpielklasseID());

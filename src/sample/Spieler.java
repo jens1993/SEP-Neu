@@ -1,18 +1,11 @@
 package sample;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.Timer;
-import java.util.Vector;
+import java.util.*;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.DAO.*;
-import sample.Spielsysteme.*;
-import sample.Enums.*;
 
 public class Spieler {
 	SpielerDAO spielerDAO = new SpielerDAOimpl();
@@ -182,6 +175,35 @@ public class Spieler {
 	public void setAktuellesSpiel(Spiel aktuellesSpiel) {
 		this.aktuellesSpiel = aktuellesSpiel;
 		//spielerDAO.update(this);
+	}
+	public ArrayList<Spielklasse> checkeSetzlisteMitglied(Spieler spieler)
+	{
+
+		ArrayList <Spielklasse> vorhandenspielklassen = new ArrayList<>();
+
+		Enumeration enumeration = auswahlklasse.getAktuelleTurnierAuswahl().getTeams().keys();
+
+		while (enumeration.hasMoreElements())
+		{
+			int key=(int) enumeration.nextElement();
+			Spielklasse spielklasse = auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key).getSpielklasse();
+
+			if(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key).getSpielerEins().equals(spieler))
+			{
+
+				vorhandenspielklassen.add(spielklasse);
+			}
+			if(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key).getSpielerZwei()!=null)
+			{
+				if(auswahlklasse.getAktuelleTurnierAuswahl().getTeams().get(key).getSpielerZwei().equals(spieler))
+				{
+					vorhandenspielklassen.add(spielklasse);
+				}
+			}
+
+
+		}
+		return vorhandenspielklassen;
 	}
 
 	public int getRLPanzeigen()
