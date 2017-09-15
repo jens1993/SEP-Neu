@@ -998,17 +998,29 @@ private TextField t_suchleistespielerhinzu;
                             }
                         }
                     });
+                    MenuItem item5= new MenuItem("Eigenschaften anzeigen");
+                    item5.setOnAction(new EventHandler<ActionEvent>() {
 
+                        @Override
+                        public void handle(ActionEvent event) {
+                            try {
+                                auswahlklasse.setSpielerzumHinzufeuegen(clickedRow);
+                                spielerEigenschaftenAnzeigen();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                     // Add MenuItem to ContextMenu
                     contextMenu.getItems().clear();
 
                     if(item4.getItems().size()>0)
                     {
-                        contextMenu.getItems().addAll(item1, item2, item3,item4);
+                        contextMenu.getItems().addAll(item1, item2, item3,item4,item5);
                     }
                     else
                     {
-                        contextMenu.getItems().addAll(item1, item2, item3);
+                        contextMenu.getItems().addAll(item1, item2, item3,item5);
                     }
 
 
@@ -1125,6 +1137,22 @@ private TextField t_suchleistespielerhinzu;
             stage.setScene(new Scene(root1));
             stage.show();
             stage.setTitle("Neuer Verein");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void spielerEigenschaftenAnzeigen() throws Exception {
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("spielerEigenschaften.fxml"));
+
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            auswahlklasse.getStagesdict().put("SpielerEigenschaften",stage);
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage.setTitle("Spieler Eigenschaften");
         } catch(Exception e) {
             e.printStackTrace();
         }
