@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b41b4edd-9e5f-4fba-81f4-0ab06d091ab5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerEigenschaften.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerEigenschaftenController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SEP.iml" afterPath="$PROJECT_DIR$/SEP.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Infos/Protokoll Jens.txt" afterPath="$PROJECT_DIR$/src/Infos/Protokoll Jens.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerEigenschaften.fxml" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerEigenschaften.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerEigenschaftenController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerEigenschaftenController.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -95,8 +97,8 @@
             <file leaf-file-name="spielerHinzuController.java" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="188">
-                    <caret line="884" column="20" lean-forward="false" selection-start-line="884" selection-start-column="20" selection-end-line="974" selection-end-column="21" />
+                  <state relative-caret-position="656">
+                    <caret line="910" column="0" lean-forward="false" selection-start-line="910" selection-start-column="0" selection-end-line="910" selection-end-column="0" />
                     <folding />
                   </state>
                 </provider>
@@ -114,7 +116,7 @@
               <entry file="file://$PROJECT_DIR$/src/sample/GUI/KlasseUebersichtController.java">
                 <provider selected="true" editor-type-id="text-editor">
                   <state relative-caret-position="637">
-                    <caret line="359" column="38" lean-forward="true" selection-start-line="111" selection-start-column="7" selection-end-line="359" selection-end-column="38" />
+                    <caret line="359" column="38" lean-forward="false" selection-start-line="111" selection-start-column="7" selection-end-line="359" selection-end-column="38" />
                     <folding />
                   </state>
                 </provider>
@@ -147,19 +149,31 @@
       <file leaf-file-name="spielerEigenschaften.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerEigenschaften.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+            <state relative-caret-position="288">
+              <caret line="16" column="36" lean-forward="false" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
               <folding>
-                <marker date="1505499821822" expanded="true" signature="4985:5152" ph="..." />
-                <marker date="1505499821822" expanded="true" signature="5009:5133" ph="..." />
-                <marker date="1505499821822" expanded="true" signature="5209:5376" ph="..." />
-                <marker date="1505499821822" expanded="true" signature="5233:5357" ph="..." />
-                <marker date="1505499821822" expanded="true" signature="5432:5599" ph="..." />
-                <marker date="1505499821822" expanded="true" signature="5456:5580" ph="..." />
-                <marker date="1505499821822" expanded="true" signature="5652:5999" ph="..." />
-                <marker date="1505499821822" expanded="true" signature="5676:5980" ph="..." />
-                <marker date="1505499821822" expanded="true" signature="5773:5955" ph="..." />
-                <marker date="1505499821822" expanded="true" signature="5805:5942" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4454:4496" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4454:4528" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4454:4561" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4454:4593" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4454:4616" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4454:4633" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4454:6161" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4454:6178" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4454:6193" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4454:6206" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4696:5065" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="4720:5046" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="5131:5298" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="5155:5279" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="5355:5522" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="5379:5503" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="5578:5745" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="5602:5726" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="5798:6145" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="5822:6126" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="5919:6101" ph="..." />
+                <marker date="1505503778363" expanded="true" signature="5951:6088" ph="..." />
               </folding>
             </state>
           </provider>
@@ -171,8 +185,8 @@
       <file leaf-file-name="spielerEigenschaftenController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerEigenschaftenController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="169" column="3" lean-forward="false" selection-start-line="169" selection-start-column="3" selection-end-line="169" selection-end-column="3" />
+            <state relative-caret-position="126">
+              <caret line="86" column="68" lean-forward="false" selection-start-line="86" selection-start-column="68" selection-end-line="86" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -223,24 +237,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TeamDAOimpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/DAO/TeamDAOimpl.java">
+      <file leaf-file-name="Protokoll Jens.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll Jens.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-              <folding>
-                <marker date="1505491829834" expanded="true" signature="260:444" ph="Select AUTO_... TABLES" />
-                <marker date="1505491829834" expanded="true" signature="470:553" ph="INSERT INTO team... " />
-                <marker date="1505491829834" expanded="true" signature="589:707" ph="INSERT INTO Team_Spieler... " />
-                <marker date="1505491829834" expanded="true" signature="760:878" ph="INSERT INTO Team_Spieler... " />
-                <marker date="1505491829834" expanded="true" signature="2461:2645" ph="Select AUTO_... TABLES" />
-                <marker date="1505491829834" expanded="true" signature="2671:2764" ph="INSERT INTO team... " />
-                <marker date="1505491829834" expanded="true" signature="3623:3968" ph="UPDATE team " />
-                <marker date="1505491829834" expanded="true" signature="4920:5038" ph="INSERT INTO Team_Spieler... " />
-                <marker date="1505491829834" expanded="true" signature="5091:5209" ph="INSERT INTO Team_Spieler... " />
-                <marker date="1505491829834" expanded="true" signature="6327:6359" ph="Delete From " />
-                <marker date="1505491829834" expanded="true" signature="6868:6908" ph="Delete From " />
-              </folding>
+            <state relative-caret-position="495">
+              <caret line="50" column="115" lean-forward="false" selection-start-line="50" selection-start-column="115" selection-end-line="50" selection-end-column="115" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TurnierladenController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="110" column="32" lean-forward="false" selection-start-line="110" selection-start-column="32" selection-end-line="110" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -349,7 +361,6 @@
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/neuesTurnierController.java" />
         <option value="$PROJECT_DIR$/src/sample/DAO/SetzlisteDAOimpl.java" />
-        <option value="$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java" />
         <option value="$PROJECT_DIR$/src/CSS/Main.css" />
         <option value="$PROJECT_DIR$/src/sample/GUI/Visualisierung/TurnierbaumSpiel.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/MainSpielübersichtController.java" />
@@ -378,7 +389,6 @@
         <option value="$PROJECT_DIR$/src/sample/Team.java" />
         <option value="$PROJECT_DIR$/src/sample/Spielklasse.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/MainController.java" />
-        <option value="$PROJECT_DIR$/src/Infos/Protokoll Jens.txt" />
         <option value="$PROJECT_DIR$/src/sample/GUI/SpielSystem_neu.fxml" />
         <option value="$PROJECT_DIR$/src/sample/DAO/SpielklasseDAOimpl.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/klasseHinzufuegen.fxml" />
@@ -389,6 +399,8 @@
         <option value="$PROJECT_DIR$/src/sample/Spieler.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/spielerEigenschaften.fxml" />
+        <option value="$PROJECT_DIR$/src/Infos/Protokoll Jens.txt" />
+        <option value="$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java" />
         <option value="$PROJECT_DIR$/src/sample/GUI/spielerEigenschaftenController.java" />
       </list>
     </option>
@@ -631,42 +643,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEP-Neu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEP-Neu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEP-Neu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SEP-Neu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dictionaries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -686,7 +662,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea/libraries/fontawesomefx-8.9.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../jfoenix-1.7.0.jar!/" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -1380,14 +1356,7 @@
       <workItem from="1505205269060" duration="16730000" />
       <workItem from="1505288308973" duration="15370000" />
       <workItem from="1505332033940" duration="5360000" />
-      <workItem from="1505388568064" duration="46267000" />
-    </task>
-    <task id="LOCAL-00083" summary="Alle ID's über Auto-Increment! Controller überarbeiten (Über die Keys durch Dictionaries!)">
-      <created>1503065449595</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1503065449596</updated>
+      <workItem from="1505388568064" duration="48333000" />
     </task>
     <task id="LOCAL-00084" summary="Alle ID's über Auto-Increment! Controller überarbeiten (Über die Keys durch Dictionaries!)">
       <created>1503076392743</created>
@@ -1725,11 +1694,18 @@
       <option name="project" value="LOCAL" />
       <updated>1505494642257</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="Spielereigenschaften">
+      <created>1505502437203</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1505502437204</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="893755000" />
+    <option name="totallyTimeSpent" value="895821000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1754,7 +1730,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20712695" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24832962" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24832962" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1767,7 +1743,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31737193" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31737193" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1863,7 +1839,6 @@
     <ignored-roots>
       <path value="C:" />
     </ignored-roots>
-    <MESSAGE value="SpielListe" />
     <MESSAGE value="Spielerhinzufügen" />
     <MESSAGE value="Spielerhinzufügen ContextMenu + Verein hinzufügen" />
     <MESSAGE value="Einstellungen, Spieler löschen verhindern" />
@@ -1888,7 +1863,8 @@
     <MESSAGE value="Anzahl Setzliste Spieler hinzugefügt" />
     <MESSAGE value="Setzliste stop" />
     <MESSAGE value="aus Spielertab: zur Setzliste hinzufügen" />
-    <option name="LAST_COMMIT_MESSAGE" value="aus Spielertab: zur Setzliste hinzufügen" />
+    <MESSAGE value="Spielereigenschaften" />
+    <option name="LAST_COMMIT_MESSAGE" value="Spielereigenschaften" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2055,6 +2031,12 @@
           <properties />
           <option name="timeStamp" value="556" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java</url>
+          <line>108</line>
+          <properties />
+          <option name="timeStamp" value="564" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/sample/DAO/TeamDAOimpl.java</url>
           <line>69</line>
@@ -2077,7 +2059,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="564" />
+      <option name="time" value="565" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -2088,6 +2070,7 @@
         <watch expression="obs_spielklasse.size()" language="JAVA" />
         <watch expression="Integer.valueOf(obs_spielklasse.size())" language="JAVA" />
         <watch expression="finalSp[finalI" language="JAVA" />
+        <watch expression="loadProps" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
@@ -2448,14 +2431,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll Jens.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="35" lean-forward="true" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/SpielSystem_neu.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -2481,14 +2456,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="1859" column="0" lean-forward="false" selection-start-line="1859" selection-start-column="0" selection-end-line="1859" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="46" column="46" lean-forward="true" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -2614,19 +2581,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerEigenschaften.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+        <state relative-caret-position="288">
+          <caret line="16" column="36" lean-forward="false" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
           <folding>
-            <marker date="1505499821822" expanded="true" signature="4985:5152" ph="..." />
-            <marker date="1505499821822" expanded="true" signature="5009:5133" ph="..." />
-            <marker date="1505499821822" expanded="true" signature="5209:5376" ph="..." />
-            <marker date="1505499821822" expanded="true" signature="5233:5357" ph="..." />
-            <marker date="1505499821822" expanded="true" signature="5432:5599" ph="..." />
-            <marker date="1505499821822" expanded="true" signature="5456:5580" ph="..." />
-            <marker date="1505499821822" expanded="true" signature="5652:5999" ph="..." />
-            <marker date="1505499821822" expanded="true" signature="5676:5980" ph="..." />
-            <marker date="1505499821822" expanded="true" signature="5773:5955" ph="..." />
-            <marker date="1505499821822" expanded="true" signature="5805:5942" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4454:4496" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4454:4528" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4454:4561" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4454:4593" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4454:4616" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4454:4633" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4454:6161" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4454:6178" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4454:6193" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4454:6206" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4696:5065" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="4720:5046" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="5131:5298" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="5155:5279" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="5355:5522" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="5379:5503" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="5578:5745" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="5602:5726" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="5798:6145" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="5822:6126" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="5919:6101" ph="..." />
+            <marker date="1505503778363" expanded="true" signature="5951:6088" ph="..." />
           </folding>
         </state>
       </provider>
@@ -2664,23 +2643,39 @@
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/KlasseUebersichtController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="637">
-          <caret line="359" column="38" lean-forward="true" selection-start-line="111" selection-start-column="7" selection-end-line="359" selection-end-column="38" />
+          <caret line="359" column="38" lean-forward="false" selection-start-line="111" selection-start-column="7" selection-end-line="359" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="884" column="20" lean-forward="false" selection-start-line="884" selection-start-column="20" selection-end-line="974" selection-end-column="21" />
+        <state relative-caret-position="656">
+          <caret line="910" column="0" lean-forward="false" selection-start-line="910" selection-start-column="0" selection-end-line="910" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/GUI/TurnierladenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="110" column="32" lean-forward="false" selection-start-line="110" selection-start-column="32" selection-end-line="110" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Infos/Protokoll Jens.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="50" column="115" lean-forward="false" selection-start-line="50" selection-start-column="115" selection-end-line="50" selection-end-column="115" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/GUI/spielerEigenschaftenController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="169" column="3" lean-forward="false" selection-start-line="169" selection-start-column="3" selection-end-line="169" selection-end-column="3" />
+        <state relative-caret-position="126">
+          <caret line="86" column="68" lean-forward="false" selection-start-line="86" selection-start-column="68" selection-end-line="86" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2753,7 +2748,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>fontawesomefx-8.9</last-edited>
+          <last-edited>jfoenix-1.7.0</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

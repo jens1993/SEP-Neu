@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -81,6 +82,7 @@
                               </HBox>
                               <ChoiceBox fx:id="choice_verein" prefWidth="150.0" />
                               <TextField fx:id="t_spielerid" />
+                              <JFXRadioButton fx:id="r_test" selected="true" textFill="#e10f0f" />
                            </children>
                         </VBox>
                      </children>

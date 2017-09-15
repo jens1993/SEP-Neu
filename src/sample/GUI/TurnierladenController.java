@@ -26,6 +26,9 @@ import javafx.util.Callback;
 import sample.*;
 import sample.DAO.*;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -99,7 +102,24 @@ public class TurnierladenController implements Initializable
             }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Properties saveProps = new Properties();
+        saveProps.setProperty("path1", "/somethingpath1");
+        saveProps.setProperty("path2", "/somethingpath2");
+        try {
+            saveProps.storeToXML(new FileOutputStream("settings.xml"), "");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        // Load Settings
+        Properties loadProps = new Properties();
+        try {
+            loadProps.loadFromXML(new FileInputStream("settings.xml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String path1 = loadProps.getProperty("path1");
+        String path2 = loadProps.getProperty("path2");
         try
         {
             ResourceBundle bundle = ResourceBundle.getBundle( baseName );
