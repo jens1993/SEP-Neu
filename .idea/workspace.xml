@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b41b4edd-9e5f-4fba-81f4-0ab06d091ab5" name="Default" comment="">
+    <list default="true" id="b41b4edd-9e5f-4fba-81f4-0ab06d091ab5" name="Default" comment="aus Spielertab: zur Setzliste hinzufügen">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SEP/sample/Spieler.class" afterPath="$PROJECT_DIR$/out/production/SEP/sample/Spieler.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/DAO/TeamDAOimpl.java" afterPath="$PROJECT_DIR$/src/sample/DAO/TeamDAOimpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/KlasseUebersichtController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/KlasseUebersichtController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java" afterPath="$PROJECT_DIR$/src/sample/GUI/SpielSystemController_neu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/klasseHinzufuegen.fxml" afterPath="$PROJECT_DIR$/src/sample/GUI/klasseHinzufuegen.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/klasseHinzufuegenController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/klasseHinzufuegenController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerHinzu.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" afterPath="$PROJECT_DIR$/src/sample/GUI/spielerHinzuController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Spieler.java" afterPath="$PROJECT_DIR$/src/sample/Spieler.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1347,14 +1340,7 @@
       <workItem from="1505205269060" duration="16730000" />
       <workItem from="1505288308973" duration="15370000" />
       <workItem from="1505332033940" duration="5360000" />
-      <workItem from="1505388568064" duration="40698000" />
-    </task>
-    <task id="LOCAL-00081" summary="SpielerID und VereinID neu vergeben">
-      <created>1502984775393</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1502984775393</updated>
+      <workItem from="1505388568064" duration="40746000" />
     </task>
     <task id="LOCAL-00082" summary="Alle ID's über Auto-Increment! Controller überarbeiten (Über die Keys durch Dictionaries!)">
       <created>1503058549205</created>
@@ -1692,11 +1678,18 @@
       <option name="project" value="LOCAL" />
       <updated>1505425225154</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="aus Spielertab: zur Setzliste hinzufügen">
+      <created>1505494623137</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1505494623138</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="888186000" />
+    <option name="totallyTimeSpent" value="888234000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1830,7 +1823,6 @@
     <ignored-roots>
       <path value="C:" />
     </ignored-roots>
-    <MESSAGE value="TeamFenster hinzugefügt + Neue Klasse erstellen funktioniert" />
     <MESSAGE value="SpielListe" />
     <MESSAGE value="Spielerhinzufügen" />
     <MESSAGE value="Spielerhinzufügen ContextMenu + Verein hinzufügen" />
@@ -1855,7 +1847,8 @@
     <MESSAGE value="Setzliste Bug behoben" />
     <MESSAGE value="Anzahl Setzliste Spieler hinzugefügt" />
     <MESSAGE value="Setzliste stop" />
-    <option name="LAST_COMMIT_MESSAGE" value="Setzliste stop" />
+    <MESSAGE value="aus Spielertab: zur Setzliste hinzufügen" />
+    <option name="LAST_COMMIT_MESSAGE" value="aus Spielertab: zur Setzliste hinzufügen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
