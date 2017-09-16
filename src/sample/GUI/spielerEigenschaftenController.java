@@ -1,6 +1,5 @@
 package sample.GUI;
 
-import com.jfoenix.controls.JFXRadioButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -81,8 +80,7 @@ public class spielerEigenschaftenController implements Initializable{
 
     @FXML
     private Tab tab_notizen;
-    @FXML
-    private JFXRadioButton r_test;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -100,7 +98,7 @@ public class spielerEigenschaftenController implements Initializable{
         }
         spielklassenTab();
 
-        r_test.setSelectedColor(Color.AQUA);
+
 
 
 
