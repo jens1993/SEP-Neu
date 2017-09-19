@@ -1287,15 +1287,16 @@ public class MainController implements Initializable
 
     private void AllesNeuLaden() {
         int indexalt = tabelle_spiele.getSelectionModel().getSelectedIndex();
-        if (!tspielsuche.getText().equals("")) {
+        tabelle_spiele.refresh();
+        /*if (!tspielsuche.getText().equals("")) {
             CheckeSpielsuche();
         } else {
             //("maus event");
             //ObservableList index = tabelle_spiele.getSelectionModel().getSelectedIndices();
-            /*index_neu.clear();
+            *//*index_neu.clear();
             for (int i = 0; i < index.size(); i++) {
                 index_neu.add((Integer) index.get(i));
-            }*/
+            }*//*
 
             //region checkbox
             if (check_gespielteSpiele.isSelected()) {
@@ -1369,14 +1370,14 @@ public class MainController implements Initializable
 
 
             }
-
+*/
             /*for (int i = 0; i < index_neu.size(); i++) {*/
 
             tabelle_spiele.getSelectionModel().select(indexalt);
             /*}*/
 
 
-        }
+        //}
     }
         /*Später für Drag & DROP
     public void pressBtn_Felder(ActionEvent event) throws Exception {

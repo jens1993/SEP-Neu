@@ -68,12 +68,12 @@ public class Gruppe extends Spielsystem {
 			int setzPlatzFuerEndrunde;
 			if(zeile%2==0) {
 				setzPlatzFuerEndrunde = anzahlGruppen * zeile - (gruppenNummer - 1);
-				if (setzPlatzFuerEndrunde % 2 == 0) {
-					setzPlatzFuerEndrunde--;
-				}
-				else
-				{
-					setzPlatzFuerEndrunde++;
+				if(anzahlGruppen%2 == 0) {
+					if (setzPlatzFuerEndrunde % 2 == 0) {
+						setzPlatzFuerEndrunde--;
+					} else {
+						setzPlatzFuerEndrunde++;
+					}
 				}
 			}
 			else{

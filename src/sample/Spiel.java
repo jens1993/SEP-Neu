@@ -151,7 +151,7 @@ public class Spiel {
 	}
 	public void setHeim(Team heim) {
 		this.heim = heim;
-		if(this.gast != null && !(this.getSystemSpielID()<30000000)){
+		if(this.gast != null && !(this.getSystemSpielArt()==1) && !(this.getSystemSpielArt()==2&&this.getVorrundenNummer()!=0)){
 			this.status = 1;
 
 		}
@@ -160,7 +160,7 @@ public class Spiel {
 
 	public void setGast(Team gast) {
 		this.gast = gast;
-		if(this.heim != null && !(this.getSystemSpielID()<30000000)){
+		if(this.heim != null && !(this.getSystemSpielArt()==1) && !(this.getSystemSpielArt()==2&&this.getVorrundenNummer()!=0)){
 			this.status = 1;
 		/*	if (this.heim.isFreilos()){
 				this.setErgebnis(new Ergebnis(0,21,0,21));
@@ -395,7 +395,7 @@ public class Spiel {
 	}
 
 	public void setFreilosErgebnis(){
-		if (this.heim != null && this.heim.isFreilos()){
+		if (this.gast != null && this.heim != null && this.heim.isFreilos()){
 			this.ergebnis = new Ergebnis(0,21,0,21);
 			status=3;
 			this.spielsystem.beendeMatch(this);
@@ -409,7 +409,7 @@ public class Spiel {
 			this.getSpielsystem().getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().remove(this);
 			this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);
 		}
-		else if(this.gast != null && this.gast.isFreilos()){
+		else if(this.heim != null && this.gast != null && this.gast.isFreilos()){
 			this.ergebnis = new Ergebnis(21,0,21,0);
 			status=3;
 			this.spielsystem.beendeMatch(this);
