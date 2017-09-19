@@ -148,7 +148,7 @@ public class MainController implements Initializable
 
     //endregion
 
-    ObservableList<Spiel> sortListe = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele();
+    ObservableList<Spiel> sortListe = auswahlklasse.getAktuelleTurnierAuswahl().getObs_angezeigteSpiele();
 //wieso integer?
     //wenn integer dann die ids abgehen
 
@@ -265,12 +265,12 @@ public class MainController implements Initializable
 
     @FXML
     private void fuelleSpielElemente() throws Exception{
-        auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
+        auswahlklasse.getAktuelleTurnierAuswahl().getObs_angezeigteSpiele().clear();
         if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl()!=null&&auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size()>0) {
-            fuelleCheckboxSpielElemente(check_gespielteSpiele,auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele());
-            fuelleCheckboxSpielElemente(check_aktiveSpiele,auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele());
-            fuelleCheckboxSpielElemente(check_ausstehendeSpiele,auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele());
-            fuelleCheckboxSpielElemente(check_zukuenftigeSpiele,auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele());
+            fuelleCheckboxSpielElemente(check_gespielteSpiele,3);
+            fuelleCheckboxSpielElemente(check_aktiveSpiele,2);
+            fuelleCheckboxSpielElemente(check_ausstehendeSpiele,1);
+            fuelleCheckboxSpielElemente(check_zukuenftigeSpiele,0);
         }
         sortiereTabelleSpiele();
     }
@@ -285,8 +285,9 @@ public class MainController implements Initializable
         tabelle_spiele.setItems(sortListe);
     }
 
-    private void fuelleCheckboxSpielElemente(CheckBox checkBox, ObservableList<Spiel> spiele) {
+    private void fuelleCheckboxSpielElemente(CheckBox checkBox, int status) {
         int id;
+        ObservableList<Spiel> spiele = auswahlklasse.getAktuelleTurnierAuswahl().getObs_alleSpiele();
         if (checkBox.isSelected()) {
             for (int j = 0; j < auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size(); j++) {
                 id = auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().get(j);
@@ -304,7 +305,9 @@ public class MainController implements Initializable
                         if(frei)
                         {}
                         else {
-                            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().add(spiele.get(i));
+                            if(spiele.get(i).getStatus()==status) {
+                                auswahlklasse.getAktuelleTurnierAuswahl().getObs_angezeigteSpiele().add(spiele.get(i));
+                            }
                         }
                     }
                 }
@@ -712,7 +715,7 @@ public class MainController implements Initializable
 
 
         tooltipsHinzufuegen();
-        //auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
+        //auswahlklasse.getAktuelleTurnierAuswahl().getObs_alleSpiele().clear();
         Zeitplan.zeitplanErstellen(auswahlklasse.getAktuelleTurnierAuswahl()); //vergebe Zeitplannummern für die Spiele
         klassenTabsErstellen();
         felderHinzufuegen();
@@ -1330,13 +1333,13 @@ public class MainController implements Initializable
 //endregion
 
 
-            //System.out.println(tabelle_spiele.getItems().size()+"   "+a.getAktuelleTurnierAuswahl().getObs_spiele().size());
+            //System.out.println(tabelle_spiele.getItems().size()+"   "+a.getAktuelleTurnierAuswahl().getObs_alleSpiele().size());
 
-//                for(int i=0;i<a.getAktuelleTurnierAuswahl().getObs_spiele().size();i++)
+//                for(int i=0;i<a.getAktuelleTurnierAuswahl().getObs_alleSpiele().size();i++)
 //                {
 //
-//                    //System.out.println(a.getAktuelleTurnierAuswahl().getObs_spiele().get(i).getGast().isFreilos());
-//                    System.out.println(a.getAktuelleTurnierAuswahl().getObs_spiele().get(i).toString().toUpperCase().contains("FREILOS"));
+//                    //System.out.println(a.getAktuelleTurnierAuswahl().getObs_alleSpiele().get(i).getGast().isFreilos());
+//                    System.out.println(a.getAktuelleTurnierAuswahl().getObs_alleSpiele().get(i).toString().toUpperCase().contains("FREILOS"));
 //                }
 
 
@@ -1370,14 +1373,14 @@ public class MainController implements Initializable
 
 
             }
-*/
-            /*for (int i = 0; i < index_neu.size(); i++) {*/
+
+            *//*for (int i = 0; i < index_neu.size(); i++) {*//*
 
             tabelle_spiele.getSelectionModel().select(indexalt);
-            /*}*/
+            *//*}*//*
 
 
-        //}
+        }*/
     }
         /*Später für Drag & DROP
     public void pressBtn_Felder(ActionEvent event) throws Exception {
@@ -1420,7 +1423,7 @@ public class MainController implements Initializable
     public void reloadcheckbox()
     {
 
-        a.getAktuelleTurnierAuswahl().getObs_spiele().clear();
+        a.getAktuelleTurnierAuswahl().getObs_alleSpiele().clear();
         checkComboBox.getItems().clear();
 
         //System.out.println(a.getAktuelleTurnierAuswahl().getSpielklassen().size());

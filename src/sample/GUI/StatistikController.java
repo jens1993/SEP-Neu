@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import sample.DAO.auswahlklasse;
@@ -103,7 +102,7 @@ public class StatistikController implements Initializable
 
     lturnier.setText("Turnierinformationen: "+ auswahlklasse.getAktuelleTurnierAuswahl().getName());
     anzahlSpielklassen.setText(String.valueOf(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()));
-    anzahlSpiele.setText(String.valueOf(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().size()));
+    anzahlSpiele.setText(String.valueOf(auswahlklasse.getAktuelleTurnierAuswahl().getObs_alleSpiele().size()));
     anzahlSpielerimTurnier.setText(String.valueOf(auswahlklasse.getObs_spieler().size()));
     anzahlobsspiele.setText(
             String.valueOf("Aktive "+

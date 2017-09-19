@@ -219,7 +219,8 @@ public class Spiel {
 		this.systemSpielID = systemSpielID;
 		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
-		turnier.getObs_ausstehendeSpiele().add(this);
+		//turnier.getObs_ausstehendeSpiele().add(this);
+		turnier.getObs_alleSpiele().add(this);
 		auswahlklasse.getAktuelleTurnierAuswahl().addobsAusstehendeSpiele(this);
 		//spielDAO.create(this);
 		this.status = 1;
@@ -235,7 +236,8 @@ public class Spiel {
 		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
 		//spielDAO.create(this);
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
-		this.spielsystem.getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().add(this);
+		//this.spielsystem.getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().add(this);
+		this.spielsystem.getSpielklasse().getTurnier().getObs_alleSpiele().add(this);
 
 	}
 
@@ -248,8 +250,8 @@ public class Spiel {
 		//this.spielDAO.create(this);
 		this.turnier = this.spielsystem.getSpielklasse().getTurnier();
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
-		this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
-
+		//this.spielsystem.getSpielklasse().getTurnier().getObs_ausstehendeSpiele().add(this);
+		this.spielsystem.getSpielklasse().getTurnier().getObs_alleSpiele().add(this);
 	}
 
 
@@ -275,6 +277,7 @@ public class Spiel {
 
 	public void setSpielsystem(Spielsystem spielsystem) {
 		this.spielsystem = spielsystem;
+		this.spielsystem.getSpielklasse().getTurnier().getObs_alleSpiele().add(this);
 		this.spielsystem.getSpielklasse().getTurnier().getSpiele().put(spielID,this);
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 	}
@@ -406,8 +409,8 @@ public class Spiel {
 			gast.addGespieltePunkte(42,0);
 			gast.getTeamDAO().update(gast);
 			ergebnis.getErgebnisDAO().create(this);
-			this.getSpielsystem().getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().remove(this);
-			this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);
+/*			this.getSpielsystem().getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().remove(this);
+			this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);*/
 		}
 		else if(this.heim != null && this.gast != null && this.gast.isFreilos()){
 			this.ergebnis = new Ergebnis(21,0,21,0);
@@ -420,8 +423,8 @@ public class Spiel {
 			heim.addGespieltePunkte(42,0);
 			heim.getTeamDAO().update(heim);
 			ergebnis.getErgebnisDAO().create(this);
-			this.getSpielsystem().getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().remove(this);
-			this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);
+/*			this.getSpielsystem().getSpielklasse().getTurnier().getObs_zukuenftigeSpiele().remove(this);
+			this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);*/
 		}
 
 
@@ -436,8 +439,8 @@ public class Spiel {
 		heim.getTeamDAO().update(heim);
 		gast.getTeamDAO().update(gast);
 		ergebnis.getErgebnisDAO().create(this);
-		this.getSpielsystem().getSpielklasse().getTurnier().getObs_aktiveSpiele().remove(this);
-		this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);
+/*		this.getSpielsystem().getSpielklasse().getTurnier().getObs_aktiveSpiele().remove(this);
+		this.getSpielsystem().getSpielklasse().getTurnier().getObs_gespielteSpiele().add(this);*/
 		if (this.feld != null){
 			this.feld.spielBeenden();
 		}

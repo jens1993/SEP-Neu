@@ -1,29 +1,18 @@
 package sample.GUI;
 
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
 import sample.DAO.SpielDAO;
 import sample.DAO.SpielDAOimpl;
 import sample.DAO.auswahlklasse;
 import sample.Spiel;
-import sample.Spielklasse;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -308,9 +297,9 @@ public class FeldZuweisungController implements Initializable
 
 
                        int a = tabelle_felder.getSelectionModel().getSelectedIndex();
-                       //System.out.println(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().get(a));
+                       //System.out.println(auswahlklasse.getAktuelleTurnierAuswahl().getObs_alleSpiele().get(a));
 
-                    clipboardContent.putString(String.valueOf(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().get(a).getSpielID()));
+                    clipboardContent.putString(String.valueOf(auswahlklasse.getAktuelleTurnierAuswahl().getObs_alleSpiele().get(a).getSpielID()));
                    //Daten in Clipboard
                     db.setContent(clipboardContent);
                 }
@@ -326,7 +315,7 @@ public class FeldZuweisungController implements Initializable
         }
         //Tabelle
 
-        tabelle_felder.setItems(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele());
+        tabelle_felder.setItems(auswahlklasse.getAktuelleTurnierAuswahl().getObs_alleSpiele());
 
 
 

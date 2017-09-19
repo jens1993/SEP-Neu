@@ -11,9 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import sample.DAO.FeldDAO;
-import sample.DAO.FeldDAOimpl;
-import sample.GUI.MainController;
 
 public class Turnier  implements Initializable {
 	private int matchDauer;
@@ -30,7 +27,8 @@ public class Turnier  implements Initializable {
 	//private Dictionary<Integer, Spieler> spieler = new Hashtable<Integer,Spieler>();
 	private static Dictionary<Integer, Team> teams = new Hashtable<Integer,Team>();
 	private static Dictionary<Integer, Spiel> spiele = new Hashtable<Integer,Spiel>();
-	private static ObservableList<Spiel> obs_spiele = FXCollections.observableArrayList();
+	private static ObservableList<Spiel> obs_alleSpiele = FXCollections.observableArrayList();
+	private static ObservableList<Spiel> obs_angezeigteSpiele = FXCollections.observableArrayList();
 	private static ObservableList<Integer> obs_spielklassen_auswahl = FXCollections.observableArrayList();
 	private static ObservableList<Spiel> obs_gespielteSpiele = FXCollections.observableArrayList();
 	private static ObservableList<Spiel> obs_aktiveSpiele = FXCollections.observableArrayList();
@@ -44,8 +42,12 @@ public class Turnier  implements Initializable {
 		return obs_spielklassen;
 	}
 
-	public ObservableList<Spiel> getObs_spiele() {
-		return obs_spiele;
+	public ObservableList<Spiel> getObs_alleSpiele() {
+		return obs_alleSpiele;
+	}
+
+	public static ObservableList<Spiel> getObs_angezeigteSpiele() {
+		return obs_angezeigteSpiele;
 	}
 
 	public ObservableList<Integer> getObs_spielklassen_auswahl() {
@@ -62,10 +64,10 @@ public class Turnier  implements Initializable {
 		this.obs_spielklassen.remove(spielklasse);
 	}
 	public void addObs_spiele(Spiel spiel) {
-		this.obs_spiele.add(spiel);
+		this.obs_alleSpiele.add(spiel);
 	}
 	public void removeobs_spielklassen(Spiel spiel) {
-		this.obs_spiele.remove(spiel);
+		this.obs_alleSpiele.remove(spiel);
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -80,7 +82,7 @@ public class Turnier  implements Initializable {
 				}
 			}
 		});
-		obs_spiele.addListener(new ListChangeListener<Spiel>() {
+		obs_alleSpiele.addListener(new ListChangeListener<Spiel>() {
 			@Override
 			public void onChanged(Change<? extends Spiel> c) {
 				// System.out.println("Changed on " + c.toString());
@@ -124,7 +126,7 @@ public class Turnier  implements Initializable {
 	}
 
 	public void deleteSpiel(Spiel spiel){
-		this.obs_spiele.remove(spiel);
+		this.obs_alleSpiele.remove(spiel);
 		this.obs_aktiveSpiele.remove(spiel);
 		this.obs_ausstehendeSpiele.remove(spiel);
 		this.obs_gespielteSpiele.remove(spiel);

@@ -1,7 +1,6 @@
 
 package sample.GUI;
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,15 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-import javafx.stage.WindowEvent;
-import javafx.util.Callback;
 import sample.*;
 import sample.DAO.*;
 
@@ -163,7 +156,7 @@ public class TurnierladenController implements Initializable
         auswahlklasse a = new auswahlklasse();
         a.readTurnierListe();
         if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
-            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_alleSpiele().clear();
             auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().clear();
             auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().clear();
             auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().clear();
@@ -365,7 +358,7 @@ public class TurnierladenController implements Initializable
             auswahlklasse.turnierAuswahlSpeichern((Turnier) TurnierlisteTabelle.getSelectionModel().getSelectedItem());
             auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().clear();
             auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().clear();
-            auswahlklasse.getAktuelleTurnierAuswahl().getObs_spiele().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_alleSpiele().clear();
 
             t.read(auswahlklasse.getAktuelleTurnierAuswahl());
             //System.out.println(a.getAktuelleTurnierAuswahl().getName());
