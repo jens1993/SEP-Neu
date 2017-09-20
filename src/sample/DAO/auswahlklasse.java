@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import sample.*;
+import sample.GUI.MainController;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -28,7 +29,7 @@ public class auswahlklasse
 
 
 
-
+    private static MainController mainController;
     private TurnierDAO turnierDAO = new TurnierDAOimpl();
     private static Dictionary<Integer, Turnier> turnierliste = new Hashtable<Integer,Turnier>();
     private static Dictionary<Integer, Verein> vereine = new Hashtable<Integer, Verein>();
@@ -107,8 +108,6 @@ public class auswahlklasse
     {
         updateSpieler=spieler;
         tab=tabspeichern;
-
-
     }
 
 
@@ -120,7 +119,13 @@ public class auswahlklasse
         auswahlklasse.vorhandeneSpieler = vorhandeneSpieler;
     }
 
+    public static void setMainController(MainController mainController) {
+        auswahlklasse.mainController = mainController;
+    }
 
+    public static MainController getMainController() {
+        return mainController;
+    }
 
     public static Spieler getSpielerzumHinzufeuegen() {
         return SpielerzumHinzufeuegen;

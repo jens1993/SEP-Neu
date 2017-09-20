@@ -21,6 +21,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import sample.DAO.auswahlklasse;
 import sample.ExcelImport;
+import sample.Main;
 import sample.Spielklasse;
 
 import javax.xml.ws.RequestWrapper;
@@ -32,6 +33,7 @@ import java.util.*;
  */
 public class KlasseUebersichtController implements Initializable
 {
+    private MainController mainController;
     String baseName = "resources.Main";
     String titel ="";
 
@@ -57,6 +59,10 @@ public class KlasseUebersichtController implements Initializable
 
 
     //Label label2 = new Label("Search---------------------");
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
     public void pressBtn_neueKlassehinzufuegen(ActionEvent event) throws Exception {
         try {
@@ -97,8 +103,10 @@ public class KlasseUebersichtController implements Initializable
             auswahlklasse.getStagesdict().put("Spielsytem",stage);
 
             stage.setScene(new Scene(root1));
+
             stage.show();
             stage.setTitle(spielklasse.getDisziplin()+ " "+ spielklasse.getNiveau());
+            ((SpielSystemController_neu)fxmlLoader.getController()).setMainController(mainController);
 
         } catch(Exception e) {
             e.printStackTrace();

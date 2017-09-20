@@ -157,10 +157,7 @@ public class TurnierladenController implements Initializable
         a.readTurnierListe();
         if(auswahlklasse.getAktuelleTurnierAuswahl()!=null) {
             auswahlklasse.getAktuelleTurnierAuswahl().getObs_alleSpiele().clear();
-            auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().clear();
-            auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().clear();
-            auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().clear();
-            auswahlklasse.getAktuelleTurnierAuswahl().getObs_zukuenftigeSpiele().clear();
+            auswahlklasse.getAktuelleTurnierAuswahl().getObs_angezeigteSpiele().clear();
         }
         zeigeTabelle();
 

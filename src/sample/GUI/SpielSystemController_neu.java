@@ -44,7 +44,8 @@ import java.util.stream.Collectors;
 public class SpielSystemController_neu implements Initializable
 {
     //region Deklaration
-    TableColumn<Team,Integer> setzplatz = new TableColumn("Setzplatz");
+    private MainController mainController;
+    private TableColumn<Team,Integer> setzplatz = new TableColumn("Setzplatz");
     //Dictionary<Integer, Team> dicttest = new Hashtable<>();
     @FXML
     private Button btn_stoppen;
@@ -143,6 +144,11 @@ public class SpielSystemController_neu implements Initializable
 
     //endregion
     //Linke Tabelle füllen beim Laden
+
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
     private void fuelleobs_setzliste() {
         obs_setzliste.clear();
@@ -291,6 +297,12 @@ public class SpielSystemController_neu implements Initializable
             }
             if (radio_gruppeMitE.isSelected()){
                 gruppeMitEndrundeStarten();
+            }
+            try {
+                auswahlklasse.getMainController().fuelleSpielElemente();
+                auswahlklasse.getMainController().tabelle_spiele.refresh();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

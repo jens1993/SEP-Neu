@@ -69,7 +69,7 @@ public class MainController implements Initializable
     @FXML
     private ChoiceBox choice_spielklassen= new ChoiceBox();
     @FXML
-    private javafx.scene.control.TableView tabelle_spiele;
+    public TableView tabelle_spiele;
     @FXML
     private Tab tab_spieluebersicht = new Tab();
     @FXML
@@ -200,6 +200,7 @@ public class MainController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("klasseUebersicht.fxml"));
             //System.out.println("test");
             Parent root1 = (Parent) fxmlLoader.load();
+            ((KlasseUebersichtController)fxmlLoader.getController()).setMainController(this);
             Stage stage = new Stage();
 
             auswahlklasse.addStagesdict(stage,"Klassenuebersicht");
@@ -264,7 +265,7 @@ public class MainController implements Initializable
     }
 
     @FXML
-    private void fuelleSpielElemente() throws Exception{
+    public void fuelleSpielElemente() throws Exception{
         auswahlklasse.getAktuelleTurnierAuswahl().getObs_angezeigteSpiele().clear();
         if(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl()!=null&&auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen_auswahl().size()>0) {
             fuelleCheckboxSpielElemente(check_gespielteSpiele,3);
@@ -372,7 +373,7 @@ public class MainController implements Initializable
 
     @Override
         public void initialize(URL location, ResourceBundle resources) {
-
+        auswahlklasse.setMainController(this);
         try
         {
             ResourceBundle bundle = ResourceBundle.getBundle( baseName );
@@ -1029,8 +1030,8 @@ public class MainController implements Initializable
                                             //System.out.println("Feld = " + feld.get(ii));
                                             clickedRow.setFeld(feld.get(ii));
                                             clickedRow.setStatus(2);
-                                            auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().remove(clickedRow);
-                                            auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().add(clickedRow);
+                                       /*     auswahlklasse.getAktuelleTurnierAuswahl().getObs_ausstehendeSpiele().remove(clickedRow);
+                                            auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().add(clickedRow);*/
                                         }
                                     });
 
@@ -1172,7 +1173,7 @@ public class MainController implements Initializable
                 tab.setContent(scrollPane);
                 scrollPane.setContent(vBox);
                 vBox.getChildren().add(canvas);
-                turnierbaum.erstelleTurnierbaum(spielsystem.getSpielklasse(), canvas);
+                turnierbaum.erstelleTurnierbaum(spielsystem, canvas);
                 vBox.setStyle("-fx-background-color: #d8d8d8");
             }
         }
@@ -1290,7 +1291,7 @@ public class MainController implements Initializable
 
     private void AllesNeuLaden() {
         int indexalt = tabelle_spiele.getSelectionModel().getSelectedIndex();
-        tabelle_spiele.refresh();
+        //tabelle_spiele.refresh();
         /*if (!tspielsuche.getText().equals("")) {
             CheckeSpielsuche();
         } else {

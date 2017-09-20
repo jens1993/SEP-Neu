@@ -262,9 +262,14 @@ public class GruppeMitEndrunde extends Spielsystem{
 		int systemSpielID = spiel.getSystemSpielID();
 		int extraRundenNummer = systemSpielID-spiel.getSystemSpielID()/10000000 * 10000000;
 		extraRundenNummer = extraRundenNummer / 100000;
-		for (int i=0;i<alleGruppen.size();i++){
-			if (alleGruppen.get(i).getExtraRunde()==extraRundenNummer){
-				alleGruppen.get(i).beendeMatch(spiel,"einlesen");
+		if (extraRundenNummer==0){
+			endrunde.beendeMatch(spiel);
+		}
+		else {
+			for (int i = 0; i < alleGruppen.size(); i++) {
+				if (alleGruppen.get(i).getExtraRunde() == extraRundenNummer) {
+					alleGruppen.get(i).beendeMatch(spiel, "einlesen");
+				}
 			}
 		}
 		return false;

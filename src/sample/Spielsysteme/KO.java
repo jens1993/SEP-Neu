@@ -19,6 +19,7 @@ public class KO extends Spielsystem {
 		this.setzliste=setzliste;
 		this.platzDreiAusspielen = platzDreiAusspielen;
 		this.teilnehmerzahl=setzliste.size();
+		this.spielsystem=this;
 		setSpielSystemArt(3);
 		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
 		freiloseHinzufuegen(setzliste);
@@ -83,6 +84,7 @@ public class KO extends Spielsystem {
 	public KO(ArrayList<Team> setzliste, Spielklasse spielklasse, ArrayList<Spiel> spiele, Dictionary<Integer,Ergebnis> ergebnisse) {
 		this.setSpielklasse(spielklasse);		//Constructor nur für Einlesen aus der Datenbank
 		this.teilnehmerzahl=setzliste.size();
+		this.spielsystem = this;
 		setSpielSystemArt(3);
 		finale = new SpielTree(spielSystemIDberechnen(), 1, 2);
 		freiloseHinzufuegen(setzliste);
@@ -163,7 +165,7 @@ public class KO extends Spielsystem {
 		int anzahlRunden = rundenBerechnen();
 		int hoechsterSetzplatz;
 		SpielTree aktuellerKnoten = finale;
-		finale.setSpiel(new Spiel(spielSystemIDberechnen(),1,2,this));
+		finale.setSpiel(new Spiel(spielSystemIDberechnen(),1,2,this.spielsystem));
 		this.getRundenArray().add(new ArrayList<>());
 		this.getRundenArray().get(0).add(finale.getSpiel());
 

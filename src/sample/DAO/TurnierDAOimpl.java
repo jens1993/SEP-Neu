@@ -131,7 +131,6 @@ public class TurnierDAOimpl implements TurnierDAO {
                     turnierEingabe.getSpielklassen().get(key).setSpielsystem(spielsystem);
                 }
             }
-            spielListenFuellen(turnierEingabe);
             smt.close();
 
             //turnier.setSpiele(readSpiele(turnier));
@@ -205,27 +204,6 @@ public class TurnierDAOimpl implements TurnierDAO {
         readVereine();
         readSpieler();
         return turnierListe;
-    }
-
-    private void spielListenFuellen(Turnier turnierEingabe) {
-        Enumeration e = turnierEingabe.getSpiele().keys();
-        while(e.hasMoreElements()){
-            int spielID = (int) e.nextElement();
-            Spiel spiel = turnierEingabe.getSpiele().get(spielID);
-            if(spiel.getStatus() == 3){
-                turnierEingabe.getObs_gespielteSpiele().add(spiel);
-            }
-            else if (spiel.getStatus()==2){
-                turnierEingabe.getObs_aktiveSpiele().add(spiel);
-
-            }
-            else if (spiel.getStatus()==1){
-                turnierEingabe.getObs_ausstehendeSpiele().add(spiel);
-            }
-            else if (spiel.getStatus()==0){
-                turnierEingabe.getObs_zukuenftigeSpiele().add(spiel);
-            }
-        }
     }
 
     private Dictionary<Integer,Spielklasse> readSpielklassen(Turnier turnier) {

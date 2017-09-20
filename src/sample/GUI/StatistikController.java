@@ -104,7 +104,7 @@ public class StatistikController implements Initializable
     anzahlSpielklassen.setText(String.valueOf(auswahlklasse.getAktuelleTurnierAuswahl().getObs_spielklassen().size()));
     anzahlSpiele.setText(String.valueOf(auswahlklasse.getAktuelleTurnierAuswahl().getObs_alleSpiele().size()));
     anzahlSpielerimTurnier.setText(String.valueOf(auswahlklasse.getObs_spieler().size()));
-    anzahlobsspiele.setText(
+    /*anzahlobsspiele.setText(
             String.valueOf("Aktive "+
                     auswahlklasse.getAktuelleTurnierAuswahl().getObs_aktiveSpiele().size()+"Gespielte "+
                     auswahlklasse.getAktuelleTurnierAuswahl().getObs_gespielteSpiele().size()+"Ausstehende "+
@@ -124,6 +124,6 @@ public class StatistikController implements Initializable
         chart.setLegendVisible(false);
         hbox_statistik.getChildren().add(chart);
         chart.setTitle("Spielübersicht");
-
+*/
     }
 }

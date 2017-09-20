@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import sample.*;
 import sample.DAO.auswahlklasse;
+import sample.Spielsysteme.Spielsystem;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -54,8 +55,8 @@ public class Turnierbaum {
         this.yAbstand = yAbstand;
     }
 
-    public void erstelleTurnierbaum(Spielklasse spielklasse, Canvas canvas) {
-        ArrayList<ArrayList<Spiel>> runden = spielklasse.getSpielsystem().getRunden();
+    public void erstelleTurnierbaum(Spielsystem spielsystem, Canvas canvas) {
+        ArrayList<ArrayList<Spiel>> runden = spielsystem.getRunden();
         int gesamtHoehe =runden.get(0).size()*(hoehe+yAbstand)+yObenLinks+2-yAbstand;
         int gesamtBreite = runden.size()*(breite+xAbstand)+xObenLinks+2-xAbstand;
 

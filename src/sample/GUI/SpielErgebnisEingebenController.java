@@ -189,7 +189,6 @@ public class SpielErgebnisEingebenController implements Initializable{
                     auswahlklasse.getSpielAuswahlErgebniseintragen().setErgebnis(erg);
                     auswahlklasse.getSpielAuswahlErgebniseintragen().setStatus(3);
                    // a.getAktuelleTurnierAuswahl().addobsGespielteSpiele(a.getSpielAuswahlErgebniseintragen());
-                    auswahlklasse.getAktuelleTurnierAuswahl().removeobsAusstehendeSpiele(auswahlklasse.getSpielAuswahlErgebniseintragen());
                     l_meldungergebnis.setText("Ergebnis erfolgreich eingetragen");
 
 

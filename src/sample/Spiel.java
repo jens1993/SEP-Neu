@@ -79,15 +79,15 @@ public class Spiel {
 			return heim.toString();
 		}
 		else{
-			if (spielsystem.getSpielSystemArt()==2&&getVorrundenNummer()==0){
+			if (spielsystem instanceof sample.Spielsysteme.GruppeMitEndrunde && getVorrundenNummer()==0){
 				GruppeMitEndrunde hauptsystem = (GruppeMitEndrunde) spielsystem;
 				Dictionary<Integer, Integer[]> setzplatze = hauptsystem.getSetzPlatze();
-				if (setzplatze.get(setzPlatzHeim)!=null){
+				if (setzplatze.get(setzPlatzHeim)!=null && hauptsystem.getEndrunde().getRunden().get(0).contains(this)){
 					Integer[] gruppePlatzierung = setzplatze.get(setzPlatzHeim);
 					return ("Gruppe"+gruppePlatzierung[0]+" #"+gruppePlatzierung[1]);
 				}
 			}
-			return "ausstehend" + getVorrundenNummer();
+			return "ausstehend";
 		}
 
 	}
@@ -96,10 +96,10 @@ public class Spiel {
 			return gast.toString();
 		}
 		else{
-			if (spielsystem.getSpielSystemArt()==2&&getVorrundenNummer()==0){
+			if (spielsystem instanceof sample.Spielsysteme.GruppeMitEndrunde && getVorrundenNummer()==0){
 				GruppeMitEndrunde hauptsystem = (GruppeMitEndrunde) spielsystem;
 				Dictionary<Integer, Integer[]> setzplatze = hauptsystem.getSetzPlatze();
-				if (setzplatze.get(setzPlatzGast)!=null){
+				if (setzplatze.get(setzPlatzGast)!=null && hauptsystem.getEndrunde().getRunden().get(0).contains(this)){
 					Integer[] gruppePlatzierung = setzplatze.get(setzPlatzGast);
 					return ("Gruppe"+gruppePlatzierung[0]+" #"+gruppePlatzierung[1]);
 				}
@@ -221,7 +221,7 @@ public class Spiel {
 		this.spielsystem.getSpielklasse().getSpiele().put(systemSpielID,this);
 		//turnier.getObs_ausstehendeSpiele().add(this);
 		turnier.getObs_alleSpiele().add(this);
-		auswahlklasse.getAktuelleTurnierAuswahl().addobsAusstehendeSpiele(this);
+		//auswahlklasse.getAktuelleTurnierAuswahl().getObs_alleSpiele().add(this);
 		//spielDAO.create(this);
 		this.status = 1;
 		if(heim.isFreilos()){
@@ -451,7 +451,9 @@ public class Spiel {
 		this.ergebnis = ergebnis;
 		statistikAktualisieren();
 		status=3;
-		this.spielsystem.beendeMatch(this,einlesen);
+		if (spielsystem.getSpielSystemArt()!=2 && this.getVorrundenNummer()!=0) {
+			this.spielsystem.beendeMatch(this, einlesen);
+		}
 	}
 
 	private void statistikAktualisieren() {
